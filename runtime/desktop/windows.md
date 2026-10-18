@@ -4,12 +4,10 @@ title: "Windows"
 description: "Create and manage native windows with Deno.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 The [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) class controls native
 windows. A window opens automatically when your binary starts and is navigated

@@ -11,11 +11,8 @@ The `deno bump-version` command updates the `version` field in your project's
 configuration file, similar to `npm version`. It reads and writes the `version`
 field in `deno.json(c)` if present, otherwise it falls back to `package.json`.
 
-:::caution
-
-`deno bump-version` is experimental and subject to change.
-
-:::
+> [!CAUTION]
+> `deno bump-version` is experimental and subject to change.
 
 ## Usage
 
@@ -73,7 +70,7 @@ deno bump-version
 After bumping, commit the updated configuration file as part of your release.
 For publishing the bumped version to JSR, see
 [`deno publish`](/runtime/reference/cli/publish/); for an npm tarball, see
-[`deno pack`](/runtime/reference/cli/pack/).
+`deno pack`.
 
 ## Workspace mode
 

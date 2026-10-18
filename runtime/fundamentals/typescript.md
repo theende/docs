@@ -57,8 +57,7 @@ there is no `outDir`, no `dist/` directory, and no source map configuration to
 manage. Error stack traces still point at your `.ts` sources directly. If you
 genuinely need `.js` files on disk (for example, to ship a library to consumers
 running Node or a bundler), reach for a separate tool:
-[`deno transpile`](/runtime/reference/cli/transpile/) or
-[`deno pack`](/runtime/reference/cli/pack/).
+[`deno transpile`](/runtime/reference/cli/transpile/) or `deno pack`.
 
 ## Coming from Node.js
 
@@ -71,7 +70,7 @@ replacement:
 | `tsc --noEmit`                                  | `deno check`                                                                                                    |
 | `tsconfig.json`                                 | Optional. Auto-detected if present; Deno-first projects use `compilerOptions` in `deno.json`                    |
 | `typescript` as a devDependency                 | Nothing to install; the checker ships inside the `deno` binary                                                  |
-| `@types/node`                                   | Built in and [version-overridable](/runtime/fundamentals/node/#including-node-types); `node:` imports are typed |
+| `@types/node`                                   | Built in and version-overridable; `node:` imports are typed                                                     |
 | ESLint + Prettier with TypeScript plugins       | [`deno lint`](/runtime/reference/cli/lint/) and [`deno fmt`](/runtime/reference/cli/fmt/) handle `.ts` natively |
 
 Three differences trip up Node.js developers most often:
@@ -99,9 +98,8 @@ writing to disk. Deno warns about these ignored options, and the
 in the configuration reference says what to do with each one. For most, the
 answer is "delete it".
 
-If you are moving a whole project over, the
-[Migrating from Node.js](/runtime/migrate/) guide covers the rest (dependencies,
-`package.json`, npm scripts).
+If you are moving a whole project over, the Migrating from Node.js guide covers
+the rest (dependencies, `package.json`, npm scripts).
 
 ## Type checking
 
@@ -181,23 +179,21 @@ Or turn it on for a whole project in `deno.json`:
 }
 ```
 
-:::caution
-
-This is an unstable, preview feature. The native compiler is not yet
-feature-complete, so some programs that type-check with the default compiler may
-report different results. Don't rely on it for CI or release builds yet, and
-please [report issues](https://github.com/denoland/deno/issues).
-
-:::
+> [!CAUTION]
+> This is an unstable, preview feature. The native compiler is not yet
+> feature-complete, so some programs that type-check with the default compiler
+> may report different results. Don't rely on it for CI or release builds yet,
+> and please [report issues](https://github.com/denoland/deno/issues).
 
 ## Configuring TypeScript compiler options
 
 Deno's defaults are strict and modern, so most projects need no configuration at
 all. When you do want to change the checker's behavior, set the options under
 `compilerOptions`, either in [`deno.json`](/runtime/fundamentals/configuration/)
-or in a `tsconfig.json` (see [using an existing tsconfig.json](#tsconfig)). For
-a Deno-first project, keeping them in `deno.json` means one config file instead
-of two:
+or in a `tsconfig.json` (see
+[using an existing tsconfig.json](#using-an-existing-tsconfigjson)). For a
+Deno-first project, keeping them in `deno.json` means one config file instead of
+two:
 
 ```json title="deno.json"
 {
@@ -214,7 +210,7 @@ The
 is in the configuration reference. For JSX settings (React, Preact, and
 friends), see the [JSX reference](/runtime/reference/jsx/).
 
-### Using an existing tsconfig.json {#tsconfig}
+### Using an existing tsconfig.json
 
 You do not have to translate your configuration to try Deno. Each workspace
 directory containing a `deno.json` or `package.json` is probed for a
@@ -453,5 +449,4 @@ publishing to [JSR](https://jsr.io).
   for the full compiler options table and `tsconfig.json` semantics.
 - Type-check the examples in your docs with
   [documentation tests](/runtime/test/doc_tests/).
-- Moving an existing project? Start with
-  [Migrating from Node.js](/runtime/migrate/).
+- Moving an existing project? Start with Migrating from Node.js.

@@ -1514,3 +1514,5 @@ export const featuredItems = [
 
 export const sectionTitle = "Examples";
 export const sectionHref = "/examples/";
+
+export default { sidebar, sectionTitle, sectionHref };

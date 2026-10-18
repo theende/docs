@@ -21,16 +21,14 @@ You can see the
 and a
 [demo of the app on Deno Deploy](https://tutorial-with-fresh.deno.deno.net/).
 
-:::info Deploy your own
-
-Want to skip the tutorial and deploy the finished app right now? Click the
-button below to instantly deploy your own copy of the complete Fresh dinosaur
-app to Deno Deploy. You'll get a live, working application that you can
-customize and modify as you learn!
-
-[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-fresh)
-
-:::
+> [!NOTE] Deploy your own
+>
+> Want to skip the tutorial and deploy the finished app right now? Click the
+> button below to instantly deploy your own copy of the complete Fresh dinosaur
+> app to Deno Deploy. You'll get a live, working application that you can
+> customize and modify as you learn!
+>
+> [![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-fresh)
 
 ## Create a Fresh project
 
@@ -320,8 +318,7 @@ git push -u origin main
 Once your app is on GitHub, you can
 [deploy it to Deno Deploy](https://console.deno.com/).
 
-For a walkthrough of deploying your app, check out the
-[Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
+For a walkthrough of deploying your app, check out the Deno Deploy tutorial.
 
 🦕 Now you have a starter Fresh app! Here are some ideas to extend your dinosaur
 catalog:

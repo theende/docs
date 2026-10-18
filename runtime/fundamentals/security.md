@@ -210,13 +210,11 @@ dependencies safe over time.
 
 ## Permission broker
 
-:::caution Advanced use only
-
-Using a permission broker changes Deno's decision authority: CLI flags and
-prompts no longer apply. Ensure your broker process is resilient, audited, and
-available before enabling `DENO_PERMISSION_BROKER_PATH`.
-
-:::
+> [!CAUTION] Advanced use only
+>
+> Using a permission broker changes Deno's decision authority: CLI flags and
+> prompts no longer apply. Ensure your broker process is resilient, audited, and
+> available before enabling `DENO_PERMISSION_BROKER_PATH`.
 
 For centralized and policy-driven permission decisions, Deno can delegate all
 permission checks to an external broker process. Enable this by setting the

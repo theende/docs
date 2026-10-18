@@ -1,4 +1,5 @@
 ---
+title: prefer-as-const
 tags: [recommended]
 ---
 

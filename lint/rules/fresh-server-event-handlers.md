@@ -1,4 +1,5 @@
 ---
+title: fresh-server-event-handlers
 tags: [fresh]
 ---
 

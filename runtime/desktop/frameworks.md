@@ -4,12 +4,10 @@ title: "Frameworks"
 description: "Run Next.js, Astro, Fresh, Remix, React Router, Nuxt, SvelteKit, SolidStart, TanStack Start, and Vite projects as desktop apps."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 Point `deno desktop` at a directory and it auto-detects the framework, picks the
 right entry point, embeds the build output in the binary, and runs the

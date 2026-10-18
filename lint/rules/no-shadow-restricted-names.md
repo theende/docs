@@ -1,4 +1,5 @@
 ---
+title: no-shadow-restricted-names
 tags: [recommended]
 ---
 

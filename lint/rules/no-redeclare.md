@@ -1,4 +1,5 @@
 ---
+title: no-redeclare
 tags: [recommended]
 ---
 

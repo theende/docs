@@ -160,8 +160,8 @@ deno init --serve
 - [llms.txt](/llms.txt): curated section index with key documentation links
 - [llms-full-guide.txt](/llms-full-guide.txt): agent-oriented quick reference
   with CLI commands, code examples, and usage patterns
-- [llms-summary.txt](/llms-summary.txt): compact, high-signal index
-- [llms-full.txt](/llms-full.txt): full content dump (large)
+- llms-summary.txt: compact, high-signal index
+- llms-full.txt: full content dump (large)
 - [Site search](/): use the on-site search UI for human browsing
 - [Skills](https://github.com/denoland/skills): AI skills for coding assistants
 

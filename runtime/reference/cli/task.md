@@ -116,13 +116,10 @@ For multi-word task names, we recommend using `:` as the separator (e.g.
 `build:client`, `test:unit`, `lint:fix`) to match the convention used in the npm
 ecosystem and to group related tasks for wildcard matching.
 
-:::note
-
-**When using a wildcard** make sure to quote the task name (eg. `"build:*"`),
-otherwise your shell might try to expand the wildcard character, leading to
-surprising errors.
-
-:::
+> [!NOTE]
+> **When using a wildcard** make sure to quote the task name (eg. `"build:*"`),
+> otherwise your shell might try to expand the wildcard character, leading to
+> surprising errors.
 
 Exclude tasks from a wildcard match by adding an exclusion group `(!a|b|c)` to
 the end of the pattern. Each listed value is matched against what the `*`
@@ -197,14 +194,12 @@ precedence:
 deno task --recursive --jobs 1 build
 ```
 
-:::info Deno 2.8
-
-When tasks run in parallel, each output line is prefixed with the task name that
-produced it (color-coded per task). Prefixes stay attached even when a task
-forks subprocesses, so a parallel `build` + `test` + `lint` run stays legible
-without an external multiplexer.
-
-:::
+> [!NOTE] Deno 2.8
+>
+> When tasks run in parallel, each output line is prefixed with the task name
+> that produced it (color-coded per task). Prefixes stay attached even when a
+> task forks subprocesses, so a parallel `build` + `test` + `lint` run stays
+> legible without an external multiplexer.
 
 Dependencies are tracked and if multiple tasks depend on the same task, that
 task will only be run once:
@@ -662,22 +657,19 @@ echo data[0-9].csv
 
 The supported glob characters are `*`, `?`, and `[`/`]`.
 
-:::caution
-
-Because `globstar` is enabled by default (see [Shell options](#shell-options)),
-`**` recurses into **all** descendant directories, including `node_modules`.
-This differs from some interactive shells where `**` is not recursive unless
-explicitly enabled, so a task like `deno check **/*.ts` can expand to far more
-files than the same command typed in your terminal, sweeping in dependency
-files. That can lead to errors such as `Argument list too long` or type-checking
-files you didn't intend to.
-
-For `deno check` and `deno fmt`, prefer running them without glob arguments and
-using the [`exclude`](/runtime/reference/deno_json/#include-and-exclude) option
-in your `deno.json` (`node_modules` is excluded by default), or disable
-recursion for the task with `shopt -u globstar`.
-
-:::
+> [!CAUTION]
+> Because `globstar` is enabled by default (see
+> [Shell options](#shell-options)), `**` recurses into **all** descendant
+> directories, including `node_modules`. This differs from some interactive
+> shells where `**` is not recursive unless explicitly enabled, so a task like
+> `deno check **/*.ts` can expand to far more files than the same command typed
+> in your terminal, sweeping in dependency files. That can lead to errors such
+> as `Argument list too long` or type-checking files you didn't intend to.
+>
+> For `deno check` and `deno fmt`, prefer running them without glob arguments
+> and using the [`exclude`](/runtime/reference/deno_json/#include-and-exclude)
+> option in your `deno.json` (`node_modules` is excluded by default), or disable
+> recursion for the task with `shopt -u globstar`.
 
 ### Shell options
 
@@ -718,12 +710,9 @@ Examples:
 }
 ```
 
-:::note
-
-Shell options do not propagate to `deno task` subprocesses. Each `deno task`
-invocation starts with the default options.
-
-:::
+> [!NOTE]
+> Shell options do not propagate to `deno task` subprocesses. Each `deno task`
+> invocation starts with the default options.
 
 ## Built-in commands
 

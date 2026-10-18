@@ -1,3 +1,0 @@
-status: partial
-symbols:
-  Server: The `cert` and `key` options do not support an array input.

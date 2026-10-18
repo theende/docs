@@ -1,4 +1,5 @@
 ---
+title: no-const-assign
 tags: [recommended]
 ---
 

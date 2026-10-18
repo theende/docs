@@ -24,13 +24,13 @@ the guide for each.
 
 ## Deno Deploy (managed platform)
 
-[Deno Deploy](/deploy/) is Deno's serverless platform. You push code and it
-handles builds, TLS, global distribution, and scaling, with first-class support
-for Deno and Node apps and frameworks like Next.js, Astro, and SvelteKit. It
-also offers integrated observability, cron, and a built-in key-value database.
+Deno Deploy is Deno's serverless platform. You push code and it handles builds,
+TLS, global distribution, and scaling, with first-class support for Deno and
+Node apps and frameworks like Next.js, Astro, and SvelteKit. It also offers
+integrated observability, cron, and a built-in key-value database.
 
-- [Get started with Deno Deploy](/deploy/getting_started/)
-- [Deploy with the `deno deploy` command](/examples/deploy_command_tutorial/)
+- Get started with Deno Deploy
+- Deploy with the `deno deploy` command
 
 ## Containers and Docker
 
@@ -52,9 +52,9 @@ Step-by-step guides for deploying a Deno app to specific providers:
 - [Google Cloud Run](/examples/google_cloud_run_tutorial/) for serverless
   containers
 - [DigitalOcean](/examples/digital_ocean_tutorial/) for container hosting
-- [Kinsta](/examples/kinsta_tutorial/) for managed app hosting
-- [Cloudflare Workers](/examples/cloudflare_workers_tutorial/), or
-  [with Wrangler](/examples/cloudflare_workers_wrangler_tutorial/), for the edge
+- Kinsta for managed app hosting
+- [Cloudflare Workers](/examples/cloudflare_workers_tutorial/), or with
+  Wrangler, for the edge
 
 Browse all of these under
 [Deploying Deno projects](/examples/#deploying-deno-projects) in the examples.

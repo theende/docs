@@ -14,16 +14,13 @@ addition, you can generate code coverage reports from test results with
 
 ## Setting up a basic pipeline
 
-:::tip
-
-Looking for a ready-made GitHub Actions workflow? GitHub provides an official
-starter workflow for Deno that you can add to your repository:
-<https://github.com/actions/starter-workflows/blob/main/ci/deno.yml>.
-
-In GitHub, open the Actions tab, choose "New workflow", and search for "Deno" to
-use the template.
-
-:::
+> [!TIP]
+> Looking for a ready-made GitHub Actions workflow? GitHub provides an official
+> starter workflow for Deno that you can add to your repository:
+> <https://github.com/actions/starter-workflows/blob/main/ci/deno.yml>.
+>
+> In GitHub, open the Actions tab, choose "New workflow", and search for "Deno"
+> to use the template.
 
 You can set up basic pipelines for Deno projects in GitHub Actions. The concepts
 explained on this page largely apply to other CI providers as well, such as
@@ -93,21 +90,18 @@ jobs:
       - run: deno test --allow-all --coverage cov/
 ```
 
-:::caution
-
-Note: GitHub Actions has a known
-[issue](https://github.com/actions/checkout/issues/135) with handling
-Windows-style line endings (CRLF). This may cause issues when running `deno fmt`
-in a pipeline with jobs that run on `windows`. To prevent this, configure the
-Actions runner to use Linux-style line endings before running the
-`actions/checkout@v4` step:
-
-```sh
-git config --system core.autocrlf false
-git config --system core.eol lf
-```
-
-:::
+> [!CAUTION]
+> Note: GitHub Actions has a known
+> [issue](https://github.com/actions/checkout/issues/135) with handling
+> Windows-style line endings (CRLF). This may cause issues when running
+> `deno fmt` in a pipeline with jobs that run on `windows`. To prevent this,
+> configure the Actions runner to use Linux-style line endings before running
+> the `actions/checkout@v4` step:
+>
+> ```sh
+> git config --system core.autocrlf false
+> git config --system core.eol lf
+> ```
 
 If you are working with experimental or unstable Deno APIs, you can include a
 matrix job running the canary version of Deno. This can help to spot breaking

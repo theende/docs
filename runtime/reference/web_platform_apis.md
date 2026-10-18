@@ -239,13 +239,10 @@ const worker = new Worker("./workers/hello.ts", { type: "module" });
 // Fetches worker module at "https://example.com/workers/hello.ts".
 ```
 
-:::note
-
-For the above use cases, it is preferable to pass URLs in full rather than
-relying on `--location`. You can manually base a relative URL using the
-[`URL`](/api/web/~/URL) constructor if needed.
-
-:::
+> [!NOTE]
+> For the above use cases, it is preferable to pass URLs in full rather than
+> relying on `--location`. You can manually base a relative URL using the
+> [`URL`](/api/web/~/URL) constructor if needed.
 
 The `--location` flag is intended for those who have a specific purpose in mind
 for emulating a document location and are aware that this will only work at
@@ -446,12 +443,9 @@ hello world
 
 ### Specifying worker permissions
 
-:::caution
-
-This is an unstable Deno feature. Learn more about
-[unstable features](/runtime/fundamentals/stability_and_releases/#unstable-apis).
-
-:::
+> [!CAUTION]
+> This is an unstable Deno feature. Learn more about
+> [unstable features](/runtime/fundamentals/stability_and_releases/#unstable-apis).
 
 The permissions available for the worker are analogous to the CLI permission
 flags, meaning every permission enabled there can be disabled at the level of

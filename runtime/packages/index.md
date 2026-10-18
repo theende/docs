@@ -50,22 +50,22 @@ import { assertEquals } from "@std/assert";
 Every dependency task has a built-in subcommand. Each links to its full
 reference:
 
-| Command                                                           | What it does                                              |
-| ----------------------------------------------------------------- | --------------------------------------------------------- |
-| [`deno install`](/runtime/reference/cli/install/)                 | Install the project's dependencies (or a tool, with `-g`) |
-| [`deno add`](/runtime/reference/cli/add/)                         | Add a dependency to the config file                       |
-| [`deno remove`](/runtime/reference/cli/remove/)                   | Remove a dependency from the config file                  |
-| [`deno outdated`](/runtime/reference/cli/outdated/)               | List dependencies with newer versions                     |
-| [`deno update`](/runtime/reference/cli/update/)                   | Update dependencies to newer versions                     |
-| [`deno why`](/runtime/reference/cli/why/)                         | Explain why a package is in your dependency tree          |
-| [`deno info`](/runtime/reference/cli/info/)                       | Show a module's full dependency graph and cache details   |
-| [`deno audit`](/runtime/reference/cli/audit/)                     | Check installed dependencies for known vulnerabilities    |
-| [`deno approve-scripts`](/runtime/reference/cli/approve_scripts/) | Approve npm lifecycle scripts for specific packages       |
-| [`deno ci`](/runtime/reference/cli/ci/)                           | Clean, lockfile-strict install for CI (like `npm ci`)     |
-| [`deno publish`](/runtime/reference/cli/publish/)                 | Publish a package to JSR                                  |
-| [`deno pack`](/runtime/reference/cli/pack/)                       | Build an npm-compatible tarball from a Deno package       |
-| [`deno uninstall`](/runtime/reference/cli/uninstall/)             | Remove a globally installed tool                          |
-| [`deno clean`](/runtime/reference/cli/clean/)                     | Remove the global module cache                            |
+| Command                                               | What it does                                              |
+| ----------------------------------------------------- | --------------------------------------------------------- |
+| [`deno install`](/runtime/reference/cli/install/)     | Install the project's dependencies (or a tool, with `-g`) |
+| [`deno add`](/runtime/reference/cli/add/)             | Add a dependency to the config file                       |
+| [`deno remove`](/runtime/reference/cli/remove/)       | Remove a dependency from the config file                  |
+| [`deno outdated`](/runtime/reference/cli/outdated/)   | List dependencies with newer versions                     |
+| [`deno update`](/runtime/reference/cli/update/)       | Update dependencies to newer versions                     |
+| [`deno why`](/runtime/reference/cli/why/)             | Explain why a package is in your dependency tree          |
+| [`deno info`](/runtime/reference/cli/info/)           | Show a module's full dependency graph and cache details   |
+| [`deno audit`](/runtime/reference/cli/audit/)         | Check installed dependencies for known vulnerabilities    |
+| `deno approve-scripts`                                | Approve npm lifecycle scripts for specific packages       |
+| [`deno ci`](/runtime/reference/cli/ci/)               | Clean, lockfile-strict install for CI (like `npm ci`)     |
+| [`deno publish`](/runtime/reference/cli/publish/)     | Publish a package to JSR                                  |
+| `deno pack`                                           | Build an npm-compatible tarball from a Deno package       |
+| [`deno uninstall`](/runtime/reference/cli/uninstall/) | Remove a globally installed tool                          |
+| [`deno clean`](/runtime/reference/cli/clean/)         | Remove the global module cache                            |
 
 ## Choosing versions
 
@@ -155,8 +155,7 @@ allow it explicitly:
 deno install --allow-scripts=npm:better-sqlite3
 ```
 
-Or manage approvals interactively with
-[`deno approve-scripts`](/runtime/reference/cli/approve_scripts/). Scripts only
+Or manage approvals interactively with `deno approve-scripts`. Scripts only
 execute when a `node_modules` directory is in use.
 
 ## Lockfile and reproducible installs
@@ -383,7 +382,7 @@ When using a `package.json` file, dev dependencies can be added to the separate
 If you work primarily in `package.json`, set `"preferPackageJson": true` in
 `deno.json` so that `deno add`, `deno install`, and `deno remove` write there by
 default instead of `deno.json`, without passing `--package-json` each time. See
-[preferPackageJson](/runtime/reference/deno_json/#prefer-package-json-for-dependencies).
+[preferPackageJson](/runtime/reference/deno_json/#prefer-packagejson-for-dependencies).
 
 ### JSR packages in package.json
 
@@ -473,4 +472,4 @@ host. To pin and localize them, see [vendoring](#vendoring-remote-modules).
   discipline, minimum dependency age, audit workflows, and a CI baseline.
 - **[Private repositories](/runtime/packages/private_repositories/)**:
   authenticate remote module hosts with `DENO_AUTH_TOKENS`. For private npm
-  registries, see [npm support](/runtime/fundamentals/node/#private-registries).
+  registries, see npm support.

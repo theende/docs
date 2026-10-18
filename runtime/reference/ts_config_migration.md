@@ -224,17 +224,14 @@ Typically, when you use the `"lib"` option in TypeScript, you need to include an
 "es" library as well. In the case of `"deno.ns"` and `"deno.unstable"`, they
 automatically include `"esnext"` when you bring them in.
 
-:::note
-
-If you get type errors like **cannot find `document` or `HTMLElement`**, it is
-likely that the library you are using has dependencies on the DOM. This is
-common for packages that are designed to run in a browser as well as
-server-side. By default, Deno only includes the libraries that are directly
-supported. Assuming the package properly identifies what environment it is
-running in at runtime it is "safe" to use the DOM libraries to type check the
-code.
-
-:::
+> [!NOTE]
+> If you get type errors like **cannot find `document` or `HTMLElement`**, it is
+> likely that the library you are using has dependencies on the DOM. This is
+> common for packages that are designed to run in a browser as well as
+> server-side. By default, Deno only includes the libraries that are directly
+> supported. Assuming the package properly identifies what environment it is
+> running in at runtime it is "safe" to use the DOM libraries to type check the
+> code.
 
 ## Types and Type Declarations
 

@@ -355,12 +355,9 @@ to real paths on disk, for example `preopens: { "/data": "./data" }`. The module
 can then read and write within `./data` (and your Deno process needs the
 matching `--allow-read` and `--allow-write` permissions).
 
-:::note
-
-`node:wasi` is an experimental Node.js API, so Deno prints an experimental
-warning when you use it.
-
-:::
+> [!NOTE]
+> `node:wasi` is an experimental Node.js API, so Deno prints an experimental
+> warning when you use it.
 
 ### Running a WASI Preview 2 component
 

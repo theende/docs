@@ -1,6 +1,4 @@
-import { walk } from "jsr:@std/fs";
-import { parse as yamlParse } from "jsr:@std/yaml";
-import { Sidebar } from "../types.ts";
+import type { Sidebar } from "../_lib/types.ts";
 
 export const sidebar = [
   {
@@ -451,60 +449,6 @@ export const sidebar = [
         ],
       },
       {
-        title: "Standard library",
-        href: "/runtime/reference/std/",
-        disclosure: true,
-        items: [
-          ...[
-            "assert",
-            "async",
-            "bytes",
-            "cache",
-            "cbor",
-            "cli",
-            "collections",
-            "crypto",
-            "csv",
-            "data-structures",
-            "datetime",
-            "dotenv",
-            "encoding",
-            "expect",
-            "fmt",
-            "front-matter",
-            "fs",
-            "html",
-            "http",
-            "ini",
-            "internal",
-            "io",
-            "json",
-            "jsonc",
-            "log",
-            "media-types",
-            "msgpack",
-            "net",
-            "path",
-            "random",
-            "regexp",
-            "semver",
-            "streams",
-            "tar",
-            "testing",
-            "text",
-            "toml",
-            "ulid",
-            "uuid",
-            "webgpu",
-            "xml",
-            "yaml",
-          ].map((name) => ({
-            title: name,
-            href: `/runtime/reference/std/${name}/`,
-          })),
-        ],
-      },
-      {
         title: "deno.json",
         href: "/runtime/reference/deno_json/",
       },
@@ -556,71 +500,4 @@ export const sidebar = [
 export const sectionTitle = "Runtime";
 export const sectionHref = "/runtime/";
 
-export interface Description {
-  kind: "note" | "tip" | "info" | "caution";
-  description: string;
-}
-function handleDescription(description: Description | string): Description {
-  if (typeof description === "string") {
-    return {
-      kind: "caution",
-      description,
-    };
-  } else {
-    return description;
-  }
-}
-
-export type Descriptions = Record<string, DescriptionItem>;
-
-type DescriptionItem = {
-  status: "good" | "partial" | "stubs" | "unsupported";
-  description?: Description;
-  symbols?: Record<string, Description>;
-};
-
-export async function generateDescriptions(): Promise<Descriptions> {
-  const descriptions: Descriptions = {};
-  for await (
-    const dirEntry of walk(
-      new URL(import.meta.resolve("../reference_gen/node_descriptions")),
-      { exts: ["yaml"] },
-    )
-  ) {
-    const file = await Deno.readTextFile(dirEntry.path);
-    const parsed = yamlParse(file) as Partial<DescriptionItem> & {
-      description?: Description | string;
-      symbols?: Record<string, Description | string>;
-    };
-    if (!parsed) {
-      throw `Invalid or empty file: ${dirEntry.path}`;
-    }
-    if (parsed.description) {
-      parsed.description = handleDescription(parsed.description);
-    }
-
-    if (parsed.symbols) {
-      parsed.symbols = Object.fromEntries(
-        Object.entries(parsed.symbols).map(([key, value]) => [
-          key,
-          handleDescription(value as Description | string),
-        ]),
-      );
-    }
-
-    if (
-      !(
-        parsed.status === "good" ||
-        parsed.status === "partial" ||
-        parsed.status === "stubs" ||
-        parsed.status === "unsupported"
-      )
-    ) {
-      throw `Invalid status provided in '${dirEntry.name}': ${parsed.status}`;
-    }
-
-    descriptions[dirEntry.name.slice(0, -5)] = parsed as DescriptionItem;
-  }
-
-  return descriptions;
-}
+export default { sidebar, sectionTitle, sectionHref };

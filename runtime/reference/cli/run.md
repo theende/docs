@@ -72,14 +72,12 @@ The same `--watch` flag is also accepted by
 [`deno serve`](/runtime/reference/cli/serve/), and
 [`deno bench`](/runtime/reference/cli/bench/).
 
-:::info Deno 2.8
-
-When the watcher restarts the process, Deno sends `SIGTERM` first so `unload`
-event listeners and `process.exit` hooks run, then waits 500ms before the hard
-kill. This gives graceful-shutdown code time to flush resources between
-restarts.
-
-:::
+> [!NOTE] Deno 2.8
+>
+> When the watcher restarts the process, Deno sends `SIGTERM` first so `unload`
+> event listeners and `process.exit` hooks run, then waits 500ms before the hard
+> kill. This gives graceful-shutdown code time to flush resources between
+> restarts.
 
 ## Running a package.json script
 

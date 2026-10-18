@@ -1,4 +1,5 @@
 ---
+title: no-constant-condition
 tags: [recommended]
 ---
 

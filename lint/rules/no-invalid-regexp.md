@@ -1,4 +1,5 @@
 ---
+title: no-invalid-regexp
 tags: [recommended]
 ---
 

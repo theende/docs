@@ -4,7 +4,6 @@ title: "deno install"
 oldUrl:
   - /runtime/manual/tools/script_installer/
   - /runtime/reference/cli/script_installer/
-  - /runtime/manual/tools/script_installer/
   - /runtime/manual/tools/cache/
   - /runtime/reference/cli/cache/
 command: install
@@ -36,20 +35,15 @@ Use this command to install particular packages and add them to `deno.json` or
 deno install jsr:@std/testing npm:express
 ```
 
-:::info Deno 2.8
+> [!NOTE] Deno 2.8
+>
+> Unprefixed package names are treated as npm packages by default, so the `npm:`
+> prefix is no longer required at the CLI. `deno install express` is equivalent
+> to `deno install npm:express`. JSR packages still need the `jsr:` prefix to
+> stay unambiguous. The `npm:` prefix remains required in `import` specifiers.
 
-Unprefixed package names are treated as npm packages by default, so the `npm:`
-prefix is no longer required at the CLI. `deno install express` is equivalent to
-`deno install npm:express`. JSR packages still need the `jsr:` prefix to stay
-unambiguous. The `npm:` prefix remains required in `import` specifiers.
-
-:::
-
-:::tip
-
-You can also use `deno add` which is an alias to `deno install [PACKAGES]`
-
-:::
+> [!TIP]
+> You can also use `deno add` which is an alias to `deno install [PACKAGES]`
 
 If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
@@ -96,7 +90,7 @@ form (`npm:@jsr/...`). The same flag works on `deno add`, `deno remove`, and
 `deno uninstall`.
 
 To make this behavior the default without passing the flag every time, set
-[`"preferPackageJson": true`](/runtime/reference/deno_json/#prefer-package-json-for-dependencies)
+[`"preferPackageJson": true`](/runtime/reference/deno_json/#prefer-packagejson-for-dependencies)
 in `deno.json`.
 
 ### deno install --entrypoint [FILES]
@@ -119,15 +113,12 @@ Download jsr:@std/fmt
 Download npm:express
 ```
 
-:::tip
-
-If you want to set up a local `node_modules` directory, you can pass the
-`--node-modules-dir=auto` flag.
-
-Some dependencies might not work correctly without a local `node_modules`
-directory.
-
-:::
+> [!TIP]
+> If you want to set up a local `node_modules` directory, you can pass the
+> `--node-modules-dir=auto` flag.
+>
+> Some dependencies might not work correctly without a local `node_modules`
+> directory.
 
 ### deno install --global [PACKAGE_OR_URL]
 
@@ -260,12 +251,10 @@ imports:
 deno install --prod --skip-types
 ```
 
-:::caution
-
-The `--skip-types` flag identifies type packages by checking if the package name
-starts with `@types/`. This heuristic may not cover all type-only packages.
-
-:::
+> [!CAUTION]
+> The `--skip-types` flag identifies type packages by checking if the package
+> name starts with `@types/`. This heuristic may not cover all type-only
+> packages.
 
 #### --prod with --entrypoint
 

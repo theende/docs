@@ -1,4 +1,5 @@
 ---
+title: ban-unknown-rule-code
 tags: [recommended]
 ---
 

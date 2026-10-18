@@ -1,4 +1,5 @@
 ---
+title: no-case-declarations
 tags: [recommended]
 ---
 

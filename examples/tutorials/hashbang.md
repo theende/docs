@@ -20,13 +20,10 @@ a shebang). This is a sequence of characters (#!) that tells your operating
 system how to execute a script. It is followed by the path to the interpreter
 that should be used to run the script.
 
-:::note
-
-To use a hashbang on Windows you will need to install the Windows Subsystem for
-Linux (WSL) or use a Unix-like shell like
-[Git Bash](https://git-scm.com/downloads).
-
-:::
+> [!NOTE]
+> To use a hashbang on Windows you will need to install the Windows Subsystem
+> for Linux (WSL) or use a Unix-like shell like
+> [Git Bash](https://git-scm.com/downloads).
 
 We'll make a small command-line greeter that reads its first argument from
 [Deno.args](/api/deno/~/Deno.args) and falls back to a default when none is
@@ -50,14 +47,11 @@ are no `--allow-*` flags here because the script only reads from `Deno.args`,
 which is always available. Deno prompts for permissions only when the script
 tries to use a sandboxed API.
 
-:::note
-
-The `-S` flag is an extension provided by GNU coreutils and BSD/macOS `env`. It
-is not part of POSIX, so on systems that ship a more minimal `env` (for example
-some embedded or BusyBox environments) the hashbang may not work. On those
-systems, run the script explicitly with `deno run script.ts` instead.
-
-:::
+> [!NOTE]
+> The `-S` flag is an extension provided by GNU coreutils and BSD/macOS `env`.
+> It is not part of POSIX, so on systems that ship a more minimal `env` (for
+> example some embedded or BusyBox environments) the hashbang may not work. On
+> those systems, run the script explicitly with `deno run script.ts` instead.
 
 `Deno.args` is an array of the arguments that follow the script name on the
 command line. `Deno.args[0]` is the first one; `?? "world"` substitutes

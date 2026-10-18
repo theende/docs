@@ -1,4 +1,5 @@
 ---
+title: no-node-globals
 tags: []
 ---
 

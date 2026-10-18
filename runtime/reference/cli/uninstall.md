@@ -35,11 +35,9 @@ cat deno.json
 }
 ```
 
-:::tip
-
-You can also use `deno remove` which is an alias to `deno uninstall [PACKAGES]`
-
-:::
+> [!TIP]
+> You can also use `deno remove` which is an alias to
+> `deno uninstall [PACKAGES]`
 
 You can remove multiple dependencies at once:
 
@@ -68,12 +66,9 @@ cat deno.json
 }
 ```
 
-:::info
-
-While dependencies are removed from the `deno.json` and `package.json` they
-still persist in the global cache for future use.
-
-:::
+> [!NOTE]
+> While dependencies are removed from the `deno.json` and `package.json` they
+> still persist in the global cache for future use.
 
 If your project contains `package.json`, `deno uninstall` can work with it too:
 

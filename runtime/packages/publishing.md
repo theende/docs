@@ -17,10 +17,9 @@ developers to import. This page covers where to publish and how.
   It accepts TypeScript directly (no build step), generates documentation from
   your JSDoc comments, and serves packages to Deno, Node.js, and other runtimes.
 - **[npm](https://www.npmjs.com/)**: publish here when your consumers are
-  primarily on Node.js or need npm tooling. Use
-  [`deno pack`](/runtime/reference/cli/pack/) to build an npm-compatible tarball
-  from a Deno project, or [dnt](https://github.com/denoland/dnt) for a more
-  configurable build pipeline.
+  primarily on Node.js or need npm tooling. Use `deno pack` to build an
+  npm-compatible tarball from a Deno project, or
+  [dnt](https://github.com/denoland/dnt) for a more configurable build pipeline.
 - **[deno.land/x](https://deno.com/add_module)**: the legacy registry for HTTPS
   imports. For new packages, prefer JSR.
 
@@ -57,9 +56,9 @@ To bump the version field between releases, you can use
 
 ## Publish to npm
 
-[`deno pack`](/runtime/reference/cli/pack/) (Deno 2.8+) builds an npm-compatible
-tarball from a Deno-first project: it transpiles TypeScript, generates type
-declarations, and produces the `package.json` metadata npm expects.
+`deno pack` (Deno 2.8+) builds an npm-compatible tarball from a Deno-first
+project: it transpiles TypeScript, generates type declarations, and produces the
+`package.json` metadata npm expects.
 
 ```sh
 deno pack                # creates the tarball
@@ -102,6 +101,5 @@ with no manual version edits.
 
 - [Dependency management](/runtime/packages/): the day-to-day workflow this page
   grew out of
-- [`deno publish`](/runtime/reference/cli/publish/) and
-  [`deno pack`](/runtime/reference/cli/pack/) references
+- [`deno publish`](/runtime/reference/cli/publish/) and `deno pack` references
 - [JSR publishing docs](https://jsr.io/docs/publishing-packages)

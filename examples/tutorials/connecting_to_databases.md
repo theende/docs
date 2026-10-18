@@ -15,8 +15,7 @@ NoSQL databases, including MySQL, PostgreSQL, MongoDB, SQLite, Firebase, and
 Supabase.
 
 You can find helpful database connectivity modules on [JSR](https://jsr.io/@db)
-and deno supports many npm packages with the use of
-[npm specifiers](/runtime/fundamentals/node/#using-npm-packages).
+and deno supports many npm packages with the use of npm specifiers.
 
 ## SQLite
 

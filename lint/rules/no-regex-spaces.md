@@ -1,4 +1,5 @@
 ---
+title: no-regex-spaces
 tags: [recommended]
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: no-misused-new
 tags: [recommended]
 ---
 

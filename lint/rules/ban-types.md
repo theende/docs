@@ -1,4 +1,5 @@
 ---
+title: ban-types
 tags: [recommended]
 ---
 

@@ -4,12 +4,10 @@ title: "Tray and dock"
 description: "Add icons to the OS status area and the macOS dock: tooltips, dark-mode variants, click events, and right-click context menus."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 [`Deno.Tray`](/api/deno/~/Deno.Tray) puts an icon in the system status area
 (macOS menu bar extras, Windows system tray, Linux AppIndicator).

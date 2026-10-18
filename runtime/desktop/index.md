@@ -9,12 +9,10 @@ Next.js app) into a self-contained desktop application. The output is a
 redistributable binary that bundles your code, the Deno runtime, and a web
 rendering engine into one bundle per platform.
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 ## Why `deno desktop`
 

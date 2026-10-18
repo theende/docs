@@ -1,4 +1,5 @@
 ---
+title: valid-typeof
 tags: [recommended]
 ---
 

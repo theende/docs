@@ -1,4 +1,5 @@
 ---
+title: prefer-const
 tags: [recommended]
 ---
 

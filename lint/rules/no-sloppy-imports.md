@@ -1,4 +1,5 @@
 ---
+title: no-sloppy-imports
 tags: [recommended]
 ---
 

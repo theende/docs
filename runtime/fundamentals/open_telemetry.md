@@ -38,51 +38,48 @@ This will automatically collect and export runtime observability data to an
 OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 (`http/protobuf`).
 
-:::tip
+> [!TIP]
+> If you want to quickly see OpenTelemetry output without setting up a
+> collector, you can use the built-in console exporter to print spans, logs, and
+> metrics directly to stderr in a human-readable format:
+>
+> ```sh
+> OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console deno run my_script.ts
+> ```
+>
+> Example output:
+>
+> ```
+> SPAN inner span [00000000000000000000000000000001/0000000000000002] Internal 0.495ms
+>   parent: 0000000000000001
+>   scope: example-tracer
+>   key: value
+> LOG [INFO] 2025-03-14T13:47:07.235Z "hello from inner"
+>   scope: deno@2.7.5
+>   trace: 00000000000000000000000000000001/0000000000000002
+> ```
 
-If you want to quickly see OpenTelemetry output without setting up a collector,
-you can use the built-in console exporter to print spans, logs, and metrics
-directly to stderr in a human-readable format:
+> [!TIP]
+> If you want to visualize telemetry data in a dashboard, you can get started
+> with a
+> [local LGTM stack in Docker](https://github.com/grafana/docker-otel-lgtm/tree/main?tab=readme-ov-file)
+> (Loki (logs), Grafana (dashboard), Tempo (traces), and Prometheus (metrics))
+> by running the following command:
+>
+> ```sh
+> docker run --name lgtm -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm -ti \
+> ```
 
-```sh
-OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console deno run my_script.ts
-```
+    -v "$PWD"/lgtm/grafana:/data/grafana \
+    -v "$PWD"/lgtm/prometheus:/data/prometheus \
+    -v "$PWD"/lgtm/loki:/data/loki \
+    -e GF_PATHS_DATA=/data/grafana \
+    docker.io/grafana/otel-lgtm:0.8.1
 
-Example output:
-
-```
-SPAN inner span [00000000000000000000000000000001/0000000000000002] Internal 0.495ms
-  parent: 0000000000000001
-  scope: example-tracer
-  key: value
-LOG [INFO] 2025-03-14T13:47:07.235Z "hello from inner"
-  scope: deno@2.7.5
-  trace: 00000000000000000000000000000001/0000000000000002
-```
-
-:::
-
-:::tip
-
-If you want to visualize telemetry data in a dashboard, you can get started with
-a
-[local LGTM stack in Docker](https://github.com/grafana/docker-otel-lgtm/tree/main?tab=readme-ov-file)
-(Loki (logs), Grafana (dashboard), Tempo (traces), and Prometheus (metrics)) by
-running the following command:
-
-```sh
-docker run --name lgtm -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm -ti \
-	-v "$PWD"/lgtm/grafana:/data/grafana \
-	-v "$PWD"/lgtm/prometheus:/data/prometheus \
-	-v "$PWD"/lgtm/loki:/data/loki \
-	-e GF_PATHS_DATA=/data/grafana \
-	docker.io/grafana/otel-lgtm:0.8.1
-```
-
-You can then access the Grafana dashboard at `http://localhost:3000` with the
-username `admin` and password `admin`.
-
-:::
+> ```
+> You can then access the Grafana dashboard at `http://localhost:3000` with the
+> username `admin` and password `admin`.
+> ```
 
 This will automatically collect and export runtime observability data like
 `console.log`, traces for HTTP requests, and metrics for the Deno runtime.
@@ -512,17 +509,14 @@ counter.add(1, { color: "red" });
 counter.add(2, { color: "blue" });
 ```
 
-:::tip
-
-In OpenTelemetry, metric attributes should generally have low cardinality. This
-means that there should not be too many unique combinations of attribute values.
-For example, it is probably fine to have an attribute for which continent a user
-is on, but it would be too high cardinality to have an attribute for the exact
-latitude and longitude of the user. High cardinality attributes can cause
-problems with metric storage and exporting, and should be avoided. Use spans and
-logs for high cardinality data.
-
-:::
+> [!TIP]
+> In OpenTelemetry, metric attributes should generally have low cardinality.
+> This means that there should not be too many unique combinations of attribute
+> values. For example, it is probably fine to have an attribute for which
+> continent a user is on, but it would be too high cardinality to have an
+> attribute for the exact latitude and longitude of the user. High cardinality
+> attributes can cause problems with metric storage and exporting, and should be
+> avoided. Use spans and logs for high cardinality data.
 
 There are several types of instruments that can be created with a meter:
 
@@ -774,13 +768,10 @@ By default, Deno supports the following propagators:
 - `baggage`: The W3C Baggage propagation format, which allows passing key-value
   pairs across service boundaries.
 
-:::note
-
-These propagators automatically work with Deno's [`fetch`](/api/web/~/fetch) API
-and [`Deno.serve`](/api/deno/~/Deno.serve), enabling end-to-end tracing across
-HTTP requests without manual context management.
-
-:::
+> [!NOTE]
+> These propagators automatically work with Deno's [`fetch`](/api/web/~/fetch)
+> API and [`Deno.serve`](/api/deno/~/Deno.serve), enabling end-to-end tracing
+> across HTTP requests without manual context management.
 
 You can access the propagation API through the `@opentelemetry/api` package:
 

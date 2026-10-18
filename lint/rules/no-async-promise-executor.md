@@ -1,4 +1,5 @@
 ---
+title: no-async-promise-executor
 tags: [recommended]
 ---
 

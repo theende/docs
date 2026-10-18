@@ -1,4 +1,5 @@
 ---
+title: no-empty-character-class
 tags: [recommended]
 ---
 

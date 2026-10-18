@@ -1,4 +1,5 @@
 ---
+title: prefer-namespace-keyword
 tags: [recommended]
 ---
 

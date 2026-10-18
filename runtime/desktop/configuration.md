@@ -4,12 +4,10 @@ title: "Configuration"
 description: "Configure deno desktop in deno.json: app metadata, icons, deep-link URL schemes, backend selection, output paths, error reporting, and the auto-update server."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 All configuration for `deno desktop` lives in the `desktop` block in
 `deno.json`. Most fields are optional; a project with no `desktop` block at all
@@ -140,14 +138,12 @@ Registration happens at bundle time, per platform:
   `HKCU\Software\Classes\<scheme>` keys pointing back at the launcher. An
   installer (or the user) runs it once after install.
 
-:::info Registration only
-
-This registers the schemes with the OS so links are routed to your app. Handling
-the opened URL inside a running app (delivering the URL to your code) is coming
-in a later release; declare your schemes now so packaging and OS registration
-are in place.
-
-:::
+> [!NOTE] Registration only
+>
+> This registers the schemes with the OS so links are routed to your app.
+> Handling the opened URL inside a running app (delivering the URL to your code)
+> is coming in a later release; declare your schemes now so packaging and OS
+> registration are in place.
 
 ## `backend`
 

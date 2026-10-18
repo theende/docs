@@ -1,4 +1,5 @@
 ---
+title: no-class-assign
 tags: [recommended]
 ---
 

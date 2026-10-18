@@ -1,4 +1,5 @@
 ---
+title: no-irregular-whitespace
 tags: [recommended]
 ---
 

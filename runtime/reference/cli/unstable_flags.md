@@ -190,8 +190,7 @@ available on the `Deno` namespace.
 
 ## `--unstable-kv`
 
-Enabling this flag makes [Deno KV](/deploy/kv/manual) APIs available in the
-`Deno` namespace.
+Enabling this flag makes Deno KV APIs available in the `Deno` namespace.
 
 ## `--unstable-net`
 
@@ -237,29 +236,23 @@ delivered.
 
 ## `--unstable`
 
-:::caution
-
-**`--unstable` is deprecated - use granular flags instead.**
-
-The `--unstable` flag is no longer being used for new features, and will be
-removed in a future release. All unstable features that were available using
-this flag are now available as granular unstable flags, notably:
-
-- `--unstable-kv`
-- `--unstable-cron`
-
-Please use these feature flags instead moving forward.
-
-:::
+> [!CAUTION]
+> **`--unstable` is deprecated - use granular flags instead.**
+>
+> The `--unstable` flag is no longer being used for new features, and will be
+> removed in a future release. All unstable features that were available using
+> this flag are now available as granular unstable flags, notably:
+>
+> - `--unstable-kv`
+> - `--unstable-cron`
+>
+> Please use these feature flags instead moving forward.
 
 ## `--unstable-temporal`
 
-:::note
-
-As of Deno 2.7, the Temporal API is **stable** and available by default. The
-`--unstable-temporal` flag is no longer required.
-
-:::
+> [!NOTE]
+> As of Deno 2.7, the Temporal API is **stable** and available by default. The
+> `--unstable-temporal` flag is no longer required.
 
 The [Temporal API](https://tc39.es/proposal-temporal/docs/) is a modern date and
 time API available in the global scope. It provides better support for time

@@ -1,44 +1,40 @@
-import { extractYaml } from "@std/front-matter";
-import { walk } from "jsr:@std/fs";
-import { basename } from "jsr:@std/path";
-import { Sidebar, SidebarLink } from "../types.ts";
+import { extract } from "@ende/front-matter/yaml";
+import { basename } from "@ende/path";
+import type { Sidebar, SidebarItem } from "../_lib/types.ts";
 
-async function generateSidebarItems() {
-  const sidebarItems = [];
-
-  for await (
-    const dirEntry of walk(
-      new URL(import.meta.resolve("./rules/")),
-      { exts: ["md"] },
-    )
-  ) {
-    const lintRuleName = basename(dirEntry.path).split(".")[0];
-    const mdContent = await Deno.readTextFile(dirEntry.path);
-    let frontMatterData = { body: "", attrs: {} };
-    try {
-      frontMatterData = extractYaml(mdContent);
-    } catch {
-      frontMatterData.body = mdContent;
-    }
-    const tags = frontMatterData.attrs.tags ?? [];
-    const content = frontMatterData.body;
-
-    sidebarItems.push(
-      {
-        href: `/lint/rules/${lintRuleName}/`,
-        title: lintRuleName,
-        tags,
-        content,
-      } satisfies SidebarLink,
-    );
-  }
-
-  sidebarItems.sort((a, b) => a.title.localeCompare(b.title));
-
-  return sidebarItems;
+/** A lint rule page, for the sidebar and the list of rules. */
+export interface LintRule extends SidebarItem {
+  title: string;
+  href: string;
+  tags: string[];
+  /** The rule's first paragraph, in Markdown. */
+  summary: string;
 }
 
-export const lintRulePages = await generateSidebarItems();
+async function lintRules(): Promise<LintRule[]> {
+  const dir = new URL("./rules/", import.meta.url);
+  const rules: LintRule[] = [];
+
+  for await (const entry of Ende.readDir(dir)) {
+    if (!entry.isFile || !entry.name.endsWith(".md")) continue;
+
+    const name = basename(entry.name, ".md");
+    const { attrs, body } = extract<{ tags?: string[] }>(
+      await Ende.readTextFile(new URL(entry.name, dir)),
+    );
+
+    rules.push({
+      title: name,
+      href: `/lint/rules/${name}/`,
+      tags: attrs.tags ?? [],
+      summary: body.trim().split(/\n\s*\n/)[0],
+    });
+  }
+
+  return rules.sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export const lintRulePages = await lintRules();
 
 export const sectionTitle = "Lint rules";
 
@@ -51,3 +47,5 @@ export const sidebar = [
     items: lintRulePages,
   },
 ] satisfies Sidebar;
+
+export default { sidebar, sectionTitle, sectionHref, lintRulePages };

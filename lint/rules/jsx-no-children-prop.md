@@ -1,4 +1,5 @@
 ---
+title: jsx-no-children-prop
 tags: [recommended, react, jsx, fresh]
 ---
 

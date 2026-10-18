@@ -1,4 +1,5 @@
 ---
+title: explicit-function-return-type
 tags: []
 ---
 

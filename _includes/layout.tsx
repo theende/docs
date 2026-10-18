@@ -1,51 +1,17 @@
-export function deleteBackticks(str?: string) {
-  return str?.replace(/`/g, "");
-}
+import type { LayoutProps } from "@ende/satz";
+import Footer from "../_components/Footer.tsx";
+import Header from "../_components/Header.tsx";
+import type { NavLink } from "../_lib/types.ts";
 
-export default function Layout(data: Lume.Data) {
-  const fingerprint = Deno.env.get("DENO_DEPLOY_BUILD_ID") || null;
-  const isReference = data.url.startsWith("/api/");
-  const section = data.url.split("/").filter(Boolean)[0];
-  const description = data.description ||
-    "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
-  const is404 = data.url.startsWith("/404");
-  const canonicalUrl = `https://docs.deno.com${data.url}`;
-  const pageTitle = deleteBackticks(data.title);
+const DEFAULT_DESCRIPTION =
+  "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
 
-  // BreadcrumbList structured data (schema.org JSON-LD): Deno Docs → section
-  // → page. Search engines read this to show a breadcrumb trail in results
-  // instead of the raw URL, and to understand the site hierarchy; see
-  // https://developers.google.com/search/docs/appearance/structured-data/breadcrumb
-  // We emit only the data (no visible breadcrumb UI yet). The section name
-  // comes from the section's own _data.ts (sectionTitle) when defined.
-  const sectionRoot = section ? `/${section}/` : null;
-  const sectionTitle = sectionRoot
-    ? (data.search.data(sectionRoot)?.sectionTitle ??
-      section.charAt(0).toUpperCase() + section.slice(1))
-    : null;
-  const breadcrumbJsonLd = pageTitle && !is404
-    ? {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { name: "Deno Docs", item: "https://docs.deno.com/" },
-        ...(sectionTitle && data.url !== sectionRoot
-          ? [{
-            name: sectionTitle as string,
-            item: `https://docs.deno.com${sectionRoot}`,
-          }]
-          : []),
-        { name: pageTitle, item: canonicalUrl },
-      ].map((crumb, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        name: crumb.name,
-        item: crumb.item,
-      })),
-    }
-    : null;
-  const isServicesPage = data.url.startsWith("/services");
-  const hasSubNav = isServicesPage;
+/** The HTML document around every page: head, header, the page, footer. */
+export default function Layout(props: LayoutProps) {
+  const title = props.title as string | undefined;
+  const description = (props.description as string | undefined) ??
+    DEFAULT_DESCRIPTION;
+  const is404 = props.url === "/404.html";
 
   return (
     <html lang="en">
@@ -53,112 +19,21 @@ export default function Layout(data: Lume.Data) {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light dark" />
-        <title>{pageTitle ? `${pageTitle} | Deno Docs` : "Deno Docs"}</title>
-        {data?.description &&
-          <meta name="description" content={data.description} />}
-        {!is404 && <link rel="canonical" href={canonicalUrl} />}
-        {breadcrumbJsonLd && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(breadcrumbJsonLd),
-            }}
-          />
+        <title>{title ? `${title} | Deno Docs` : "Deno Docs"}</title>
+        <meta name="description" content={description} />
+        {!is404 && (
+          <link rel="canonical" href={`https://docs.ende.sh${props.url}`} />
         )}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              `const theme = localStorage.getItem('denoDocsTheme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); document.documentElement.classList.add(theme);`,
-          }}
-        />
-
-        <link
-          rel="stylesheet"
-          href={`/style.css${fingerprint ? `?v=${fingerprint}` : ""}`}
-        />
-
-        <link
-          rel="preload"
-          href="/fonts/inter/Inter-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/inter/Inter-SemiBold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        {data.page?.sourcePath?.endsWith(".md") && data.url !== "/" && (
-          <link
-            rel="alternate"
-            type="text/markdown"
-            href={data.page.sourcePath.endsWith("/index.md")
-              ? `/${data.page.sourcePath}`
-              : `${data.url.replace(/\/$/, "")}.md`}
-          />
-        )}
-        <link rel="me" href="https://fosstodon.org/@deno_land" />
-        <data.comp.OpenGraph
-          title={data.title}
-          description={description}
-          section={section}
-          url={`https://docs.deno.com${data.url}`}
-        />
-        <meta
-          name="keywords"
-          content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
-        />
-        <script type="module" defer src="/script.js"></script>
-        <script type="module" defer src="/js/main.js"></script>
-        <script type="module" defer src="/js/lint_rules.js"></script>
-        <script type="module" defer src="/js/copy.js"></script>
-        <script type="module" defer src="/js/tabs.js"></script>
-        <script type="module" defer src="/js/copy-page.js"></script>
-        <script type="module" defer src="/js/search.js"></script>
+        <script type="module" src="/js/copy.js"></script>
+        <script type="module" src="/js/tabs.js"></script>
       </head>
-      <body
-        data-services-page={Boolean(isServicesPage)}
-      >
-        <a
-          href="#content"
-          class="opacity-0 p-2 px-4 bg-background-secondary transition-transform duration-150 rounded-md ease-out absolute top-2 left-2 -translate-y-full focus:opacity-100 focus:translate-y-0 z-[500]"
-        >
-          Skip to main content
-        </a>
-        <data.comp.Header
-          currentSection={section}
-          currentUrl={data.url}
-          data={data}
-          hasSubNav={hasSubNav}
-        />
-        <div
-          class={`layout ${
-            (data.toc?.length || isReference) && !data.fullWidth
-              ? "layout--three-column"
-              : "layout--two-column"
-          }`}
-        >
-          <data.comp.Navigation
-            data={data}
-            currentSection={section}
-            currentUrl={data.url}
-            hasSubNav={hasSubNav}
-          />
-          {data.children}
-          {!isReference && (
-            <data.comp.TableOfContents
-              toc={data.toc}
-              data={data}
-              hasSubNav={hasSubNav}
-            />
-          )}
-        </div>
-        <data.comp.Footer />
+      <body>
+        <a href="#content">Skip to main content</a>
+        <Header navigation={props.navigation as NavLink[]} url={props.url} />
+        {props.content}
+        <Footer />
       </body>
     </html>
   );

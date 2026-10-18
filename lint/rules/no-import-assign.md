@@ -1,4 +1,5 @@
 ---
+title: no-import-assign
 tags: [recommended]
 ---
 

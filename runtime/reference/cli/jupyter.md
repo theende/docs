@@ -11,12 +11,10 @@ Deno ships with a built-in Jupyter kernel that allows you to write JavaScript
 and TypeScript; use Web and Deno APIs and import `npm` packages straight in your
 interactive notebooks.
 
-:::caution `deno jupyter` always runs with `--allow-all`
-
-Currently all code executed in the Jupyter kernel runs with `--allow-all` flag.
-This is a temporary limitation and will be addressed in the future.
-
-:::
+> [!CAUTION] `deno jupyter` always runs with `--allow-all`
+>
+> Currently all code executed in the Jupyter kernel runs with `--allow-all`
+> flag. This is a temporary limitation and will be addressed in the future.
 
 ## Quickstart
 
@@ -79,12 +77,9 @@ should be displayed.
 
 _Example of an object that returns plain text and HTML output._
 
-:::info
-
-You can also use `Deno.jupyter.$display` instead of typing
-`Symbol.for("Jupyter.display")`
-
-:::
+> [!NOTE]
+> You can also use `Deno.jupyter.$display` instead of typing
+> `Symbol.for("Jupyter.display")`
 
 This is a regular function, so you can use any library you want to format the
 output - eg. use [`@std/fmt/colors`](/runtime/reference/std/fmt/) to provide a
@@ -174,7 +169,7 @@ notebook.
 
 <figure>
 
-<video class="w-full" alt="`confirm` and `prompt` APIs example" autoplay muted loop playsinline controls src="../images/jupyter-confirm-prompt.mp4"></video>
+<video class="w-full" alt="`confirm` and `prompt` APIs example" autoplay muted loop playsinline controls src="/runtime/reference/images/jupyter-confirm-prompt.mp4"></video>
 
 <figcaption><span style="font-family: monospace;">confirm</span> and <span style="font-family: monospace;">prompt</span> APIs example</figcaption>
 
@@ -208,7 +203,7 @@ await Deno.jupyter.broadcast("update_display_data", {
 
 <figure>
 
-<video class="w-full" alt="[`Deno.jupyter.broadcast`](/api/deno/~/Deno.jupyter.broadcast) API example" autoplay muted loop playsinline controls src="../images/jupyter-broadcast.mp4"></video>
+<video class="w-full" alt="[`Deno.jupyter.broadcast`](/api/deno/~/Deno.jupyter.broadcast) API example" autoplay muted loop playsinline controls src="/runtime/reference/images/jupyter-broadcast.mp4"></video>
 
 <figcaption><span style="font-family: monospace;">Deno.jupyter.broadcast</span> API example</figcaption>
 

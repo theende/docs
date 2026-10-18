@@ -108,11 +108,11 @@ needed at runtime.
 
 ## Common failure modes
 
-| Error                                       | Likely cause                                                                                        | Fix                                                                                                                   |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| "deno.lock is missing"                      | No lockfile is committed.                                                                           | Run `deno install` locally and commit the resulting `deno.lock`.                                                      |
-| "lockfile is out of date"                   | A dependency was added or bumped in `deno.json` / `package.json` but the lockfile wasn't refreshed. | Run `deno install` locally and commit the updated `deno.lock`.                                                        |
-| Build-script approval prompts in non-TTY CI | A new npm package wants to run lifecycle scripts that haven't been approved.                        | Approve them locally with [`deno approve-scripts`](/runtime/reference/cli/approve_scripts/) and commit the approvals. |
+| Error                                       | Likely cause                                                                                        | Fix                                                                        |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| "deno.lock is missing"                      | No lockfile is committed.                                                                           | Run `deno install` locally and commit the resulting `deno.lock`.           |
+| "lockfile is out of date"                   | A dependency was added or bumped in `deno.json` / `package.json` but the lockfile wasn't refreshed. | Run `deno install` locally and commit the updated `deno.lock`.             |
+| Build-script approval prompts in non-TTY CI | A new npm package wants to run lifecycle scripts that haven't been approved.                        | Approve them locally with `deno approve-scripts` and commit the approvals. |
 
 ## See also
 
@@ -122,5 +122,4 @@ needed at runtime.
   to running Deno in GitHub Actions and other CI providers
 - [`deno audit`](/runtime/reference/cli/audit/) — scan dependencies for known
   vulnerabilities, complements `deno ci` in CI
-- [`deno approve-scripts`](/runtime/reference/cli/approve_scripts/) — manage
-  which npm lifecycle scripts are allowed to run
+- `deno approve-scripts` — manage which npm lifecycle scripts are allowed to run

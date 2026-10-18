@@ -22,8 +22,7 @@ below for more information on each subcommand.
 ## Dependency management
 
 - [deno add](/runtime/reference/cli/add) - add dependencies
-- [deno approve-scripts](/runtime/reference/cli/approve_scripts) - manage
-  lifecycle scripts of npm packages
+- deno approve-scripts - manage lifecycle scripts of npm packages
 - [deno audit](/runtime/reference/cli/audit) - audit dependencies
 - [deno bump-version](/runtime/reference/cli/bump_version/) - bump the project
   version in `deno.json` or `package.json`
@@ -53,8 +52,7 @@ below for more information on each subcommand.
 - [deno create](/runtime/reference/cli/create/) - scaffold a new project from a
   template
 - [deno doc](/runtime/reference/cli/doc/) - generate documentation for a module
-- [deno deploy](/runtime/reference/cli/deploy) - Manage and publish your
-  projects on the web
+- deno deploy - Manage and publish your projects on the web
 - [deno desktop](/runtime/reference/cli/desktop/) - build a desktop app from the
   current Deno project
 - [deno fmt](/runtime/reference/cli/fmt/) - format your code
@@ -64,8 +62,7 @@ below for more information on each subcommand.
 - [deno jupyter](/runtime/reference/cli/jupyter/) - run a Jupyter notebook
 - [deno lint](/runtime/reference/cli/lint/) - lint your code
 - [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
-- [deno pack](/runtime/reference/cli/pack/) - create an npm tarball from the
-  current Deno project
+- deno pack - create an npm tarball from the current Deno project
 - [deno publish](/runtime/reference/cli/publish/) - publish a module to JSR
 - [deno test](/runtime/reference/cli/test/) - run your tests
 - [deno transpile](/runtime/reference/cli/transpile/) - transpile TypeScript,

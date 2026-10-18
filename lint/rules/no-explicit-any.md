@@ -1,4 +1,5 @@
 ---
+title: no-explicit-any
 tags: [recommended]
 ---
 

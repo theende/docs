@@ -1,4 +1,5 @@
 ---
+title: no-throw-literal
 tags: []
 ---
 

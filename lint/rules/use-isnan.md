@@ -1,4 +1,5 @@
 ---
+title: use-isnan
 tags: [recommended]
 ---
 

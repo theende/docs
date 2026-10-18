@@ -63,12 +63,9 @@ Dev dependencies only exist in the `package.json` world:
 deno add --dev npm:typescript
 ```
 
-:::note
-
-Without a `package.json`, the `--dev` flag has no effect: `deno.json` has a
-single `imports` map, so the package is added as a regular import.
-
-:::
+> [!NOTE]
+> Without a `package.json`, the `--dev` flag has no effect: `deno.json` has a
+> single `imports` map, so the package is added as a regular import.
 
 ## Aliasing a package
 

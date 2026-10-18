@@ -28,27 +28,24 @@ creates JavaScript bindings to the functions they export.
 ## Security considerations
 
 FFI requires explicit permission using the
-[`--allow-ffi`](/runtime/reference/permissions/#ffi-(foreign-function-interface))
+[`--allow-ffi`](/runtime/reference/permissions/#ffi-foreign-function-interface)
 flag, as native code runs outside of Deno's security sandbox:
 
 ```sh
 deno run --allow-ffi my_ffi_script.ts
 ```
 
-:::info
-
-<strong>Important security warning</strong>: Unlike JavaScript code running in
-the Deno sandbox, native libraries loaded via FFI have the same access level as
-the Deno process itself. This means they can:
-
-- Access the filesystem
-- Make network connections
-- Access environment variables
-- Execute system commands
-
-Always ensure you trust the native libraries you're loading through FFI.
-
-:::
+> [!NOTE]
+> <strong>Important security warning</strong>: Unlike JavaScript code running in
+> the Deno sandbox, native libraries loaded via FFI have the same access level
+> as the Deno process itself. This means they can:
+>
+> - Access the filesystem
+> - Make network connections
+> - Access environment variables
+> - Execute system commands
+>
+> Always ensure you trust the native libraries you're loading through FFI.
 
 ## Basic usage
 

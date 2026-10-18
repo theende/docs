@@ -72,13 +72,10 @@ or
 
 ### Argument and flag ordering
 
-:::caution
-
-Anything passed after the script name is a script argument, not a Deno runtime
-flag. This is a common source of confusion, so make sure runtime flags appear
-**before** the script name.
-
-:::
+> [!CAUTION]
+> Anything passed after the script name is a script argument, not a Deno runtime
+> flag. This is a common source of confusion, so make sure runtime flags appear
+> **before** the script name.
 
 This leads to the following pitfall:
 

@@ -1,4 +1,5 @@
 ---
+title: no-control-regex
 tags: [recommended]
 ---
 

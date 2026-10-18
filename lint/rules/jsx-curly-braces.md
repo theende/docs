@@ -1,4 +1,5 @@
 ---
+title: jsx-curly-braces
 tags: [recommended, react, jsx]
 ---
 

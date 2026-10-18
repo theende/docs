@@ -133,14 +133,11 @@ next to the `deno` executable.
 
 ## Choosing a JavaScript engine
 
-:::caution
-
-`--engine quickjs` is experimental and subject to change. It landed after Deno
-2.9.4, so it is available in
-[canary builds](/runtime/reference/cli/upgrade/#canary-build) and in later
-releases.
-
-:::
+> [!CAUTION]
+> `--engine quickjs` is experimental and subject to change. It landed after Deno
+> 2.9.4, so it is available in
+> [canary builds](/runtime/reference/cli/upgrade/#canary-build) and in later
+> releases.
 
 Compiled binaries run on V8 by default. The `--engine` flag lets you build
 against QuickJS instead, which produces a smaller executable:
@@ -288,12 +285,9 @@ deno compile main.ts
 
 ## Bundling dependencies
 
-:::caution
-
-`--bundle` is experimental and subject to change. Some dynamic patterns are not
-yet supported (see [Limitations](#limitations) below).
-
-:::
+> [!CAUTION]
+> `--bundle` is experimental and subject to change. Some dynamic patterns are
+> not yet supported (see [Limitations](#limitations) below).
 
 By default, `deno compile` embeds the entire resolved `node_modules` tree in the
 executable. For projects with many npm dependencies this can make binaries large

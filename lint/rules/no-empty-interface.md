@@ -1,4 +1,5 @@
 ---
+title: no-empty-interface
 tags: [recommended]
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: no-boolean-literal-for-arguments
 tags: []
 ---
 

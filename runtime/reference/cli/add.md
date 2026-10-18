@@ -22,14 +22,12 @@ deno add npm:express hono zod
 deno add jsr:@std/path
 ```
 
-:::info Deno 2.8
-
-Unprefixed package names are treated as npm packages by default, so the `npm:`
-prefix is no longer required at the CLI. `deno add express` is equivalent to
-`deno add npm:express`. JSR packages still need the `jsr:` prefix to stay
-unambiguous. The `npm:` prefix remains required in `import` specifiers.
-
-:::
+> [!NOTE] Deno 2.8
+>
+> Unprefixed package names are treated as npm packages by default, so the `npm:`
+> prefix is no longer required at the CLI. `deno add express` is equivalent to
+> `deno add npm:express`. JSR packages still need the `jsr:` prefix to stay
+> unambiguous. The `npm:` prefix remains required in `import` specifiers.
 
 By default, dependencies are added with a caret (`^`) version range. Use
 `--save-exact` to pin to an exact version:
@@ -61,5 +59,5 @@ form (`npm:@jsr/...`). The same flag works on
 [`deno uninstall`](/runtime/reference/cli/uninstall/).
 
 To make this the default without passing the flag each time, set
-[`"preferPackageJson": true`](/runtime/reference/deno_json/#prefer-package-json-for-dependencies)
+[`"preferPackageJson": true`](/runtime/reference/deno_json/#prefer-packagejson-for-dependencies)
 in `deno.json`.

@@ -4,12 +4,10 @@ title: "WebGPU rendering"
 description: "Draw to a native window with WebGPU on the raw backend: request an adapter, wrap the window as an UnsafeWindowSurface, configure a canvas context, and run a render loop."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 The [raw backend](/runtime/desktop/backends/#raw) gives you a native window with
 no web engine attached. Instead of loading HTML, you draw to the window yourself

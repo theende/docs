@@ -80,12 +80,9 @@ the root `deno.json`: `nodeModulesDir`, `vendor`, `minimumDependencyAge`,
 `links`, `lock`, and `allowScripts`. Setting them in a member has no effect and
 Deno will warn about it.
 
-:::note
-
-`name`, `version`, and `exports` go the other way: they belong in members, not
-in the root.
-
-:::
+> [!NOTE]
+> `name`, `version`, and `exports` go the other way: they belong in members, not
+> in the root.
 
 ## Sharing dependencies from the root
 
@@ -131,13 +128,10 @@ $ deno run pkg-b/main.ts
 from workspace member
 ```
 
-:::note
-
-pnpm workspaces are the exception: Deno does not read `pnpm-workspace.yaml`, so
-move its package list into the `workspace` field of a root `deno.json` (or a
-`workspaces` field in `package.json`).
-
-:::
+> [!NOTE]
+> pnpm workspaces are the exception: Deno does not read `pnpm-workspace.yaml`,
+> so move its package list into the `workspace` field of a root `deno.json` (or
+> a `workspaces` field in `package.json`).
 
 ## Centralized versions with `catalog:`
 

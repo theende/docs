@@ -1,4 +1,5 @@
 ---
+title: no-new-symbol
 tags: [recommended]
 ---
 

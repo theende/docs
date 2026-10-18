@@ -1,4 +1,5 @@
 ---
+title: react-no-danger-with-children
 tags: [react, fresh]
 ---
 

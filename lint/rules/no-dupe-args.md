@@ -1,4 +1,5 @@
 ---
+title: no-dupe-args
 tags: [recommended]
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: no-unused-vars
 tags: [recommended]
 ---
 

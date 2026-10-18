@@ -2,137 +2,72 @@
 
 This repository contains the website running
 [docs.deno.com](https://docs.deno.com). The intent of this project is to
-centralize all official Deno documentation content in a single website. The Deno
-Docs site is built using [Lume](https://lume.land/), an extremely fast static
-site generator.
-
-The `docs.deno.com` website is hosted on [Deno Deploy](https://deno.com/deploy).
+centralize all official Deno documentation content in a single website. The site
+is built with [satz](https://jsr.io/@ende/satz), a static site generator for
+[Ende](https://ende.sh) built on the `@ende/*` standard library.
 
 ## Local development
 
-Install [Deno](https://deno.com).
-
-You can then start the local development server with:
+Install [Ende](https://ende.sh). Then start the development server:
 
 ```console
-deno task serve
+ende task serve
 ```
 
-This will launch a browser window open to
-[localhost:3000](http://localhost:3000), where you will see any doc content
-changes you make update live. Here redirects will not work. If you want
-redirects to work, you need to run:
+It serves the site on [localhost:3000](http://localhost:3000) (`--port` picks
+another), rebuilds when a file changes and reloads open pages. Redirects work
+there too. To build the site into `_site/` once:
 
 ```console
-deno task build
-deno task prod
+ende task build
 ```
 
-Which will start a Deno server on [localhost:8000](http://localhost:8000) used
-in production, which handles redirects.
+The site is configured in `_config.ts` (redirects come from `oldurls.json` and
+`go.json`), its layouts are in `_includes/` and its components in
+`_components/`. The pages are unstyled for now.
 
-the above commands will default to performing as complete build of the site
-including all of the more expensive operations. You can also perform a lighter
-build by running:
+## Checks
 
 ```console
-deno task build:light
+ende task build && ende task check:links   # every internal link and #fragment resolves
+ende task test                             # front matter and sidebar rules
+ende task test:examples                    # type-checks every example script
+ende task check                            # type-checks the site's own code
 ```
 
-This will build the site without generating the Open Graph images and other more
-time-consuming operations which might be desirable to skip during local
-development work.
-
-## Developing styles and components
-
-We are increasingly making use of global components to improve consistency and
-reduce duplication. A styleguide has been created to preview and develop these
-components and is generated during the build process.
-
-You can browse to it in the site at `/styleguide/`
-
-To avoid longer build times of the entire site and all of its content while
-developing UI elements and components, a styleguide-only build is available
-which performs the initial global configuration for the site, but then only
-generates and watches for changes in the `/styleguide` folder of the repo.
-
-To work on just the components and UI elements and review them within
-styleguide, run:
-
-```console
-deno task serve:style
-```
-
-Then browse to the styleguide section of the site at `/styleguide/`
-
-## Link checking
-
-To ensure all links in the documentation work correctly, you can run the link
-checker locally before committing changes. This helps catch broken links early
-in the development process.
-
-### Running link checker locally
-
-The link checker needs to run against a live server. Here's the workflow:
-
-1. **Start the dev server** (in one terminal):
-
-   ```console
-   deno task dev
-   ```
-
-   Wait for it to fully start (may take 30-60 seconds on first run).
-
-2. **Run the link checker** (in another terminal):
-
-   ```console
-   deno task check:links
-   ```
-
-This will check all links on your local site and report any issues.
-
-### Pre-commit hook (optional)
-
-For automatic link checking before commits, you can install a pre-commit hook:
-
-```console
-deno task install:hooks
-```
-
-This will check links automatically whenever you commit markdown files. You can
-bypass it temporarily with:
-
-```console
-git commit --no-verify
-```
-
-**Note for Windows users**: If you're using Git Bash or WSL, the pre-commit hook
-should work normally. If you encounter issues, you can manually run
-`deno task check:links` before committing.
-
-The link checker also runs automatically in CI for all deployments.
+The link checker reads the built site. Links into the API and standard library
+reference are reported as pending until that reference is generated again.
 
 ## Editing content
 
 The actual content of the docs site is found mostly in these folders:
 
 - `runtime` - docs for the Deno CLI / runtime
-- `deploy` - docs for the Deno Deploy cloud service
-- `subhosting` - docs for Deno Subhosting
 - `examples` - docs for the [Examples](#Examples) section
+- `lint/rules` - one page per lint rule
 
-Most files are [markdown](https://lume.land/plugins/markdown/), but even
-markdown files are processed with [MDX](https://mdxjs.com/), which enables you
-to use JSX syntax within your markdown files.
+Pages are GitHub-flavored Markdown with YAML front matter. Callouts are GitHub
+alerts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`, `> [!CAUTION]`); text after the
+marker is the callout's title, followed by a `>` line:
+
+```md
+> [!TIP] Want to type-check only?
+>
+> Use `deno check` instead.
+```
+
+A code block's file name goes in its fence: `` ```json title="deno.json" ``.
 
 Left navigation for the different doc sections are configured in the `_data.ts`
 files in their respective content directories.
 
 - `runtime/_data.ts` - sidebar config for the Runtime section
-- `deploy/_data.ts` - sidebar config for the Deno Deploy section
+- `examples/_data.ts` - the Examples catalog and its sidebar
+- `lint/_data.ts` - the list of lint rules
 
-Static files (like screenshots) can be included directly in the `runtime`,
-`deploy`, or `kv` folders, and referenced by relative URLs in your markdown.
+Static files (like screenshots) can be included directly in the content folders
+and referenced by URLs relative to the Markdown file. Files in `static/` are
+published at the root of the site.
 
 ### Keep `last_modified` fresh
 
@@ -140,7 +75,7 @@ Every content page carries a `last_modified: YYYY-MM-DD` field in its
 frontmatter. Whenever you change a page, bump that date to the day of the change
 in the same pull request. CI enforces this: the `frontmatter_test` checks that
 every page has a valid `last_modified`, and the Freshness workflow fails when a
-page is edited without bumping it. Run `deno task check:freshness` locally to
+page is edited without bumping it. Run `ende task check:freshness` locally to
 check your branch.
 
 ### Guides teach, reference enumerates
@@ -166,35 +101,9 @@ previous major release.
 
 ## Reference docs
 
-The reference docs served at `/api` are generated via the `deno doc` subcommand.
-To generate the reference docs locally, run:
-
-```console
-deno task reference
-```
-
-This will generate the reference docs, and you can use the `serve` or `build`
-tasks.
-
-The API reference documentation is generated from type definitions in the
-[Deno source code](https://github.com/denoland/deno). The API reference content
-can be edited by modifying the JSDoc comments in the corresponding `d.ts` files
-in the Deno source code. Once merged, the changes will be reflected in the API
-reference documentation when the Deno documentation site is next updated.
-
-### Previewing API reference changes
-
-In order to preview changes to the API reference, take the following steps:
-
-1. Make changes to the JSDoc comments in the Deno source code
-1. [Build the Deno CLI locally](https://docs.deno.com/runtime/contributing/building_from_source/),
-   including your JSDoc changes
-1. For convenience, create an alias of `d_deno` to point to your local build of
-   the Deno CLI (typically in the `target/debug/deno` directory of your CLI
-   repo)
-1. Generate the reference docs from your local build of the Deno CLI by running
-   in the root directory `d_deno task reference`
-1. Run the `deno task serve` command in the root directory to see the changes
+The API reference (`/api/`) and the standard library reference
+(`/runtime/reference/std/`) aren't built at the moment. They will be generated
+with `ende doc`.
 
 ## Versioning docs content
 
@@ -213,38 +122,6 @@ For additive changes, it should usually be sufficient to indicate which version
 a feature or API was released in. For example - in the Node 20 docs, the
 [register function](https://nodejs.org/dist/latest-v20.x/docs/api/module.html#moduleregister)
 is marked as being added in version `20.6.0`.
-
-## Caching of the API Reference docs
-
-The generation of the API reference docs is a very time-consuming operation. To
-speed up this process, we use a caching system that tracks file changes and only
-regenerates documentation when necessary.
-
-### How the caching system works
-
-The caching system uses multiple cache files in the `reference_gen/` directory:
-
-- **`.gen-cache.json`** - Main cache tracking file modification times and
-  content hashes for source files
-- **`.gen-cache-modules.json`** - Module-specific cache for individual
-  TypeScript definition files
-- **`.node-incremental-cache.json`** - Incremental cache for Node.js API
-  documentation
-
-The cache system performs content-based hashing to detect actual changes (not
-just timestamp changes) and supports both file-level and directory-level
-tracking. It automatically invalidates and rebuilds cache entries when:
-
-- Source `.d.ts` files are modified
-- File content hashes change
-- Dependencies are updated
-
-If you need to force a complete regeneration (bypassing the cache), you can
-delete the cache files:
-
-```console
-deno task cache:clear
-```
 
 ## Contribution
 
@@ -338,74 +215,6 @@ this command:
 ```bash
 git shortlog -s -n
 ```
-
-## Orama Search Configuration
-
-1. **Sign up for Orama Cloud**: Go to
-   [https://cloud.oramasearch.com/](https://cloud.oramasearch.com/) and create
-   an account.
-
-2. **Create a new index**:
-   - In the Orama dashboard, create a new index
-   - Set the data source to docs.deno.com or upload the documentation content
-     directly
-
-3. **Get your credentials**:
-   - In your Orama dashboard, you'll find your **Endpoint URL** and **Public API
-     Key**
-   - These are safe to include in frontend applications
-
-4. **Configure the search**:
-   - Open `search.client.ts`
-   - Replace `YOUR_ORAMA_ENDPOINT` with your actual endpoint URL
-   - Replace `YOUR_ORAMA_API_KEY` with your actual public API key
-
-### Data Sources
-
-For the Deno docs, we have several options:
-
-#### Option 1: Web Crawler (Recommended)
-
-- Use Orama's built-in web crawler to index your documentation site
-- Go to Data Sources → Web Crawler in your Orama dashboard
-- Add your site URL (e.g., `https://docs.deno.com`)
-- Configure crawling rules if needed
-
-#### Option 2: Static Files
-
-- Export your documentation content as JSON
-- Upload it directly to Orama
-- This gives you more control over what gets indexed
-
-#### Option 3: API Integration
-
-- Use Orama's REST API to programmatically add/update content
-- Useful to integrate with our build process
-
-### Configuration Example
-
-In `search.client.ts`, update the ORAMA_CONFIG object:
-
-```typescript
-const ORAMA_CONFIG = {
-  endpoint: "https://cloud.orama.com/v1/indexes/your-index-id",
-  apiKey: "your-public-api-key-here",
-};
-```
-
-### Customization
-
-We can customize the search experience by modifying:
-
-- **Search modes**: Change between "fulltext", "vector", or "hybrid" search
-- **Result limit**: Adjust how many results to show
-- **UI styling**: Modify the CSS classes in the search components
-- **Result formatting**: Change how search results are displayed
-
-## Deployment
-
-The `docs.deno.com` site is updated with every push to the `main` branch, which
-should be done via pull request to this repository.
 
 ## License
 

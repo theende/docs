@@ -69,14 +69,12 @@ Deno.test("example.ts$4-10.ts", async () => {
 and then run it as a standalone module living in the same directory as the
 module being documented.
 
-:::tip Want to type-check only?
-
-If you want to type-check your code snippets in JSDoc and markdown files without
-actually running them, you can use [`deno check`](/runtime/reference/cli/check/)
-command with `--doc` option (for JSDoc) or with `--doc-only` option (for
-markdown) instead.
-
-:::
+> [!TIP] Want to type-check only?
+>
+> If you want to type-check your code snippets in JSDoc and markdown files
+> without actually running them, you can use
+> [`deno check`](/runtime/reference/cli/check/) command with `--doc` option (for
+> JSDoc) or with `--doc-only` option (for markdown) instead.
 
 ## Exported items are automatically imported
 
@@ -151,12 +149,9 @@ Below is how each permission flag is interpreted:
 | `--ignore-*`        | Currently unsupported (ignored)                      |
 | No permission flags | None                                                 |
 
-:::note
-
-A code example never runs with broader permissions than what `deno test` was
-granted, even if the hashbang itself specifies broader ones.
-
-:::
+> [!NOTE]
+> A code example never runs with broader permissions than what `deno test` was
+> granted, even if the hashbang itself specifies broader ones.
 
 ## Skipping code blocks
 

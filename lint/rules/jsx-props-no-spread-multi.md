@@ -1,4 +1,5 @@
 ---
+title: jsx-props-no-spread-multi
 tags: [recommended, react, jsx]
 ---
 

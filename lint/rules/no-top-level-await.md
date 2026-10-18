@@ -1,4 +1,5 @@
 ---
+title: no-top-level-await
 tags: []
 ---
 

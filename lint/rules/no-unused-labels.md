@@ -1,4 +1,5 @@
 ---
+title: no-unused-labels
 tags: [recommended]
 ---
 

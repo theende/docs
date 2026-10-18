@@ -13,19 +13,17 @@ by LLMs interact with users in a roleplay game setting.
 You can see the code for the
 [finished app on GitHub](https://github.com/denoland/tutorial-with-llm).
 
-:::info Deploy your own
-
-Want to skip the tutorial and deploy the finished app right now? Click the
-button below to instantly deploy your own copy of the complete LLM chat
-application to Deno Deploy. You'll get a live, working application that you can
-customize and modify as you learn!
-
-[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-llm&mode=dynamic&entrypoint=main.ts&install=deno+install)
-
-Once you have deployed, add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` in the
-project "Settings".
-
-:::
+> [!NOTE] Deploy your own
+>
+> Want to skip the tutorial and deploy the finished app right now? Click the
+> button below to instantly deploy your own copy of the complete LLM chat
+> application to Deno Deploy. You'll get a live, working application that you
+> can customize and modify as you learn!
+>
+> [![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-llm&mode=dynamic&entrypoint=main.ts&install=deno+install)
+>
+> Once you have deployed, add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` in
+> the project "Settings".
 
 ## Initialize a new project
 
@@ -931,8 +929,7 @@ Once your app is on GitHub, you can
 Don't forget to add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` environment
 variables in the project "Settings".
 
-For a walkthrough of deploying your app, check out the
-[Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
+For a walkthrough of deploying your app, check out the Deno Deploy tutorial.
 
 ## Testing
 

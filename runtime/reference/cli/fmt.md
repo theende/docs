@@ -147,12 +147,9 @@ deno fmt --ignore=dist/,build/
 [Nunjucks]: https://mozilla.github.io/nunjucks/
 [Vento]: https://github.com/ventojs/vento
 
-:::note
-
-**`deno fmt` can format code snippets in Markdown files.** Snippets must be
-enclosed in triple backticks and have a language attribute.
-
-:::
+> [!NOTE]
+> **`deno fmt` can format code snippets in Markdown files.** Snippets must be
+> enclosed in triple backticks and have a language attribute.
 
 The markup formatters (HTML, XML, SVG, and the `--unstable-component` formats)
 and the style formatters (CSS, SCSS, and Less) were rebuilt to only adjust

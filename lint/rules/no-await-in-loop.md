@@ -1,4 +1,5 @@
 ---
+title: no-await-in-loop
 tags: []
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: no-extra-boolean-cast
 tags: [recommended]
 ---
 

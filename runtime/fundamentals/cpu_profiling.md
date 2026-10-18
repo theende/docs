@@ -29,14 +29,11 @@ into Chrome DevTools (Performance tab) or other V8 profile viewers for analysis.
 | `--cpu-prof-md`                      | Generate a human-readable Markdown report alongside the `.cpuprofile` file.                                      |
 | `--cpu-prof-flamegraph`              | Generate an interactive SVG flamegraph alongside the `.cpuprofile` file.                                         |
 
-:::note
-
-CPU profiles report line numbers from the transpiled JavaScript code, not the
-original TypeScript source. This is a limitation of V8's profiler. For
-TypeScript files, the reported line numbers may not match your source code
-directly.
-
-:::
+> [!NOTE]
+> CPU profiles report line numbers from the transpiled JavaScript code, not the
+> original TypeScript source. This is a limitation of V8's profiler. For
+> TypeScript files, the reported line numbers may not match your source code
+> directly.
 
 ## Customizing profile output
 

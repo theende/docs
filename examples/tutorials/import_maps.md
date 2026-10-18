@@ -82,14 +82,11 @@ for imports that originate under a given path prefix:
 
 Modules under `vendor/` get the legacy logger; everything else gets the default.
 
-:::note
-
-The import map redirects specifiers in your own code. To force the version of a
-package deeper in the dependency tree, use the `overrides` field of
-`package.json` instead; see
-[Overriding transitive dependencies](/examples/add_remove_dependencies_tutorial/#overriding-transitive-dependencies).
-
-:::
+> [!NOTE]
+> The import map redirects specifiers in your own code. To force the version of
+> a package deeper in the dependency tree, use the `overrides` field of
+> `package.json` instead; see
+> [Overriding transitive dependencies](/examples/add_remove_dependencies_tutorial/#overriding-transitive-dependencies).
 
 For how packages themselves are named and versioned in the import map, see
 [Add and remove dependencies](/examples/add_remove_dependencies_tutorial/) and

@@ -1,4 +1,5 @@
 ---
+title: no-cond-assign
 tags: [recommended]
 ---
 

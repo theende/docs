@@ -1,4 +1,5 @@
 ---
+title: require-await
 tags: [recommended]
 ---
 

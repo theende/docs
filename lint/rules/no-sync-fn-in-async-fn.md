@@ -1,4 +1,5 @@
 ---
+title: no-sync-fn-in-async-fn
 tags: []
 ---
 

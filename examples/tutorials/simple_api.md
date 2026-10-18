@@ -13,9 +13,9 @@ the Web Platform primitives (Request, Response, fetch) with built‑in data
 storage in KV. In this tutorial you'll build and deploy a small link shortener
 backed by Deno KV, then push it to production on Deno Deploy.
 
-We'll implement a simple link shortener service using
-[Deno KV](/deploy/kv/manual). The modern Deno runtime provides `Deno.serve()`
-which starts an HTTP server with zero configuration.
+We'll implement a simple link shortener service using Deno KV. The modern Deno
+runtime provides `Deno.serve()` which starts an HTTP server with zero
+configuration.
 
 ## Create a local API server
 
@@ -177,12 +177,11 @@ curl -v http://localhost:8000/denodocs
 
 ## Deploy your API server
 
-::: Deno Deploy account required
-
-You will need an account on Deno Deploy to complete this section. If you haven't
-already, [sign up for a free Deno Deploy account](https://console.deno.com/).
-
-:::
+> [!NOTE] Deno Deploy account required
+>
+> You will need an account on Deno Deploy to complete this section. If you
+> haven't already,
+> [sign up for a free Deno Deploy account](https://console.deno.com/).
 
 ### Provision a KV database on Deno Deploy
 

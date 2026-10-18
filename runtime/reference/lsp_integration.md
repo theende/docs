@@ -10,13 +10,10 @@ oldUrl:
   - /runtime/reference/cli/lsp_integration/
 ---
 
-:::tip
-
-If you are looking for information how to use Deno's LSP with various editors,
-visit
-[Setup your environment page](/runtime/getting_started/setup_your_environment/).
-
-:::
+> [!TIP]
+> If you are looking for information how to use Deno's LSP with various editors,
+> visit
+> [Setup your environment page](/runtime/getting_started/setup_your_environment/).
 
 The Deno CLI comes with a built in language server that can provide an
 intelligent editing experience, as well as a way to easily access the other

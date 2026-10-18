@@ -1,4 +1,5 @@
 ---
+title: jsx-button-has-type
 tags: [recommended, react, jsx, fresh]
 ---
 

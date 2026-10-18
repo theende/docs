@@ -1,4 +1,5 @@
 ---
+title: no-array-constructor
 tags: [recommended]
 ---
 

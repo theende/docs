@@ -1,4 +1,5 @@
 ---
+title: no-empty-enum
 tags: [recommended]
 ---
 

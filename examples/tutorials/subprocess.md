@@ -136,12 +136,9 @@ console.log("Exit code:", status.code);
 
 ## Convenience spawn functions
 
-:::caution
-
-`Deno.spawn()`, `Deno.spawnAndWait()`, and `Deno.spawnAndWaitSync()` are
-unstable APIs introduced in Deno 2.7. They may evolve before being stabilized.
-
-:::
+> [!CAUTION]
+> `Deno.spawn()`, `Deno.spawnAndWait()`, and `Deno.spawnAndWaitSync()` are
+> unstable APIs introduced in Deno 2.7. They may evolve before being stabilized.
 
 As of Deno 2.7, three shorthand functions provide a more concise alternative to
 `Deno.Command`:

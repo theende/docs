@@ -68,15 +68,14 @@ export function Hello() {
 }
 ```
 
-:::note Legacy classic runtime
-
-Deno's built-in default predates the automatic runtime: it is the classic
-`"react"` transform, which compiles JSX to `React.createElement` calls and
-expects a `React` variable to be in scope. Code that relies on the default
-throws `ReferenceError: React is not defined` at runtime unless you import React
-into every JSX file. Prefer the automatic runtime above for new projects.
-
-:::
+> [!NOTE] Legacy classic runtime
+>
+> Deno's built-in default predates the automatic runtime: it is the classic
+> `"react"` transform, which compiles JSX to `React.createElement` calls and
+> expects a `React` variable to be in scope. Code that relies on the default
+> throws `ReferenceError: React is not defined` at runtime unless you import
+> React into every JSX file. Prefer the automatic runtime above for new
+> projects.
 
 ## Choose React, Preact, or Hono
 
@@ -168,20 +167,18 @@ Deno.serve((_req) => {
 });
 ```
 
-:::caution React's server renderer needs `--allow-env`
-
-`react-dom/server` reads `process.env.NODE_ENV`, so a React server fails with
-`NotCapable: Requires env access to "NODE_ENV"` unless you grant environment
-access. Run it with `-E` (or `--allow-env`) alongside the network flag:
-
-```sh
-deno run -N -E server.tsx
-```
-
-Preact's renderer does not read the environment, so it needs no extra
-permission.
-
-:::
+> [!CAUTION] React's server renderer needs `--allow-env`
+>
+> `react-dom/server` reads `process.env.NODE_ENV`, so a React server fails with
+> `NotCapable: Requires env access to "NODE_ENV"` unless you grant environment
+> access. Run it with `-E` (or `--allow-env`) alongside the network flag:
+>
+> ```sh
+> deno run -N -E server.tsx
+> ```
+>
+> Preact's renderer does not read the environment, so it needs no extra
+> permission.
 
 ## Speed up server rendering
 

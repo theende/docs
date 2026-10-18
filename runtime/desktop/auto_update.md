@@ -4,12 +4,10 @@ title: "Auto-update"
 description: "Ship binary-diff updates to deno desktop apps with Deno.autoUpdate(): bsdiff patches, manifest polling, automatic rollback on failed launch."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) polls a release server for
 new versions, downloads binary-diff patches, applies them to the runtime dylib,
@@ -17,15 +15,13 @@ and stages the result for the next launch. If the next launch fails, the runtime
 rolls back to the previous version automatically. Updates ship as small `bsdiff`
 patches instead of full binary downloads, with rollback baked into the launcher.
 
-:::note Platform support
-
-Applying staged updates and rolling back on a failed launch currently run on
-**macOS and Linux only**. On Windows, patches are still downloaded and staged,
-but the launcher does not yet swap them in (a loaded DLL can't be replaced in
-place), so updates do not take effect. Treat Windows auto-update as not yet
-supported.
-
-:::
+> [!NOTE] Platform support
+>
+> Applying staged updates and rolling back on a failed launch currently run on
+> **macOS and Linux only**. On Windows, patches are still downloaded and staged,
+> but the launcher does not yet swap them in (a loaded DLL can't be replaced in
+> place), so updates do not take effect. Treat Windows auto-update as not yet
+> supported.
 
 ## Prerequisites
 

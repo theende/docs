@@ -26,8 +26,8 @@ Deno decides which system a file uses from its extension and the nearest
 `package.json`: a `.mjs` file is always an ES module, a `.cjs` file is always
 CommonJS, and `.js` and `.ts` files are treated as ES modules unless a
 `package.json` sets `"type": "commonjs"`. The rest of this page covers ES
-modules; see [CommonJS support](/runtime/fundamentals/node/#commonjs-support)
-for how `require`, module resolution, and ESM/CommonJS interop work.
+modules; see CommonJS support for how `require`, module resolution, and
+ESM/CommonJS interop work.
 
 ## Importing modules
 
@@ -141,11 +141,9 @@ console.log(text);
 // Hello from a text file
 ```
 
-:::info `text` imports
-
-Stable in Deno 2.8 and no longer require a flag.
-
-:::
+> [!NOTE] `text` imports
+>
+> Stable in Deno 2.8 and no longer require a flag.
 
 ```ts
 import bytes from "./image.png" with { type: "bytes" };
@@ -160,13 +158,11 @@ console.log(bytes);
 // ]
 ```
 
-:::info `bytes` imports
-
-Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
-`unstable.raw-import` option in
-[`deno.json`](/runtime/fundamentals/configuration/).
-
-:::
+> [!NOTE] `bytes` imports
+>
+> Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
+> `unstable.raw-import` option in
+> [`deno.json`](/runtime/fundamentals/configuration/).
 
 A stylesheet can be imported with `with { type: "css" }`. The import evaluates
 to a
@@ -223,13 +219,11 @@ is backed by the raw CSS text rather than a full CSS object model. `cssRules`
 uses a naive top-level rule split, so the live mutation methods `insertRule` and
 `deleteRule` are not implemented.
 
-:::info `css` imports
-
-Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
-`unstable.raw-import` option in
-[`deno.json`](/runtime/fundamentals/configuration/).
-
-:::
+> [!NOTE] `css` imports
+>
+> Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
+> `unstable.raw-import` option in
+> [`deno.json`](/runtime/fundamentals/configuration/).
 
 ## Deferred module evaluation
 
@@ -325,8 +319,7 @@ Deno recommends [JSR](https://jsr.io), the modern JavaScript registry, for third
 party modules. There, you'll find plenty of well documented ES modules for your
 projects, including the [Deno Standard Library](/runtime/reference/std/).
 
-You can
-[read more about Deno's support for npm packages here](/runtime/fundamentals/node/#using-npm-modules).
+You can read more about Deno's support for npm packages here.
 
 ## Managing third party modules and libraries
 

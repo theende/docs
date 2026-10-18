@@ -83,15 +83,12 @@ Deno.serve(async (req) => {
 });
 ```
 
-:::caution
-
-Be aware that the `req.text()` call can fail if the user hangs up the connection
-before the body is fully received. Make sure to handle this case. Do note this
-can happen in all methods that read from the request body, such as `req.json()`,
-`req.formData()`, `req.arrayBuffer()`, `req.body.getReader().read()`,
-`req.body.pipeTo()`, etc.
-
-:::
+> [!CAUTION]
+> Be aware that the `req.text()` call can fail if the user hangs up the
+> connection before the body is fully received. Make sure to handle this case.
+> Do note this can happen in all methods that read from the request body, such
+> as `req.json()`, `req.formData()`, `req.arrayBuffer()`,
+> `req.body.getReader().read()`, `req.body.pipeTo()`, etc.
 
 ## Responding with real data
 
@@ -140,14 +137,11 @@ Deno.serve((req) => {
 });
 ```
 
-:::note
-
-Note the `cancel` function above. This is called when the client hangs up the
-connection. It is important to make sure that you handle this case, otherwise
-the server will keep queuing up messages forever, and eventually run out of
-memory.
-
-:::
+> [!NOTE]
+> Note the `cancel` function above. This is called when the client hangs up the
+> connection. It is important to make sure that you handle this case, otherwise
+> the server will keep queuing up messages forever, and eventually run out of
+> memory.
 
 Be aware that the response body stream is "cancelled" when the client hangs up
 the connection. Make sure to handle this case. This can surface itself as an
@@ -257,13 +251,10 @@ $ curl -k https://localhost:8443/
 Hello over HTTPS!
 ```
 
-:::note
-
-In production, use a certificate issued by a trusted authority such as
-[Let's Encrypt](https://letsencrypt.org/) instead of a self-signed one. The
-runtime API is the same; only the source of `cert` and `key` changes.
-
-:::
+> [!NOTE]
+> In production, use a certificate issued by a trusted authority such as
+> [Let's Encrypt](https://letsencrypt.org/) instead of a self-signed one. The
+> runtime API is the same; only the source of `cert` and `key` changes.
 
 ## HTTP/2 support
 
@@ -373,11 +364,8 @@ Deno.serve((req) => {
 The connection the WebSocket was created on can not be used for HTTP traffic
 after a WebSocket upgrade has been performed.
 
-:::note
-
-Note that WebSockets are only supported on HTTP/1.1 for now.
-
-:::
+> [!NOTE]
+> Note that WebSockets are only supported on HTTP/1.1 for now.
 
 ## Default fetch export
 

@@ -4,12 +4,10 @@ title: "Dialogs"
 description: "prompt(), alert(), and confirm() show native popup dialogs in deno desktop apps instead of terminal prompts."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 The familiar browser globals `prompt()`, `alert()`, and `confirm()` work inside
 `deno desktop` apps, but instead of reading from the terminal, they show

@@ -1,31 +1,14 @@
-document.addEventListener("click", (event) => {
-  const btn = (event.target as HTMLElement).closest("button[data-copy]");
-
-  if (!btn) {
-    return;
-  }
-
-  let textToCopy = btn.getAttribute("data-copy") as string;
-
-  // CLEAN COMMANDS:  Remove leading spaces, $, and > from each line
-  textToCopy = textToCopy.replace(/^[\$>\s]+/, "");
-
-  navigator?.clipboard?.writeText(textToCopy).then(() => {
-    if (!btn) {
-      return;
-    }
-
-    const copyIcon = btn.querySelector(".copy-icon");
-    const checkIcon = btn.querySelector(".check-icon");
-
-    if (copyIcon && checkIcon) {
-      copyIcon.classList.add("hidden");
-      checkIcon.classList.remove("hidden");
-
-      setTimeout(() => {
-        copyIcon.classList.remove("hidden");
-        checkIcon.classList.add("hidden");
-      }, 2000);
-    }
+// Adds a "Copy" button to every code block. Shell prompts (`$ `, `> `) at the
+// start of the copied text are left out.
+for (const pre of document.querySelectorAll<HTMLPreElement>("pre")) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = "Copy";
+  button.addEventListener("click", async () => {
+    const text = (pre.querySelector("code") ?? pre).textContent ?? "";
+    await navigator.clipboard?.writeText(text.replace(/^[$>\s]+/, ""));
+    button.textContent = "Copied";
+    setTimeout(() => button.textContent = "Copy", 2000);
   });
-});
+  pre.before(button);
+}

@@ -442,13 +442,10 @@ equivalent to terminating yourself (like [`Deno.exit`](/api/deno/~/Deno.exit)).
 flag, so tools that re-raise a signal on their own PID (such as `signal-exit`,
 used by Vite) no longer force you to grant blanket run access.
 
-:::caution
-
-You probably don't ever want to use `--allow-run=deno` unless the parent process
-has `--allow-all`, as being able to spawn a `deno` process means the script can
-spawn another `deno` process with full permissions.
-
-:::
+> [!CAUTION]
+> You probably don't ever want to use `--allow-run=deno` unless the parent
+> process has `--allow-all`, as being able to spawn a `deno` process means the
+> script can spawn another `deno` process with full permissions.
 
 ### Subprocesses with `LD_*` and `DYLD_*` environment variables
 

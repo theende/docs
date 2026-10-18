@@ -1,4 +1,5 @@
 ---
+title: jsx-key
 tags: [recommended, react, jsx]
 ---
 

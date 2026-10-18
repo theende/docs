@@ -1,4 +1,5 @@
 ---
+title: no-prototype-builtins
 tags: [recommended]
 ---
 

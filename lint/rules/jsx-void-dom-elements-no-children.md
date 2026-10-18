@@ -1,4 +1,5 @@
 ---
+title: jsx-void-dom-elements-no-children
 tags: [recommended, react, jsx, fresh]
 ---
 

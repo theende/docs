@@ -16,16 +16,14 @@ JSON or terminal output. It leverages JSDoc comments for documentation and
 automatically extracts type information from TypeScript type annotations in your
 code.
 
-:::info Automatic documentation with JSR
-
-If you're publishing your package to
-[JSR (JavaScript Registry)](https://jsr.io), you get beautiful documentation
-automatically generated for free! JSR uses the same `deno doc` technology under
-the hood to create searchable, web-based documentation for all published
-packages. Simply publish your well-documented code with `deno publish` and JSR
-handles the rest.
-
-:::
+> [!NOTE] Automatic documentation with JSR
+>
+> If you're publishing your package to
+> [JSR (JavaScript Registry)](https://jsr.io), you get beautiful documentation
+> automatically generated for free! JSR uses the same `deno doc` technology
+> under the hood to create searchable, web-based documentation for all published
+> packages. Simply publish your well-documented code with `deno publish` and JSR
+> handles the rest.
 
 ## Setting up a sample project
 

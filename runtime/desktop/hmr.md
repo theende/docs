@@ -4,12 +4,10 @@ title: "Hot module replacement"
 description: "deno desktop --hmr keeps the runtime and rendering backend alive across edits: framework dev servers in framework projects, V8 hot-swap in everything else."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 ```sh
 deno desktop --hmr .

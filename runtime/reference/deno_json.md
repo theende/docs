@@ -422,8 +422,7 @@ To exempt specific packages, use the object form with an `exclude` list:
 ```
 
 The same control is available as the `--minimum-dependency-age` CLI flag and as
-`min-release-age` in
-[`.npmrc`](/runtime/fundamentals/node/#.npmrc-configuration).
+`min-release-age` in `.npmrc`.
 
 ## Node modules directory
 
@@ -479,12 +478,9 @@ The `compilerOptions` field in the `deno.json` file is used to configure
 Deno project. This allows you to customize how TypeScript code is compiled,
 ensuring it aligns with your project’s requirements and coding standards.
 
-:::info
-
-Deno recommends the default TypeScript configuration. This will help when
-sharing code.
-
-:::
+> [!NOTE]
+> Deno recommends the default TypeScript configuration. This will help when
+> sharing code.
 
 If you’re migrating from Node.js, your existing `tsconfig.json` files work out
 of the box with Deno. See the

@@ -37,12 +37,10 @@ bare specifier as long as the directory is listed in the root workspace
 configuration. This lets you gradually adopt Deno tooling without having to add
 a `deno.json` to every existing Node package up front.
 
-:::info Naming
-
-Deno uses `workspace` rather than npm's `workspaces` to represent a singular
-workspace with multiple members.
-
-:::
+> [!NOTE] Naming
+>
+> Deno uses `workspace` rather than npm's `workspaces` to represent a singular
+> workspace with multiple members.
 
 ## Example
 
@@ -180,11 +178,8 @@ can use wildcard patterns to include multiple directories at once:
 }
 ```
 
-:::info
-
-Pattern support was added in Deno 2.1.
-
-:::
+> [!NOTE]
+> Pattern support was added in Deno 2.1.
 
 The pattern matching syntax follows specific rules regarding folder depth:
 
@@ -770,16 +765,14 @@ since Deno 2.9, in the `imports` of a member's `deno.json`. The catalog
 definition itself lives in either `deno.json` or `package.json` at the workspace
 root.
 
-:::info Catalogs are npm-only
-
-Catalogs only manage **npm** dependencies. A catalog entry is a bare package
-name mapped to a version requirement, and a `catalog:` reference always resolves
-to an `npm:` specifier — there is no way to point a catalog entry at a `jsr:`
-package. Manage `jsr:` dependencies through `imports` directly instead. Because
-catalog entries are treated as npm packages, `deno update` and `deno outdated`
-resolve them against the npm registry.
-
-:::
+> [!NOTE] Catalogs are npm-only
+>
+> Catalogs only manage **npm** dependencies. A catalog entry is a bare package
+> name mapped to a version requirement, and a `catalog:` reference always
+> resolves to an `npm:` specifier — there is no way to point a catalog entry at
+> a `jsr:` package. Manage `jsr:` dependencies through `imports` directly
+> instead. Because catalog entries are treated as npm packages, `deno update`
+> and `deno outdated` resolve them against the npm registry.
 
 Define a catalog in the root `deno.json`:
 

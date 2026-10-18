@@ -55,13 +55,10 @@ Hello, local package!
 The linked directory is used instead of the registry; the package doesn't even
 have to be published. Edits in `greeter/` are picked up directly.
 
-:::note
-
-`links` is only respected in the workspace root. Linking npm packages also
-works, but requires a `node_modules` directory and the package name must exist
-in the npm registry.
-
-:::
+> [!NOTE]
+> `links` is only respected in the workspace root. Linking npm packages also
+> works, but requires a `node_modules` directory and the package name must exist
+> in the npm registry.
 
 ## Import straight from an HTTPS URL
 
@@ -88,13 +85,10 @@ scoped to the host, e.g.
 `DENO_AUTH_TOKENS=a1b2c3d4e5f6@raw.githubusercontent.com`; see
 [Private repositories](/runtime/packages/private_repositories/) for details.
 
-:::caution
-
-Only import over HTTPS from sources you trust, and prefer a registry for
-anything beyond small projects. HTTPS imports are not supported by
-`deno add`/`deno install`.
-
-:::
+> [!CAUTION]
+> Only import over HTTPS from sources you trust, and prefer a registry for
+> anything beyond small projects. HTTPS imports are not supported by
+> `deno add`/`deno install`.
 
 ## What is not supported
 

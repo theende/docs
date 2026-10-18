@@ -1,4 +1,5 @@
 ---
+title: no-useless-rename
 tags: []
 ---
 

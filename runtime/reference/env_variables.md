@@ -43,15 +43,13 @@ You can pass multiple `--env-file` flags (e.g.,
 `deno run --env-file=.env.one --env-file=.env.two --allow-env <script>`) to load
 variables from multiple files.
 
-:::note
-
-When multiple declarations for the same environment variable exist within a
-single `.env` file, the first occurrence is applied. However, if the same
-variable is defined across multiple `.env` files (using multiple `--env-file`
-arguments), the value from the last file specified takes precedence. This means
-that the first occurrence found in the last `.env` file listed will be applied.
-
-:::
+> [!NOTE]
+> When multiple declarations for the same environment variable exist within a
+> single `.env` file, the first occurrence is applied. However, if the same
+> variable is defined across multiple `.env` files (using multiple `--env-file`
+> arguments), the value from the last file specified takes precedence. This
+> means that the first occurrence found in the last `.env` file listed will be
+> applied.
 
 ## [`@std/dotenv`](/runtime/reference/std/dotenv/)
 
@@ -117,16 +115,14 @@ variable, and can be helpfully combined with
 }
 ```
 
-:::note Variables with spaces
-
-When setting environment variables that contain space characters in a `.env`
-file, ensure you enclose the value in quotes. For example:
-
-```shell
-MY_VAR="my value with spaces"
-```
-
-:::
+> [!NOTE] Variables with spaces
+>
+> When setting environment variables that contain space characters in a `.env`
+> file, ensure you enclose the value in quotes. For example:
+>
+> ```shell
+> MY_VAR="my value with spaces"
+> ```
 
 ## Special environment variables
 

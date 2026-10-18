@@ -1,4 +1,5 @@
 ---
+title: no-unsafe-negation
 tags: [recommended]
 ---
 

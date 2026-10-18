@@ -170,7 +170,7 @@ uses them to fill in any option you have not set through a CLI flag or the
 `deno.json` `fmt` block. The precedence is CLI flags, then `deno.json`, then
 `.editorconfig`, then the built-in defaults, so an `.editorconfig` value only
 applies when nothing higher up has set it. See
-[Inheriting settings from .editorconfig](/runtime/reference/cli/fmt/#inheriting-settings-from-.editorconfig)
+[Inheriting settings from .editorconfig](/runtime/reference/cli/fmt/#inheriting-settings-from-editorconfig)
 for the property mappings.
 
 ## Using other linters and formatters
@@ -212,13 +212,10 @@ Declaring the Node and `Deno` globals prevents false `no-undef` errors for
 globals such as `console`. For type-aware linting of TypeScript, add
 [typescript-eslint](https://typescript-eslint.io/) to the config.
 
-:::note
-
-The VS Code ESLint extension needs a real `node_modules` directory to resolve
-ESLint and its plugins. Set `"nodeModulesDir": "auto"` in your `deno.json` and
-run `deno install` so the packages are materialized on disk.
-
-:::
+> [!NOTE]
+> The VS Code ESLint extension needs a real `node_modules` directory to resolve
+> ESLint and its plugins. Set `"nodeModulesDir": "auto"` in your `deno.json` and
+> run `deno install` so the packages are materialized on disk.
 
 ### oxlint
 

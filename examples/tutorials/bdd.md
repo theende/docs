@@ -326,15 +326,12 @@ User API ... ok (6ms)
 ok | 1 passed (2 steps) | 0 failed (11ms)
 ```
 
-:::caution
-
-Anything you create in `beforeAll` is shared by every test in the block. If one
-test mutates that shared state — adds a row, changes a field, leaves a handler
-registered — the next test starts from the changed state, not the original. When
-tests need a clean slate, set up the cheap, per-test state in `beforeEach` and
-leave only the expensive, read-mostly setup in `beforeAll`.
-
-:::
+> [!CAUTION]
+> Anything you create in `beforeAll` is shared by every test in the block. If
+> one test mutates that shared state — adds a row, changes a field, leaves a
+> handler registered — the next test starts from the changed state, not the
+> original. When tests need a clean slate, set up the cheap, per-test state in
+> `beforeEach` and leave only the expensive, read-mostly setup in `beforeAll`.
 
 ### Aborting a suite when a precondition isn't met
 

@@ -1,4 +1,5 @@
 ---
+title: no-var
 tags: [recommended]
 ---
 

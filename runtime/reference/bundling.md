@@ -4,11 +4,8 @@ title: "Bundling"
 description: "An overview of `deno bundle` subcommand that can be used to produce a single file application created from multiple source files for optimized execution."
 ---
 
-:::caution
-
-This is an experimental feature and requires Deno `2.4.0` or newer.
-
-:::
+> [!CAUTION]
+> This is an experimental feature and requires Deno `2.4.0` or newer.
 
 The `deno bundle` command outputs a single JavaScript file with all
 dependencies.
@@ -77,13 +74,11 @@ single output file.
 
 For the full flag list, run `deno bundle --help`.
 
-:::tip Bundling a single-file executable
-
-To produce a standalone binary rather than a JavaScript file, use
-[`deno compile`](/runtime/reference/cli/compile/), which can also bundle and
-minify its input with the `--bundle` and `--minify` flags.
-
-:::
+> [!TIP] Bundling a single-file executable
+>
+> To produce a standalone binary rather than a JavaScript file, use
+> [`deno compile`](/runtime/reference/cli/compile/), which can also bundle and
+> minify its input with the `--bundle` and `--minify` flags.
 
 ---
 
@@ -111,12 +106,10 @@ In addition to the CLI, you can use [`Deno.bundle()`](/api/deno/~/Deno.bundle)
 to programmatically bundle your JavaScript or TypeScript files. This allows you
 to integrate bundling into your build processes and workflows.
 
-:::note
-
-This API was added in Deno v2.5. The [`Deno.bundle()`](/api/deno/~/Deno.bundle)
-API is experimental and must be used with the `--unstable-bundle` flag.
-
-:::
+> [!NOTE]
+> This API was added in Deno v2.5. The
+> [`Deno.bundle()`](/api/deno/~/Deno.bundle) API is experimental and must be
+> used with the `--unstable-bundle` flag.
 
 ### Basic usage
 

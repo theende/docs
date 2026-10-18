@@ -1,146 +1,78 @@
-type LintIconType = "jsr" | "react" | "jsx" | "recommended" | "fresh";
+import { markdown } from "../_lib/markdown.ts";
+import type { LintRule } from "./_data.ts";
 
 export const title = "List of rules";
-export const toc = [];
 export const oldUrl = "/lint/rules";
 
-const getReadableIconName = (iconType: LintIconType) => {
-  if (["jsx", "jsr"].includes(iconType)) {
-    return iconType.toUpperCase();
-  }
-  return iconType.charAt(0).toUpperCase() + iconType.slice(1);
-};
+const TAGS = ["recommended", "fresh", "jsx", "react", "jsr", "workspace"];
 
-export const getLintIcon = (
-  type: LintIconType,
-) => {
-  const svgFileName = type === "recommended" ? "checkmark" : type;
-  return (
-    <img
-      src={`/img/${svgFileName}.svg`}
-      class="size-6 !bg-transparent"
-      alt={getReadableIconName(type)}
-      title={getReadableIconName(type)}
-    />
-  );
-};
-
+/** Every lint rule with its first paragraph, filterable by name and tag. */
 export default function LintRulesIndex(
-  data: Lume.Data,
-  helpers: Lume.Helpers,
+  { lintRulePages }: { lintRulePages: LintRule[] },
 ) {
-  const TAGS = [
-    "recommended",
-    "fresh",
-    "jsx",
-    "react",
-    "jsr",
-    "workspace",
-  ] as LintIconType[];
   return (
-    <div>
-      <div class="flex flex-col gap-4 mb-8">
-        <p>
-          These lint rules are provided by the{" "}
-          <a href="/runtime/reference/cli/lint/">
-            <code>deno lint</code>
-          </a>{" "}
-          command. You can enable sets of rules in <code>deno.json(c)</code>
-          {" "}
-          by adding their tags (e.g. <code>recommended</code>,{" "}
-          <code>react</code>) to the{" "}
-          <a href="/runtime/reference/deno_json/#linting">
-            <code>lint.rules.tags</code>
-          </a>{" "}
-          array.
-        </p>
-        <p>
-          If no tag is provided, then the <code>recommended</code>{" "}
-          set of rules will be enabled by default.
-        </p>
-        <p>
-          To turn a rule off, add it to{" "}
-          <a href="/runtime/reference/cli/lint/#configuring-rules-in-deno.json">
-            <code>lint.rules.exclude</code>
-          </a>{" "}
-          in{" "}
-          <code>deno.json</code>, or suppress a single diagnostic in your code
-          with a{" "}
-          <a href="/runtime/reference/cli/lint/#ignore-directives">
-            <code>deno-lint-ignore</code>
-          </a>{" "}
-          comment.
-        </p>
-        <input
-          type="text"
-          id="lint-rule-search"
-          placeholder="Search lint rules"
-          className="
-          w-full
-          lg:flex
-          rounded-md
-          items-center
-          text-sm
-          leading-6
-          py-1.5 pl-2 pr-3
-          border
-          text-slate-600
-          bg-slate-100
-          dark:bg-background-secondary
-          dark:text-slate-200
-          dark:highlight-white/5
-          dark:hover:bg-slate-700
-          dark:border-foreground-tertiary
-          hover:bg-slate-200
-          duration-150 ease-in-out"
-        />
-
-        <ul class="flex flex-wrap gap-2 mb-8 !list-none !pl-0">
-          {TAGS.map((iconType) => (
-            <li class="!m-0">
-              <button
-                class="flex items-center p-1.5 px-3 rounded-md bg-background-secondary/30 border border-background-secondary aria-pressed:bg-background-secondary aria-pressed:border-background-tertiary w-max max-w-full whitespace-pre-wrap cursor-pointer transition-colors duration-150 ease-in-out"
-                data-tag-btn={iconType}
-                aria-pressed="false"
-                title={`Filter by ${getReadableIconName(iconType)}`}
-              >
-                {getLintIcon(iconType)}&ensp;{getReadableIconName(iconType)}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <ul class="flex flex-col gap-4 !list-none !pl-0">
-        {data.lintRulePages.map((lintRule, idx: number) => (
+    <>
+      <p>
+        These lint rules are provided by the{" "}
+        <a href="/runtime/reference/cli/lint/">
+          <code>deno lint</code>
+        </a>{" "}
+        command. You can enable sets of rules in <code>deno.json(c)</code>{" "}
+        by adding their tags (e.g. <code>recommended</code>,{" "}
+        <code>react</code>) to the{" "}
+        <a href="/runtime/reference/deno_json/#linting">
+          <code>lint.rules.tags</code>
+        </a>{" "}
+        array.
+      </p>
+      <p>
+        If no tag is provided, then the <code>recommended</code>{" "}
+        set of rules will be enabled by default.
+      </p>
+      <p>
+        To turn a rule off, add it to{" "}
+        <a href="/runtime/reference/cli/lint/#configuring-rules-in-denojson">
+          <code>lint.rules.exclude</code>
+        </a>{" "}
+        in{" "}
+        <code>deno.json</code>, or suppress a single diagnostic in your code
+        with a{" "}
+        <a href="/runtime/reference/cli/lint/#ignore-directives">
+          <code>deno-lint-ignore</code>
+        </a>{" "}
+        comment.
+      </p>
+      <p>
+        <label>
+          Search lint rules <input type="search" id="lint-rule-search" />
+        </label>
+      </p>
+      <p>
+        Filter by tag: {TAGS.map((tag) => (
+          <>
+            <button type="button" data-tag-btn={tag} aria-pressed="false">
+              {tag}
+            </button>
+            {" "}
+          </>
+        ))}
+      </p>
+      <ul>
+        {lintRulePages.map((rule) => (
           <li
-            class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box dark:border-gray-700 !mt-0"
-            id={lintRule.title}
-            data-tags={lintRule.tags.join(",")}
+            class="lint-rule-box"
+            id={rule.title}
+            data-tags={rule.tags.join(",")}
           >
-            <div class="flex flex-row justify-start items-center gap-4 mb-2">
-              <a href={lintRule.href} class="block font-mono">
-                {lintRule.title}
-              </a>{" "}
-              {lintRule.tags.map((tag: LintIconType) => (
-                <div class="bg-background-secondary/30 border border-background-secondary rounded-md p-1">
-                  {getLintIcon(tag)}
-                </div>
-              ))}
-            </div>
-            <div
-              class="text-sm [&>*]:last:mb-0"
-              dangerouslySetInnerHTML={{
-                __html: helpers.md(
-                  lintRule.content.split(/\n\n/)[0] +
-                    ` <a href="${lintRule.href}">Details<span class="sr-only"> about ${lintRule.label}</span></a>`,
-                ),
-              }}
-            >
-            </div>
+            <a href={rule.href}>
+              <code>{rule.title}</code>
+            </a>
+            {rule.tags.length > 0 && ` (${rule.tags.join(", ")})`}
+            {markdown(rule.summary)}
           </li>
         ))}
       </ul>
-    </div>
+      <script type="module" src="/js/lint_rules.js"></script>
+    </>
   );
 }

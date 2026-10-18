@@ -1,4 +1,5 @@
 ---
+title: no-func-assign
 tags: [recommended]
 ---
 

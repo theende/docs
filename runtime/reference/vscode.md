@@ -54,13 +54,10 @@ These settings (and other settings) are available via the VS Code
 [settings](https://code.visualstudio.com/docs/getstarted/userinterface#_settings)
 panel. In the panel the setting is **Deno: Enable**.
 
-:::note
-
-VS Code has user and workspace settings. You probably don't want to enable Deno
-in the **user** settings, instead set it in **workspace** settings, or by
-default every workspace will be Deno enabled.
-
-:::
+> [!NOTE]
+> VS Code has user and workspace settings. You probably don't want to enable
+> Deno in the **user** settings, instead set it in **workspace** settings, or by
+> default every workspace will be Deno enabled.
 
 ### Workspace folder settings
 
@@ -339,14 +336,12 @@ Run `deno task dev:debug`, then start the "Attach to dev server" configuration
 from the `Run and Debug` panel. Breakpoints set in your server-side code (such
 as Fresh route handlers) are hit on the next matching request.
 
-:::note
-
-Vite loads and transforms route modules on demand, so a breakpoint in a route
-that hasn't been requested yet may show as "Unbound breakpoint" with a "Some of
-your breakpoints could not be set" warning. This is expected: the breakpoint
-binds once the route is first loaded, and it still pauses when that code runs.
-
-:::
+> [!NOTE]
+> Vite loads and transforms route modules on demand, so a breakpoint in a route
+> that hasn't been requested yet may show as "Unbound breakpoint" with a "Some
+> of your breakpoints could not be set" warning. This is expected: the
+> breakpoint binds once the route is first loaded, and it still pauses when that
+> code runs.
 
 ## Tasks
 

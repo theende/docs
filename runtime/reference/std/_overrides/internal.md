@@ -9,9 +9,7 @@ generated: true
 stability: internal
 ---
 
-:::info Internal
-
-This @std package is for internal use and not intended for public consumption.
-APIs may change or be removed.
-
-:::
+> [!NOTE] Internal
+>
+> This @std package is for internal use and not intended for public consumption.
+> APIs may change or be removed.

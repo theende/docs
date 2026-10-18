@@ -30,7 +30,7 @@ along one track never moves you along another:
   downloaded from [GitHub releases](https://github.com/denoland/deno/releases).
 - `lts` - long term support: a single stable minor line that receives only
   backwards-compatible bug fixes, recommended for enterprise users who prefer
-  not to upgrade so often. See [Long Term Support](#long-term-support-(lts)).
+  not to upgrade so often. See [Long Term Support](#long-term-support-lts).
 - `rc` - a release candidate for the upcoming semver minor release.
 - `canary` - an unstable build that changes multiple times per day, so you can
   try the latest bug fixes and features before they reach `stable`.

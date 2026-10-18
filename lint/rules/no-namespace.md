@@ -1,4 +1,5 @@
 ---
+title: no-namespace
 tags: [recommended]
 ---
 

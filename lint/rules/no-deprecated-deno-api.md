@@ -1,4 +1,5 @@
 ---
+title: no-deprecated-deno-api
 tags: [recommended]
 ---
 

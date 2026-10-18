@@ -4,12 +4,9 @@ title: "Lint Plugins"
 description: "Guide to creating and using custom lint plugins in Deno. Learn how to write custom lint rules, use selectors for AST matching, implement fixes, and test your plugins using Deno's lint plugin API."
 ---
 
-:::note
-
-The lint plugin API is available in Deno `2.2.0` and later, with no unstable
-flag required. The API is still evolving and may change in a future release.
-
-:::
+> [!NOTE]
+> The lint plugin API is available in Deno `2.2.0` and later, with no unstable
+> flag required. The API is still evolving and may change in a future release.
 
 The built-in linter can be extended with plugins to add custom lint rules.
 
@@ -43,14 +40,11 @@ The value is an array of plugin specifiers. These can be paths, `npm:`, or
 A plugin always has the same shape. It has a default export which is your plugin
 object.
 
-:::info
-
-Deno provides type declarations for the lint plugins API.
-
-All the typings are available under the [`Deno.lint`](/api/deno/~/Deno.lint)
-namespace.
-
-:::
+> [!NOTE]
+> Deno provides type declarations for the lint plugins API.
+>
+> All the typings are available under the [`Deno.lint`](/api/deno/~/Deno.lint)
+> namespace.
 
 ```ts title="my-plugin.ts"
 const plugin: Deno.lint.Plugin = {
@@ -145,14 +139,11 @@ There is also the `:exit` pseudo that is only valid at the end of the whole
 selector. When it's present, Deno will call the function while going **up** the
 tree instead of when going down.
 
-:::tip
-
-We highly recommend using the
-[typescript-eslint playground](https://typescript-eslint.io/play/) when
-developing lint rules. It allows you to inspect code and the resulting AST
-format. This makes it easier to see which selectors match which node.
-
-:::
+> [!TIP]
+> We highly recommend using the
+> [typescript-eslint playground](https://typescript-eslint.io/play/) when
+> developing lint rules. It allows you to inspect code and the resulting AST
+> format. This makes it easier to see which selectors match which node.
 
 ## Applying fixes
 
@@ -228,15 +219,12 @@ const plugin: Deno.lint.Plugin = {
 export default plugin;
 ```
 
-:::caution
-
-It is not safe to assume that your plugin code will be executed again for each
-of the files linted.
-
-Prefer not to keep a global state, and do cleanup in the `destroy` hook, in case
-`deno lint` decides to reuse the existing plugin instance.
-
-:::
+> [!CAUTION]
+> It is not safe to assume that your plugin code will be executed again for each
+> of the files linted.
+>
+> Prefer not to keep a global state, and do cleanup in the `destroy` hook, in
+> case `deno lint` decides to reuse the existing plugin instance.
 
 ## Excluding custom rules
 
@@ -301,14 +289,11 @@ Deno.test("my-plugin", () => {
 });
 ```
 
-:::info
-
-The [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) API is only
-available in the `deno test` and `deno bench` subcommands.
-
-Trying to use it with any other subcommand will throw an error.
-
-:::
+> [!NOTE]
+> The [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) API is only
+> available in the `deno test` and `deno bench` subcommands.
+>
+> Trying to use it with any other subcommand will throw an error.
 
 Consult [the API reference](/api/deno/) for more information on
 [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) and

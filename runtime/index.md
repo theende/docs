@@ -24,9 +24,9 @@ few minutes.
 
 ## Why Deno?
 
-- **Works with your existing [Node.js projects](/runtime/fundamentals/node/).**
-  Drop Deno into a repo with `package.json` and `node_modules` and it just runs;
-  mix `npm:` imports with native ES modules as you migrate.
+- **Works with your existing Node.js projects.** Drop Deno into a repo with
+  `package.json` and `node_modules` and it just runs; mix `npm:` imports with
+  native ES modules as you migrate.
 - **Modern module system.** ES modules with URL imports, [JSR](https://jsr.io)
   for typed packages, and [workspaces](/runtime/fundamentals/workspaces/).
 - **[TypeScript-first](/runtime/fundamentals/typescript/).** Run `.ts` files
@@ -172,6 +172,5 @@ deno task    # run scripts defined in deno.json
 - **[Run code](/runtime/run/).** Servers, tasks, web APIs, and debugging.
 - **[Manage packages](/runtime/packages/).** Dependencies, workspaces,
   publishing.
-- **[Migrate from Node.js](/runtime/migrate/).** Bring an existing project
-  across.
+- **Migrate from Node.js.** Bring an existing project across.
 - **[Examples and tutorials](/examples/).** Ideas for what to build next.

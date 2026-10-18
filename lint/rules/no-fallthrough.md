@@ -1,4 +1,5 @@
 ---
+title: no-fallthrough
 tags: [recommended]
 ---
 

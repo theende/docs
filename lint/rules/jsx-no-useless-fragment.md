@@ -1,4 +1,5 @@
 ---
+title: jsx-no-useless-fragment
 tags: [recommended, react, jsx, fresh]
 ---
 

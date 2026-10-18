@@ -1,4 +1,5 @@
 ---
+title: no-inferrable-types
 tags: []
 ---
 

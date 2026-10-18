@@ -1,0 +1,38 @@
+{
+  "imports": {
+    "@ende/assert": "jsr:@ende/assert@^2026.10.15",
+    "@ende/front-matter": "jsr:@ende/front-matter@^2026.10.15",
+    "@ende/fs": "jsr:@ende/fs@^2026.10.15",
+    "@ende/html": "jsr:@ende/html@^2026.10.15",
+    "@ende/markdown": "jsr:@ende/markdown@^2026.10.18",
+    "@ende/path": "jsr:@ende/path@^2026.10.15",
+    "@ende/satz": "jsr:@ende/satz@^2026.10.18",
+    "@ende/yaml": "jsr:@ende/yaml@^2026.10.15"
+  },
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "@ende/satz",
+    "lib": ["ende.window", "dom", "dom.iterable"]
+  },
+  "tasks": {
+    "build": "ende run -A @ende/satz/cli build",
+    "serve": "ende run -A @ende/satz/cli serve",
+    "check:links": "ende run -R _tools/check_links.ts",
+    "test": "ende test -A _tools/frontmatter_test.ts _tools/sidebar_test.ts",
+    "test:examples": "ende test -A _tools/examples_test.ts",
+    "check": "ende check _config.ts _lib/ _includes/ _components/ _tools/ js/ search.page.tsx examples/_data.ts examples/_lib/ examples/index.page.tsx examples/index.examples.page.tsx lint/ runtime/_data.ts",
+    "check:freshness": "ende run -R --allow-run=git --allow-env _tools/check_freshness.ts",
+    "lint:update": "ende run -A _tools/update_lint_rules.ts"
+  },
+  "fmt": {
+    "exclude": ["_site/", "examples/scripts/", "static/"]
+  },
+  "lint": {
+    "exclude": ["_site/", "examples/scripts/", "static/"],
+    "rules": {
+      "exclude": ["jsx-key"]
+    }
+  },
+  "exclude": ["_site/"],
+  "links": ["../satz", "../std/markdown"]
+}

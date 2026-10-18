@@ -1,4 +1,5 @@
 ---
+title: no-empty-pattern
 tags: [recommended]
 ---
 

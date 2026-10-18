@@ -1,4 +1,5 @@
 ---
+title: jsx-boolean-value
 tags: [recommended, react, jsx]
 ---
 

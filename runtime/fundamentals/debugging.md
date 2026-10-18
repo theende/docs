@@ -59,16 +59,13 @@ listening. You can control this with `--inspect-publish-uid`:
 deno run --inspect --inspect-publish-uid=http your_script.ts
 ```
 
-:::note
-
-If you use the `--inspect` flag, the code will start executing immediately. If
-your program is short, you might not have enough time to connect the debugger
-before the program finishes execution.
-
-In such cases, try running with `--inspect-wait` or `--inspect-brk` flag
-instead, or add a timeout at the end of your code.
-
-:::
+> [!NOTE]
+> If you use the `--inspect` flag, the code will start executing immediately. If
+> your program is short, you might not have enough time to connect the debugger
+> before the program finishes execution.
+>
+> In such cases, try running with `--inspect-wait` or `--inspect-brk` flag
+> instead, or add a timeout at the end of your code.
 
 ## --inspect-wait
 
@@ -138,13 +135,11 @@ A `Session` is also available for issuing
 [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)
 commands programmatically without an external client.
 
-:::caution
-
-Binding the inspector to a public IP with an open port is insecure: it lets any
-host that can reach the port connect to the inspector and execute arbitrary
-code. Keep the host at `127.0.0.1` unless you fully control the network.
-
-:::
+> [!CAUTION]
+> Binding the inspector to a public IP with an open port is insecure: it lets
+> any host that can reach the port connect to the inspector and execute
+> arbitrary code. Keep the host at `127.0.0.1` unless you fully control the
+> network.
 
 ### Starting inspector with a signal
 
@@ -366,13 +361,10 @@ clients, so tooling that already speaks the Chrome DevTools Protocol against
 Node can attach to Deno and observe the same network traffic without any
 changes.
 
-:::note
-
-When no debugger is attached, the network instrumentation has effectively no
-overhead — the events are only emitted while a session has opted in via
-`Network.enable`.
-
-:::
+> [!NOTE]
+> When no debugger is attached, the network instrumentation has effectively no
+> overhead — the events are only emitted while a session has opted in via
+> `Network.enable`.
 
 ## VSCode
 

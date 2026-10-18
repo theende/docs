@@ -4,12 +4,10 @@ title: "Notifications"
 description: "Show native OS notifications from deno desktop apps with the standard Web Notifications API: permission flow, options, and events."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 `deno desktop` implements the standard
 [Web Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notification).
@@ -63,15 +61,13 @@ On a platform or backend with no permission concept (an unbundled macOS process,
 some Linux notification daemons), the query reports `"prompt"` and notifications
 are shown without an explicit grant.
 
-:::note macOS requires a code-signed bundle
-
-macOS only hands out notification permission to an app with a stable code
-identity. `deno desktop` ad-hoc-signs every bundle it produces (and re-signs the
-cached runtime in `--hmr` mode) so this works out of the box. See
-[Distribution](/runtime/desktop/distribution/#code-signing) for configuring a
-real signing identity.
-
-:::
+> [!NOTE] macOS requires a code-signed bundle
+>
+> macOS only hands out notification permission to an app with a stable code
+> identity. `deno desktop` ad-hoc-signs every bundle it produces (and re-signs
+> the cached runtime in `--hmr` mode) so this works out of the box. See
+> [Distribution](/runtime/desktop/distribution/#code-signing) for configuring a
+> real signing identity.
 
 ## Options
 

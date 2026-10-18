@@ -19,8 +19,8 @@ HyperDX to collect and visualize telemetry data.
 In this tutorial, we'll build a simple application and export its telemetry data
 to HyperDX:
 
-- [Set up your chat app](#set-up-your-chat-app)
-- [Set up a Docker collector](#set-up-a-docker-collector)
+- [Set up your chat app](#set-up-the-app)
+- [Set up a Docker collector](#set-up-the-collector)
 - [Generating telemetry data](#generating-telemetry-data)
 - [Viewing telemetry data](#viewing-telemetry-data)
 

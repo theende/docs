@@ -1,4 +1,5 @@
 ---
+title: ban-unused-ignore
 tags: [recommended]
 ---
 

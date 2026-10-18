@@ -1,4 +1,5 @@
 ---
+title: no-obj-calls
 tags: [recommended]
 ---
 

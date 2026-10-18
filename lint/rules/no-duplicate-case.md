@@ -1,4 +1,5 @@
 ---
+title: no-duplicate-case
 tags: [recommended]
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: no-invalid-triple-slash-reference
 tags: [recommended]
 ---
 

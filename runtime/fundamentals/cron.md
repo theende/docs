@@ -83,11 +83,10 @@ Deno.cron(
 
 [`Deno.cron`](/api/deno/~/Deno.cron) keeps execution state in-memory in the Deno
 CLI, which means each process maintains its own independent set of cron tasks.
-For production workloads, [Deno Deploy](/deploy/reference/cron/) builds on top
-of this runtime API: it discovers your [`Deno.cron()`](/api/deno/~/Deno.cron)
-definitions at deployment time, schedules and invokes them, handles retries, and
-surfaces runs in a dashboard — so you don't need to keep a long-running process
-up yourself.
+For production workloads, Deno Deploy builds on top of this runtime API: it
+discovers your [`Deno.cron()`](/api/deno/~/Deno.cron) definitions at deployment
+time, schedules and invokes them, handles retries, and surfaces runs in a
+dashboard — so you don't need to keep a long-running process up yourself.
 
 ## OpenTelemetry
 

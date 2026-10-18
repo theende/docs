@@ -1,4 +1,5 @@
 ---
+title: jsx-no-unescaped-entities
 tags: [recommended, react, jsx, fresh]
 ---
 

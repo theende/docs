@@ -1,4 +1,5 @@
 ---
+title: jsx-no-comment-text-nodes
 tags: [recommended, react, jsx, fresh]
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: jsx-no-duplicate-props
 tags: [recommended, react, jsx]
 ---
 

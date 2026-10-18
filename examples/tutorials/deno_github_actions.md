@@ -49,12 +49,9 @@ missing, and fails if `deno.json` or `package.json` changed without the lockfile
 being refreshed. That catches "bumped a version but forgot to commit the
 lockfile" mistakes before they reach production.
 
-:::note
-
-`deno ci` requires a committed `deno.lock`. If your repository doesn't have one
-yet, run `deno install` locally and commit the resulting lockfile.
-
-:::
+> [!NOTE]
+> `deno ci` requires a committed `deno.lock`. If your repository doesn't have
+> one yet, run `deno install` locally and commit the resulting lockfile.
 
 ## How the cache works
 

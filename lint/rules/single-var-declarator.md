@@ -1,4 +1,5 @@
 ---
+title: single-var-declarator
 tags: []
 ---
 

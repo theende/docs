@@ -4,12 +4,10 @@ title: "Menus"
 description: "Build native application menu bars and right-click context menus, with submenus, accelerators, separators, checkboxes, and click events."
 ---
 
-:::info Available in Deno 2.9
-
-`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-:::
+> [!NOTE] Available in Deno 2.9
+>
+> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 `deno desktop` exposes two kinds of native menus: the **application menu**
 (macOS menu bar, Windows / Linux window menu) and **context menus** (right-click

@@ -440,15 +440,12 @@ fetchUserData failure ... ok (0ms)
 ok | 2 passed | 0 failed (5ms)
 ```
 
-:::tip
-
-Why not just write `globalThis.fetch = async (url: string) => …`? Two reasons.
-First, the real `fetch` accepts `URL | RequestInfo`, not just `string`, so the
-assignment fails type-checking. Second, a plain assignment is never undone: any
-later test in the same file (or any code your test imports transitively) will
-keep seeing the mock. The `using` + `stub` pattern fixes both.
-
-:::
+> [!TIP]
+> Why not just write `globalThis.fetch = async (url: string) => …`? Two reasons.
+> First, the real `fetch` accepts `URL | RequestInfo`, not just `string`, so the
+> assignment fails type-checking. Second, a plain assignment is never undone:
+> any later test in the same file (or any code your test imports transitively)
+> will keep seeing the mock. The `using` + `stub` pattern fixes both.
 
 For spies, fake timers, and more advanced mocking, see
 [Mocking data for tests](/runtime/test/mocking/).
@@ -567,13 +564,10 @@ Coverage analysis helps you to:
 - Prevent regressions when making changes
 - Measure testing progress over time
 
-:::note
-
-High coverage doesn't guarantee high-quality tests. It simply shows what code
-was executed, not whether your assertions are meaningful or if edge cases are
-handled correctly.
-
-:::
+> [!NOTE]
+> High coverage doesn't guarantee high-quality tests. It simply shows what code
+> was executed, not whether your assertions are meaningful or if edge cases are
+> handled correctly.
 
 Deno provides built-in coverage tools to help you analyze your test coverage. To
 collect coverage information:

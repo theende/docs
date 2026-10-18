@@ -1,4 +1,5 @@
 ---
+title: no-global-assign
 tags: [recommended]
 ---
 

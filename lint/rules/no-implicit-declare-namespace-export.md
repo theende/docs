@@ -1,4 +1,5 @@
 ---
+title: no-implicit-declare-namespace-export
 tags: []
 ---
 

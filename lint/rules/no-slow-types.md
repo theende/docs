@@ -1,4 +1,5 @@
 ---
+title: no-slow-types
 tags: [jsr]
 ---
 

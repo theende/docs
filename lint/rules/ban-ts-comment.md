@@ -1,4 +1,5 @@
 ---
+title: ban-ts-comment
 tags: [recommended]
 ---
 

@@ -1,4 +1,5 @@
 ---
+title: no-inner-declarations
 tags: [recommended]
 ---
 

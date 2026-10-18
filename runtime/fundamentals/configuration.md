@@ -37,9 +37,8 @@ configuration from `deno.json`.
 This is what lets you adopt Deno incrementally: keep running an app on Node
 while using Deno as a faster drop-in package manager, run your existing scripts
 with `deno task`, and add a `deno.json` for Deno's toolchain when you are ready.
-The [Migrate from Node.js](/runtime/migrate/) guide walks through each step, and
-[Node compatibility in Deno](/runtime/fundamentals/node/) covers how the runtime
-maps Node's APIs and module resolution.
+The Migrate from Node.js guide walks through each step, and Node compatibility
+in Deno covers how the runtime maps Node's APIs and module resolution.
 
 ## deno.json
 
@@ -94,6 +93,6 @@ including:
 - [Minimum dependency age](/runtime/reference/deno_json/#minimum-dependency-age)
 
 See the reference for a
-[full example deno.json file](/runtime/reference/deno_json/#an-example-deno.json-file)
+[full example deno.json file](/runtime/reference/deno_json/#an-example-denojson-file)
 and the [JSON schema](/runtime/reference/deno_json/#json-schema) for editor
 autocompletion.

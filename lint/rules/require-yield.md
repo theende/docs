@@ -1,4 +1,5 @@
 ---
+title: require-yield
 tags: [recommended]
 ---
 

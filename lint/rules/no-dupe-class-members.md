@@ -1,4 +1,5 @@
 ---
+title: no-dupe-class-members
 tags: [recommended]
 ---
 

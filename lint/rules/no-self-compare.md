@@ -1,4 +1,5 @@
 ---
+title: no-self-compare
 tags: []
 ---
 

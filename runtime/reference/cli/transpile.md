@@ -17,9 +17,8 @@ For most workflows you do **not** need `deno transpile` — `deno run`,
 Reach for it when:
 
 - You're shipping a library to consumers that run `node` or a browser bundler
-  directly. (For npm tarballs, prefer
-  [`deno pack`](/runtime/reference/cli/pack/), which wraps `deno transpile` with
-  packaging logic.)
+  directly. (For npm tarballs, prefer `deno pack`, which wraps `deno transpile`
+  with packaging logic.)
 - A downstream tool only understands `.js`.
 - You want pre-compiled `.js` checked into a build artifact rather than
   transpiled on the fly.
@@ -132,8 +131,8 @@ If you want type errors to surface, run
 
 - [`deno bundle`](/runtime/reference/cli/bundle/) — produce a single bundled
   JavaScript file
-- [`deno pack`](/runtime/reference/cli/pack/) — build an npm-publishable tarball
-  (uses `deno transpile` internally)
+- `deno pack` — build an npm-publishable tarball (uses `deno transpile`
+  internally)
 - [`deno check`](/runtime/reference/cli/check/) — type-check without emitting
 - [TypeScript support](/runtime/fundamentals/typescript/) — overview of how
   TypeScript works in Deno

@@ -1,26 +1,17 @@
 {
+  "layout": "doc.tsx",
   "navigation": [
     {
       "name": "Runtime",
       "href": "/runtime/"
     },
     {
-      "name": "API reference",
-      "href": "/api/"
-    },
-    {
       "name": "Examples",
       "href": "/examples/"
-    }
-  ],
-  "sidebar": [
+    },
     {
-      "items": [
-        {
-          "title": "deno.com",
-          "href": "https://deno.com"
-        }
-      ]
+      "name": "Lint rules",
+      "href": "/lint/"
     }
   ]
 }
