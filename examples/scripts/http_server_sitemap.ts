@@ -1,7 +1,7 @@
 /**
  * @title Generate sitemap.xml and robots.txt
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://www.sitemaps.org/protocol.html} Sitemaps XML format
  * @resource {/examples/http_server_rss} Example: Generate an RSS feed

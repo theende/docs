@@ -1,7 +1,7 @@
 /**
  * @title Parsing and serializing INI
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://jsr.io/@std/ini} Doc: @std/ini
  * @resource {https://en.wikipedia.org/wiki/INI_file} Wikipedia: INI file

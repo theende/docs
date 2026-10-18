@@ -1,7 +1,7 @@
 /**
  * @title Encode and decode CBOR
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://jsr.io/@std/cbor} Doc: @std/cbor
  * @resource {https://www.rfc-editor.org/rfc/rfc8949} Spec: CBOR (RFC 8949)

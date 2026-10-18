@@ -1,7 +1,7 @@
 /**
  * @title Importing & exporting
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @resource {https://docs.deno.com/runtime/fundamentals/modules/} Doc: Modules and dependencies
  * @group Basics
  *

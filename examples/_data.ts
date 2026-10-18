@@ -35,12 +35,6 @@ export const items = [
     category: "Basics",
   },
   {
-    title: "Top level await",
-    href: "/examples/top_level_await/",
-    type: "example",
-    category: "Basics",
-  },
-  {
     title: "Sleep and delay execution",
     href: "/examples/sleep_delay/",
     type: "example",
@@ -50,12 +44,6 @@ export const items = [
     title: "Check if two values are deeply equal",
     href: "/examples/deep_equal/",
     type: "example",
-    category: "Basics",
-  },
-  {
-    title: "Update from CommonJS to ESM",
-    href: "/examples/cjs_to_esm_tutorial/",
-    type: "tutorial",
     category: "Basics",
   },
   {
@@ -77,12 +65,6 @@ export const items = [
     category: "Basics",
   },
   {
-    title: "Sharing your local server with tunnel",
-    href: "/examples/tunnel_tutorial/",
-    type: "tutorial",
-    category: "Basics",
-  },
-  {
     title: "Generating documentation with deno doc",
     href: "/examples/deno_doc_tutorial/",
     type: "tutorial",
@@ -90,18 +72,6 @@ export const items = [
   },
 
   // Modules and package management
-  {
-    title: "Use Node.js built-in modules",
-    href: "/examples/node_built_in/",
-    type: "example",
-    category: "Modules and package management",
-  },
-  {
-    title: "Import modules from npm",
-    href: "/examples/npm/",
-    type: "example",
-    category: "Modules and package management",
-  },
   {
     title: "Add and remove dependencies",
     href: "/examples/add_remove_dependencies_tutorial/",
@@ -111,18 +81,6 @@ export const items = [
   {
     title: "Lock dependencies with deno.lock",
     href: "/examples/dependency_lockfile_tutorial/",
-    type: "tutorial",
-    category: "Modules and package management",
-  },
-  {
-    title: "Use private npm registries",
-    href: "/examples/private_registries_tutorial/",
-    type: "tutorial",
-    category: "Modules and package management",
-  },
-  {
-    title: "Run npm lifecycle scripts",
-    href: "/examples/npm_lifecycle_scripts_tutorial/",
     type: "tutorial",
     category: "Modules and package management",
   },
@@ -141,12 +99,6 @@ export const items = [
   {
     title: "Run Deno in GitHub Actions",
     href: "/examples/deno_github_actions_tutorial/",
-    type: "tutorial",
-    category: "Modules and package management",
-  },
-  {
-    title: "Use Deno in an existing Node.js project",
-    href: "/examples/migrate_node_project_tutorial/",
     type: "tutorial",
     category: "Modules and package management",
   },
@@ -209,12 +161,6 @@ export const items = [
   {
     title: "HTTP server: Scaling across CPU cores",
     href: "/examples/http_server_parallel/",
-    type: "example",
-    category: "Network",
-  },
-  {
-    title: "HTTP server: Node.js streams",
-    href: "/examples/http_server_node_streams/",
     type: "example",
     category: "Network",
   },
@@ -481,12 +427,6 @@ export const items = [
     category: "System",
   },
   {
-    title: "Communicate with a child process over IPC",
-    href: "/examples/child_process_ipc/",
-    type: "example",
-    category: "System",
-  },
-  {
     title: "Environment variables",
     href: "/examples/environment_variables/",
     type: "example",
@@ -637,12 +577,6 @@ export const items = [
     category: "Encoding",
   },
   {
-    title: "Convert a Buffer (node:buffer)",
-    href: "/examples/convert_buffer/",
-    type: "example",
-    category: "Encoding",
-  },
-  {
     title: "Convert a ReadableStream",
     href: "/examples/convert_readablestream/",
     type: "example",
@@ -651,12 +585,6 @@ export const items = [
   {
     title: "Convert a string to bytes and back",
     href: "/examples/convert_string/",
-    type: "example",
-    category: "Encoding",
-  },
-  {
-    title: "Convert a Node.js Readable",
-    href: "/examples/convert_node_readable/",
     type: "example",
     category: "Encoding",
   },
@@ -810,113 +738,11 @@ export const items = [
     type: "example",
     category: "Testing",
   },
-  {
-    title: "Use Testing Library with Deno",
-    href: "/examples/testing_library_tutorial/",
-    type: "tutorial",
-    category: "Testing",
-  },
 
   // Web frameworks and libraries
   {
-    title: "Build a React App",
-    href: "/examples/react_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a Next.js app",
-    href: "/examples/next_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
     title: "Build a Fresh app",
     href: "/examples/fresh_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a Svelte app",
-    href: "/examples/svelte_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a Vue app",
-    href: "/examples/vue_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Use Express with Deno",
-    href: "/examples/express_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "How to use Apollo with Deno",
-    href: "/examples/apollo_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Upload files to S3-compatible storage",
-    href: "/examples/s3_upload/",
-    type: "example",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Accept payments with Stripe Checkout",
-    href: "/examples/stripe_checkout/",
-    type: "example",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Send email with Resend",
-    href: "/examples/send_email/",
-    type: "example",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Send email with SendGrid",
-    href: "/examples/send_email_sendgrid/",
-    type: "example",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build an Astro site with Deno",
-    href: "/examples/astro_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a Qwik app with Deno",
-    href: "/examples/qwik_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a Nuxt app with Deno",
-    href: "/examples/nuxt_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a Typesafe API with tRPC and Deno",
-    href: "/examples/trpc_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a SolidJS app",
-    href: "/examples/solidjs_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a Tanstack app",
-    href: "/examples/tanstack_tutorial/",
     type: "tutorial",
     category: "Web frameworks and libraries",
   },
@@ -941,74 +767,8 @@ export const items = [
     category: "Databases",
   },
   {
-    title: "MySQL",
-    href: "/examples/mysql2_tutorial/",
-    type: "tutorial",
-    category: "Databases",
-  },
-  {
-    title: "PlanetScale",
-    href: "/examples/planetscale_tutorial/",
-    type: "tutorial",
-    category: "Databases",
-  },
-  {
-    title: "How to use Redis with Deno",
-    href: "/examples/redis_tutorial/",
-    type: "tutorial",
-    category: "Databases",
-  },
-  {
-    title: "Prisma",
-    href: "/examples/prisma_tutorial/",
-    type: "tutorial",
-    category: "Databases",
-  },
-  {
-    title: "Drizzle",
-    href: "/examples/drizzle_tutorial/",
-    type: "tutorial",
-    category: "Databases",
-  },
-  {
-    title: "Mongoose",
-    href: "/examples/mongoose_tutorial/",
-    type: "tutorial",
-    category: "Databases",
-  },
-  {
-    title: "Redis quick start",
-    href: "/examples/redis/",
-    type: "example",
-    category: "Databases",
-  },
-  {
-    title: "Postgres",
-    href: "/examples/postgres/",
-    type: "example",
-    category: "Databases",
-  },
-  {
     title: "Supabase",
     href: "/examples/supabase/",
-    type: "example",
-    category: "Databases",
-  },
-  {
-    title: "MongoDB",
-    href: "/examples/mongo/",
-    type: "example",
-    category: "Databases",
-  },
-  {
-    title: "SQLite",
-    href: "/examples/sqlite/",
-    type: "example",
-    category: "Databases",
-  },
-  {
-    title: "DuckDB",
-    href: "/examples/duckdb/",
     type: "example",
     category: "Databases",
   },
@@ -1046,104 +806,8 @@ export const items = [
     type: "tutorial",
     category: "AI",
   },
-  {
-    title: "Connect to Claude (Anthropic API)",
-    href: "/examples/anthropic_chat_completion/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "Build an agent with tool use",
-    href: "/examples/anthropic_tool_use/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "Stream a Claude response to the browser",
-    href: "/examples/anthropic_sse/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "Get structured JSON output from Claude",
-    href: "/examples/anthropic_structured_output/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "RAG: ground Claude's answer in your documents",
-    href: "/examples/anthropic_rag/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "Connect to an MCP server from a client",
-    href: "/examples/mcp_client/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "Connect to OpenAI - Chat completion",
-    href: "/examples/openai_chat_completion/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "Stream a chat response from OpenAI",
-    href: "/examples/openai_streaming/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "Build an agent with OpenAI function calling",
-    href: "/examples/openai_tool_use/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "Stream an OpenAI response to the browser",
-    href: "/examples/openai_sse/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "Get structured JSON output from OpenAI",
-    href: "/examples/openai_structured_output/",
-    type: "example",
-    category: "AI",
-  },
-  {
-    title: "RAG: ground an OpenAI answer in your documents",
-    href: "/examples/openai_rag/",
-    type: "example",
-    category: "AI",
-  },
 
   // Deploying Deno projects
-  {
-    title: "Deploy with Deno Deploy",
-    href: "/examples/deno_deploy_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "Deploy with the deploy command",
-    href: "/examples/deploy_command_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "Migrating a custom domain to Deno Deploy",
-    href: "/examples/migrate_custom_domain_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "Connecting to a database both locally and on Deno Deploy",
-    href: "/examples/tunnel_database_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
   {
     title: "AWS Lambda",
     href: "/examples/aws_lambda_tutorial/",
@@ -1169,12 +833,6 @@ export const items = [
     category: "Deploying Deno projects",
   },
   {
-    title: "Cloudflare workers with wrangler",
-    href: "/examples/cloudflare_workers_wrangler_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
     title: "Digital Ocean",
     href: "/examples/digital_ocean_tutorial/",
     type: "tutorial",
@@ -1183,12 +841,6 @@ export const items = [
   {
     title: "Google Cloud Run",
     href: "/examples/google_cloud_run_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "Kinsta",
-    href: "/examples/kinsta_tutorial/",
     type: "tutorial",
     category: "Deploying Deno projects",
   },
@@ -1213,12 +865,6 @@ export const items = [
     category: "OpenTelemetry",
   },
   {
-    title: "View telemetry data for your local application",
-    href: "/examples/tunnel_telemetry_tutorial/",
-    type: "tutorial",
-    category: "OpenTelemetry",
-  },
-  {
     title: "Export telemetry to Honeycomb",
     href: "/examples/honeycomb_tutorial/",
     type: "tutorial",
@@ -1229,128 +875,6 @@ export const items = [
     href: "/examples/otel_span_propagation_tutorial/",
     type: "tutorial",
     category: "OpenTelemetry",
-  },
-  {
-    title: "OpenTelemetry with Deno Deploy",
-    href: "/examples/deploy_otel_tutorial/",
-    type: "tutorial",
-    category: "OpenTelemetry",
-  },
-
-  // Deno Sandbox
-  {
-    title: "Evaluating JavaScript",
-    href: "/examples/sandbox_evaluating_javascript/",
-    type: "example",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Spawn a subprocess",
-    href: "/examples/sandbox_spawn_subprocess/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Serve a web framework",
-    href: "/examples/sandbox_web_framework/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Provide SSH access to a sandbox",
-    href: "/examples/sandbox_ssh_access/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Interactive JavaScript REPL",
-    href: "/examples/sandbox_javascript_repl/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Provide a VSCode instance in a sandbox",
-    href: "/examples/sandbox_vscode_instance/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Use template literals with variable interpolation",
-    href: "/examples/sandbox_template_literals/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Error handling",
-    href: "/examples/sandbox_error_handling/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Command cancellation",
-    href: "/examples/sandbox_command_cancellation/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Streaming access string and binary output",
-    href: "/examples/sandbox_access_output/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Set and get environment variables",
-    href: "/examples/sandbox_environment_variables/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Stream output to a local file",
-    href: "/examples/sandbox_stream_output/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Upload files and directories to a sandbox",
-    href: "/examples/sandbox_upload_files/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Control sandbox timeout",
-    href: "/examples/sandbox_timeout_control/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Configure sandbox memory",
-    href: "/examples/sandbox_memory/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Add read-write volumes to your Sandbox",
-    href: "/examples/volumes_tutorial/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Boot instantly with snapshots",
-    href: "/examples/snapshots_tutorial/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Boot a Python environment with snapshots",
-    href: "/examples/snapshot_python_tutorial/",
-    type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Run AI generated code",
-    href: "/examples/sandbox_for_untrusted_code/",
-    type: "example",
-    category: "Deno Sandbox",
   },
 
   {
@@ -1389,12 +913,6 @@ export const items = [
     href: "/examples/set_timezone/",
     type: "example",
     category: "System",
-  },
-  {
-    title: "Inspect memory with heap snapshots",
-    href: "/examples/heap_snapshot/",
-    type: "example",
-    category: "CLI",
   },
   {
     title: "Find an executable on the PATH",
@@ -1442,24 +960,6 @@ export const items = [
   {
     title: "Set and read process exit codes",
     href: "/examples/exit_codes/",
-    type: "example",
-    category: "System",
-  },
-  {
-    title: "Use worker_threads in Deno",
-    href: "/examples/worker_threads/",
-    type: "example",
-    category: "System",
-  },
-  {
-    title: "Use EventEmitter from node:events",
-    href: "/examples/event_emitter/",
-    type: "example",
-    category: "System",
-  },
-  {
-    title: "Read input line by line with node:readline",
-    href: "/examples/node_readline/",
     type: "example",
     category: "System",
   },
@@ -1650,12 +1150,6 @@ export const items = [
     type: "example",
     category: "Cryptography",
   },
-  {
-    title: "Hash and sign with node:crypto",
-    href: "/examples/node_crypto/",
-    type: "example",
-    category: "Cryptography",
-  },
 
   {
     title: "Debounce a function",
@@ -1754,12 +1248,6 @@ export const items = [
     category: "Encoding",
   },
   {
-    title: "Compress data with node:zlib",
-    href: "/examples/zlib_compression/",
-    type: "example",
-    category: "Encoding",
-  },
-  {
     title: "Create and extract tar archives",
     href: "/examples/tar_archives/",
     type: "example",
@@ -1839,24 +1327,6 @@ export const items = [
     category: "Network",
   },
   {
-    title: "Authentication with Auth.js",
-    href: "/examples/authjs_github/",
-    type: "example",
-    category: "Network",
-  },
-  {
-    title: "Email and password auth with Better Auth",
-    href: "/examples/better_auth/",
-    type: "example",
-    category: "Network",
-  },
-  {
-    title: "Protect routes with JWT in Hono",
-    href: "/examples/hono_jwt_auth/",
-    type: "example",
-    category: "Network",
-  },
-  {
     title: "Generate an RSS feed",
     href: "/examples/http_server_rss/",
     type: "example",
@@ -1887,12 +1357,6 @@ export const items = [
     category: "Network",
   },
   {
-    title: "Creating and verifying JWT",
-    href: "/examples/creating_and_verifying_jwt/",
-    type: "example",
-    category: "Network",
-  },
-  {
     title: "Render markdown to HTML",
     href: "/examples/render_markdown/",
     type: "example",
@@ -1909,24 +1373,6 @@ export const items = [
     href: "/examples/generate_qr_code/",
     type: "example",
     category: "Web frameworks and libraries",
-  },
-  {
-    title: "Generate a PDF",
-    href: "/examples/generate_pdf/",
-    type: "example",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Resize and convert images",
-    href: "/examples/resize_images/",
-    type: "example",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build an MCP server",
-    href: "/examples/mcp_server/",
-    type: "example",
-    category: "AI",
   },
   {
     title: "Call C functions with FFI",
@@ -2006,12 +1452,6 @@ export const items = [
     type: "example",
     category: "Web standard APIs",
   },
-  {
-    title: "Use Vite with Deno",
-    href: "/examples/vite_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
 ];
 
 // Section order on the landing page and in the sidebar.
@@ -2033,7 +1473,6 @@ export const categoryOrder = [
   "AI",
   "Deploying Deno projects",
   "OpenTelemetry",
-  "Deno Sandbox",
 ];
 
 // Grouped, alphabetized view consumed by the landing page and sidebars.
@@ -2060,22 +1499,10 @@ export const featuredItems = [
     description: "Use the built-in test runner, no dependencies needed.",
   },
   {
-    title: "Build a Next.js app",
-    href: "/examples/next_tutorial/",
-    type: "tutorial",
-    description: "Run a full-stack React framework on Deno.",
-  },
-  {
     title: "Connecting to databases",
     href: "/examples/connecting_to_databases_tutorial/",
     type: "tutorial",
     description: "Postgres, MySQL, MongoDB, SQLite and more.",
-  },
-  {
-    title: "Deploy with Deno Deploy",
-    href: "/examples/deno_deploy_tutorial/",
-    type: "tutorial",
-    description: "Ship your app to the edge in minutes.",
   },
   {
     title: "Built in TypeScript support",

@@ -1,7 +1,7 @@
 /**
  * @title Atomic transactions in Deno KV
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run --unstable-kv <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.AtomicOperation} Doc: Deno.AtomicOperation
  * @resource {https://docs.deno.com/examples/kv/} Example: Deno KV

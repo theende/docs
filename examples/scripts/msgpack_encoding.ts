@@ -1,7 +1,7 @@
 /**
  * @title Encode and decode MessagePack
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://jsr.io/@std/msgpack} Doc: @std/msgpack
  * @resource {https://msgpack.org} Spec: MessagePack

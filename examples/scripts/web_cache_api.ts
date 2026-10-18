@@ -1,7 +1,7 @@
 /**
  * @title Cache HTTP responses with the Web Cache API
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Cache} MDN: Cache
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage} MDN: CacheStorage

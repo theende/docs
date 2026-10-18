@@ -1,7 +1,7 @@
 /**
  * @title Transform data with TransformStream
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/TransformStream} MDN: TransformStream
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/pipeThrough} MDN: pipeThrough

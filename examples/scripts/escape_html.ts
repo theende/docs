@@ -1,7 +1,7 @@
 /**
  * @title Escape an HTML string
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/html/doc/~/escape} Doc: @std/html escape
  * @resource {https://owasp.org/www-community/attacks/xss/} OWASP: Cross Site Scripting

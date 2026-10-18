@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Verifying webhook signatures
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries} GitHub: Validating webhook deliveries
  * @resource {/examples/hmac_generate_verify} Example: HMAC generation and verification

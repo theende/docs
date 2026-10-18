@@ -1,7 +1,7 @@
 /**
  * @title Convert a Blob
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Blob} MDN: Blob
  * @resource {https://docs.deno.com/api/web/~/Blob} Doc: Blob

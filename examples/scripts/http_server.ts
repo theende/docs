@@ -1,11 +1,10 @@
 /**
  * @title HTTP Server: Hello world
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Doc: Deno.serve
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Response} MDN: Response
- * @playground https://dash.deno.com/playground/example-helloworld
  * @group Network
  *
  * An example of an HTTP server that serves a "Hello World" message.

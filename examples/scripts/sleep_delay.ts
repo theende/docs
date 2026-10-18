@@ -1,7 +1,7 @@
 /**
  * @title Sleep and delay execution
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/async/doc/~/delay} Doc: @std/async delay
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal} MDN: AbortSignal

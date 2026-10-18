@@ -1,7 +1,7 @@
 /**
  * @title Deno KV watch
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run --unstable-kv -N <url>
  * @resource {https://docs.deno.com/deploy/kv/} Deno KV user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.Kv} Deno KV Runtime API docs

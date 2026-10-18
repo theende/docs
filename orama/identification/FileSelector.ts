@@ -5,9 +5,7 @@ import type { InputFileReference } from "../types.ts";
 export class FileSelector {
     private INCLUDE_DIRS = [
         "runtime",
-        "deploy",
         "examples",
-        "subhosting",
         "lint",
     ];
 

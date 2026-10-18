@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Paginating results
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams} MDN: URLSearchParams
  * @resource {/examples/http_server_routing} Example: HTTP server: Routing

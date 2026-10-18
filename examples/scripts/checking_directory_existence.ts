@@ -1,7 +1,7 @@
 /**
  * @title Checking for directory existence
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -R -W <url>
  * @group File System
  *

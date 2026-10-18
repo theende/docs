@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Health checks
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/} Kubernetes: Liveness and readiness probes
  * @resource {/examples/http_server} Example: HTTP server: Hello World

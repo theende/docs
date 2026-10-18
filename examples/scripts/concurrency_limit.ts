@@ -1,7 +1,7 @@
 /**
  * @title Run async tasks with a concurrency limit
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/async/doc/~/pooledMap} Doc: @std/async pooledMap
  * @resource {https://jsr.io/@std/async/doc/~/delay} Doc: @std/async delay

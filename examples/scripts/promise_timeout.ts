@@ -1,7 +1,7 @@
 /**
  * @title Add a timeout to any promise
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/async/doc/~/deadline} Doc: @std/async deadline
  * @resource {https://jsr.io/@std/async/doc/~/abortable} Doc: @std/async abortable

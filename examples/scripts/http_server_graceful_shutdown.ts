@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Graceful shutdown
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.HttpServer} Deno: HttpServer
  * @resource {https://docs.deno.com/api/deno/~/Deno.addSignalListener} Deno: addSignalListener

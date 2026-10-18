@@ -22,10 +22,7 @@ const ROOT_DIR = fromFileUrl(new URL(".", import.meta.url));
 // Directories to include in the documentation
 const INCLUDE_DIRS = [
   "runtime",
-  "deploy",
-  "sandbox",
   "examples",
-  "subhosting",
   "lint",
 ];
 
@@ -419,14 +416,8 @@ function getSectionDescription(section: string): string {
   const descriptions: Record<string, string> = {
     runtime:
       "Documentation for the Deno CLI and runtime environment, including installation, configuration, and core concepts.",
-    deploy:
-      "Documentation for Deno Deploy, a serverless platform for deploying JavaScript to a global edge network.",
-    sandbox:
-      "Documentation for Deno Sandbox, ephemeral Linux microVMs for running untrusted code safely.",
     examples:
       "Code examples and tutorials demonstrating how to build applications with Deno.",
-    subhosting:
-      "Documentation for Deno Subhosting, a platform for securely running code written by customers.",
     lint:
       "Documentation for Deno's built-in linter and formatter, including available rules and configuration.",
   };

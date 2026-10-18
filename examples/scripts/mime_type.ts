@@ -1,7 +1,7 @@
 /**
  * @title Get the MIME type of a file
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://jsr.io/@std/media-types} Doc: @std/media-types
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types} MDN: MIME types

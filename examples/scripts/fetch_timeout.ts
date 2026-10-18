@@ -1,7 +1,7 @@
 /**
  * @title Set a timeout on fetch
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static} MDN: AbortSignal.timeout
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/any_static} MDN: AbortSignal.any

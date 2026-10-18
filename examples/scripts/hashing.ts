@@ -1,7 +1,7 @@
 /**
  * @title Hashing
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -R <url>
  * @resource {https://jsr.io/@std/crypto} Web Crypto extensions in the Standard Library
  * @resource {https://docs.deno.com/api/web/~/SubtleCrypto} Doc: crypto.subtle

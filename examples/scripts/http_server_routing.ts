@@ -1,11 +1,10 @@
 /**
  * @title HTTP server: Routing
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {/examples/http_server} Example: HTTP Server: Hello World
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/URL_Pattern_API} MDN: URL Pattern API
- * @playground https://dash.deno.com/playground/example-routing
  * @group Network
  *
  * An example of an HTTP server that handles requests with different responses

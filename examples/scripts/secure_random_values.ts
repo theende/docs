@@ -1,7 +1,7 @@
 /**
  * @title Generate secure random values
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues} MDN: crypto.getRandomValues
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID} MDN: crypto.randomUUID

@@ -1,7 +1,7 @@
 /**
  * @title Generate a QR code
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -W <url>
  * @resource {https://jsr.io/@libs/qrcode} @libs/qrcode on JSR
  * @group Web frameworks and libraries

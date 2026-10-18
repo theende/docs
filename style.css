@@ -1763,14 +1763,6 @@
       hover:bg-jsr-yellow-400;
   }
 
-  .deploy-button {
-    padding-left: 3rem;
-    background-image: url("../deno-deploy.svg");
-    background-repeat: no-repeat;
-    background-position: 1.25rem center;
-    background-size: 1.25rem;
-  }
-
   .columns {
     margin: 2rem 0;
     div {

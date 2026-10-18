@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Basic authentication
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication} MDN: HTTP authentication
  * @resource {https://jsr.io/@std/crypto/doc/timing-safe-equal} @std/crypto: timingSafeEqual

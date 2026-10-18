@@ -1,7 +1,7 @@
 /**
  * @title Convert a string to bytes and back
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder} MDN: TextEncoder
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder} MDN: TextDecoder

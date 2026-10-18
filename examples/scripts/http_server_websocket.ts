@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: WebSockets
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {/examples/http_server} Example: HTTP Server: Hello World
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/WebSocket} MDN: WebSocket

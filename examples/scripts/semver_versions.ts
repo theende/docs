@@ -1,7 +1,7 @@
 /**
  * @title Parse and compare semver versions
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/semver/doc/~/parse} Doc: @std/semver parse
  * @resource {https://jsr.io/@std/semver/doc/~/satisfies} Doc: @std/semver satisfies

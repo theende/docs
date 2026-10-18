@@ -1,7 +1,7 @@
 /**
  * @title Derive encryption keys from passwords
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/deriveKey} MDN: SubtleCrypto.deriveKey
  * @resource {/examples/hash_password/} Example: Hashing and verifying passwords

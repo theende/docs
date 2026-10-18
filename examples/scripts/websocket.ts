@@ -1,7 +1,7 @@
 /**
  * @title Outbound WebSockets
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run -N <url>
  * @resource {/examples/http_server_websocket} HTTP Server: WebSockets
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/WebSocket} MDN: WebSocket

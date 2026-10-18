@@ -1,7 +1,7 @@
 /**
  * @title Structured logging
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -R -W <url>
  * @resource {https://jsr.io/@std/log} Doc: @std/log
  * @resource {https://jsr.io/@std/log/doc/~/FileHandler} Doc: @std/log FileHandler

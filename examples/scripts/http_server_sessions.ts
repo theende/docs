@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Sessions
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies} MDN: Using HTTP cookies
  * @resource {/examples/http_server_routing} Example: HTTP server: Routing

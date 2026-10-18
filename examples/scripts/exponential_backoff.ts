@@ -1,7 +1,7 @@
 /**
  * @title Exponential backoff
  * @difficulty intermediate
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://en.wikipedia.org/wiki/Exponential_backoff} Wikipedia: Exponential backoff
  * @resource {https://jsr.io/@std/async/doc/~/retry} Doc: @std/async > retry

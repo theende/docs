@@ -80,20 +80,3 @@ export interface TableOfContentsItem {
   slug: string;
   children: TableOfContentsItem[];
 }
-
-export interface FeedbackSubmission {
-  path: string;
-  sentiment: "yes" | "no";
-  comment?: string;
-  contact?: string; // Now represents GitHub username instead of email
-  id?: string | null;
-}
-
-export interface GoogleSheetsUpdateResponse {
-  updates: {
-    updatedRange: string;
-    updatedRows: number;
-    updatedColumns: number;
-    updatedCells: number;
-  };
-}

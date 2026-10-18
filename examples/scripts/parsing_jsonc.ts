@@ -1,7 +1,7 @@
 /**
  * @title Parsing JSONC
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://jsr.io/@std/jsonc} Doc: @std/jsonc
  * @resource {https://docs.deno.com/runtime/fundamentals/configuration/} Doc: deno.json configuration

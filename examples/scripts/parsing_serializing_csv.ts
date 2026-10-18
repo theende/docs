@@ -1,7 +1,7 @@
 /**
  * @title Parsing and serializing CSV
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run -R <url>
  * @resource {https://jsr.io/@std/csv} std/csv
  * @resource {https://datatracker.ietf.org/doc/html/rfc4180} Spec: CSV

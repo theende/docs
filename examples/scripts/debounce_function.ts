@@ -1,7 +1,7 @@
 /**
  * @title Debounce a function
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/async/doc/~/debounce} Doc: @std/async debounce
  * @resource {https://jsr.io/@std/async/doc/~/DebouncedFunction} Doc: @std/async DebouncedFunction

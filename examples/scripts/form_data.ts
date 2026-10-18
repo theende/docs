@@ -1,7 +1,7 @@
 /**
  * @title Build and send forms with FormData
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/FormData} MDN: FormData
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Request/formData} MDN: Request.formData

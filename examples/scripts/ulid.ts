@@ -1,7 +1,7 @@
 /**
  * @title ULID
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://github.com/ulid/spec} ULID: Specification
  * @group Cryptography

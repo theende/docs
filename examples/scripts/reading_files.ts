@@ -1,7 +1,7 @@
 /**
  * @title Reading files
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -R <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.readFile} Doc: Deno.readFile
  * @resource {https://docs.deno.com/api/deno/~/Deno.open} Doc: Deno.open

@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Request timeouts
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal} MDN: AbortSignal
  * @resource {/examples/http_server} Example: HTTP server: Hello World

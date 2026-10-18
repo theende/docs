@@ -1,7 +1,7 @@
 /**
  * @title Convert string case
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/text/doc/~/toCamelCase} Doc: @std/text toCamelCase
  * @resource {https://jsr.io/@std/text/doc/~/toKebabCase} Doc: @std/text toKebabCase

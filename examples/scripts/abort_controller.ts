@@ -1,7 +1,7 @@
 /**
  * @title Cancel async work with AbortController
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/AbortController} MDN: AbortController
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal} MDN: AbortSignal

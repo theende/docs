@@ -1,7 +1,7 @@
 /**
  * @title Sign in with GitHub (OAuth)
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N -E <url>
  * @resource {https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps} GitHub OAuth web flow
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/URL} MDN: URL

@@ -1,7 +1,7 @@
 /**
  * @title Stream JSON Lines data
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://jsr.io/@std/json} Doc: @std/json
  * @resource {https://jsonlines.org} Spec: JSON Lines

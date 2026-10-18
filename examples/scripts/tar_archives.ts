@@ -1,7 +1,7 @@
 /**
  * @title Create and extract tar archives
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -R -W <url>
  * @resource {https://jsr.io/@std/tar} Doc: @std/tar
  * @resource {/examples/compress_decompress/} Example: Compress and decompress data

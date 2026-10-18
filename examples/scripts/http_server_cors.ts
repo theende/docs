@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: CORS
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS} MDN: Cross-Origin Resource Sharing
  * @resource {/examples/http_server} Example: HTTP server: Hello World

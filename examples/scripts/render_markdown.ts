@@ -1,7 +1,7 @@
 /**
  * @title Render markdown to HTML
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -WE <url>
  * @resource {https://jsr.io/@deno/gfm} @deno/gfm on JSR
  * @resource {https://docs.deno.com/examples/front_matter/} Example: Extract front matter from markdown

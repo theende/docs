@@ -1,7 +1,7 @@
 /**
  * @title Proxy HTTP requests
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Request} MDN: Request
  * @resource {/examples/http_server} Example: HTTP Server: Hello world

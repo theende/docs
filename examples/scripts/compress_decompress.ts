@@ -1,7 +1,7 @@
 /**
  * @title Compress and decompress data
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -R -W <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream} MDN: CompressionStream
  * @resource {https://docs.deno.com/examples/streaming_files/} Example: Streaming file operations

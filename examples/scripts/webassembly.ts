@@ -1,7 +1,7 @@
 /**
  * @title Web assembly
  * @difficulty intermediate
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://webassembly.github.io/spec/core/syntax/modules.html} WebAssembly Spec: Modules
  * @resource {https://webassembly.github.io/spec/core/syntax/instructions.html} WebAssembly Spec: Instructions

@@ -1,7 +1,7 @@
 /**
  * @title Parsing and serializing YAML
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/yaml} std/yaml
  * @resource {https://yaml.org} Spec: YAML

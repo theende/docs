@@ -1,7 +1,7 @@
 /**
  * @title Escape text for regular expressions
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/regexp/doc/~/escape} Doc: @std/regexp escape
  * @resource {https://jsr.io/@std/regexp} Doc: @std/regexp

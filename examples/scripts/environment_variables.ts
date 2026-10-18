@@ -1,7 +1,7 @@
 /**
  * @title Environment variables
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -E <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.env} Doc: Deno.env
  * @resource {https://docs.deno.com/deploy/classic/environment-variables} Deploy Docs: Environment Variables

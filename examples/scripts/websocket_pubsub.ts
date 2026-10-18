@@ -1,7 +1,7 @@
 /**
  * @title WebSocket server: Broadcasting messages
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.upgradeWebSocket} Doc: Deno.upgradeWebSocket
  * @resource {/examples/http_server_websocket/} Example: HTTP server: WebSockets

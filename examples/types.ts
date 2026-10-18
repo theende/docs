@@ -3,17 +3,9 @@ export const TAGS = {
     title: "cli",
     description: "Works in Deno CLI",
   },
-  deploy: {
-    title: "deploy",
-    description: "Works on Deno Deploy",
-  },
   web: {
     title: "web",
     description: "Works in on the Web",
-  },
-  sandbox: {
-    title: "sandbox",
-    description: "Uses Deno Deploy Sandbox",
   },
 };
 
@@ -44,7 +36,6 @@ export interface Example {
   tags: (keyof typeof TAGS)[];
   additionalResources: [string, string][];
   run?: string;
-  playground?: string;
   files: ExampleFile[];
   group: string;
   sortOrder: any;

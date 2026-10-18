@@ -1,7 +1,7 @@
 /**
  * @title Sign and verify data with ECDSA
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign} MDN: SubtleCrypto.sign
  * @resource {https://docs.deno.com/api/web/~/SubtleCrypto} Doc: crypto.subtle

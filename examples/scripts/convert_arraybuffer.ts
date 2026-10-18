@@ -1,7 +1,7 @@
 /**
  * @title Convert an ArrayBuffer
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer} MDN: ArrayBuffer
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder} MDN: TextDecoder

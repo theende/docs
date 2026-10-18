@@ -1,7 +1,7 @@
 /**
  * @title Generate an RSS feed
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://www.rssboard.org/rss-specification} RSS 2.0 specification
  * @resource {/examples/http_server} Example: HTTP server: Hello world

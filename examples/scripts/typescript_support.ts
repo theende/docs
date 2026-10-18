@@ -1,7 +1,7 @@
 /**
  * @title Built-in TypeScript support
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://www.typescriptlang.org/docs/handbook/intro.html} TypeScript handbook
  * @group Basics

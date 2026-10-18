@@ -1,7 +1,7 @@
 /**
  * @title Compare secrets in constant time
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://jsr.io/@std/crypto/doc/timing-safe-equal} Doc: timingSafeEqual
  * @resource {https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html} OWASP: Authentication Cheat Sheet (timing attacks)

@@ -1,7 +1,7 @@
 /**
  * @title User Data Processing with Deno Collections
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @group Data Processing
  * @run <url>
  *

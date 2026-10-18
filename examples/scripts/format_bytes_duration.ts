@@ -1,7 +1,7 @@
 /**
  * @title Format bytes and durations for humans
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/fmt/doc/bytes/~/format} Doc: @std/fmt bytes format
  * @resource {https://jsr.io/@std/fmt/doc/duration/~/format} Doc: @std/fmt duration format

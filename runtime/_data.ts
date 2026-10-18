@@ -48,10 +48,6 @@ export const sidebar = [
             href: "/runtime/packages/supply_chain/",
           },
           {
-            title: "Peer dependencies",
-            href: "/runtime/packages/peer_dependencies/",
-          },
-          {
             title: "Private repositories",
             href: "/runtime/packages/private_repositories/",
           },
@@ -103,29 +99,6 @@ export const sidebar = [
       {
         title: "Linting and formatting",
         href: "/runtime/lint_and_format/",
-      },
-      {
-        title: "Migrating from Node",
-        href: "/runtime/migrate/",
-        disclosure: true,
-        items: [
-          {
-            title: "Migrate from npm",
-            href: "/runtime/migrate/migrate_from_npm/",
-          },
-          {
-            title: "Migrate from Yarn",
-            href: "/runtime/migrate/migrate_from_yarn/",
-          },
-          {
-            title: "Migrate from pnpm",
-            href: "/runtime/migrate/migrate_from_pnpm/",
-          },
-          {
-            title: "Migrate from Bun",
-            href: "/runtime/migrate/migrate_from_bun/",
-          },
-        ],
       },
       {
         title: "Building CLI apps",
@@ -220,10 +193,6 @@ export const sidebar = [
         href: "/runtime/fundamentals/typescript/",
       },
       {
-        title: "Node",
-        href: "/runtime/fundamentals/node/",
-      },
-      {
         title: "Security",
         href: "/runtime/fundamentals/security/",
       },
@@ -278,10 +247,6 @@ export const sidebar = [
         href: "/runtime/fundamentals/cron/",
       },
       {
-        title: "Loader hooks",
-        href: "/runtime/reference/loader_hooks/",
-      },
-      {
         title: "Lint plugins",
         href: "/runtime/reference/lint_plugins/",
       },
@@ -318,10 +283,6 @@ export const sidebar = [
           {
             title: "deno add",
             href: "/runtime/reference/cli/add/",
-          },
-          {
-            title: "deno approve-scripts",
-            href: "/runtime/reference/cli/approve_scripts/",
           },
           {
             title: "deno audit",
@@ -366,10 +327,6 @@ export const sidebar = [
           {
             title: "deno coverage",
             href: "/runtime/reference/cli/coverage/",
-          },
-          {
-            title: "deno deploy",
-            href: "/runtime/reference/cli/deploy/",
           },
           {
             title: "deno desktop",
@@ -420,10 +377,6 @@ export const sidebar = [
             href: "/runtime/reference/cli/outdated/",
           },
           {
-            title: "deno pack",
-            href: "/runtime/reference/cli/pack/",
-          },
-          {
             title: "deno publish",
             href: "/runtime/reference/cli/publish/",
           },
@@ -442,10 +395,6 @@ export const sidebar = [
           {
             title: "deno run",
             href: "/runtime/reference/cli/run/",
-          },
-          {
-            title: "deno sandbox",
-            href: "/runtime/reference/cli/sandbox/",
           },
           {
             title: "deno serve",
@@ -674,81 +623,4 @@ export async function generateDescriptions(): Promise<Descriptions> {
   }
 
   return descriptions;
-}
-
-/*
-generates the node compat list for the Node Support page.
-This the data is read from the files in the reference_gen/node_description directory.
-This function is called in node.md through the templating engine Vento,
-after which the normal markdown rendered is called.
- */
-export async function generateNodeCompatibility() {
-  const descriptions = await generateDescriptions();
-  const sorted = Object.entries(descriptions).toSorted(([keyA], [keyB]) =>
-    keyA.localeCompare(keyB)
-  );
-  const grouped: Record<
-    string,
-    { label: string; icon: string; items: Array<[string, DescriptionItem]> }
-  > = {
-    good: {
-      label: "Fully supported modules",
-      icon:
-        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#22c55e"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
-      items: [],
-    },
-    partial: {
-      label: "Partially supported modules",
-      icon:
-        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#6366f1"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>',
-      items: [],
-    },
-    unsupported: {
-      label: "Unsupported modules",
-      icon:
-        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
-      items: [],
-    },
-  };
-  for (const item of sorted) {
-    grouped[item[1].status].items.push(item);
-  }
-
-  return Object.entries(grouped)
-    .map(([_status, entries]) => {
-      let content =
-        `<div class="module-info">\n\n## ${entries.icon} ${entries.label} (${entries.items.length}/${
-          Object.keys(descriptions).length
-        })\n\n`;
-
-      content += entries.items
-        .map(([key, content]) => {
-          const link = key.replaceAll("--", "/");
-          let out =
-            `\n\n### <a href="/api/node/${link}">node:${link}</a>\n\n<div class="item-content">\n\n`;
-
-          if (content) {
-            if (content.description) {
-              out += `${content.description.description}\n\n`;
-            }
-            if (content.symbols) {
-              for (
-                const [symbol, description] of Object.entries(
-                  content.symbols,
-                )
-              ) {
-                out += `**${
-                  symbol === "*" ? "All symbols" : symbol
-                }**: ${description.description}\n\n`;
-              }
-            }
-          }
-
-          return out + "</div>";
-        })
-        .join("\n\n");
-
-      return content;
-    })
-    .join("\n\n");
 }

@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: File upload
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://usefresh.dev/docs/advanced/forms#handling-file-uploads} Handling File Uploads in Fresh
  * @resource {/examples/writing_files} Writing files

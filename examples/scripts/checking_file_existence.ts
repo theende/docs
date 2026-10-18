@@ -1,7 +1,7 @@
 /**
  * @title Checking for file existence
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -R -W <url>
  * @resource {https://jsr.io/@std/fs/doc/exists/~} Doc: @std/fs/exists
  * @resource {https://docs.deno.com/api/deno/~/Deno.lstat} Doc: Deno.lstat

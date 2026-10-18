@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Cookies
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://jsr.io/@std/http/doc/cookie} @std/http: cookie
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies} MDN: Using HTTP cookies

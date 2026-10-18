@@ -1,7 +1,7 @@
 /**
  * @title Memoize an expensive function
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/cache/doc/~/memoize} Doc: @std/cache memoize
  * @resource {https://jsr.io/@std/cache/doc/~/LruCache} Doc: @std/cache LruCache

@@ -1,11 +1,10 @@
 /**
  * @title HTTP server: Streaming
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {/examples/http_server} Example: HTTP Server: Hello World
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream} MDN: ReadableStream
- * @playground https://dash.deno.com/playground/example-streaming
  * @group Network
  *
  * An example HTTP server that streams a response back to the client.

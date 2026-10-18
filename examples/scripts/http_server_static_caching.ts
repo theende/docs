@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Caching headers
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N -R <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching} MDN: HTTP caching
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag} MDN: ETag

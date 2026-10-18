@@ -1,7 +1,7 @@
 /**
  * @title Logging with colors
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/console#styling_console_output} MDN: Styling console output
  * @group Basics

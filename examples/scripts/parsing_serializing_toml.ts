@@ -1,7 +1,7 @@
 /**
  * @title Parsing and serializing TOML
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/toml} std/toml
  * @resource {https://toml.io} Spec: TOML

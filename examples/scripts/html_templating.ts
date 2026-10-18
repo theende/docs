@@ -1,7 +1,7 @@
 /**
  * @title Render HTML templates with Eta
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -RW <url>
  * @resource {https://eta.js.org/} Eta documentation
  * @resource {https://docs.deno.com/examples/http_server/} Example: HTTP server

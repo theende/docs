@@ -1,7 +1,7 @@
 /**
  * @title Hono HTTP server
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://jsr.io/@hono/hono} Hono on jsr.io
  * @resource {https://hono.dev/docs} Hono documentation

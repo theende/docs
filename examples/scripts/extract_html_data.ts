@@ -1,7 +1,7 @@
 /**
  * @title Extract links and metadata from HTML
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://jsr.io/@b-fuze/deno-dom} Doc: deno-dom
  * @resource {https://ogp.me/} Reference: Open Graph protocol

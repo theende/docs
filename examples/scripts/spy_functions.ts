@@ -1,7 +1,7 @@
 /**
  * @title Spy functions
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run <url>
  * @resource {https://jsr.io/@std/testing/doc/mock#spying} Spy docs on JSR
  * @resource {https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html} Typescript docs for `using` keyword

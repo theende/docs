@@ -1,7 +1,7 @@
 /**
  * @title Deno Cron
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run --unstable-cron <url>
  * @resource {https://docs.deno.com/deploy/reference/cron/} Deno Cron user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.cron} Deno Cron Runtime API docs

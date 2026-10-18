@@ -1,7 +1,7 @@
 /**
  * @title Parse large CSV files as streams
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -R -W <url>
  * @resource {https://jsr.io/@std/csv/doc/~/CsvParseStream} Doc: CsvParseStream
  * @resource {/examples/parsing_serializing_csv/} Example: Parsing and serializing CSV

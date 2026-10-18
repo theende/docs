@@ -1,7 +1,7 @@
 /**
  * @title Match URLs with URLPattern
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/URLPattern} MDN: URLPattern
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/URL_Pattern_API} MDN: URL Pattern API

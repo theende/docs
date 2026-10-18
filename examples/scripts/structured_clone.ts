@@ -1,7 +1,7 @@
 /**
  * @title Deep clone objects with structuredClone
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone} MDN: structuredClone
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm} MDN: Structured clone algorithm

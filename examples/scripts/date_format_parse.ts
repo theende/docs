@@ -1,7 +1,7 @@
 /**
  * @title Parse and format dates
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://docs.deno.com/api/web/~/Temporal} Doc: Temporal
  * @resource {/examples/temporal/} Example: Temporal API

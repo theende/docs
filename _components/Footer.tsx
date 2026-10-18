@@ -64,23 +64,6 @@ const data = [
     ],
   },
   {
-    title: "Services Docs",
-    items: [
-      {
-        label: "Deno Deploy ",
-        to: "/deploy/",
-      },
-      {
-        label: "Deno Deploy Classic",
-        to: "/deploy/classic/",
-      },
-      {
-        label: "Deno Subhosting",
-        to: "/subhosting/manual/",
-      },
-    ],
-  },
-  {
     title: "Community",
     items: [
       {
@@ -121,14 +104,6 @@ const data = [
         href: "https://discord.gg/deno",
       },
       {
-        label: "Deploy System Status",
-        href: "https://denostatus.com",
-      },
-      {
-        label: "Deploy Feedback",
-        href: "https://github.com/denoland/deploy_feedback",
-      },
-      {
         label: "Report a Problem",
         href: "mailto:support@deno.com",
       },
@@ -144,10 +119,6 @@ const data = [
       {
         label: "Blog",
         href: "https://deno.com/blog",
-      },
-      {
-        label: "Privacy Policy",
-        href: "/deploy/privacy_policy",
       },
       {
         label: "LLMs",

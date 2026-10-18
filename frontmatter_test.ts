@@ -2,16 +2,13 @@ import { walk } from "@std/fs";
 import { extract } from "@std/front-matter/yaml";
 import { assert, assertEquals } from "@std/assert";
 
-const DIRS_TO_CHECK = ["./runtime", "./deploy", "./examples"];
+const DIRS_TO_CHECK = ["./runtime", "./examples"];
 
 // Content pages that must carry a `last_modified` frontmatter field so the
 // freshness check (scripts/check_freshness.ts) has something to enforce.
 const LAST_MODIFIED_DIRS = [
   "./runtime",
-  "./deploy",
   "./examples",
-  "./sandbox",
-  "./subhosting",
   "./ai",
 ];
 // Generated or synced subtrees that aren't hand-edited content pages.

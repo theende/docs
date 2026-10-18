@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Rate limiting
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429} MDN: 429 Too Many Requests
  * @resource {/examples/http_server} Example: HTTP server: Hello world

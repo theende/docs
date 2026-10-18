@@ -27,7 +27,6 @@ import relativeLinksPlugin from "./markdown-it/relative-path.ts";
 import replacerPlugin from "./markdown-it/replacer.ts";
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
-import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware from "./middleware/redirects.ts";
 import createLlmsFilesMiddleware from "./middleware/llmsFiles.ts";
 import createMarkdownSourceMiddleware from "./middleware/markdownSource.ts";
@@ -90,13 +89,6 @@ const site = lume(
         redirectsMiddleware,
         createMarkdownSourceMiddleware({ root: "_site" }),
         createRoutingMiddleware(),
-        createGAMiddleware({
-          addr: {
-            transport: "tcp",
-            hostname: "localhost",
-            port: parseInt(Deno.env.get("PORT") || "3000"),
-          },
-        }),
         createLlmsFilesMiddleware({ root: "_site" }),
         apiDocumentContentTypeMiddleware,
       ],
@@ -253,19 +245,11 @@ if (PROFILE) {
 
 site.copy("static", ".");
 site.copy("timeUtils.ts");
-site.copy("subhosting/api/images");
-site.copy("deploy/docs-images");
-site.copy("deploy/images");
-site.copy("deploy/classic/images");
-site.copy("deploy/kv/images");
-site.copy("deploy/tutorials/images");
-site.copy("sandbox/images");
 site.copy("runtime/fundamentals/images");
 site.copy("runtime/getting_started/images");
 site.copy("runtime/reference/images");
 site.copy("runtime/contributing/images");
 site.copy("examples/tutorials/images");
-site.copy("deploy/manual/images");
 site.copy("examples/scripts");
 
 site.use(
@@ -382,9 +366,6 @@ site.addEventListener("afterBuild", async () => {
     (async () => {
       const contentDirs = [
         "runtime",
-        "deploy",
-        "sandbox",
-        "subhosting",
         "examples",
       ];
       let mdCopied = 0;
@@ -452,9 +433,7 @@ site.ignore(
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
   (path) => path.includes("/lint/rules/"),
-  // "deploy",
   // "runtime",
-  // "subhosting",
   // "404",
 );
 

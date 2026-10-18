@@ -11,11 +11,6 @@
     {
       "name": "Examples",
       "href": "/examples/"
-    },
-    {
-      "name": "Deno Deploy",
-      "href": "/deploy/",
-      "style": "services"
     }
   ],
   "sidebar": [

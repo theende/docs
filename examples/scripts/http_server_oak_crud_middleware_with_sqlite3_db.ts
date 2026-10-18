@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Performing CRUD operations using SQLite3
  * @difficulty intermediate
- * @tags web, cli, deploy
+ * @tags web, cli
  * @run -A <url>
  * @resource {https://jsr.io/@oak/oak} Doc: @oak/oak/README.md
  * @resource {https://jsr.io/@db/sqlite} @db/sqlite on JSR

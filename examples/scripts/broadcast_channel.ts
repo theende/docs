@@ -1,7 +1,7 @@
 /**
  * @title Communicate between workers with BroadcastChannel
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel} MDN: BroadcastChannel
  * @resource {https://docs.deno.com/deploy/classic/api/runtime-broadcast-channel/} Deno Deploy: BroadcastChannel

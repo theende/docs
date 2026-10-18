@@ -1,7 +1,7 @@
 /**
  * @title Check if two values are deeply equal
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://jsr.io/@std/assert/doc/~/equal} Doc: @std/assert equal
  * @resource {https://docs.deno.com/api/node/util/} Doc: node:util

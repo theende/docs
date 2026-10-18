@@ -1,7 +1,7 @@
 /**
  * @title Hex and base64 encoding
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64} MDN: Uint8Array.prototype.toBase64
  * @resource {https://docs.deno.com/examples/convert_uint8array/} Example: Convert a Uint8Array

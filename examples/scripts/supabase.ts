@@ -1,7 +1,7 @@
 /**
  * @title Connect to Supabase
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N -E <url>
  * @resource {https://supabase.com/docs/reference/javascript/installing} supabase-js docs
  * @resource {https://jsr.io/@supabase/supabase-js} supabase-js on jsr.io

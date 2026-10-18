@@ -1,7 +1,7 @@
 /**
  * @title HTTP server: Serving files
  * @difficulty intermediate
- * @tags cli, deploy
+ * @tags cli
  * @run -N -R <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Doc: Deno.serve
  * @resource {https://jsr.io/@std/http#file-server} Doc: @std/http/file-server

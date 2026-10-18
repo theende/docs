@@ -1,7 +1,7 @@
 /**
  * @title Hello world
  * @difficulty beginner
- * @tags cli, deploy, web
+ * @tags cli, web
  * @run <url>
  * @resource {https://docs.deno.com/runtime/getting_started/installation/} Deno: Installation
  * @resource {https://docs.deno.com/runtime/getting_started/setup_your_environment/} Manual: Set up your environment

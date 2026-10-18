@@ -1,7 +1,7 @@
 /**
  * @title Running DNS queries
  * @difficulty beginner
- * @tags cli, deploy
+ * @tags cli
  * @run -N <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.resolveDns} Doc: Deno.resolveDns
  * @resource {https://developer.mozilla.org/en-US/docs/Glossary/DNS} MDN: DNS
