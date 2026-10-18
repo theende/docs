@@ -6,7 +6,7 @@
  * @group Cryptography
  *
  * This example demonstrates how to generate and verify an HMAC (Hash-based Message Authentication Code)
- * using Deno's built-in SubtleCrypto API with the SHA-256 hash function.
+ * using Ende's built-in SubtleCrypto API with the SHA-256 hash function.
  */
 
 // Define the secret key for HMAC (in a real application, store this securely)

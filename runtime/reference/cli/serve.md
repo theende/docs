@@ -1,15 +1,15 @@
 ---
 last_modified: 2026-06-17
-title: "deno serve"
+title: "ende serve"
 oldUrl: /runtime/manual/tools/serve/
 command: serve
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno serve"
-description: "A flexible and configurable HTTP server for Deno"
+openGraphTitle: "ende serve"
+description: "A flexible and configurable HTTP server for Ende"
 ---
 
-`deno serve` runs a file as an HTTP server using
-[`Deno.serve()`](/api/deno/~/Deno.serve). The file must export a default object
+`ende serve` runs a file as an HTTP server using
+[`Ende.serve()`](/api/ende/~/Ende.serve/). The file must export a default object
 with a `fetch` handler. For a full guide on building HTTP servers, see
 [Writing an HTTP Server](/runtime/fundamentals/http_server/).
 
@@ -20,47 +20,47 @@ export default {
   fetch(_req: Request) {
     return new Response("Hello world!");
   },
-} satisfies Deno.ServeDefaultExport;
+} satisfies Ende.ServeDefaultExport;
 ```
 
 ```sh
-deno serve server.ts
+ende serve server.ts
 ```
 
 By default, the server listens on port **8000**. Override it with `--port`:
 
 ```sh
-deno serve --port=3000 server.ts
+ende serve --port=3000 server.ts
 ```
 
-## `deno serve` vs `deno run`
+## `ende serve` vs `ende run`
 
 Both approaches start an HTTP server, and the difference is who calls
-[`Deno.serve()`](/api/deno/~/Deno.serve):
+[`Ende.serve()`](/api/ende/~/Ende.serve/):
 
-- With `deno serve`, Deno calls [`Deno.serve()`](/api/deno/~/Deno.serve) for
-  you. Your file just exports a default object with a `fetch` handler. Deno owns
+- With `ende serve`, Ende calls [`Ende.serve()`](/api/ende/~/Ende.serve/) for
+  you. Your file just exports a default object with a `fetch` handler. Ende owns
   the listener, which lets it add features such as running multiple instances
   across threads with [`--parallel`](#horizontal-scaling).
-- With `deno run`, you call [`Deno.serve()`](/api/deno/~/Deno.serve) yourself
+- With `ende run`, you call [`Ende.serve()`](/api/ende/~/Ende.serve/) yourself
   inside the program. This gives you full control over the listen options and
   the surrounding code, and is the right choice when the server is one part of a
   larger program.
 
-Use `deno serve` when the program is primarily an HTTP server and you want Deno
-to manage it; use `deno run` with [`Deno.serve()`](/api/deno/~/Deno.serve) when
+Use `ende serve` when the program is primarily an HTTP server and you want Ende
+to manage it; use `ende run` with [`Ende.serve()`](/api/ende/~/Ende.serve/) when
 you need to control how and when the server starts.
 
 ## Default export shape
 
 The file must export a default object that satisfies
-[`Deno.ServeDefaultExport`](/api/deno/~/Deno.ServeDefaultExport). The object has
-two properties:
+[`Ende.ServeDefaultExport`](/api/ende/~/Ende.ServeDefaultExport/). The object
+has two properties:
 
 ```typescript
 export interface ServeDefaultExport {
   fetch: ServeHandler;
-  onListen?: (localAddr: Deno.Addr) => void;
+  onListen?: (localAddr: Ende.Addr) => void;
 }
 ```
 
@@ -68,7 +68,7 @@ export interface ServeDefaultExport {
 
 The `fetch` handler receives a standard
 [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) and a
-[`ServeHandlerInfo`](/api/deno/~/Deno.ServeHandlerInfo) object with connection
+[`ServeHandlerInfo`](/api/ende/~/Ende.ServeHandlerInfo/) object with connection
 metadata:
 
 ```typescript
@@ -78,7 +78,7 @@ type ServeHandler = (
 ) => Response | Promise<Response>;
 
 interface ServeHandlerInfo {
-  remoteAddr: Deno.Addr; // remote address of the connection
+  remoteAddr: Ende.Addr; // remote address of the connection
   completed: Promise<void>; // resolves when the request completes
 }
 ```
@@ -94,7 +94,7 @@ logged to the console.
 ```typescript title="server.ts"
 export default {
   fetch(request, info) {
-    const { hostname, port } = info.remoteAddr as Deno.NetAddr;
+    const { hostname, port } = info.remoteAddr as Ende.NetAddr;
     console.log(`${request.method} ${request.url} from ${hostname}:${port}`);
 
     return new Response("Hello, World!", {
@@ -105,7 +105,7 @@ export default {
   onListen({ hostname, port }) {
     console.log(`Server running at http://${hostname}:${port}/`);
   },
-} satisfies Deno.ServeDefaultExport;
+} satisfies Ende.ServeDefaultExport;
 ```
 
 Any other properties on the default export are silently ignored. If `fetch` is
@@ -127,16 +127,16 @@ export default {
 
     return new Response("Not found", { status: 404 });
   },
-} satisfies Deno.ServeDefaultExport;
+} satisfies Ende.ServeDefaultExport;
 ```
 
 ## Binding to a hostname
 
-By default, `deno serve` listens on `0.0.0.0`. Use `--host` to bind to a
+By default, `ende serve` listens on `0.0.0.0`. Use `--host` to bind to a
 specific interface:
 
 ```sh
-deno serve --host=127.0.0.1 server.ts
+ende serve --host=127.0.0.1 server.ts
 ```
 
 ## Horizontal scaling
@@ -144,7 +144,7 @@ deno serve --host=127.0.0.1 server.ts
 Run multiple server instances across CPU cores for better throughput:
 
 ```sh
-deno serve --parallel server.ts
+ende serve --parallel server.ts
 ```
 
 ## Watch mode
@@ -152,15 +152,15 @@ deno serve --parallel server.ts
 Restart the server automatically when files change:
 
 ```sh
-deno serve --watch server.ts
+ende serve --watch server.ts
 ```
 
 ## Permissions
 
-`deno serve` automatically allows the server to listen without requiring
+`ende serve` automatically allows the server to listen without requiring
 `--allow-net`. Additional permissions (like file reads) must be granted
 explicitly:
 
 ```sh
-deno serve --allow-read server.ts
+ende serve --allow-read server.ts
 ```

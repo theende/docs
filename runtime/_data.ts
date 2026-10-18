@@ -5,7 +5,7 @@ export const sidebar = [
     title: "Get started",
     items: [
       {
-        title: "Welcome to Deno",
+        title: "Welcome to Ende",
         href: "/runtime/",
       },
       {
@@ -118,10 +118,6 @@ export const sidebar = [
           {
             title: "HTTP serving",
             href: "/runtime/desktop/serving/",
-          },
-          {
-            title: "Frameworks",
-            href: "/runtime/desktop/frameworks/",
           },
           {
             title: "Windows",
@@ -249,20 +245,8 @@ export const sidebar = [
         href: "/runtime/reference/lint_plugins/",
       },
       {
-        title: "Bundling",
-        href: "/runtime/reference/bundling/",
-      },
-      {
-        title: "Docker",
-        href: "/runtime/reference/docker/",
-      },
-      {
         title: "Continuous integration",
         href: "/runtime/reference/continuous_integration/",
-      },
-      {
-        title: "Deno & VS Code",
-        href: "/runtime/reference/vscode/",
       },
     ],
   },
@@ -279,178 +263,166 @@ export const sidebar = [
         disclosure: true,
         items: [
           {
-            title: "deno add",
+            title: "ende add",
             href: "/runtime/reference/cli/add/",
           },
           {
-            title: "deno audit",
-            href: "/runtime/reference/cli/audit/",
-          },
-          {
-            title: "deno bench",
+            title: "ende bench",
             href: "/runtime/reference/cli/bench/",
           },
           {
-            title: "deno bump-version",
+            title: "ende bump-version",
             href: "/runtime/reference/cli/bump_version/",
           },
           {
-            title: "deno bundle",
-            href: "/runtime/reference/cli/bundle/",
-          },
-          {
-            title: "deno check",
+            title: "ende check",
             href: "/runtime/reference/cli/check/",
           },
           {
-            title: "deno ci",
+            title: "ende ci",
             href: "/runtime/reference/cli/ci/",
           },
           {
-            title: "deno clean",
+            title: "ende clean",
             href: "/runtime/reference/cli/clean/",
           },
           {
-            title: "deno compile",
+            title: "ende compile",
             href: "/runtime/reference/cli/compile/",
           },
           {
-            title: "deno create",
+            title: "ende create",
             href: "/runtime/reference/cli/create/",
           },
           {
-            title: "deno completions",
+            title: "ende completions",
             href: "/runtime/reference/cli/completions/",
           },
           {
-            title: "deno coverage",
+            title: "ende coverage",
             href: "/runtime/reference/cli/coverage/",
           },
           {
-            title: "deno desktop",
+            title: "ende desktop",
             href: "/runtime/reference/cli/desktop/",
           },
           {
-            title: "deno doc",
+            title: "ende doc",
             href: "/runtime/reference/cli/doc/",
           },
           {
-            title: "deno eval",
+            title: "ende eval",
             href: "/runtime/reference/cli/eval/",
           },
           {
-            title: "deno fmt",
+            title: "ende fmt",
             href: "/runtime/reference/cli/fmt/",
           },
           {
-            title: "deno info",
+            title: "ende info",
             href: "/runtime/reference/cli/info/",
           },
           {
-            title: "deno init",
+            title: "ende init",
             href: "/runtime/reference/cli/init/",
           },
           {
-            title: "deno install",
+            title: "ende install",
             href: "/runtime/reference/cli/install/",
           },
           {
-            title: "deno jupyter",
-            href: "/runtime/reference/cli/jupyter/",
-          },
-          {
-            title: "deno link",
+            title: "ende link",
             href: "/runtime/reference/cli/link/",
           },
           {
-            title: "deno lint",
+            title: "ende lint",
             href: "/runtime/reference/cli/lint/",
           },
           {
-            title: "deno list",
+            title: "ende list",
             href: "/runtime/reference/cli/list/",
           },
           {
-            title: "deno outdated",
+            title: "ende outdated",
             href: "/runtime/reference/cli/outdated/",
           },
           {
-            title: "deno publish",
+            title: "ende publish",
             href: "/runtime/reference/cli/publish/",
           },
           {
-            title: "deno lsp",
+            title: "ende lsp",
             href: "/runtime/reference/cli/lsp/",
           },
           {
-            title: "deno remove",
+            title: "ende remove",
             href: "/runtime/reference/cli/remove/",
           },
           {
-            title: "deno repl",
+            title: "ende repl",
             href: "/runtime/reference/cli/repl/",
           },
           {
-            title: "deno run",
+            title: "ende run",
             href: "/runtime/reference/cli/run/",
           },
           {
-            title: "deno serve",
+            title: "ende serve",
             href: "/runtime/reference/cli/serve/",
           },
           {
-            title: "deno task",
+            title: "ende task",
             href: "/runtime/reference/cli/task/",
           },
           {
-            title: "deno test",
+            title: "ende test",
             href: "/runtime/reference/cli/test/",
           },
           {
-            title: "deno transpile",
+            title: "ende transpile",
             href: "/runtime/reference/cli/transpile/",
           },
           {
-            title: "deno types",
+            title: "ende types",
             href: "/runtime/reference/cli/types/",
           },
           {
-            title: "deno uninstall",
+            title: "ende uninstall",
             href: "/runtime/reference/cli/uninstall/",
           },
           {
-            title: "deno unlink",
+            title: "ende unlink",
             href: "/runtime/reference/cli/unlink/",
           },
           {
-            title: "deno update",
+            title: "ende update",
             href: "/runtime/reference/cli/update/",
           },
           {
-            title: "deno upgrade",
+            title: "ende upgrade",
             href: "/runtime/reference/cli/upgrade/",
           },
           {
-            title: "deno unstable flags",
+            title: "ende unstable flags",
             href: "/runtime/reference/cli/unstable_flags/",
           },
           {
-            title: "deno watch",
+            title: "ende watch",
             href: "/runtime/reference/cli/watch/",
           },
           {
-            title: "deno why",
+            title: "ende why",
             href: "/runtime/reference/cli/why/",
           },
           {
-            title: "deno x",
+            title: "ende x",
             href: "/runtime/reference/cli/x/",
           },
         ],
       },
       {
-        title: "deno.json",
-        href: "/runtime/reference/deno_json/",
+        title: "ende.json",
+        href: "/runtime/reference/ende_json/",
       },
       {
         title: "TypeScript",
@@ -459,6 +431,10 @@ export const sidebar = [
       {
         title: "Environment variables",
         href: "/runtime/reference/env_variables/",
+      },
+      {
+        title: "Deprecated APIs",
+        href: "/runtime/reference/migrate_deprecations/",
       },
       {
         title: "Permissions",

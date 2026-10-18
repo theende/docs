@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-09-16
 title: "Snapshot testing"
-description: "Capture program output as reference snapshots with Deno's built-in test runner, compare against them on every run, and update them with deno test --update-snapshots."
+description: "Capture program output as reference snapshots with Ende's built-in test runner, compare against them on every run, and update them with ende test --update-snapshots."
 oldUrl:
   - /runtime/manual/basics/testing/snapshot_testing/
   - /examples/snapshot_test_tutorial/
@@ -14,18 +14,18 @@ for each property, you let the test runner record the entire serialized output
 once, then fail loudly whenever that output changes. This is ideal when the
 value you want to verify is large or hard to express by hand (rendered HTML, CLI
 output, API response shapes, error objects), or when the expected output changes
-often enough that maintaining manual assertions becomes a chore. Deno's built-in
+often enough that maintaining manual assertions becomes a chore. Ende's built-in
 test runner provides snapshot testing through the `t.assertSnapshot` method on
 the test context, with no imports or dependencies.
 
 ## Write your first snapshot test
 
-The test context `t` that Deno passes to each test has an `assertSnapshot`
+The test context `t` that Ende passes to each test has an `assertSnapshot`
 method. It serializes a value and compares it against a reference snapshot
 stored alongside your test file, using the test name to key the snapshot:
 
 ```ts title="example_test.ts"
-Deno.test("isSnapshotMatch", async (t) => {
+Ende.test("isSnapshotMatch", async (t) => {
   const a = {
     hello: "world!",
     example: 123,
@@ -38,7 +38,7 @@ No snapshot exists yet, so the first run must create one. Snapshots are created
 and updated with the `--update-snapshots` flag (short form `-u`):
 
 ```bash
-deno test --update-snapshots
+ende test --update-snapshots
 ```
 
 The runner manages the snapshot files itself, so no read or write permission is
@@ -47,7 +47,7 @@ test normally; it passes if the serialized value still matches, or fails with an
 `AssertionError` showing a diff if it does not:
 
 ```bash
-deno test
+ende test
 ```
 
 ## Read the snapshot file
@@ -70,7 +70,7 @@ snapshot[`isSnapshotMatch 1`] = `
 Each entry is keyed by the test name plus a counter, so a test that calls
 `assertSnapshot` multiple times produces `isSnapshotMatch 1`,
 `isSnapshotMatch 2`, and so on. The value is the result of serializing your data
-with [`Deno.inspect`](/api/deno/~/Deno.inspect), with object keys sorted
+with [`Ende.inspect`](/api/ende/~/Ende.inspect/), with object keys sorted
 alphabetically. Snapshot files are plain TypeScript, so they are easy to read in
 code review.
 
@@ -85,7 +85,7 @@ change behavior and your snapshot tests start failing, or when you add new
 `assertSnapshot` calls, rerun the tests in update mode:
 
 ```bash
-deno test --update-snapshots
+ende test --update-snapshots
 ```
 
 Any snapshot that does not match the current output is rewritten, any missing
@@ -97,8 +97,8 @@ committing. The update command happily records bugs as the new expected output,
 so the human review of that diff is what gives snapshot tests their value.
 
 To try the full loop with the example above: change `hello: "world!"` to
-`hello: "everyone!"`, run `deno test`, and watch the test fail with a diff. Then
-run `deno test --update-snapshots` and the snapshot file is rewritten to match.
+`hello: "everyone!"`, run `ende test`, and watch the test fail with a diff. Then
+run `ende test --update-snapshots` and the snapshot file is rewritten to match.
 
 ## Verify snapshots in CI
 
@@ -113,11 +113,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
+      - name: Install Ende
+        run: |
+          curl -fsSL https://ende.sh/install.sh | sh
+          echo "$HOME/.ende/bin" >> "$GITHUB_PATH"
       - name: Run tests
-        run: deno test
+        run: ende test
 ```
 
 If a pull request changes output, the CI run fails and the author must update
@@ -131,9 +132,9 @@ change is intentional.
 where the defaults do not fit:
 
 ```ts title="serializer_test.ts"
-import { stripAnsiCode } from "jsr:@std/fmt/colors";
+import { stripAnsiCode } from "jsr:@ende/fmt/colors";
 
-Deno.test("Custom Serializer", async (t) => {
+Ende.test("Custom Serializer", async (t) => {
   const output = "\x1b[34mHello World!\x1b[39m";
   await t.assertSnapshot(output, {
     serializer: (actual) => stripAnsiCode(actual),
@@ -155,27 +156,8 @@ The most useful options:
   generated diff message.
 
 Classes can customize their own serialization by implementing
-`Symbol.for("Deno.customInspect")`, since the default serializer is built on
-[`Deno.inspect`](/api/deno/~/Deno.inspect).
-
-## Snapshots with node:test
-
-If you write tests with [`node:test`](/runtime/reference/cli/test/) instead of
-[`Deno.test`](/api/deno/~/Deno.test), its own snapshot assertion is available
-too. `t.assert.fileSnapshot` serializes a value, writes it to a named file the
-first time, and compares against that file on later runs:
-
-```ts title="node_snapshot_test.ts"
-import { test } from "node:test";
-
-test("matches the saved output", (t) => {
-  t.assert.fileSnapshot({ id: 1, name: "ada" }, "./__snapshots__/user.json");
-});
-```
-
-See the
-[Node.js test runner docs](https://nodejs.org/api/test.html#snapshot-testing)
-for the full snapshot API.
+`Symbol.for("Ende.customInspect")`, since the default serializer is built on
+[`Ende.inspect`](/api/ende/~/Ende.inspect/).
 
 ## When not to snapshot
 

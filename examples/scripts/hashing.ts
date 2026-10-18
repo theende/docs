@@ -3,14 +3,14 @@
  * @difficulty intermediate
  * @tags cli
  * @run -R <url>
- * @resource {https://jsr.io/@std/crypto} Web Crypto extensions in the Standard Library
- * @resource {https://docs.deno.com/api/web/~/SubtleCrypto} Doc: crypto.subtle
+ * @resource {https://jsr.io/@ende/crypto} Web Crypto extensions in the Standard Library
+ * @resource {https://docs.ende.sh/api/web/~/SubtleCrypto} Doc: crypto.subtle
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest} MDN: Cryptographic Digests
  * @group Cryptography
  *
  * Hashing data is a common operation that is facilitated
- * through Deno's support for the Web Crypto API. In addition,
- * the Deno Standard Library's implementation extends the standard API, allowing for
+ * through Ende's support for the Web Crypto API. In addition,
+ * the Ende Standard Library's implementation extends the standard API, allowing for
  * more advanced uses.
  */
 
@@ -28,7 +28,7 @@ const hashBuffer = await crypto.subtle.digest("SHA-256", messageBuffer);
 
 // We can encode this into a string using the standard
 // library's encodeHex method.
-import { encodeHex } from "jsr:@std/encoding/hex";
+import { encodeHex } from "jsr:@ende/encoding/hex";
 const hash = encodeHex(hashBuffer);
 console.log(hash);
 
@@ -43,8 +43,8 @@ console.log(hash);
 // "crypto" module, a drop-in replacement for the Web Crypto
 // API that delegates to the native implementation when
 // possible.
-import { crypto } from "jsr:@std/crypto";
-const file = await Deno.open("example.txt", { read: true });
+import { crypto } from "jsr:@ende/crypto";
+const file = await Ende.open("example.txt", { read: true });
 
 // We obtain an async iterable using the readable property.
 const readableStream = file.readable;

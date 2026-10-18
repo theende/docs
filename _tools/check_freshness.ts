@@ -5,15 +5,15 @@
 // Pages that don't have a `last_modified` field at all are left alone, so
 // this only enforces freshness where we already opted in to tracking it.
 //
-// Run locally:   deno task check:freshness
-// Run in CI:     BASE_SHA=<base sha> deno task check:freshness
+// Run locally:   ende task check:freshness
+// Run in CI:     BASE_SHA=<base sha> ende task check:freshness
 
 import { extract } from "@ende/front-matter/yaml";
 
 const DOC_EXTENSIONS = [".md", ".mdx"];
 
 async function git(...args: string[]): Promise<string> {
-  const { code, stdout, stderr } = await new Deno.Command("git", {
+  const { code, stdout, stderr } = await new Ende.Command("git", {
     args,
     stdout: "piped",
     stderr: "piped",
@@ -28,7 +28,7 @@ async function git(...args: string[]): Promise<string> {
 
 // Returns the blob at `ref:path`, or null if the path doesn't exist there.
 async function showFile(ref: string, path: string): Promise<string | null> {
-  const { code, stdout } = await new Deno.Command("git", {
+  const { code, stdout } = await new Ende.Command("git", {
     args: ["show", `${ref}:${path}`],
     stdout: "piped",
     stderr: "null",
@@ -61,11 +61,11 @@ function isDoc(path: string): boolean {
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
 async function resolveBase(): Promise<string> {
-  const fromEnv = Deno.env.get("BASE_SHA") ?? Deno.env.get("BASE_REF");
+  const fromEnv = Ende.env.get("BASE_SHA") ?? Ende.env.get("BASE_REF");
   if (fromEnv) return fromEnv.trim();
   // Local fallback: diff against the default branch.
   for (const ref of ["origin/main", "main"]) {
-    const { code } = await new Deno.Command("git", {
+    const { code } = await new Ende.Command("git", {
       args: ["rev-parse", "--verify", "--quiet", ref],
       stdout: "null",
       stderr: "null",
@@ -105,7 +105,7 @@ async function main() {
     const newPath = isRename ? parts[2] : parts[1];
     if (!isDoc(newPath)) continue;
 
-    const headContent = await Deno.readTextFile(newPath).catch(() => null);
+    const headContent = await Ende.readTextFile(newPath).catch(() => null);
     const baseContent = status === "A"
       ? null
       : await showFile(mergeBase, oldPath);
@@ -161,7 +161,7 @@ async function main() {
     console.error(
       `\nWhen you change a page that tracks 'last_modified', bump that field to the date of the change.\n`,
     );
-    Deno.exit(1);
+    Ende.exit(1);
   }
 
   console.log(

@@ -1,23 +1,22 @@
 ---
 last_modified: 2026-04-29
-title: "deno bump-version"
+title: "ende bump-version"
 command: bump-version
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno bump-version"
-description: "Bump the project version field in deno.json or package.json"
+openGraphTitle: "ende bump-version"
+description: "Bump the project version field in ende.json"
 ---
 
-The `deno bump-version` command updates the `version` field in your project's
-configuration file, similar to `npm version`. It reads and writes the `version`
-field in `deno.json(c)` if present, otherwise it falls back to `package.json`.
+The `ende bump-version` command updates the `version` field in your project's
+configuration file. It reads and writes the `version` field in `ende.json(c)`.
 
 > [!CAUTION]
-> `deno bump-version` is experimental and subject to change.
+> `ende bump-version` is experimental and subject to change.
 
 ## Usage
 
 ```sh
-deno bump-version [increment]
+ende bump-version [increment]
 ```
 
 The `increment` argument selects how the version is bumped:
@@ -38,64 +37,63 @@ file is left unchanged.
 If the configuration file has no `version` field and an increment is given, the
 version defaults to `0.1.0`.
 
-The command exits with an error if neither `deno.json` nor `package.json` is
-found in the current directory.
+The command exits with an error if no `ende.json` is found in the current
+directory.
 
 ## Examples
 
 Release a patch:
 
 ```sh
-deno bump-version patch
+ende bump-version patch
 ```
 
 Cut a new minor release:
 
 ```sh
-deno bump-version minor
+ende bump-version minor
 ```
 
 Iterate on a prerelease:
 
 ```sh
-deno bump-version prerelease
+ende bump-version prerelease
 ```
 
 Print the current version without modifying the file:
 
 ```sh
-deno bump-version
+ende bump-version
 ```
 
 After bumping, commit the updated configuration file as part of your release.
 For publishing the bumped version to JSR, see
-[`deno publish`](/runtime/reference/cli/publish/); for an npm tarball, see
-`deno pack`.
+[`ende publish`](/runtime/reference/cli/publish/).
 
 ## Workspace mode
 
 When run at the root of a [workspace](/runtime/fundamentals/workspaces/),
-`deno bump-version` operates on every member package in a single pass instead of
+`ende bump-version` operates on every member package in a single pass instead of
 just the root config:
 
 - The same increment is applied to each member's `version` field.
 - `jsr:` version constraints in the workspace root config and in any
-  [import map](/runtime/reference/deno_json/#dependencies) are rewritten in
+  [import map](/runtime/reference/ende_json/#dependencies) are rewritten in
   place so cross-package references keep matching the bumped versions.
 - Members without a `version` field are left alone.
 
 ```sh
 # At the workspace root: patch every member from 1.4.6 to 1.4.7
-deno bump-version patch
+ende bump-version patch
 ```
 
 This avoids the manual coordination step where a workspace release used to
-require updating each member's `deno.json`/`package.json` and the root import
-map one at a time.
+require updating each member's `ende.json` and the root import map one at a
+time.
 
 ## Deriving bumps from Conventional Commits
 
-Inside a workspace, running `deno bump-version` with no `increment` argument
+Inside a workspace, running `ende bump-version` with no `increment` argument
 switches to deriving per-package bumps from
 [Conventional Commits](https://www.conventionalcommits.org/) between a base ref
 and the current branch. Each member's bump is computed independently from the
@@ -119,7 +117,7 @@ The derivation rules:
 
 ```sh
 # Derive the bumps from commits between `main` and the current branch
-deno bump-version --base=main
+ende bump-version --base=main
 ```
 
 ### Selecting the range
@@ -134,10 +132,10 @@ the latest tag) isn't what you want:
 
 ```sh
 # Bump based on commits between v1.4.7 and the current branch
-deno bump-version --base=v1.4.7
+ende bump-version --base=v1.4.7
 
 # Bump based on commits between two explicit refs
-deno bump-version --base=v1.4.7 --start=release/1.5
+ende bump-version --base=v1.4.7 --start=release/1.5
 ```
 
 ### `--dry-run`
@@ -147,7 +145,7 @@ old/new version pairs, and the rewritten `jsr:` constraints — without writing
 anything to disk:
 
 ```sh
-deno bump-version --base=main --dry-run
+ende bump-version --base=main --dry-run
 ```
 
 This is a good fit for CI checks ("does this branch produce the bumps we

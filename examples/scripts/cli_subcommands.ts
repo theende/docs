@@ -3,17 +3,17 @@
  * @difficulty intermediate
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/cli/doc/parse-args/~} Doc: @std/cli parseArgs
+ * @resource {https://jsr.io/@ende/cli/doc/parse-args/~} Doc: @ende/cli parseArgs
  * @resource {/examples/command_line_arguments} Example: Command line arguments
  * @group CLI
  *
- * Tools like git and deno itself take a subcommand first and flags after
+ * Tools like git and ende itself take a subcommand first and flags after
  * it. The pattern is easy to build by hand: treat the first element of
- * Deno.args as the command name, dispatch to a function, and let each
- * command parse its own flags with parseArgs from node:util.
+ * Ende.args as the command name, dispatch to a function, and let each
+ * command parse its own flags with parseArgs from @ende/cli.
  */
 
-import { parseArgs } from "node:util";
+import { parseArgs } from "jsr:@ende/cli@^2026.10.15/parse-args";
 
 // A tiny task manager. State lives in memory here to keep the example
 // small; a real tool would persist it to a file.
@@ -28,38 +28,32 @@ const tasks: Task[] = [];
 // the command name and returns an exit code. This keeps commands easy to
 // unit test. Every command declares just its own flags.
 function runInit(args: string[]): number {
-  const { values } = parseArgs({
-    args,
-    options: { name: { type: "string", default: "my-todos" } },
+  const flags = parseArgs(args, {
+    string: ["name"],
+    default: { name: "my-todos" },
   });
-  console.log(`Initialized task list "${values.name}".`);
+  console.log(`Initialized task list "${flags.name}".`);
   return 0;
 }
 
 function runAdd(args: string[]): number {
-  const { values } = parseArgs({
-    args,
-    options: {
-      title: { type: "string" },
-      urgent: { type: "boolean", default: false },
-    },
+  const flags = parseArgs(args, {
+    string: ["title"],
+    boolean: ["urgent"],
   });
   // Validate required flags and signal failure with a nonzero exit code.
-  if (!values.title) {
+  if (!flags.title) {
     console.error("error: add requires --title");
     return 1;
   }
-  tasks.push({ title: values.title, urgent: values.urgent! });
-  console.log(`Added "${values.title}"${values.urgent ? " (urgent)" : ""}.`);
+  tasks.push({ title: flags.title, urgent: flags.urgent });
+  console.log(`Added "${flags.title}"${flags.urgent ? " (urgent)" : ""}.`);
   return 0;
 }
 
 function runList(args: string[]): number {
-  const { values } = parseArgs({
-    args,
-    options: { "urgent-only": { type: "boolean", default: false } },
-  });
-  const visible = values["urgent-only"] ? tasks.filter((t) => t.urgent) : tasks;
+  const flags = parseArgs(args, { boolean: ["urgent-only"] });
+  const visible = flags["urgent-only"] ? tasks.filter((t) => t.urgent) : tasks;
   if (visible.length === 0) {
     console.log("No tasks yet.");
     return 0;
@@ -109,7 +103,7 @@ function main(args: string[]): number {
 // dispatcher is just a function, demonstrates a session by calling it
 // directly. With arguments it dispatches them and exits with the returned
 // code.
-if (Deno.args.length === 0) {
+if (Ende.args.length === 0) {
   printHelp();
   console.log("\nDemo session:");
   main(["init", "--name", "groceries"]);
@@ -117,26 +111,25 @@ if (Deno.args.length === 0) {
   main(["add", "--title", "pay rent", "--urgent"]);
   main(["list"]);
 } else {
-  Deno.exit(main(Deno.args));
+  Ende.exit(main(Ende.args));
 }
 
-// parseArgs from node:util is the web-and-Node-portable choice. The
-// standard library variant, parseArgs from jsr:@std/cli, adds aliases,
-// collectable flags, and negatable booleans when a tool outgrows this one.
+// parseArgs from jsr:@ende/cli also supports aliases, collectable flags,
+// and negatable booleans when a tool outgrows this one.
 
 // Real runs of the script, with their output:
 //
-//   deno run cli_subcommands.ts add --title "milk"
+//   ende run cli_subcommands.ts add --title "milk"
 //   Added "milk".
 //
-//   deno run cli_subcommands.ts add --title "pay rent" --urgent
+//   ende run cli_subcommands.ts add --title "pay rent" --urgent
 //   Added "pay rent" (urgent).
 //
-//   deno run cli_subcommands.ts add
+//   ende run cli_subcommands.ts add
 //   error: add requires --title
 //   (exit code 1)
 //
-//   deno run cli_subcommands.ts remove
+//   ende run cli_subcommands.ts remove
 //   error: unknown command "remove"
 //   Run "todo help" for a list of commands.
 //   (exit code 2)

@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/testing/doc/mock#spying} Spy docs on JSR
+ * @resource {https://jsr.io/@ende/testing/doc/mock#spying} Spy docs on JSR
  * @resource {https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html} Typescript docs for `using` keyword
  * @group Testing
  *
@@ -11,7 +11,7 @@
  * This snippet demonstrates how to spy on a function using a mock function.
  */
 
-import { assertSpyCall, assertSpyCalls, spy } from "jsr:@std/testing/mock";
+import { assertSpyCall, assertSpyCalls, spy } from "jsr:@ende/testing/mock";
 
 function log(message: string) {
   console.log(message);
@@ -19,7 +19,7 @@ function log(message: string) {
 
 const logger = { log };
 
-Deno.test("logger uses the log function", () => {
+Ende.test("logger uses the log function", () => {
   // Create a spy on the `logger.log` method.
   const logSpy = spy(logger, "log");
 
@@ -38,7 +38,7 @@ Deno.test("logger uses the log function", () => {
   }
 });
 
-Deno.test("Creating a spy with the using keyword", () => {
+Ende.test("Creating a spy with the using keyword", () => {
   // method spys are disposable, so we can create them with the keyword `using`
   using logSpy = spy(logger, "log");
 

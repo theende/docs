@@ -28,9 +28,9 @@ console.log(url.pathname); // /manual/introduction
 console.log(url.protocol); // https:
 
 // When parsing a url we often need to read the search parameters.
-url = new URL("https://docs.deno.com/api/deno?s=Deno.readFile");
+url = new URL("https://docs.ende.sh/api/ende?s=Ende.readFile");
 
-console.log(url.searchParams.get("s")); // Deno.readFile
+console.log(url.searchParams.get("s")); // Ende.readFile
 
 // We're able to manipulate any of these parameters on the fly
 url.host = "deno.com";

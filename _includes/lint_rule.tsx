@@ -38,16 +38,16 @@ function RuleSets({ tags, rule }: { tags: string[]; rule: string }) {
           )}
       </p>
       <p>
-        Enable the full set in <code>deno.json</code>:
+        Enable the full set in <code>ende.json</code>:
       </p>
       <pre><code>{tagsConfig(tags)}</code></pre>
-      <p>Enable the full set using the Deno CLI:</p>
-      <pre><code>{tags.map((tag) => `deno lint --rules-tags=${tag}`).join("\n# or ...\n")}</code></pre>
+      <p>Enable the full set using the Ende CLI:</p>
+      <pre><code>{tags.map((tag) => `ende lint --rules-tags=${tag}`).join("\n# or ...\n")}</code></pre>
       <p>
         This rule can be explicitly included in or excluded from the rules
         present in the current tag by adding it to the <code>include</code> or
         {" "}
-        <code>exclude</code> array in <code>deno.json</code>:
+        <code>exclude</code> array in <code>ende.json</code>:
       </p>
       <pre><code>{`{
   "lint": {

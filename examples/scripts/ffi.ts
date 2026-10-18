@@ -3,13 +3,13 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-ffi <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.dlopen} Doc: Deno.dlopen
- * @resource {https://docs.deno.com/api/deno/~/Deno.UnsafeCallback} Doc: Deno.UnsafeCallback
- * @resource {https://docs.deno.com/runtime/fundamentals/ffi/} FFI in the Deno manual
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.dlopen} Doc: Ende.dlopen
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.UnsafeCallback} Doc: Ende.UnsafeCallback
+ * @resource {https://docs.ende.sh/runtime/fundamentals/ffi/} FFI in the Ende manual
  * @group System
  *
- * The Foreign Function Interface lets Deno call functions in native shared
- * libraries directly, with no glue code or build step. Deno.dlopen opens a
+ * The Foreign Function Interface lets Ende call functions in native shared
+ * libraries directly, with no glue code or build step. Ende.dlopen opens a
  * library, you describe the signatures of the symbols you need, and they
  * become callable JavaScript functions. This example calls into the C
  * standard library, which is already present on every system.
@@ -19,19 +19,19 @@
 // library is a convenient demo target because it requires no installation,
 // but the same approach works for any shared library, including ones you
 // build yourself.
-const libNames: Partial<Record<typeof Deno.build.os, string>> = {
+const libNames: Partial<Record<typeof Ende.build.os, string>> = {
   darwin: "/usr/lib/libSystem.B.dylib",
   linux: "libc.so.6",
   windows: "msvcrt.dll",
 };
-const libName = libNames[Deno.build.os];
-if (!libName) throw new Error(`Unsupported OS: ${Deno.build.os}`);
+const libName = libNames[Ende.build.os];
+if (!libName) throw new Error(`Unsupported OS: ${Ende.build.os}`);
 
 // Open the library and declare the symbols to bind. Each entry gives the
 // parameter types and result type in C terms: buffer accepts a TypedArray
 // and passes a pointer to its bytes, usize is an unsigned size_t, and
 // function accepts a pointer to a callback.
-const libc = Deno.dlopen(libName, {
+const libc = Ende.dlopen(libName, {
   strlen: { parameters: ["buffer"], result: "usize" },
   qsort: {
     parameters: ["buffer", "usize", "usize", "function"],
@@ -45,15 +45,15 @@ const libc = Deno.dlopen(libName, {
 const message = new TextEncoder().encode("Hello from C\0");
 console.log(libc.symbols.strlen(message)); // 12n
 
-// Native code can also call back into JavaScript. Deno.UnsafeCallback wraps
+// Native code can also call back into JavaScript. Ende.UnsafeCallback wraps
 // a JavaScript function in a native function pointer. Here we build a
 // comparator for the C qsort function. The arguments arrive as raw
 // pointers, and UnsafePointerView reads typed values from them.
-const comparator = new Deno.UnsafeCallback(
+const comparator = new Ende.UnsafeCallback(
   { parameters: ["pointer", "pointer"], result: "i32" },
   (a, b) => {
-    const x = new Deno.UnsafePointerView(a!).getInt32();
-    const y = new Deno.UnsafePointerView(b!).getInt32();
+    const x = new Ende.UnsafePointerView(a!).getInt32();
+    const y = new Ende.UnsafePointerView(b!).getInt32();
     return x - y;
   },
 );

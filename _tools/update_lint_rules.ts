@@ -1,37 +1,37 @@
 import { extractYaml } from "@ende/front-matter";
 
-interface DenoLintRuleDesc {
+interface EndeLintRuleDesc {
   code: string;
   tags: string[];
 }
 
-interface DenoLintRulesOutput {
+interface EndeLintRulesOutput {
   version: string;
-  rules: DenoLintRuleDesc[];
+  rules: EndeLintRuleDesc[];
 }
 
-async function getCurrentLintRules(): Promise<DenoLintRulesOutput> {
-  const output = await new Deno.Command(Deno.execPath(), {
+async function getCurrentLintRules(): Promise<EndeLintRulesOutput> {
+  const output = await new Ende.Command(Ende.execPath(), {
     args: ["lint", "--rules", "--json"],
   }).outputSync();
 
   if (!output.success) {
-    throw new Error("Failed to run `deno lint --rules --json`");
+    throw new Error("Failed to run `ende lint --rules --json`");
   }
 
   const data = new TextDecoder().decode(output.stdout);
-  return JSON.parse(data) satisfies DenoLintRulesOutput;
+  return JSON.parse(data) satisfies EndeLintRulesOutput;
 }
 
 const missingDocs: string[] = [];
 
-async function checkIfDocsExistAndUpdate(lintRulesData: DenoLintRulesOutput) {
+async function checkIfDocsExistAndUpdate(lintRulesData: EndeLintRulesOutput) {
   for (const lintRule of lintRulesData.rules) {
     const name = lintRule.code;
 
     let content = "";
     try {
-      content = await Deno.readTextFile(`./lint/rules/${name}.md`);
+      content = await Ende.readTextFile(`./lint/rules/${name}.md`);
     } catch {
       missingDocs.push(name);
       continue;
@@ -56,7 +56,7 @@ tags: [${fmData.attrs.tags.join(", ")}]
 ---
 
 ${fmData.body}`;
-    await Deno.writeTextFile(`./lint/rules/${name}.md`, newContent);
+    await Ende.writeTextFile(`./lint/rules/${name}.md`, newContent);
   }
 }
 

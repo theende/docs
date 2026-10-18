@@ -1,15 +1,10 @@
 ---
 last_modified: 2026-06-25
 title: "Auto-update"
-description: "Ship binary-diff updates to deno desktop apps with Deno.autoUpdate(): bsdiff patches, manifest polling, automatic rollback on failed launch."
+description: "Ship binary-diff updates to ende desktop apps with Ende.autoUpdate(): bsdiff patches, manifest polling, automatic rollback on failed launch."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) polls a release server for
+[`Ende.autoUpdate()`](/api/ende/~/Ende.autoUpdate/) polls a release server for
 new versions, downloads binary-diff patches, applies them to the runtime dylib,
 and stages the result for the next launch. If the next launch fails, the runtime
 rolls back to the previous version automatically. Updates ship as small `bsdiff`
@@ -27,11 +22,11 @@ patches instead of full binary downloads, with rollback baked into the launcher.
 
 Two pieces of configuration are required:
 
-1. A `version` in your `deno.json`:
+1. A `version` in your `ende.json`:
    ```jsonc
    { "version": "1.4.0" }
    ```
-2. A `desktop.release.baseUrl` in your `deno.json`:
+2. A `desktop.release.baseUrl` in your `ende.json`:
    ```jsonc
    {
      "desktop": {
@@ -41,24 +36,24 @@ Two pieces of configuration are required:
    ```
 
 Both are baked into the compiled binary. The version is exposed at runtime as
-[`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion):
+[`Ende.desktopVersion`](/api/ende/~/Ende.desktopVersion/):
 
 ```ts
-console.log(Deno.desktopVersion); // "1.4.0", or null if no version was set
+console.log(Ende.desktopVersion); // "1.4.0", or null if no version was set
 ```
 
-If [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion) is `null`,
-[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) is a no-op: the runtime warns
-once and returns. This is also what happens under `deno run`, since a
+If [`Ende.desktopVersion`](/api/ende/~/Ende.desktopVersion/) is `null`,
+[`Ende.autoUpdate()`](/api/ende/~/Ende.autoUpdate/) is a no-op: the runtime
+warns once and returns. This is also what happens under `ende run`, since a
 non-compiled program has no baked-in version.
-[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) does not throw there, so you
-can leave the call in your code and run the same entry point with `deno run`
+[`Ende.autoUpdate()`](/api/ende/~/Ende.autoUpdate/) does not throw there, so you
+can leave the call in your code and run the same entry point with `ende run`
 during development.
 
 ## Calling `autoUpdate()`
 
 ```ts
-Deno.autoUpdate({
+Ende.autoUpdate({
   url: "https://releases.example.com/my-app",
   interval: 60 * 60 * 1000, // hourly
   onUpdateReady(version) {
@@ -73,12 +68,12 @@ Deno.autoUpdate({
 Or pass a URL string for a single one-shot check on startup:
 
 ```ts
-Deno.autoUpdate("https://releases.example.com/my-app");
+Ende.autoUpdate("https://releases.example.com/my-app");
 ```
 
 | Option          | Type                        | Notes                                                                                                         |
 | --------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `url`           | `string`                    | Required if no `desktop.release.baseUrl` is set in `deno.json`.                                               |
+| `url`           | `string`                    | Required if no `desktop.release.baseUrl` is set in `ende.json`.                                               |
 | `interval`      | `number` (milliseconds)     | Poll interval. If omitted, only a single check is performed.                                                  |
 | `onUpdateReady` | `(version: string) => void` | Called once a patch is applied and staged for next launch.                                                    |
 | `onRollback`    | `(reason: string) => void`  | Called shortly after this call if the previous launch failed.                                                 |
@@ -102,7 +97,7 @@ is an object carrying the patch filename and its **SHA-256 hash**:
 
 | Field     | Meaning                                                                                                                                                          |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `version` | The latest available version. Compared with [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion).                                                            |
+| `version` | The latest available version. Compared with [`Ende.desktopVersion`](/api/ende/~/Ende.desktopVersion/).                                                           |
 | `patches` | Map of from-version → `{ name, sha256 }`. `name` is the patch filename relative to the manifest's URL; `sha256` is the lowercase hex SHA-256 of the patch bytes. |
 
 The `sha256` is **required**: the runtime refuses to apply a patch whose bytes
@@ -119,7 +114,7 @@ endpoint.
 ### Signed manifests
 
 For tamper protection beyond TLS, sign the manifest with an Ed25519 key and pass
-the public key to [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate). When a
+the public key to [`Ende.autoUpdate()`](/api/ende/~/Ende.autoUpdate/). When a
 `publicKey` is configured, the manifest must be an envelope:
 
 ```json
@@ -135,7 +130,7 @@ depending on a canonical-JSON implementation, the real manifest is embedded
 verbatim as the `signed` string and only its contents are trusted.
 
 ```ts
-Deno.autoUpdate({
+Ende.autoUpdate({
   url: "https://releases.example.com/my-app",
   publicKey: "<base64-encoded 32-byte Ed25519 public key>",
 });
@@ -145,9 +140,9 @@ Deno.autoUpdate({
 
 1. **Fetch manifest.** `GET <url>/latest.json`. On a non-2xx response, the check
    silently returns and waits for the next interval.
-2. **Compare versions.** If `manifest.version === Deno.desktopVersion`, nothing
+2. **Compare versions.** If `manifest.version === Ende.desktopVersion`, nothing
    to do.
-3. **Look up a patch.** `manifest.patches[Deno.desktopVersion]` →
+3. **Look up a patch.** `manifest.patches[Ende.desktopVersion]` →
    `{ name, sha256 }`.
 4. **Download the patch.** `GET <url>/<name>`. The whole patch is buffered into
    memory; for typical bsdiff outputs (a few MB) this is fine.
@@ -179,7 +174,7 @@ anything else runs, using three files next to the runtime dylib:
 - If `<dylib>.backup` exists but `<dylib>.update-ok` does not, the last update
   started but never confirmed, meaning it crashed during startup. The launcher
   restores `<dylib>.backup` over the dylib, rolling back. The next
-  [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) call then fires
+  [`Ende.autoUpdate()`](/api/ende/~/Ende.autoUpdate/) call then fires
   `onRollback` with the reason.
 
 This makes broken updates self-healing. Users do not need to know anything
@@ -215,8 +210,8 @@ keys and pick on the client:
 ```
 
 ```ts
-const arch = Deno.build.os + "-" + Deno.build.arch;
-Deno.autoUpdate({
+const arch = Ende.build.os + "-" + Ende.build.arch;
+Ende.autoUpdate({
   url: "https://releases.example.com/" + arch,
   interval: 60 * 60 * 1000,
 });

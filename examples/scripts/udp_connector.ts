@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N --unstable-net <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.connect} Doc: Deno.connect
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.connect} Doc: Ende.connect
  * @resource {/examples/udp_listener} Example: UDP Listener
  * @group Unstable APIs
  *
@@ -14,13 +14,13 @@
 const encoder = new TextEncoder();
 
 // Create a UDP listener to allow us to send a ping to the other UDP server.
-const listener = Deno.listenDatagram({
+const listener = Ende.listenDatagram({
   port: 10001,
   transport: "udp",
 });
 
 // Since UDP is a connectionless protocol, we need to define the address of the listener
-const peerAddress: Deno.NetAddr = {
+const peerAddress: Ende.NetAddr = {
   transport: "udp",
   hostname: "127.0.0.1",
   port: 10000,

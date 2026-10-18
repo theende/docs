@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/crypto/doc/timing-safe-equal} Doc: timingSafeEqual
+ * @resource {https://jsr.io/@ende/crypto/doc/timing-safe-equal} Doc: timingSafeEqual
  * @resource {https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html} OWASP: Authentication Cheat Sheet (timing attacks)
  * @group Cryptography
  *
@@ -14,7 +14,7 @@
  * comparison whose duration does not depend on where the inputs differ.
  */
 
-import { timingSafeEqual } from "jsr:@std/crypto/timing-safe-equal";
+import { timingSafeEqual } from "jsr:@ende/crypto/timing-safe-equal";
 
 // timingSafeEqual compares two buffers of the same length in constant
 // time. Digests are a natural fit since they always have a fixed length.
@@ -44,10 +44,10 @@ async function safeCompare(actual: string, expected: string) {
 console.log(await safeCompare("my-api-key", "my-api-key")); // true
 console.log(await safeCompare("my-api", "my-api-key")); // false
 
-// The same @std/crypto module extends WebCrypto with additional digest
+// The same @ende/crypto module extends WebCrypto with additional digest
 // algorithms. Its crypto.subtle accepts everything the built-in one does,
 // plus algorithms like BLAKE3, and the digests feed the same comparison.
-import { crypto as stdCrypto } from "jsr:@std/crypto";
+import { crypto as stdCrypto } from "jsr:@ende/crypto";
 
 const fast = await stdCrypto.subtle.digest(
   "BLAKE3",

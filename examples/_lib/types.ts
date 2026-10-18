@@ -1,7 +1,7 @@
 export const TAGS = {
   cli: {
     title: "cli",
-    description: "Works in Deno CLI",
+    description: "Works in Ende CLI",
   },
   web: {
     title: "web",

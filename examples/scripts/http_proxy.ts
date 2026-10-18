@@ -9,7 +9,7 @@
  *
  * A reverse proxy receives requests and forwards them to another server.
  * Because fetch, Request, and Response are the same objects on both sides,
- * a proxy in Deno is a few lines: rewrite the URL, forward, return.
+ * a proxy in Ende is a few lines: rewrite the URL, forward, return.
  */
 
 // The server we forward every request to.
@@ -36,7 +36,7 @@ async function handler(req: Request): Promise<Response> {
   return response;
 }
 
-Deno.serve(handler);
+Ende.serve(handler);
 
 // Requests to the proxy now answer with the upstream's content:
 //
@@ -46,20 +46,3 @@ Deno.serve(handler);
 // A real deployment usually adds forwarding headers so the upstream knows
 // the original client, e.g. headers.set("x-forwarded-for", clientIp) using
 // the info argument of the handler.
-
-// The same proxy works on a node:http server; fetch bridges to the web
-// Response, whose body is then streamed out through the Node response.
-import { createServer } from "node:http";
-
-createServer(async (req, res) => {
-  const target = new URL(req.url ?? "/", UPSTREAM);
-  const response = await fetch(target);
-  res.writeHead(
-    response.status,
-    Object.fromEntries(response.headers.entries()),
-  );
-  for await (const chunk of response.body ?? []) {
-    res.write(chunk);
-  }
-  res.end();
-}).listen(8001);

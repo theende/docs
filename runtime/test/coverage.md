@@ -1,23 +1,23 @@
 ---
 last_modified: 2026-06-12
 title: "Test coverage"
-description: "Collect coverage data with deno test --coverage and turn it into terminal summaries, HTML reports, and lcov files for CI with deno coverage."
+description: "Collect coverage data with ende test --coverage and turn it into terminal summaries, HTML reports, and lcov files for CI with ende coverage."
 oldUrl:
   - /runtime/manual/basics/testing/coverage/
 ---
 
 Code coverage tells you which lines, branches, and functions of your code
-actually ran while your tests executed. Deno has coverage built in: no
+actually ran while your tests executed. Ende has coverage built in: no
 instrumentation step, no extra dependencies. The workflow is two commands:
-`deno test --coverage` collects the data, and
-[`deno coverage`](/runtime/reference/cli/coverage/) turns it into a report.
+`ende test --coverage` collects the data, and
+[`ende coverage`](/runtime/reference/cli/coverage/) turns it into a report.
 
 ## Collect coverage data
 
 Pass `--coverage` when you run your tests:
 
 ```sh
-deno test --coverage
+ende test --coverage
 ```
 
 This writes raw coverage data into a `coverage/` directory as one JSON profile
@@ -25,15 +25,15 @@ per module. The data comes directly from the V8 JavaScript engine, which tracks
 execution as your code runs, so the numbers reflect exactly what executed rather
 than an approximation from source rewriting.
 
-Deno also prints a coverage summary table after the test results and writes an
+Ende also prints a coverage summary table after the test results and writes an
 `lcov.info` file and an HTML report into the coverage directory. If you only
 want the raw profiles, pass `--coverage-raw-data-only`.
 
 To use a different directory, give the flag a value, or set the
-`DENO_COVERAGE_DIR` environment variable:
+`ENDE_COVERAGE_DIR` environment variable:
 
 ```sh
-deno test --coverage=cov_profile
+ende test --coverage=cov_profile
 ```
 
 Coverage data accumulates across runs. When you rename or delete files, stale
@@ -41,41 +41,41 @@ profiles can linger and skew the report, so pass `--clean` to empty the
 directory before the tests run:
 
 ```sh
-deno test --clean --coverage
+ende test --clean --coverage
 ```
 
-### Collect coverage outside deno test
+### Collect coverage outside ende test
 
-`deno run` accepts the same `--coverage` flag, which is useful when the code you
+`ende run` accepts the same `--coverage` flag, which is useful when the code you
 want to measure doesn't run under the test runner: integration scripts, CLI
 invocations of your tool, or a server exercised from the outside.
 
 ```sh
-deno run --coverage=cov_profile main.ts
+ende run --coverage=cov_profile main.ts
 ```
 
-When your tests spawn Deno subprocesses, set the `DENO_COVERAGE_DIR` environment
+When your tests spawn Ende subprocesses, set the `ENDE_COVERAGE_DIR` environment
 variable instead. Child processes inherit it, so their execution is collected
 into the same directory and shows up in the combined report:
 
 ```sh
-DENO_COVERAGE_DIR=cov_profile deno test --allow-run
-deno coverage cov_profile
+ENDE_COVERAGE_DIR=cov_profile ende test --allow-run
+ende coverage cov_profile
 ```
 
 ## Read the report
 
-Point `deno coverage` at the directory you collected into:
+Point `ende coverage` at the directory you collected into:
 
 ```sh
-deno coverage coverage/
+ende coverage coverage/
 ```
 
-For a fresh project created with `deno init`, which generates a `main.ts` HTTP
+For a fresh project created with `ende init`, which generates a `main.ts` HTTP
 handler and a `main_test.ts` that exercises it, the report looks like this:
 
 ```console
-$ deno coverage coverage/
+$ ende coverage coverage/
 | File      | Branch % | Function % | Line % |
 | --------- | -------- | ---------- | ------ |
 | main.ts   |     75.0 |      100.0 |   80.0 |
@@ -93,10 +93,10 @@ To see which lines were missed, add `--detailed`. Uncovered lines are listed
 under each file:
 
 ```console
-$ deno coverage --detailed coverage/
+$ ende coverage --detailed coverage/
 cover file:///dev/my-project/main.ts ... 80.000% (12/15)
   16 | if (import.meta.main) {
-  17 |   Deno.serve(handler);
+  17 |   Ende.serve(handler);
   18 | }
 ```
 
@@ -112,7 +112,7 @@ navigate. It shows the summary table as a clickable file tree, with each source
 file rendered line by line and uncovered code highlighted:
 
 ```sh
-deno coverage --html coverage/
+ende coverage --html coverage/
 ```
 
 This writes the report to `coverage/html/`. Open `coverage/html/index.html` in a
@@ -125,7 +125,7 @@ Most coverage services and editor extensions consume the
 `--lcov`:
 
 ```sh
-deno coverage --lcov --output=coverage.lcov coverage/
+ende coverage --lcov --output=coverage.lcov coverage/
 ```
 
 Without `--output`, the lcov report is written to stdout. In a GitHub Actions
@@ -135,9 +135,12 @@ with the Codecov action:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: denoland/setup-deno@v2
-  - run: deno test --coverage
-  - run: deno coverage --lcov --output=coverage.lcov coverage/
+  - name: Install Ende
+    run: |
+      curl -fsSL https://ende.sh/install.sh | sh
+      echo "$HOME/.ende/bin" >> "$GITHUB_PATH"
+  - run: ende test --coverage
+  - run: ende coverage --lcov --output=coverage.lcov coverage/
   - uses: codecov/codecov-action@v5
     with:
       files: coverage.lcov
@@ -145,7 +148,7 @@ steps:
 
 ## Enforce a coverage threshold
 
-`deno coverage` reports coverage but has no built-in flag to fail when coverage
+`ende coverage` reports coverage but has no built-in flag to fail when coverage
 drops below a target. There are two common ways to gate on coverage:
 
 1. Let your coverage service do it. Codecov, Coveralls, and similar services can
@@ -155,7 +158,7 @@ drops below a target. There are two common ways to gate on coverage:
    found) and `LH` (lines hit), so summing them gives the overall line coverage:
 
 ```sh
-deno coverage --lcov coverage/ > coverage.lcov
+ende coverage --lcov coverage/ > coverage.lcov
 awk -F: '/^LF/ {lf += $2} /^LH/ {lh += $2}
   END {pct = 100 * lh / lf; printf "line coverage: %.1f%%\n", pct;
   exit (pct < 80)}' coverage.lcov
@@ -175,10 +178,10 @@ the exclude pattern:
 
 ```sh
 # Report on main.ts only
-deno coverage --include="main.ts" coverage/
+ende coverage --include="main.ts" coverage/
 
 # Also include remote modules fetched over https
-deno coverage --include="^file:|https:" coverage/
+ende coverage --include="^file:|https:" coverage/
 ```
 
 ## Ignore code in the report
@@ -194,7 +197,7 @@ console.log("this single line is ignored");
 
 // deno-coverage-ignore-start
 if (import.meta.main) {
-  Deno.serve(handler);
+  Ende.serve(handler);
 }
 // deno-coverage-ignore-stop
 ```
@@ -207,8 +210,8 @@ for the full rules.
 
 ## Keep going
 
-- [Testing in Deno](/runtime/test/): the test runner, assertions, and mocking
-- [`deno coverage` reference](/runtime/reference/cli/coverage/): every flag and
+- [Testing in Ende](/runtime/test/): the test runner, assertions, and mocking
+- [`ende coverage` reference](/runtime/reference/cli/coverage/): every flag and
   ignore-comment rule
-- [`deno test` reference](/runtime/reference/cli/test/): all test runner
+- [`ende test` reference](/runtime/reference/cli/test/): all test runner
   options, including coverage collection

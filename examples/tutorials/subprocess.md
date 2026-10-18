@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-03-09
 title: "Creating a subprocess"
-description: "A guide to working with subprocesses in Deno. Learn how to spawn processes, handle input/output streams, manage process lifecycles, and implement inter-process communication patterns safely."
+description: "A guide to working with subprocesses in Ende. Learn how to spawn processes, handle input/output streams, manage process lifecycles, and implement inter-process communication patterns safely."
 url: /examples/subprocess_tutorial/
 oldUrl:
   - /runtime/manual/examples/subprocess/
@@ -10,25 +10,25 @@ oldUrl:
 
 ## Concepts
 
-- Deno is capable of spawning a subprocess via
-  [Deno.Command](https://docs.deno.com/api/deno/~/Deno.Command).
+- Ende is capable of spawning a subprocess via
+  [Ende.Command](https://docs.ende.sh/api/ende/~/Ende.Command).
 - `--allow-run` permission is required to spawn a subprocess.
 - Spawned subprocesses do not run in a security sandbox.
 - Communicate with the subprocess via the
-  [stdin](https://docs.deno.com/api/deno/~/Deno.stdin),
-  [stdout](https://docs.deno.com/api/deno/~/Deno.stdout) and
-  [stderr](https://docs.deno.com/api/deno/~/Deno.stderr) streams.
+  [stdin](https://docs.ende.sh/api/ende/~/Ende.stdin),
+  [stdout](https://docs.ende.sh/api/ende/~/Ende.stdout) and
+  [stderr](https://docs.ende.sh/api/ende/~/Ende.stderr) streams.
 
 ## Simple example
 
-This example is the equivalent of running `echo "Hello from Deno!"` from the
+This example is the equivalent of running `echo "Hello from Ende!"` from the
 command line.
 
 ```ts title="subprocess_simple.ts"
 // define command used to create the subprocess
-const command = new Deno.Command("echo", {
+const command = new Ende.Command("echo", {
   args: [
-    "Hello from Deno!",
+    "Hello from Ende!",
   ],
 });
 
@@ -43,19 +43,19 @@ console.log(new TextDecoder().decode(stderr));
 Run it:
 
 ```shell
-$ deno run --allow-run=echo ./subprocess_simple.ts
-Hello from Deno!
+$ ende run --allow-run=echo ./subprocess_simple.ts
+Hello from Ende!
 ```
 
 ## Security
 
 The `--allow-run` permission is required for creation of a subprocess. Be aware
-that subprocesses are not run in a Deno sandbox and therefore have the same
+that subprocesses are not run in an Ende sandbox and therefore have the same
 permissions as if you were to run the command from the command line yourself.
 
 ## Communicating with subprocesses
 
-By default when you use `Deno.Command()` the subprocess inherits `stdin`,
+By default when you use `Ende.Command()` the subprocess inherits `stdin`,
 `stdout` and `stderr` of the parent process. If you want to communicate with a
 started subprocess you must use the `"piped"` option.
 
@@ -66,17 +66,17 @@ This example is the equivalent of running `yes &> ./process_output` in bash.
 ```ts title="subprocess_piping_to_files.ts"
 import {
   mergeReadableStreams,
-} from "jsr:@std/streams@1.0.0-rc.4/merge-readable-streams";
+} from "jsr:@ende/streams@^2026.10.15/merge-readable-streams";
 
 // create the file to attach the process to
-const file = await Deno.open("./process_output.txt", {
+const file = await Ende.open("./process_output.txt", {
   read: true,
   write: true,
   create: true,
 });
 
 // start the process
-const command = new Deno.Command("yes", {
+const command = new Ende.Command("yes", {
   stdout: "piped",
   stderr: "piped",
 });
@@ -101,7 +101,7 @@ setTimeout(() => {
 Run it:
 
 ```shell
-$ deno run --allow-run=yes --allow-read=. --allow-write=. ./subprocess_piping_to_file.ts
+$ ende run --allow-run=yes --allow-read=. --allow-write=. ./subprocess_piping_to_file.ts
 ```
 
 ## Reading subprocess output with convenience methods
@@ -111,7 +111,7 @@ When working with spawned subprocesses, you can use convenience methods on the
 are similar to those available on `Response` objects:
 
 ```ts title="subprocess_convenience_methods.ts"
-const command = new Deno.Command("deno", {
+const command = new Ende.Command("ende", {
   args: [
     "eval",
     "console.log(JSON.stringify({message: 'Hello from subprocess'}))",
@@ -137,39 +137,38 @@ console.log("Exit code:", status.code);
 ## Convenience spawn functions
 
 > [!CAUTION]
-> `Deno.spawn()`, `Deno.spawnAndWait()`, and `Deno.spawnAndWaitSync()` are
-> unstable APIs introduced in Deno 2.7. They may evolve before being stabilized.
+> `Ende.spawn()`, `Ende.spawnAndWait()`, and `Ende.spawnAndWaitSync()` are
+> unstable APIs. They may evolve before being stabilized.
 
-As of Deno 2.7, three shorthand functions provide a more concise alternative to
-`Deno.Command`:
+Three shorthand functions provide a more concise alternative to `Ende.Command`:
 
-- **`Deno.spawn(command, args, options?)`** — spawns a subprocess and returns a
-  `ChildProcess` (equivalent to `new Deno.Command(cmd, { args }).spawn()`)
-- **`Deno.spawnAndWait(command, args, options?)`** — spawns a subprocess and
+- **`Ende.spawn(command, args, options?)`** — spawns a subprocess and returns a
+  `ChildProcess` (equivalent to `new Ende.Command(cmd, { args }).spawn()`)
+- **`Ende.spawnAndWait(command, args, options?)`** — spawns a subprocess and
   returns a promise resolving to `CommandOutput` (equivalent to
-  `new Deno.Command(cmd, { args }).output()`)
-- **`Deno.spawnAndWaitSync(command, args, options?)`** — synchronous variant
+  `new Ende.Command(cmd, { args }).output()`)
+- **`Ende.spawnAndWaitSync(command, args, options?)`** — synchronous variant
   that blocks until the subprocess completes
 
 ```ts title="spawn_examples.ts"
 // Spawn a child process
-const child = Deno.spawn("echo", ["hello"]);
+const child = Ende.spawn("echo", ["hello"]);
 
 // Spawn and wait for output
-const output = await Deno.spawnAndWait("git", ["status"]);
+const output = await Ende.spawnAndWait("git", ["status"]);
 console.log(new TextDecoder().decode(output.stdout));
 
 // Spawn with options
-const formatted = Deno.spawn("deno", ["fmt", "--check"], {
+const formatted = Ende.spawn("ende", ["fmt", "--check"], {
   stdout: "inherit",
 });
 
 // Synchronous execution
-const result = Deno.spawnAndWaitSync("echo", ["done"]);
+const result = Ende.spawnAndWaitSync("echo", ["done"]);
 ```
 
 These functions accept the command and arguments as separate parameters, which
-can be more readable than the `Deno.Command` constructor options pattern.
+can be more readable than the `Ende.Command` constructor options pattern.
 
 ## Convenience methods on output streams
 
@@ -181,8 +180,8 @@ Available convenience methods include:
 - `.json()` - Parses the output as JSON and returns the parsed object
 
 ```ts title="subprocess_json_parsing.ts"
-const command = new Deno.Command("deno", {
-  args: ["eval", "console.log(JSON.stringify({name: 'Deno', version: '2.0'}))"],
+const command = new Ende.Command("ende", {
+  args: ["eval", "console.log(JSON.stringify({name: 'Ende', version: '2.0'}))"],
   stdout: "piped",
 });
 
@@ -190,7 +189,7 @@ const process = command.spawn();
 
 // Parse JSON output directly
 const jsonOutput = await process.stdout.json();
-console.log("Parsed JSON:", jsonOutput); // { name: "Deno", version: "2.0" }
+console.log("Parsed JSON:", jsonOutput); // { name: "Ende", version: "2.0" }
 
 await process.status;
 ```

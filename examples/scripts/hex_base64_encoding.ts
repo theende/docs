@@ -4,11 +4,11 @@
  * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64} MDN: Uint8Array.prototype.toBase64
- * @resource {https://docs.deno.com/examples/convert_uint8array/} Example: Convert a Uint8Array
+ * @resource {https://docs.ende.sh/examples/convert_uint8array/} Example: Convert a Uint8Array
  * @group Encoding
  *
  * Binary data often needs to travel as text, in URLs, JSON, or HTTP
- * headers. Since Deno 2.x the Uint8Array built-in methods handle hex and
+ * headers. The Uint8Array built-in methods handle hex and
  * base64 directly, with no imports needed.
  */
 
@@ -39,5 +39,5 @@ console.log(hexEncoded); // 736f6d65737472696e67746f656e636f6465
 const hexDecoded = Uint8Array.fromHex(hexEncoded);
 console.log(new TextDecoder().decode(hexDecoded)); // somestringtoencode
 
-// For formats beyond hex and base64, like base32 or base58, the Deno
-// Standard Library provides encoders in jsr:@std/encoding.
+// For formats beyond hex and base64, like base32 or base58, the Ende
+// Standard Library provides encoders in jsr:@ende/encoding.

@@ -1,47 +1,42 @@
 ---
 last_modified: 2026-07-29
 title: "AI entrypoint"
-description: "Overview and key resources for LLMs and AI agents using the Deno docs"
+description: "Overview and key resources for LLMs and AI agents using the Ende docs"
 url: /ai/
 ---
 
-This page is a short entrypoint for LLMs and AI agents consuming the Deno
+This page is a short entrypoint for LLMs and AI agents consuming the Ende
 documentation.
 
-If you are a coding agent working in a user's project, read
-[deno.com/agents.md](https://deno.com/agents.md) instead. It orients you and
-points you at [Deno's agent skills](https://github.com/denoland/skills), which
-carry the full reference material and are kept current with the runtime.
+## Ende overview
 
-## Deno overview
-
-Deno is a secure JavaScript and TypeScript runtime built on V8 and Rust that
+Ende is a secure JavaScript and TypeScript runtime built on V8 and Rust that
 ships as a single binary with batteries included: TypeScript transpilation,
-bundling, formatting, linting, testing, and a rich standard library all work out
-of the box. Its explicit permission model (`--allow-net`, `--allow-read`, etc.)
-keeps programs sandboxed by default, which is especially useful for AI agents
-that need predictable side effects when running untrusted code snippets.
+formatting, linting, testing, and a rich standard library all work out of the
+box. Its explicit permission model (`--allow-net`, `--allow-read`, etc.) keeps
+programs sandboxed by default, which is especially useful for AI agents that
+need predictable side effects when running untrusted code snippets.
 
 ## Usage highlights for agents
 
 ### Everything starts with the CLI
 
-Deno is fundamentally a command-line program. Most workflows boil down to
+Ende is fundamentally a command-line program. Most workflows boil down to
 learning a handful of subcommands and flags.
 
 Common starting points:
 
 ```
-deno run main.ts
-deno test
-deno fmt
-deno lint
-deno task <name>
+ende run main.ts
+ende test
+ende fmt
+ende lint
+ende task <name>
 ```
 
 ### “Secure by default” means you must think about permissions
 
-By default, deno run executes in a sandbox. If code needs the network or
+By default, ende run executes in a sandbox. If code needs the network or
 filesystem, you grant it explicitly with --allow-* flags (or accept an
 interactive prompt, when applicable).
 
@@ -49,35 +44,35 @@ Example:
 
 ```
 # Allow network + read access (common for servers that read local files)
-deno run --allow-net --allow-read server.ts
+ende run --allow-net --allow-read server.ts
 
 # Restrict read access to a specific path
-deno run --allow-read=./data main.ts
+ende run --allow-read=./data main.ts
 
 # Allow everything (convenient for local experiments, not a great default)
-deno run -A main.ts
+ende run -A main.ts
 ```
 
-### Deno projects are usually centered around deno.json
+### Ende projects are usually centered around ende.json
 
-A deno.json (or deno.jsonc) file configures the runtime and tooling: TypeScript
-settings, lint/format behavior, import maps, tasks, and more. Deno will
-auto-detect it up the directory tree. Deno also supports package.json and will
-run node projects with `deno run` without modification.
+A ende.json (or ende.jsonc) file configures the runtime and tooling: TypeScript
+settings, lint/format behavior, import maps, tasks, and more. Ende will
+auto-detect it up the directory tree.
 
-Deno projects prefer imports from jsr or npm with the correct specifiers.
+Ende projects import packages from JSR with `jsr:` specifiers. Ende does not
+support npm packages, Node built-ins (`node:`), or CommonJS.
 
-Two fields in the deno.json matter constantly:
+Two fields in the ende.json matter constantly:
 
-**Tasks**: lightweight “scripts” you run with deno task:
+**Tasks**: lightweight “scripts” you run with ende task:
 
 ```
 {
   "tasks": {
-    "dev": "deno run --watch --allow-net main.ts",
-    "test": "deno test",
-    "lint": "deno lint",
-    "fmt": "deno fmt"
+    "dev": "ende run --watch --allow-net main.ts",
+    "test": "ende test",
+    "lint": "ende lint",
+    "fmt": "ende fmt"
   }
 }
 ```
@@ -90,8 +85,8 @@ have to remember them.
 ```
 {
   "imports": {
-    "@std/assert": "jsr:@std/assert@^1.0.0",
-    "chalk": "npm:chalk@5"
+    "@ende/assert": "jsr:@ende/assert@^2026.10.15",
+    "@ende/fmt": "jsr:@ende/fmt@^2026.10.15"
   }
 }
 ```
@@ -99,78 +94,50 @@ have to remember them.
 Then in code:
 
 ```
-import { assertEquals } from "@std/assert";
-import chalk from "chalk";
+import { assertEquals } from "@ende/assert";
+import { yellow } from "@ende/fmt/colors";
 ```
 
-Dependencies can be added with the `deno add` command. Deno uses ES modules and
+Dependencies can be added with the `ende add` command. Ende uses ES modules and
 can import from multiple sources:
 
-- JSR (recommended for many third-party modules and the Deno Standard Library)
-- npm packages (native support, without requiring a separate npm install step)
-
-### Node + npm compatibility is real (and has conventions)
-
-Deno can run lots of Node-targeted code, but there are a couple of “Deno-isms”
-to know:
-
-Node built-ins are imported with the node: prefix:
-
-```
-import * as os from "node:os";
-```
-
-npm packages can be imported with an npm: specifier (and often mapped to bare
-names via deno.json imports).
-
-This is why Deno can often use npm packages without a traditional install step
-or a node_modules workflow.
+- JSR (third-party modules and the Ende Standard Library)
+- HTTPS URLs
 
 ### Built-in testing, formatting, linting (use them)
 
-Deno’s standard workflow expects you to lean on the CLI:
+Ende’s standard workflow expects you to lean on the CLI:
 
-`deno test` finds and runs tests by convention
+`ende test` finds and runs tests by convention
 
-`deno fmt` formats code
+`ende fmt` formats code
 
-`deno lint` lints code
+`ende lint` lints code
 
-**For agents:** when someone asks “how do I run this?” in Deno, the answer is
+**For agents:** when someone asks “how do I run this?” in Ende, the answer is
 usually a combination of (a) the right permissions and (b) the right built-in
 command.
 
-### Bootstrapping: deno init gets you to a working project fast
+### Bootstrapping: ende init gets you to a working project fast
 
-To start a project, Deno provides templates via deno init, including library
+To start a project, Ende provides templates via ende init, including library
 scaffolding and a simple server setup.
 
 ```
-deno init my_project
+ende init my_project
 # or
-deno init --lib
+ende init --lib
 # or
-deno init --serve
+ende init --serve
 ```
 
 ## Key resources
 
-- [agents.md](https://deno.com/agents.md): entrypoint for coding agents working
-  in a project — orientation, then how to install Deno's agent skills
-- [llms.txt](/llms.txt): curated section index with key documentation links
-- [llms-full-guide.txt](/llms-full-guide.txt): agent-oriented quick reference
-  with CLI commands, code examples, and usage patterns
-- llms-summary.txt: compact, high-signal index
-- llms-full.txt: full content dump (large)
-- [Site search](/): use the on-site search UI for human browsing
-- [Skills](https://github.com/denoland/skills): AI skills for coding assistants
+- [Site search](/search/): search the documentation
+- [Search index](/search.json): every page's title, headings and summary text,
+  as JSON
+- [Sitemap](/sitemap.xml): every page URL
 
 ## Usage notes
 
-- Start with `llms.txt` for a curated overview of all documentation sections.
-- Use `llms-full-guide.txt` for a self-contained quick reference with CLI
-  commands, permissions, configuration, and code examples.
-- Use `llms-summary.txt` for a compact, scored selection of the most important
-  pages.
-- `llms-full.txt` is large; only fetch it when you need full-text extraction.
 - When possible, follow canonical URLs for stable citations.

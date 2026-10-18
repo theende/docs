@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-02-02
 title: "Language Server Integration"
-description: "Technical guide to integrating Deno's Language Server Protocol (LSP). Learn about LSP implementation details, custom commands, requests, notifications, and testing API integration for editor and tool developers."
+description: "Technical guide to integrating Ende's Language Server Protocol (LSP). Learn about LSP implementation details, custom commands, requests, notifications, and testing API integration for editor and tool developers."
 oldUrl:
   - /runtime/manual/reference/lsp/
   - /runtime/manual/advanced/language_server/overview/
@@ -11,22 +11,21 @@ oldUrl:
 ---
 
 > [!TIP]
-> If you are looking for information how to use Deno's LSP with various editors,
+> If you are looking for information how to use Ende's LSP with various editors,
 > visit
 > [Setup your environment page](/runtime/getting_started/setup_your_environment/).
 
-The Deno CLI comes with a built in language server that can provide an
+The Ende CLI comes with a built in language server that can provide an
 intelligent editing experience, as well as a way to easily access the other
-tools that come built in with Deno. For most users, using the language server
-would be via an editor such as [Visual Studio Code](/runtime/reference/vscode/)
-or [other editors](/runtime/getting_started/setup_your_environment/).
+tools that come built in with Ende. For most users, using the language server
+would be via [an editor](/runtime/getting_started/setup_your_environment/).
 
 This page is designed for those creating integrations to the language server or
-providing a package registry for Deno that integrates intelligently.
+providing a package registry for Ende that integrates intelligently.
 
-The Deno Language Server provides a server implementation of the
+The Ende Language Server provides a server implementation of the
 [Language Server Protocol](https://microsoft.github.io/language-server-protocol/)
-which is specifically tailored to provide a _Deno_ view of code. It is
+which is specifically tailored to provide a _an Ende_ view of code. It is
 integrated into the command line and can be started via the `lsp` sub-command.
 
 ## Structure
@@ -37,41 +36,44 @@ methods that the client calls via the Language Server RPC protocol.
 
 ## Settings
 
+The language server reads its settings from the `ende` section. Settings in the
+`deno` section, which the Deno editor extensions send, are still accepted.
+
 The language server supports a number of settings for a workspace:
 
-- `deno.enable`
-- `deno.enablePaths`
-- `deno.cache`
-- `deno.certificateStores`
-- `deno.config`
-- `deno.importMap`
-- `deno.internalDebug`
-- `deno.codeLens.implementations`
-- `deno.codeLens.references`
-- `deno.codeLens.referencesAllFunctions`
-- `deno.codeLens.test`
-- `deno.suggest.completeFunctionCalls`
-- `deno.suggest.names`
-- `deno.suggest.paths`
-- `deno.suggest.autoImports`
-- `deno.suggest.imports.autoDiscover`
-- `deno.suggest.imports.hosts`
-- `deno.lint`
-- `deno.tlsCertificate`
-- `deno.unsafelyIgnoreCertificateErrors`
-- `deno.unstable`
+- `ende.enable`
+- `ende.enablePaths`
+- `ende.cache`
+- `ende.certificateStores`
+- `ende.config`
+- `ende.importMap`
+- `ende.internalDebug`
+- `ende.codeLens.implementations`
+- `ende.codeLens.references`
+- `ende.codeLens.referencesAllFunctions`
+- `ende.codeLens.test`
+- `ende.suggest.completeFunctionCalls`
+- `ende.suggest.names`
+- `ende.suggest.paths`
+- `ende.suggest.autoImports`
+- `ende.suggest.imports.autoDiscover`
+- `ende.suggest.imports.hosts`
+- `ende.lint`
+- `ende.tlsCertificate`
+- `ende.unsafelyIgnoreCertificateErrors`
+- `ende.unstable`
 
 And there are settings that are supported on a per resource basis by the
 language server:
 
-- `deno.enable`
-- `deno.enablePaths`
-- `deno.codeLens.test`
+- `ende.enable`
+- `ende.enablePaths`
+- `ende.codeLens.test`
 
-Deno analyzes these settings at multiple points in the language server process.
+Ende analyzes these settings at multiple points in the language server process.
 First, when the `initialize` request arrives from the client, the
 `initializationOptions` will be assumed to be an object that represents the
-`deno` namespace of options. For example, the following value will enable Deno
+`ende` namespace of options. For example, the following value will enable Ende
 with the unstable APIs for this instance of the language server.
 
 ```json
@@ -103,20 +105,20 @@ client, which the client is expected to implement:
 
 ### .cache
 
-`deno.cache` is sent as a resolution code action when there is an un-cached
+`ende.cache` is sent as a resolution code action when there is an un-cached
 module specifier that is being imported into a module. It will be sent with an
 argument that contains the resolved specifier as a string to be cached.
 
 ### showReferences
 
-`deno.showReferences` is sent as the command on some code lenses to show
+`ende.showReferences` is sent as the command on some code lenses to show
 locations of references. The arguments contain the specifier that is the subject
 of the command, the start position of the target and the locations of the
 references to show.
 
 ### test
 
-`deno.test` is sent as part of a test code lens to, of which the client is
+`ende.test` is sent as part of a test code lens to, of which the client is
 expected to run a test based on the arguments, which are the specifier the test
 is contained in and the name of the test to filter the tests on.
 
@@ -124,11 +126,11 @@ is contained in and the name of the test to filter the tests on.
 
 The LSP currently supports the following custom requests. A client should
 implement these in order to have a fully functioning client that integrates well
-with Deno:
+with Ende:
 
 ### /cache
 
-`deno/cache` will instruct Deno to attempt to cache a module and all of its
+`ende/cache` will instruct Ende to attempt to cache a module and all of its
 dependencies. If a `referrer` only is passed, then all dependencies for the
 module specifier will be loaded. If there are values in the `uris`, then only
 those `uris` will be cached.
@@ -144,24 +146,24 @@ interface CacheParams {
 
 ### performance
 
-`deno/performance` requests the return of the timing averages for the internal
-instrumentation of Deno. It does not expect any parameters.
+`ende/performance` requests the return of the timing averages for the internal
+instrumentation of Ende. It does not expect any parameters.
 
 ### reloadImportRegistries
 
-`deno/reloadImportRegistries` reloads any cached responses from import
+`ende/reloadImportRegistries` reloads any cached responses from import
 registries. It does not expect any parameters.
 
 ### virtualTextDocument
 
-`deno/virtualTextDocument` requests a virtual text document from the LSP, which
+`ende/virtualTextDocument` requests a virtual text document from the LSP, which
 is a read only document that can be displayed in the client. This allows clients
-to access documents in the Deno cache, like remote modules and TypeScript
-library files built into Deno. The Deno language server will encode all internal
-files under the custom scheme `deno:`, so clients should route all requests for
-the `deno:` scheme back to the `deno/virtualTextDocument` API.
+to access documents in the Ende cache, like remote modules and TypeScript
+library files built into Ende. The Ende language server will encode all internal
+files under the custom scheme `ende:`, so clients should route all requests for
+the `ende:` scheme back to the `ende/virtualTextDocument` API.
 
-It also supports a special URL of `deno:/status.md` which provides a markdown
+It also supports a special URL of `ende:/status.md` which provides a markdown
 formatted text document that contains details about the status of the LSP for
 display to a user.
 
@@ -175,21 +177,21 @@ interface VirtualTextDocumentParams {
 
 ### task
 
-`deno/task` requests the return of available deno tasks, see
+`ende/task` requests the return of available ende tasks, see
 [task_runner](/runtime/reference/cli/task_runner/). It does not expect any
 parameters.
 
 ## Notifications
 
 There is currently one custom notification that is sent from the server to the
-client, `deno/registryState`. When `deno.suggest.imports.autoDiscover` is `true`
+client, `ende/registryState`. When `ende.suggest.imports.autoDiscover` is `true`
 and an origin for an import being added to a document is not explicitly set in
-`deno.suggest.imports.hosts`, the origin will be checked and the notification
+`ende.suggest.imports.hosts`, the origin will be checked and the notification
 will be sent to the client of the status.
 
 When receiving the notification, if the param `suggestion` is `true`, the client
 should offer the user the choice to enable the origin and add it to the
-configuration for `deno.suggest.imports.hosts`. If `suggestion` is `false` the
+configuration for `ende.suggest.imports.hosts`. If `suggestion` is `false` the
 client should add it to the configuration of as `false` to stop the language
 server from attempting to detect if suggestions are supported.
 
@@ -222,10 +224,9 @@ The language server supports only formatting for the following language IDs:
 
 ## Testing
 
-The Deno language server supports a custom set of APIs to enable testing. These
-are built around providing information to enable the
-[vscode's Testing API](https://code.visualstudio.com/api/extension-guides/testing)
-but can be used by other language server clients to provide a similar interface.
+The Ende language server supports a custom set of APIs to enable testing.
+Language server clients can use them to list, run and report tests in a test
+explorer.
 
 Both the client and the server should support the experimental `testingApi`
 capability:
@@ -246,7 +247,7 @@ interface ServerCapabilities {
 }
 ```
 
-When a version of Deno that supports the testing API encounters a client which
+When a version of Ende that supports the testing API encounters a client which
 supports the capability, it will initialize the code which handles the test
 detection and will start providing the notifications which enable it.
 
@@ -257,30 +258,30 @@ testing code lenses will no longer be sent to the client.
 
 There are specific settings which change the behavior of the language server:
 
-- `deno.testing.args` - An array of strings which will be provided as arguments
-  when executing tests. This works in the same fashion as the `deno test`
+- `ende.testing.args` - An array of strings which will be provided as arguments
+  when executing tests. This works in the same fashion as the `ende test`
   subcommand.
-- `deno.testing.enable` - A binary flag that enables or disables the testing
+- `ende.testing.enable` - A binary flag that enables or disables the testing
   server
 
 ### Testing notifications
 
 The server will send notifications to the client under certain conditions.
 
-#### deno/testModule
+#### ende/testModule
 
 When a module containing tests is discovered by the server, it will notify the
-client by sending a `deno/testModule` notification along with a payload of
+client by sending a `ende/testModule` notification along with a payload of
 `TestModuleParams`.
 
-Deno structures in this fashion:
+Ende structures in this fashion:
 
 - A module can contain _n_ tests.
 - A test can contain _n_ steps.
 - A step can contain _n_ steps.
 
-When Deno does static analysis of a test module, it attempts to identify any
-tests and test steps. Because of the dynamic way tests can be declared in Deno,
+When Ende does static analysis of a test module, it attempts to identify any
+tests and test steps. Because of the dynamic way tests can be declared in Ende,
 they cannot always be statically identified and can only be identified when the
 module is executed. The notification is designed to handle both of these
 situations when updating the client. When tests are discovered statically, the
@@ -333,10 +334,10 @@ interface TestModuleParams {
 }
 ```
 
-#### deno/testModuleDelete
+#### ende/testModuleDelete
 
 When a test module is deleted that the server is observing, the server will
-issue a `deno/testModuleDelete` notification. When receiving the notification
+issue a `ende/testModuleDelete` notification. When receiving the notification
 the client should remove the representation of the test module and all of its
 children tests and test steps.
 
@@ -347,10 +348,10 @@ interface TestModuleDeleteParams {
 }
 ```
 
-#### deno/testRunProgress
+#### ende/testRunProgress
 
-When a [`deno/testRun`](#denotestrun) is requested from the client, the server
-will support progress of that test run via the `deno/testRunProgress`
+When a [`ende/testRun`](#endetestrun) is requested from the client, the server
+will support progress of that test run via the `ende/testRunProgress`
 notification.
 
 The client should process these messages and update any UI representation.
@@ -359,12 +360,12 @@ The state change is represented in the `.message.kind` property of the
 `TestRunProgressParams`. The states are:
 
 - `"enqueued"` - A test or test step has been enqueued for testing.
-- `"skipped"` - A test or test step was skipped. This occurs when the Deno test
+- `"skipped"` - A test or test step was skipped. This occurs when the Ende test
   has the `ignore` option set to `true`.
 - `"started"` - A test or test step has started.
 - `"passed"` - A test or test step has passed.
 - `"failed"` - A test or test step has failed. This is intended to indicate an
-  error with the test harness instead of the test itself, but Deno currently
+  error with the test harness instead of the test itself, but Ende currently
   does not support this distinction.
 - `"errored"` - The test or test step has errored. Additional information about
   the error will be in the `.message.messages` property.
@@ -415,7 +416,7 @@ interface TestFailedErrored {
   /** The state change that has occurred to a specific test or test step.
    *
    * - `"failed"` - The test failed to run properly, versus the test erroring.
-   *   currently the Deno language server does not support this.
+   *   currently the Ende language server does not support this.
    * - `"errored"` - The test errored.
    */
   type: "failed" | "errored";
@@ -482,14 +483,14 @@ interface TestRunProgressParams {
 
 The server handles two different requests:
 
-#### deno/testRun
+#### ende/testRun
 
 To request the language server to perform a set of tests, the client sends a
-`deno/testRun` request, which includes that ID of the test run to be used in
+`ende/testRun` request, which includes that ID of the test run to be used in
 future responses to the client, the type of the test run, and any test modules
 or tests to include or exclude.
 
-Currently Deno only supports the `"run"` kind of test run. Both `"debug"` and
+Currently Ende only supports the `"run"` kind of test run. Both `"debug"` and
 `"coverage"` are planned to be supported in the future.
 
 When there are no test modules or tests that are included, it implies that all
@@ -507,7 +508,7 @@ interface TestRunRequestParams {
   /** The id of the test run to be used for future messages. */
   id: number;
 
-  /** The run kind. Currently Deno only supports `"run"` */
+  /** The run kind. Currently Ende only supports `"run"` */
   kind: "run" | "coverage" | "debug";
 
   /** Test modules or tests to exclude from the test run. */
@@ -531,10 +532,10 @@ interface TestRunResponseParams {
 }
 ```
 
-#### deno/testRunCancel
+#### ende/testRunCancel
 
 If a client wishes to cancel a currently running test run, it sends a
-`deno/testRunCancel` request with the test ID to cancel. The response back will
+`ende/testRunCancel` request with the test ID to cancel. The response back will
 be a boolean of `true` if the test is cancelled or `false` if it was not
 possible. Appropriate test progress notifications will still be sent as the test
 is being cancelled.

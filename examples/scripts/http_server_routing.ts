@@ -30,5 +30,5 @@ function handler(req: Request): Response {
   });
 }
 
-// To start the server on the default port, call `Deno.serve` with the handler.
-Deno.serve(handler);
+// To start the server on the default port, call `Ende.serve` with the handler.
+Ende.serve(handler);

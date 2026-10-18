@@ -3,21 +3,21 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/front-matter} @std/front-matter on JSR
+ * @resource {https://jsr.io/@ende/front-matter} @ende/front-matter on JSR
  * @group Encoding
  *
  * Front matter is a metadata block at the top of a markdown file, fenced
  * by --- lines and usually written in YAML. Static site generators and
- * blog engines use it for titles, dates, and tags. The @std/front-matter
+ * blog engines use it for titles, dates, and tags. The @ende/front-matter
  * module parses it and hands back the document body separately.
  */
-import { extractYaml, test } from "jsr:@std/front-matter";
+import { extractYaml, test } from "jsr:@ende/front-matter";
 
 // A typical markdown document with YAML front matter.
 const markdown = `---
 title: My first post
 date: 2026-06-12
-tags: [deno, markdown]
+tags: [ende, markdown]
 draft: false
 ---
 
@@ -42,12 +42,12 @@ type PostMeta = {
 const { attrs, body } = extractYaml<PostMeta>(markdown);
 
 console.log(attrs.title); // My first post
-console.log(attrs.tags); // [ "deno", "markdown" ]
+console.log(attrs.tags); // [ "ende", "markdown" ]
 console.log(body.trim().split("\n")[0]); // # Hello
 
 // JSON and TOML front matter have matching extractors, fenced the same
 // way but with the format name on the fence.
-import { extractToml } from "jsr:@std/front-matter";
+import { extractToml } from "jsr:@ende/front-matter";
 
 const tomlDoc = `---toml
 title = "TOML works too"

@@ -1,7 +1,7 @@
 ---
 last_modified: 2025-07-11
-title: "Distributed Tracing with Context Propagation in Deno"
-description: "Implement end-to-end distributed tracing with automatic context propagation in Deno applications. This tutorial covers creating traced services, automatic propagation of trace context, and visualizing distributed traces."
+title: "Distributed Tracing with Context Propagation in Ende"
+description: "Implement end-to-end distributed tracing with automatic context propagation in Ende applications. This tutorial covers creating traced services, automatic propagation of trace context, and visualizing distributed traces."
 url: /examples/otel_span_propagation_tutorial/
 ---
 
@@ -10,11 +10,11 @@ services communicating with each other. When debugging issues or optimizing
 performance in these systems, it's crucial to be able to trace requests as they
 flow through different services. This is where distributed tracing comes in.
 
-As of Deno 2.3, the runtime now automatically preserves trace context across
-service boundaries, making end-to-end tracing in distributed systems simpler and
-more powerful. This means that when one service makes a request to another, the
-trace context is automatically propagated, allowing you to see the entire
-request flow as a single trace.
+The runtime now automatically preserves trace context across service boundaries,
+making end-to-end tracing in distributed systems simpler and more powerful. This
+means that when one service makes a request to another, the trace context is
+automatically propagated, allowing you to see the entire request flow as a
+single trace.
 
 ## Setting up a distributed system
 
@@ -29,12 +29,10 @@ We'll set up a simple HTTP server that responds to GET requests with a JSON
 message:
 
 ```ts title="server.ts"
-import { trace } from "npm:@opentelemetry/api@1";
+const tracer = Ende.telemetry.tracerProvider.getTracer("api-server", "1.0.0");
 
-const tracer = trace.getTracer("api-server", "1.0.0");
-
-// Create a simple API server with Deno.serve
-Deno.serve({ port: 8000 }, (req) => {
+// Create a simple API server with Ende.serve
+Ende.serve({ port: 8000 }, (req) => {
   return tracer.startActiveSpan("process-api-request", async (span) => {
     // Add attributes to the span for better context
     span.setAttribute("http.route", "/");
@@ -66,9 +64,7 @@ Deno.serve({ port: 8000 }, (req) => {
 Now, let's create a client that will make requests to our server:
 
 ```ts title="client.ts"
-import { SpanStatusCode, trace } from "npm:@opentelemetry/api@1";
-
-const tracer = trace.getTracer("api-client", "1.0.0");
+const tracer = Ende.telemetry.tracerProvider.getTracer("api-client", "1.0.0");
 
 // Create a parent span for the client operation
 await tracer.startActiveSpan("call-api", async (parentSpan) => {
@@ -93,7 +89,7 @@ await tracer.startActiveSpan("call-api", async (parentSpan) => {
       parentSpan.recordException(error);
     }
     parentSpan.setStatus({
-      code: SpanStatusCode.ERROR,
+      code: 2, // SpanStatusCode.ERROR
       message: error instanceof Error ? error.message : String(error),
     });
   } finally {
@@ -107,8 +103,8 @@ await tracer.startActiveSpan("call-api", async (parentSpan) => {
 Both the client and server code already include basic OpenTelemetry
 instrumentation:
 
-1. Create a tracer - both files create a tracer using `trace.getTracer()` with a
-   name and version.
+1. Create a tracer - both files create a tracer using
+   `Ende.telemetry.tracerProvider.getTracer()` with a name and version.
 
 2. Create spans - We use `startActiveSpan()` to create spans that represent
    operations.
@@ -126,11 +122,11 @@ code there is a fetch call to the server:
 const response = await fetch("http://localhost:8000/");
 ```
 
-Since this fetch call happens inside an active span, Deno automatically creates
+Since this fetch call happens inside an active span, Ende automatically creates
 a child span for the fetch operation and Injects the trace context into the
 outgoing request headers.
 
-When the server receives this request, Deno extracts the trace context from the
+When the server receives this request, Ende extracts the trace context from the
 request headers and establishes the server span as a child of the client's span.
 
 ## Running the example
@@ -138,14 +134,14 @@ request headers and establishes the server span as a child of the client's span.
 To run this example, first, start the server, giving your otel service a name:
 
 ```sh
-OTEL_DENO=true OTEL_SERVICE_NAME=server deno run --allow-net server.ts
+OTEL_ENDE=true OTEL_SERVICE_NAME=server ende run --allow-net server.ts
 ```
 
 Then, in another terminal, run the client, giving the client a different service
 name to make observing the propagation clearer:
 
 ```sh
-OTEL_DENO=true OTEL_SERVICE_NAME=client deno run --allow-net client.ts
+OTEL_ENDE=true OTEL_SERVICE_NAME=client ende run --allow-net client.ts
 ```
 
 You should see:
@@ -171,8 +167,8 @@ For example, in Grafana, the trace visualization may look like this:
 
 ![Viewing expanded traces in Grafana](./images/how-to/grafana/propagation.png)
 
-🦕 Now that you understand distributed tracing with Deno, you could extend this
+🦕 Now that you understand distributed tracing with Ende, you could extend this
 to more complex systems with multiple services and async operations.
 
-With Deno's automatic context propagation, implementing distributed tracing in
+With Ende's automatic context propagation, implementing distributed tracing in
 your applications has never been easier!

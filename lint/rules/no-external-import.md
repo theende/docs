@@ -14,9 +14,9 @@ Disallows the use of external imports.
     places in your project.
 - When should it be used?
   - To avoid it you could use "deps.ts convention" or
-    [import maps](https://docs.deno.com/runtime/manual/basics/import_maps),
-    where you import all external modules and then re-export them or assign
-    aliases to them.
+    [import maps](https://docs.ende.sh/runtime/manual/basics/import_maps), where
+    you import all external modules and then re-export them or assign aliases to
+    them.
   - If you'd like to follow the "deps.ts convention" or use import maps.
 
 **Invalid:**
@@ -42,4 +42,4 @@ export {
 ```
 
 you can refer to the explanation of this convention here
-https://docs.deno.com/runtime/manual/basics/modules/#it-seems-unwieldy-to-import-urls-everywhere
+https://docs.ende.sh/runtime/manual/basics/modules/#it-seems-unwieldy-to-import-urls-everywhere

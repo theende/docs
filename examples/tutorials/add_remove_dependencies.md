@@ -1,37 +1,34 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-10-18
 title: "Add and remove dependencies"
-description: "Manage project dependencies with deno add and deno remove: npm and JSR packages, version pinning, dev dependencies, and aliasing packages in your import map."
+description: "Manage project dependencies with ende add and ende remove: JSR packages, version pinning, and aliasing packages in your import map."
 url: /examples/add_remove_dependencies_tutorial/
 ---
 
-Deno manages dependencies through your project's `deno.json` import map, or
-through `package.json` when you have one. The `deno add` and `deno remove`
-commands edit those files for you, and `deno install` with a package argument
-does the same.
+Ende manages dependencies through your project's `ende.json` import map. The
+`ende add` and `ende remove` commands edit it for you, and `ende install` with a
+package argument does the same.
 
 ## Adding packages
 
-Unprefixed package names are treated as npm packages. Use the `jsr:` prefix for
-JSR packages:
+Use the `jsr:` prefix for [JSR](https://jsr.io) packages:
 
 ```sh
-$ deno add express jsr:@std/path
-Add npm:express@5.2.1
-Add jsr:@std/path@1.1.5
+$ ende add jsr:@ende/path jsr:@ende/fmt
+Add jsr:@ende/path@^2026.10.15
+Add jsr:@ende/fmt@^2026.10.15
 ```
 
-`deno install express` is equivalent: it records the dependency the same way and
-installs everything in one step.
+`ende install jsr:@ende/path` is equivalent: it records the dependency the same
+way and installs everything in one step.
 
-Both end up in the `imports` map of `deno.json`, with a semver-compatible caret
-range:
+Both end up in the `imports` map of `ende.json`, with a caret range:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "imports": {
-    "@std/path": "jsr:@std/path@^1.1.5",
-    "express": "npm:express@^5.2.1"
+    "@ende/fmt": "jsr:@ende/fmt@^2026.10.15",
+    "@ende/path": "jsr:@ende/path@^2026.10.15"
   }
 }
 ```
@@ -39,92 +36,46 @@ range:
 Import them by their bare name anywhere in the project:
 
 ```ts
-import express from "express";
-import { join } from "@std/path";
+import { join } from "@ende/path";
+import { green } from "@ende/fmt/colors";
 ```
 
 To pin an exact version instead of a caret range, pass `--save-exact`. To
-request a specific version or tag, spell it out:
+request a specific version, spell it out:
 
 ```sh
-deno add --save-exact npm:express@4.21.2
-deno add npm:typescript@next
+ende add --save-exact jsr:@ende/path@2026.10.15
 ```
-
-## Where dependencies are written
-
-If the project contains a `package.json`, npm packages are added to its
-`dependencies` instead of `deno.json`, which is handy in projects shared with
-Node.js tooling. You can force this with `--package-json`.
-
-Dev dependencies only exist in the `package.json` world:
-
-```sh
-deno add --dev npm:typescript
-```
-
-> [!NOTE]
-> Without a `package.json`, the `--dev` flag has no effect: `deno.json` has a
-> single `imports` map, so the package is added as a regular import.
 
 ## Aliasing a package
 
-The import map maps any name you like to any specifier. This installs a fork
-under the name of the original, so existing imports keep working:
+The import map maps any name you like to any specifier. Aliases are also the way
+to use two versions of one package side by side:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "imports": {
-    "lodash": "npm:lodash-es@^4.17.21"
+    "@ende/path": "jsr:@ende/path@^2026.10.15",
+    "path-old": "jsr:@ende/path@2026.10.14"
   }
 }
 ```
 
-Aliases are also the way to use two versions of one package side by side:
-
-```json title="deno.json"
-{
-  "imports": {
-    "preact": "npm:preact@^10.27.2",
-    "preact-canary": "npm:preact@11.0.0-experimental.4"
-  }
-}
-```
-
-## Overriding transitive dependencies
-
-The import map only names your direct dependencies. To force a specific version
-of a package somewhere deeper in the tree, use the `overrides` field in
-`package.json`, the same way npm does:
-
-```json title="package.json"
-{
-  "dependencies": {
-    "debug": "4.4.3"
-  },
-  "overrides": {
-    "ms": "2.1.2"
-  }
-}
-```
-
-`deno install` resolves `ms` to 2.1.2 everywhere it appears, and records that in
-the lockfile. For overriding with a local copy of a package, or remapping your
-own imports rather than the dependency tree, see
-[Overriding dependencies](/runtime/packages/#overriding-dependencies) and
+For overriding a dependency with a local copy, or remapping your own imports,
+see [Overriding dependencies](/runtime/packages/#overriding-dependencies) and
 [Re-map import paths](/examples/import_maps_tutorial/).
 
 ## Removing packages
 
-`deno remove` deletes the entry by its import-map name (not the package name, if
+`ende remove` deletes the entry by its import-map name (not the package name, if
 they differ):
 
 ```sh
-$ deno remove express
-Removed express
+$ ende remove @ende/fmt
+Removed @ende/fmt
 ```
 
-The lockfile keeps records of removed packages until you run `deno install`
+The lockfile keeps records of removed packages until you run `ende install`
 again; see
 [the lockfile documentation](/runtime/packages/#lockfile-and-reproducible-installs)
-for how `deno.lock` tracks all of this.
+for how `ende.lock` tracks all of this.

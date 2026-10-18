@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N -R <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.connectTls} Doc: Deno.connectTls
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.connectTls} Doc: Ende.connectTls
  * @resource {/examples/tls_listener} Example: TCP/TLS Listener
  * @group Network
  *
@@ -11,12 +11,12 @@
  */
 
 // Read a CA Certificate from the file system
-const caCert = await Deno.readTextFile("./root.pem");
+const caCert = await Ende.readTextFile("./root.pem");
 
 // Establish a connection to our TCP server using TLS that is currently being run on localhost port 443.
-// We use a custom CA root certificate here. If we remove this option, Deno defaults to using
+// We use a custom CA root certificate here. If we remove this option, Ende defaults to using
 // Mozilla's root certificates.
-const conn = await Deno.connectTls({
+const conn = await Ende.connectTls({
   hostname: "127.0.0.1",
   port: 443,
   caCerts: [caCert],

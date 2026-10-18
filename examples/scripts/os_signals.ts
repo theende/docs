@@ -3,10 +3,10 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.addSignalListener} Doc: Deno.addSignalListener
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.addSignalListener} Doc: Ende.addSignalListener
  * @group System
  *
- * You can listen for OS signals using the `Deno.addSignalListener` function.
+ * You can listen for OS signals using the `Ende.addSignalListener` function.
  * This allows you to do things like gracefully shutdown a server when a
  * `SIGINT` signal is received.
  */
@@ -18,12 +18,12 @@ let i = 0;
 // We isolate the signal handler function so that we can remove it later.
 function sigIntHandler() {
   console.log("interrupted! your number was", i);
-  Deno.exit();
+  Ende.exit();
 }
 
 // Then, we can listen for the `SIGINT` signal,
 // which is sent when the user presses Ctrl+C.
-Deno.addSignalListener("SIGINT", sigIntHandler);
+Ende.addSignalListener("SIGINT", sigIntHandler);
 
 // While we're waiting for the signal, we can do other things,
 // like count seconds, or start a server.
@@ -34,6 +34,6 @@ const interval = setInterval(() => {
 // And, after 10 seconds, we can exit and remove the signal listener.
 setTimeout(() => {
   clearInterval(interval);
-  Deno.removeSignalListener("SIGINT", sigIntHandler);
+  Ende.removeSignalListener("SIGINT", sigIntHandler);
   console.log("done! it has been 10 seconds");
 }, 10_000);

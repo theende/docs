@@ -1,20 +1,20 @@
 ---
 last_modified: 2026-06-12
 title: "CPU profiling"
-description: "Profile Deno programs with the built-in CPU profiler: collecting profiles, Markdown and flamegraph reports, Chrome DevTools analysis, and profiling tips."
+description: "Profile Ende programs with the built-in CPU profiler: collecting profiles, Markdown and flamegraph reports, Chrome DevTools analysis, and profiling tips."
 ---
 
-Deno includes built-in support for V8 CPU profiling, which helps you identify
+Ende includes built-in support for V8 CPU profiling, which helps you identify
 performance bottlenecks in your code. Use the `--cpu-prof` flag to capture a CPU
 profile during program execution:
 
 ```sh
-deno run --cpu-prof your_script.ts
-# or with deno eval
-deno eval --cpu-prof "for (let i = 0; i < 1e8; i++) {}"
+ende run --cpu-prof your_script.ts
+# or with ende eval
+ende eval --cpu-prof "for (let i = 0; i < 1e8; i++) {}"
 ```
 
-When your program exits, Deno will write a `.cpuprofile` file to the current
+When your program exits, Ende will write a `.cpuprofile` file to the current
 directory (e.g., `CPU.1769017882255.25986.cpuprofile`). This file can be loaded
 into Chrome DevTools (Performance tab) or other V8 profile viewers for analysis.
 
@@ -42,13 +42,13 @@ filename. You can control where and how profiles are saved:
 
 ```sh
 # Save profiles to a specific directory
-deno run --cpu-prof --cpu-prof-dir=./profiles your_script.ts
+ende run --cpu-prof --cpu-prof-dir=./profiles your_script.ts
 
 # Use a custom filename
-deno run --cpu-prof --cpu-prof-name=my-profile.cpuprofile your_script.ts
+ende run --cpu-prof --cpu-prof-name=my-profile.cpuprofile your_script.ts
 
 # Increase sampling frequency for more detail (default: 1000μs)
-deno run --cpu-prof --cpu-prof-interval=100 your_script.ts
+ende run --cpu-prof --cpu-prof-interval=100 your_script.ts
 ```
 
 A lower `--cpu-prof-interval` captures more samples per second, giving finer
@@ -74,7 +74,7 @@ The `--cpu-prof-md` flag generates a Markdown summary that's easy to read
 without loading the profile into DevTools:
 
 ```sh
-deno run -A --cpu-prof --cpu-prof-md server.js
+ende run -A --cpu-prof --cpu-prof-md server.js
 ```
 
 This creates both a `.cpuprofile` file and a `.md` file with a report like:
@@ -129,7 +129,7 @@ The `--cpu-prof-flamegraph` flag generates a self-contained, interactive SVG
 flamegraph that you can open directly in a browser — no external tools required:
 
 ```sh
-deno run --cpu-prof --cpu-prof-flamegraph your_script.ts
+ende run --cpu-prof --cpu-prof-flamegraph your_script.ts
 ```
 
 This creates both a `.cpuprofile` file and an `.svg` file. Open the SVG in any
@@ -142,10 +142,10 @@ browser to explore the profile interactively:
 - **Invert** checkbox to flip into an icicle graph (root at top)
 - **Hover** any frame to see the function name and sample count
 
-The flamegraph also works with `deno eval`:
+The flamegraph also works with `ende eval`:
 
 ```sh
-deno eval --cpu-prof --cpu-prof-flamegraph "for (let i = 0; i < 1e8; i++) {}"
+ende eval --cpu-prof --cpu-prof-flamegraph "for (let i = 0; i < 1e8; i++) {}"
 ```
 
 ## Profiling tips
@@ -164,7 +164,7 @@ deno eval --cpu-prof --cpu-prof-flamegraph "for (let i = 0; i < 1e8; i++) {}"
   `--cpu-prof-flamegraph` together to get all three outputs (`.cpuprofile`,
   `.md`, and `.svg`) in a single run:
   ```sh
-  deno run --cpu-prof --cpu-prof-md --cpu-prof-flamegraph your_script.ts
+  ende run --cpu-prof --cpu-prof-md --cpu-prof-flamegraph your_script.ts
   ```
 - **Filter out noise**: Short-lived programs may show startup overhead (module
   loading, JIT compilation) dominating the profile. For more accurate results,

@@ -3,33 +3,33 @@
  * @difficulty beginner
  * @tags cli
  * @run -R -W <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.writeFile} Doc: Deno.writeFile
- * @resource {https://docs.deno.com/api/deno/~/Deno.create} Doc: Deno.create
- * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.writeFile} Doc: Ende.writeFile
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.create} Doc: Ende.create
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.FsFile} Doc: Ende.FsFile
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder} MDN: TextEncoder
  * @group File System
  *
- * Many applications need to write files to disk. Deno provides a simple
+ * Many applications need to write files to disk. Ende provides a simple
  * interface for writing files.
  */
 
 // The easiest way to write a file, is to dump an entire buffer into the file at
 // once. Here is a simple example that writes an array of bytes to a file.
 const bytes = new Uint8Array([72, 101, 108, 108, 111]);
-await Deno.writeFile("hello.txt", bytes, { mode: 0o644 });
+await Ende.writeFile("hello.txt", bytes, { mode: 0o644 });
 
 // You can also write a string instead of a byte array.
-await Deno.writeTextFile("hello.txt", "Hello World");
+await Ende.writeTextFile("hello.txt", "Hello World");
 
 // To append to a text file, set the `append` parameter to `true`.
-await Deno.writeTextFile("server.log", "Request: ...", { append: true });
+await Ende.writeTextFile("server.log", "Request: ...", { append: true });
 
 // Synchronous writing is also supported.
-Deno.writeFileSync("hello.txt", bytes);
-Deno.writeTextFileSync("hello.txt", "Hello World");
+Ende.writeFileSync("hello.txt", bytes);
+Ende.writeTextFileSync("hello.txt", "Hello World");
 
 // For more granular writes, open a new file for writing.
-const file = await Deno.create("hello.txt");
+const file = await Ende.create("hello.txt");
 
 // You can write chunks of data to the file.
 const written = await file.write(bytes);

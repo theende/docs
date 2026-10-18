@@ -3,16 +3,16 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/jsonc} Doc: @std/jsonc
- * @resource {https://docs.deno.com/runtime/fundamentals/configuration/} Doc: deno.json configuration
+ * @resource {https://jsr.io/@ende/jsonc} Doc: @ende/jsonc
+ * @resource {https://docs.ende.sh/runtime/fundamentals/configuration/} Doc: ende.json configuration
  * @group Encoding
  *
  * JSONC is JSON extended with comments and trailing commas, which makes it
- * a friendlier format for configuration files that humans edit. Deno reads
- * its own deno.jsonc config file in this format. The Standard Library
- * provides a parser for it in jsr:@std/jsonc.
+ * a friendlier format for configuration files that humans edit. Ende reads
+ * its own ende.jsonc config file in this format. The Standard Library
+ * provides a parser for it in jsr:@ende/jsonc.
  */
-import { parse } from "jsr:@std/jsonc";
+import { parse } from "jsr:@ende/jsonc";
 
 // This config uses line comments, a block comment and trailing commas.
 // All three are valid JSONC.

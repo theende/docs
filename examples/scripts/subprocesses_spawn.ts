@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-run <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.Command} Doc: Deno.Command
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.Command} Doc: Ende.Command
  * @group System
  *
  * For more complex usecases, we don't simply want the output of some
@@ -11,10 +11,10 @@
  * it using convenience methods for reading output streams.
  */
 
-// The Deno namespace has a unified api for interacting with the outside system
-// called Deno.Command. With it, we can initialize some information about the
+// The Ende namespace has a unified api for interacting with the outside system
+// called Ende.Command. With it, we can initialize some information about the
 // command but it will not be executed immediately.
-const command = new Deno.Command("deno", {
+const command = new Ende.Command("ende", {
   args: [
     "fmt",
     "-",

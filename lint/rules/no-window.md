@@ -5,7 +5,7 @@ tags: [recommended]
 
 Disallows the use of the `window` object.
 
-The `window` global is no longer available in Deno. Deno does not have a window
+The `window` global is no longer available in Ende. Ende does not have a window
 and `typeof window === "undefined"` is often used to tell if the code is running
 in the browser.
 
@@ -14,7 +14,7 @@ in the browser.
 ```typescript
 const a = await window.fetch("https://deno.land");
 
-const b = window.Deno.metrics();
+const b = window.Ende.metrics();
 console.log(window);
 
 window.addEventListener("load", () => {
@@ -29,9 +29,9 @@ const a1 = await fetch("https://deno.land");
 const a2 = await globalThis.fetch("https://deno.land");
 const a3 = await self.fetch("https://deno.land");
 
-const b1 = Deno.metrics();
-const b2 = globalThis.Deno.metrics();
-const b3 = self.Deno.metrics();
+const b1 = Ende.metrics();
+const b2 = globalThis.Ende.metrics();
+const b3 = self.Ende.metrics();
 console.log(globalThis);
 
 addEventListener("load", () => {

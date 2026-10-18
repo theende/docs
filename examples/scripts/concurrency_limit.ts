@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/async/doc/~/pooledMap} Doc: @std/async pooledMap
- * @resource {https://jsr.io/@std/async/doc/~/delay} Doc: @std/async delay
+ * @resource {https://jsr.io/@ende/async/doc/~/pooledMap} Doc: @ende/async pooledMap
+ * @resource {https://jsr.io/@ende/async/doc/~/delay} Doc: @ende/async delay
  * @group Standard library
  *
  * Firing hundreds of requests at once can overwhelm a server or hit rate
@@ -14,8 +14,8 @@
  * come back in.
  */
 
-import { pooledMap } from "jsr:@std/async/pool";
-import { delay } from "jsr:@std/async/delay";
+import { pooledMap } from "jsr:@ende/async/pool";
+import { delay } from "jsr:@ende/async/delay";
 
 // Track how many tasks run at once. The maximum observed value proves
 // that the pool never exceeds its limit.

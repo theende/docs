@@ -1,33 +1,26 @@
 ---
 last_modified: 2026-06-14
 title: "Continuous integration"
-description: "Guide to setting up continuous integration (CI) pipelines for Deno projects. Learn how to configure GitHub Actions workflows, run tests and linting in CI, handle cross-platform builds, and optimize pipeline performance with caching."
+description: "Guide to setting up continuous integration (CI) pipelines for Ende projects. Learn how to configure GitHub Actions workflows, run tests and linting in CI, handle cross-platform builds, and optimize pipeline performance with caching."
 oldUrl: /runtime/manual/advanced/continuous_integration
 ---
 
-Deno's built-in tools make it easy to set up Continuous Integration (CI)
+Ende's built-in tools make it easy to set up Continuous Integration (CI)
 pipelines for your projects. [Testing](/runtime/test/),
 [linting and formatting](/runtime/lint_and_format/) your code can all be done
-with the corresponding commands `deno test`, `deno lint` and `deno fmt`. In
+with the corresponding commands `ende test`, `ende lint` and `ende fmt`. In
 addition, you can generate code coverage reports from test results with
-`deno coverage` in pipelines.
+`ende coverage` in pipelines.
 
 ## Setting up a basic pipeline
 
-> [!TIP]
-> Looking for a ready-made GitHub Actions workflow? GitHub provides an official
-> starter workflow for Deno that you can add to your repository:
-> <https://github.com/actions/starter-workflows/blob/main/ci/deno.yml>.
->
-> In GitHub, open the Actions tab, choose "New workflow", and search for "Deno"
-> to use the template.
-
-You can set up basic pipelines for Deno projects in GitHub Actions. The concepts
+You can set up basic pipelines for Ende projects in GitHub Actions. The concepts
 explained on this page largely apply to other CI providers as well, such as
 Azure Pipelines, CircleCI or GitLab.
 
-Building a pipeline for Deno generally starts with checking out the repository
-and installing Deno:
+Building a pipeline for Ende generally starts with checking out the repository
+and installing Ende with its
+[install script](/runtime/getting_started/installation/):
 
 ```yaml
 name: Build
@@ -39,42 +32,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x # Run with latest stable Deno.
+      - name: Install Ende
+        run: |
+          curl -fsSL https://ende.sh/install.sh | sh
+          echo "$HOME/.ende/bin" >> "$GITHUB_PATH"
 ```
 
-To expand the workflow, add any of the `deno` subcommands that you might need:
+To expand the workflow, add any of the `ende` subcommands that you might need:
 
 ```yaml
-# Install the locked dependencies as a single reproducible step
-# (Deno 2.8+). Equivalent to `deno install --frozen` plus npm
-# lifecycle-script handling.
-- run: deno ci
+# Install the locked dependencies as a single reproducible step.
+- run: ende ci
 
-# Check if the code is formatted according to Deno's default
+# Check if the code is formatted according to Ende's default
 # formatting conventions.
-- run: deno fmt --check
+- run: ende fmt --check
 
 # Scan the code for syntax errors and style issues. If
 # you want to use a custom linter configuration you can add a configuration file with --config <myconfig>
-- run: deno lint
+- run: ende lint
 
 # Run all test files in the repository and collect code coverage. The example
 # runs with all permissions, but it is recommended to run with the minimal permissions your program needs (for example --allow-read).
-- run: deno test --allow-all --coverage=cov/
+- run: ende test --allow-all --coverage=cov/
 
-# This generates a report from the collected coverage in `deno test --coverage`. It is
+# This generates a report from the collected coverage in `ende test --coverage`. It is
 # stored as a .lcov file which integrates well with services such as Codecov, Coveralls and Travis CI.
-- run: deno coverage --lcov cov/ > cov.lcov
+- run: ende coverage --lcov cov/ > cov.lcov
 ```
 
-See the [`deno ci`](/runtime/reference/cli/ci/) reference for exactly what it
+See the [`ende ci`](/runtime/reference/cli/ci/) reference for exactly what it
 installs and the flags it accepts.
 
 ## Cross-platform workflows
 
-As a Deno module maintainer, you probably want to know that your code works on
+As an Ende module maintainer, you probably want to know that your code works on
 all of the major operating systems in use today: Linux, MacOS and Windows. A
 cross-platform workflow can be achieved by running a matrix of parallel jobs,
 each one running the build on a different OS:
@@ -87,14 +79,25 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - run: deno test --allow-all --coverage cov/
+      - uses: actions/checkout@v4
+      - name: Install Ende (Linux, macOS)
+        if: runner.os != 'Windows'
+        run: |
+          curl -fsSL https://ende.sh/install.sh | sh
+          echo "$HOME/.ende/bin" >> "$GITHUB_PATH"
+      - name: Install Ende (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          irm https://ende.sh/install.ps1 | iex
+          "$HOME\.ende\bin" >> $env:GITHUB_PATH
+      - run: ende test --allow-all --coverage cov/
 ```
 
 > [!CAUTION]
 > Note: GitHub Actions has a known
 > [issue](https://github.com/actions/checkout/issues/135) with handling
 > Windows-style line endings (CRLF). This may cause issues when running
-> `deno fmt` in a pipeline with jobs that run on `windows`. To prevent this,
+> `ende fmt` in a pipeline with jobs that run on `windows`. To prevent this,
 > configure the Actions runner to use Linux-style line endings before running
 > the `actions/checkout@v4` step:
 >
@@ -103,27 +106,7 @@ jobs:
 > git config --system core.eol lf
 > ```
 
-If you are working with experimental or unstable Deno APIs, you can include a
-matrix job running the canary version of Deno. This can help to spot breaking
-changes early on:
-
-```yaml
-jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.canary }} # Continue in case the canary run does not succeed
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        deno-version: [v2.x]
-        canary: [false]
-        include:
-          - deno-version: canary
-            os: ubuntu-latest
-            canary: true
-```
-
-## Speeding up Deno pipelines
+## Speeding up Ende pipelines
 
 ### Reducing repetition
 
@@ -136,7 +119,7 @@ coverage generation and upload steps only on the `ubuntu` (Linux) runner:
 ```yaml
 - name: Generate coverage report
   if: matrix.os == 'ubuntu-latest'
-  run: deno coverage --lcov cov > cov.lcov
+  run: ende coverage --lcov cov > cov.lcov
 
 - name: Upload coverage to Coveralls.io
   if: matrix.os == 'ubuntu-latest'
@@ -149,66 +132,35 @@ coverage generation and upload steps only on the `ubuntu` (Linux) runner:
 
 ### Caching dependencies
 
-As a project grows in size, more and more dependencies tend to be included. Deno
+As a project grows in size, more and more dependencies tend to be included. Ende
 will download these dependencies during testing and if a workflow is run many
 times a day, this can become a time-consuming process. A common solution to
 speed things up is to cache dependencies so that they do not need to be
 downloaded anew.
 
-Deno stores dependencies locally in a cache directory. In a pipeline the cache
-can be preserved between workflows by turning on the `cache: true` option on
-`denoland/setup-deno`:
+Ende stores dependencies in its cache directory, which the `ENDE_DIR`
+environment variable sets. Point it at a directory in the workspace and cache it
+with [`actions/cache`](https://github.com/actions/cache), keyed by the lockfile:
 
 ```yaml
+env:
+  ENDE_DIR: ${{ github.workspace }}/.ende-cache
+
 steps:
   - uses: actions/checkout@v4
-  - uses: denoland/setup-deno@v2
+  - name: Install Ende
+    run: |
+      curl -fsSL https://ende.sh/install.sh | sh
+      echo "$HOME/.ende/bin" >> "$GITHUB_PATH"
+  - uses: actions/cache@v4
     with:
-      cache: true
+      path: ${{ env.ENDE_DIR }}
+      key: ende-${{ runner.os }}-${{ hashFiles('**/ende.lock') }}
+  - run: ende ci
 ```
 
 At first, when this workflow runs the cache is still empty and commands like
-`deno test` will still have to download dependencies, but when the job succeeds
-the contents of cached dependencies are saved and any subsequent runs can
-restore them from cache instead of re-downloading.
-
-To demonstrate, let's say you have a project that uses the logger from
-[`@std/log`](/runtime/reference/std/log/):
-
-```json title="deno.json"
-{
-  "imports": {
-    "@std/log": "jsr:@std/log@0.224.5"
-  }
-}
-```
-
-In order to increment this version, you can update the dependency and then
-reload the cache and update the lockfile locally:
-
-```console
-deno install --reload --frozen=false
-```
-
-You should see changes in the lockfile's contents after running this. When this
-is committed and run through the pipeline, you should then see a new cache and
-using it in any runs that follow.
-
-By default, the cache is automatically keyed by:
-
-- the github
-  [job_id](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_id)
-- the runner os and architecture
-- a hash of the `deno.lock` files in the project
-
-It is possible to customize the default hash
-(`${{ hashFiles('**/deno.lock') }}`) used as part of the cache key via the
-`cache-hash` input.
-
-```yaml
-- uses: denoland/setup-deno@v2
-  with:
-    # setting `cache-hash` implies `cache: true` and will replace
-    # the default cache-hash of `${{ hashFiles('**/deno.lock') }}`
-    cache-hash: ${{ hashFiles('**/deno.json') }}
-```
+`ende test` will still have to download dependencies, but when the job succeeds
+the cache directory is saved and any subsequent runs restore it instead of
+re-downloading. Updating a dependency changes `ende.lock`, which starts a new
+cache.

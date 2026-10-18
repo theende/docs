@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/media-types} Doc: @std/media-types
+ * @resource {https://jsr.io/@ende/media-types} Doc: @ende/media-types
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types} MDN: MIME types
  * @group File System
  *
@@ -11,8 +11,8 @@
  * library maps file extensions to MIME types. This example looks up the
  * type for a few file names.
  */
-import { contentType } from "jsr:@std/media-types";
-import { extname } from "node:path";
+import { contentType } from "jsr:@ende/media-types";
+import { extname } from "jsr:@ende/path@^2026.10.15";
 
 // Look up the MIME type for a file name by its extension.
 console.log(contentType(extname("photo.png"))); // image/png

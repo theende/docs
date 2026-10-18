@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/bytes/doc} Doc: @std/bytes
+ * @resource {https://jsr.io/@ende/bytes/doc} Doc: @ende/bytes
  * @group Encoding
  *
  * When working with lower-level data we often deal
@@ -19,16 +19,16 @@ const c = new Uint8Array([4, 5]);
 
 // We can concatenate two byte arrays using the
 // concat method
-import { concat } from "jsr:@std/bytes/concat";
+import { concat } from "jsr:@ende/bytes/concat";
 const d = concat([a, b]);
 console.log(d); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 // Sometimes we need to repeat certain bytes
-import { repeat } from "jsr:@std/bytes/repeat";
+import { repeat } from "jsr:@ende/bytes/repeat";
 console.log(repeat(c, 4)); // [4, 5, 4, 5, 4, 5, 4, 5]
 
 // Sometimes we need to mutate a Uint8Array and need a copy
-import { copy } from "jsr:@std/bytes/copy";
+import { copy } from "jsr:@ende/bytes/copy";
 const cpy = new Uint8Array(5);
 console.log("Bytes copied:", copy(b, cpy)); // 5
 console.log("Bytes:", cpy); // [5, 6, 7, 8, 9]

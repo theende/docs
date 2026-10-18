@@ -33,8 +33,8 @@ const buffer = await new Response(streamOf("Hello")).arrayBuffer();
 console.log(buffer.byteLength); // 5
 
 // To parse the stream contents as JSON, use the json method.
-const data = await new Response(streamOf('{"name":"Deno"}')).json();
-console.log(data.name); // Deno
+const data = await new Response(streamOf('{"name":"Ende"}')).json();
+console.log(data.name); // Ende
 
 // To collect into a Blob, use the blob method.
 const blob = await new Response(streamOf("Hello")).blob();

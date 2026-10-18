@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-18
 title: "WebAssembly"
-description: "A guide to using WebAssembly (Wasm) in Deno. Learn about module imports, type checking, streaming APIs, optimization techniques, and how to work with various programming languages that compile to Wasm."
+description: "A guide to using WebAssembly (Wasm) in Ende. Learn about module imports, type checking, streaming APIs, optimization techniques, and how to work with various programming languages that compile to Wasm."
 oldUrl:
   - /runtime/manual/getting_started/webassembly/
   - /runtime/manual/runtime/webassembly/
@@ -12,15 +12,14 @@ oldUrl:
 
 Designed to be used alongside JavaScript to speed up key application components,
 [WebAssembly](https://webassembly.org/) (Wasm) can have much higher, and more
-consistent execution speed than JavaScript - similar to C, C++, or Rust. Deno
+consistent execution speed than JavaScript - similar to C, C++, or Rust. Ende
 can execute WebAssembly modules with the same interfaces that
 [browsers provide](https://developer.mozilla.org/en-US/docs/WebAssembly) and by
 importing them as modules.
 
 ## Wasm modules
 
-Starting in Deno 2.1, WebAssembly modules can be imported and their use is type
-checked.
+WebAssembly modules can be imported and their use is type checked.
 
 Say we have a
 [WebAssembly text format](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
@@ -53,13 +52,13 @@ console.log(add(1, 2));
 ```
 
 ```shellsession
-> deno run main.ts
+> ende run main.ts
 3
 ```
 
 ### Type Checking
 
-Deno understands the exports of Wasm modules and type checks their use. If we
+Ende understands the exports of Wasm modules and type checks their use. If we
 call the `add` function incorrectly in the previous example, we'll see a type
 checking error.
 
@@ -70,7 +69,7 @@ console.log(add(1, ""));
 ```
 
 ```shellsession
-> deno check main.ts   
+> ende check main.ts   
 Check file:///.../main.ts
 error: TS2345 [ERROR]: Argument of type 'string' is not assignable to parameter of type 'number'.
 console.log(add(1, ""));
@@ -111,10 +110,10 @@ Now running:
 
 ```shellsession
 > wat2wasm toolkit.wat
-> deno run main.ts
+> ende run main.ts
 1732147633
 V:\scratch
-> deno run main.ts
+> ende run main.ts
 1732147637
 ```
 
@@ -150,7 +149,7 @@ console.log(getValue());
 
 ```shellsession
 > wat2wasm toolkit.wat
-> deno run main.ts
+> ende run main.ts
 error: Relative import path "env" not prefixed with / or ./ or ../
     at file:///.../toolkit.wasm
 ```
@@ -158,9 +157,9 @@ error: Relative import path "env" not prefixed with / or ./ or ../
 That's not super convenient because we want it to import `"./env.ts"`.
 
 Luckily, it's pretty simple to make this work by mapping the specifier in an
-[import map](https://github.com/WICG/import-maps) via the _deno.json_:
+[import map](https://github.com/WICG/import-maps) via the _ende.json_:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "imports": {
     "env": "./env.ts"
@@ -171,13 +170,13 @@ Luckily, it's pretty simple to make this work by mapping the specifier in an
 Now it works:
 
 ```shellsession
-> deno run main.ts
+> ende run main.ts
 1732148355
 ```
 
 ## Using WebAssembly via the WebAssembly API
 
-To run WebAssembly in Deno, all you need is a Wasm module to run. The following
+To run WebAssembly in Ende, all you need is a Wasm module to run. The following
 module exports a `main` function that just returns `42` upon invocation:
 
 ```ts
@@ -224,7 +223,7 @@ pub fn main() -> u32 { // u32 stands for an unsigned integer using 32 bits of me
 
 ## Using the Streaming WebAssembly APIs
 
-The [most efficient](/api/web/~/WebAssembly.instantiateStreaming) way to fetch,
+The [most efficient](/api/web/~/WebAssembly.instantiateStreaming/) way to fetch,
 compile and instantiate a WebAssembly module is to use the streaming variants of
 the WebAssembly API. For example, you can use `instantiateStreaming` combined
 with `fetch` to perform all three steps in one go:
@@ -240,7 +239,7 @@ console.log(increment(41));
 
 Note that the `.wasm` file must be served with the `application/wasm` MIME type.
 If you want to do additional work on the module before instantiation you can
-instead use [`compileStreaming`](/api/web/~/WebAssembly.compileStreaming):
+instead use [`compileStreaming`](/api/web/~/WebAssembly.compileStreaming/):
 
 ```ts
 const module = await WebAssembly.compileStreaming(
@@ -254,8 +253,8 @@ instance.exports.increment as (input: number) => number;
 ```
 
 If for some reason you cannot make use of the streaming methods you can fall
-back to the less efficient [`compile`](/api/web/~/WebAssembly.compile) and
-[`instantiate`](/api/web/~/WebAssembly.instantiate) methods.
+back to the less efficient [`compile`](/api/web/~/WebAssembly.compile/) and
+[`instantiate`](/api/web/~/WebAssembly.instantiate/) methods.
 
 For a more in-depth look on what makes the streaming methods more performant,
 [check out this post](https://hacks.mozilla.org/2018/01/making-webassembly-even-faster-firefoxs-new-streaming-and-tiering-compiler/).
@@ -263,7 +262,7 @@ For a more in-depth look on what makes the streaming methods more performant,
 ## WebAssembly API
 
 Further information on all parts of the WebAssembly API can be found on in the
-[Deno Reference Guide](/api/web/~/WebAssembly) and on
+[Ende Reference Guide](/api/web/~/WebAssembly/) and on
 [MDN](https://developer.mozilla.org/en-US/docs/WebAssembly).
 
 ## Working with Non-Numeric Types
@@ -281,13 +280,13 @@ If you plan to do a lot of work with Web APIs in Rust+WebAssembly, you may find
 the [web_sys](https://rustwasm.github.io/wasm-bindgen/web-sys/index.html) and
 [js_sys](https://rustwasm.github.io/wasm-bindgen/contributing/js-sys/index.html)
 Rust crates useful. `web_sys` contains bindings to most of the Web APIs that are
-available in Deno, while `js_sys` provides bindings to JavaScript's standard,
+available in Ende, while `js_sys` provides bindings to JavaScript's standard,
 built-in objects.
 
-## Using wasmbuild for Rust WebAssembly in Deno
+## Using wasmbuild for Rust WebAssembly in Ende
 
-[wasmbuild](https://github.com/denoland/wasmbuild) is an official Deno tool that
-simplifies working with Rust and WebAssembly in Deno projects. It automates the
+[wasmbuild](https://github.com/denoland/wasmbuild) is an official Ende tool that
+simplifies working with Rust and WebAssembly in Ende projects. It automates the
 process of compiling Rust code to WebAssembly and generating TypeScript
 bindings, making it easy to call Rust functions from JavaScript.
 
@@ -295,94 +294,6 @@ wasmbuild generates TypeScript definitions for your Rust functions, providing
 full type checking. The generated JavaScript can be used with bundlers like
 esbuild. Generated files can be committed directly to source control for easy
 deployment.
-
-## WebAssembly System Interface (WASI)
-
-The examples above instantiate Wasm modules that only exchange numbers and
-memory with JavaScript. The
-[WebAssembly System Interface (WASI)](https://wasi.dev/) is a standard set of
-imports that give a Wasm module access to operating-system-like capabilities,
-such as reading command-line arguments and environment variables, the clock, and
-(when you grant it) the file system. It is what lets a program written in Rust,
-C, or another language and compiled to Wasm run outside the browser, the same
-way it would as a native command-line binary.
-
-Deno supports both generations of WASI:
-
-- **WASI Preview 1** (`wasip1`) modules run through the
-  [`node:wasi`](https://nodejs.org/api/wasi.html) module.
-- **WASI Preview 2** (`wasip2`) components, built on the
-  [component model](https://component-model.bytecodealliance.org/), run with the
-  Bytecode Alliance's [`jco`](https://github.com/bytecodealliance/jco) tool,
-  which can also transpile a component to JavaScript you import like any module.
-
-### Running a WASI Preview 1 module
-
-Compile a program to the `wasm32-wasip1` target. Any toolchain that targets WASI
-works; with Rust:
-
-```sh
-rustc --target wasm32-wasip1 -O hello.rs -o hello.wasm
-```
-
-Run it from Deno with the `node:wasi` module. Construct a `WASI` instance with
-the arguments and environment variables the guest should see, instantiate the
-module with the WASI imports, and call `start`:
-
-```ts title="run.ts"
-import { WASI } from "node:wasi";
-
-const wasi = new WASI({
-  version: "preview1",
-  args: ["hello", "alpha", "beta"],
-  env: { GREETING: "hello-wasi" },
-});
-
-const bytes = await Deno.readFile(new URL("./hello.wasm", import.meta.url));
-const module = await WebAssembly.compile(bytes);
-const instance = await WebAssembly.instantiate(module, wasi.getImportObject());
-
-wasi.start(instance);
-```
-
-```sh
-deno run --allow-read run.ts
-```
-
-A WASI instance starts with no access to the real file system. To expose
-directories to the guest, pass a `preopens` map from the paths the module sees
-to real paths on disk, for example `preopens: { "/data": "./data" }`. The module
-can then read and write within `./data` (and your Deno process needs the
-matching `--allow-read` and `--allow-write` permissions).
-
-> [!NOTE]
-> `node:wasi` is an experimental Node.js API, so Deno prints an experimental
-> warning when you use it.
-
-### Running a WASI Preview 2 component
-
-Preview 2 components are compiled to the `wasm32-wasip2` target:
-
-```sh
-rustc --target wasm32-wasip2 -O hello.rs -o hello.wasm
-```
-
-A component is not a plain Wasm module, so it does not load through the
-`WebAssembly` API or `node:wasi`. Run it directly with `jco`:
-
-```sh
-deno run -A npm:@bytecodealliance/jco run hello.wasm alpha beta
-```
-
-To call a component from your own code instead of running it as a command,
-transpile it to JavaScript with bindings:
-
-```sh
-deno run -A npm:@bytecodealliance/jco transpile hello.wasm -o out
-```
-
-This writes an ES module to `out/` that you can import like any other JavaScript
-module.
 
 ## Optimization
 

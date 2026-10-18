@@ -4,16 +4,11 @@ title: "Menus"
 description: "Build native application menu bars and right-click context menus, with submenus, accelerators, separators, checkboxes, and click events."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-`deno desktop` exposes two kinds of native menus: the **application menu**
+`ende desktop` exposes two kinds of native menus: the **application menu**
 (macOS menu bar, Windows / Linux window menu) and **context menus** (right-click
 popups).
 
-Both use the same [`Deno.MenuItem`](/api/deno/~/Deno.MenuItem) type.
+Both use the same [`Ende.MenuItem`](/api/ende/~/Ende.MenuItem/) type.
 
 ## `MenuItem` shape
 
@@ -152,9 +147,9 @@ commands so they behave natively (and so macOS wires up the standard Edit-menu
 keyboard shortcuts):
 
 ```ts
-const quit: Deno.MenuItem = { role: { role: "quit" } };
-const copy: Deno.MenuItem = { role: { role: "copy" } };
-const paste: Deno.MenuItem = { role: { role: "paste" } };
+const quit: Ende.MenuItem = { role: { role: "quit" } };
+const copy: Ende.MenuItem = { role: { role: "copy" } };
+const paste: Ende.MenuItem = { role: { role: "paste" } };
 ```
 
 Common roles include `quit`, `undo`, `redo`, `cut`, `copy`, `paste`,
@@ -176,7 +171,7 @@ natively when you include them as `role` items.
 Show a context menu at a screen position with `showContextMenu(x, y, menu)`:
 
 ```ts
-const contextMenu: Deno.MenuItem[] = [
+const contextMenu: Ende.MenuItem[] = [
   { item: { label: "Copy", id: "copy", enabled: true } },
   { item: { label: "Paste", id: "paste", enabled: true } },
   "separator",
@@ -237,7 +232,7 @@ calling on every change.
 Set `enabled: false` to gray out an item:
 
 ```ts
-const save: Deno.MenuItem = {
+const save: Ende.MenuItem = {
   item: { label: "Save", id: "save", enabled: false },
 };
 ```

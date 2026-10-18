@@ -1,7 +1,7 @@
 ---
 last_modified: 2025-03-18
-title: "Building a word finder app with Deno"
-description: "A tutorial on creating a word search application with Deno. Learn how to build a web server, implement pattern matching, handle HTTP requests, and create an interactive web interface using Oak framework."
+title: "Building a word finder app with Ende"
+description: "A tutorial on creating a word search application with Ende. Learn how to build a web server, implement pattern matching, handle HTTP requests, and create an interactive web interface using Oak framework."
 url: /examples/word_finder_tutorial/
 oldUrl:
   - /runtime/manual/examples/word_finder/
@@ -10,8 +10,8 @@ oldUrl:
 
 ## Getting Started
 
-In this tutorial we'll create a simple Word Finder web application using Deno.
-No prior knowledge of Deno is required.
+In this tutorial we'll create a simple Word Finder web application using Ende.
+No prior knowledge of Ende is required.
 
 ## Introduction
 
@@ -50,11 +50,11 @@ export function renderHtml(pattern, words) {
 
   return `<html>
     <head>
-        <title>Deno Word Finder</title>
+        <title>Ende Word Finder</title>
         <meta name="version" content="1.0" />
     </head>
     <body>
-        <h1>Deno Word Finder</h1>
+        <h1>Ende Word Finder</h1>
 
         <form id="perform-search" name="perform-search" method="get" action="/api/search">
             <label for="search-text">Search text:</label>
@@ -132,10 +132,10 @@ export function search(pattern, dictionary) {
 }
 ```
 
-## Running a Deno Server
+## Running an Ende Server
 
 [Oak](https://jsr.io/@oak/oak) is a framework that lets you easily setup a
-server in Deno (analogous to JavaScript's Express) and we'll be using it to host
+server in Ende (analogous to JavaScript's Express) and we'll be using it to host
 our application. Our server will use our search function to populate our HTML
 template with data and then return the customized HTML back to the viewer. We
 can conveniently rely on the `/usr/share/dict/words` file as our dictionary
@@ -146,7 +146,7 @@ import { Application, Router } from "jsr:@oak/oak";
 import { search } from "./search.js";
 import { renderHtml } from "./render.js";
 
-const dictionary = (await Deno.readTextFile("/usr/share/dict/words")).split(
+const dictionary = (await Ende.readTextFile("/usr/share/dict/words")).split(
   "\n",
 );
 
@@ -172,10 +172,10 @@ await app.listen({ port });
 ```
 
 We can start our server with the following command. Note we need to explicitly
-grant access to the file system and network because Deno is secure by default.
+grant access to the file system and network because Ende is secure by default.
 
 ```bash
-deno run --allow-read --allow-net server.js
+ende run --allow-read --allow-net server.js
 ```
 
 Now if you visit [http://localhost:8080](http://localhost:8080/) you should be

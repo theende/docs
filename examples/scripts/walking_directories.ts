@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli
  * @run -R <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.readDir} Doc: Deno.readDir
- * @resource {https://jsr.io/@std/fs/doc/walk/~} Doc: @std/fs/walk
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.readDir} Doc: Ende.readDir
+ * @resource {https://jsr.io/@ende/fs/doc/walk/~} Doc: @ende/fs/walk
  * @group File System
  *
  * When doing something like filesystem routing, it is
@@ -13,15 +13,15 @@
  */
 
 // If the directory has no depth (no folders), we can use
-// the built-in Deno.readDir
-for await (const dirEntry of Deno.readDir(".")) {
+// the built-in Ende.readDir
+for await (const dirEntry of Ende.readDir(".")) {
   console.log("Basic listing:", dirEntry.name);
 }
 
 // If on the other hand you need to recursively walk
 // a repository, the standard library has a method for this.
 // In the most simple case it is a drop-in replacement
-import { walk } from "jsr:@std/fs/walk";
+import { walk } from "jsr:@ende/fs/walk";
 
 for await (const dirEntry of walk(".")) {
   console.log("Recursive walking:", dirEntry.name);

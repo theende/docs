@@ -5,7 +5,7 @@
  * @run <url>
  * @group Cryptography
  *
- * This example demonstrates RSA signature and verification using Deno's built-in SubtleCrypto API.
+ * This example demonstrates RSA signature and verification using Ende's built-in SubtleCrypto API.
  */
 
 // Convert the text to a Uint8Array using TextEncoder (required for signing)

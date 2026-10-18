@@ -4,7 +4,7 @@
  * @tags cli, web
  * @run <url>
  * @resource {https://en.wikipedia.org/wiki/Exponential_backoff} Wikipedia: Exponential backoff
- * @resource {https://jsr.io/@std/async/doc/~/retry} Doc: @std/async > retry
+ * @resource {https://jsr.io/@ende/async/doc/~/retry} Doc: @ende/async > retry
  * @group Advanced
  *
  * Exponential backoff is a technique used in computer systems to handle retries and
@@ -12,8 +12,8 @@
  * utility provided by the standard library.
  */
 
-// Import the 'retry' utility from '@std/async'.
-import { retry, RetryError, type RetryOptions } from "jsr:@std/async";
+// Import the 'retry' utility from '@ende/async'.
+import { retry, RetryError, type RetryOptions } from "jsr:@ende/async";
 
 // A function that logs 'hello world' to the console and returns a rejected Promise.
 const fn = () => {

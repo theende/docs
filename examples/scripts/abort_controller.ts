@@ -16,7 +16,7 @@
 
 // Start a local server that takes a full second to answer, so the abort
 // below always fires first and the example is self-contained.
-const server = Deno.serve({ port: 0, onListen() {} }, async () => {
+const server = Ende.serve({ port: 0, onListen() {} }, async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   return new Response("finally done");
 });

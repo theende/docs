@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.upgradeWebSocket} Doc: Deno.upgradeWebSocket
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.upgradeWebSocket} Doc: Ende.upgradeWebSocket
  * @resource {/examples/http_server_websocket/} Example: HTTP server: WebSockets
  * @group Network
  *
@@ -24,11 +24,11 @@ function broadcast(message: string) {
   }
 }
 
-Deno.serve((req) => {
+Ende.serve((req) => {
   if (req.headers.get("upgrade") !== "websocket") {
     return new Response("This endpoint expects a WebSocket", { status: 426 });
   }
-  const { socket, response } = Deno.upgradeWebSocket(req);
+  const { socket, response } = Ende.upgradeWebSocket(req);
 
   // Register the socket once the connection is established, and clean up
   // when it goes away for any reason.
@@ -57,9 +57,8 @@ Deno.serve((req) => {
 //   ws.onopen = () => ws.send("hello, everyone");
 
 // This state lives in one worker. To broadcast across the workers of
-// deno serve --parallel, relay each message through a BroadcastChannel,
-// which reaches the other workers; on Deno Deploy it reaches the other
-// instances too.
+// ende serve --parallel, relay each message through a BroadcastChannel,
+// which reaches the other workers.
 //
 //   const relay = new BroadcastChannel("chat");
 //   relay.onmessage = (event) => broadcast(event.data);
@@ -69,5 +68,4 @@ Deno.serve((req) => {
 //   };
 //
 // Separate processes and machines do not share a BroadcastChannel; for
-// those, relay through something external like Deno KV watch or a Redis
-// channel.
+// those, relay through something external like a Redis channel.

@@ -3,20 +3,20 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/msgpack} Doc: @std/msgpack
+ * @resource {https://jsr.io/@ende/msgpack} Doc: @ende/msgpack
  * @resource {https://msgpack.org} Spec: MessagePack
  * @group Encoding
  *
  * MessagePack is a binary serialization format with the same data model as
  * JSON. The binary encoding is smaller and faster to parse, which makes it
  * a good fit for caches, message queues and service to service traffic.
- * The Standard Library implements it in jsr:@std/msgpack.
+ * The Standard Library implements it in jsr:@ende/msgpack.
  */
-import { decode, encode } from "jsr:@std/msgpack";
+import { decode, encode } from "jsr:@ende/msgpack";
 
 // We encode a value that could just as well be JSON.
 const value = {
-  name: "Deno",
+  name: "Ende",
   version: 2,
   tags: ["fast", "secure"],
   active: true,
@@ -34,7 +34,7 @@ console.log(JSON.stringify(value).length); // 79
 const decoded = decode(bytes);
 console.log(decoded);
 //- {
-//-   name: "Deno",
+//-   name: "Ende",
 //-   version: 2,
 //-   tags: [ "fast", "secure" ],
 //-   active: true,

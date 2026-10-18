@@ -58,7 +58,7 @@ async function deriveBits(
 
 // Compare hashes in constant time so the comparison itself does not leak
 // how many leading bytes matched.
-import { timingSafeEqual } from "jsr:@std/crypto/timing-safe-equal";
+import { timingSafeEqual } from "jsr:@ende/crypto/timing-safe-equal";
 
 // Putting it together: hash at signup, verify at login.
 const stored = await hashPassword("hunter2");
@@ -68,5 +68,5 @@ console.log(await verifyPassword("hunter2", stored)); // true
 console.log(await verifyPassword("wrong", stored)); // false
 
 // PBKDF2 ships with the runtime and is OWASP approved. If your threat
-// model calls for a memory-hard algorithm, use argon2 via an npm package
-// instead, the API shape stays the same: hash at signup, verify at login.
+// model calls for a memory-hard algorithm, use an argon2 library instead,
+// the API shape stays the same: hash at signup, verify at login.

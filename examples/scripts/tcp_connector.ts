@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.connect} Doc: Deno.connect
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.connect} Doc: Ende.connect
  * @resource {/examples/tcp_listener} Example: TCP Listener
  * @group Network
  *
@@ -13,7 +13,7 @@
 // Instantiate an instance of text encoder to write to the TCP stream.
 const encoder = new TextEncoder();
 // Establish a connection to our TCP server that is currently being run on localhost port 8080.
-const conn = await Deno.connect({
+const conn = await Ende.connect({
   hostname: "127.0.0.1",
   port: 8080,
   transport: "tcp",

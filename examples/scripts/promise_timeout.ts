@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/async/doc/~/deadline} Doc: @std/async deadline
- * @resource {https://jsr.io/@std/async/doc/~/abortable} Doc: @std/async abortable
+ * @resource {https://jsr.io/@ende/async/doc/~/deadline} Doc: @ende/async deadline
+ * @resource {https://jsr.io/@ende/async/doc/~/abortable} Doc: @ende/async abortable
  * @group Standard library
  *
  * A promise has no built-in time limit, so a stalled request can hang a
@@ -14,7 +14,7 @@
  * cancel the wait.
  */
 
-import { abortable, deadline, delay } from "jsr:@std/async";
+import { abortable, deadline, delay } from "jsr:@ende/async";
 
 // When the promise settles before the time limit, deadline resolves
 // with its value as if the wrapper was not there.

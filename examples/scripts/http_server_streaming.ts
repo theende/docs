@@ -56,6 +56,6 @@ function iteratorHandler(_req: Request): Response {
 }
 
 // Serve the interval stream on / and the generator stream on /ticks.
-Deno.serve((req) =>
+Ende.serve((req) =>
   new URL(req.url).pathname === "/ticks" ? iteratorHandler(req) : handler(req)
 );

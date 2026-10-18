@@ -7,7 +7,7 @@ url: /examples/honeycomb_tutorial/
 
 [OpenTelemetry](https://opentelemetry.io/) (often abbreviated as OTel) is an
 open-source observability framework that provides a standardized way to collect
-and export telemetry data such as traces, metrics and logs. Deno has built-in
+and export telemetry data such as traces, metrics and logs. Ende has built-in
 support for OpenTelemetry, making it easy to instrument your applications
 without adding external dependencies. This integration works out of the box with
 observability platforms like [Honeycomb](https://honeycomb.io).
@@ -155,15 +155,15 @@ to send data to the collector:
 ```sh
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318 \
 OTEL_SERVICE_NAME=chat-app \
-OTEL_DENO=true \
-deno run --allow-net --allow-env --env-file --allow-read main.ts
+OTEL_ENDE=true \
+ende run --allow-net --allow-env --env-file --allow-read main.ts
 ```
 
 This command:
 
 - Points the OpenTelemetry exporter to your local collector (`localhost:4318`)
 - Names your service "chat-app" in Honeycomb
-- Enables Deno's OpenTelemetry integration
+- Enables Ende's OpenTelemetry integration
 - Runs your application with the necessary permissions
 
 To generate some telemetry data, make a few requests to your running application
@@ -196,9 +196,9 @@ You can drill down into individual spans to debug performance issues:
 1. Add custom spans and attributes to better understand your application
 2. Set up alerts based on latency or error conditions
 3. Deploy your application and collector to production using platforms like:
-   - [Fly.io](https://docs.deno.com/runtime/reference/docker/)
-   - [Digital Ocean](https://docs.deno.com/examples/digital_ocean_tutorial/)
-   - [AWS Lightsail](https://docs.deno.com/examples/aws_lightsail_tutorial/)
+   - [Fly.io](https://docs.ende.sh/runtime/reference/docker/)
+   - [Digital Ocean](https://docs.ende.sh/examples/digital_ocean_tutorial/)
+   - [AWS Lightsail](https://docs.ende.sh/examples/aws_lightsail_tutorial/)
 
 For more details on OpenTelemetry configuration, check out the
 [Honeycomb documentation](https://docs.honeycomb.io/send-data/opentelemetry/collector/).

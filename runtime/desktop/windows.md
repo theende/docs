@@ -1,19 +1,14 @@
 ---
 last_modified: 2026-07-27
 title: "Windows"
-description: "Create and manage native windows with Deno.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
+description: "Create and manage native windows with Ende.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-The [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) class controls native
-windows. A window opens automatically when your binary starts and is navigated
-to your local [HTTP server](/runtime/desktop/serving/). The **first**
-`new Deno.BrowserWindow()` you construct adopts that initial window; every
-construction after that opens a new one. All windows share the same Deno
+The [`Ende.BrowserWindow`](/api/ende/~/Ende.BrowserWindow/) class controls
+native windows. A window opens automatically when your binary starts and is
+navigated to your local [HTTP server](/runtime/desktop/serving/). The **first**
+`new Ende.BrowserWindow()` you construct adopts that initial window; every
+construction after that opens a new one. All windows share the same Ende
 runtime: there is one async runtime per process, regardless of how many windows
 are open.
 
@@ -24,13 +19,13 @@ the [denidian example](https://github.com/bartlomieju/denidian).
 
 ```ts
 // The first construction adopts the implicit startup window.
-const win = new Deno.BrowserWindow({ title: "My App" });
+const win = new Ende.BrowserWindow({ title: "My App" });
 
 // Subsequent constructions open additional windows.
-const base = Deno.env.get("DENO_SERVE_ADDRESS")!; // "tcp:127.0.0.1:<port>"
+const base = Ende.env.get("ENDE_SERVE_ADDRESS")!; // "tcp:127.0.0.1:<port>"
 const port = base.split(":").pop();
 
-const settings = new Deno.BrowserWindow({
+const settings = new Ende.BrowserWindow({
   title: "Settings",
   width: 420,
   height: 320,
@@ -52,7 +47,7 @@ The constructor accepts a `BrowserWindowOptions` object:
 | `noActivate`          | `boolean` | `false` | Floating, non-activating panel that doesn't steal focus. Creation-only. |
 | `transparentTitlebar` | `boolean` | `false` | Blend the title bar into the content. Creation-only.                    |
 
-`new Deno.BrowserWindow()` opens (or adopts) a window immediately. The window is
+`new Ende.BrowserWindow()` opens (or adopts) a window immediately. The window is
 alive until `close()` is called or the user closes it from the OS.
 
 `frameless`, `noActivate`, and `transparentTitlebar` can only be set at creation
@@ -83,7 +78,7 @@ console.log(win.windowId);
 ```
 
 Closing a window does not stop the runtime; the process keeps running until all
-windows are closed (or you call [`Deno.exit()`](/api/deno/~/Deno.exit)).
+windows are closed (or you call [`Ende.exit()`](/api/ende/~/Ende.exit/)).
 
 ## Size and position
 
@@ -105,7 +100,7 @@ Sizes are in logical pixels. The OS handles HiDPI scaling.
 
 ### Persisting size and position
 
-Deno does not remember a window's size or position between runs, and you should
+Ende does not remember a window's size or position between runs, and you should
 not rely on the OS to restore them — some window managers do, but many don't (on
 Linux/KDE, for example, each launch opens at the constructor's defaults). If you
 want a window to reopen where the user left it, save its geometry to app-owned
@@ -115,16 +110,16 @@ Seed the constructor from the saved values, then write the geometry back
 whenever it changes:
 
 ```ts
-const file = `${Deno.env.get("HOME")}/.myapp-window.json`;
+const file = `${Ende.env.get("HOME")}/.myapp-window.json`;
 
 let saved: { width?: number; height?: number; x?: number; y?: number } = {};
 try {
-  saved = JSON.parse(await Deno.readTextFile(file));
+  saved = JSON.parse(await Ende.readTextFile(file));
 } catch {
   // First run, or no saved state yet — fall back to defaults.
 }
 
-const win = new Deno.BrowserWindow({
+const win = new Ende.BrowserWindow({
   title: "My App",
   width: saved.width ?? 800,
   height: saved.height ?? 600,
@@ -135,7 +130,7 @@ const win = new Deno.BrowserWindow({
 async function save() {
   const [width, height] = win.getSize();
   const [x, y] = win.getPosition();
-  await Deno.writeTextFile(file, JSON.stringify({ width, height, x, y }));
+  await Ende.writeTextFile(file, JSON.stringify({ width, height, x, y }));
 }
 
 win.addEventListener("resize", save);
@@ -154,7 +149,7 @@ window switchers, the dock, and the taskbar.
 ## Navigation
 
 ```ts
-const port = Deno.env.get("DENO_SERVE_ADDRESS")!.split(":").pop();
+const port = Ende.env.get("ENDE_SERVE_ADDRESS")!.split(":").pop();
 win.navigate(`http://127.0.0.1:${port}`);
 ```
 
@@ -167,7 +162,7 @@ windows. For modal dialogs, prefer creating a child window over navigating away.
 
 ## Events
 
-[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) is an `EventTarget`.
+[`Ende.BrowserWindow`](/api/ende/~/Ende.BrowserWindow/) is an `EventTarget`.
 Listen with `addEventListener` or assign to the matching `on<event>` property.
 
 ```ts
@@ -223,7 +218,7 @@ console.log(result); // number of <li> on the current page
 result. The value crosses a realm boundary, so it must be JSON-serializable; if
 the script throws, the returned promise rejects with the thrown value.
 
-For richer Deno ↔ webview communication, use
+For richer Ende ↔ webview communication, use
 [bindings](/runtime/desktop/bindings/) instead.
 
 ## Native window handle
@@ -233,7 +228,7 @@ const surface = win.getNativeWindow();
 ```
 
 `getNativeWindow()` wraps the window's native surface as a
-[`Deno.UnsafeWindowSurface`](/api/deno/~/Deno.UnsafeWindowSurface) so you can
+[`Ende.UnsafeWindowSurface`](/api/ende/~/Ende.UnsafeWindowSurface/) so you can
 render to it with WebGPU. Request a GPU adapter first; the call throws if there
 is no active WebGPU context:
 
@@ -255,8 +250,8 @@ a render loop — see [WebGPU rendering](/runtime/desktop/webgpu/).
 
 ```ts
 win.openDevtools(); // both isolates
-win.openDevtools({ deno: false }); // renderer only
-win.openDevtools({ renderer: false }); // Deno runtime only
+win.openDevtools({ ende: false }); // renderer only
+win.openDevtools({ renderer: false }); // Ende runtime only
 ```
 
 See [DevTools](/runtime/desktop/devtools/).
@@ -267,7 +262,7 @@ The runtime exits when no windows are open and there are no other live async
 tasks (timers, pending fetches, etc.). To exit explicitly:
 
 ```ts
-Deno.exit(0);
+Ende.exit(0);
 ```
 
 To prevent close (for example, to show a "Save?" dialog), listen for `close` and

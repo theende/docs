@@ -1,25 +1,25 @@
 /**
- * @title Deno Cron
+ * @title Ende.cron
  * @difficulty intermediate
  * @tags cli
  * @run --unstable-cron <url>
- * @resource {https://docs.deno.com/deploy/reference/cron/} Deno Cron user guide
- * @resource {https://docs.deno.com/api/deno/~/Deno.cron} Deno Cron Runtime API docs
+ * @resource {/runtime/fundamentals/cron/} Cron guide
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.cron} Ende.cron API docs
  * @group Unstable APIs
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>Deno Cron is a cron task scheduler built into the Deno runtime and works with
- * zero configuration on Deno Deploy. There's no overlapping cron executions and
- * has automatic handler retries on exceptions.
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>Ende.cron is a cron task scheduler built into the Ende runtime. There are no
+ * overlapping cron executions, and handlers are retried automatically on
+ * exceptions.
  */
 
 // Create a cron job called "Log a message" that runs once a minute.
-Deno.cron("Log a message", "* * * * *", () => {
+Ende.cron("Log a message", "* * * * *", () => {
   console.log("This will print once a minute.");
 });
 
 // Create a cron job with a backoff schedule measured in milliseconds.
-Deno.cron("Retry example", "* * * * *", {
+Ende.cron("Retry example", "* * * * *", {
   backoffSchedule: [1000, 5000, 10000],
 }, () => {
-  throw new Error("Deno.cron will retry this three times, to no avail!");
+  throw new Error("Ende.cron will retry this three times, to no avail!");
 });

@@ -3,8 +3,8 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N -R -W <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.createHttpClient} Doc: Deno.createHttpClient
- * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Doc: Deno.serve
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.createHttpClient} Doc: Ende.createHttpClient
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.serve} Doc: Ende.serve
  * @group Network
  *
  * Local services like the Docker daemon expose HTTP over a Unix domain
@@ -12,8 +12,8 @@
  * and fetches from it.
  */
 
-// Deno.serve listens on a Unix socket when given a path instead of a port.
-const server = Deno.serve(
+// Ende.serve listens on a Unix socket when given a path instead of a port.
+const server = Ende.serve(
   { path: "/tmp/example.sock" },
   () => new Response("Hello over a Unix socket"),
 );
@@ -21,7 +21,7 @@ const server = Deno.serve(
 // On the client side, create an HTTP client that connects through the
 // socket, and pass it to fetch. The URL's hostname is ignored; only the
 // path and headers matter to the server.
-const client = Deno.createHttpClient({
+const client = Ende.createHttpClient({
   proxy: { transport: "unix", path: "/tmp/example.sock" },
 });
 
@@ -31,28 +31,10 @@ console.log(await response.text()); // Hello over a Unix socket
 client.close();
 await server.shutdown();
 
-// The Node.js API supports Unix sockets too: a node:http server listens on
-// a path, and the client passes socketPath in the request options.
-import { createServer, request } from "node:http";
-
-const nodeServer = createServer((_req, res) => {
-  res.end("Hello from node:http");
-});
-nodeServer.listen("/tmp/example-node.sock", () => {
-  const req = request(
-    { socketPath: "/tmp/example-node.sock", path: "/" },
-    (res) => {
-      res.on("data", (chunk) => console.log(String(chunk))); // Hello from node:http
-      res.on("end", () => nodeServer.close());
-    },
-  );
-  req.end();
-});
-
 // The same client works for talking to existing services. For example,
 // with -R -W -N permissions and Docker running, this lists containers:
 //
-//   const docker = Deno.createHttpClient({
+//   const docker = Ende.createHttpClient({
 //     proxy: { transport: "unix", path: "/var/run/docker.sock" },
 //   });
 //   await fetch("http://localhost/containers/json", { client: docker });

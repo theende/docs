@@ -6,32 +6,32 @@ oldUrl:
   - /runtime/manual/tools/unstable_flags/
 ---
 
-New Deno runtime features are often released behind feature flags, so that users
+New Ende runtime features are often released behind feature flags, so that users
 can try out new APIs and features before they are finalized. Current unstable
 feature flags are listed on this page, and can also be found in the CLI help
 text by running:
 
 ```sh
-deno --help
+ende --help
 ```
 
 ## Using flags at the command line
 
-You can enable a feature flag when you run a Deno program from the command line
+You can enable a feature flag when you run an Ende program from the command line
 by passing in the flag as an option to the CLI. Here's an example of running a
 program with the `--unstable-node-globals` flag enabled:
 
 ```sh
-deno run --unstable-node-globals main.ts
+ende run --unstable-node-globals main.ts
 ```
 
-## Configuring flags in `deno.json`
+## Configuring flags in `ende.json`
 
 You can specify which unstable features you'd like to enable for your project
 using a
-[configuration option in `deno.json`](/runtime/fundamentals/configuration/).
+[configuration option in `ende.json`](/runtime/fundamentals/configuration/).
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "unstable": ["sloppy-imports", "webgpu"]
 }
@@ -44,49 +44,19 @@ The possible values in the `unstable` array are the flag names with the
 
 Some flags can be enabled by setting a value (any value) for an environment
 variable of a given name, rather than being passed as a flag or
-[`deno.json`](/runtime/fundamentals/configuration/) configuration option. Flags
+[`ende.json`](/runtime/fundamentals/configuration/) configuration option. Flags
 that are settable via environment variables will be noted below.
 
 Here's an example of setting the `--unstable-sloppy-imports` flag via
 environment variable:
 
 ```sh
-export DENO_UNSTABLE_SLOPPY_IMPORTS=true
+export ENDE_UNSTABLE_SLOPPY_IMPORTS=true
 ```
-
-## `--unstable-detect-cjs`
-
-**Environment variable:** `DENO_UNSTABLE_DETECT_CJS`
-
-Loads `.js`, `.jsx`, `.ts`, and `.tsx` modules as possibly being CommonJS in the
-following additional scenarios:
-
-1. The _package.json_ has no `"type"` field.
-1. No _package.json_ exists.
-
-By default, Deno only loads these modules as being possibly CommonJS when you're
-in a project with a _package.json_ and the closest _package.json_ has
-`{ "type": "commonjs" }`.
-
-Requires Deno >= 2.1.2
-
-## `--unstable-node-globals`
-
-This flags injects Node specific globals into the global scope. The injected
-globals are:
-
-- `Buffer`
-- `global`
-- `setImmediate`
-- `clearImmediate`
-
-Note, that `process` is already available as a global starting with Deno 2.0.
-
-Requires Deno >= 2.1.0
 
 ## `--unstable-sloppy-imports`
 
-**Environment variable:** `DENO_UNSTABLE_SLOPPY_IMPORTS`
+**Environment variable:** `ENDE_UNSTABLE_SLOPPY_IMPORTS`
 
 This flag enables behavior which will infer file extensions from imports that do
 not include them. Normally, the import statement below would produce an error:
@@ -111,22 +81,22 @@ Sloppy imports will allow (but print warnings for) the following:
 - Import a directory path, and automatically use `index.js` or `index.ts` as the
   import for that directory
 
-[`deno compile`](/runtime/reference/cli/compile/) does not support sloppy
+[`ende compile`](/runtime/reference/cli/compile/) does not support sloppy
 imports.
 
 ## `--unstable-unsafe-proto`
 
-Deno made a conscious decision to not support `Object.prototype.__proto__` for
-security reasons. However there are still many npm packages that rely on this
-property to work correctly.
+Ende made a conscious decision to not support `Object.prototype.__proto__` for
+security reasons. However some libraries still rely on this property to work
+correctly.
 
 This flag enables this property. Note that it is not recommended to use this,
 but if you really need to use a package that relies on it, the escape hatch is
 now available to you.
 
-Starting in Deno 2.9, `--unsafe-proto` is a stable shorthand for the same
-behavior. It is spelled as an ordinary flag rather than an unstable one, so
-`deno run --unsafe-proto main.ts` and `deno run --unstable-unsafe-proto main.ts`
+`--unsafe-proto` is a stable shorthand for the same behavior. It is spelled as
+an ordinary flag rather than an unstable one, so
+`ende run --unsafe-proto main.ts` and `ende run --unstable-unsafe-proto main.ts`
 are equivalent.
 
 ## `--unstable-webgpu`
@@ -173,7 +143,7 @@ workers:
 ```ts
 new Worker(`data:application/javascript;base64,${btoa(`postMessage("ok");`)}`, {
   type: "module",
-  deno: {
+  ende: {
     permissions: {
       read: true,
     },
@@ -185,32 +155,21 @@ new Worker(`data:application/javascript;base64,${btoa(`postMessage("ok");`)}`, {
 
 ## `--unstable-cron`
 
-Enabling this flag makes the [`Deno.cron`](/runtime/fundamentals/cron/) API
-available on the `Deno` namespace.
-
-## `--unstable-kv`
-
-Enabling this flag makes Deno KV APIs available in the `Deno` namespace.
+Enabling this flag makes the [`Ende.cron`](/runtime/fundamentals/cron/) API
+available on the `Ende` namespace.
 
 ## `--unstable-net`
 
 Enable unstable net APIs. These APIs include:
 
 - [`WebSocketStream`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocketStream)
-- [`Deno.DatagramConn`](https://docs.deno.com/api/deno/~/Deno.DatagramConn)
+- [`Ende.DatagramConn`](https://docs.ende.sh/api/ende/~/Ende.DatagramConn)
 
 ## `--unstable-otel`
 
 Enable the
-[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry). This
-feature is now stable, so this flag is unnecessary in
-[Deno 2.4](https://deno.com/blog/v2.4)+.
-
-## `--unstable-bundle`
-
-Enable the unstable [`Deno.bundle`](/api/deno/~/Deno.bundle) runtime API for
-bundling JavaScript and TypeScript programmatically. See also the
-[`deno bundle`](/runtime/reference/cli/bundle/) command.
+[OpenTelemetry integration for Ende](/runtime/fundamentals/open_telemetry). This
+feature is now stable, so this flag is unnecessary.
 
 ## `--unstable-lazy-dynamic-imports`
 
@@ -218,19 +177,14 @@ Lazily loads statically analyzable dynamic imports when not running with type
 checking, rather than loading them up front. Note that this may change the order
 in which semver specifiers are resolved.
 
-## `--unstable-npm-lazy-caching`
-
-Download npm dependencies only as they are actually referenced by an import,
-rather than installing every npm package listed in `package.json` on startup.
-
 ## `--unstable-no-legacy-abort`
 
-Use the abort signal in [`Deno.serve`](/api/deno/~/Deno.serve) without the
+Use the abort signal in [`Ende.serve`](/api/ende/~/Ende.serve/) without the
 legacy behavior. With this flag `request.signal` aborts only when the client
 actually disconnects, rather than on every successful response.
 
 See
-[Deno.serve request abort behavior](/runtime/reference/deno_serve_legacy_abort/)
+[Ende.serve request abort behavior](/runtime/reference/ende_serve_legacy_abort/)
 for why this is changing and how to detect when a request has been fully
 delivered.
 
@@ -251,7 +205,7 @@ delivered.
 ## `--unstable-temporal`
 
 > [!NOTE]
-> As of Deno 2.7, the Temporal API is **stable** and available by default. The
+> The Temporal API is **stable** and available by default. The
 > `--unstable-temporal` flag is no longer required.
 
 The [Temporal API](https://tc39.es/proposal-temporal/docs/) is a modern date and
@@ -276,16 +230,16 @@ console.log(`Time in New York: ${zonedDateTime}`);
 ## `--unstable-tsgo`
 
 Type-checks with TypeScript's native compiler (written in Go), which is often
-around 10 times faster than the default JavaScript `tsc`. Deno integrates the
-native compiler with its own module resolution and types, so Deno code
+around 10 times faster than the default JavaScript `tsc`. Ende integrates the
+native compiler with its own module resolution and types, so Ende code
 type-checks normally.
 
 ```sh
-deno check --unstable-tsgo main.ts
+ende check --unstable-tsgo main.ts
 ```
 
-It can also be enabled with the `DENO_UNSTABLE_TSGO=1` environment variable or
-`"unstable": ["tsgo"]` in `deno.json`. This is a preview feature and is not yet
+It can also be enabled with the `ENDE_UNSTABLE_TSGO=1` environment variable or
+`"unstable": ["tsgo"]` in `ende.json`. This is a preview feature and is not yet
 feature-complete. See
 [TypeScript](/runtime/fundamentals/typescript/#faster-type-checking-with-the-native-compiler-tsgo)
 for details.

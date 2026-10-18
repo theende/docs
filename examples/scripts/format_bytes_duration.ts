@@ -3,18 +3,18 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/fmt/doc/bytes/~/format} Doc: @std/fmt bytes format
- * @resource {https://jsr.io/@std/fmt/doc/duration/~/format} Doc: @std/fmt duration format
+ * @resource {https://jsr.io/@ende/fmt/doc/bytes/~/format} Doc: @ende/fmt bytes format
+ * @resource {https://jsr.io/@ende/fmt/doc/duration/~/format} Doc: @ende/fmt duration format
  * @group Standard library
  *
  * Raw numbers like 1536 bytes or 97000 milliseconds are hard to read in
- * logs and user interfaces. The @std/fmt package turns byte counts into
+ * logs and user interfaces. The @ende/fmt package turns byte counts into
  * strings like 1.54 kB and millisecond durations into strings like
  * 1m 37s, with options for units and precision.
  */
 
-import { format as formatBytes } from "jsr:@std/fmt/bytes";
-import { format as formatDuration } from "jsr:@std/fmt/duration";
+import { format as formatBytes } from "jsr:@ende/fmt/bytes";
+import { format as formatDuration } from "jsr:@ende/fmt/duration";
 
 // Byte formatting picks a sensible unit automatically.
 console.log(formatBytes(1536)); // 1.54 kB

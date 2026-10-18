@@ -2,30 +2,30 @@
  * @title Writing tests
  * @difficulty beginner
  * @tags cli
- * @run deno test -R -W <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.test} Doc: Deno.test
- * @resource {https://jsr.io/@std/assert/doc} Doc: @std/assert
+ * @run ende test -R -W <url>
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.test} Doc: Ende.test
+ * @resource {https://jsr.io/@ende/assert/doc} Doc: @ende/assert
  * @group CLI
  *
  * One of the most common tasks in developing software is writing tests for
- * existing code. Deno has a built-in test runner which makes this very easy.
+ * existing code. Ende has a built-in test runner which makes this very easy.
  */
 
 // First, we import assert statements from the standard library. There are
 // quite a few options but we will just import the most common ones here.
-import { assert, assertEquals } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@ende/assert";
 
 // The most simple way to use the test runner is to just pass it a description
 // and a callback function
-Deno.test("assert works correctly", () => {
+Ende.test("assert works correctly", () => {
   assert(true);
   assertEquals(1, 1);
 });
 
 // In more complex scenarios, we often need to have some setup and teardown code
 // with some steps in between. This is also made simple with the built-in test runner.
-Deno.test("testing steps", async (t) => {
-  const file = await Deno.open("example.txt", {
+Ende.test("testing steps", async (t) => {
+  const file = await Ende.open("example.txt", {
     read: true,
     write: true,
     create: true,
@@ -36,7 +36,7 @@ Deno.test("testing steps", async (t) => {
   await t.step("write some bytes", async () => {
     const bytesWritten = await file.write(data);
     assertEquals(bytesWritten, data.length);
-    await file.seek(0, Deno.SeekMode.Start);
+    await file.seek(0, Ende.SeekMode.Start);
   });
 
   await t.step("read some bytes", async () => {
@@ -52,10 +52,10 @@ Deno.test("testing steps", async (t) => {
 // each test, the test runner checks to make sure all resources created during the
 // test are freed. There are situations where this is not useful behavior. We can use
 // the more complex test definition to disable this behavior
-Deno.test({
+Ende.test({
   name: "leaky test",
   async fn() {
-    await Deno.open("example.txt");
+    await Ende.open("example.txt");
   },
   sanitizeResources: false,
 });

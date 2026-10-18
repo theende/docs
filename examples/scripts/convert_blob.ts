@@ -4,7 +4,7 @@
  * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Blob} MDN: Blob
- * @resource {https://docs.deno.com/api/web/~/Blob} Doc: Blob
+ * @resource {https://docs.ende.sh/api/web/~/Blob} Doc: Blob
  * @group Encoding
  *
  * Blobs show up whenever you handle files or multipart form data, since an

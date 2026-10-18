@@ -15,12 +15,12 @@ export default function LintRulesIndex(
       <p>
         These lint rules are provided by the{" "}
         <a href="/runtime/reference/cli/lint/">
-          <code>deno lint</code>
+          <code>ende lint</code>
         </a>{" "}
-        command. You can enable sets of rules in <code>deno.json(c)</code>{" "}
+        command. You can enable sets of rules in <code>ende.json(c)</code>{" "}
         by adding their tags (e.g. <code>recommended</code>,{" "}
         <code>react</code>) to the{" "}
-        <a href="/runtime/reference/deno_json/#linting">
+        <a href="/runtime/reference/ende_json/#linting">
           <code>lint.rules.tags</code>
         </a>{" "}
         array.
@@ -31,11 +31,11 @@ export default function LintRulesIndex(
       </p>
       <p>
         To turn a rule off, add it to{" "}
-        <a href="/runtime/reference/cli/lint/#configuring-rules-in-denojson">
+        <a href="/runtime/reference/cli/lint/#configuring-rules-in-endejson">
           <code>lint.rules.exclude</code>
         </a>{" "}
         in{" "}
-        <code>deno.json</code>, or suppress a single diagnostic in your code
+        <code>ende.json</code>, or suppress a single diagnostic in your code
         with a{" "}
         <a href="/runtime/reference/cli/lint/#ignore-directives">
           <code>deno-lint-ignore</code>

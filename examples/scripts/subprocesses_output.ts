@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-run <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.Command} Doc: Deno.Command
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.Command} Doc: Ende.Command
  * @group System
  *
  * We don't often write programs in isolation. In a lot of cases we want
@@ -11,14 +11,14 @@
  * common way to do this.
  */
 
-// The Deno namespace has a unified api for interacting with the outside system
-// called Deno.Command. With it, we can initialize some information about the
+// The Ende namespace has a unified api for interacting with the outside system
+// called Ende.Command. With it, we can initialize some information about the
 // command but it will not be executed immediately.
-const command = new Deno.Command("deno", {
+const command = new Ende.Command("ende", {
   args: [
     "eval",
     "\
-    console.log('hello from deno'); \
+    console.log('hello from ende'); \
     console.error('hello from stderr'); \
     ",
   ],

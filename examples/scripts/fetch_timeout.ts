@@ -15,7 +15,7 @@
 
 // Start a local server where the delay is controlled by a query parameter,
 // so the timeouts in this example are deterministic and self-contained.
-const server = Deno.serve({ port: 0, onListen() {} }, async (req) => {
+const server = Ende.serve({ port: 0, onListen() {} }, async (req) => {
   const delay = Number(new URL(req.url).searchParams.get("delay"));
   await new Promise((resolve) => setTimeout(resolve, delay));
   return new Response(`answered after ${delay}ms`);

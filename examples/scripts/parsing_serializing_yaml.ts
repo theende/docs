@@ -3,13 +3,13 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/yaml} std/yaml
+ * @resource {https://jsr.io/@ende/yaml} std/yaml
  * @resource {https://yaml.org} Spec: YAML
  * @group Encoding
  *
  * YAML is a widely used data serialization language designed to be easily human readable and writeable.
  */
-import { parse, stringify } from "jsr:@std/yaml";
+import { parse, stringify } from "jsr:@ende/yaml";
 
 // To parse a YAML string, you can use the standard library's YAML
 // parse function. The value is returned as a JavaScript object.

@@ -1,76 +1,48 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-10-18
 title: "Deploying your app"
-description: "Ways to run a Deno app in production: the managed Deno Deploy platform, containers and Docker, cloud and serverless providers, and self-hosting a standalone binary."
+description: "Ways to run an Ende app in production: a standalone compiled binary, the runtime on your own host, and containers."
 ---
 
-Once your app runs locally, you have a few ways to get it into production.
-Broadly, you either let a managed platform run it for you, or you run it
-yourself on infrastructure you control. This page maps the options and points to
-the guide for each.
+Once your app runs locally, you run it in production on infrastructure you
+control. This page maps the options.
 
 ## Choosing an option
 
-- **Want the least operational overhead?** Use
-  [Deno Deploy](#deno-deploy-managed-platform), the managed platform built for
-  Deno.
-- **Already have container infrastructure, or want portability across clouds?**
-  Ship a [container image](#containers-and-docker).
-- **Targeting a specific cloud or serverless provider?** Jump to the
-  [platform guides](#cloud-and-serverless-platforms).
 - **Want a single self-contained artifact with no runtime to install?**
   [Compile to a standalone binary](#self-hosting-the-runtime) and run it on any
   machine.
-
-## Deno Deploy (managed platform)
-
-Deno Deploy is Deno's serverless platform. You push code and it handles builds,
-TLS, global distribution, and scaling, with first-class support for Deno and
-Node apps and frameworks like Next.js, Astro, and SvelteKit. It also offers
-integrated observability, cron, and a built-in key-value database.
-
-- Get started with Deno Deploy
-- Deploy with the `deno deploy` command
-
-## Containers and Docker
-
-Containers give you a portable artifact you can run on any host, orchestrator,
-or cloud. Deno publishes official images in several variants.
-
-- [Deno and Docker](/runtime/reference/docker/) covers Dockerfiles, multi-stage
-  builds, Docker Compose, workspaces, and production best practices.
-
-## Cloud and serverless platforms
-
-Step-by-step guides for deploying a Deno app to specific providers:
-
-- [AWS Lambda](/examples/aws_lambda_tutorial/) for serverless functions
-- [AWS Lightsail](/examples/aws_lightsail_tutorial/) for container-based VM
-  hosting
-- [AWS ECS Fargate](/examples/aws_ecs_fargate_tutorial/) for serverless
-  containers
-- [Google Cloud Run](/examples/google_cloud_run_tutorial/) for serverless
-  containers
-- [DigitalOcean](/examples/digital_ocean_tutorial/) for container hosting
-- Kinsta for managed app hosting
-- [Cloudflare Workers](/examples/cloudflare_workers_tutorial/), or with
-  Wrangler, for the edge
-
-Browse all of these under
-[Deploying Deno projects](/examples/#deploying-deno-projects) in the examples.
+- **Already have container infrastructure?** Build a
+  [container image](#containers) that installs Ende.
 
 ## Self-hosting the runtime
 
 To run on a VM or bare metal yourself, you have two paths:
 
 - [Compile a standalone binary](/runtime/reference/cli/compile/) with
-  `deno compile`. The result bundles your code and the runtime into a single
+  `ende compile`. The result bundles your code and the runtime into a single
   executable with no external dependencies, which you can copy to a server and
   run directly.
-- [Install Deno](/runtime/getting_started/installation/) on the host and run
-  your app with [`deno serve`](/runtime/reference/cli/serve/) for a
+- [Install Ende](/runtime/getting_started/installation/) on the host and run
+  your app with [`ende serve`](/runtime/reference/cli/serve/) for a
   production-ready HTTP server, typically behind a process manager such as
   systemd.
+
+## Containers
+
+Ende doesn't publish container images yet. Install it in your image with the
+install script, or copy in a binary compiled with `ende compile`:
+
+```dockerfile title="Dockerfile"
+FROM debian:stable-slim
+RUN apt-get update && apt-get install -y --no-install-recommends curl unzip ca-certificates \
+  && curl -fsSL https://ende.sh/install.sh | sh
+ENV PATH="/root/.ende/bin:$PATH"
+WORKDIR /app
+COPY . .
+RUN ende install --entrypoint main.ts
+CMD ["ende", "serve", "--allow-net", "main.ts"]
+```
 
 ## Production considerations
 
@@ -82,7 +54,7 @@ Whichever option you choose, a few things carry across:
 - **[Environment variables](/runtime/reference/env_variables/).** Configure
   secrets and per-environment settings through the environment rather than
   hard-coding them.
-- **[Observability](/runtime/fundamentals/open_telemetry/).** Deno has built-in
+- **[Observability](/runtime/fundamentals/open_telemetry/).** Ende has built-in
   OpenTelemetry support for traces, metrics, and logs.
 - **[Continuous integration](/runtime/reference/continuous_integration/).** Run
   tests, linting, and formatting checks before you deploy.

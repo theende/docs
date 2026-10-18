@@ -1,16 +1,16 @@
 ---
 last_modified: 2026-03-12
-title: "Deno Style Guide"
-description: "Comprehensive style guide for contributing to Deno's internal runtime code and standard library. Covers coding conventions, documentation standards, testing requirements, and best practices for TypeScript and Rust development."
+title: "Ende Style Guide"
+description: "Comprehensive style guide for contributing to Ende's internal runtime code and standard library. Covers coding conventions, documentation standards, testing requirements, and best practices for TypeScript and Rust development."
 oldUrl:
   - /runtime/manual/contributing/style_guide/
   - /runtime/manual/references/contributing/style_guide/
 ---
 
 > [!NOTE]
-> Note that this is the style guide for **internal runtime code** in the Deno
-> runtime, and in the Deno Standard Library. This is not meant as a general
-> style guide for users of Deno.
+> Note that this is the style guide for **internal runtime code** in the Ende
+> runtime, and in the Ende Standard Library. This is not meant as a general
+> style guide for users of Ende.
 
 ### Copyright Headers
 
@@ -67,7 +67,7 @@ The TypeScript portion of the code base is the standard library `std`.
 
 #### Do not use the filename `index.ts`/`index.js`
 
-Deno does not treat "index.js" or "index.ts" in a special way. By using these
+Ende does not treat "index.js" or "index.ts" in a special way. By using these
 filenames, it suggests that they can be left out of the module specifier when
 they cannot. This is confusing.
 
@@ -187,9 +187,9 @@ export function pwrite(options: PWrite) {}
 
 Note: When one of the arguments is a function, you can adjust the order
 flexibly. See examples like
-[Deno.serve](https://docs.deno.com/api/deno/~/Deno.serve),
-[Deno.test](https://docs.deno.com/api/deno/~/Deno.test),
-[Deno.addSignalListener](https://docs.deno.com/api/deno/~/Deno.addSignalListener).
+[Ende.serve](https://docs.ende.sh/api/ende/~/Ende.serve),
+[Ende.test](https://docs.ende.sh/api/ende/~/Ende.test),
+[Ende.addSignalListener](https://docs.ende.sh/api/ende/~/Ende.addSignalListener).
 See also
 [this post](https://twitter.com/jaffathecake/status/1646798390355697664).
 
@@ -252,7 +252,7 @@ Code string literals should be braced with the back-tick (\`) instead of quotes.
 For example:
 
 ```ts
-/** Import something from the `deno` module. */
+/** Import something from the `ende` module. */
 ```
 
 Every exported function should have a `@param` tag for each parameter with a
@@ -287,7 +287,7 @@ Code examples should utilize markdown format, like so:
 ````ts
 /** A straightforward comment and an example:
  * ```ts
- * import { foo } from "deno";
+ * import { foo } from "ende";
  * foo("bar");
  * ```
  */
@@ -329,10 +329,10 @@ foo() returns bar object ... ok
 Example of test:
 
 ```ts
-import { assertEquals } from "@std/assert";
+import { assertEquals } from "@ende/assert";
 import { foo } from "./mod.ts";
 
-Deno.test("foo() returns bar object", function () {
+Ende.test("foo() returns bar object", function () {
   assertEquals(foo(), { bar: "bar" });
 });
 ```
@@ -442,7 +442,7 @@ Better: Cannot compute the square root for x as x must be >= 0: current value is
 
 #### Do not depend on external code.
 
-`https://jsr.io/@std` is intended to be baseline functionality that all Deno
+`https://jsr.io/@std` is intended to be baseline functionality that all Ende
 programs can rely on. We want to guarantee to users that this code does not
 include potentially unreviewed third-party code.
 
@@ -456,7 +456,7 @@ of the module:
 ```
 
 Maintain browser compatibility for such a module by either not using the global
-`Deno` namespace or feature-testing for it. Make sure any new dependencies are
+`Ende` namespace or feature-testing for it. Make sure any new dependencies are
 also browser compatible.
 
 #### Prefer # over private keyword
@@ -544,7 +544,7 @@ When the names are in `camelCase` or `PascalCase`, always follow the rules of
 them even when the parts of them are acronyms.
 
 Note: Web APIs use uppercase acronyms (`JSON`, `URL`, `URL.createObjectURL()`
-etc.). Deno Standard Library does not follow this convention.
+etc.). Ende Standard Library does not follow this convention.
 
 Good:
 

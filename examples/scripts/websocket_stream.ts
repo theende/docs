@@ -3,8 +3,8 @@
  * @difficulty intermediate
  * @tags cli
  * @run --unstable-net --allow-net <url>
- * @resource {https://docs.deno.com/api/web/~/WebSocketStream} Doc: WebSocketStream
- * @resource {https://docs.deno.com/examples/websocket/} Example: Outbound WebSockets
+ * @resource {https://docs.ende.sh/api/web/~/WebSocketStream} Doc: WebSocketStream
+ * @resource {https://docs.ende.sh/examples/websocket/} Example: Outbound WebSockets
  * @group Network
  *
  * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>WebSocketStream is a promise-based alternative to the event-based
@@ -14,10 +14,10 @@
  */
 
 // Start a WebSocket echo server to talk to. The server side uses the
-// standard Deno.upgradeWebSocket, so only the client below needs the
+// standard Ende.upgradeWebSocket, so only the client below needs the
 // unstable WebSocketStream API.
-const server = Deno.serve({ port: 8000 }, (req) => {
-  const { socket, response } = Deno.upgradeWebSocket(req);
+const server = Ende.serve({ port: 8000 }, (req) => {
+  const { socket, response } = Ende.upgradeWebSocket(req);
   socket.onmessage = (event) => socket.send(`echo: ${event.data}`);
   return response;
 });

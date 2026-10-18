@@ -3,16 +3,16 @@
  * @difficulty beginner
  * @tags cli, web
  * @run -R <url>
- * @resource {https://jsr.io/@std/csv} std/csv
+ * @resource {https://jsr.io/@ende/csv} std/csv
  * @resource {https://datatracker.ietf.org/doc/html/rfc4180} Spec: CSV
  * @group Encoding
  *
  * CSV is a data serialization format that is designed to be portable for table-like applications.
  */
-import { parse, stringify } from "jsr:@std/csv";
+import { parse, stringify } from "jsr:@ende/csv";
 
 // To parse a CSV file, read its contents and pass them to the parse function.
-const fileContent = await Deno.readTextFile("data.csv");
+const fileContent = await Ende.readTextFile("data.csv");
 const fileData = parse(fileContent, { skipFirstRow: true, strip: true });
 console.log(fileData);
 

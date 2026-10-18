@@ -3,58 +3,58 @@ title: no-deprecated-deno-api
 tags: [recommended]
 ---
 
-Warns the usage of the deprecated - Deno APIs.
+Warns the usage of the deprecated - Ende APIs.
 
-The following APIs will be removed from the `Deno.*` namespace but have newer
+The following APIs will be removed from the `Ende.*` namespace but have newer
 APIs to migrate to. See the
-[Deno 1.x to 2.x Migration Guide](https://docs.deno.com/runtime/manual/advanced/migrate_deprecations)
-for migration instructions.
+[Removed and deprecated APIs](/runtime/reference/migrate_deprecations/) page for
+migration instructions.
 
-- `Deno.Buffer`
-- `Deno.Closer`
-- `Deno.close()`
-- `Deno.Conn.rid`
-- `Deno.copy()`
-- `Deno.customInspect`
-- `Deno.File`
-- `Deno.fstatSync()`
-- `Deno.fstat()`
-- `Deno.FsWatcher.rid`
-- `Deno.ftruncateSync()`
-- `Deno.ftruncate()`
-- `Deno.futimeSync()`
-- `Deno.futime()`
-- `Deno.isatty()`
-- `Deno.Listener.rid`
-- `Deno.ListenTlsOptions.certFile`
-- `Deno.ListenTlsOptions.keyFile`
-- `Deno.readAllSync()`
-- `Deno.readAll()`
-- `Deno.Reader`
-- `Deno.ReaderSync`
-- `Deno.readSync()`
-- `Deno.read()`
-- `Deno.run()`
-- `Deno.seekSync()`
-- `Deno.seek()`
-- `Deno.serveHttp()`
-- `Deno.Server`
-- `Deno.shutdown`
-- `Deno.stderr.rid`
-- `Deno.stdin.rid`
-- `Deno.stdout.rid`
-- `Deno.TlsConn.rid`
-- `Deno.UnixConn.rid`
-- `Deno.writeAllSync()`
-- `Deno.writeAll()`
-- `Deno.Writer`
-- `Deno.WriterSync`
-- `Deno.writeSync()`
-- `Deno.write()`
-- `new Deno.FsFile()`
+- `Ende.Buffer`
+- `Ende.Closer`
+- `Ende.close()`
+- `Ende.Conn.rid`
+- `Ende.copy()`
+- `Ende.customInspect`
+- `Ende.File`
+- `Ende.fstatSync()`
+- `Ende.fstat()`
+- `Ende.FsWatcher.rid`
+- `Ende.ftruncateSync()`
+- `Ende.ftruncate()`
+- `Ende.futimeSync()`
+- `Ende.futime()`
+- `Ende.isatty()`
+- `Ende.Listener.rid`
+- `Ende.ListenTlsOptions.certFile`
+- `Ende.ListenTlsOptions.keyFile`
+- `Ende.readAllSync()`
+- `Ende.readAll()`
+- `Ende.Reader`
+- `Ende.ReaderSync`
+- `Ende.readSync()`
+- `Ende.read()`
+- `Ende.run()`
+- `Ende.seekSync()`
+- `Ende.seek()`
+- `Ende.serveHttp()`
+- `Ende.Server`
+- `Ende.shutdown`
+- `Ende.stderr.rid`
+- `Ende.stdin.rid`
+- `Ende.stdout.rid`
+- `Ende.TlsConn.rid`
+- `Ende.UnixConn.rid`
+- `Ende.writeAllSync()`
+- `Ende.writeAll()`
+- `Ende.Writer`
+- `Ende.WriterSync`
+- `Ende.writeSync()`
+- `Ende.write()`
+- `new Ende.FsFile()`
 
-The following APIs will be removed from the `Deno.*` namespace without
+The following APIs will be removed from the `Ende.*` namespace without
 replacement.
 
-- `Deno.resources()`
-- `Deno.metrics()`
+- `Ende.resources()`
+- `Ende.metrics()`

@@ -2,12 +2,12 @@
  * @title Importing & exporting
  * @difficulty beginner
  * @tags cli
- * @resource {https://docs.deno.com/runtime/fundamentals/modules/} Doc: Modules and dependencies
+ * @resource {https://docs.ende.sh/runtime/fundamentals/modules/} Doc: Modules and dependencies
  * @group Basics
  *
  * To build composable programs, it is necessary to be able to import and export
  * functions from other modules. This is accomplished by using ECMA script
- * modules in Deno.
+ * modules in Ende.
  */
 
 // File: ./util.ts
@@ -34,9 +34,7 @@ import * as util from "./util.ts";
 util.sayHello("World");
 
 // Imports don't have to be relative, they can also reference
-// absolute file, https, npm, or [JSR](https://jsr.io) URLs.
+// absolute file, https, or [JSR](https://jsr.io) URLs.
 import { camelCase } from "jsr:@luca/cases@1";
 console.log(camelCase("hello world")); // helloWorld
 
-import OpenAI from "npm:openai";
-const client = new OpenAI();

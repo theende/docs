@@ -13,7 +13,7 @@
 // Use the `exists` utility from the std library to check for existence of a file or folder.
 // Note: Can create a race condition if followed by file operation.
 // Consider the alternative below.
-import { exists } from "jsr:@std/fs/exists";
+import { exists } from "jsr:@ende/fs/exists";
 await exists("./this_file_or_folder_exists"); // true
 await exists("./this_file_or_folder_does_not_exist"); // false
 
@@ -25,12 +25,12 @@ await exists("./file", { isDirectory: true }); // false
 // Doing so creates a time-of-check to time-of-use race condition: the folder can be created or removed
 // in the gap between `exists` returning and your next call, so the result may already be stale. That is
 // why `exists` is not recommended for that usecase. Prefer to attempt the operation directly and handle
-// the error, or probe with `Deno.lstat` as shown below and act on the result you get back.
+// the error, or probe with `Ende.lstat` as shown below and act on the result you get back.
 try {
-  await Deno.lstat("./example_directory");
+  await Ende.lstat("./example_directory");
   console.log("Folder exists");
 } catch (err) {
-  if (!(err instanceof Deno.errors.NotFound)) {
+  if (!(err instanceof Ende.errors.NotFound)) {
     throw err;
   }
   console.log("Folder does not exist");

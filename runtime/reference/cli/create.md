@@ -1,38 +1,30 @@
 ---
-last_modified: 2026-03-12
-title: "deno create"
+last_modified: 2026-10-18
+title: "ende create"
 command: create
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno create"
+openGraphTitle: "ende create"
 description: "Scaffold a new project from a template package"
 ---
 
-The `deno create` command scaffolds a new project from a template package. It
-works with both [JSR](https://jsr.io/) and [npm](https://www.npmjs.com/)
-packages that provide project templates.
+The `ende create` command scaffolds a new project from a template package
+published on [JSR](https://jsr.io/).
 
 ## Usage
 
 ```sh
-deno create [OPTIONS] [PACKAGE] [-- [ARGS]...]
+ende create [OPTIONS] [PACKAGE] [-- [ARGS]...]
 ```
 
-The `[PACKAGE]` argument requires either a `jsr:` or `npm:` prefix, or one of
-the `--jsr` / `--npm` flags. Unprefixed package names error out with
-`Missing 'jsr:' or 'npm:' prefix.`
+The `[PACKAGE]` argument needs a `jsr:` prefix, or the `--jsr` flag for an
+unprefixed name.
 
 ## How it works
 
-Package resolution differs between npm and JSR:
+A JSR package acts as a template by defining a `./create` entry point in its
+[`ende.json`](/runtime/fundamentals/configuration/):
 
-- **npm packages** use the `create-` naming convention. Running
-  `deno create npm:vite` resolves to the `create-vite` package on npm and
-  executes its main entry point.
-- **JSR packages** use the `./create` export. Any JSR package can act as a
-  template by defining a `./create` entry point in its
-  [`deno.json`](/runtime/fundamentals/configuration/):
-
-```json title="deno.json"
+```json title="ende.json"
 {
   "name": "@my-scope/my-template",
   "version": "1.0.0",
@@ -43,7 +35,7 @@ Package resolution differs between npm and JSR:
 }
 ```
 
-When you run `deno create jsr:@my-scope/my-template`, Deno looks for the
+When you run `ende create jsr:@my-scope/my-template`, Ende looks for the
 `./create` export and runs it as the scaffolding script.
 
 ## Examples
@@ -51,29 +43,16 @@ When you run `deno create jsr:@my-scope/my-template`, Deno looks for the
 Create a project from a JSR package:
 
 ```sh
-deno create jsr:@fresh/init
-```
-
-Create a project from an npm package:
-
-```sh
-deno create npm:vite my-app
-```
-
-Using the `--npm` flag to treat unprefixed names as npm packages:
-
-```sh
-deno create --npm create-vite my-app
+ende create jsr:@my-scope/my-template
 ```
 
 Pass arguments to the template package:
 
 ```sh
-deno create jsr:@fresh/init -- --force
+ende create jsr:@my-scope/my-template -- --force
 ```
 
 ## Flags
 
-- `--npm` - Treat unprefixed package names as npm packages
 - `--jsr` - Treat unprefixed package names as JSR packages
 - `-y, --yes` - Bypass the prompt and run with full permissions

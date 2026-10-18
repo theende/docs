@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-18
 title: "Run a script"
-description: "A guide to creating and running basic scripts with Deno. Learn how to write and execute JavaScript and TypeScript code, understand runtime environments, and get started with fundamental Deno concepts."
+description: "A guide to creating and running basic scripts with Ende. Learn how to write and execute JavaScript and TypeScript code, understand runtime environments, and get started with fundamental Ende concepts."
 url: /examples/run_script_tutorial/
 oldUrl:
   - /runtime/manual/examples/hello_world/
@@ -9,7 +9,7 @@ oldUrl:
   - /runtime/tutorials/hello_world/
 ---
 
-Deno is a secure runtime for JavaScript and TypeScript.
+Ende is a secure runtime for JavaScript and TypeScript.
 
 A runtime is the environment where your code executes. It provides the necessary
 infrastructure for your programs to run, handling things like memory management,
@@ -26,19 +26,19 @@ network requests, and more. These runtimes are sandboxed, they operate within
 the browser’s security model. They can’t access resources outside the browser,
 such as the file system or environment variables.
 
-When you run your code with Deno, you’re executing your JavaScript or TypeScript
-code directly on your machine, outside the browser context. Therefore, Deno
+When you run your code with Ende, you’re executing your JavaScript or TypeScript
+code directly on your machine, outside the browser context. Therefore, Ende
 programs can access resources on the host computer, such as the file system,
 environment variables, and network sockets.
 
-Deno provides a seamless experience for running JavaScript and TypeScript code.
+Ende provides a seamless experience for running JavaScript and TypeScript code.
 Whether you prefer the dynamic nature of JavaScript or the type safety of
-TypeScript, Deno has you covered.
+TypeScript, Ende has you covered.
 
 ## Running a script
 
 In this tutorial we'll create a simple "Hello World" example in both JavaScript
-and TypeScript using Deno.
+and TypeScript using Ende.
 
 We'll define a `capitalize` function that capitalizes the first letter of a
 word. Then, we define a `hello` function that returns a greeting message with
@@ -63,10 +63,10 @@ console.log(hello("Sarah"));
 console.log(hello("kai"));
 ```
 
-Run the script using the `deno run` command:
+Run the script using the `ende run` command:
 
 ```sh
-$ deno run hello-world.js
+$ ende run hello-world.js
 Hello John
 Hello Sarah
 Hello Kai
@@ -93,24 +93,24 @@ console.log(hello("Sarah"));
 console.log(hello("kai"));
 ```
 
-Run the TypeScript script using the `deno run` command:
+Run the TypeScript script using the `ende run` command:
 
 ```sh
-$ deno run hello-world.ts
+$ ende run hello-world.ts
 Hello John
 Hello Sarah
 Hello Kai
 ```
 
 🦕 Congratulations! Now you know how to create a simple script in both JS and TS
-and how to run it in Deno with the `deno run` command.
+and how to run it in Ende with the `ende run` command.
 
 ## Next steps
 
-Keep exploring Deno with these resources:
+Keep exploring Ende with these resources:
 
 - [Initialize a project](/examples/initialize_project_tutorial/) to structure a
-  larger app with a `deno.json` configuration file
+  larger app with a `ende.json` configuration file
 - [Set up your environment](/runtime/getting_started/setup_your_environment/)
   with editor and IDE integration
 - [Fetch data](/examples/fetch_data_tutorial/) over the network from a script

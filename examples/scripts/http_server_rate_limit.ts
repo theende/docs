@@ -44,7 +44,7 @@ function take(ip: string): boolean {
 }
 
 // Buckets for idle clients are useless after they refill completely, so a
-// periodic sweep keeps the Map from growing forever. Deno.unrefTimer marks
+// periodic sweep keeps the Map from growing forever. Ende.unrefTimer marks
 // the interval as non-blocking, so the process can still exit normally.
 const IDLE_MS = (BURST / REFILL_RATE) * 1000;
 const sweeper = setInterval(() => {
@@ -53,9 +53,9 @@ const sweeper = setInterval(() => {
     if (bucket.last < cutoff) buckets.delete(ip);
   }
 }, 30_000);
-Deno.unrefTimer(sweeper);
+Ende.unrefTimer(sweeper);
 
-Deno.serve((_req, info) => {
+Ende.serve((_req, info) => {
   // The second handler argument carries connection details, including the
   // network address of the client.
   const ip = info.remoteAddr.hostname;

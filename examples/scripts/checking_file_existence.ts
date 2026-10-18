@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli
  * @run -R -W <url>
- * @resource {https://jsr.io/@std/fs/doc/exists/~} Doc: @std/fs/exists
- * @resource {https://docs.deno.com/api/deno/~/Deno.lstat} Doc: Deno.lstat
+ * @resource {https://jsr.io/@ende/fs/doc/exists/~} Doc: @ende/fs/exists
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.lstat} Doc: Ende.lstat
  * @group File System
  *
  * When creating files it can be useful to first ensure that
@@ -15,7 +15,7 @@
 // Use the `exists` utility from the std library to check for existence of a file or folder.
 // Note: Can create a race condition if followed by file operation.
 // Consider the alternative below.
-import { exists } from "jsr:@std/fs/exists";
+import { exists } from "jsr:@ende/fs/exists";
 await exists("./this_file_or_folder_exists"); // true
 await exists("./this_file_or_folder_does_not_exist"); // false
 
@@ -27,9 +27,9 @@ await exists("./directory", { isFile: true }); // false
 // Doing so creates a race condition. The `exists` function is not recommended for that usecase.
 // Consider this alternative which checks for existence of a file without doing any other filesystem operations.
 try {
-  const stats = await Deno.lstat("example.txt");
+  const stats = await Ende.lstat("example.txt");
 } catch (err) {
-  if (!(err instanceof Deno.errors.NotFound)) {
+  if (!(err instanceof Ende.errors.NotFound)) {
     throw err;
   }
   console.log("File does not exist");

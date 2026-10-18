@@ -1,6 +1,6 @@
 ---
 last_modified: 2026-06-17
-title: "deno lint"
+title: "ende lint"
 oldUrl:
   - /runtime/tools/linter/
   - /runtime/fundamentals/linting_and_formatting/lint-cli-ref
@@ -9,11 +9,11 @@ oldUrl:
   - /runtime/reference/cli/linter/
 command: lint
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno lint"
-description: "Run the Deno linter to check your code for errors and apply automated fixes"
+openGraphTitle: "ende lint"
+description: "Run the Ende linter to check your code for errors and apply automated fixes"
 ---
 
-Deno ships with a built-in linter that analyzes your code for potential errors,
+Ende ships with a built-in linter that analyzes your code for potential errors,
 bugs, and stylistic issues. For a broader overview, see
 [Linting and Formatting](/runtime/lint_and_format/).
 
@@ -22,13 +22,13 @@ bugs, and stylistic issues. For a broader overview, see
 Lint all TypeScript and JavaScript files in the current directory:
 
 ```sh
-deno lint
+ende lint
 ```
 
 Lint specific files or directories:
 
 ```sh
-deno lint src/ main.ts
+ende lint src/ main.ts
 ```
 
 ## Watch mode
@@ -36,35 +36,35 @@ deno lint src/ main.ts
 Automatically re-lint files when they change:
 
 ```sh
-deno lint --watch
+ende lint --watch
 ```
 
 ## Using in CI
 
-`deno lint` exits with a non-zero status code when it finds violations, making
+`ende lint` exits with a non-zero status code when it finds violations, making
 it suitable for CI pipelines:
 
 ```sh
-deno lint
-deno fmt --check
-deno test
+ende lint
+ende fmt --check
+ende test
 ```
 
 ## Available rules
 
-Deno's linter includes over 100 rules. View all available rules:
+Ende's linter includes over 100 rules. View all available rules:
 
 ```sh
-deno lint --rules
+ende lint --rules
 ```
 
 For a full list with documentation, visit the [lint rules](/lint/) reference.
 
-## Configuring rules in `deno.json`
+## Configuring rules in `ende.json`
 
-Customize which rules are active in your `deno.json`:
+Customize which rules are active in your `ende.json`:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "lint": {
     "rules": {
@@ -83,17 +83,17 @@ Customize which rules are active in your `deno.json`:
 Many rules do not belong to any tag (for example `eqeqeq` or `no-console`).
 Those rules are not enabled by `tags` and must be turned on by listing them
 individually in `include`. You can check whether a rule has a tag with
-`deno lint --rules` or on each rule's page in the [lint rules](/lint/)
+`ende lint --rules` or on each rule's page in the [lint rules](/lint/)
 reference.
 
-See the [Configuration](/runtime/reference/deno_json/#linting) page for all
+See the [Configuration](/runtime/reference/ende_json/#linting) page for all
 available options.
 
 ## Including and excluding files
 
-Specify which files to lint in `deno.json`:
+Specify which files to lint in `ende.json`:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "lint": {
     "include": ["src/"],
@@ -105,7 +105,7 @@ Specify which files to lint in `deno.json`:
 You can also exclude files from the command line:
 
 ```sh
-deno lint --ignore=dist/,build/
+ende lint --ignore=dist/,build/
 ```
 
 ## Lint plugins
@@ -210,7 +210,7 @@ function foo(): any {
 
 ## Ignore `ban-unused-ignore` itself
 
-`deno lint` provides [`ban-unused-ignore` rule](/lint/rules/ban-unused-ignore/),
+`ende lint` provides [`ban-unused-ignore` rule](/lint/rules/ban-unused-ignore/),
 which will detect ignore directives that don't ever suppress certain
 diagnostics. This is useful when you want to discover ignore directives that are
 no longer necessary after refactoring the code.

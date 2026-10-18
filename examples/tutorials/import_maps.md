@@ -1,11 +1,11 @@
 ---
 last_modified: 2026-06-12
 title: "Re-map import paths"
-description: "Use the imports field in deno.json as an import map: path aliases like @/ for src/, bare names for local modules, and scoped overrides for transitive imports."
+description: "Use the imports field in ende.json as an import map: path aliases like @/ for src/, bare names for local modules, and scoped overrides for transitive imports."
 url: /examples/import_maps_tutorial/
 ---
 
-The `imports` field in `deno.json` is an import map: any specifier prefix can be
+The `imports` field in `ende.json` is an import map: any specifier prefix can be
 re-mapped to any location. Besides naming packages, it replaces the `paths`
 section of `tsconfig.json` for path aliases like `@/`.
 
@@ -14,7 +14,7 @@ section of `tsconfig.json` for path aliases like `@/`.
 A key ending in `/` maps a whole prefix. The common convention aliases the
 source root:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "imports": {
     "@/": "./src/"
@@ -34,7 +34,7 @@ import { greet } from "@/greet.ts";
 A key without a trailing slash maps one bare name to one file, which reads
 nicely for modules used everywhere:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "imports": {
     "@/": "./src/",
@@ -51,13 +51,13 @@ log(greet("import maps"));
 ```
 
 ```sh
-$ deno run main.ts
+$ ende run main.ts
 [log] Hello, import maps!
 ```
 
 ## Editor support
 
-The Deno language server reads the same file, so completions and
+The Ende language server reads the same file, so completions and
 go-to-definition follow the aliases with no extra `tsconfig.json` configuration.
 If you migrate a project that has `compilerOptions.paths`, move those entries
 into `imports`.
@@ -67,7 +67,7 @@ into `imports`.
 The standard import map `scopes` field also works, remapping a specifier only
 for imports that originate under a given path prefix:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "imports": {
     "logger": "./src/utils/logger.ts"
@@ -83,10 +83,9 @@ for imports that originate under a given path prefix:
 Modules under `vendor/` get the legacy logger; everything else gets the default.
 
 > [!NOTE]
-> The import map redirects specifiers in your own code. To force the version of
-> a package deeper in the dependency tree, use the `overrides` field of
-> `package.json` instead; see
-> [Overriding transitive dependencies](/examples/add_remove_dependencies_tutorial/#overriding-transitive-dependencies).
+> The import map redirects specifiers in your own code. To replace a dependency
+> with a local copy, see
+> [Overriding dependencies](/runtime/packages/#overriding-dependencies).
 
 For how packages themselves are named and versioned in the import map, see
 [Add and remove dependencies](/examples/add_remove_dependencies_tutorial/) and

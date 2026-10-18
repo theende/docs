@@ -39,7 +39,7 @@ function handler(_req: Request): Response {
   });
 }
 
-Deno.serve(handler);
+Ende.serve(handler);
 
 // In the browser, EventSource consumes the stream and reconnects
 // automatically if the connection drops:

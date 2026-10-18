@@ -5,7 +5,7 @@ tags: []
 
 Disallow sync function inside async function.
 
-Using sync functions like `Deno.readTextFileSync` blocks the deno event loop so
+Using sync functions like `Ende.readTextFileSync` blocks the ende event loop so
 it's not recommended to use it inside of an async function, because it stops
 progress of all other async tasks.
 
@@ -13,15 +13,15 @@ progress of all other async tasks.
 
 ```javascript
 async function foo() {
-  Deno.readTextFileSync("");
+  Ende.readTextFileSync("");
 }
 
 const fooFn = async function foo() {
-  Deno.readTextFileSync("");
+  Ende.readTextFileSync("");
 };
 
 const fooFn = async () => {
-  Deno.readTextFileSync("");
+  Ende.readTextFileSync("");
 };
 ```
 
@@ -29,18 +29,18 @@ const fooFn = async () => {
 
 ```javascript
 async function foo() {
-  await Deno.readTextFile("");
+  await Ende.readTextFile("");
 }
 
 function foo() {
-  Deno.readTextFileSync("");
+  Ende.readTextFileSync("");
 }
 
 const fooFn = function foo() {
-  Deno.readTextFileSync("");
+  Ende.readTextFileSync("");
 };
 
 const fooFn = () => {
-  Deno.readTextFileSync("");
+  Ende.readTextFileSync("");
 };
 ```

@@ -53,10 +53,10 @@ const progress = new TransformStream<Uint8Array, Uint8Array>({
   },
 });
 
-// Deno.open returns a file whose writable property is a standard
+// Ende.open returns a file whose writable property is a standard
 // WritableStream, so the response body pipes directly into it. pipeTo
 // closes the file when the stream ends.
-const file = await Deno.open(output, {
+const file = await Ende.open(output, {
   write: true,
   create: true,
   truncate: true,
@@ -67,10 +67,8 @@ await response.body.pipeThrough(progress).pipeTo(file.writable);
 report();
 console.log(`saved ${output}`);
 
-// With node:fs the same pipe works through the web stream bridge:
-// Readable.fromWeb(response.body).pipe(createWriteStream(output)).
 //
-//   deno run -N -W download_progress.ts
+//   ende run -N -W download_progress.ts
 //   15406 / 15406 bytes (100%)
 //   saved favicon.ico
 //

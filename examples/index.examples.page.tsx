@@ -7,7 +7,7 @@ import type { ExampleFromFileSystem } from "./_lib/types.ts";
 function ExamplePage({ example }: { example: ExampleFromFileSystem }) {
   const source =
     `https://github.com/theende/docs/blob/primary/examples/scripts/${example.name}`;
-  const rawUrl = `https://docs.deno.com/examples/scripts/${example.name}`;
+  const rawUrl = `https://docs.ende.sh/examples/scripts/${example.name}`;
   const run = example.parsed.run;
 
   return (
@@ -32,13 +32,13 @@ function ExamplePage({ example }: { example: ExampleFromFileSystem }) {
       {run && (
         <section>
           <p>
-            Run <a href={source}>this example</a> locally using the Deno CLI:
+            Run <a href={source}>this example</a> locally using the Ende CLI:
           </p>
-          <pre><code>{run.startsWith("deno test")
-            ? `# deno test runs local files, so download the example first:\ncurl -O ${rawUrl}\n${run.replace("<url>", example.name)}`
-            : run.startsWith("deno")
+          <pre><code>{run.startsWith("ende test")
+            ? `# ende test runs local files, so download the example first:\ncurl -O ${rawUrl}\n${run.replace("<url>", example.name)}`
+            : run.startsWith("ende")
             ? run.replace("<url>", rawUrl)
-            : `deno run ${run.replace("<url>", rawUrl)}`}</code></pre>
+            : `ende run ${run.replace("<url>", rawUrl)}`}</code></pre>
         </section>
       )}
       {example.parsed.additionalResources.length > 0 && (

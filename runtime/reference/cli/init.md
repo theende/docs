@@ -1,33 +1,33 @@
 ---
 last_modified: 2026-06-15
-title: "deno init"
+title: "ende init"
 oldUrl: /runtime/manual/tools/init/
 command: init
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno init"
-description: "Scaffold a new Deno project with tests and configuration"
+openGraphTitle: "ende init"
+description: "Scaffold a new Ende project with tests and configuration"
 ---
 
 ## Examples
 
 ```sh
-deno init
+ende init
 ✅ Project initialized
 Run these commands to get started
 
   // Run the program
-  deno run main.ts
+  ende run main.ts
 
   // Run the program and watch for file changes
-  deno task dev
+  ende task dev
 
   // Run the tests
-  deno test
+  ende test
 
-deno run main.ts
+ende run main.ts
 Add 2 + 3 = 5
 
-deno test
+ende test
 Check file:///dev/main_test.ts
 running 1 test from main_test.ts
 addTest ... ok (6ms)
@@ -36,177 +36,177 @@ ok | 1 passed | 0 failed (29ms)
 ```
 
 The `init` subcommand will create two files (`main.ts` and `main_test.ts`).
-These files provide a basic example of how to write a Deno program and how to
+These files provide a basic example of how to write an Ende program and how to
 write tests for it. The `main.ts` file exports a `add` function that adds two
 numbers together and the `main_test.ts` file contains a test for this function.
 
-You can also specify an argument to `deno init` to initialize a project in a
+You can also specify an argument to `ende init` to initialize a project in a
 specific directory:
 
 ```sh
-deno init my_deno_project
+ende init my_ende_project
 ✅ Project initialized
 
 Run these commands to get started
 
-  cd my_deno_project
+  cd my_ende_project
 
   // Run the program
-  deno run main.ts
+  ende run main.ts
 
   // Run the program and watch for file changes
-  deno task dev
+  ende task dev
 
   // Run the tests
-  deno test
+  ende test
 ```
 
 ## Init a JSR package
 
-By running `deno init --lib` Deno will bootstrap a project that is ready to be
+By running `ende init --lib` Ende will bootstrap a project that is ready to be
 published on [JSR](https://jsr.io/).
 
 ```sh
-deno init --lib
+ende init --lib
 ✅ Project initialized
 
 Run these commands to get started
 
   # Run the tests
-  deno test
+  ende test
 
   # Run the tests and watch for file changes
-  deno task dev
+  ende task dev
 
   # Publish to JSR (dry run)
-  deno publish --dry-run
+  ende publish --dry-run
 ```
 
-Inside `deno.json` you'll see that the entries for `name`, `exports` and
+Inside `ende.json` you'll see that the entries for `name`, `exports` and
 `version` are prefilled.
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "name": "my-lib",
   "version": "0.1.0",
   "exports": "./mod.ts",
   "tasks": {
-    "dev": "deno test --watch mod.ts"
+    "dev": "ende test --watch mod.ts"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1"
+    "@ende/assert": "jsr:@ende/assert@^2026.10.15"
   }
 }
 ```
 
 ## Initialize a web server
 
-Running `deno init --serve` bootstraps a web server that works with
-[`deno serve`](./serve).
+Running `ende init --serve` bootstraps a web server that works with
+[`ende serve`](./serve).
 
 ```sh
-deno init --serve
+ende init --serve
 ✅ Project initialized
 
 Run these commands to get started
 
   # Run the server
-  deno serve -R main.ts
+  ende serve -R main.ts
 
   # Run the server and watch for file changes
-  deno task dev
+  ende task dev
 
   # Run the tests
-  deno -R test
+  ende -R test
 ```
 
-Your [`deno.json`](/runtime/fundamentals/configuration/) file will look like
+Your [`ende.json`](/runtime/fundamentals/configuration/) file will look like
 this:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "tasks": {
-    "dev": "deno serve --watch -R main.ts"
+    "dev": "ende serve --watch -R main.ts"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1",
-    "@std/http": "jsr:@std/http@1"
+    "@ende/assert": "jsr:@ende/assert@^2026.10.15",
+    "@ende/http": "jsr:@ende/http@^2026.10.15"
   }
 }
 ```
 
 Now, you can start your web server, which
-[watches for changes](/runtime/run/watch_mode/), by running `deno task dev`.
+[watches for changes](/runtime/run/watch_mode/), by running `ende task dev`.
 
 ```sh
-deno task dev
-Task dev deno serve --watch -R main.ts
+ende task dev
+Task dev ende serve --watch -R main.ts
 Watcher Process started.
-deno serve: Listening on http://0.0.0.0:8000/
+ende serve: Listening on http://0.0.0.0:8000/
 ```
 
 ## Initialize an empty project
 
-Running `deno init --empty` bootstraps an empty project with a basic console
+Running `ende init --empty` bootstraps an empty project with a basic console
 log.
 
 ```sh
-deno init --empty
+ende init --empty
 ✅ Project initialized
 
 Run these commands to get started
 
   # Run the program
-  deno run main.ts
+  ende run main.ts
 
   # Run the program and watch for file changes
-  deno task dev
+  ende task dev
 ```
 
-Your [`deno.json`](/runtime/fundamentals/configuration/) file will look like
+Your [`ende.json`](/runtime/fundamentals/configuration/) file will look like
 this:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev": "ende run --watch main.ts"
   }
 }
 ```
 
 Now, you can run the project, which
-[watches for changes](/runtime/run/watch_mode/), by running `deno task dev`.
+[watches for changes](/runtime/run/watch_mode/), by running `ende task dev`.
 
 ```sh
-deno task dev
-Task dev deno run --watch main.ts
+ende task dev
+Task dev ende run --watch main.ts
 Watcher Process started.
 Hello world!
 ```
 
 ## Generate a library project
 
-You can append a `--lib` flag to add extra parameters to your `deno.json`, such
+You can append a `--lib` flag to add extra parameters to your `ende.json`, such
 as "name", "version" and an "exports" fields.
 
 ```sh
-deno init my_deno_project --lib
+ende init my_ende_project --lib
 ✅ Project initialized
 ```
 
-The resulting `deno.json` will be as follows:
+The resulting `ende.json` will be as follows:
 
-```jsonc title="deno.json"
+```jsonc title="ende.json"
 {
-  "name": "my_deno_project",
+  "name": "my_ende_project",
   "version": "0.1.0",
   "exports": "./mod.ts",
   "tasks": {
-    "dev": "deno test --watch mod.ts"
+    "dev": "ende test --watch mod.ts"
   },
   "license": "MIT",
   "imports": {
-    "@std/assert": "jsr:@std/assert@1"
+    "@ende/assert": "jsr:@ende/assert@^2026.10.15"
   }
 }
 ```

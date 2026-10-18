@@ -2,56 +2,53 @@
  * @title Render markdown to HTML
  * @difficulty intermediate
  * @tags cli
- * @run -WE <url>
- * @resource {https://jsr.io/@deno/gfm} @deno/gfm on JSR
- * @resource {https://docs.deno.com/examples/front_matter/} Example: Extract front matter from markdown
+ * @run -W <url>
+ * @resource {https://jsr.io/@ende/markdown} @ende/markdown on JSR
+ * @resource {/examples/front_matter/} Example: Extract front matter from markdown
  * @group Web frameworks and libraries
  *
- * The @deno/gfm module renders GitHub Flavored Markdown to HTML, with the
- * same tables, task lists, and syntax highlighting you see on GitHub. It is
- * the renderer behind this documentation site, so it is a safe default for
- * turning user content or markdown files into web pages.
+ * The @ende/markdown module parses CommonMark and GitHub Flavored Markdown
+ * and renders it to HTML: tables, task lists, footnotes and GitHub's alerts.
+ * It is the renderer behind this documentation site.
  */
-import { render } from "jsr:@deno/gfm";
-
-// Syntax highlighting is opt-in per language: import the matching Prism
-// grammar and the renderer will tokenize fenced code blocks in that
-// language. Import one line per language you want to highlight.
-import "npm:prismjs/components/prism-typescript.js";
+import { parse, render, toc } from "jsr:@ende/markdown@^2026.10.17";
 
 const markdown = `# Release notes
 
-Deno **2.0** is here. Highlights:
+Ende **2026.10.17** is here. Highlights:
 
-- Stable APIs
-- A code block:
+- [x] Stable APIs
+- [ ] A code block:
 
 \`\`\`ts
 const greeting: string = "hello";
 \`\`\`
+
+> [!TIP]
+> Run \`ende upgrade\` to get it.
 `;
 
-// render returns an HTML fragment, not a full document. Headings get
-// anchor links and code blocks are highlighted with token spans.
-const body = render(markdown);
-console.log(body.includes("<h1")); // true
-console.log(body.includes("token")); // true
+// parse turns the source into a syntax tree. The gfm option enables tables,
+// task lists, strikethrough, footnotes and alerts.
+const ast = parse(markdown, { gfm: true });
 
-// To produce a standalone page, wrap the fragment and include the GFM
-// stylesheet. The CSS export styles the markup, and the markdown-body
-// class is the selector it targets.
-import { CSS } from "jsr:@deno/gfm";
+// render returns an HTML fragment, not a full document. Headings get ids,
+// so they can be linked to.
+const body = render(ast);
+console.log(body.includes('<h1 id="release-notes">')); // true
 
+// toc lists the headings, for a table of contents.
+console.log(toc(ast)); // [ { depth: 1, text: "Release notes", slug: "release-notes" } ]
+
+// To produce a standalone page, wrap the fragment in a document.
 const page = `<!DOCTYPE html>
 <html>
-  <head><style>${CSS}</style></head>
-  <body class="markdown-body" data-color-mode="light">${body}</body>
+  <head><meta charset="utf-8"><title>Release notes</title></head>
+  <body>${body}</body>
 </html>`;
 
-await Deno.writeTextFile("release-notes.html", page);
+await Ende.writeTextFile("release-notes.html", page);
 console.log("wrote release-notes.html");
 
-// Markdown is rendered by an untrusted-input-safe parser, but if you allow
-// raw HTML in the source, sanitize the output before serving it. The
-// render function strips scripts by default; pass allowMath or other
-// options when you need them.
+// Raw HTML in the source renders as written by default. For untrusted
+// input, pass { html: "escape" } or { html: "strip" } to render.

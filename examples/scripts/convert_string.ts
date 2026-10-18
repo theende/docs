@@ -42,8 +42,3 @@ console.log(base64); // SGVsbG8=
 
 // To decode base64 back to a string, combine fromBase64 and TextDecoder.
 console.log(new TextDecoder().decode(Uint8Array.fromBase64(base64))); // Hello
-
-// When working with Node.js APIs, Buffer.from encodes a string directly,
-// with an optional encoding argument.
-import { Buffer } from "node:buffer";
-console.log(Buffer.from(text, "utf8").toString("base64")); // SGVsbG8=

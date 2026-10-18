@@ -4,7 +4,7 @@
  * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID} MDN: crypto.randomUUID
- * @resource {https://jsr.io/@std/uuid/doc} Doc: @std/uuid
+ * @resource {https://jsr.io/@ende/uuid/doc} Doc: @ende/uuid
  * @group Cryptography
  *
  * UUIDs (universally unique identifier) can be used to uniquely identify some
@@ -17,7 +17,7 @@ const myUUID = crypto.randomUUID();
 console.log("Random UUID:", myUUID);
 
 // The standard library contains some more functions for working with UUIDs.
-import * as uuid from "jsr:@std/uuid";
+import * as uuid from "jsr:@ende/uuid";
 
 // You can validate that a given string is a valid UUID.
 console.log(uuid.validate("not a UUID")); // false

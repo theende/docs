@@ -11,7 +11,7 @@
  * `console.log`.
  */
 
-// Deno has support for CSS using the %c syntax in console.log. Here, the text
+// Ende has support for CSS using the %c syntax in console.log. Here, the text
 // "Hello World" is displayed in red. This also works in the browser.
 console.log("%cHello World", "color: red");
 

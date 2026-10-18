@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/cache/doc/~/memoize} Doc: @std/cache memoize
- * @resource {https://jsr.io/@std/cache/doc/~/LruCache} Doc: @std/cache LruCache
+ * @resource {https://jsr.io/@ende/cache/doc/~/memoize} Doc: @ende/cache memoize
+ * @resource {https://jsr.io/@ende/cache/doc/~/LruCache} Doc: @ende/cache LruCache
  * @group Standard library
  *
  * Memoization caches the result of a function call so repeated calls
@@ -14,7 +14,7 @@
  * when the cache fills up.
  */
 
-import { LruCache, type MemoizationCacheResult, memoize } from "jsr:@std/cache";
+import { LruCache, type MemoizationCacheResult, memoize } from "jsr:@ende/cache";
 
 // A counter reveals how often the real function body runs.
 let calls = 0;

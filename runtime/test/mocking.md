@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-12
 title: "Mocking and test doubles"
-description: "Isolate the code under test with spies, stubs, mocks, and fake time using the Deno Standard Library's @std/testing package."
+description: "Isolate the code under test with spies, stubs, mocks, and fake time using the Ende Standard Library's @ende/testing package."
 oldUrl:
   - /runtime/manual/basics/testing/mocking/
   - /examples/mocking_tutorial/
@@ -12,10 +12,10 @@ Unit tests are most useful when they test one thing at a time. Real
 dependencies, such as databases, HTTP APIs, or the system clock, make tests
 slow, flaky, and hard to set up. A test double is a controlled stand-in for such
 a dependency. It lets you verify how your code interacts with the dependency
-without paying the cost of the real thing. The Deno Standard Library ships
+without paying the cost of the real thing. The Ende Standard Library ships
 everything you need in
-[`@std/testing/mock`](https://jsr.io/@std/testing/doc/mock) and
-[`@std/testing/time`](https://jsr.io/@std/testing/doc/time).
+[`@ende/testing/mock`](https://jsr.io/@ende/testing/doc/mock) and
+[`@ende/testing/time`](https://jsr.io/@ende/testing/doc/time).
 
 ## Spies
 
@@ -27,8 +27,8 @@ Here we test a `saveUser()` function that hands a user off to a database object.
 Instead of a real database, we pass an object whose `save` method is a spy:
 
 ```ts
-import { assertEquals } from "jsr:@std/assert";
-import { assertSpyCall, assertSpyCalls, spy } from "jsr:@std/testing/mock";
+import { assertEquals } from "jsr:@ende/assert";
+import { assertSpyCall, assertSpyCalls, spy } from "jsr:@ende/testing/mock";
 
 interface User {
   name: string;
@@ -46,7 +46,7 @@ function saveUser(
   return database.save(user);
 }
 
-Deno.test("saveUser calls database.save", async () => {
+Ende.test("saveUser calls database.save", async () => {
   // A stand-in database whose save method is wrapped in a spy
   const mockDatabase = {
     save: spy((user: User) => Promise.resolve({ id: 1, ...user })),
@@ -76,10 +76,10 @@ original method automatically when the test ends. No `try`/`finally` cleanup is
 needed:
 
 ```ts
-import { assertEquals } from "jsr:@std/assert";
-import { assertSpyCalls, spy } from "jsr:@std/testing/mock";
+import { assertEquals } from "jsr:@ende/assert";
+import { assertSpyCalls, spy } from "jsr:@ende/testing/mock";
 
-Deno.test("using disposable spies", () => {
+Ende.test("using disposable spies", () => {
   const calculator = {
     add: (a: number, b: number) => a + b,
   };
@@ -105,8 +105,8 @@ tests from touching external services. A stub still records its calls, so all
 the spy assertions work on it too.
 
 ```ts
-import { assertEquals } from "jsr:@std/assert";
-import { stub } from "jsr:@std/testing/mock";
+import { assertEquals } from "jsr:@ende/assert";
+import { stub } from "jsr:@ende/testing/mock";
 
 // Wrap dependencies in an object so they can be stubbed from tests
 const deps = {
@@ -122,7 +122,7 @@ function greetUser(id: number): string {
   return `Hello, ${name}!`;
 }
 
-Deno.test("greetUser with stubbed getUserName", () => {
+Ende.test("greetUser with stubbed getUserName", () => {
   // Replace the implementation with a controlled one
   using getUserNameStub = stub(deps, "getUserName", () => "Test User");
 
@@ -142,8 +142,8 @@ values in order. This is handy for simulating a missing record, a retry, or any
 call-by-call scenario:
 
 ```ts
-import { assertEquals, assertThrows } from "jsr:@std/assert";
-import { assertSpyCalls, returnsNext, stub } from "jsr:@std/testing/mock";
+import { assertEquals, assertThrows } from "jsr:@ende/assert";
+import { assertSpyCalls, returnsNext, stub } from "jsr:@ende/testing/mock";
 
 type User = { id: number; name: string };
 
@@ -161,7 +161,7 @@ function findOrThrow(id: number): User {
   return user;
 }
 
-Deno.test("findOrThrow throws when the user was not found", () => {
+Ende.test("findOrThrow throws when the user was not found", () => {
   // The stub returns undefined on its first (and only) call
   using dbStub = stub(database, "getUserById", returnsNext([undefined]));
 
@@ -169,7 +169,7 @@ Deno.test("findOrThrow throws when the user was not found", () => {
   assertSpyCalls(dbStub, 1);
 });
 
-Deno.test("stub with multiple return values", () => {
+Ende.test("stub with multiple return values", () => {
   const dataService = { fetchData: () => "original data" };
 
   using fetchDataStub = stub(
@@ -195,19 +195,19 @@ The terms overlap, but the distinction is simple:
   object" is usually a hand-built stand-in (like `mockDatabase` above) whose
   methods are spies or stubs, asserted against after the code under test runs.
 
-Everything you need for all three lives in `jsr:@std/testing/mock`.
+Everything you need for all three lives in `jsr:@ende/testing/mock`.
 
 ## Faking time
 
 Code that reads the clock or sets timers produces different results depending on
-when it runs. `FakeTime` from `jsr:@std/testing/time` replaces `Date`,
+when it runs. `FakeTime` from `jsr:@ende/testing/time` replaces `Date`,
 `setTimeout`, `setInterval`, and friends with controllable versions, so you can
 pin the current date and advance time instantly with `tick()` instead of waiting
 for real timeouts:
 
 ```ts
-import { assertEquals } from "jsr:@std/assert";
-import { FakeTime } from "jsr:@std/testing/time";
+import { assertEquals } from "jsr:@ende/assert";
+import { FakeTime } from "jsr:@ende/testing/time";
 
 // Function that depends on the current time
 function isWeekend(): boolean {
@@ -220,7 +220,7 @@ function delayedGreeting(callback: (message: string) => void): void {
   setTimeout(() => callback("Hello after delay"), 1000);
 }
 
-Deno.test("time-dependent tests", () => {
+Ende.test("time-dependent tests", () => {
   // Start the fake clock on a known Monday; restored automatically
   using time = new FakeTime(new Date("2023-05-01T12:00:00Z"));
 
@@ -257,9 +257,9 @@ restoration so one test never bleeds into the next.
 
 ## Keep going
 
-- [Testing in Deno](/runtime/test/): the test runner, assertions, and coverage
+- [Testing in Ende](/runtime/test/): the test runner, assertions, and coverage
 - [Snapshot testing](/runtime/test/snapshots/): compare output against recorded
   snapshots
-- [`@std/testing` API documentation](https://jsr.io/@std/testing): every utility
-  in detail
+- [`@ende/testing` API documentation](https://jsr.io/@ende/testing): every
+  utility in detail
 - [More examples](/examples/): runnable tutorials and samples

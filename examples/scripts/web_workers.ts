@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli, web
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers} MDN: Web Workers
- * @resource {https://docs.deno.com/api/web/~/Worker/} API: Worker
+ * @resource {https://docs.ende.sh/api/web/~/Worker/} API: Worker
  * @group Advanced
  *
  * Workers are the only way of running javascript off of the main thread.
@@ -20,14 +20,14 @@
 // thread and do some processing as a result of them.
 self.onmessage = async (e) => {
   const { filename } = e.data;
-  const text = await Deno.readTextFile(filename);
+  const text = await Ende.readTextFile(filename);
   console.log(text);
   self.close();
 };
 
 // File: ./main.ts
 
-// Currently, Deno only supports module-type workers. To instantiate one
+// Currently, Ende only supports module-type workers. To instantiate one
 // we can use similar syntax to what is found on the web.
 const worker = new Worker(
   new URL("./worker.ts", import.meta.url).href,
@@ -41,12 +41,12 @@ worker.postMessage({ filename: "./log.txt" });
 
 // By default the worker inherits the permissions of the thread it was
 // instantiated from. We can give workers certain permissions by using
-// the deno.permissions option.
+// the ende.permissions option.
 const worker2 = new Worker(
   new URL("./worker.ts", import.meta.url).href,
   {
     type: "module",
-    deno: {
+    ende: {
       permissions: {
         read: [
           new URL("./file_1.txt", import.meta.url),

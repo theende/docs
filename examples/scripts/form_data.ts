@@ -15,7 +15,7 @@
 
 // Build a form field by field. The same key can appear more than once.
 const form = new FormData();
-form.append("name", "Deno");
+form.append("name", "Ende");
 form.append("tag", "fast");
 form.append("tag", "secure");
 
@@ -25,7 +25,7 @@ const readme = new Blob(["hello from a file"], { type: "text/plain" });
 form.append("readme", readme, "readme.txt");
 
 // get returns the first value for a key, getAll returns every value.
-console.log(form.get("name")); // Deno
+console.log(form.get("name")); // Ende
 console.log(form.getAll("tag")); // [ "fast", "secure" ]
 
 // A FormData object is iterable. File entries come back as File objects.
@@ -33,12 +33,12 @@ for (const [key, value] of form) {
   if (value instanceof File) {
     console.log(`${key}: file ${value.name}, ${value.size} bytes`); // readme: file readme.txt, 17 bytes
   } else {
-    console.log(`${key}: ${value}`); // name: Deno, then tag: fast, then tag: secure
+    console.log(`${key}: ${value}`); // name: Ende, then tag: fast, then tag: secure
   }
 }
 
 // Start a local server that parses the form and echoes back what it got.
-const server = Deno.serve({ port: 0, onListen() {} }, async (req) => {
+const server = Ende.serve({ port: 0, onListen() {} }, async (req) => {
   const data = await req.formData();
   const file = data.get("readme") as File;
   return Response.json({
@@ -60,7 +60,7 @@ const res = await fetch(`http://localhost:${server.addr.port}/`, {
 const echoed = await res.json();
 
 console.log(echoed.contentType); // multipart/form-data
-console.log(echoed.name); // Deno
+console.log(echoed.name); // Ende
 console.log(echoed.tags); // [ "fast", "secure" ]
 console.log(echoed.fileName); // readme.txt
 console.log(echoed.fileText); // hello from a file

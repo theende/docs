@@ -5,14 +5,14 @@ tags: [recommended]
 
 Warns the wrong usage of triple-slash reference directives.
 
-Deno supports the triple-slash reference directives of `types`, `path`, `lib`,
+Ende supports the triple-slash reference directives of `types`, `path`, `lib`,
 and `no-default-lib`. This lint rule checks if there is an invalid, badly-formed
 directive because it is most likely a mistake.
 
 Additionally, note that only the `types` directive is allowed in JavaScript
 files. This directive is useful for telling the TypeScript compiler the location
 of a type definition file that corresponds to a certain JavaScript file.
-However, even in the Deno manual of the versions prior to v1.10 (e.g. [v1.9.2]),
+However, even in the Ende manual of the versions prior to v1.10 (e.g. [v1.9.2]),
 there was a wrong statement describing that one should use the `path` directive
 in such cases. Actually, the `types` directive should be used. See
 [the latest manual] for more detail. So this rule also detects the usage of the

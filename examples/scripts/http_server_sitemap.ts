@@ -48,7 +48,7 @@ Allow: /
 Sitemap: ${SITE}/sitemap.xml
 `;
 
-Deno.serve((req) => {
+Ende.serve((req) => {
   const { pathname } = new URL(req.url);
 
   if (pathname === "/sitemap.xml") {

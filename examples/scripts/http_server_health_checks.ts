@@ -27,7 +27,7 @@ function pingDb(): Promise<boolean> {
   return Promise.resolve(dbConnected);
 }
 
-Deno.serve(async (req) => {
+Ende.serve(async (req) => {
   const url = new URL(req.url);
   // Probes must see the current state, so never let a cache answer them.
   const headers = { "cache-control": "no-store" };

@@ -27,7 +27,7 @@ function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
-Deno.serve((req) => {
+Ende.serve((req) => {
   const url = new URL(req.url);
   const limit = clamp(Number(url.searchParams.get("limit") ?? "5"), 1, 10);
 

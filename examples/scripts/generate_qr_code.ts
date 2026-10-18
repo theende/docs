@@ -16,7 +16,7 @@ import { qrcode } from "jsr:@libs/qrcode";
 // to a file. SVG scales to any size without blurring, which suits print
 // and high-resolution screens.
 const svg = qrcode("https://deno.com", { output: "svg" });
-await Deno.writeTextFile("deno-qr.svg", svg);
+await Ende.writeTextFile("ende-qr.svg", svg);
 console.log(svg.startsWith("<?xml")); // true
 
 // The error-correction level trades data capacity for resilience: a higher

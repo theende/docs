@@ -20,10 +20,10 @@ const app = new Hono();
 // The first argument is the path, the second is the request handler
 app.get("/", (c) => c.text("Hello, World!"));
 
-// Call Deno.serve with the request handler to start the server on the default port (8000)
-Deno.serve(app.fetch);
+// Call Ende.serve with the request handler to start the server on the default port (8000)
+Ende.serve(app.fetch);
 
 // Test the server with: curl http://localhost:8000
 // Should output "Hello, World!"
 
-// Read more about Hono with Deno at https://hono.dev/docs/getting-started/deno
+// Read more about Hono with Ende at https://hono.dev/docs/getting-started/ende

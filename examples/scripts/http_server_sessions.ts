@@ -44,7 +44,7 @@ function getSession(req: Request): Session | null {
   return session;
 }
 
-Deno.serve(async (req) => {
+Ende.serve(async (req) => {
   const { pathname } = new URL(req.url);
 
   if (req.method === "POST" && pathname === "/login") {
@@ -86,7 +86,7 @@ Deno.serve(async (req) => {
 
 // An in-memory Map only works while a single process serves all traffic.
 // For multiple instances or restarts, keep the same cookie scheme but store
-// sessions in a shared store such as Deno KV or a database.
+// sessions in a shared store such as a database.
 
 // The full flow with curl, using a cookie jar (-c saves cookies, -b sends
 // them back):

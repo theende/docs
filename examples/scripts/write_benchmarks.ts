@@ -1,14 +1,14 @@
 /**
- * @title Write benchmarks with Deno.bench
+ * @title Write benchmarks with Ende.bench
  * @difficulty beginner
  * @tags cli
- * @run deno bench <url>
- * @resource {https://docs.deno.com/runtime/reference/cli/bench/} Doc: Benchmarking
- * @resource {https://docs.deno.com/api/deno/~/Deno.bench} Doc: Deno.bench
+ * @run ende bench <url>
+ * @resource {https://docs.ende.sh/runtime/reference/cli/bench/} Doc: Benchmarking
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.bench} Doc: Ende.bench
  * @group CLI
  *
- * Deno has a built-in benchmark runner. Register benchmarks with Deno.bench
- * and run them with the deno bench subcommand, which reports timings and
+ * Ende has a built-in benchmark runner. Register benchmarks with Ende.bench
+ * and run them with the ende bench subcommand, which reports timings and
  * compares grouped benchmarks against a baseline.
  */
 
@@ -22,7 +22,7 @@ const needle = "item-9999";
 
 // Benchmarks that belong to the same group are compared with each other in
 // the summary. Exactly one of them can be marked as the baseline.
-Deno.bench({
+Ende.bench({
   name: "Array.prototype.includes",
   group: "lookup",
   baseline: true,
@@ -31,7 +31,7 @@ Deno.bench({
   },
 });
 
-Deno.bench({
+Ende.bench({
   name: "Set.prototype.has",
   group: "lookup",
   fn: () => {
@@ -43,19 +43,19 @@ Deno.bench({
 // context passed to the function exposes start and end methods that limit
 // the measured section. Here only the join call is timed, not building the
 // input array.
-Deno.bench("join parts", (b) => {
+Ende.bench("join parts", (b) => {
   const parts = Array.from({ length: 1_000 }, (_, i) => `part-${i}`);
   b.start();
   parts.join(", ");
   b.end();
 });
 
-// Run the file with deno bench. The trailing columns with min, max and
+// Run the file with ende bench. The trailing columns with min, max and
 // percentiles are trimmed here to keep the table narrow:
 //
-//   deno bench deno_bench.ts
+//   ende bench ende_bench.ts
 //       CPU | Apple M1 Max
-//   Runtime | Deno 2.8.2 (aarch64-apple-darwin)
+//   Runtime | Ende 2026.10.17 (aarch64-apple-darwin)
 //
 //   | benchmark                  | time/iter (avg) |        iter/s |
 //   | -------------------------- | --------------- | ------------- |
@@ -72,5 +72,5 @@ Deno.bench("join parts", (b) => {
 // The linear scan takes microseconds while the hash lookup takes
 // nanoseconds, so the Set wins by more than three orders of magnitude.
 
-// Useful flags: deno bench --filter lookup runs only matching benchmarks,
-// and deno bench --json emits machine-readable results.
+// Useful flags: ende bench --filter lookup runs only matching benchmarks,
+// and ende bench --json emits machine-readable results.

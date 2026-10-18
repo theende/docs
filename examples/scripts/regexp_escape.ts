@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/regexp/doc/~/escape} Doc: @std/regexp escape
- * @resource {https://jsr.io/@std/regexp} Doc: @std/regexp
+ * @resource {https://jsr.io/@ende/regexp/doc/~/escape} Doc: @ende/regexp escape
+ * @resource {https://jsr.io/@ende/regexp} Doc: @ende/regexp
  * @group Standard library
  *
  * Building a RegExp from user input is dangerous, because characters
@@ -26,7 +26,7 @@ try {
 
 // Escaping the input first makes construction safe and the match
 // literal.
-import { escape } from "jsr:@std/regexp";
+import { escape } from "jsr:@ende/regexp";
 
 const safe = new RegExp(escape(userInput), "g");
 console.log(safe.test("call to find( in line 3")); // true

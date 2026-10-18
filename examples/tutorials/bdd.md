@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-05-14
 title: "Behavior-Driven Development (BDD)"
-description: "Implementing Behavior-Driven Development with Deno's Standard Library's BDD module. Create readable, well organised tests with effective assertions."
+description: "Implementing Behavior-Driven Development with Ende's Standard Library's BDD module. Create readable, well organised tests with effective assertions."
 url: /examples/bdd_tutorial/
 ---
 
@@ -10,7 +10,7 @@ encourages collaboration between developers, QA, and non-technical stakeholders.
 BDD focuses on defining the behavior of an application through examples written
 in a natural, ubiquitous language that all stakeholders can understand.
 
-Deno's Standard Library provides a BDD-style testing module that allows you to
+Ende's Standard Library provides a BDD-style testing module that allows you to
 structure tests in a way that's both readable for non-technical stakeholders and
 practical for implementation. In this tutorial, we'll explore how to use the BDD
 module to create descriptive test suites for your applications.
@@ -31,10 +31,10 @@ The basic elements of BDD include:
 - **It** statements that express a single behavior
 - **Before/After** hooks for setup and teardown operations
 
-## Using Deno's BDD module
+## Using Ende's BDD module
 
-To get started with BDD testing in Deno, we'll use the `@std/testing/bdd` module
-from the [Deno Standard Library](https://jsr.io/@std/testing/doc/bdd).
+To get started with BDD testing in Ende, we'll use the `@ende/testing/bdd`
+module from the [Ende Standard Library](https://jsr.io/@ende/testing/doc/bdd).
 
 First, let's import the necessary functions:
 
@@ -46,8 +46,8 @@ import {
   beforeEach,
   describe,
   it,
-} from "jsr:@std/testing/bdd";
-import { assertEquals, assertThrows } from "jsr:@std/assert";
+} from "jsr:@ende/testing/bdd";
+import { assertEquals, assertThrows } from "jsr:@ende/assert";
 ```
 
 These imports provide the core BDD functions:
@@ -58,7 +58,7 @@ These imports provide the core BDD functions:
 - `beforeAll`/`afterAll` run once before or after all tests in a describe block
 
 We'll also use assertion functions from
-[`@std/assert`](https://jsr.io/@std/assert) to verify our expectations.
+[`@ende/assert`](https://jsr.io/@ende/assert) to verify our expectations.
 
 ### Writing your first BDD test
 
@@ -104,8 +104,8 @@ export class Calculator {
 Now, let's test this calculator using the BDD style:
 
 ```ts title="calculator_test.ts"
-import { afterEach, beforeEach, describe, it } from "jsr:@std/testing/bdd";
-import { assertEquals, assertThrows } from "jsr:@std/assert";
+import { afterEach, beforeEach, describe, it } from "jsr:@ende/testing/bdd";
+import { assertEquals, assertThrows } from "jsr:@ende/assert";
 import { Calculator } from "./calculator.ts";
 
 describe("Calculator", () => {
@@ -193,10 +193,10 @@ describe("Calculator", () => {
 });
 ```
 
-To run this test, use the `deno test` command:
+To run this test, use the `ende test` command:
 
 ```sh
-deno test calculator_test.ts
+ende test calculator_test.ts
 ```
 
 You'll see output similar to this:
@@ -268,30 +268,30 @@ handful of cases — so the server starts once in `beforeAll` and shuts down onc
 in `afterAll`:
 
 ```ts title="user_api_test.ts"
-import { afterAll, beforeAll, describe, it } from "jsr:@std/testing/bdd";
-import { assertEquals } from "jsr:@std/assert";
+import { afterAll, beforeAll, describe, it } from "jsr:@ende/testing/bdd";
+import { assertEquals } from "jsr:@ende/assert";
 
 describe("User API", () => {
-  let server: Deno.HttpServer;
+  let server: Ende.HttpServer;
   let baseUrl: string;
 
   beforeAll(() => {
     // Start the test server once before any test runs. Port 0 asks the
     // OS for a free port, so parallel test files don't collide.
-    server = Deno.serve({ port: 0, onListen() {} }, (req) => {
+    server = Ende.serve({ port: 0, onListen() {} }, (req) => {
       const { pathname } = new URL(req.url);
       if (pathname === "/users/1") {
         return Response.json({ id: 1, name: "Ada" });
       }
       return new Response("Not Found", { status: 404 });
     });
-    const { port } = server.addr as Deno.NetAddr;
+    const { port } = server.addr as Ende.NetAddr;
     baseUrl = `http://localhost:${port}`;
   });
 
   afterAll(async () => {
     // Shut the server down once, after every test has run. Without
-    // this, `deno test` would report a resource leak.
+    // this, `ende test` would report a resource leak.
     await server.shutdown();
   });
 
@@ -313,7 +313,7 @@ The server binds to a local port, so the test needs network permission to reach
 itself:
 
 ```sh
-deno test --allow-net=0.0.0.0,localhost user_api_test.ts
+ende test --allow-net=0.0.0.0,localhost user_api_test.ts
 ```
 
 ```console
@@ -339,7 +339,7 @@ Sometimes a whole suite depends on something external — a database connection,
 service running on a known port, a file on disk. If that precondition isn't
 satisfied, you usually don't want the rest of the suite to run and produce
 dozens of confusing failures. There are two patterns that work well with
-`@std/testing/bdd`.
+`@ende/testing/bdd`.
 
 **Throw from `beforeAll`.** If you want the suite to fail loudly when the
 precondition is missing (so CI surfaces it as a real error), throw from the
@@ -375,8 +375,8 @@ than fail it. Both `describe` and `it` accept an `ignore` option that takes a
 boolean — compute it once at the top of the file and pass it in:
 
 ```ts
-import { describe, it } from "jsr:@std/testing/bdd";
-import { assertEquals } from "jsr:@std/assert";
+import { describe, it } from "jsr:@ende/testing/bdd";
+import { assertEquals } from "jsr:@ende/assert";
 
 async function isDatabaseReachable(): Promise<boolean> {
   try {
@@ -410,7 +410,7 @@ need to skip part of a suite.
 If you're familiar with Cucumber or other BDD frameworks, you might be expecting
 Gherkin syntax with "Given-When-Then" statements.
 
-Deno's BDD module uses a JavaScript-style syntax rather than Gherkin. This
+Ende's BDD module uses a JavaScript-style syntax rather than Gherkin. This
 approach is similar to other JavaScript testing frameworks like Mocha or
 Jasmine. However, you can still follow BDD principles by:
 
@@ -437,10 +437,10 @@ describe("Calculator", () => {
 ```
 
 If you need full Gherkin support with natural language specifications, consider
-using a dedicated BDD framework that integrates with Deno, such as
+using a dedicated BDD framework that integrates with Ende, such as
 [cucumber-js](https://github.com/cucumber/cucumber-js).
 
-## Best Practices for BDD with Deno
+## Best Practices for BDD with Ende
 
 ### Write your tests for humans to read
 
@@ -561,6 +561,6 @@ collaborative approach to defining and verifying application behavior. The most
 successful BDD implementations combine these technical practices with regular
 conversations between developers, testers, product and business stakeholders.
 
-To continue learning about testing in Deno, explore other modules in the
+To continue learning about testing in Ende, explore other modules in the
 Standard Library's testing suite, such as [mocking](/runtime/test/mocking/) and
 [snapshot testing](/runtime/test/snapshots/).

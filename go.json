@@ -28,11 +28,11 @@
   "lsp": "/runtime/reference/cli/lsp/",
   "minimum-dependency-age": "/runtime/packages/supply_chain/#minimum-dependency-age",
   "permission-broker": "/runtime/fundamentals/security/#permission-broker",
-  "permission-sets": "/runtime/reference/deno_json/#permissions",
+  "permission-sets": "/runtime/reference/ende_json/#permissions",
   "permissions": "/runtime/fundamentals/security/",
   "run": "/runtime/reference/cli/run/",
   "serve": "/runtime/reference/cli/serve/",
   "test": "/runtime/reference/cli/test/",
-  "unstable-no-legacy-abort": "/runtime/reference/deno_serve_legacy_abort/",
+  "unstable-no-legacy-abort": "/runtime/reference/ende_serve_legacy_abort/",
   "upgrade": "/runtime/reference/cli/upgrade/"
 }

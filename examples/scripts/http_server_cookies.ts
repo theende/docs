@@ -3,19 +3,19 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N <url>
- * @resource {https://jsr.io/@std/http/doc/cookie} @std/http: cookie
+ * @resource {https://jsr.io/@ende/http/doc/cookie} @ende/http: cookie
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies} MDN: Using HTTP cookies
  * @group Network
  *
  * Cookies carry state between requests in the cookie and set-cookie headers.
- * The @std/http/cookie module parses and serializes them with the right
+ * The @ende/http/cookie module parses and serializes them with the right
  * attributes. This example sets a session cookie on login, reads it back on
  * later requests, and deletes it on logout.
  */
 
-import { deleteCookie, getCookies, setCookie } from "jsr:@std/http/cookie";
+import { deleteCookie, getCookies, setCookie } from "jsr:@ende/http/cookie";
 
-Deno.serve((req) => {
+Ende.serve((req) => {
   const url = new URL(req.url);
   // getCookies parses the cookie request header into a plain object.
   const cookies = getCookies(req.headers);

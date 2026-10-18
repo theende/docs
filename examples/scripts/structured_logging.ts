@@ -51,10 +51,10 @@ log.error("upstream timed out"); // ERROR upstream timed out
 // The file handler buffers writes, so flush before reading the file.
 fileHandler.flush();
 
-const contents = await Deno.readTextFile(logFile);
+const contents = await Ende.readTextFile(logFile);
 console.log(contents.trimEnd()); // {"level":"WARN","message":"disk usage at 81%"}
 // {"level":"ERROR","message":"upstream timed out"}
 
 // Close the handler and remove the file to clean up.
 fileHandler.destroy();
-await Deno.remove(logFile);
+await Ende.remove(logFile);

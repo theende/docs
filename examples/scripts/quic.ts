@@ -3,8 +3,8 @@
  * @difficulty intermediate
  * @tags cli
  * @run --unstable-net --allow-net --allow-read <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.QuicEndpoint} Doc: Deno.QuicEndpoint
- * @resource {https://docs.deno.com/api/deno/~/Deno.connectQuic} Doc: Deno.connectQuic
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.QuicEndpoint} Doc: Ende.QuicEndpoint
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.connectQuic} Doc: Ende.connectQuic
  * @group Network
  *
  * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>QUIC is the transport protocol underneath HTTP/3. It runs over UDP,
@@ -19,18 +19,18 @@
  * <code>openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 365 -nodes -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost" -addext "basicConstraints=critical,CA:FALSE"</code>
  */
 
-const cert = Deno.readTextFileSync("./server.crt");
-const key = Deno.readTextFileSync("./server.key");
+const cert = Ende.readTextFileSync("./server.crt");
+const key = Ende.readTextFileSync("./server.key");
 
 // A QuicEndpoint binds a UDP socket. Listening on it takes the TLS
 // configuration; ALPN protocol names are required and both sides must
 // agree on one.
-const endpoint = new Deno.QuicEndpoint({ hostname: "localhost", port: 4433 });
+const endpoint = new Ende.QuicEndpoint({ hostname: "localhost", port: 4433 });
 const listener = endpoint.listen({ cert, key, alpnProtocols: ["echo"] });
 
 // The server accepts connections, and on each connection accepts incoming
 // bidirectional streams. Each stream is an independent, ordered, reliable
-// channel: a pair of web streams, just like other Deno networking APIs.
+// channel: a pair of web streams, just like other Ende networking APIs.
 (async () => {
   for await (const incoming of listener) {
     const conn = await incoming.accept();
@@ -46,7 +46,7 @@ const listener = endpoint.listen({ cert, key, alpnProtocols: ["echo"] });
 
 // Connect as a client. caCerts trusts our self-signed certificate; with a
 // real certificate it is not needed.
-const client = await Deno.connectQuic({
+const client = await Ende.connectQuic({
   hostname: "localhost",
   port: 4433,
   caCerts: [cert],

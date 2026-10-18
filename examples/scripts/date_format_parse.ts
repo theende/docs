@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://docs.deno.com/api/web/~/Temporal} Doc: Temporal
+ * @resource {https://docs.ende.sh/api/web/~/Temporal} Doc: Temporal
  * @resource {/examples/temporal/} Example: Temporal API
  * @group Web Standard APIs
  *
@@ -51,7 +51,7 @@ console.log(date.daysInMonth); // 30
 // the standard library converts to a Date. It interprets the value in the
 // local time zone, so hand it to Temporal through that same zone to keep
 // the calendar date intact.
-import { parse } from "jsr:@std/datetime/parse";
+import { parse } from "jsr:@ende/datetime/parse";
 const legacy = parse("06/12/2026", "MM/dd/yyyy");
 const imported = Temporal.Instant.fromEpochMilliseconds(legacy.getTime())
   .toZonedDateTimeISO(Temporal.Now.timeZoneId()).toPlainDate();

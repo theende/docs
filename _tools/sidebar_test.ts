@@ -30,7 +30,7 @@ function collectLabels(nodes: readonly LabelNode[]): string[] {
 }
 
 for (const { name, sidebar, maxLabelLength } of SIDEBARS) {
-  Deno.test(`${name} sidebar labels stay within ${maxLabelLength} characters`, () => {
+  Ende.test(`${name} sidebar labels stay within ${maxLabelLength} characters`, () => {
     const labels = collectLabels(sidebar);
     assert(labels.length > 0, `expected to find labels in the ${name} sidebar`);
 

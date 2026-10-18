@@ -17,28 +17,28 @@ reach production, saving time and resources. Tests are also useful to help plan
 out the logic of your application, they can serve as a human readable
 description of how your code is meant to be used.
 
-Deno provides [built-in testing capabilities](/runtime/test/), making it
+Ende provides [built-in testing capabilities](/runtime/test/), making it
 straightforward to implement robust testing practices in your projects.
 
-## Writing tests with `Deno.test`
+## Writing tests with `Ende.test`
 
-Defining a test in Deno is straightforward - use the `Deno.test()` function to
+Defining a test in Ende is straightforward - use the `Ende.test()` function to
 register your test with the test runner. This function accepts either a test
 name and function, or a configuration object with more detailed options. All
 test functions in files that match patterns like `*_test.{ts,js,mjs,jsx,tsx}` or
 `*.test.{ts,js,mjs,jsx,tsx}` are automatically discovered and executed when you
-run the `deno test` command.
+run the `ende test` command.
 
 Here are the basic ways to define tests:
 
 ```ts
 // Basic test with a name and function
-Deno.test("my first test", () => {
+Ende.test("my first test", () => {
   // Your test code here
 });
 
 // Test with configuration options
-Deno.test({
+Ende.test({
   name: "my configured test",
   fn: () => {
     // Your test code here
@@ -55,21 +55,21 @@ Deno.test({
 ### A simple example test
 
 Let's start with a simple test. Create a file called `main_test.ts`, in it we
-will test a basic addition operation using Deno's testing API and the
-`assertEquals` function from the [Deno Standard Library](https://jsr.io/@std).
+will test a basic addition operation using Ende's testing API and the
+`assertEquals` function from the [Ende Standard Library](https://jsr.io/@std).
 
-We use `Deno.test` and provide a name that describes what the test will do:
+We use `Ende.test` and provide a name that describes what the test will do:
 
 ```ts title="main_test.ts"
 // hello_test.ts
-import { assertEquals } from "jsr:@std/assert";
+import { assertEquals } from "jsr:@ende/assert";
 
 // Function we want to test
 function add(a: number, b: number): number {
   return a + b;
 }
 
-Deno.test("basic addition test", () => {
+Ende.test("basic addition test", () => {
   // Arrange - set up the test data
   const a = 1;
   const b = 2;
@@ -82,10 +82,10 @@ Deno.test("basic addition test", () => {
 });
 ```
 
-To run this test, use the `deno test` command:
+To run this test, use the `ende test` command:
 
 ```sh
-deno test hello_test.ts
+ende test hello_test.ts
 ```
 
 You should see output indicating that your test has passed:
@@ -121,7 +121,7 @@ error: AssertionError: Values are not equal:
     -   -1
     +   3
 
-  at assertEquals (https://jsr.io/@std/assert@0.218.2/assert_equals.ts:31:9)
+  at assertEquals (https://jsr.io/@ende/assert@0.218.2/assert_equals.ts:31:9)
   at Object.fn (file:///path/to/hello_test.ts:12:3)
   at asyncOpSanitizer (ext:core/01_core.js:199:13)
   at Object.sanitizeOps (ext:core/01_core.js:219:15)
@@ -135,7 +135,7 @@ This clear feedback helps you quickly identify and fix issues in your code.
 
 ## Test structure and organization
 
-Deno will automatically find and run tests that match naming patterns like
+Ende will automatically find and run tests that match naming patterns like
 `*_test.{ts,js,mjs,jsx,tsx}` or `*.test.{ts,js,mjs,jsx,tsx}`. There are plenty
 of ways to organize your test files, we recommend co-locating your unit tests
 with the code they are testing, and keeping integration tests and configuration
@@ -145,7 +145,7 @@ simplified imports, while keeping a separation between different types of tests.
 Here's an example of how you might structure your project with tests:
 
 ```sh
-my-deno-project/
+my-ende-project/
 ├── src/
 │   ├── models/
 │   │   ├── user.ts
@@ -170,7 +170,7 @@ my-deno-project/
 │       ├── test_data.ts          // Test data used across tests
 │       └── setup.ts              // Common setup functions
 ├── main.ts
-└── deno.json                     // Project configuration
+└── ende.json                     // Project configuration
 ```
 
 This kind of structure offers a centralized place for test configuration while
@@ -179,19 +179,19 @@ With this structure, you can:
 
 ```sh
 # Run all tests
-deno test
+ende test
 
 # Run only unit tests
-deno test src/
+ende test src/
 
 # Run only integration tests
-deno test tests/integration/
+ende test tests/integration/
 
 # Run specific module tests
-deno test src/models/
+ende test src/models/
 
 # Run a specific test file
-deno test src/models/user_test.ts
+ende test src/models/user_test.ts
 ```
 
 ## Assertions
@@ -201,8 +201,8 @@ that your code behaves as expected. They check if a specific condition is true
 and throw an error if it's not, causing the test to fail. Good assertions are
 clear, specific, and help identify exactly what went wrong when a test fails.
 
-Deno doesn't include assertions in its core library, but you can import them
-from the [Deno standard library](https://jsr.io/@std/assert):
+Ende doesn't include assertions in its core library, but you can import them
+from the [Ende standard library](https://jsr.io/@ende/assert):
 
 ```ts
 import {
@@ -216,9 +216,9 @@ import {
   assertStrictEquals, // Check that values are strictly equal (===)
   assertStringIncludes, // Check that string contains substring
   assertThrows, // Check that function throws an error
-} from "jsr:@std/assert";
+} from "jsr:@ende/assert";
 
-Deno.test("assertion examples", () => {
+Ende.test("assertion examples", () => {
   // Basic assertions
   assertEquals(1 + 1, 2);
   assertNotEquals("hello", "world");
@@ -226,7 +226,7 @@ Deno.test("assertion examples", () => {
 
   // String assertions
   assertStringIncludes("Hello, world!", "world");
-  assertMatch("deno@1.0.0", /^deno@\d+\.\d+\.\d+$/);
+  assertMatch("ende@1.0.0", /^ende@\d+\.\d+\.\d+$/);
 
   // Object assertions
   assertObjectMatch(
@@ -235,7 +235,7 @@ Deno.test("assertion examples", () => {
   );
 
   // Strict equality (type + value)
-  assertStrictEquals("deno", "deno");
+  assertStrictEquals("ende", "ende");
 
   // Error assertions
   assertThrows(
@@ -252,12 +252,12 @@ For those that prefer fluent assertions (familiar to users of Jest), you can use
 the `expect` module:
 
 ```ts
-import { expect } from "jsr:@std/expect";
+import { expect } from "jsr:@ende/expect";
 
-Deno.test("expect style assertions", () => {
+Ende.test("expect style assertions", () => {
   // Basic matchers
   expect(5).toBe(5);
-  expect({ name: "deno" }).toEqual({ name: "deno" });
+  expect({ name: "ende" }).toEqual({ name: "ende" });
 
   // Collection matchers
   expect([1, 2, 3]).toContain(2);
@@ -312,10 +312,10 @@ export function validateUser(user: any): { valid: boolean; errors: string[] } {
 }
 
 // user_processor_test.ts
-import { assertEquals } from "jsr:@std/assert";
+import { assertEquals } from "jsr:@ende/assert";
 import { validateUser } from "./user_processor.ts";
 
-Deno.test("validateUser", async (t) => {
+Ende.test("validateUser", async (t) => {
   await t.step("should validate a correct user object", () => {
     const user = {
       name: "John Doe",
@@ -359,13 +359,13 @@ Deno.test("validateUser", async (t) => {
 
 ## Async testing
 
-Deno handles async tests naturally. Just make your test function async and use
+Ende handles async tests naturally. Just make your test function async and use
 await:
 
 ```ts
-import { assertEquals } from "jsr:@std/assert";
+import { assertEquals } from "jsr:@ende/assert";
 
-Deno.test("async test example", async () => {
+Ende.test("async test example", async () => {
   const response = await fetch("https://deno.land");
   const status = response.status;
   assertEquals(status, 200);
@@ -375,8 +375,8 @@ Deno.test("async test example", async () => {
 ### Testing async functions
 
 When testing functions that return promises, always `await` the result. When the
-function calls a global like `fetch` or `Deno.readTextFile`, replace it with a
-stub from [`@std/testing/mock`](https://jsr.io/@std/testing/doc/mock/~) rather
+function calls a global like `fetch` or `Ende.readTextFile`, replace it with a
+stub from [`@ende/testing/mock`](https://jsr.io/@ende/testing/doc/mock/~) rather
 than reassigning the global directly. The stub matches the real signature (so
 the test file still type-checks), and combined with a `using` declaration it
 restores the original when the test scope exits — so one test can't poison the
@@ -393,11 +393,11 @@ export async function fetchUserData(userId: string) {
 ```
 
 ```ts title="async_function_test.ts"
-import { assertEquals, assertRejects } from "jsr:@std/assert";
-import { stub } from "jsr:@std/testing/mock";
+import { assertEquals, assertRejects } from "jsr:@ende/assert";
+import { stub } from "jsr:@ende/testing/mock";
 import { fetchUserData } from "./async_function.ts";
 
-Deno.test("fetchUserData success", async () => {
+Ende.test("fetchUserData success", async () => {
   using _fetchStub = stub(
     globalThis,
     "fetch",
@@ -415,7 +415,7 @@ Deno.test("fetchUserData success", async () => {
   assertEquals(userData.name, "Test User");
 });
 
-Deno.test("fetchUserData failure", async () => {
+Ende.test("fetchUserData failure", async () => {
   using _fetchStub = stub(
     globalThis,
     "fetch",
@@ -430,7 +430,7 @@ Deno.test("fetchUserData failure", async () => {
 });
 ```
 
-Run the file with `deno test async_function_test.ts`:
+Run the file with `ende test async_function_test.ts`:
 
 ```console
 running 2 tests from ./async_function_test.ts
@@ -453,7 +453,7 @@ For spies, fake timers, and more advanced mocking, see
 ## Mocking in tests
 
 Mocking is an essential technique for isolating the code being tested from its
-dependencies. Deno provides built-in utilities and third-party libraries for
+dependencies. Ende provides built-in utilities and third-party libraries for
 creating mocks.
 
 ### Basic Mocking
@@ -473,7 +473,7 @@ const api = {
 };
 
 // In your test file
-Deno.test("basic mocking example", async () => {
+Ende.test("basic mocking example", async () => {
   // Store the original function
   const originalFetchData = api.fetchData;
 
@@ -498,9 +498,9 @@ Deno.test("basic mocking example", async () => {
 Spies allow you to track function calls without changing their behavior:
 
 ```ts
-import { spy } from "jsr:@std/testing/mock";
+import { spy } from "jsr:@ende/testing/mock";
 
-Deno.test("spy example", () => {
+Ende.test("spy example", () => {
   // Create a spy on console.log
   const consoleSpy = spy(console, "log");
 
@@ -519,28 +519,28 @@ Deno.test("spy example", () => {
 ```
 
 For more advanced mocking techniques, check our
-[dedicated guide on mocking in Deno](/runtime/test/mocking/).
+[dedicated guide on mocking in Ende](/runtime/test/mocking/).
 
 ## Test hooks
 
-Deno provides test hooks for running setup and teardown code. Here's a simple
+Ende provides test hooks for running setup and teardown code. Here's a simple
 example using `beforeEach` to ensure clean state between tests:
 
 ```ts
-import { assertEquals } from "jsr:@std/assert";
+import { assertEquals } from "jsr:@ende/assert";
 
 let testData: string[] = [];
 
-Deno.test.beforeEach(() => {
+Ende.test.beforeEach(() => {
   testData = ["initial", "data"];
 });
 
-Deno.test("first test", () => {
+Ende.test("first test", () => {
   testData.push("first");
   assertEquals(testData.length, 3);
 });
 
-Deno.test("second test", () => {
+Ende.test("second test", () => {
   testData.push("second");
   assertEquals(testData.length, 3); // Clean state from beforeEach
 });
@@ -569,18 +569,18 @@ Coverage analysis helps you to:
 > was executed, not whether your assertions are meaningful or if edge cases are
 > handled correctly.
 
-Deno provides built-in coverage tools to help you analyze your test coverage. To
+Ende provides built-in coverage tools to help you analyze your test coverage. To
 collect coverage information:
 
 ```bash
-deno test --coverage=coverage_dir
+ende test --coverage=coverage_dir
 ```
 
 This generates coverage data in a specified directory (here, `coverage_dir`). To
 view a human-readable report:
 
 ```bash
-deno coverage coverage_dir
+ende coverage coverage_dir
 ```
 
 You'll see output like:
@@ -596,7 +596,7 @@ total: 87.5% (39/45)
 For more detailed insights, you can also generate an HTML report:
 
 ```bash
-deno coverage --html coverage_dir
+ende coverage --html coverage_dir
 ```
 
 This creates an interactive HTML report in the specified directory that shows
@@ -615,7 +615,7 @@ test files or external dependencies.
 You can exclude files from coverage reports by using the `--exclude` flag:
 
 ```bash
-deno coverage --exclude="test_,vendor/,_build/,node_modules/" coverage_dir
+ende coverage --exclude="test_,vendor/,_build/" coverage_dir
 ```
 
 ### Integrating with CI
@@ -626,11 +626,11 @@ coverage threshold:
 ```yaml
 # In your GitHub Actions workflow
 - name: Run tests with coverage
-  run: deno test --coverage=coverage_dir
+  run: ende test --coverage=coverage_dir
 
 - name: Check coverage meets threshold
   run: |
-    COVERAGE=$(deno coverage coverage_dir | grep "total:" | grep -o '[0-9]\+\.[0-9]\+')
+    COVERAGE=$(ende coverage coverage_dir | grep "total:" | grep -o '[0-9]\+\.[0-9]\+')
     if (( $(echo "$COVERAGE < 80" | bc -l) )); then
       echo "Test coverage is below 80%: $COVERAGE%"
       exit 1
@@ -642,13 +642,13 @@ meaningful coverage with high quality tests over 100% coverage.
 
 ## Comparison with other testing frameworks
 
-If you're coming from other JavaScript testing frameworks, here's how Deno's
+If you're coming from other JavaScript testing frameworks, here's how Ende's
 testing capabilities compare:
 
-| Feature       | Deno             | Jest                   | Mocha                      | Jasmine               |
+| Feature       | Ende             | Jest                   | Mocha                      | Jasmine               |
 | ------------- | ---------------- | ---------------------- | -------------------------- | --------------------- |
 | Setup         | Built-in         | Requires installation  | Requires installation      | Requires installation |
-| Syntax        | `Deno.test()`    | `test()`, `describe()` | `it()`, `describe()`       | `it()`, `describe()`  |
+| Syntax        | `Ende.test()`    | `test()`, `describe()` | `it()`, `describe()`       | `it()`, `describe()`  |
 | Assertions    | From std library | Built-in expect        | Requires assertion library | Built-in expect       |
 | Mocking       | From std library | Built-in jest.mock()   | Requires sinon or similar  | Built-in spies        |
 | Async support | Native           | Needs special handling | Supports promises          | Supports promises     |
@@ -657,12 +657,12 @@ testing capabilities compare:
 
 ### Testing Style Comparison
 
-**Deno:**
+**Ende:**
 
 ```ts
-import { assertEquals } from "jsr:@std/assert";
+import { assertEquals } from "jsr:@ende/assert";
 
-Deno.test("add function", () => {
+Ende.test("add function", () => {
   assertEquals(1 + 2, 3);
 });
 ```
@@ -699,12 +699,12 @@ describe("math", () => {
 
 ## Next steps
 
-🦕 Deno's built-in testing capabilities make it easy to write and run tests
+🦕 Ende's built-in testing capabilities make it easy to write and run tests
 without needing to install extra testing frameworks or tools. By following the
-patterns and practices outlined in this tutorial, you can ensure your Deno
+patterns and practices outlined in this tutorial, you can ensure your Ende
 applications are well-tested and reliable.
 
-For more information about testing in Deno, check out:
+For more information about testing in Ende, check out:
 
 - [Testing documentation](/runtime/test/)
 - [Mocking data for tests](/runtime/test/mocking/)

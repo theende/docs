@@ -53,20 +53,14 @@ export const items = [
     category: "Basics",
   },
   {
-    title: "Simple API server",
-    href: "/examples/simple_api_tutorial/",
-    type: "tutorial",
-    category: "Basics",
-  },
-  {
     title: "Simple file server",
     href: "/examples/file_server_tutorial/",
     type: "tutorial",
     category: "Basics",
   },
   {
-    title: "Generating documentation with deno doc",
-    href: "/examples/deno_doc_tutorial/",
+    title: "Generating documentation with ende doc",
+    href: "/examples/ende_doc_tutorial/",
     type: "tutorial",
     category: "Basics",
   },
@@ -79,7 +73,7 @@ export const items = [
     category: "Modules and package management",
   },
   {
-    title: "Lock dependencies with deno.lock",
+    title: "Lock dependencies with ende.lock",
     href: "/examples/dependency_lockfile_tutorial/",
     type: "tutorial",
     category: "Modules and package management",
@@ -97,8 +91,8 @@ export const items = [
     category: "Modules and package management",
   },
   {
-    title: "Run Deno in GitHub Actions",
-    href: "/examples/deno_github_actions_tutorial/",
+    title: "Run Ende in GitHub Actions",
+    href: "/examples/ende_github_actions_tutorial/",
     type: "tutorial",
     category: "Modules and package management",
   },
@@ -177,12 +171,6 @@ export const items = [
     category: "Network",
   },
   {
-    title: "HTTP server: CRUD with SQLite3",
-    href: "/examples/http_server_oak_crud_middleware_with_sqlite3_db/",
-    type: "example",
-    category: "Network",
-  },
-  {
     title: "Hono HTTP server",
     href: "/examples/hono/",
     type: "example",
@@ -245,12 +233,6 @@ export const items = [
   {
     title: "File Based Routing",
     href: "/examples/file_based_routing_tutorial/",
-    type: "tutorial",
-    category: "Network",
-  },
-  {
-    title: "Build a chat app with WebSockets",
-    href: "/examples/chat_app_tutorial/",
     type: "tutorial",
     category: "Network",
   },
@@ -503,7 +485,7 @@ export const items = [
 
   // Standard library
   {
-    title: "User Data Processing with Deno Collections",
+    title: "User Data Processing with Ende Collections",
     href: "/examples/data_processing/",
     type: "example",
     category: "Standard library",
@@ -627,8 +609,8 @@ export const items = [
     category: "CLI",
   },
   {
-    title: "Getting the Deno version",
-    href: "/examples/deno_version/",
+    title: "Getting the Ende version",
+    href: "/examples/ende_version/",
     type: "example",
     category: "CLI",
   },
@@ -741,12 +723,6 @@ export const items = [
 
   // Web frameworks and libraries
   {
-    title: "Build a Fresh app",
-    href: "/examples/fresh_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
     title: "HTTP server file upload",
     href: "/examples/http_server_file_upload/",
     type: "example",
@@ -766,37 +742,13 @@ export const items = [
     type: "tutorial",
     category: "Databases",
   },
-  {
-    title: "Supabase",
-    href: "/examples/supabase/",
-    type: "example",
-    category: "Databases",
-  },
 
-  // Deno KV and scheduling
+  // Scheduling
   {
-    title: "Deno KV: Key/Value database",
-    href: "/examples/kv/",
-    type: "example",
-    category: "Deno KV and scheduling",
-  },
-  {
-    title: "Deno KV watch",
-    href: "/examples/kv_watch/",
-    type: "example",
-    category: "Deno KV and scheduling",
-  },
-  {
-    title: "Deno queues",
-    href: "/examples/queues/",
-    type: "example",
-    category: "Deno KV and scheduling",
-  },
-  {
-    title: "Deno Cron",
+    title: "Ende.cron",
     href: "/examples/cron/",
     type: "example",
-    category: "Deno KV and scheduling",
+    category: "Scheduling",
   },
 
   // AI
@@ -807,43 +759,7 @@ export const items = [
     category: "AI",
   },
 
-  // Deploying Deno projects
-  {
-    title: "AWS Lambda",
-    href: "/examples/aws_lambda_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "AWS Lightsail",
-    href: "/examples/aws_lightsail_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "AWS ECS Fargate",
-    href: "/examples/aws_ecs_fargate_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "Cloudflare workers",
-    href: "/examples/cloudflare_workers_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "Digital Ocean",
-    href: "/examples/digital_ocean_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "Google Cloud Run",
-    href: "/examples/google_cloud_run_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
+  // Deploying Ende projects
 
   // OpenTelemetry
   {
@@ -920,12 +836,6 @@ export const items = [
     type: "example",
     category: "System",
   },
-  {
-    title: "Use Deno in Docker",
-    href: "/runtime/reference/docker/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
 
   {
     title: "Pipe data into a subprocess",
@@ -995,19 +905,19 @@ export const items = [
   },
   {
     title: "Compile a script into an executable",
-    href: "/examples/deno_compile/",
+    href: "/examples/ende_compile/",
     type: "example",
     category: "CLI",
   },
   {
-    title: "Write benchmarks with Deno.bench",
+    title: "Write benchmarks with Ende.bench",
     href: "/examples/write_benchmarks/",
     type: "example",
     category: "CLI",
   },
   {
     title: "Find and update outdated dependencies",
-    href: "/examples/deno_outdated/",
+    href: "/examples/ende_outdated/",
     type: "example",
     category: "CLI",
   },
@@ -1363,12 +1273,6 @@ export const items = [
     category: "Web frameworks and libraries",
   },
   {
-    title: "Render HTML templates with Eta",
-    href: "/examples/html_templating/",
-    type: "example",
-    category: "Web frameworks and libraries",
-  },
-  {
     title: "Generate a QR code",
     href: "/examples/generate_qr_code/",
     type: "example",
@@ -1379,18 +1283,6 @@ export const items = [
     href: "/examples/ffi/",
     type: "example",
     category: "System",
-  },
-  {
-    title: "Bundle code with Deno.bundle",
-    href: "/examples/deno_bundle/",
-    type: "example",
-    category: "CLI",
-  },
-  {
-    title: "Rich output in Jupyter notebooks",
-    href: "/examples/jupyter_display/",
-    type: "example",
-    category: "CLI",
   },
   {
     title: "Upgrade a TCP connection to TLS (STARTTLS)",
@@ -1415,12 +1307,6 @@ export const items = [
     href: "/examples/websocket_stream/",
     type: "example",
     category: "Network",
-  },
-  {
-    title: "Atomic transactions in Deno KV",
-    href: "/examples/kv_transactions/",
-    type: "example",
-    category: "Deno KV and scheduling",
   },
   {
     title: "Run a compute shader with WebGPU",
@@ -1469,9 +1355,9 @@ export const categoryOrder = [
   "Testing",
   "Web frameworks and libraries",
   "Databases",
-  "Deno KV and scheduling",
+  "Scheduling",
   "AI",
-  "Deploying Deno projects",
+  "Deploying Ende projects",
   "OpenTelemetry",
 ];
 
@@ -1490,7 +1376,7 @@ export const featuredItems = [
     title: "HTTP Server: Hello world",
     href: "/examples/http_server/",
     type: "example",
-    description: "Spin up a web server with Deno.serve in a few lines.",
+    description: "Spin up a web server with Ende.serve in a few lines.",
   },
   {
     title: "Writing tests",

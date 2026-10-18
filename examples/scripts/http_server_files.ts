@@ -3,8 +3,8 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N -R <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Doc: Deno.serve
- * @resource {https://jsr.io/@std/http#file-server} Doc: @std/http/file-server
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.serve} Doc: Ende.serve
+ * @resource {https://jsr.io/@ende/http#file-server} Doc: @ende/http/file-server
  * @resource {/examples/http_server} Example: HTTP Server: Hello World
  * @group Network
  *
@@ -12,10 +12,10 @@
  */
 
 // Import utility methods for serving files with mime types.
-import { serveDir, serveFile } from "jsr:@std/http/file-server";
+import { serveDir, serveFile } from "jsr:@ende/http/file-server";
 
 // Here we start a simple server
-Deno.serve((req: Request) => {
+Ende.serve((req: Request) => {
   // Get the path from the url (ie. example.com/whatever -> /whatever)
   const pathname = new URL(req.url).pathname;
 

@@ -11,7 +11,7 @@ interface. It helps developers debug applications faster by providing a complete
 view of your system's behavior and performance.
 
 [OpenTelemetry](https://opentelemetry.io/) (often abbreviated as OTel) provides
-a standardized way to collect and export telemetry data. Deno includes built-in
+a standardized way to collect and export telemetry data. Ende includes built-in
 OpenTelemetry support, allowing you to instrument your applications without
 additional dependencies. This integration works seamlessly with platforms like
 HyperDX to collect and visualize telemetry data.
@@ -133,15 +133,15 @@ to send data to the collector:
 ```sh
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318 \
 OTEL_SERVICE_NAME=chat-app \
-OTEL_DENO=true \
-deno run --allow-net --allow-env --env-file --allow-read main.ts
+OTEL_ENDE=true \
+ende run --allow-net --allow-env --env-file --allow-read main.ts
 ```
 
 This command:
 
 - Points the OpenTelemetry exporter to your local collector (`localhost:4318`)
 - Names your service "chat-app" in HyperDX
-- Enables Deno's OpenTelemetry integration
+- Enables Ende's OpenTelemetry integration
 - Runs your application with the necessary permissions
 
 To generate some telemetry data, make a few requests to your running application
@@ -180,9 +180,9 @@ Monitor system performance:
 1. Add custom spans and attributes to better understand your application
 2. Set up alerts based on latency or error conditions
 3. Deploy your application and collector to production using platforms like:
-   - [Fly.io](https://docs.deno.com/runtime/reference/docker/)
-   - [Digital Ocean](https://docs.deno.com/examples/digital_ocean_tutorial/)
-   - [AWS Lightsail](https://docs.deno.com/examples/aws_lightsail_tutorial/)
+   - [Fly.io](https://docs.ende.sh/runtime/reference/docker/)
+   - [Digital Ocean](https://docs.ende.sh/examples/digital_ocean_tutorial/)
+   - [AWS Lightsail](https://docs.ende.sh/examples/aws_lightsail_tutorial/)
 
 🦕 For more details on OpenTelemetry configuration with HyperDX, see their
 [documentation](https://www.hyperdx.io/docs/install/opentelemetry).

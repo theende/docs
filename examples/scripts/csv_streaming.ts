@@ -3,23 +3,23 @@
  * @difficulty beginner
  * @tags cli
  * @run -R -W <url>
- * @resource {https://jsr.io/@std/csv/doc/~/CsvParseStream} Doc: CsvParseStream
+ * @resource {https://jsr.io/@ende/csv/doc/~/CsvParseStream} Doc: CsvParseStream
  * @resource {/examples/parsing_serializing_csv/} Example: Parsing and serializing CSV
  * @group Encoding
  *
  * Reading a whole CSV file into memory does not work once the file grows to
- * gigabytes. CsvParseStream from jsr:@std/csv parses records as the bytes
+ * gigabytes. CsvParseStream from jsr:@ende/csv parses records as the bytes
  * arrive, so only one record is in memory at a time. For small files the
  * in-memory parse function shown in /examples/parsing_serializing_csv/ is
  * simpler.
  */
-import { CsvParseStream } from "jsr:@std/csv";
+import { CsvParseStream } from "jsr:@ende/csv";
 
 // We create a small sample file. In a real application this could be a
 // multi-gigabyte export.
-const dir = await Deno.makeTempDir();
+const dir = await Ende.makeTempDir();
 const path = `${dir}/measurements.csv`;
-await Deno.writeTextFile(
+await Ende.writeTextFile(
   path,
   `city,temperature,humidity
 Berlin,18.5,60
@@ -32,7 +32,7 @@ Oslo,11.2,72
 // TextDecoderStream to become text, then through a CsvParseStream to
 // become records. With skipFirstRow the header line names the fields and
 // every record is an object.
-const file = await Deno.open(path);
+const file = await Ende.open(path);
 const records = file.readable
   .pipeThrough(new TextDecoderStream())
   .pipeThrough(new CsvParseStream({ skipFirstRow: true }));
@@ -50,8 +50,8 @@ for await (const record of records) {
 // field names and also types the records, so record.city is checked by the
 // TypeScript compiler.
 const headerless = `${dir}/headerless.csv`;
-await Deno.writeTextFile(headerless, `Berlin,18.5,60\nMadrid,24.1,35\n`);
-const file2 = await Deno.open(headerless);
+await Ende.writeTextFile(headerless, `Berlin,18.5,60\nMadrid,24.1,35\n`);
+const file2 = await Ende.open(headerless);
 const rows = file2.readable
   .pipeThrough(new TextDecoderStream())
   .pipeThrough(
@@ -64,4 +64,4 @@ for await (const row of rows) {
 //- { city: "Madrid", temperature: "24.1", humidity: "35" }
 
 // Reading and writing files requires the -R and -W permissions.
-await Deno.remove(dir, { recursive: true });
+await Ende.remove(dir, { recursive: true });

@@ -1,15 +1,15 @@
 ---
 last_modified: 2026-06-24
-title: "deno coverage"
+title: "ende coverage"
 oldUrl: /runtime/manual/tools/coverage/
 command: coverage
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno coverage"
+openGraphTitle: "ende coverage"
 description: "Generate a coverage report for your code"
 ---
 
-`deno coverage` generates coverage reports from data collected by
-[`deno test --coverage`](/runtime/reference/cli/test/#code-coverage).
+`ende coverage` generates coverage reports from data collected by
+[`ende test --coverage`](/runtime/reference/cli/test/#code-coverage).
 
 ## Inclusions and Exclusions
 
@@ -23,7 +23,7 @@ You can expand the coverage to include files that are not on the local file
 system by using the `--include` option and customizing the regex pattern.
 
 ```sh
-deno coverage --include="^file:|https:"
+ende coverage --include="^file:|https:"
 ```
 
 The default inclusion pattern should be sufficient for most use cases, but you
@@ -36,7 +36,7 @@ are excluded by default.
 This is equivalent to:
 
 ```sh
-deno coverage --exclude="test\.(js|mjs|ts|jsx|tsx)$"
+ende coverage --exclude="test\.(js|mjs|ts|jsx|tsx)$"
 ```
 
 This default setting prevents your test code from contributing to your coverage
@@ -86,7 +86,7 @@ All code after a `// deno-coverage-ignore-start` comment is ignored until a
 Each `// deno-coverage-ignore-start` comment must be terminated by a
 `// deno-coverage-ignore-stop` comment, and ignored ranges may not be nested.
 When these requirements are not met, some lines may be unintentionally included
-in the coverage report. The `deno coverage` command will log warnings for any
+in the coverage report. The `ende coverage` command will log warnings for any
 invalid comments.
 
 ```ts
@@ -150,26 +150,26 @@ output.
 
 ## Coverage thresholds
 
-By default `deno coverage` and `deno test --coverage` exit with code zero no
+By default `ende coverage` and `ende test --coverage` exit with code zero no
 matter how low the numbers are. To gate CI on coverage, set a minimum threshold
 and the command exits non-zero when coverage falls below it.
 
-Pass `--threshold` to `deno coverage` with a whole-number percentage. The value
+Pass `--threshold` to `ende coverage` with a whole-number percentage. The value
 applies to all three metrics shown in the summary table: line, branch, and
 function coverage.
 
 ```sh
-deno coverage --threshold=90
+ende coverage --threshold=90
 ```
 
 When you collect and check in a single step, pass `--coverage-threshold` to
-`deno test`:
+`ende test`:
 
 ```sh
-deno test --coverage --coverage-threshold=90
+ende test --coverage --coverage-threshold=90
 ```
 
-To set a different target per metric, add a `coverage` section to `deno.json`.
+To set a different target per metric, add a `coverage` section to `ende.json`.
 Each key under `thresholds` is optional and accepts a fractional percentage:
 
 ```json
@@ -190,23 +190,23 @@ every reported file, using the same numbers the summary table prints.
 
 When you pass the CLI flag, its single value applies to line, branch, and
 function coverage and overrides whatever the config sets for each metric. With
-no flag, the per-metric `deno.json` values are used.
+no flag, the per-metric `ende.json` values are used.
 
 ## Output Formats
 
-By default we support Deno's own coverage format - but you can also output
+By default we support Ende's own coverage format - but you can also output
 coverage reports in the
 [lcov format](https://github.com/linux-test-project/lcov?tab=readme-ov-file) (a
 standard file format used to describe code coverage data), or in html.
 
 ```sh
-deno coverage --lcov --output=cov.lcov
+ende coverage --lcov --output=cov.lcov
 ```
 
 This lcov file can be used with other tools that support the lcov format.
 
 ```sh
-deno coverage --html
+ende coverage --html
 ```
 
 This will output a coverage report as a html file
@@ -216,35 +216,35 @@ This will output a coverage report as a html file
 Generate a coverage report from the default coverage profile in your workspace
 
 ```sh
-deno test --coverage
-deno coverage
+ende test --coverage
+ende coverage
 ```
 
 Generate a coverage report from a coverage profile with a custom name
 
 ```sh
-deno test --coverage=custom_profile_name
-deno coverage custom_profile_name
+ende test --coverage=custom_profile_name
+ende coverage custom_profile_name
 ```
 
-> Note: You can alternatively set coverage directory by `DENO_COVERAGE_DIR` env
+> Note: You can alternatively set coverage directory by `ENDE_COVERAGE_DIR` env
 > var.
 >
 > ```
-> DENO_COVERAGE_DIR=custom_profile_name deno test
-> deno coverage custom_profile_name
+> ENDE_COVERAGE_DIR=custom_profile_name ende test
+> ende coverage custom_profile_name
 > ```
 
 Only include coverage that matches a specific pattern - in this case, only
 include tests from main.ts
 
 ```sh
-deno coverage --include="main.ts"
+ende coverage --include="main.ts"
 ```
 
 Export test coverage from the default coverage profile to an lcov file
 
 ```sh
-deno test --coverage
-deno coverage --lcov --output=cov.lcov
+ende test --coverage
+ende coverage --lcov --output=cov.lcov
 ```

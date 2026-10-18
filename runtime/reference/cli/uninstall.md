@@ -1,104 +1,66 @@
 ---
 last_modified: 2025-03-10
-title: "deno uninstall"
+title: "ende uninstall"
 oldUrl: /runtime/manual/tools/uninstall/
 command: uninstall
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno uninstall"
+openGraphTitle: "ende uninstall"
 description: "Remove a dependency from your project or from your global cache"
 ---
 
-## `deno uninstall [PACKAGES]`
+## `ende uninstall [PACKAGES]`
 
 Remove dependencies specified in
-[`deno.json`](/runtime/fundamentals/configuration/) or `package.json`:
+[`ende.json`](/runtime/fundamentals/configuration/):
 
 ```sh
-deno add npm:express
-Add npm:express@5.0.0
+ende add jsr:@ende/path
+Add jsr:@ende/path@^2026.10.15
 
-cat deno.json
+cat ende.json
 {
   "imports": {
-    "express": "npm:express@5.0.0"
+    "@ende/path": "jsr:@ende/path@^2026.10.15"
   }
 }
 ```
 
 ```sh
-deno uninstall express
-Removed express
+ende uninstall @ende/path
+Removed @ende/path
 
-cat deno.json
+cat ende.json
 {
   "imports": {}
 }
 ```
 
 > [!TIP]
-> You can also use `deno remove` which is an alias to
-> `deno uninstall [PACKAGES]`
+> You can also use `ende remove` which is an alias to
+> `ende uninstall [PACKAGES]`
 
 You can remove multiple dependencies at once:
 
 ```sh
-deno add npm:express jsr:@std/http
-Added npm:express@5.0.0
-Added jsr:@std/http@1.0.7
-
-cat deno.json
-{
-  "imports": {
-    "@std/http": "jsr:@std/http@^1.0.7",
-    "express": "npm:express@^5.0.0",
-  }
-}
-```
-
-```sh
-deno remove express @std/http
-Removed express
-Removed @std/http
-
-cat deno.json
-{
-  "imports": {}
-}
+ende remove @ende/path @ende/http
+Removed @ende/path
+Removed @ende/http
 ```
 
 > [!NOTE]
-> While dependencies are removed from the `deno.json` and `package.json` they
-> still persist in the global cache for future use.
+> While dependencies are removed from `ende.json` they still persist in the
+> global cache for future use.
 
-If your project contains `package.json`, `deno uninstall` can work with it too:
-
-```sh
-cat package.json
-{
-  "dependencies": {
-    "express": "^5.0.0"
-  }
-}
-
-deno remove express
-Removed express
-
-cat package.json
-{
-  "dependencies": {}
-}
-```
-
-## `deno uninstall --global [SCRIPT_NAME]`
+## `ende uninstall --global [SCRIPT_NAME]`
 
 Uninstall `serve`
 
 ```sh
-deno uninstall --global serve
+ende uninstall --global serve
 ```
 
 Uninstall `serve` from a specific installation root
 
 ```sh
-deno uninstall -g --root /usr/local/bin serve
+ende uninstall -g --root /usr/local/bin serve
 ```

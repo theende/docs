@@ -3,11 +3,11 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N -R <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Doc: Deno.serve
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.serve} Doc: Ende.serve
  * @resource {/examples/http_server} Example: HTTP Server: Hello world
  * @group Network
  *
- * Deno.serve speaks HTTPS when given a certificate and private key. This
+ * Ende.serve speaks HTTPS when given a certificate and private key. This
  * example starts a TLS server with a locally generated certificate.
  */
 
@@ -21,11 +21,11 @@
 
 // Pass the certificate and key as strings; reading them needs the -R
 // permission, and serving needs -N.
-Deno.serve(
+Ende.serve(
   {
     port: 8443,
-    cert: Deno.readTextFileSync("localhost-cert.pem"),
-    key: Deno.readTextFileSync("localhost-key.pem"),
+    cert: Ende.readTextFileSync("localhost-cert.pem"),
+    key: Ende.readTextFileSync("localhost-key.pem"),
   },
   () => new Response("Hello over TLS"),
 );
@@ -34,18 +34,6 @@ Deno.serve(
 //
 //   curl --cacert localhost-cert.pem https://localhost:8443/
 //   Hello over TLS
-
-// Code written against the Node.js API works as well: node:https takes the
-// same certificate material in its options.
-import { createServer } from "node:https";
-
-createServer(
-  {
-    cert: Deno.readTextFileSync("localhost-cert.pem"),
-    key: Deno.readTextFileSync("localhost-key.pem"),
-  },
-  (_req, res) => res.end("Hello from node:https"),
-).listen(8444);
 
 // Browsers will warn about self-signed certificates. A tool like mkcert
 // installs a locally trusted authority and removes the warning during

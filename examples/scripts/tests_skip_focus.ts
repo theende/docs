@@ -2,8 +2,8 @@
  * @title Skipping and focusing tests
  * @difficulty beginner
  * @tags cli
- * @run deno test <url>
- * @resource {https://docs.deno.com/runtime/fundamentals/testing/} Doc: Testing
+ * @run ende test <url>
+ * @resource {https://docs.ende.sh/runtime/fundamentals/testing/} Doc: Testing
  * @resource {/examples/writing_tests/} Example: Writing tests
  * @group Testing
  *
@@ -11,16 +11,16 @@
  * platform, or you want to focus on a single failing case. This example
  * shows how to skip and focus tests.
  */
-import { assertEquals } from "jsr:@std/assert";
+import { assertEquals } from "jsr:@ende/assert";
 
 // A regular test, for comparison.
-Deno.test("addition", () => {
+Ende.test("addition", () => {
   assertEquals(1 + 1, 2);
 });
 
 // To skip a test, set the ignore option. The test is reported as ignored
 // rather than silently dropped, so it stays visible as a todo.
-Deno.test({
+Ende.test({
   name: "subtraction",
   ignore: true,
   fn() {
@@ -29,15 +29,15 @@ Deno.test({
 });
 
 // The shorthand reads nicely when there is no other option to set.
-Deno.test.ignore("multiplication", () => {
+Ende.test.ignore("multiplication", () => {
   assertEquals(2 * 2, 4);
 });
 
 // The ignore option takes any boolean, which makes platform-specific or
 // environment-specific skips one-liners.
-Deno.test({
+Ende.test({
   name: "windows paths",
-  ignore: Deno.build.os !== "windows",
+  ignore: Ende.build.os !== "windows",
   fn() {
     // Only runs on Windows.
   },
@@ -45,13 +45,13 @@ Deno.test({
 
 // Running the file reports each skipped test:
 //
-//   deno test skip.test.ts
+//   ende test skip.test.ts
 //   ok | 1 passed | 0 failed | 3 ignored
 
 // To focus on one test, use only. Every other test in the run is filtered
 // out:
 //
-//   Deno.test.only("focus on this", () => {});
+//   Ende.test.only("focus on this", () => {});
 //
 // As a guard against forgotten focus markers, the run itself fails after
 // the tests pass:

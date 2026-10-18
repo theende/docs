@@ -1,94 +1,78 @@
 ---
 last_modified: 2026-07-02
 title: "Set up your environment"
-description: "A guide to setting up your development environment for Deno. Learn how to configure popular editors like VS Code, set up language server support, and enable shell completions for better productivity."
+description: "A guide to setting up your development environment for Ende. Learn how to connect your editor to the Ende language server and enable shell completions for better productivity."
 oldUrl: /runtime/manual/getting_started/setup_your_environment/
 ---
 
-Deno comes with many of the tools that are commonly needed for developing
+Ende comes with many of the tools that are commonly needed for developing
 applications, including a full
 [language server (LSP)](/runtime/reference/cli/lsp/) to help power your IDE of
 choice. This page will help you set up your environment to get the most out of
-Deno while you are developing.
+Ende while you are developing.
 
 We'll cover:
 
-- How to use Deno with your favorite editor/IDE
+- How to use Ende with your favorite editor/IDE
 - How to generate shell completions
 
 ## Setting up your editor/IDE
 
-### Visual Studio Code
-
-If you haven't already, download and install Visual Studio Code from the
-[official website](https://code.visualstudio.com/).
-
-In the Extensions tab, search for "Deno" and install the
-[extension by Denoland](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno).
-
-Next, open the Command Palette by pressing `Ctrl+Shift+P` and type
-`Deno: Initialize Workspace Configuration`. Select this option to configure Deno
-for your workspace.
-
-![The VSCode command palette with the Deno: Initialize Workspace Configuration option selected.](./images/vscode-setup.png)
-
-A file called `.vscode/settings.json` will be created in your workspace with the
-following configuration:
-
-```json
-{
-  "deno.enable": true
-}
-```
-
-That's it! You've successfully set up your developer environment for Deno using
-VSCode. You will now get all the benefits of Deno's LSP, including IntelliSense,
-code formatting, linting, and more.
+Any editor with a language server client can use Ende's: run `ende lsp` and send
+settings under the `ende` section (or as `initializationOptions`). The server
+also reads a `deno` section, so clients written for Deno's language server work
+once they start `ende lsp`. The
+[LSP integration reference](/runtime/reference/lsp_integration/) lists the
+settings.
 
 ### JetBrains IDEs
 
-To install the Deno Plugin, open your IDE and go to **File** > **Settings**.
-Navigate to **Plugins** and search for `Deno`. Install the official Deno plugin.
+JetBrains IDEs support Ende through their Deno plugin. Open your IDE and go to
+**File** > **Settings**, navigate to **Plugins**, search for `Deno` and install
+the plugin.
 
 ![The WebStorm plugins settings](./images/webstorm_setup.png)
 
 To configure the Plugin, go to **File** > **Settings** again. Navigate to
 **Languages & Frameworks** > **JavaScript Runtime**. Switch **Preferred
-Runtime** to **Deno**. Under **Deno**, specify the path to the Deno executable
-(if it has not been auto-detected).
+Runtime** to **Deno**. Under **Deno**, specify the path to the `ende`
+executable.
 
 Check out
 [this blog post](https://blog.jetbrains.com/webstorm/2020/06/deno-support-in-jetbrains-ides/)
-to learn more about how to get started with Deno in Jetbrains IDEs.
+to learn more about the plugin, which was written for Deno.
 
 ### Vim/Neovim
 
 The recommended setup for Neovim 0.11+ is the built-in language server client
 with [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/), which ships a
-[ready-made Deno configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols).
+[ready-made `denols` configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols)
+for Deno's language server. Ende's language server speaks the same protocol, so
+use that configuration with `cmd` pointing at `ende lsp`.
 
 If you also have `ts_ls` (the TypeScript language server) configured, both
 servers can attach to the same buffer. Recent versions of nvim-lspconfig prevent
 this out of the box: their `ts_ls` configuration skips projects that contain a
-`deno.json`, `deno.jsonc`, or `deno.lock`. If you are on an older version of the
+`ende.json`, `ende.jsonc`, or `ende.lock`. If you are on an older version of the
 plugin, or you configure the servers yourself, give each server distinct
 `root_markers` and set `workspace_required = true` on `ts_ls` so that it only
-attaches when it finds a `package.json`:
+attaches when it finds a `package.json` or `tsconfig.json`:
 
 ```lua
 vim.lsp.config('denols', {
-    root_markers = { "deno.json", "deno.jsonc" },
+    cmd = { "ende", "lsp" },
+    root_markers = { "ende.json", "ende.jsonc" },
 })
 
 vim.lsp.config('ts_ls', {
-    root_markers = { "package.json" },
+    root_markers = { "package.json", "tsconfig.json" },
     workspace_required = true,
 })
 
 vim.lsp.enable({ 'denols', 'ts_ls' })
 ```
 
-This assumes a `deno.json` or `deno.jsonc` lives at the root of your Deno
+This assumes a `ende.json` or `ende.jsonc` lives at the root of your Ende
 project. Note that `workspace_required` needs Neovim 0.11.1 or later. The older
 `single_file_support` option has no effect here: it is only read by the
 deprecated `require('lspconfig').setup()` API and is silently ignored by
@@ -102,22 +86,23 @@ configuration to the `servers` table in your `init.lua`:
 local servers = {
         -- ... some configuration
         ts_ls = {
-            root_markers = { "package.json" },
+            root_markers = { "package.json", "tsconfig.json" },
             workspace_required = true,
             settings = {},
         },
         denols = {
-            root_markers = { "deno.json", "deno.jsonc" },
+            cmd = { "ende", "lsp" },
+            root_markers = { "ende.json", "ende.jsonc" },
             settings = {},
         },
     }
 ```
 
-**Other Vim/Neovim plugins.** If you prefer a different plugin ecosystem, Deno
-also works with the following:
+**Other Vim/Neovim plugins.** The plugins below were written for Deno and start
+`deno lsp` by default; configure each to run `ende lsp` instead:
 
 - **[ALE](https://github.com/dense-analysis/ale):** supports the Deno language
-  server out of the box. See
+  server, which works for Ende with the executable set to `ende`. See
   [`:help ale-typescript-deno`](https://github.com/dense-analysis/ale/blob/master/doc/ale-typescript.txt)
   for configuration options.
 - **[coc.nvim](https://github.com/neoclide/coc.nvim):** install
@@ -125,30 +110,30 @@ also works with the following:
   `:CocInstall coc-deno`, then run `:CocCommand deno.initializeWorkspace` in
   your project.
 - **[vim-easycomplete](https://github.com/jayli/vim-easycomplete):** once
-  installed, run `:InstallLspServer deno`. See the
-  [project README](https://github.com/jayli/vim-easycomplete) for details.
-- **[vim-lsp](https://github.com/prabirshrestha/vim-lsp):** register the Deno
+  installed, run `:InstallLspServer deno` and point it at the `ende` binary. See
+  the [project README](https://github.com/jayli/vim-easycomplete) for details.
+- **[vim-lsp](https://github.com/prabirshrestha/vim-lsp):** register the Ende
   language server in your `.vimrc`:
 
   ```vim
-  if executable('deno')
+  if executable('ende')
     let server_config = {
-      \ 'name': 'deno',
-      \ 'cmd': {server_info->['deno', 'lsp']},
+      \ 'name': 'ende',
+      \ 'cmd': {server_info->['ende', 'lsp']},
       \ 'allowlist': ['typescript', 'javascript', 'javascriptreact', 'typescriptreact'],
       \ }
 
-    if exists('$DENO_ENABLE')
-      let deno_enabled = $DENO_ENABLE == '1'
-      let server_config['workspace_config'] = { 'deno': { 'enable': deno_enabled ? v:true : v:false } }
+    if exists('$ENDE_ENABLE')
+      let ende_enabled = $ENDE_ENABLE == '1'
+      let server_config['workspace_config'] = { 'ende': { 'enable': ende_enabled ? v:true : v:false } }
     endif
 
     au User lsp_setup call lsp#register_server(server_config)
   endif
   ```
 
-  Activate the server either by placing a `deno.json`/`deno.jsonc` in the
-  working directory or by setting `DENO_ENABLE=1`. To highlight syntax in
+  Activate the server either by placing a `ende.json`/`ende.jsonc` in the
+  working directory or by setting `ENDE_ENABLE=1`. To highlight syntax in
   intellisense tooltips, also add:
 
   ```vim
@@ -157,56 +142,55 @@ also works with the following:
 
 ### Zed
 
-The [Zed editor](https://zed.dev) can integrate the Deno language server via the
-[Deno extension](https://zed.dev/extensions?query=deno&filter=language-servers).
+The [Zed editor](https://zed.dev) can integrate the Ende language server via the
+[Deno extension](https://zed.dev/extensions?query=deno&filter=language-servers),
+with its binary set to `ende`.
 
 ### Helix
 
 [Helix](https://helix-editor.com) comes with built-in language server support.
-Enabling connection to the Deno language server requires changes in the
+Enabling connection to the Ende language server requires changes in the
 `languages.toml` configuration file.
 
 ```toml
 [[language]]
 name = "typescript"
-roots = ["deno.json", "deno.jsonc", "package.json"]
+roots = ["ende.json", "ende.jsonc"]
 file-types = ["ts", "tsx"]
 auto-format = true
-language-servers = ["deno-lsp"]
+language-servers = ["ende-lsp"]
 
 [[language]]
 name = "javascript"
-roots = ["deno.json", "deno.jsonc", "package.json"]
+roots = ["ende.json", "ende.jsonc"]
 file-types = ["js", "jsx"]
 auto-format = true
-language-servers = ["deno-lsp"]
+language-servers = ["ende-lsp"]
 
-[language-server.deno-lsp]
-command = "deno"
+[language-server.ende-lsp]
+command = "ende"
 args = ["lsp"]
-config.deno.enable = true
+config.ende.enable = true
 ```
 
 ### Emacs
 
-**lsp-mode.** Emacs supports Deno via the Deno language server using
-[lsp-mode](https://emacs-lsp.github.io/lsp-mode/). Once
-[lsp-mode is installed](https://emacs-lsp.github.io/lsp-mode/page/installation/)
-it should support Deno, which can be
-[configured](https://emacs-lsp.github.io/lsp-mode/page/lsp-deno/) to support
-various settings.
+**lsp-mode.** [lsp-mode](https://emacs-lsp.github.io/lsp-mode/) ships a client
+for Deno's language server, which works for Ende with
+[`lsp-clients-deno-server`](https://emacs-lsp.github.io/lsp-mode/page/lsp-deno/)
+set to `"ende"`.
 
-**eglot.** You can also use the built-in Deno language server via
+**eglot.** You can also use the built-in Ende language server via
 [`eglot`](https://github.com/joaotavora/eglot). An example configuration:
 
 ```elisp
-(add-to-list 'eglot-server-programs '((js-mode typescript-mode) . (eglot-deno "deno" "lsp")))
+(add-to-list 'eglot-server-programs '((js-mode typescript-mode) . (eglot-deno "ende" "lsp")))
 
   (defclass eglot-deno (eglot-lsp-server) ()
-    :documentation "A custom class for deno lsp.")
+    :documentation "A custom class for ende lsp.")
 
   (cl-defmethod eglot-initialization-options ((server eglot-deno))
-    "Passes through required deno initialization options"
+    "Passes through required ende initialization options"
     (list
       :enable t
       :unstable t
@@ -218,30 +202,18 @@ various settings.
             (:enabled t)))))
 ```
 
-This is the equivalent of having the following settings in a VSCode
-`settings.json`:
-
-```jsonc
-{
-  "deno.enable": true,
-  "deno.unstable": true,
-  "typescript.inlayHints.variableTypes.enabled": true,
-  "typescript.inlayHints.parameterTypes.enabled": true
-}
-```
-
 ### Sublime Text
 
-[Sublime Text](https://www.sublimetext.com/) supports connecting to the Deno
+[Sublime Text](https://www.sublimetext.com/) supports connecting to the Ende
 language server via the [LSP package](https://packagecontrol.io/packages/LSP).
-Once it's installed, add a minimal Deno client to your `.sublime-project`:
+Once it's installed, add a minimal Ende client to your `.sublime-project`:
 
 ```jsonc
 {
   "settings": {
     "LSP": {
-      "deno": {
-        "command": ["deno", "lsp"],
+      "ende": {
+        "command": ["ende", "lsp"],
         "enabled": true,
         "selector": "source.ts | source.tsx | source.js | source.jsx",
         "initializationOptions": {
@@ -262,57 +234,43 @@ and the
 
 ### Kakoune
 
-[Kakoune](https://kakoune.org/) supports connecting to the Deno language server
+[Kakoune](https://kakoune.org/) supports connecting to the Ende language server
 via the [kak-lsp](https://github.com/kak-lsp/kak-lsp) client. Once
 [kak-lsp is installed](https://github.com/kak-lsp/kak-lsp#installation) an
-example of configuring it up to connect to the Deno language server is by adding
+example of configuring it up to connect to the Ende language server is by adding
 the following to your `kak-lsp.toml`:
 
 ```toml
 [language.typescript]
 filetypes = ["typescript", "javascript"]
 roots = [".git"]
-command = "deno"
+command = "ende"
 args = ["lsp"]
-[language.typescript.settings.deno]
+[language.typescript.settings.ende]
 enable = true
 lint = true
 ```
 
 ### Nova
 
-The [Nova editor](https://nova.app) can integrate the Deno language server via
+The [Nova editor](https://nova.app) can integrate the Ende language server via
 the
-[Deno extension](https://extensions.panic.com/extensions/co.gwil/co.gwil.deno/).
+[Deno extension](https://extensions.panic.com/extensions/co.gwil/co.gwil.deno/),
+with its executable set to `ende`.
 
 ### Pulsar
 
 The [Pulsar editor, formerly known as Atom](https://pulsar-edit.dev/) supports
-integrating with the Deno language server via the
+integrating with the Ende language server via the
 [atom-ide-deno](https://web.pulsar-edit.dev/packages/atom-ide-deno) package.
-`atom-ide-deno` requires that the Deno CLI be installed and the
-[atom-ide-base](https://web.pulsar-edit.dev/packages/atom-ide-base) package to
-be installed as well.
-
-## Remote development
-
-### GitHub Codespaces
-
-[GitHub Codespaces](https://github.com/features/codespaces) lets you develop in
-a hosted environment with no local Deno install.
-
-If the repository already includes a `.devcontainer` configuration with Deno,
-opening it in Codespaces just works. To add Deno to a Codespace that doesn't:
-
-1. Open the command palette (`Cmd/Ctrl+Shift+P`).
-2. Run `Codespaces: Add Development Container Configuration Files...`.
-3. Choose `Show All Definitions...` and search for `Deno`.
-4. Rebuild the container so the Deno CLI is available.
+`atom-ide-deno` requires that the CLI (set its path to `ende`) be installed and
+the [atom-ide-base](https://web.pulsar-edit.dev/packages/atom-ide-base) package
+to be installed as well.
 
 ## Shell completions
 
-Built into the Deno CLI is support to generate shell completion information for
-the CLI itself. By using `deno completions <shell>`, the Deno CLI will output to
+Built into the Ende CLI is support to generate shell completion information for
+the CLI itself. By using `ende completions <shell>`, the Ende CLI will output to
 stdout the completions. Current shells that are supported:
 
 - bash
@@ -326,8 +284,8 @@ stdout the completions. Current shells that are supported:
 Output the completions and add them to the environment:
 
 ```shell
-deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
-source /usr/local/etc/bash_completion.d/deno.bash
+ende completions bash > /usr/local/etc/bash_completion.d/ende.bash
+source /usr/local/etc/bash_completion.d/ende.bash
 ```
 
 ### PowerShell example
@@ -335,7 +293,7 @@ source /usr/local/etc/bash_completion.d/deno.bash
 Output the completions:
 
 ```shell
-deno completions powershell >> $profile
+ende completions powershell >> $profile
 .$profile
 ```
 
@@ -354,7 +312,7 @@ mkdir ~/.zsh
 Then output the completions:
 
 ```shell
-deno completions zsh > ~/.zsh/_deno
+ende completions zsh > ~/.zsh/_ende
 ```
 
 And ensure the completions get loaded in your `~/.zshrc`:
@@ -378,8 +336,8 @@ zsh and can make it easier to manage your shell configuration.
 Create the directory to store the completions and output the completions:
 
 ```shell
-mkdir ~/.oh-my-zsh/custom/plugins/deno
-deno completions zsh > ~/.oh-my-zsh/custom/plugins/deno/_deno
+mkdir ~/.oh-my-zsh/custom/plugins/ende
+ende completions zsh > ~/.oh-my-zsh/custom/plugins/ende/_ende
 ```
 
 Then your `.zshrc` might look something like this:
@@ -390,32 +348,32 @@ source /path-to-antigen/antigen.zsh
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
-antigen bundle deno
+antigen bundle ende
 ```
 
 ### fish example
 
-Output the completions to a `deno.fish` file into the completions directory in
+Output the completions to a `ende.fish` file into the completions directory in
 the fish config folder:
 
 ```shell
-deno completions fish > ~/.config/fish/completions/deno.fish
+ende completions fish > ~/.config/fish/completions/ende.fish
 ```
 
 ### Dynamic completions
 
 Pass the `--dynamic` flag to generate completions that are aware of your
 project. Currently this lets your shell suggest the task names defined in your
-`deno.json` when you type `deno task <TAB>`:
+`ende.json` when you type `ende task <TAB>`:
 
 ```shell
-deno completions --dynamic zsh > ~/.zsh/_deno
+ende completions --dynamic zsh > ~/.zsh/_ende
 ```
 
 Dynamic completions are unstable and may change in a future release.
 
 ## Building your own LSP integration
 
-If you're building or maintaining a community integration with the Deno language
+If you're building or maintaining a community integration with the Ende language
 server, see the [LSP integration reference](/runtime/reference/lsp_integration/)
-and join the `#dev-lsp` channel on the [Deno Discord](https://discord.gg/deno).
+and join the `#dev-lsp` channel on the [Ende Discord](https://discord.gg/ende).

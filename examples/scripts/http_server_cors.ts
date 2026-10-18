@@ -33,7 +33,7 @@ function corsHeaders(req: Request): Headers {
   return headers;
 }
 
-Deno.serve((req) => {
+Ende.serve((req) => {
   const headers = corsHeaders(req);
 
   // Before non-simple requests (methods like PUT, or custom headers) the

@@ -1,7 +1,7 @@
 ---
 last_modified: 2025-03-10
 title: "File system events"
-description: "Tutorial on monitoring file system changes with Deno. Learn how to watch directories for file modifications, handle change events, and understand platform-specific behaviors across Linux, macOS, and Windows."
+description: "Tutorial on monitoring file system changes with Ende. Learn how to watch directories for file modifications, handle change events, and understand platform-specific behaviors across Linux, macOS, and Windows."
 url: /examples/file_system_events_tutorial/
 oldUrl:
   - /runtime/manual/examples/file_system_events/
@@ -10,7 +10,7 @@ oldUrl:
 
 ## Concepts
 
-- Use [Deno.watchFs](https://docs.deno.com/api/deno/~/Deno.watchFs) to watch for
+- Use [Ende.watchFs](https://docs.ende.sh/api/ende/~/Ende.watchFs) to watch for
   file system events.
 - Results may vary between operating systems.
 
@@ -19,17 +19,17 @@ oldUrl:
 To poll for file system events in the current directory:
 
 ```ts title="watcher.ts"
-const watcher = Deno.watchFs(".");
+const watcher = Ende.watchFs(".");
 for await (const event of watcher) {
   console.log(">>>> event", event);
-  // Example event: { kind: "create", paths: [ "/home/alice/deno/foo.txt" ] }
+  // Example event: { kind: "create", paths: [ "/home/alice/ende/foo.txt" ] }
 }
 ```
 
 Run with:
 
 ```shell
-deno run --allow-read watcher.ts
+ende run --allow-read watcher.ts
 ```
 
 Now try adding, removing and modifying files in the same directory as

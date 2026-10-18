@@ -7,7 +7,7 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/WebSocket} MDN: WebSocket
  * @group Network
  *
- * Opening a WebSocket connection for real-time, bi-directional communication with Deno is very simple.
+ * Opening a WebSocket connection for real-time, bi-directional communication with Ende is very simple.
  */
 
 // First we need to use the WebSocket constructor to initiate

@@ -1,88 +1,68 @@
 ---
 last_modified: 2025-03-10
-title: "deno outdated"
+title: "ende outdated"
 command: outdated
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno outdated"
+openGraphTitle: "ende outdated"
 description: "Check for outdated dependencies in your project and safely update them with an interactive CLI"
 ---
 
 ## Checking for outdated dependencies
 
-The `outdated` subcommand checks for new versions of NPM and JSR dependencies
-listed in [`deno.json`](/runtime/fundamentals/configuration/) or `package.json`
-files, and displays dependencies that could be updated. Workspaces are fully
-supported, including workspaces where some members use `package.json` and others
-use `deno.json`.
+The `outdated` subcommand checks for new versions of the JSR dependencies listed
+in [`ende.json`](/runtime/fundamentals/configuration/) files, and displays
+dependencies that could be updated. Workspaces are fully supported.
 
-For example, take a project with a `deno.json` file:
+For example, take a project with an `ende.json` file:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "imports": {
-    "@std/fmt": "jsr:@std/fmt@^1.0.0",
-    "@std/async": "jsr:@std/async@1.0.1",
-    "chalk": "npm:chalk@4"
+    "@ende/fmt": "jsr:@ende/fmt@^2026.10.14",
+    "@ende/path": "jsr:@ende/path@2026.10.14"
   }
 }
 ```
 
-and a lockfile that has `@std/fmt` at version `1.0.0`.
-
 ```sh
-deno outdated
-┌────────────────┬─────────┬────────┬────────┐
-│ Package        │ Current │ Update │ Latest │
-├────────────────┼─────────┼────────┼────────┤
-│ jsr:@std/fmt   │ 1.0.0   │ 1.0.3  │ 1.0.3  │
-├────────────────┼─────────┼────────┼────────┤
-│ jsr:@std/async │ 1.0.1   │ 1.0.1  │ 1.0.8  │
-├────────────────┼─────────┼────────┼────────┤
-│ npm:chalk      │ 4.1.2   │ 4.1.2  │ 5.3.0  │
-└────────────────┴─────────┴────────┴────────┘
+ende outdated
+┌────────────────┬────────────┬────────────┬────────────┐
+│ Package        │ Current    │ Update     │ Latest     │
+├────────────────┼────────────┼────────────┼────────────┤
+│ jsr:@ende/path │ 2026.10.14 │ 2026.10.14 │ 2026.10.15 │
+└────────────────┴────────────┴────────────┴────────────┘
 ```
 
-The `Update` column lists the newest semver-compatible version, while the
-`Latest` column lists the latest version.
+The `Update` column lists the newest version the import's range allows, while
+the `Latest` column lists the latest version. `@ende/path` is pinned to an exact
+version, so it can't be updated without changing its range.
 
-Notice that `jsr:@std/async` is listed, even though there is no
-semver-compatible version to update to. If you would prefer to only show
-packages that have new compatible versions you can pass the `--compatible` flag.
-
-```sh
-deno outdated --compatible
-┌────────────────┬─────────┬────────┬────────┐
-│ Package        │ Current │ Update │ Latest │
-├────────────────┼─────────┼────────┼────────┤
-│ jsr:@std/fmt   │ 1.0.0   │ 1.0.3  │ 1.0.3  │
-└────────────────┴─────────┴────────┴────────┘
-```
-
-`jsr:@std/fmt` is still listed, since it could be compatibly updated to `1.0.3`,
-but `jsr:@std/async` is no longer shown.
+If you would prefer to only show packages that have new compatible versions you
+can pass the `--compatible` flag.
 
 ## Updating dependencies
 
 The `outdated` subcommand can also update dependencies with the `--update` flag.
-By default, it will only update dependencies to semver-compatible versions (i.e.
-it won't update to a breaking version).
+By default, it will only update dependencies within their ranges:
 
 ```sh
-deno outdated --update
+ende outdated --update
 Updated 1 dependency:
- - jsr:@std/fmt 1.0.0 -> 1.0.3
+ - jsr:@ende/fmt ^2026.10.14 -> ^2026.10.15
 ```
 
-To update to the latest versions (regardless of whether it's semver compatible),
-pass the `--latest` flag.
+To update to the latest versions regardless of the ranges, pass the `--latest`
+flag:
 
 ```sh
-deno outdated --update --latest
-Updated 3 dependencies:
- - jsr:@std/async 1.0.1 -> 1.0.8
- - jsr:@std/fmt   1.0.0 -> 1.0.3
- - npm:chalk      4.1.2 -> 5.3.0
+ende outdated --update --latest
+Updated 2 dependencies:
+ - jsr:@ende/fmt  ^2026.10.14 -> ^2026.10.15
+ - jsr:@ende/path  2026.10.14 ->  2026.10.15
 ```
+
+[`ende update`](/runtime/reference/cli/update/) does the same as
+`ende outdated --update`.
 
 ## Selecting packages
 
@@ -90,21 +70,15 @@ The `outdated` subcommand also supports selecting which packages to operate on.
 This works with or without the `--update` flag.
 
 ```sh
-deno outdated --update --latest chalk
-Updated 1 dependency:
- - npm:chalk 4.1.2 -> 5.3.0
+ende outdated --update --latest @ende/path
 ```
 
 Multiple selectors can be passed, and wildcards (`*`) or exclusions (`!`) are
-also supported.
-
-For instance, to update all packages with the `@std` scope, except for
-`@std/fmt`:
+also supported. For instance, to update all packages in the `@ende` scope,
+except for `@ende/fmt`:
 
 ```sh
-deno outdated --update --latest "@std/*" "!@std/fmt"
-Updated 1 dependency:
- - jsr:@std/async 1.0.1 -> 1.0.8
+ende outdated --update --latest "@ende/*" "!@ende/fmt"
 ```
 
 Note that if you use wildcards, you will probably need to surround the argument
@@ -115,10 +89,7 @@ in quotes to prevent the shell from trying to expand them.
 You can also select a specific version to update to by appending it after `@`.
 
 ```sh
-deno outdated --update chalk@5.2 @std/async@1.0.6
-Updated 2 dependencies:
- - jsr:@std/async 1.0.1 -> 1.0.6
- - npm:chalk      4.1.2 -> 5.2.0
+ende outdated --update @ende/path@2026.10.15
 ```
 
 ## Workspaces
@@ -128,7 +99,7 @@ workspace member.
 
 For instance, given a workspace:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": ["./member-a", "./member-b"]
 }
@@ -137,16 +108,16 @@ For instance, given a workspace:
 Running
 
 ```sh
-deno outdated
+ende outdated
 ```
 
 from the `./member-a` directory will only check for outdated dependencies listed
-in `./member-a/deno.json` or `./member-a/package.json`.
+in `./member-a/ende.json`.
 
 To include all workspace members, pass the `--recursive` flag (the `-r`
 shorthand is also accepted).
 
 ```sh
-deno outdated --recursive
-deno outdated --update --latest -r
+ende outdated --recursive
+ende outdated --update --latest -r
 ```

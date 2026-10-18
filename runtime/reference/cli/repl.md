@@ -1,11 +1,11 @@
 ---
 last_modified: 2026-03-12
-title: "deno repl"
+title: "ende repl"
 oldUrl: /runtime/manual/tools/repl/
 command: repl
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno repl"
-description: "Interact with Deno's runtime in a REPL environment"
+openGraphTitle: "ende repl"
+description: "Interact with Ende's runtime in a REPL environment"
 ---
 
 ## Special variables
@@ -18,7 +18,7 @@ The REPL provides a couple of special variables, that are always available:
 | _error     | Yields the last thrown error         |
 
 ```sh
-Deno 1.14.3
+Ende 2026.10.17
 exit using ctrl+d or close()
 > "hello world!"
 "hello world!"
@@ -46,14 +46,14 @@ into the REPL. This is useful for importing some code you commonly use in the
 REPL, or modifying the runtime in some way:
 
 ```sh
-deno repl --allow-net --eval 'import { assert } from "jsr:@std/assert@1"'
-Deno 1.45.3
+ende repl --allow-net --eval 'import { assert } from "jsr:@ende/assert@^2026.10.15"'
+Ende 2026.10.17
 exit using ctrl+d, ctrl+c, or close()
 > assert(true)
 undefined
 > assert(false)
 Uncaught AssertionError
-    at assert (https://jsr.io/@std/assert/1.0.0/assert.ts:21:11)
+    at assert (https://jsr.io/@ende/assert/1.0.0/assert.ts:21:11)
     at <anonymous>:1:22
 ```
 
@@ -70,11 +70,11 @@ If `--eval` is also specified, then `--eval-file` files are run before the
 `--eval` code.
 
 ```sh
-deno repl --eval-file=https://docs.deno.com/examples/welcome.ts,https://docs.deno.com/examples/local.ts
-Download https://docs.deno.com/examples/welcome.ts
-Welcome to Deno!
-Download https://docs.deno.com/examples/local.ts
-Deno 1.45.3
+ende repl --eval-file=https://docs.ende.sh/examples/welcome.ts,https://docs.ende.sh/examples/local.ts
+Download https://docs.ende.sh/examples/welcome.ts
+Welcome to Ende!
+Download https://docs.ende.sh/examples/local.ts
+Ende 2026.10.17
 exit using ctrl+d or close()
 > local // this variable is defined locally in local.ts, but not exported
 "This is a local variable inside of local.ts"
@@ -89,10 +89,10 @@ This can cause "Module not found" errors when `--eval-file` is used with module
 files:
 
 ```sh
-deno repl --eval-file=https://jsr.io/@std/encoding/1.0.0/ascii85.ts
-error in --eval-file file https://jsr.io/@std/encoding/1.0.0/ascii85.ts. Uncaught TypeError: Module not found "file:///home/_validate_binary_like.ts".
+ende repl --eval-file=https://jsr.io/@ende/encoding/1.0.0/ascii85.ts
+error in --eval-file file https://jsr.io/@ende/encoding/1.0.0/ascii85.ts. Uncaught TypeError: Module not found "file:///home/_validate_binary_like.ts".
     at async <anonymous>:2:13
-Deno 1.45.3
+Ende 2026.10.17
 exit using ctrl+d or close()
 >
 ```
@@ -100,13 +100,13 @@ exit using ctrl+d or close()
 ## Tab completions
 
 Tab completions are a crucial feature for quick navigation in the REPL. After
-hitting `tab` key, Deno will now show a list of all possible completions.
+hitting `tab` key, Ende will now show a list of all possible completions.
 
 ```sh
-deno repl
-Deno 1.45.3
+ende repl
+Ende 2026.10.17
 exit using ctrl+d or close()
-> Deno.read
+> Ende.read
 readTextFile      readFile          readDirSync       readLinkSync      readAll           read
 readTextFileSync  readFileSync      readDir           readLink          readAllSync       readSync
 ```
@@ -153,12 +153,12 @@ readTextFileSync  readFileSync      readDir           readLink          readAllS
 | Meta-Y                | See Ctrl-Y                                                                                                                                                                                                                                            |
 | Ctrl-S                | Insert a new line                                                                                                                                                                                                                                     |
 
-## `DENO_REPL_HISTORY`
+## `ENDE_REPL_HISTORY`
 
-By default, Deno stores REPL history in a `deno_history.txt` file within the
-`DENO_DIR` directory. The location of your `DENO_DIR` directory and other
-resources, can be found by running the `deno info`.
+By default, Ende stores REPL history in an `ende_history.txt` file within the
+`ENDE_DIR` directory. The location of your `ENDE_DIR` directory and other
+resources, can be found by running the `ende info`.
 
-You can use `DENO_REPL_HISTORY` environmental variable to control where Deno
-stores the REPL history file. You can set it to an empty value, Deno will not
+You can use `ENDE_REPL_HISTORY` environmental variable to control where Ende
+stores the REPL history file. You can set it to an empty value, Ende will not
 store the history file.

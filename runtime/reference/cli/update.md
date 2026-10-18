@@ -1,36 +1,35 @@
 ---
 last_modified: 2025-07-01
-title: "deno update"
+title: "ende update"
 command: update
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno update"
+openGraphTitle: "ende update"
 description: "Update outdated dependencies with an interactive CLI"
 ---
 
-`deno update` updates dependencies in your
-[`deno.json`](/runtime/fundamentals/configuration/) or `package.json`. See
+`ende update` updates dependencies in your
+[`ende.json`](/runtime/fundamentals/configuration/). See
 [Modules](/runtime/fundamentals/modules/) for more about managing dependencies.
 
 ## Updating dependencies
 
-By default, the `update` subcommand will only update dependencies to
-semver-compatible versions (i.e. it won't update to a breaking version).
+By default, the `update` subcommand will only update dependencies within their
+version ranges:
 
 ```sh
-deno update
+ende update
 Updated 1 dependency:
- - jsr:@std/fmt 1.0.0 -> 1.0.3
+ - jsr:@ende/fmt ^2026.10.14 -> ^2026.10.15
 ```
 
-To update to the latest versions (regardless of whether it's semver compatible),
-pass the `--latest` flag.
+To update to the latest versions regardless of the ranges, pass the `--latest`
+flag:
 
 ```sh
-deno update --latest
-Updated 3 dependencies:
- - jsr:@std/async 1.0.1 -> 1.0.8
- - jsr:@std/fmt   1.0.0 -> 1.0.3
- - npm:chalk      4.1.2 -> 5.3.0
+ende update --latest
+Updated 2 dependencies:
+ - jsr:@ende/fmt  ^2026.10.14 -> ^2026.10.15
+ - jsr:@ende/path  2026.10.14 ->  2026.10.15
 ```
 
 ## Selecting packages
@@ -38,21 +37,15 @@ Updated 3 dependencies:
 The `update` subcommand also supports selecting which packages to operate on.
 
 ```sh
-deno update --latest chalk
-Updated 1 dependency:
- - npm:chalk 4.1.2 -> 5.3.0
+ende update --latest @ende/path
 ```
 
 Multiple selectors can be passed, and wildcards (`*`) or exclusions (`!`) are
-also supported.
-
-For instance, to update all packages with the `@std` scope, except for
-`@std/fmt`:
+also supported. For instance, to update all packages in the `@ende` scope,
+except for `@ende/fmt`:
 
 ```sh
-deno update --latest "@std/*" "!@std/fmt"
-Updated 1 dependency:
- - jsr:@std/async 1.0.1 -> 1.0.8
+ende update --latest "@ende/*" "!@ende/fmt"
 ```
 
 Note that if you use wildcards, you will probably need to surround the argument
@@ -63,10 +56,7 @@ in quotes to prevent the shell from trying to expand them.
 You can also select a specific version to update to by appending it after `@`.
 
 ```sh
-deno update chalk@5.2 @std/async@1.0.6
-Updated 2 dependencies:
- - jsr:@std/async 1.0.1 -> 1.0.6
- - npm:chalk      4.1.2 -> 5.2.0
+ende update @ende/path@2026.10.15
 ```
 
 ## Workspaces
@@ -76,7 +66,7 @@ workspace member.
 
 For instance, given a workspace:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": ["./member-a", "./member-b"]
 }
@@ -85,16 +75,16 @@ For instance, given a workspace:
 Running
 
 ```sh
-deno update
+ende update
 ```
 
 from the `./member-a` directory will only update dependencies listed in
-`./member-a/deno.json` or `./member-a/package.json`.
+`./member-a/ende.json`.
 
 To include all workspace members, pass the `--recursive` flag (the `-r`
 shorthand is also accepted).
 
 ```sh
-deno update --recursive
-deno update --latest -r
+ende update --recursive
+ende update --latest -r
 ```

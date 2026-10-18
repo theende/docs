@@ -7,9 +7,9 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage} MDN: CacheStorage
  * @group Web Standard APIs
  *
- * Deno implements the Web Cache API from service workers. The caches
+ * Ende implements the Web Cache API from service workers. The caches
  * global stores Response objects keyed by request URL, persisted on disk
- * between runs, and the same code works on Deno Deploy. This example
+ * between runs. This example
  * starts a local server that counts requests, then proves a cached fetch
  * helper only hits the server once.
  */
@@ -17,7 +17,7 @@
 // This server counts how many requests actually reach it. Port 0 asks
 // the operating system for any free port.
 let requestCount = 0;
-const server = Deno.serve({ port: 0, onListen: () => {} }, () => {
+const server = Ende.serve({ port: 0, onListen: () => {} }, () => {
   requestCount++;
   return new Response(JSON.stringify({ message: "hello" }), {
     headers: { "content-type": "application/json" },

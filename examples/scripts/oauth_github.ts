@@ -14,8 +14,8 @@
  * then set GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET.
  */
 
-const clientId = Deno.env.get("GITHUB_CLIENT_ID")!;
-const clientSecret = Deno.env.get("GITHUB_CLIENT_SECRET")!;
+const clientId = Ende.env.get("GITHUB_CLIENT_ID")!;
+const clientSecret = Ende.env.get("GITHUB_CLIENT_SECRET")!;
 const redirectUri = "http://localhost:8000/callback";
 
 async function handler(req: Request): Promise<Response> {
@@ -58,7 +58,7 @@ async function handler(req: Request): Promise<Response> {
     const userRes = await fetch("https://api.github.com/user", {
       headers: {
         authorization: `Bearer ${access_token}`,
-        "user-agent": "deno-oauth-example",
+        "user-agent": "ende-oauth-example",
       },
     });
     const user = await userRes.json();
@@ -68,4 +68,4 @@ async function handler(req: Request): Promise<Response> {
   return new Response("Not found", { status: 404 });
 }
 
-Deno.serve(handler);
+Ende.serve(handler);

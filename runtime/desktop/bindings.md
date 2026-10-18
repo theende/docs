@@ -1,26 +1,21 @@
 ---
 last_modified: 2026-06-25
 title: "Bindings"
-description: "Call Deno-side functions from webview JavaScript via win.bind(): type-safe RPC over in-process channels, encoded at the boundary with no cross-process round-trip."
+description: "Call Ende-side functions from webview JavaScript via win.bind(): type-safe RPC over in-process channels, encoded at the boundary with no cross-process round-trip."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-`win.bind(name, handler)` exposes a Deno-side function to the webview. From the
+`win.bind(name, handler)` exposes an Ende-side function to the webview. From the
 webview, call it as `bindings.<name>(args)`, and the call returns a `Promise`
 that resolves with the handler's return value.
 
-```ts title="Deno side"
+```ts title="Ende side"
 win.bind("readSettings", async () => {
-  const text = await Deno.readTextFile("settings.json");
+  const text = await Ende.readTextFile("settings.json");
   return JSON.parse(text);
 });
 
 win.bind("saveSettings", async (settings) => {
-  await Deno.writeTextFile("settings.json", JSON.stringify(settings, null, 2));
+  await Ende.writeTextFile("settings.json", JSON.stringify(settings, null, 2));
 });
 ```
 
@@ -32,7 +27,7 @@ await bindings.saveSettings(settings);
 
 ## How it works
 
-Bindings are **not** IPC. The Deno runtime and the rendering backend run as
+Bindings are **not** IPC. The Ende runtime and the rendering backend run as
 threads / processes inside the same address space (CEF) or coordinated process
 group (WebView). Calls go through in-process channels, and the backend
 dispatches them from its run loop.
@@ -62,7 +57,7 @@ you call it (the call rejects because no such binding is registered).
 ## Argument and return value semantics
 
 Arguments and return values are encoded as JSON as they cross between the
-webview and the Deno runtime. This means:
+webview and the Ende runtime. This means:
 
 - Plain objects, arrays, strings, numbers, booleans, and `null`: passed through
   as-is.
@@ -102,7 +97,7 @@ webview-side call to reject:
 
 ```ts
 win.bind("readFile", async (path) => {
-  return await Deno.readTextFile(path);
+  return await Ende.readTextFile(path);
 });
 ```
 
@@ -127,13 +122,13 @@ Removes the binding. Subsequent `bindings.readSettings()` calls reject.
 
 ## Permissions
 
-Bindings run inside the Deno runtime, so they inherit the process's permissions.
-A binding that calls [`Deno.readTextFile`](/api/deno/~/Deno.readTextFile)
+Bindings run inside the Ende runtime, so they inherit the process's permissions.
+A binding that calls [`Ende.readTextFile`](/api/ende/~/Ende.readTextFile/)
 requires `--allow-read` to have been granted at startup. The webview cannot
 escalate the runtime's permissions through bindings.
 
 For desktop apps you typically run with broad permissions baked into the
-compiled binary (`deno desktop` does not currently enforce a separate permission
+compiled binary (`ende desktop` does not currently enforce a separate permission
 prompt at runtime). If you expose bindings that act on the filesystem or
 network, validate inputs as carefully as you would in any trust-boundary code.
 
@@ -143,21 +138,21 @@ Bindings are per-window. A binding registered on `winA` is not callable from
 `winB`'s webview. To share, register on each window:
 
 ```ts
-function bindShared(win: Deno.BrowserWindow) {
+function bindShared(win: Ende.BrowserWindow) {
   win.bind("now", () => Date.now());
   win.bind("readSettings", readSettings);
 }
 
-const main = new Deno.BrowserWindow(); // adopts the startup window
+const main = new Ende.BrowserWindow(); // adopts the startup window
 bindShared(main);
 
-const settings = new Deno.BrowserWindow();
+const settings = new Ende.BrowserWindow();
 bindShared(settings);
 ```
 
 ## Type safety
 
-There is no built-in type bridge between the Deno side's `win.bind()` and the
+There is no built-in type bridge between the Ende side's `win.bind()` and the
 webview side's `bindings.<name>()`. The two sides are separate JS realms.
 
 A small shared declaration file gives you both ends:
@@ -179,17 +174,17 @@ export interface Settings {
 }
 ```
 
-Reference it from the webview's `tsconfig` / Deno project config and use the
+Reference it from the webview's `tsconfig` / Ende project config and use the
 same `Bindings` interface to type-check your `win.bind` calls. Mismatches
 between the registration and the declaration will be caught at compile time on
-the Deno side.
+the Ende side.
 
 ## Migrating from Electron
 
 If you are coming from Electron's `ipcMain.handle('channel', handler)` /
 `ipcRenderer.invoke('channel', ...)`, the mental model is identical:
 
-| Electron                                            | `deno desktop`                                |
+| Electron                                            | `ende desktop`                                |
 | --------------------------------------------------- | --------------------------------------------- |
 | `ipcMain.handle('channel', (e, ...args) => result)` | `win.bind('channel', (...args) => result)`    |
 | `ipcRenderer.invoke('channel', ...args)`            | `bindings.channel(...args)`                   |

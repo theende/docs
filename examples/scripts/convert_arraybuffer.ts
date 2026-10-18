@@ -45,9 +45,3 @@ console.log(blob.size); // 5
 // with explicit endianness.
 const view = new DataView(buffer);
 console.log(view.getUint8(0)); // 72
-
-// When working with Node.js APIs, Buffer.from creates a Buffer viewing
-// the same memory, just like Uint8Array does.
-import { Buffer } from "node:buffer";
-const nodeBuffer = Buffer.from(buffer);
-console.log(nodeBuffer.toString("utf8")); // Hello

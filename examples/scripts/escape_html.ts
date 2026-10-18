@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/html/doc/~/escape} Doc: @std/html escape
+ * @resource {https://jsr.io/@ende/html/doc/~/escape} Doc: @ende/html escape
  * @resource {https://owasp.org/www-community/attacks/xss/} OWASP: Cross Site Scripting
  * @group Web Standard APIs
  *
@@ -11,7 +11,7 @@
  * cross-site scripting. The standard library escapes the five significant
  * characters for you. This example shows escaping and unescaping.
  */
-import { escape, unescape } from "jsr:@std/html/entities";
+import { escape, unescape } from "jsr:@ende/html/entities";
 
 // Escape replaces the characters that carry meaning in HTML with their
 // entity equivalents.

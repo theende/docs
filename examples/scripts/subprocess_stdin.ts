@@ -3,8 +3,8 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-run <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.Command} Doc: Deno.Command
- * @resource {https://docs.deno.com/examples/subprocesses_spawn/} Example: Subprocesses: Spawning
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.Command} Doc: Ende.Command
+ * @resource {https://docs.ende.sh/examples/subprocesses_spawn/} Example: Subprocesses: Spawning
  * @group System
  *
  * Many command line tools read their input from stdin. To drive such a tool
@@ -15,7 +15,7 @@
 // Setting stdin to "piped" makes the child's stdin available as a web
 // standard writable stream. The stdout is piped as well so the result can
 // be collected.
-const sortCommand = new Deno.Command("sort", {
+const sortCommand = new Ende.Command("sort", {
   stdin: "piped",
   stdout: "piped",
 });
@@ -40,11 +40,11 @@ console.log(sorted.trim().split("\n")); // [ "apple", "banana", "cherry" ]
 await sortProcess.status;
 
 // When the input already exists as a stream or an iterable, skip the manual
-// writer and pipe it into stdin in one shot. Deno.spawn is the shorthand
+// writer and pipe it into stdin in one shot. Ende.spawn is the shorthand
 // for spawning: command, arguments, options. ReadableStream.from turns any
 // iterable into a stream, and pipeTo closes the child's stdin when the
 // stream ends.
-const catProcess = Deno.spawn("cat", [], {
+const catProcess = Ende.spawn("cat", [], {
   stdin: "piped",
   stdout: "piped",
 });

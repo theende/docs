@@ -1,12 +1,12 @@
 ---
 last_modified: 2025-04-03
 title: "Better debugging with the console API"
-description: "An in-depth guide to advanced console debugging in Deno. Learn about console.table, timers, counters, tracers, and how to leverage the full console API beyond basic logging for better debugging workflows."
+description: "An in-depth guide to advanced console debugging in Ende. Learn about console.table, timers, counters, tracers, and how to leverage the full console API beyond basic logging for better debugging workflows."
 url: /examples/debugging_with_console_tutorial/
 ---
 
 Some of the console API is probably muscle memory for web developers, but there
-is so much more than just `console.log()` for you to use. Deno has great support
+is so much more than just `console.log()` for you to use. Ende has great support
 for this API, so whether you’re writing JavaScript for the browser of for the
 server it’s worth learning about these helpful utilities.
 
@@ -183,7 +183,7 @@ Trace
 
 There’s more to explore, but these handy methods can give your JavaScript
 debugging a boost and they are ready and waiting for you to use right in your
-browser or in your Deno application.
+browser or in your Ende application.
 
-Take a look at [console support](/api/web/~/Console) in the API Reference docs.
+Take a look at [console support](/api/web/~/Console/) in the API Reference docs.
 for more.

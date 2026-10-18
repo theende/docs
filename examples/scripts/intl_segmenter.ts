@@ -18,11 +18,11 @@
 // Word segmentation yields words and the separators between them. The
 // isWordLike flag filters out spaces and punctuation.
 const wordSegmenter = new Intl.Segmenter("en", { granularity: "word" });
-const text = "Deno ships with web standard APIs. Try Intl.Segmenter!";
+const text = "Ende ships with web standard APIs. Try Intl.Segmenter!";
 const words = [...wordSegmenter.segment(text)]
   .filter((segment) => segment.isWordLike)
   .map((segment) => segment.segment);
-console.log(words.join("|")); // Deno|ships|with|web|standard|APIs|Try|Intl|Segmenter
+console.log(words.join("|")); // Ende|ships|with|web|standard|APIs|Try|Intl|Segmenter
 console.log(words.length); // 9
 
 // Word segmentation also works for languages without spaces, where
@@ -38,7 +38,7 @@ console.log(japaneseWords.join("|")); // デ|ノ|は|安全|です
 const sentenceSegmenter = new Intl.Segmenter("en", {
   granularity: "sentence",
 });
-const prose = "Deno is secure by default. It needs permission flags. Try it!";
+const prose = "Ende is secure by default. It needs permission flags. Try it!";
 const sentences = [...sentenceSegmenter.segment(prose)]
   .map((segment) => segment.segment.trim());
 console.log(sentences.length); // 3

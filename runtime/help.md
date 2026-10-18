@@ -1,30 +1,30 @@
 ---
 last_modified: 2025-06-19
 title: "Where to get help"
-description: "Guide to getting help with Deno. Find community resources, support channels, discussion forums, and how to engage with the Deno community for troubleshooting and assistance."
+description: "Guide to getting help with Ende. Find community resources, support channels, discussion forums, and how to engage with the Ende community for troubleshooting and assistance."
 oldUrl: /runtime/manual/help/
 ---
 
-Stuck? Lost? Get Help from the Deno Community.
+Stuck? Lost? Get Help from the Ende Community.
 
-## [Community Discord](https://discord.gg/deno)
+## [Community Discord](https://discord.gg/ende)
 
 Ask questions and chat with community members in real-time.
 
-## [Stack Overflow](https://stackoverflow.com/questions/tagged/deno)
+## [Stack Overflow](https://stackoverflow.com/questions/tagged/ende)
 
 Stack Overflow is a popular forum to ask code-level questions or if you're stuck
 with a specific error.
-[Ask your own!](https://stackoverflow.com/questions/ask?tags=deno)
+[Ask your own!](https://stackoverflow.com/questions/ask?tags=ende)
 
-## [DEV's Deno Community](https://dev.to/t/deno)
+## [DEV's Ende Community](https://dev.to/t/ende)
 
 A great place to find interesting articles about best practices, application
-architecture and new learnings. Post your articles with the tag `deno`.
+architecture and new learnings. Post your articles with the tag `ende`.
 
 ## Examples and Tutorials
 
-Deno provides a wide range of examples and tutorials that might address your
+Ende provides a wide range of examples and tutorials that might address your
 problem:
 
-- [Deno by Example](/examples/): Practical code snippets for common tasks
+- [Ende by Example](/examples/): Practical code snippets for common tasks

@@ -1,6 +1,6 @@
 ---
 last_modified: 2026-06-25
-title: "deno fmt"
+title: "ende fmt"
 oldUrl:
   - /runtime/tools/formatter/
   - /runtime/manual/tools/formatter/
@@ -8,11 +8,11 @@ oldUrl:
   - /runtime/reference/cli/formatter/
 command: fmt
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno fmt"
-description: "Format your code with Deno's built-in formatter"
+openGraphTitle: "ende fmt"
+description: "Format your code with Ende's built-in formatter"
 ---
 
-Deno ships with a built-in code formatter based on [dprint](https://dprint.dev/)
+Ende ships with a built-in code formatter based on [dprint](https://dprint.dev/)
 that auto-formats your code to a consistent style. For a broader overview, see
 [Linting and Formatting](/runtime/lint_and_format/).
 
@@ -21,13 +21,13 @@ that auto-formats your code to a consistent style. For a broader overview, see
 Format all supported files in the current directory:
 
 ```sh
-deno fmt
+ende fmt
 ```
 
 Format specific files or directories:
 
 ```sh
-deno fmt main.ts src/
+ende fmt main.ts src/
 ```
 
 ## Watch mode
@@ -35,7 +35,7 @@ deno fmt main.ts src/
 Automatically re-format files when they change:
 
 ```sh
-deno fmt --watch
+ende fmt --watch
 ```
 
 ## Check formatting in CI
@@ -44,14 +44,14 @@ Use `--check` to verify files are formatted without modifying them. The command
 exits with a non-zero status code if any files are unformatted:
 
 ```sh
-deno fmt --check
+ende fmt --check
 ```
 
 Add `--fail-fast` to stop on the first unformatted file instead of reporting all
 of them, which is useful in large codebases:
 
 ```sh
-deno fmt --check --fail-fast
+ende fmt --check --fail-fast
 ```
 
 ## Formatting stdin
@@ -59,14 +59,14 @@ deno fmt --check --fail-fast
 Format code piped through stdin — useful for editor integrations:
 
 ```sh
-cat main.ts | deno fmt -
+cat main.ts | ende fmt -
 ```
 
 ## Configuring the formatter
 
-Customize formatting options in your `deno.json`:
+Customize formatting options in your `ende.json`:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "fmt": {
     "useTabs": false,
@@ -79,29 +79,29 @@ Customize formatting options in your `deno.json`:
 }
 ```
 
-See the [Configuration](/runtime/reference/deno_json/#formatting) page for all
+See the [Configuration](/runtime/reference/ende_json/#formatting) page for all
 available options.
 
 ## Inheriting settings from .editorconfig
 
-`deno fmt` also reads [`.editorconfig`](https://editorconfig.org/) files and
+`ende fmt` also reads [`.editorconfig`](https://editorconfig.org/) files and
 uses them to fill in any formatting option you have not set elsewhere. The
 precedence, from highest to lowest, is:
 
 1. CLI flags (`--indent-width`, `--use-tabs`, and so on)
-2. The `fmt` block in `deno.json`
+2. The `fmt` block in `ende.json`
 3. `.editorconfig`
 4. Built-in defaults
 
 So `.editorconfig` only supplies values you have not already configured through
-a flag or `deno.json`. Properties such as `indent_style`, `indent_size`, and
-`max_line_length` map onto the corresponding `deno fmt` options.
+a flag or `ende.json`. Properties such as `indent_style`, `indent_size`, and
+`max_line_length` map onto the corresponding `ende fmt` options.
 
 ## Including and excluding files
 
-Specify which files to format in `deno.json`:
+Specify which files to format in `ende.json`:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "fmt": {
     "include": ["src/"],
@@ -113,12 +113,12 @@ Specify which files to format in `deno.json`:
 You can also exclude files from the command line:
 
 ```sh
-deno fmt --ignore=dist/,build/
+ende fmt --ignore=dist/,build/
 ```
 
 ## Supported file types
 
-<!-- This list needs to be updated along with https://github.com/denoland/deno/blob/main/cli/tools/fmt.rs -->
+<!-- This list needs to be updated along with https://github.com/theende/ende/blob/primary/cli/tools/fmt.rs -->
 
 | File Type            | Extension                                              | Notes                                                                                  |
 | -------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------- |
@@ -148,7 +148,7 @@ deno fmt --ignore=dist/,build/
 [Vento]: https://github.com/ventojs/vento
 
 > [!NOTE]
-> **`deno fmt` can format code snippets in Markdown files.** Snippets must be
+> **`ende fmt` can format code snippets in Markdown files.** Snippets must be
 > enclosed in triple backticks and have a language attribute.
 
 The markup formatters (HTML, XML, SVG, and the `--unstable-component` formats)

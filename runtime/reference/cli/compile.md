@@ -1,75 +1,34 @@
 ---
 last_modified: 2026-08-06
-title: "deno compile"
+title: "ende compile"
 oldUrl:
   - /runtime/manual/tools/compile/
   - /runtime/manual/tools/compiler/
   - /runtime/reference/cli/compiler/
 command: compile
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno compile"
+openGraphTitle: "ende compile"
 description: "Compile your code into a standalone executable"
 ---
 
 ## Flags
 
-As with [`deno install`](/runtime/reference/cli/install/), the runtime flags
+As with [`ende install`](/runtime/reference/cli/install/), the runtime flags
 used to execute the script must be specified at compilation time. This includes
 permission flags.
 
 ```sh
-deno compile --allow-read --allow-net jsr:@std/http/file-server
+ende compile --allow-read --allow-net jsr:@ende/http/file-server
 ```
 
 [Script arguments](/runtime/run/#passing-script-arguments) can be partially
 embedded.
 
 ```sh
-deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
+ende compile --allow-read --allow-net jsr:@ende/http/file-server -p 8080
 
 ./file_server --help
 ```
-
-## Framework detection
-
-Starting in Deno 2.8, `deno compile .` (or `deno compile <directory>`) detects
-common web frameworks and produces an entrypoint that knows how to start them.
-The detected build script is run first, so the compiled binary always contains a
-fresh build.
-
-Supported frameworks:
-
-- Next.js
-- Astro
-- Fresh (1.x and 2.x)
-- Remix
-- React Router
-- SvelteKit
-- Nuxt
-- SolidStart
-- TanStack Start
-- Vite (SSR, plus SPA/MPA projects served as static output)
-
-```sh
-# In a Next.js / Astro / Fresh / React Router / etc. project
-deno compile .
-
-# Or pointing at a specific app directory
-deno compile ./apps/web
-```
-
-Generated entrypoints use `import.meta.dirname` so framework asset paths resolve
-correctly against the [virtual filesystem](#including-data-files-or-directories)
-inside the compiled binary.
-
-React Router projects must build successfully under Deno before they can be
-compiled. Because React Router's default server entry targets Node.js, add a Web
-Streams-compatible `app/entry.server.tsx` when building with Deno. See the
-[React Router desktop framework notes](/runtime/desktop/frameworks/#react-router)
-for an example.
-
-If the project doesn't match any supported framework, `deno compile` will error
-out.
 
 ## Watch mode
 
@@ -77,14 +36,14 @@ Pass `--watch` to rebuild the executable whenever a file in the compile graph
 changes:
 
 ```sh
-deno compile --watch main.ts
+ende compile --watch main.ts
 ```
 
 Use `--watch-exclude` to keep specific paths from triggering a rebuild, and
 `--no-clear-screen` to preserve the terminal output between rebuilds:
 
 ```sh
-deno compile --watch --watch-exclude=./dist --no-clear-screen main.ts
+ende compile --watch --watch-exclude=./dist --no-clear-screen main.ts
 ```
 
 ## Cross Compilation
@@ -93,15 +52,15 @@ You can cross-compile binaries for other platforms by using the `--target` flag.
 
 ```
 # Cross compile for Apple Silicon
-deno compile --target aarch64-apple-darwin main.ts
+ende compile --target aarch64-apple-darwin main.ts
 
 # Cross compile for Windows with an icon
-deno compile --target x86_64-pc-windows-msvc --icon ./icon.ico main.ts
+ende compile --target x86_64-pc-windows-msvc --icon ./icon.ico main.ts
 ```
 
 ### Supported Targets
 
-Deno supports cross compiling to all targets regardless of the host platform.
+Ende supports cross compiling to all targets regardless of the host platform.
 
 | OS      | Architecture | Target                      |
 | ------- | ------------ | --------------------------- |
@@ -112,45 +71,42 @@ Deno supports cross compiling to all targets regardless of the host platform.
 | Linux   | x86_64       | `x86_64-unknown-linux-gnu`  |
 | Linux   | ARM64        | `aarch64-unknown-linux-gnu` |
 
-`aarch64-pc-windows-msvc` (Windows on ARM) is supported starting in Deno 2.9.3.
+`aarch64-pc-windows-msvc` (Windows on ARM) is supported .
 
-## The denort binary
+## The endert binary
 
-`deno compile` embeds your program into `denort` ("Deno runtime"): a stripped
-build of Deno that contains only what's needed to run a compiled program, with
-none of the tooling subcommands. Using `denort` as the base instead of the full
-`deno` binary is what keeps compiled executables smaller.
+`ende compile` embeds your program into `endert` ("Ende runtime"): a stripped
+build of Ende that contains only what's needed to run a compiled program, with
+none of the tooling subcommands. Using `endert` as the base instead of the full
+`ende` binary is what keeps compiled executables smaller.
 
-The first time you compile for a given Deno version and target, Deno downloads
-the matching `denort-<target>.zip` from `dl.deno.land` and caches it in
-`DENO_DIR`. This is also how cross-compilation works: compiling with `--target`
-fetches that platform's `denort`. Subsequent compiles reuse the cached binary
+The first time you compile for a given Ende version and target, Ende downloads
+the matching `endert-<target>.zip` from `dl.ende.sh` and caches it in
+`ENDE_DIR`. This is also how cross-compilation works: compiling with `--target`
+fetches that platform's `endert`. Subsequent compiles reuse the cached binary
 and work offline.
 
-To use a custom or locally built runtime as the base, set the `DENORT_BIN`
-environment variable to its path. Deno also picks up a `denort` binary placed
-next to the `deno` executable.
+To use a custom or locally built runtime as the base, set the `ENDERT_BIN`
+environment variable to its path. Ende also picks up a `endert` binary placed
+next to the `ende` executable.
 
 ## Choosing a JavaScript engine
 
 > [!CAUTION]
-> `--engine quickjs` is experimental and subject to change. It landed after Deno
-> 2.9.4, so it is available in
-> [canary builds](/runtime/reference/cli/upgrade/#canary-build) and in later
-> releases.
+> `--engine quickjs` is experimental and subject to change.
 
 Compiled binaries run on V8 by default. The `--engine` flag lets you build
 against QuickJS instead, which produces a smaller executable:
 
 ```sh
 # Default, same as omitting the flag
-deno compile --engine v8 main.ts
+ende compile --engine v8 main.ts
 
 # Build a binary that runs on QuickJS
-deno compile --engine quickjs main.ts
+ende compile --engine quickjs main.ts
 ```
 
-The same flag is available on [`deno desktop`](/runtime/desktop/distribution/),
+The same flag is available on [`ende desktop`](/runtime/desktop/distribution/),
 where it selects the engine embedded in the app's runtime library.
 
 Trade-offs to weigh before shipping a QuickJS binary:
@@ -162,13 +118,13 @@ Trade-offs to weigh before shipping a QuickJS binary:
 - **Maturity.** The backend is experimental; behavior differences from V8 are
   possible, so test your program with the engine you intend to ship.
 
-Each engine has its own prebuilt runtime: with `--engine quickjs`, Deno
-downloads `denort-quickjs-<target>.zip` (or `libdenort-quickjs-<target>.zip` for
-`deno desktop`) instead of the default `denort-<target>.zip`. Both variants are
+Each engine has its own prebuilt runtime: with `--engine quickjs`, Ende
+downloads `endert-quickjs-<target>.zip` (or `libendert-quickjs-<target>.zip` for
+`ende desktop`) instead of the default `endert-<target>.zip`. Both variants are
 published for every [supported target](#supported-targets), so cross-compilation
-works the same way. If you override the base runtime with `DENORT_BIN` (or a
-`denort` binary next to `deno`), that binary is used as-is: `--engine` is then
-ignored and Deno prints a warning.
+works the same way. If you override the base runtime with `ENDERT_BIN` (or a
+`endert` binary next to `ende`), that binary is used as-is: `--engine` is then
+ignored and Ende prints a warning.
 
 ## Icons
 
@@ -176,10 +132,10 @@ It is possible to add an icon to the executable by using the `--icon` flag when
 targeting Windows. The icon must be in the `.ico` format.
 
 ```
-deno compile --icon icon.ico main.ts
+ende compile --icon icon.ico main.ts
 
 # Cross compilation with icon
-deno compile --target x86_64-pc-windows-msvc --icon ./icon.ico main.ts
+ende compile --target x86_64-pc-windows-msvc --icon ./icon.ico main.ts
 ```
 
 ## Dynamic Imports
@@ -204,16 +160,16 @@ To include non-statically analyzable dynamic imports, specify an
 `--include <path>` flag.
 
 ```sh
-deno compile --include calc.ts --include better_calc.ts main.ts
+ende compile --include calc.ts --include better_calc.ts main.ts
 ```
 
 ## Including Data Files or Directories
 
-Starting in Deno 2.1, you can include files or directories in the executable by
-specifying them via the `--include <path>` flag.
+You can include files or directories in the executable by specifying them via
+the `--include <path>` flag.
 
 ```sh
-deno compile --include names.csv --include data main.ts
+ende compile --include names.csv --include data main.ts
 ```
 
 Then read the file relative to the directory path of the current module via
@@ -221,8 +177,8 @@ Then read the file relative to the directory path of the current module via
 
 ```ts
 // main.ts
-const names = Deno.readTextFileSync(import.meta.dirname + "/names.csv");
-const dataFiles = Deno.readDirSync(import.meta.dirname + "/data");
+const names = Ende.readTextFileSync(import.meta.dirname + "/names.csv");
+const dataFiles = Ende.readDirSync(import.meta.dirname + "/data");
 
 // use names and dataFiles here
 ```
@@ -234,18 +190,18 @@ files.
 resolves and transpiles them. To embed files exactly as they are, without any
 module resolution, use `--include-as-is` instead. This is the right choice for
 pre-built frontend bundles (for example Vite or webpack output) that are already
-processed and would fail to resolve as Deno modules:
+processed and would fail to resolve as Ende modules:
 
 ```sh
-deno compile --include-as-is ./dist main.ts
+ende compile --include-as-is ./dist main.ts
 ```
 
-### Configuring `include` / `exclude` in `deno.json`
+### Configuring `include` / `exclude` in `ende.json`
 
-The `--include` and `--exclude` paths can be set declaratively in `deno.json` so
-you don't have to repeat them on every `deno compile` invocation:
+The `--include` and `--exclude` paths can be set declaratively in `ende.json` so
+you don't have to repeat them on every `ende compile` invocation:
 
-```jsonc title="deno.json"
+```jsonc title="ende.json"
 {
   "compile": {
     "include": ["names.csv", "data", "worker.ts"],
@@ -255,8 +211,8 @@ you don't have to repeat them on every `deno compile` invocation:
 ```
 
 CLI flags are merged with the config: `--include` and `--exclude` add to the
-lists in `deno.json` rather than replacing them. See the
-[Compile config](/runtime/reference/deno_json/#compile-config) section in the
+lists in `ende.json` rather than replacing them. See the
+[Compile config](/runtime/reference/ende_json/#compile-config) section in the
 configuration guide for more details, including how to declare `permissions` on
 the same block.
 
@@ -269,7 +225,7 @@ executable by default. There are two ways to include workers:
 1. Use the `--include <path>` flag to include the worker code.
 
 ```sh
-deno compile --include worker.ts main.ts
+ende compile --include worker.ts main.ts
 ```
 
 2. Import worker module using a statically analyzable import.
@@ -280,65 +236,8 @@ import "./worker.ts";
 ```
 
 ```sh
-deno compile main.ts
+ende compile main.ts
 ```
-
-## Bundling dependencies
-
-> [!CAUTION]
-> `--bundle` is experimental and subject to change. Some dynamic patterns are
-> not yet supported (see [Limitations](#limitations) below).
-
-By default, `deno compile` embeds the entire resolved `node_modules` tree in the
-executable. For projects with many npm dependencies this can make binaries large
-and slow to start. The `--bundle` flag instead runs your entrypoint through the
-bundler before embedding, so only the code your program actually reaches ends up
-in the binary.
-
-```sh
-deno compile --bundle main.ts
-```
-
-For a pure-ESM dependency tree, tree-shaking removes everything unused and the
-npm payload is dropped entirely, producing a much smaller binary. When a
-CommonJS package or a native addon (`.node`) is reached, the relevant packages
-are embedded so they keep working at runtime, but unreached packages are still
-left out.
-
-`--bundle` understands several real-world patterns automatically:
-
-- **CommonJS and native addons** — CJS dependencies and `.node` native addons
-  are detected and the packages that provide them are embedded.
-- **Workers** — `new Worker(new URL("./worker.ts", import.meta.url), ...)` calls
-  are discovered, each worker is bundled separately and embedded alongside the
-  main bundle.
-- **`package.json` reads** — packages that read their own `package.json` at
-  runtime (for example to report a version) have it included automatically.
-
-### Minifying the bundle
-
-Combine `--bundle` with `--minify` to minify the bundled output. This reduces
-both the embedded bundle size and runtime memory use, at the cost of less
-readable stack traces.
-
-```sh
-deno compile --bundle --minify main.ts
-```
-
-`--minify` is only meaningful together with `--bundle`.
-
-### Limitations
-
-Because bundling relies on statically analyzing your code, patterns that can't
-be traced are dropped from the binary:
-
-- Dynamic `require()` / `import()` of specifiers that aren't string literals.
-- Workers spawned with computed URLs, or spawned from transitive dependencies
-  rather than your own source.
-
-If your program relies on these, either keep them statically analyzable, add the
-needed files with [`--include`](#including-data-files-or-directories), or
-compile without `--bundle`.
 
 ## Self-Extracting Executables
 
@@ -348,7 +247,7 @@ binary extracts all embedded files to disk on first run and uses real file
 system operations at runtime.
 
 ```sh
-deno compile --self-extracting main.ts
+ende compile --self-extracting main.ts
 ```
 
 This is useful for scenarios where code needs real files on disk, such as native
@@ -385,7 +284,7 @@ By default, on macOS, the compiled executable will be signed using an ad-hoc
 signature which is the equivalent of running `codesign -s -`:
 
 ```sh
-deno compile -o main main.ts
+ende compile -o main main.ts
 codesign --verify -vv ./main
 
 ./main: valid on disk
@@ -409,7 +308,7 @@ On Windows, the compiled executable can be signed using the `SignTool.exe`
 utility.
 
 ```sh
-deno compile -o main.exe main.ts
+ende compile -o main.exe main.ts
 signtool sign /fd SHA256 main.exe
 ```
 
@@ -420,17 +319,15 @@ storage persists across runs in the platform's application data directory
 (`%LOCALAPPDATA%` on Windows, `~/Library/Application Support` on macOS,
 `$XDG_DATA_HOME` on Linux):
 
-- [`localStorage`](/runtime/reference/web_platform_apis/#web-storage) and the
-  [Web Cache API](/api/web/~/Cache) read and write to that directory.
-- [`Deno.openKv()`](/api/deno/~/Deno.openKv) called without a path opens a
-  persistent database there instead of falling back to an in-memory one.
+[`localStorage`](/runtime/reference/web_platform_apis/#web-storage) and the
+[Web Cache API](/api/web/~/Cache/) read and write to that directory.
 
 Each compiled app gets its own location derived from its identity, so separate
 apps do not share storage. That identity comes from the `--app-name` flag, which
 is baked in at compile time and falls back to the output file name when omitted:
 
 ```sh
-deno compile --app-name my-app main.ts
+ende compile --app-name my-app main.ts
 ```
 
 Because the name (not the module path) drives the directory, the store stays

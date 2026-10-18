@@ -4,7 +4,7 @@
  * @tags cli
  * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication} MDN: HTTP authentication
- * @resource {https://jsr.io/@std/crypto/doc/timing-safe-equal} @std/crypto: timingSafeEqual
+ * @resource {https://jsr.io/@ende/crypto/doc/timing-safe-equal} @ende/crypto: timingSafeEqual
  * @group Network
  *
  * Basic authentication sends a username and password base64-encoded in the
@@ -13,7 +13,7 @@
  * the header and compares credentials in constant time.
  */
 
-import { timingSafeEqual } from "jsr:@std/crypto/timing-safe-equal";
+import { timingSafeEqual } from "jsr:@ende/crypto/timing-safe-equal";
 
 const USERNAME = "admin";
 const PASSWORD = "hunter2";
@@ -52,7 +52,7 @@ async function authorized(req: Request): Promise<boolean> {
   return userOk && passOk;
 }
 
-Deno.serve(async (req) => {
+Ende.serve(async (req) => {
   if (!(await authorized(req))) {
     // The www-authenticate header names the scheme and realm. Browsers
     // respond to it by showing a login dialog.

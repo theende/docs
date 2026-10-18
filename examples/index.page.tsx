@@ -3,7 +3,7 @@ import { slug } from "@ende/markdown/slug";
 import { featuredItems, sidebar } from "./_data.ts";
 import { loadExamples } from "./_lib/examples.ts";
 
-export const title = "Deno examples and tutorials";
+export const title = "Ende examples and tutorials";
 
 /** The first sentence of a description, skipping a leading "Warning: …" one. */
 function firstSentence(text: string | undefined): string | undefined {
@@ -48,7 +48,7 @@ export default async function ExamplesIndex() {
     <>
       <p>
         A collection of walkthrough tutorials, examples, videos and guides to
-        teach you about the Deno runtime and how to use it with your favorite
+        teach you about the Ende runtime and how to use it with your favorite
         tools.
       </p>
       <section>

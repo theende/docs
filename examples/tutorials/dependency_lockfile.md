@@ -1,40 +1,42 @@
 ---
 last_modified: 2026-06-12
-title: "Lock dependencies with deno.lock"
-description: "Use deno.lock for reproducible installs: what the lockfile records, reviewing lockfile diffs, frozen lockfiles for CI with --frozen and deno ci, and regenerating or relocating the lockfile."
+title: "Lock dependencies with ende.lock"
+description: "Use ende.lock for reproducible installs: what the lockfile records, reviewing lockfile diffs, frozen lockfiles for CI with --frozen-lockfile and ende ci, and regenerating or relocating the lockfile."
 url: /examples/dependency_lockfile_tutorial/
 ---
 
-`deno.lock` pins every dependency to an exact resolved version with an integrity
-hash, so every machine (and your CI) runs identical code. Deno creates and
-updates it automatically whenever a `deno.json` (or `package.json`) is present;
-your job is just to commit it and decide when it may change.
+`ende.lock` pins every dependency to an exact resolved version with an integrity
+hash, so every machine (and your CI) runs identical code. Ende creates and
+updates it automatically whenever an `ende.json` is present; your job is just to
+commit it and decide when it may change.
 
-## What deno.lock records
+## What ende.lock records
 
-Add a dependency (for example `deno add npm:chalk`) and Deno writes the lockfile
-alongside your config:
+Add a dependency (for example `ende add jsr:@ende/fmt@2026.10.14`) and Ende
+writes the lockfile alongside your config:
 
-```json title="deno.lock"
+```json title="ende.lock"
 {
   "version": "5",
   "specifiers": {
-    "npm:chalk@^5.6.2": "5.6.2"
+    "jsr:@ende/fmt@2026.10.14": "2026.10.14"
   },
-  "npm": {
-    "chalk@5.6.2": {
-      "integrity": "sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA=="
+  "jsr": {
+    "@ende/fmt@2026.10.14": {
+      "integrity": "8164455e7add9108748f336ac5ed1c604b14717ffeef0ccd1e196e47bfba8779"
     }
   },
   "workspace": {
-    "dependencies": ["npm:chalk@^5.6.2"]
+    "dependencies": [
+      "jsr:@ende/fmt@2026.10.14"
+    ]
   }
 }
 ```
 
-Each semver range from your config is mapped to one exact version, and each
-package gets a hash that Deno verifies on every install. Commit `deno.lock` to
-git; on other machines and in CI, [`deno ci`](/runtime/reference/cli/ci/) then
+Each version range from your config is mapped to one exact version, and each
+package gets a hash that Ende verifies on every install. Commit `ende.lock` to
+git; on other machines and in CI, [`ende ci`](/runtime/reference/cli/ci/) then
 installs exactly what the lockfile says.
 
 ## Reviewing lockfile diffs
@@ -43,24 +45,28 @@ A version bump shows up as a changed resolution plus a changed hash:
 
 ```diff
    "specifiers": {
--    "npm:ms@2.1.2": "2.1.2"
-+    "npm:ms@^2.1.3": "2.1.3"
+-    "jsr:@ende/fmt@2026.10.14": "2026.10.14"
++    "jsr:@ende/fmt@^2026.10.15": "2026.10.15"
    },
-   "npm": {
--    "ms@2.1.2": {
--      "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4Xqe..."
-+    "ms@2.1.3": {
-+      "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU..."
+   "jsr": {
+-    "@ende/fmt@2026.10.14": {
+-      "integrity": "8164455e7add9108748f336ac5ed1c604b14717ffeef0ccd1e196e47bfba8779"
++    "@ende/fmt@2026.10.15": {
++      "integrity": "a45abcdcb9fdd36ff050b539c724816be229661ac8b951eb09ea716890c9b334"
+     }
 ```
 
 A new dependency adds entries instead, including its transitive dependencies,
 listed under `dependencies`:
 
 ```diff
-   "npm": {
-+    "debug@4.4.3": {
-+      "integrity": "sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru...",
-+      "dependencies": ["ms"]
+   "jsr": {
++    "@ende/fs@2026.10.15": {
++      "integrity": "08f90fc65f2673817760baec63bfb58c94638a270749715a913219fcc83befc4",
++      "dependencies": [
++        "jsr:@ende/internal",
++        "jsr:@ende/path"
++      ]
 +    },
 ```
 
@@ -72,7 +78,7 @@ By default the lockfile is additive: new dependencies are recorded without
 complaint. In CI you usually want the opposite: fail if anything is not already
 locked:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "lock": {
     "frozen": true
@@ -80,42 +86,42 @@ locked:
 }
 ```
 
-The same is available ad hoc as the `--frozen` flag. With a frozen lockfile, any
-command that would modify `deno.lock` exits with an error showing the changes it
-wanted to make:
+The same is available ad hoc as the `--frozen-lockfile` flag. With a frozen
+lockfile, any command that would modify `ende.lock` exits with an error showing
+the changes it wanted to make:
 
 ```sh
-$ deno install
-error: The lockfile is out of date. Run `deno install --frozen=false`, or rerun with `--frozen=false` to update it.
+$ ende add jsr:@ende/path
+error: The lockfile is out of date. Run `ende install --frozen=false`, or rerun with `--frozen=false` to update it.
 changes:
- 4 | -    "npm:chalk@^5.6.2": "5.6.2"
- 4 | +    "npm:chalk@^5.6.2": "5.6.2",
- 5 | +    "npm:ms@^2.1.3": "2.1.3"
+13 | -      "jsr:@ende/fmt@^2026.10.15"
+13 | +      "jsr:@ende/fmt@^2026.10.15",
+14 | +      "jsr:@ende/path@^2026.10.15"
 ```
 
-[`deno ci`](/runtime/reference/cli/ci/) wraps the recommended CI flow: it
-requires `deno.lock`, removes any existing `node_modules`, installs strictly
-from the lockfile, and errors if the lockfile is missing or out of date.
+[`ende ci`](/runtime/reference/cli/ci/) wraps the recommended CI flow: it
+installs strictly from the lockfile, and errors if the lockfile is missing or
+out of date.
 
 ## Updating and regenerating
 
 To intentionally update dependencies, disable freezing for one command:
 
 ```sh
-deno install --frozen=false
+ende install --frozen=false
 ```
 
 Because the lockfile is additive, entries for removed dependencies can linger.
 To regenerate it from scratch, delete it and reinstall:
 
 ```sh
-rm deno.lock
-deno install
+rm ende.lock
+ende install
 ```
 
 ## Custom path or disabling
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "lock": { "path": "deps.lock" }
 }

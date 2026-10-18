@@ -22,11 +22,11 @@ console.log(new Date().toString());
 // Start the process with TZ set to pin the zone, for example to keep
 // timestamps in CI logs consistent or to reproduce a user's bug report:
 //
-//   TZ=Asia/Tokyo deno run main.ts
+//   TZ=Asia/Tokyo ende run main.ts
 //   Asia/Tokyo
 //   Thu Jun 11 2026 22:15:00 GMT+0900 (Japan Standard Time)
 //
-//   TZ=UTC deno run main.ts
+//   TZ=UTC ende run main.ts
 //   UTC
 
 // The Temporal API is the preferred way to work with zoned time. The

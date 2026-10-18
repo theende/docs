@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli
  * @run -R -E <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.env} Doc: Deno.env
- * @resource {https://docs.deno.com/api/deno/~/Deno.Command} Doc: Deno.Command
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.env} Doc: Ende.env
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.Command} Doc: Ende.Command
  * @group System
  *
  * Before spawning a tool like git or ffmpeg, it is useful to know whether
@@ -13,19 +13,19 @@
  */
 
 async function which(command: string): Promise<string | null> {
-  const PATH = Deno.env.get("PATH") ?? "";
+  const PATH = Ende.env.get("PATH") ?? "";
   // Windows separates entries with ";" and resolves extensions from
   // PATHEXT; this example covers the common case.
-  const separator = Deno.build.os === "windows" ? ";" : ":";
+  const separator = Ende.build.os === "windows" ? ";" : ":";
 
   for (const dir of PATH.split(separator)) {
     if (dir === "") continue;
     const candidate = `${dir}/${command}`;
     try {
-      const info = await Deno.stat(candidate);
+      const info = await Ende.stat(candidate);
       // On unix, check that some execute bit is set. Windows has no mode,
       // so existence is the best cheap signal.
-      const executable = Deno.build.os === "windows" ||
+      const executable = Ende.build.os === "windows" ||
         ((info.mode ?? 0) & 0o111) !== 0;
       if (info.isFile && executable) {
         return candidate;

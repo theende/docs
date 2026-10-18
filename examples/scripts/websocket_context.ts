@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.upgradeWebSocket} Doc: Deno.upgradeWebSocket
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.upgradeWebSocket} Doc: Ende.upgradeWebSocket
  * @resource {/examples/websocket_pubsub/} Example: WebSocket server: Broadcasting messages
  * @group Network
  *
@@ -21,11 +21,11 @@ interface Session {
 
 const sessions = new Map<WebSocket, Session>();
 
-Deno.serve((req) => {
+Ende.serve((req) => {
   if (req.headers.get("upgrade") !== "websocket") {
     return new Response("This endpoint expects a WebSocket", { status: 426 });
   }
-  const { socket, response } = Deno.upgradeWebSocket(req);
+  const { socket, response } = Ende.upgradeWebSocket(req);
 
   // Read the username from the connection URL, e.g. /?username=ada.
   const username = new URL(req.url).searchParams.get("username") ?? "guest";
@@ -58,6 +58,6 @@ Deno.serve((req) => {
 //   welcome, ada
 //   ada said: hi
 
-// Note that Deno's WebSocket upgrade does not negotiate per-message
+// Note that Ende's WebSocket upgrade does not negotiate per-message
 // compression; large payloads are sent as-is, so compress them yourself if
 // it matters.

@@ -68,7 +68,7 @@ new Request(url, {
 
 // Forms can also be sent with `fetch` by using a `FormData` object as the body.
 const formData = new FormData();
-formData.append("name", "Deno");
+formData.append("name", "Ende");
 formData.append("file", new Blob(["Hello, World!"]), "hello.txt");
 resp = await fetch("https://example.com", {
   method: "POST",

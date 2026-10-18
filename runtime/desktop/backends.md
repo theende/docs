@@ -4,14 +4,9 @@ title: "Backends"
 description: "Pick a rendering engine for your desktop app: bundled Chromium, the OS webview, or raw windowing. Tradeoffs and how to switch."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-`deno desktop` runs your app on top of one of several web rendering engines.
-`--backend` (or the `desktop.backend` field in `deno.json`) selects which engine
-your app embeds. If you don't choose one, `deno desktop` uses the **WebView**
+`ende desktop` runs your app on top of one of several web rendering engines.
+`--backend` (or the `desktop.backend` field in `ende.json`) selects which engine
+your app embeds. If you don't choose one, `ende desktop` uses the **WebView**
 backend.
 
 ## Available backends
@@ -19,7 +14,7 @@ backend.
 ### CEF
 
 ```sh
-deno desktop --backend cef main.ts
+ende desktop --backend cef main.ts
 ```
 
 **Bundled Chromium Embedded Framework.** The same engine that powers Chrome,
@@ -30,7 +25,7 @@ under `Contents/Frameworks/`.
 - Full web platform support, including modern CSS, ES modules, WebGPU, and
   WebRTC.
 - Largest binary size (~150 MB for the framework alone).
-- All Deno desktop features supported (DevTools, autoUpdate, tray, dock).
+- All Ende desktop features supported (DevTools, autoUpdate, tray, dock).
 
 Choose CEF when consistent rendering across platforms matters, or when you need
 a feature only Chromium ships (e.g. WebGPU on Linux).
@@ -38,7 +33,7 @@ a feature only Chromium ships (e.g. WebGPU on Linux).
 ### WebView (default)
 
 ```sh
-deno desktop --backend webview main.ts
+ende desktop --backend webview main.ts
 ```
 
 **The operating system's own webview**: WKWebView on macOS, WebView2 on Windows,
@@ -56,17 +51,17 @@ broadly-supported web features.
 
 ### Raw
 
-```jsonc title="deno.json"
+```jsonc title="ende.json"
 { "desktop": { "backend": "raw" } }
 ```
 
 **No web engine.** Provides window management, input events, clipboard, and the
-native API surface, but no webview, no [`Deno.serve()`](/api/deno/~/Deno.serve)
+native API surface, but no webview, no [`Ende.serve()`](/api/ende/~/Ende.serve/)
 auto-binding, and no `bindings.<name>()` proxy.
 
 Useful for apps that draw their own UI (WebGPU, Skia, custom rendering) or as a
 foundation for non-web desktop programs. The `raw` backend is selected through
-the `desktop.backend` field in `deno.json`; the `--backend` flag accepts only
+the `desktop.backend` field in `ende.json`; the `--backend` flag accepts only
 `cef` and `webview`. See [WebGPU rendering](/runtime/desktop/webgpu/) for a
 complete example of drawing to a window on this backend.
 
@@ -88,12 +83,12 @@ WebView without changes.
 
 To switch, change the config or pass the flag:
 
-```jsonc title="deno.json"
+```jsonc title="ende.json"
 { "desktop": { "backend": "webview" } }
 ```
 
 ```sh
-deno desktop --backend webview main.ts
+ende desktop --backend webview main.ts
 ```
 
 The `raw` backend has no webview, so any APIs that interact with web content
@@ -101,9 +96,9 @@ The `raw` backend has no webview, so any APIs that interact with web content
 
 ## How backends are obtained
 
-You do not build the rendering backend yourself. The Deno CLI downloads prebuilt
+You do not build the rendering backend yourself. The Ende CLI downloads prebuilt
 backend binaries automatically. Downloads are checksum-verified and cached under
-`<deno_dir>/`.
+`<ende_dir>/`.
 
 The first build for a new backend / target downloads the archive (a few hundred
 megabytes for CEF). Subsequent builds use the cache.

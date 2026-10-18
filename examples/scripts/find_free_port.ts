@@ -3,16 +3,16 @@
  * @difficulty beginner
  * @tags cli
  * @run -N <url>
- * @resource {https://jsr.io/@std/net/doc/get-available-port} @std/net: getAvailablePort
- * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Deno: serve
+ * @resource {https://jsr.io/@ende/net/doc/get-available-port} @ende/net: getAvailablePort
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.serve} Ende: serve
  * @group Network
  *
  * Test servers and helper processes should not fight over hardcoded ports.
- * The getAvailablePort function from @std/net asks the operating system for
- * a free port, and Deno.serve with port 0 does the same thing in one step.
+ * The getAvailablePort function from @ende/net asks the operating system for
+ * a free port, and Ende.serve with port 0 does the same thing in one step.
  */
 
-import { getAvailablePort } from "jsr:@std/net";
+import { getAvailablePort } from "jsr:@ende/net";
 
 // getAvailablePort binds port 0, reads the port the OS picked, and closes
 // the probe listener. Optionally pass { preferredPort: 8000 } to try a
@@ -20,17 +20,17 @@ import { getAvailablePort } from "jsr:@std/net";
 const port = getAvailablePort();
 console.log(port); // e.g. 61678
 
-const server = Deno.serve(
+const server = Ende.serve(
   { port, onListen: ({ port }) => console.log(`listening on ${port}`) },
   () => new Response("Hello from a random port\n"),
 );
 
 // Note there is a small race: between getAvailablePort returning and the
-// server starting, another process could grab the port. Asking Deno.serve
+// server starting, another process could grab the port. Asking Ende.serve
 // itself for port 0 has no such window, the listener that gets the random
 // port is the one you keep. Read the assigned port from server.addr.
 // In Node the same trick is server.listen(0) plus server.address().port.
-const server2 = Deno.serve(
+const server2 = Ende.serve(
   { port: 0, onListen: () => {} },
   () => new Response("Hello from port 0\n"),
 );

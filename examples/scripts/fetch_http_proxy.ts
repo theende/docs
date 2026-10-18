@@ -3,23 +3,23 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.createHttpClient} Doc: Deno.createHttpClient
- * @resource {/runtime/reference/env_variables/} Environment variables that Deno reads
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.createHttpClient} Doc: Ende.createHttpClient
+ * @resource {/runtime/reference/env_variables/} Environment variables that Ende reads
  * @group Network
  *
- * Deno honors the HTTP_PROXY, HTTPS_PROXY, and NO_PROXY environment
+ * Ende honors the HTTP_PROXY, HTTPS_PROXY, and NO_PROXY environment
  * variables by default, for both module downloads and fetch, with no code
  * changes. When one fetch call needs a different proxy than the rest of the
- * process, Deno.createHttpClient configures a proxy explicitly. This example
+ * process, Ende.createHttpClient configures a proxy explicitly. This example
  * starts a tiny logging proxy and routes a single fetch through it.
  */
 
 // A client talking to an HTTP proxy puts the absolute target URL in the
-// request line instead of just a path. Deno.serve exposes that URL as
+// request line instead of just a path. Ende.serve exposes that URL as
 // req.url, so forwarding it with fetch is enough to act as a basic proxy
 // for plain HTTP targets. A real proxy also implements the CONNECT method
 // to tunnel HTTPS traffic, which this handler does not.
-const proxy = Deno.serve({ port: 8080 }, async (req) => {
+const proxy = Ende.serve({ port: 8080 }, async (req) => {
   console.log("proxy saw:", req.method, req.url);
   const headers = new Headers(req.headers);
   headers.delete("host");
@@ -34,7 +34,7 @@ const proxy = Deno.serve({ port: 8080 }, async (req) => {
 // createHttpClient returns a client with its own connection settings.
 // Passing it through the client option of fetch routes only that call
 // through the proxy; every other fetch in the process is unaffected.
-const client = Deno.createHttpClient({
+const client = Ende.createHttpClient({
   proxy: { url: "http://localhost:8080/" },
 });
 
@@ -50,7 +50,7 @@ await proxy.shutdown();
 // The proxy logs the absolute URL it was asked for, which proves the
 // request went through it rather than straight to example.com:
 //
-//   deno run -N fetch_http_proxy.ts
+//   ende run -N fetch_http_proxy.ts
 //   Listening on http://0.0.0.0:8080/ (http://localhost:8080/)
 //   proxy saw: GET http://example.com/
 //   status: 200
@@ -59,5 +59,5 @@ await proxy.shutdown();
 // To proxy everything without touching code, set the environment variables
 // instead. NO_PROXY lists hosts that bypass the proxy:
 //
-//   HTTP_PROXY=http://localhost:8080 deno run -N main.ts
-//   NO_PROXY=localhost,127.0.0.1 HTTPS_PROXY=http://proxy.example.com:3128 deno run -N main.ts
+//   HTTP_PROXY=http://localhost:8080 ende run -N main.ts
+//   NO_PROXY=localhost,127.0.0.1 HTTPS_PROXY=http://proxy.example.com:3128 ende run -N main.ts

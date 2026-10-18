@@ -3,38 +3,28 @@
  * @difficulty beginner
  * @tags cli
  * @run -R -W <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.copyFile} Doc: Deno.copyFile
- * @resource {https://docs.deno.com/api/node/fs/} Doc: node:fs
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.copyFile} Doc: Ende.copyFile
  * @group File System
  *
- * Copying a file is a single call in Deno. This example copies a file, a
- * file into a directory tree, and shows the Node.js API equivalents.
+ * Copying a file is a single call in Ende. This example copies a file and a
+ * file into a directory tree.
  */
 
 // We set up a temporary directory with a small file to copy.
-const dir = await Deno.makeTempDir();
-await Deno.writeTextFile(`${dir}/source.txt`, "Hello");
+const dir = await Ende.makeTempDir();
+await Ende.writeTextFile(`${dir}/source.txt`, "Hello");
 
-// Deno.copyFile copies a file to a destination path, replacing the
+// Ende.copyFile copies a file to a destination path, replacing the
 // destination if it already exists.
-await Deno.copyFile(`${dir}/source.txt`, `${dir}/copy.txt`);
-console.log(await Deno.readTextFile(`${dir}/copy.txt`)); // Hello
+await Ende.copyFile(`${dir}/source.txt`, `${dir}/copy.txt`);
+console.log(await Ende.readTextFile(`${dir}/copy.txt`)); // Hello
 
 // The destination directory must exist; copyFile does not create it.
-await Deno.mkdir(`${dir}/backup`);
-await Deno.copyFile(`${dir}/source.txt`, `${dir}/backup/copy.txt`);
+await Ende.mkdir(`${dir}/backup`);
+await Ende.copyFile(`${dir}/source.txt`, `${dir}/backup/copy.txt`);
 
 // There is a synchronous variant as well.
-Deno.copyFileSync(`${dir}/source.txt`, `${dir}/copy2.txt`);
-
-// The same operations are available through the Node.js API, which npm
-// packages and ported code often use.
-import { copyFile, cp } from "node:fs/promises";
-await copyFile(`${dir}/source.txt`, `${dir}/copy3.txt`);
-
-// cp with the recursive option also copies whole directories.
-await cp(`${dir}/backup`, `${dir}/backup2`, { recursive: true });
-console.log(await Deno.readTextFile(`${dir}/backup2/copy.txt`)); // Hello
+Ende.copyFileSync(`${dir}/source.txt`, `${dir}/copy2.txt`);
 
 // Reading and writing files requires the -R and -W permissions.
-await Deno.remove(dir, { recursive: true });
+await Ende.remove(dir, { recursive: true });

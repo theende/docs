@@ -7,7 +7,7 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream} MDN: ReadableStream
  * @group Encoding
  *
- * Uint8Array is the workhorse binary type in Deno: file reads, network
+ * Uint8Array is the workhorse binary type in Ende: file reads, network
  * payloads, and hashes all produce or consume it. This example shows how to
  * convert one into the other common binary and text representations.
  */
@@ -48,15 +48,8 @@ const stream = ReadableStream.from([bytes]);
 console.log(stream instanceof ReadableStream); // true
 
 // To convert to a base64 or hex string, use the built-in methods available
-// since Deno 2.x. The matching fromBase64 and fromHex methods decode back.
+// . The matching fromBase64 and fromHex methods decode back.
 console.log(bytes.toBase64()); // SGVsbG8=
 console.log(bytes.toHex()); // 48656c6c6f
 const decoded = Uint8Array.fromBase64("SGVsbG8=");
 console.log(decoded); // Uint8Array(5) [ 72, 101, 108, 108, 111 ]
-
-// When working with Node.js APIs, convert to a Buffer with Buffer.from.
-// This copies the bytes. To share memory instead, pass the underlying
-// buffer together with the offset and length.
-import { Buffer } from "node:buffer";
-const nodeBuffer = Buffer.from(bytes);
-console.log(nodeBuffer.toString("utf8")); // Hello

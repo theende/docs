@@ -9,7 +9,7 @@
  * Text files can be imported in JS and TS files using the `import` keyword.
  * This makes including static data in a library much easier.
  *
- * Stable as of Deno 2.8: no flag required. (Binary `bytes` imports are still
+ * Stable .8: no flag required. (Binary `bytes` imports are still
  * experimental and require `--unstable-raw-imports`.)
  */
 

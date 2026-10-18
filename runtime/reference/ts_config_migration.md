@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-25
 title: "Configuring TypeScript"
-description: "A guide to TypeScript configuration in Deno. Learn about compiler options, type checking JavaScript, JSDoc support, type declarations, and configuring TypeScript for cross-platform compatibility."
+description: "A guide to TypeScript configuration in Ende. Learn about compiler options, type checking JavaScript, JSDoc support, type declarations, and configuring TypeScript for cross-platform compatibility."
 oldUrl:
   - /runtime/manual/advanced/typescript/faqs/
   - /runtime/manual/advanced/typescript/migration/
@@ -14,37 +14,36 @@ oldUrl:
   - /runtime/fundamentals/types/
 ---
 
-This page covers advanced TypeScript configuration in Deno, including compiler
+This page covers advanced TypeScript configuration in Ende, including compiler
 options, `tsconfig.json` compatibility, and library targeting. For an
-introduction to using TypeScript with Deno, see
+introduction to using TypeScript with Ende, see
 [TypeScript support](/runtime/fundamentals/typescript/).
 
-## Configuring TypeScript in Deno
+## Configuring TypeScript in Ende
 
-Deno aims to simplify TypeScript configuration based on the following design
+Ende aims to simplify TypeScript configuration based on the following design
 choices:
 
 - Strict and modern defaults for type-checking rules.
 - Allowing the omission of settings relating to the target runtime or
   compatibility, leveraging direct integration with the execution environment.
-- Project references using `deno.json` directory scopes.
+- Project references using `ende.json` directory scopes.
 
 The last point presents a simpler format than `tsconfig.json`'s
 [`references`](https://www.typescriptlang.org/tsconfig/#references) and
 [`extends`](https://www.typescriptlang.org/tsconfig/#extends) fields, replacing
-them with `deno.json` workspaces and root-member inheritance. See the section on
+them with `ende.json` workspaces and root-member inheritance. See the section on
 [type checking in workspaces](/runtime/fundamentals/workspaces/#type-checking).
 
 ## `tsconfig.json` compatibility
 
 While using [`tsconfig.json`](https://www.typescriptlang.org/tsconfig/) files is
-not recommended for Deno-first projects, existing Node.js + TypeScript
-workspaces using them will work out-of-the-box under Deno's type checker and
-LSP.
+not recommended for Ende projects, existing TypeScript workspaces using them
+will work out-of-the-box under Ende's type checker and LSP.
 
-Each workspace directory containing a `deno.json` or `package.json` is probed
-for a `tsconfig.json`. If it exists, it is added as a 'root' project reference
-and contained references are included recursively.
+Each workspace directory containing an `ende.json` is probed for a
+`tsconfig.json`. If it exists, it is added as a 'root' project reference and
+contained references are included recursively.
 
 As with `tsc`, the scope of a TSConfig is determined by its
 [root fields](https://www.typescriptlang.org/tsconfig/#root-fields). In case of
@@ -53,7 +52,7 @@ overlap:
 - A reference takes precedence over its referrer.
 - For root references, `foo/bar/tsconfig.json` takes precedence over
   `foo/tsconfig.json`.
-- If a parent `deno.json` contains `compilerOptions`, that will take precedence
+- If a parent `ende.json` contains `compilerOptions`, that will take precedence
   over any TSConfig.
 
 The following fields are supported:
@@ -73,37 +72,15 @@ The following fields are supported:
 }
 ```
 
-Except for `compilerOptions`, these fields cannot be specified in `deno.json`.
+Except for `compilerOptions`, these fields cannot be specified in `ende.json`.
 
 You may be forced to use a `tsconfig.json` file when, for example, the required
 granularity for [`include`](https://www.typescriptlang.org/tsconfig/#include)
-cannot be represented with `deno.json` workspaces and directory scopes.
-
-## Migrating compilerOptions from Node.js
-
-Most of a typical Node.js `tsconfig.json` exists to configure compilation output
-and module interop. Deno runs TypeScript directly and never emits JavaScript, so
-most of those options have no effect and can be deleted. Deno warns about
-ignored options when they appear in a `tsconfig.json`; moving your remaining
-options into `deno.json`'s `compilerOptions` suppresses the warning.
-
-| Option in your `tsconfig.json`                          | In Deno                                                                                                                                    |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `target`, `outDir`, `outFile`, `rootDir`                | Delete. Deno never emits: code runs directly on the latest V8, and `deno check` type-checks without producing output.                      |
-| `declaration`, `declarationMap`, `emitDeclarationOnly`  | Delete. No emit. Use [`deno doc`](/runtime/reference/cli/doc/) for API documentation.                                                      |
-| `sourceMap`, `inlineSourceMap`, `inlineSources`         | Delete. Stack traces map to your TypeScript sources automatically.                                                                         |
-| `esModuleInterop`, `allowSyntheticDefaultImports`       | Delete. Deno is ESM-native and handles CommonJS interop in the runtime.                                                                    |
-| `importHelpers`, `noEmitHelpers`, `downlevelIteration`  | Delete. No downleveling happens, so no helpers are emitted.                                                                                |
-| `resolveJsonModule`                                     | Delete. Import JSON with an attribute instead: `import data from "./data.json" with { type: "json" }`.                                     |
-| `skipLibCheck`                                          | Delete. Deno does not type-check dependencies by default (`deno check --all` opts in).                                                     |
-| `module`, `moduleResolution`                            | Usually delete. Deno defaults to `nodenext`; the supported values are listed in the table below.                                           |
-| `lib`, `types`                                          | Usually delete. Deno's defaults cover its runtime; keep `lib` only for cross-runtime code (see ["lib" property](#using-the-lib-property)). |
-| `strict`, `noImplicit*`, `noUnused*`, other check flags | Keep the ones you want, in `deno.json`'s `compilerOptions`. Note Deno's defaults are already strict (table below).                         |
-| `paths`, `baseUrl`                                      | Keep if needed for type-time path mapping, or replace with [import maps](/runtime/fundamentals/modules/), which also work at runtime.      |
+cannot be represented with `ende.json` workspaces and directory scopes.
 
 ## TS Compiler Options
 
-Here is a table of compiler options that can be changed, their default in Deno
+Here is a table of compiler options that can be changed, their default in Ende
 and any other notes about that option:
 
 | Option                           | Default                 | Notes                                                                                                                                     |
@@ -116,7 +93,7 @@ and any other notes about that option:
 | `jsxFactory`                     | `"React.createElement"` |                                                                                                                                           |
 | `jsxFragmentFactory`             | `"React.Fragment"`      |                                                                                                                                           |
 | `keyofStringsOnly`               | `false`                 |                                                                                                                                           |
-| `lib`                            | `[ "deno.window" ]`     | The default for this varies based on other settings in Deno. If it is supplied, it overrides the default. See below for more information. |
+| `lib`                            | `[ "ende.window" ]`     | The default for this varies based on other settings in Ende. If it is supplied, it overrides the default. See below for more information. |
 | `module`                         | `"nodenext"`            | Supported values: `["nodenext", "esnext", "preserve"]`.                                                                                   |
 | `moduleResolution`               | `"nodenext"`            | Supported values: `["nodenext", "bundler"]`.                                                                                              |
 | `noErrorTruncation`              | `false`                 |                                                                                                                                           |
@@ -153,67 +130,67 @@ within the `compilerOptions`.
 
 The built-in libraries that are of interest to users:
 
-- `"deno.ns"` - This includes all the custom `Deno` global namespace APIs plus
-  the Deno additions to `import.meta`. This should generally not conflict with
+- `"ende.ns"` - This includes all the custom `Ende` global namespace APIs plus
+  the Ende additions to `import.meta`. This should generally not conflict with
   other libraries or global types.
-- `"deno.window"` - This is the "default" library used when checking Deno main
-  runtime scripts. It includes the `"deno.ns"` as well as other type libraries
-  for the extensions that are built into Deno. This library will conflict with
+- `"ende.window"` - This is the "default" library used when checking Ende main
+  runtime scripts. It includes the `"ende.ns"` as well as other type libraries
+  for the extensions that are built into Ende. This library will conflict with
   libraries like `"dom"` and `"dom.iterable"` that are standard TypeScript
   libraries.
-- `"deno.worker"` - This is the library used when checking a Deno web worker
+- `"ende.worker"` - This is the library used when checking an Ende web worker
   script. For more information about web workers, check out
   [Type Checking Web Workers](/runtime/reference/ts_config_migration/#type-checking-web-workers).
 - `"dom.asynciterable"` - TypeScript currently does not include the DOM async
-  iterables that Deno implements (plus several browsers), so we have implemented
+  iterables that Ende implements (plus several browsers), so we have implemented
   it ourselves until it becomes available in TypeScript.
-- `"deno.desktop"` - This is the library used when checking apps created with
-  `deno desktop`. Check out [Desktop apps](/runtime/desktop/).
+- `"ende.desktop"` - This is the library used when checking apps created with
+  `ende desktop`. Check out [Desktop apps](/runtime/desktop/).
 
 These are common libraries that are not enabled by default, but are useful when
 writing code that is intended to also work in another runtime:
 
 - `"dom"` - The main browser global library that ships with TypeScript. The type
-  definitions conflict in many ways with `"deno.window"` and so if `"dom"` is
-  used, then consider using just `"deno.ns"` to expose the Deno specific APIs.
+  definitions conflict in many ways with `"ende.window"` and so if `"dom"` is
+  used, then consider using just `"ende.ns"` to expose the Ende specific APIs.
 - `"dom.iterable"` - The iterable extensions to the browser global library.
 - `"scripthost"` - The library for the Microsoft Windows Script Host.
 - `"webworker"` - The main library for web workers in the browser. Like `"dom"`
-  this will conflict with `"deno.window"` or `"deno.worker"`, so consider using
-  just `"deno.ns"` to expose the Deno specific APIs.
+  this will conflict with `"ende.window"` or `"ende.worker"`, so consider using
+  just `"ende.ns"` to expose the Ende specific APIs.
 - `"webworker.importscripts"` - The library that exposes the `importScripts()`
   API in the web worker.
 - `"webworker.iterable"` - The library that adds iterables to objects within a
   web worker. Modern browsers support this.
 
-## Targeting Deno and the Browser
+## Targeting Ende and the Browser
 
-You may want to write code that seamlessly runs in both Deno and the browser. In
+You may want to write code that seamlessly runs in both Ende and the browser. In
 this case you'll need to conditionally check the execution environment before
 using any APIs exclusive to one or the other. In such cases, a typical
 `compilerOptions` configuration might look like this:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "ende.ns"]
   }
 }
 ```
 
-This should allow most code to be type checked properly by Deno.
+This should allow most code to be type checked properly by Ende.
 
 If your code uses APIs that are gated behind one of the `--unstable-*` flags,
 add the `deno.unstable` library to the mix as well:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "compilerOptions": {
     "lib": [
       "dom",
       "dom.iterable",
       "dom.asynciterable",
-      "deno.ns",
+      "ende.ns",
       "deno.unstable"
     ]
   }
@@ -221,14 +198,14 @@ add the `deno.unstable` library to the mix as well:
 ```
 
 Typically, when you use the `"lib"` option in TypeScript, you need to include an
-"es" library as well. In the case of `"deno.ns"` and `"deno.unstable"`, they
+"es" library as well. In the case of `"ende.ns"` and `"deno.unstable"`, they
 automatically include `"esnext"` when you bring them in.
 
 > [!NOTE]
 > If you get type errors like **cannot find `document` or `HTMLElement`**, it is
 > likely that the library you are using has dependencies on the DOM. This is
 > common for packages that are designed to run in a browser as well as
-> server-side. By default, Deno only includes the libraries that are directly
+> server-side. By default, Ende only includes the libraries that are directly
 > supported. Assuming the package properly identifies what environment it is
 > running in at runtime it is "safe" to use the DOM libraries to type check the
 > code.
@@ -247,44 +224,44 @@ files, see
 
 ## Type Checking Web Workers
 
-When Deno loads a TypeScript module in a web worker, it will automatically type
-check the module and its dependencies against the Deno web worker library. This
-can present a challenge in other contexts like `deno check` or in editors. There
-are a couple of ways to instruct Deno to use the worker libraries instead of the
-standard Deno libraries.
+When Ende loads a TypeScript module in a web worker, it will automatically type
+check the module and its dependencies against the Ende web worker library. This
+can present a challenge in other contexts like `ende check` or in editors. There
+are a couple of ways to instruct Ende to use the worker libraries instead of the
+standard Ende libraries.
 
 ### Triple-slash directives
 
 This option couples the library settings with the code itself. By adding the
 following triple-slash directives near the top of the entry point file for the
-worker script, Deno will now type check it as a Deno worker script, irrespective
-of how the module is analyzed:
+worker script, Ende will now type check it as an Ende worker script,
+irrespective of how the module is analyzed:
 
 ```ts
 /// <reference no-default-lib="true" />
-/// <reference lib="deno.worker" />
+/// <reference lib="ende.worker" />
 ```
 
 The first directive ensures that no other default libraries are used. If this is
-omitted, you will get some conflicting type definitions, because Deno will try
-to apply the standard Deno library as well. The second instructs Deno to apply
-the built-in Deno worker type definitions plus dependent libraries (like
+omitted, you will get some conflicting type definitions, because Ende will try
+to apply the standard Ende library as well. The second instructs Ende to apply
+the built-in Ende worker type definitions plus dependent libraries (like
 `"esnext"`).
 
 The one disadvantage of this, is that it makes the code less portable to other
-non-Deno platforms like `tsc`, as it is only Deno which has the `"deno.worker"`
+non-Ende platforms like `tsc`, as it is only Ende which has the `"ende.worker"`
 library built into it.
 
-### Providing "lib" setting in deno.json
+### Providing "lib" setting in ende.json
 
-You can provide a "lib" option in your `deno.json` file to instruct Deno to use
+You can provide a "lib" option in your `ende.json` file to instruct Ende to use
 library files. For example:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["deno.worker"]
+    "lib": ["ende.worker"]
   }
 }
 ```
@@ -298,24 +275,23 @@ have its own `compilerOptions`.
 ### Type declaration semantics
 
 Type declaration files (`.d.ts` files) follow the same semantics as other files
-in Deno. This means that declaration files are assumed to be module declarations
+in Ende. This means that declaration files are assumed to be module declarations
 (_UMD declarations_) and not ambient/global declarations. It is unpredictable
-how Deno will handle ambient/global declarations.
+how Ende will handle ambient/global declarations.
 
 In addition, if a type declaration imports something else, like another `.d.ts`
-file, its resolution follow the normal import rules of Deno. For a lot of the
+file, its resolution follow the normal import rules of Ende. For a lot of the
 `.d.ts` files that are generated and available on the web, they may not be
-compatible with Deno.
+compatible with Ende.
 
 When using HTTPS imports from CDNs like [esm.sh](https://esm.sh), type
 declarations are provided by default (via the `X-TypeScript-Types` header). This
-can be disabled by appending `?no-dts` to the import URL. Note that for most use
-cases, `npm:` specifiers are the recommended way to import npm packages.
+can be disabled by appending `?no-dts` to the import URL.
 
 ## Behavior of JavaScript when type checking
 
-When you import JavaScript code into TypeScript within Deno, even if you’ve set
-`checkJs` to `false` (which is the default behavior for Deno), the TypeScript
+When you import JavaScript code into TypeScript within Ende, even if you’ve set
+`checkJs` to `false` (which is the default behavior for Ende), the TypeScript
 compiler will still analyze the JavaScript module. It tries to infer the shape
 of the exports from that module to validate the import in your TypeScript file.
 
@@ -327,10 +303,10 @@ type information using one of the methods mentioned earlier.
 
 ### Internals
 
-While it isn't required to understand how Deno works internally to be able to
-leverage TypeScript with Deno well, it can help to understand how it works.
+While it isn't required to understand how Ende works internally to be able to
+leverage TypeScript with Ende well, it can help to understand how it works.
 
-Before any code is executed or compiled, Deno generates a module graph by
+Before any code is executed or compiled, Ende generates a module graph by
 parsing the root module, and then detecting all of its dependencies, and then
 retrieving and parsing those modules, recursively, until all the dependencies
 are retrieved.
@@ -341,9 +317,9 @@ something that is or can be emitted to JavaScript, it fills the code slot, and
 type only dependencies, like `.d.ts` files fill the type slot.
 
 When the module graph is built, and there is a need to type check the graph,
-Deno starts up the TypeScript compiler and feeds it the names of the modules
+Ende starts up the TypeScript compiler and feeds it the names of the modules
 that need to be potentially emitted as JavaScript. During that process, the
-TypeScript compiler will request additional modules, and Deno will look at the
+TypeScript compiler will request additional modules, and Ende will look at the
 slots for the dependency, offering it the type slot if it is filled before
 offering it the code slot.
 

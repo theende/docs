@@ -4,7 +4,7 @@
  * @tags cli
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign} MDN: SubtleCrypto.sign
- * @resource {https://docs.deno.com/api/web/~/SubtleCrypto} Doc: crypto.subtle
+ * @resource {https://docs.ende.sh/api/web/~/SubtleCrypto} Doc: crypto.subtle
  * @group Cryptography
  *
  * A digital signature proves that a message was produced by the holder of a

@@ -1,20 +1,20 @@
-const tabGroups = document.querySelectorAll("deno-tabs");
+const tabGroups = document.querySelectorAll("ende-tabs");
 
 for (const tabGroup of tabGroups) {
   const newGroup = document.createElement("div");
-  newGroup.classList.add("deno-tabs");
+  newGroup.classList.add("ende-tabs");
   newGroup.dataset.id = tabGroup.getAttribute("group-id")!;
 
   const buttons = document.createElement("ul");
-  buttons.classList.add("deno-tabs-buttons");
+  buttons.classList.add("ende-tabs-buttons");
   newGroup.appendChild(buttons);
 
   const tabs = document.createElement("div");
-  tabs.classList.add("deno-tabs-content");
+  tabs.classList.add("ende-tabs-content");
   newGroup.appendChild(tabs);
 
   for (const tab of tabGroup.children) {
-    if (tab.tagName === "DENO-TAB") {
+    if (tab.tagName === "ENDE-TAB") {
       const selected = tab.getAttribute("default") !== null;
       const buttonContainer = document.createElement("li");
       buttons.appendChild(buttonContainer);
@@ -40,22 +40,22 @@ class GroupSelectEvent extends Event {
   tabId: string;
 
   constructor(groupId: string, tabId: string) {
-    super("deno-tab-select");
+    super("ende-tab-select");
     this.groupId = groupId;
     this.tabId = tabId;
   }
 }
 
-for (const tabGroup of document.querySelectorAll<HTMLElement>(".deno-tabs")) {
+for (const tabGroup of document.querySelectorAll<HTMLElement>(".ende-tabs")) {
   const buttons = tabGroup.querySelectorAll<HTMLElement>(
-    ".deno-tabs-buttons button",
+    ".ende-tabs-buttons button",
   )!;
   const tabs = tabGroup.querySelectorAll<HTMLElement>(
-    ".deno-tabs-content div",
+    ".ende-tabs-content div",
   )!;
 
   const groupId = tabGroup.dataset.id!;
-  document.addEventListener("deno-tab-select", (event: Event) => {
+  document.addEventListener("ende-tab-select", (event: Event) => {
     if (!(event instanceof GroupSelectEvent)) return;
     if (event.groupId !== groupId) return;
     for (const button of buttons) {
@@ -71,12 +71,12 @@ for (const tabGroup of document.querySelectorAll<HTMLElement>(".deno-tabs")) {
   for (const button of buttons) {
     button.addEventListener("click", () => {
       const tabId = button.dataset.tab!;
-      localStorage.setItem(`deno-tab-${groupId}`, tabId);
+      localStorage.setItem(`ende-tab-${groupId}`, tabId);
       document.dispatchEvent(new GroupSelectEvent(groupId, tabId));
     });
   }
 
-  const storedTabId = localStorage.getItem(`deno-tab-${groupId}`);
+  const storedTabId = localStorage.getItem(`ende-tab-${groupId}`);
   if (storedTabId) {
     document.dispatchEvent(new GroupSelectEvent(groupId, storedTabId));
   } else if (groupId === "operating-systems") {

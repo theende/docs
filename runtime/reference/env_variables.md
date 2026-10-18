@@ -1,38 +1,38 @@
 ---
 last_modified: 2026-07-02
 title: "Environment variables"
-description: "A guide to working with environment variables in Deno. Learn about Deno.env API, .env file support, CLI configuration, and special environment variables that control Deno's behavior."
+description: "A guide to working with environment variables in Ende. Learn about Ende.env API, .env file support, CLI configuration, and special environment variables that control Ende's behavior."
 oldUrl:
   - /runtime/manual/basics/env_variables/
   - /runtime/reference/cli/env_variables/
 ---
 
-There are a few ways to use environment variables in Deno:
+There are a few ways to use environment variables in Ende:
 
-## Built-in Deno.env method
+## Built-in Ende.env method
 
-The Deno runtime offers built-in support for environment variables with
-[`Deno.env`](https://docs.deno.com/api/deno/~/Deno.env).
+The Ende runtime offers built-in support for environment variables with
+[`Ende.env`](https://docs.ende.sh/api/ende/~/Ende.env).
 
-[`Deno.env`](/api/deno/~/Deno.env) has getter and setter methods. Here is
+[`Ende.env`](/api/ende/~/Ende.Env/#env) has getter and setter methods. Here is
 example usage:
 
 ```ts
-Deno.env.set("FIREBASE_API_KEY", "examplekey123");
-Deno.env.set("FIREBASE_AUTH_DOMAIN", "firebasedomain.com");
+Ende.env.set("FIREBASE_API_KEY", "examplekey123");
+Ende.env.set("FIREBASE_AUTH_DOMAIN", "firebasedomain.com");
 
-console.log(Deno.env.get("FIREBASE_API_KEY")); // examplekey123
-console.log(Deno.env.get("FIREBASE_AUTH_DOMAIN")); // firebasedomain.com
-console.log(Deno.env.has("FIREBASE_AUTH_DOMAIN")); // true
+console.log(Ende.env.get("FIREBASE_API_KEY")); // examplekey123
+console.log(Ende.env.get("FIREBASE_AUTH_DOMAIN")); // firebasedomain.com
+console.log(Ende.env.has("FIREBASE_AUTH_DOMAIN")); // true
 ```
 
 ## .env file
 
-Deno also supports `.env` files. You can tell Deno to read environment variables
+Ende also supports `.env` files. You can tell Ende to read environment variables
 from `.env` with the `--env-file` flag, for example:
 
 ```sh
-deno run --env-file main.ts
+ende run --env-file main.ts
 ```
 
 This will read the `.env` file from the current working directory or the first
@@ -40,7 +40,7 @@ parent directory that contains one. If you want to load environment variables
 from a different file, you can specify that file as a parameter to the flag.
 
 You can pass multiple `--env-file` flags (e.g.,
-`deno run --env-file=.env.one --env-file=.env.two --allow-env <script>`) to load
+`ende run --env-file=.env.one --env-file=.env.two --allow-env <script>`) to load
 variables from multiple files.
 
 > [!NOTE]
@@ -51,7 +51,7 @@ variables from multiple files.
 > means that the first occurrence found in the last `.env` file listed will be
 > applied.
 
-## [`@std/dotenv`](/runtime/reference/std/dotenv/)
+## [`@ende/dotenv`](/runtime/reference/std/dotenv/)
 
 The `dotenv` package in the standard library can be used to load environment
 variables from `.env`.
@@ -66,23 +66,23 @@ Import the `load` module to auto-import from the `.env` file and into the
 process environment.
 
 ```ts
-import { load } from "jsr:@std/dotenv";
+import { load } from "jsr:@ende/dotenv";
 
 const env = await load({
   // optional: choose a specific path (defaults to ".env")
   envPath: ".env.local",
-  // optional: also export to the process environment (so Deno.env can read it)
+  // optional: also export to the process environment (so Ende.env can read it)
   export: true,
 });
 
 console.log(env.GREETING);
-console.log(Deno.env.get("GREETING"));
+console.log(Ende.env.get("GREETING"));
 ```
 
-Run this with `deno run --allow-read --allow-env app.ts`.
+Run this with `ende run --allow-read --allow-env app.ts`.
 
 Further documentation for `.env` handling can be found in the
-[@std/dotenv](https://jsr.io/@std/dotenv/doc) documentation.
+[@ende/dotenv](https://jsr.io/@ende/dotenv/doc) documentation.
 
 ## Set a variable when running a command
 
@@ -90,14 +90,14 @@ As with other CLI commands, you can set environment variables before running a
 command like so:
 
 ```shell
-MY_VAR="my value" deno run main.ts
+MY_VAR="my value" ende run main.ts
 ```
 
 This can be useful when you want to vary a task based on an environment
 variable, and can be helpfully combined with
-[`deno task`](/runtime/reference/cli/task/) commands like so:
+[`ende task`](/runtime/reference/cli/task/) commands like so:
 
-```jsonc title="deno.json"
+```jsonc title="ende.json"
 {
 
   ...
@@ -105,11 +105,11 @@ variable, and can be helpfully combined with
   "tasks": {
     "build:full": {
       "description": "Build the site with all features",
-      "command": "BUILD_TYPE=FULL deno run main.ts"
+      "command": "BUILD_TYPE=FULL ende run main.ts"
     },
     "build:light": {
       "description": "Build the site without expensive operations",
-      "command": "BUILD_TYPE=LIGHT deno run main.ts"
+      "command": "BUILD_TYPE=LIGHT ende run main.ts"
     }
   }
 }
@@ -126,33 +126,27 @@ variable, and can be helpfully combined with
 
 ## Special environment variables
 
-The Deno runtime has these special environment variables.
+The Ende runtime has these special environment variables.
 
-| name                   | description                                                                                                                                                                                                                                                                                                                                           |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DENO_AUTH_TOKENS       | A semi-colon separated list of bearer tokens and hostnames to use when fetching remote modules from private repositories<br />(e.g. `abcde12345@deno.land;54321edcba@github.com`)                                                                                                                                                                     |
-| DENO_TLS_CA_STORE      | Comma-separated list of order dependent certificate stores.<br />Possible values: `system`, `mozilla`. Defaults to `mozilla`.                                                                                                                                                                                                                         |
-| DENO_CERT              | Load certificate authorities from a PEM encoded file. The file can contain more than one certificate, each in its own PEM block. This is the environment variable form of the `--cert` flag.                                                                                                                                                          |
-| NODE_EXTRA_CA_CERTS    | Path to a PEM file with extra certificate authorities. Loaded at the root certificate store level, so the certs are honored by `fetch()`, [`Deno.connectTls()`](/api/deno/~/Deno.connectTls), and Node compat APIs (`node:https`, `node:tls`). Available in Deno 2.8+. Missing or invalid files emit a warning rather than failing, matching Node.js. |
-| DENO_COVERAGE_DIR      | Set the directory for collecting coverage profile data. This option only works for [`deno test` subcommand](/runtime/reference/cli/test/).                                                                                                                                                                                                            |
-| DENO_DIR               | Set the cache directory                                                                                                                                                                                                                                                                                                                               |
-| DENO_INSTALL           | Used by the [shell install script](/runtime/getting_started/installation/) to choose where the `deno` executable is installed. The binary is placed at `$DENO_INSTALL/bin/deno`.                                                                                                                                                                      |
-| DENO_INSTALL_ROOT      | Set the installation root for `deno install`. Executables are placed in its `bin` subdirectory, unless the path already ends with `bin` (defaults to `$HOME/.deno`, i.e. executables go to `$HOME/.deno/bin`)                                                                                                                                         |
-| DENO_REPL_HISTORY      | Set REPL history file path History file is disabled when the value is empty <br />(defaults to `$DENO_DIR/deno_history.txt`)                                                                                                                                                                                                                          |
-| DENO_NO_PACKAGE_JSON   | Disables auto-resolution of `package.json`                                                                                                                                                                                                                                                                                                            |
-| DENO_CONDITIONS        | Comma-separated list of custom conditions to use when resolving npm package exports (equivalent to the `--conditions` flag)                                                                                                                                                                                                                           |
-| DENO_UNSTABLE_TSGO     | Set to `1` to type-check with TypeScript's native (Go) compiler. Equivalent to the `--unstable-tsgo` flag. See [TypeScript](/runtime/fundamentals/typescript/#faster-type-checking-with-the-native-compiler-tsgo).                                                                                                                                    |
-| DENO_NO_PROMPT         | Set to disable permission prompts on access<br />(alternative to passing `--no-prompt` on invocation)                                                                                                                                                                                                                                                 |
-| DENO_NO_UPDATE_CHECK   | Set to disable checking if a newer Deno version is available                                                                                                                                                                                                                                                                                          |
-| DENO_V8_FLAGS          | Set V8 command line options                                                                                                                                                                                                                                                                                                                           |
-| DENO_JOBS              | Number of parallel workers used for the `--parallel` flag with the test subcommand.<br />Defaults to number of available CPUs.                                                                                                                                                                                                                        |
-| DENO_KV_ACCESS_TOKEN   | Personal access token used when connecting to Deno KV databases (for example via [`Deno.openKv`](/api/deno/~/Deno.openKv) or `@deno/kv` with a KV Connect URL).                                                                                                                                                                                       |
-| DENO_AUDIT_PERMISSIONS | Audit every permission access. Set to a file path to write JSONL, or to the literal value `otel` to emit OpenTelemetry log records via the configured OTel exporter. See [permissions audit](/runtime/reference/permissions/) for the field set.                                                                                                      |
-| DENO_TRACE_PERMISSIONS | Set to `1` to enable stack traces in permission prompts (disabled by default because collecting traces costs performance)                                                                                                                                                                                                                             |
-| DENO_WEBGPU_TRACE      | Path to a directory to output a [WGPU trace](https://github.com/gfx-rs/wgpu/pull/619) to when using the WebGPU API                                                                                                                                                                                                                                    |
-| DENO_WEBGPU_BACKEND    | Select the backend WebGPU will use, or a comma separated list of backends in order of preference. Possible values are `vulkan`, `dx12`, `metal`, or `opengl`                                                                                                                                                                                          |
-| HTTP_PROXY             | Proxy address for HTTP requests (module downloads, fetch)                                                                                                                                                                                                                                                                                             |
-| HTTPS_PROXY            | Proxy address for HTTPS requests (module downloads, fetch)                                                                                                                                                                                                                                                                                            |
-| NPM_CONFIG_REGISTRY    | URL to use for the npm registry.                                                                                                                                                                                                                                                                                                                      |
-| NO_COLOR               | Set to disable color                                                                                                                                                                                                                                                                                                                                  |
-| NO_PROXY               | Comma-separated list of hosts which do not use a proxy (module downloads, fetch)                                                                                                                                                                                                                                                                      |
+| name                   | description                                                                                                                                                                                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ENDE_AUTH_TOKENS       | A semi-colon separated list of bearer tokens and hostnames to use when fetching remote modules from private repositories<br />(e.g. `abcde12345@deno.land;54321edcba@github.com`)                                                                                               |
+| ENDE_TLS_CA_STORE      | Comma-separated list of order dependent certificate stores.<br />Possible values: `system`, `mozilla`. Defaults to `mozilla`.                                                                                                                                                   |
+| ENDE_CERT              | Load certificate authorities from a PEM encoded file. The file can contain more than one certificate, each in its own PEM block. This is the environment variable form of the `--cert` flag.                                                                                    |
+| ENDE_COVERAGE_DIR      | Set the directory for collecting coverage profile data. This option only works for [`ende test` subcommand](/runtime/reference/cli/test/).                                                                                                                                      |
+| ENDE_DIR               | Set the cache directory                                                                                                                                                                                                                                                         |
+| ENDE_INSTALL_ROOT      | Set the installation root for `ende install` and the [install scripts](/runtime/getting_started/installation/). Executables are placed in its `bin` subdirectory, unless the path already ends with `bin` (defaults to `$HOME/.ende`, i.e. executables go to `$HOME/.ende/bin`) |
+| ENDE_REPL_HISTORY      | Set REPL history file path History file is disabled when the value is empty <br />(defaults to `$ENDE_DIR/ende_history.txt`)                                                                                                                                                    |
+| ENDE_UNSTABLE_TSGO     | Set to `1` to type-check with TypeScript's native (Go) compiler. Equivalent to the `--unstable-tsgo` flag. See [TypeScript](/runtime/fundamentals/typescript/#faster-type-checking-with-the-native-compiler-tsgo).                                                              |
+| ENDE_NO_PROMPT         | Set to disable permission prompts on access<br />(alternative to passing `--no-prompt` on invocation)                                                                                                                                                                           |
+| ENDE_NO_UPDATE_CHECK   | Set to disable checking if a newer Ende version is available                                                                                                                                                                                                                    |
+| ENDE_V8_FLAGS          | Set V8 command line options                                                                                                                                                                                                                                                     |
+| ENDE_JOBS              | Number of parallel workers used for the `--parallel` flag with the test subcommand.<br />Defaults to number of available CPUs.                                                                                                                                                  |
+| ENDE_AUDIT_PERMISSIONS | Audit every permission access. Set to a file path to write JSONL, or to the literal value `otel` to emit OpenTelemetry log records via the configured OTel exporter. See [permissions audit](/runtime/reference/permissions/) for the field set.                                |
+| ENDE_TRACE_PERMISSIONS | Set to `1` to enable stack traces in permission prompts (disabled by default because collecting traces costs performance)                                                                                                                                                       |
+| ENDE_WEBGPU_TRACE      | Path to a directory to output a [WGPU trace](https://github.com/gfx-rs/wgpu/pull/619) to when using the WebGPU API                                                                                                                                                              |
+| ENDE_WEBGPU_BACKEND    | Select the backend WebGPU will use, or a comma separated list of backends in order of preference. Possible values are `vulkan`, `dx12`, `metal`, or `opengl`                                                                                                                    |
+| HTTP_PROXY             | Proxy address for HTTP requests (module downloads, fetch)                                                                                                                                                                                                                       |
+| HTTPS_PROXY            | Proxy address for HTTPS requests (module downloads, fetch)                                                                                                                                                                                                                      |
+| NO_COLOR               | Set to disable color                                                                                                                                                                                                                                                            |
+| NO_PROXY               | Comma-separated list of hosts which do not use a proxy (module downloads, fetch)                                                                                                                                                                                                |

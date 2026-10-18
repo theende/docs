@@ -54,7 +54,7 @@ async function verify(req: Request): Promise<unknown | null> {
   return JSON.parse(new TextDecoder().decode(body));
 }
 
-Deno.serve(async (req) => {
+Ende.serve(async (req) => {
   if (req.method !== "POST") {
     return new Response("method not allowed\n", { status: 405 });
   }

@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-05-20
 title: "Handle OS signals"
-description: "Tutorial on handling operating system signals in Deno. Learn how to capture SIGINT and SIGBREAK events, manage signal listeners, and implement graceful shutdown handlers in your applications."
+description: "Tutorial on handling operating system signals in Ende. Learn how to capture SIGINT and SIGBREAK events, manage signal listeners, and implement graceful shutdown handlers in your applications."
 url: /examples/os_signals_tutorial/
 oldUrl:
   - /runtime/manual/examples/os_signals/
@@ -14,9 +14,9 @@ oldUrl:
 
 ## Concepts
 
-- [Deno.addSignalListener()](https://docs.deno.com/api/deno/~/Deno.addSignalListener)
+- [Ende.addSignalListener()](https://docs.ende.sh/api/ende/~/Ende.addSignalListener)
   can be used to capture and monitor OS signals.
-- [Deno.removeSignalListener()](https://docs.deno.com/api/deno/~/Deno.removeSignalListener)
+- [Ende.removeSignalListener()](https://docs.ende.sh/api/ende/~/Ende.removeSignalListener)
   can be used to stop watching the signal.
 
 ## Set up an OS signal listener
@@ -31,14 +31,14 @@ APIs.
 > finishing, ie. if there are no more pending async operations the process will
 > exit.
 
-You can use `Deno.addSignalListener()` function for handling OS signals:
+You can use `Ende.addSignalListener()` function for handling OS signals:
 
 ```ts title="add_signal_listener.ts"
 console.log("Press Ctrl-C to trigger a SIGINT signal");
 
-Deno.addSignalListener("SIGINT", () => {
+Ende.addSignalListener("SIGINT", () => {
   console.log("interrupted!");
-  Deno.exit();
+  Ende.exit();
 });
 
 // Add a timeout to prevent process exiting immediately.
@@ -48,10 +48,10 @@ setTimeout(() => {}, 5000);
 Run with:
 
 ```shell
-deno run add_signal_listener.ts
+ende run add_signal_listener.ts
 ```
 
-You can use `Deno.removeSignalListener()` function to unregister previously
+You can use `Ende.removeSignalListener()` function to unregister previously
 added signal handler.
 
 ```ts title="signal_listeners.ts"
@@ -59,23 +59,23 @@ console.log("Press Ctrl-C to trigger a SIGINT signal");
 
 const sigIntHandler = () => {
   console.log("interrupted!");
-  Deno.exit();
+  Ende.exit();
 };
-Deno.addSignalListener("SIGINT", sigIntHandler);
+Ende.addSignalListener("SIGINT", sigIntHandler);
 
 // Add a timeout to prevent process exiting immediately.
 setTimeout(() => {}, 5000);
 
 // Stop listening for a signal after 1s.
 setTimeout(() => {
-  Deno.removeSignalListener("SIGINT", sigIntHandler);
+  Ende.removeSignalListener("SIGINT", sigIntHandler);
 }, 1000);
 ```
 
 Run with:
 
 ```shell
-deno run signal_listeners.ts
+ende run signal_listeners.ts
 ```
 
 ## Windows support
@@ -85,10 +85,10 @@ behavior is:
 
 | Use case                         | Supported signals on Windows                                                                                                       |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `Deno.addSignalListener(sig, …)` | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGHUP`, `SIGWINCH`                                                                   |
-| `Deno.kill(pid, sig)`            | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGHUP`, `SIGWINCH`, `SIGKILL`, `SIGABRT`, plus signal `0` for a process-health check |
+| `Ende.addSignalListener(sig, …)` | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGHUP`, `SIGWINCH`                                                                   |
+| `Ende.kill(pid, sig)`            | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGHUP`, `SIGWINCH`, `SIGKILL`, `SIGABRT`, plus signal `0` for a process-health check |
 
 `SIGKILL` and `SIGABRT` are deliberately **not** registerable via
 `addSignalListener` — they're uncatchable / fatal, matching Unix semantics. On
 Windows the catchable signals all forward to libuv's emulation layer; signals
-sent via `Deno.kill` ultimately invoke `TerminateProcess`.
+sent via `Ende.kill` ultimately invoke `TerminateProcess`.

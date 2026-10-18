@@ -9,7 +9,7 @@ Ensure that inline dependency imports have a version specifier.
 
 ```ts
 import foo from "npm:chalk";
-import foo from "jsr:@std/path";
+import foo from "jsr:@ende/path";
 ```
 
 ### Valid:
@@ -17,6 +17,6 @@ import foo from "jsr:@std/path";
 ```ts
 import foo from "npm:chalk@5.3.0";
 import foo from "npm:chalk@^5.3.0";
-import foo from "jsr:@std/path@1.0.8";
-import foo from "jsr:@std/path@^1.0.8";
+import foo from "jsr:@ende/path@^2026.10.15";
+import foo from "jsr:@ende/path@^2026.10.15";
 ```

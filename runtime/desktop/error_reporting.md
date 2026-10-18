@@ -4,14 +4,9 @@ title: "Error reporting"
 description: "Capture uncaught errors, unhandled rejections, and Rust panics, showing a native alert and POSTing a JSON report to your server."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
+`ende desktop` apps automatically catch:
 
-`deno desktop` apps automatically catch:
-
-- Uncaught JavaScript exceptions (in both Deno-side and renderer-side code).
+- Uncaught JavaScript exceptions (in both Ende-side and renderer-side code).
 - Unhandled promise rejections.
 - Rust panics inside the runtime or the rendering backend.
 
@@ -20,7 +15,7 @@ message, and, if you have configured a reporting URL, `POST`s a JSON report.
 
 ## Configuration
 
-Set `desktop.errorReporting.url` in your `deno.json`:
+Set `desktop.errorReporting.url` in your `ende.json`:
 
 ```jsonc
 {
@@ -54,15 +49,15 @@ sent.
 }
 ```
 
-| Field        | Type                               | Notes                                                                              |
-| ------------ | ---------------------------------- | ---------------------------------------------------------------------------------- |
-| `version`    | `1`                                | Schema version. Check this on the server side.                                     |
-| `message`    | `string`                           | The error's `message`.                                                             |
-| `stack`      | `string`                           | The error's `stack`. Source-mapped where possible.                                 |
-| `appVersion` | `string \| null`                   | [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion) at the time of the error. |
-| `timestamp`  | ISO 8601 string                    | UTC timestamp of when the error was caught.                                        |
-| `platform`   | `"darwin" \| "windows" \| "linux"` | [`Deno.build.os`](/api/deno/~/Deno.build.os).                                      |
-| `arch`       | string                             | [`Deno.build.arch`](/api/deno/~/Deno.build.arch).                                  |
+| Field        | Type                               | Notes                                                                               |
+| ------------ | ---------------------------------- | ----------------------------------------------------------------------------------- |
+| `version`    | `1`                                | Schema version. Check this on the server side.                                      |
+| `message`    | `string`                           | The error's `message`.                                                              |
+| `stack`      | `string`                           | The error's `stack`. Source-mapped where possible.                                  |
+| `appVersion` | `string \| null`                   | [`Ende.desktopVersion`](/api/ende/~/Ende.desktopVersion/) at the time of the error. |
+| `timestamp`  | ISO 8601 string                    | UTC timestamp of when the error was caught.                                         |
+| `platform`   | `"darwin" \| "windows" \| "linux"` | [`Ende.build.os`](/api/ende/~/Ende.build/#os).                                      |
+| `arch`       | string                             | [`Ende.build.arch`](/api/ende/~/Ende.build/#arch).                                  |
 
 The `Content-Type` header is `application/json`. Reports are sent as a single
 POST with no retry. If your server is down, the report is lost. For
@@ -72,10 +67,10 @@ high-importance reports, queue them locally and resend on next launch.
 
 | Source                                       | Captured?                                     |
 | -------------------------------------------- | --------------------------------------------- |
-| Uncaught exception in Deno-side code         | Yes.                                          |
-| Unhandled rejection in Deno-side code        | Yes.                                          |
+| Uncaught exception in Ende-side code         | Yes.                                          |
+| Unhandled rejection in Ende-side code        | Yes.                                          |
 | Uncaught exception in renderer-side JS       | Yes; caught via the renderer's `error` event. |
-| Rust panic in the Deno runtime               | Yes.                                          |
+| Rust panic in the Ende runtime               | Yes.                                          |
 | Rust panic in the rendering backend (CEF, …) | Yes; the backend bridges these.               |
 | `console.error` / `console.warn`             | No; these are not errors.                     |
 | Exceptions you `try`/`catch` yourself        | No.                                           |
@@ -100,7 +95,7 @@ implementations:
 ```ts
 win.bind("readFile", async (path) => {
   try {
-    return await Deno.readTextFile(path);
+    return await Ende.readTextFile(path);
   } catch (e) {
     reportToOwnTelemetry(e);
     return null; // handled, no alert
@@ -121,7 +116,7 @@ addEventListener("unhandledrejection", (e) => reportToOwnTelemetry(e.reason));
 A minimal reporter receiver:
 
 ```ts title="server/report.ts"
-Deno.serve({ port: 8080 }, async (req) => {
+Ende.serve({ port: 8080 }, async (req) => {
   if (req.method !== "POST") return new Response(null, { status: 405 });
 
   const report = await req.json();
@@ -129,7 +124,7 @@ Deno.serve({ port: 8080 }, async (req) => {
     return new Response("unsupported version", { status: 400 });
   }
 
-  await Deno.writeTextFile(
+  await Ende.writeTextFile(
     `./reports/${report.timestamp}.json`,
     JSON.stringify(report, null, 2),
   );
@@ -147,7 +142,7 @@ in error messages (filenames, URLs, query parameters, serialized object fields).
 If your app handles sensitive data, consider:
 
 - Stripping arguments from stack frames before sending.
-- Redacting URLs of [`Deno.readTextFile`](/api/deno/~/Deno.readTextFile) calls
+- Redacting URLs of [`Ende.readTextFile`](/api/ende/~/Ende.readTextFile/) calls
   and similar.
 - Asking the user before sending the first report (a one-time consent prompt).
 

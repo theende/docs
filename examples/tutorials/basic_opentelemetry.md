@@ -1,20 +1,20 @@
 ---
 last_modified: 2026-03-25
-title: "Getting Started with OpenTelemetry in Deno"
-description: "Set up basic OpenTelemetry instrumentation in a Deno application. This tutorial covers creating a simple HTTP server with custom metrics and traces, and viewing the telemetry data."
+title: "Getting Started with OpenTelemetry in Ende"
+description: "Set up basic OpenTelemetry instrumentation in an Ende application. This tutorial covers creating a simple HTTP server with custom metrics and traces, and viewing the telemetry data."
 url: /examples/basic_opentelemetry_tutorial/
 ---
 
 OpenTelemetry provides powerful observability tools for your applications. With
-Deno's built-in OpenTelemetry support, you can easily instrument your code to
+Ende's built-in OpenTelemetry support, you can easily instrument your code to
 collect metrics, traces, and logs.
 
-This tutorial will walk you through setting up a simple Deno application with
+This tutorial will walk you through setting up a simple Ende application with
 OpenTelemetry instrumentation.
 
 ## Prerequisites
 
-- Deno 2.3 or later
+- Ende
 
 ## Step 1: Create a Simple HTTP Server
 
@@ -22,11 +22,9 @@ Let's start by creating a basic HTTP server that simulates a small web
 application:
 
 ```ts title="server.ts"
-import { metrics, SpanStatusCode, trace } from "npm:@opentelemetry/api@1";
-
 // Create a tracer and meter for our application
-const tracer = trace.getTracer("my-server", "1.0.0");
-const meter = metrics.getMeter("my-server", "1.0.0");
+const tracer = Ende.telemetry.tracerProvider.getTracer("my-server", "1.0.0");
+const meter = Ende.telemetry.meterProvider.getMeter("my-server", "1.0.0");
 
 // Create some metrics
 const requestCounter = meter.createCounter("http_requests_total", {
@@ -39,7 +37,7 @@ const requestDuration = meter.createHistogram("http_request_duration_ms", {
 });
 
 // Start the server
-Deno.serve({ port: 8000 }, (req) => {
+Ende.serve({ port: 8000 }, (req) => {
   // Record the start time for measuring request duration
   const startTime = performance.now();
 
@@ -94,7 +92,7 @@ Deno.serve({ port: 8000 }, (req) => {
       if (error instanceof Error) {
         span.recordException(error);
         span.setStatus({
-          code: SpanStatusCode.ERROR,
+          code: 2, // SpanStatusCode.ERROR
           message: error.message,
         });
       }
@@ -121,7 +119,7 @@ This server:
 To run the server with OpenTelemetry, use these flags:
 
 ```sh
-OTEL_DENO=true OTEL_SERVICE_NAME=my-server deno run --allow-net server.ts
+OTEL_ENDE=true OTEL_SERVICE_NAME=my-server ende run --allow-net server.ts
 ```
 
 > [!TIP]
@@ -130,7 +128,7 @@ OTEL_DENO=true OTEL_SERVICE_NAME=my-server deno run --allow-net server.ts
 > to stderr:
 >
 > ```sh
-> OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console OTEL_SERVICE_NAME=my-server deno run --allow-net server.ts
+> OTEL_ENDE=true OTEL_EXPORTER_OTLP_PROTOCOL=console OTEL_SERVICE_NAME=my-server ende run --allow-net server.ts
 > ```
 
 ## Step 3: Create a Test Client
@@ -160,12 +158,12 @@ for (let i = 0; i < 10; i++) {
 In a separate terminal, run the client:
 
 ```sh
-deno run --allow-net client.ts
+ende run --allow-net client.ts
 ```
 
 ## Step 5: View the Telemetry Data
 
-By default, Deno exports telemetry data to `http://localhost:4318` using the
+By default, Ende exports telemetry data to `http://localhost:4318` using the
 OTLP protocol. You'll need an OpenTelemetry collector to receive and visualize
 this data.
 
@@ -214,7 +212,7 @@ In the Metrics view, you can query for:
 - `http_requests_total` - The counter tracking the number of HTTP requests
 - `http_request_duration_ms` - The histogram of request durations
 
-You can also see built-in Deno metrics like:
+You can also see built-in Ende metrics like:
 
 - `http.server.request.duration`
 - `http.server.active_requests`
@@ -228,16 +226,16 @@ trace context.
 
 If you're not seeing data in your collector:
 
-1. Check that you've set `OTEL_DENO=true`
+1. Check that you've set `OTEL_ENDE=true`
 2. Verify the collector is running and accessible at the default endpoint
 3. Check if you need to set `OTEL_EXPORTER_OTLP_ENDPOINT` to a different URL
-4. Look for errors in your Deno console output
+4. Look for errors in your Ende console output
 
-Remember that OpenTelemetry support in Deno is still marked as unstable and may
+Remember that OpenTelemetry support in Ende is still marked as unstable and may
 change in future versions.
 
 🦕 This tutorial provides a simple starting point for users who want to
-experiment with OpenTelemetry in Deno without diving into more complex concepts
+experiment with OpenTelemetry in Ende without diving into more complex concepts
 immediately.
 
 This basic example can be extended in many ways:

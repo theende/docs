@@ -3,13 +3,13 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/toml} std/toml
+ * @resource {https://jsr.io/@ende/toml} std/toml
  * @resource {https://toml.io} Spec: TOML
  * @group Encoding
  *
  * TOML is a widely used configuration language designed to be feature-rich and intuitive to write.
  */
-import { parse, stringify } from "jsr:@std/toml";
+import { parse, stringify } from "jsr:@ende/toml";
 
 // To parse a TOML string, you can use the standard library's TOML
 // parse function. The value is returned as a JavaScript object.
@@ -18,7 +18,7 @@ int = 1_000_000
 bool = true
 
 [[bin]]
-name = "deno"
+name = "ende"
 path = "cli/main.rs"
 
 [[bin]]

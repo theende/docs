@@ -1,17 +1,17 @@
 ---
 last_modified: 2026-06-18
 title: "Fetch and stream data"
-description: "A tutorial on working with network requests in Deno. Learn how to use the fetch API for HTTP requests, handle responses, implement data streaming, and manage file uploads and downloads."
+description: "A tutorial on working with network requests in Ende. Learn how to use the fetch API for HTTP requests, handle responses, implement data streaming, and manage file uploads and downloads."
 url: /examples/fetch_data_tutorial/
 oldUrl:
   - /runtime/manual/examples/fetch_data/
   - /runtime/tutorials/fetch_data/
 ---
 
-Deno brings several familiar Web APIs to the server-side environment. If you've
-worked with browsers you may recognize the [`fetch()`](/api/web/fetch) method
-and the [`streams`](/api/web/streams) API, which are used to make network
-requests and access streams of data over the network. Deno implements these
+Ende brings several familiar Web APIs to the server-side environment. If you've
+worked with browsers you may recognize the [`fetch()`](/api/web/fetch/) method
+and the [`streams`](/api/web/streams/) API, which are used to make network
+requests and access streams of data over the network. Ende implements these
 APIs, allowing you to fetch and stream data from the web.
 
 ## Fetching data
@@ -44,11 +44,11 @@ try {
 }
 ```
 
-You can run this code with the `deno run` command. Because it is fetching data
+You can run this code with the `ende run` command. Because it is fetching data
 across the network, you need to grant the `--allow-net` permission:
 
 ```sh
-deno run --allow-net fetch.js
+ende run --allow-net fetch.js
 ```
 
 You should see the JSON data, HTML data as text, and an error message in the
@@ -57,12 +57,12 @@ console.
 ### HTTP/2
 
 You don't need to do anything special to use HTTP/2. When you `fetch()` an
-`https://` URL, Deno negotiates the protocol with the server over TLS (via ALPN)
+`https://` URL, Ende negotiates the protocol with the server over TLS (via ALPN)
 and uses HTTP/2 automatically when the server supports it, falling back to
 HTTP/1.1 otherwise. The `fetch` API is the same either way, so the same code
 talks to HTTP/1.1 and HTTP/2 servers without changes.
 
-On the server side, [`Deno.serve()`](/api/deno/~/Deno.serve) also speaks HTTP/2
+On the server side, [`Ende.serve()`](/api/ende/~/Ende.serve/) also speaks HTTP/2
 automatically when serving over TLS.
 
 ## Streaming data
@@ -71,16 +71,16 @@ Sometimes you may want to send or receive large files over the network. When you
 don't know the size of a file in advance, streaming is a more efficient way to
 handle the data. The client can read from the stream until it says it is done.
 
-Deno provides a way to stream data using the `Streams API`. We'll look at how to
+Ende provides a way to stream data using the `Streams API`. We'll look at how to
 convert a file into a readable or writable stream and how to send and receive
 files using streams.
 
 Create a new file called `stream.js`.
 
 We'll use the `fetch` API to retrieve a file. Then we'll use the
-[`Deno.open`](/api/deno/Deno.open) method to create and open a writable file and
-the [`pipeTo`](/api/web/~/ReadableStream.pipeTo) method from the Streams API to
-send the byte stream to the created file.
+[`Ende.open`](/api/ende/~/Ende.open/) method to create and open a writable file
+and the [`pipeTo`](/api/web/~/ReadableStream/#pipeTo) method from the Streams
+API to send the byte stream to the created file.
 
 Next, we'll use the `readable` property on a `POST` request to send the byte
 stream of the file to a server.
@@ -90,13 +90,13 @@ stream of the file to a server.
 const fileResponse = await fetch("https://deno.land/logo.svg");
 
 if (fileResponse.body) {
-  const file = await Deno.open("./logo.svg", { write: true, create: true });
+  const file = await Ende.open("./logo.svg", { write: true, create: true });
 
   await fileResponse.body.pipeTo(file.writable);
 }
 
 // Sending a file
-const file = await Deno.open("./logo.svg", { read: true });
+const file = await Ende.open("./logo.svg", { read: true });
 
 await fetch("https://example.com/", {
   method: "POST",
@@ -104,12 +104,12 @@ await fetch("https://example.com/", {
 });
 ```
 
-You can run this code with the `deno run` command. Because it is fetching data
+You can run this code with the `ende run` command. Because it is fetching data
 across the network and writing to a file, you need to grant the `--allow-net`,
 `--allow-write` and `--allow-read` permissions:
 
 ```sh
-deno run --allow-read --allow-write --allow-net stream.js
+ende run --allow-read --allow-write --allow-net stream.js
 ```
 
 You should see the file `logo.svg` created and populated in the current
@@ -118,6 +118,6 @@ server.
 
 🦕 Now you know how to fetch and stream data across a network and how to stream
 that data to and from files! Whether you're serving static files, processing
-uploads, generating dynamic content or streaming large datasets, Deno’s file
+uploads, generating dynamic content or streaming large datasets, Ende’s file
 handling and streaming capabilities are great tools to have in your developer
 toolbox!

@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/async/doc/~/delay} Doc: @std/async delay
+ * @resource {https://jsr.io/@ende/async/doc/~/delay} Doc: @ende/async delay
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal} MDN: AbortSignal
  * @group Basics
  *
@@ -21,13 +21,8 @@ console.log("waiting...");
 await sleep(100);
 console.log("done"); // prints 100ms later
 
-// The same helper ships with the Node.js compatibility APIs as a promised
-// setTimeout, with an optional resolution value.
-import { setTimeout as nodeSleep } from "node:timers/promises";
-console.log(await nodeSleep(100, "woke up")); // woke up
-
-// The standard library provides the same thing as delay, with extras.
-import { delay } from "jsr:@std/async/delay";
+// The standard library provides a delay helper, with extras.
+import { delay } from "jsr:@ende/async/delay";
 await delay(100);
 
 // A delay accepts an AbortSignal, which makes it cancelable. Aborting

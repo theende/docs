@@ -7,25 +7,25 @@ const decoder = new TextDecoder();
 
 /** The `--unstable-*` flags an example declares in its `@run` line. The
  * typecheck below enables exactly the unstable APIs the example needs, so
- * it stays correct as Deno's flag set changes without a hardcoded list. */
+ * it stays correct as Ende's flag set changes without a hardcoded list. */
 function unstableFlags(run: string | undefined): string[] {
   return run?.match(/--unstable-[a-z-]+/g) ?? [];
 }
 
-async function typecheck(args: string[]): Promise<Deno.CommandOutput> {
-  return await new Deno.Command(Deno.execPath(), {
+async function typecheck(args: string[]): Promise<Ende.CommandOutput> {
+  return await new Ende.Command(Ende.execPath(), {
     args: ["check", ...args],
   }).output();
 }
 
-Deno.test("Check examples", async (t) => {
+Ende.test("Check examples", async (t) => {
   for await (const item of walk("./examples/scripts/")) {
     const path = join("examples/scripts", item.name);
 
     if (!path.endsWith(".ts")) continue;
 
     await t.step("Check graph: " + path, async () => {
-      const result = await new Deno.Command(Deno.execPath(), {
+      const result = await new Ende.Command(Ende.execPath(), {
         args: ["info", path],
       }).output();
       assertEquals(result.code, 0);
@@ -37,7 +37,7 @@ Deno.test("Check examples", async (t) => {
     // above only confirms imports resolve, not that the code still
     // compiles.
     await t.step("Typecheck: " + path, async () => {
-      const content = await Deno.readTextFile(path);
+      const content = await Ende.readTextFile(path);
       const parsed = parseExample(item.name, content);
       const flags = unstableFlags(parsed.run);
 
@@ -52,13 +52,13 @@ Deno.test("Check examples", async (t) => {
       // `// File:` markers, so they cannot be checked standalone.
       // Reconstruct the files into a temp directory and typecheck every
       // TypeScript entry together so cross-file imports resolve.
-      const dir = await Deno.makeTempDir();
+      const dir = await Ende.makeTempDir();
       try {
         const entries: string[] = [];
         for (const file of parsed.files) {
           const rel = file.name.replace(/^\.\//, "");
           const code = file.snippets.map((s) => s.code).join("\n");
-          await Deno.writeTextFile(join(dir, rel), code);
+          await Ende.writeTextFile(join(dir, rel), code);
           if (rel.endsWith(".ts") || rel.endsWith(".js")) {
             entries.push(join(dir, rel));
           }
@@ -66,7 +66,7 @@ Deno.test("Check examples", async (t) => {
         const result = await typecheck([...flags, ...entries]);
         assertEquals(result.code, 0, decoder.decode(result.stderr));
       } finally {
-        await Deno.remove(dir, { recursive: true });
+        await Ende.remove(dir, { recursive: true });
       }
     });
   }

@@ -1,42 +1,30 @@
 ---
 last_modified: 2026-07-15
-title: "deno upgrade"
+title: "ende upgrade"
 oldUrl: /runtime/manual/tools/upgrade/
 command: upgrade
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno upgrade"
-description: "Upgrade Deno to the latest, or any specific version"
+openGraphTitle: "ende upgrade"
+description: "Upgrade Ende to the latest, or any specific version"
 ---
 
 ## Examples
 
 ### Upgrade to the latest version
 
-Use this command without any options to upgrade Deno to the latest available
-version:
+Use this command without any options to upgrade Ende to the latest release, the
+one named in `https://dl.ende.sh/release-latest.txt`:
 
 ```sh
-deno upgrade
-Checking for latest version
-Version has been found
-Deno is upgrading to version 1.38.5
-downloading https://github.com/denoland/deno/releases/download/v1.38.5/deno-x86_64-apple-darwin.zip
-downloading 100%
-Upgrade done successfully
+ende upgrade
 ```
 
 ### Upgrade to a specific version
 
-You can specify a particular version to upgrade to:
+You can specify a particular release to upgrade to:
 
 ```sh
-deno upgrade --version 1.37.0
-Checking for version 1.37.0
-Version has been found
-Deno is upgrading to version 1.37.0
-downloading https://github.com/denoland/deno/releases/download/v1.37.0/deno-x86_64-apple-darwin.zip
-downloading 100%
-Upgrade done successfully
+ende upgrade 2026.10.14
 ```
 
 ### Check available upgrade without installing
@@ -45,58 +33,21 @@ Use the `--dry-run` flag to see what would be upgraded without actually
 performing the upgrade:
 
 ```sh
-deno upgrade --dry-run
-Checking for latest version
-Version has been found
-Would upgrade to version 1.38.5
+ende upgrade --dry-run
+Current Ende version: v2026.10.14
+Looking up latest version
+
+Found latest version v2026.10.17
 ```
-
-## Channels
-
-`deno upgrade` works one channel at a time. With no argument it upgrades to the
-latest **stable** release. Pass a channel name to move to that channel's latest
-build instead:
-
-```sh
-# Latest stable release (the default)
-deno upgrade
-
-# Latest long term support (LTS) release
-deno upgrade lts
-
-# Latest release candidate
-deno upgrade rc
-
-# Latest canary build
-deno upgrade canary
-```
-
-A bare version number is always a **stable** coordinate. `deno upgrade 2.9.3`
-installs the stable build of 2.9.3, even when the same version number also ships
-on another channel:
-
-```sh
-deno upgrade 2.9.3
-```
-
-Because of this, if you are on the LTS channel and run `deno upgrade 2.9.3`, you
-download the stable build and move off LTS onto stable. To stay on LTS, upgrade
-with `deno upgrade lts`.
-
-Note that `deno upgrade lts` always installs the latest LTS release. There is no
-version-number form that selects a specific LTS build, since a version number
-always resolves to the stable channel. For the full mental model of channels and
-how the same version number can be two different builds, see
-[Stability and releases](/runtime/fundamentals/stability_and_releases/#choosing-a-channel).
 
 ## --quiet flag
 
 The `--quiet` flag suppresses diagnostic output during the upgrade process. When
-used with `deno upgrade`, it will hide progress indicators, download
+used with `ende upgrade`, it will hide progress indicators, download
 information, and success messages.
 
 ```sh
-deno upgrade --quiet
+ende upgrade --quiet
 ```
 
 This is useful for scripting environments or when you want cleaner output in CI
@@ -104,10 +55,8 @@ pipelines.
 
 ## Cached downloads
 
-Downloaded Deno binaries are cached in `$DENO_DIR/dl/`. If you reinstall the
-same version later, the cached archive is reused instead of re-downloading. For
-canary builds, old entries are automatically removed, keeping only the 10 most
-recent versions.
+Downloaded Ende binaries are cached in `$ENDE_DIR/dl/`. If you reinstall the
+same version later, the cached archive is reused instead of re-downloading.
 
 ## Checksum verification
 
@@ -116,70 +65,59 @@ hash. This protects against tampering in CI environments and security-sensitive
 setups:
 
 ```sh
-deno upgrade --checksum=<sha256-hash> 2.7.0
+ende upgrade --checksum=<sha256-hash> 2026.10.17
 ```
 
 SHA-256 checksums are published as `.sha256sum` files alongside release archives
 on GitHub:
 
 ```sh
-curl -sL https://github.com/denoland/deno/releases/download/v2.7.0/deno-x86_64-unknown-linux-gnu.zip.sha256sum
+curl -sL https://github.com/theende/ende/releases/download/v2026.10.17/ende-x86_64-unknown-linux-gnu.zip.sha256sum
 ```
 
 ## Delta updates
 
-Starting in Deno 2.8, `deno upgrade` downloads small binary patches (deltas)
-instead of the full release archive when upgrading between recent stable
-versions. This typically reduces the download from tens of megabytes to a few
-megabytes.
+`ende upgrade` downloads small binary patches (deltas) instead of the full
+release archive when upgrading between recent stable releases. This typically
+reduces the download from tens of megabytes to a few megabytes.
 
 Deltas are applied automatically when available, there is nothing to opt into.
-If a patch is missing or fails verification, `deno upgrade` transparently falls
+If a patch is missing or fails verification, `ende upgrade` transparently falls
 back to downloading the full archive.
 
 To force a full download (for example, in environments that cache release
 archives) pass `--no-delta`:
 
 ```sh
-deno upgrade --no-delta
+ende upgrade --no-delta
 ```
 
 Each delta patch and the resulting binary are verified against the SHA-256
 checksums published with the release before being installed.
 
-## Canary build
-
-By default, Deno will upgrade from the official GitHub releases. You can specify
-the `--canary` build flag for the latest canary build:
-
-```sh
-# Upgrade to the latest canary build
-deno upgrade --canary
-```
-
 ## Install a build from a pull request
 
-Starting in Deno 2.8, `deno upgrade pr <number>` downloads the binary built by
-CI for a specific deno PR and installs it. This is handy when you need to verify
-a fix before it has shipped in a release.
+`ende upgrade pr <number>` downloads the binary built by CI for a specific ende
+PR and installs it. This is handy when you need to verify a fix before it has
+shipped in a release.
 
 ```sh
 # Install the binary built by CI for PR #12345
-deno upgrade pr 12345
+ende upgrade pr 12345
 
 # A `#` prefix is also accepted
-deno upgrade pr '#12345'
+ende upgrade pr '#12345'
 
 # Write to a path instead of replacing the current binary
-deno upgrade --output ./deno-test pr 12345
+ende upgrade --output ./ende-test pr 12345
 
 # See what would be downloaded without replacing
-deno upgrade --dry-run pr 12345
+ende upgrade --dry-run pr 12345
 ```
 
 This subcommand requires the [`gh` CLI](https://cli.github.com/) to be installed
-and authenticated. `deno upgrade` uses `gh` to look up the PR's CI run and
-download the matching `{profile}-{os}-{arch}-deno` artifact (for example
-`release-linux-x86_64-deno`), preferring release builds and falling back to
+and authenticated. `ende upgrade` uses `gh` to look up the PR's CI run and
+download the matching `{profile}-{os}-{arch}-ende` artifact (for example
+`release-linux-x86_64-ende`), preferring release builds and falling back to
 debug. The downloaded binary is verified to run before it replaces the current
 executable.

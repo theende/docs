@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.listen} Doc: Deno.listen
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.listen} Doc: Ende.listen
  * @group Network
  *
  * An example of a TCP listener on localhost that will log the message if written to and close the connection if connected to.
@@ -13,7 +13,7 @@
 const decoder = new TextDecoder();
 
 // Instantiate an instance of a TCP listener on localhost port 8080.
-const listener = Deno.listen({
+const listener = Ende.listen({
   hostname: "127.0.0.1",
   port: 8080,
   transport: "tcp",

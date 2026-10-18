@@ -5,7 +5,7 @@
  * @run <url>
  * @group Cryptography
  *
- * This example demonstrates AES encryption and decryption using Deno's built-in SubtleCrypto API.
+ * This example demonstrates AES encryption and decryption using Ende's built-in SubtleCrypto API.
  */
 
 // Define the text to be encrypted

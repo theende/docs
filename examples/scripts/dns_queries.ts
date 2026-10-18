@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run -N <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.resolveDns} Doc: Deno.resolveDns
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.resolveDns} Doc: Ende.resolveDns
  * @resource {https://developer.mozilla.org/en-US/docs/Glossary/DNS} MDN: DNS
  * @group Network
  *
@@ -14,18 +14,18 @@
 
 // In the most basic basic case, we can query a domain's A record.
 // This will give us a list of ipv4 addresses.
-const a = await Deno.resolveDns("example.com", "A");
+const a = await Ende.resolveDns("example.com", "A");
 console.log(a);
 
 // We can also query other record types. In this case we are querying
-// an MX record which is related to email protocols. Deno supports querying
+// an MX record which is related to email protocols. Ende supports querying
 // A, AAAA, ANAME, CAA, CNAME, MX, NAPTR, NS, PTR, SOA, SRV, and TXT records.
-const mx = await Deno.resolveDns("example.com", "MX");
+const mx = await Ende.resolveDns("example.com", "MX");
 console.log(mx);
 
 // We are also optionally able to specify a nameserver via an ip address
 // and (optionally) a port number. To override the system configuration.
-const aaaa = await Deno.resolveDns("example.com", "AAAA", {
+const aaaa = await Ende.resolveDns("example.com", "AAAA", {
   nameServer: { ipAddr: "8.8.8.8", port: 53 },
 });
 console.log(aaaa);

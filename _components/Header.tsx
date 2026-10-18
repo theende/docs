@@ -6,7 +6,7 @@ export default function Header(
 ) {
   return (
     <header>
-      <a href="/">Deno Docs</a>
+      <a href="/">Ende Docs</a>
       <nav aria-label="Main">
         <ul>
           {navigation.map((link) => (

@@ -1,15 +1,10 @@
 ---
 last_modified: 2026-08-06
 title: "Distribution"
-description: "Cross-compile a deno desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats: .app, .dmg, .exe directory, AppImage."
+description: "Cross-compile a ende desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats: .app, .dmg, .exe directory, AppImage."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-`deno desktop` cross-compiles from any host. The same machine builds for macOS
+`ende desktop` cross-compiles from any host. The same machine builds for macOS
 Intel, macOS arm64, Windows x86_64, Linux arm64, and Linux x86_64. Backend
 binaries (CEF, WebView, etc.) are downloaded as needed.
 
@@ -17,13 +12,13 @@ binaries (CEF, WebView, etc.) are downloaded as needed.
 
 ```sh
 # Build for the host platform.
-deno desktop main.ts
+ende desktop main.ts
 
 # Build for a specific target.
-deno desktop --target aarch64-apple-darwin main.ts
+ende desktop --target aarch64-apple-darwin main.ts
 
 # Build for every supported target in one go.
-deno desktop --all-targets main.ts
+ende desktop --all-targets main.ts
 ```
 
 Supported triples:
@@ -36,7 +31,7 @@ Supported triples:
 | `aarch64-unknown-linux-gnu` | Linux   | arm64        |
 | `x86_64-unknown-linux-gnu`  | Linux   | x86_64       |
 
-The CLI fetches the matching prebuilt `denort` and the matching prebuilt backend
+The CLI fetches the matching prebuilt `endert` and the matching prebuilt backend
 archive automatically. No platform-specific toolchain is needed on the host.
 
 ## Output formats
@@ -66,8 +61,8 @@ MyApp.app/
 ```
 
 Self-extracting mode is enabled by default: the embedded virtual filesystem
-(your code, framework build outputs, static assets) extracts to disk on first
-run so frameworks like Next.js find their build output relative to CWD.
+(your code and static assets) extracts to disk on first run so code that reads
+files relative to CWD finds them.
 
 ### Windows
 
@@ -81,7 +76,7 @@ The `MyApp/` directory contains:
 ```
 MyApp/
   MyApp.bat               # launcher
-  denort.dll              # Deno runtime + your code
+  endert.dll              # Ende runtime + your code
   *.dll                   # rendering backend and CEF libraries
   resources.pak, locales/ # CEF support files
   AppIcon.ico             # icon (optional)
@@ -108,14 +103,14 @@ The app directory layout:
 ```
 my-app/
   my-app                  # launcher shell script
-  libdenort.so            # Deno runtime + your code
+  libendert.so            # Ende runtime + your code
   *.so                    # rendering backend and CEF libraries
   resources.pak, locales/ # CEF support files
   AppIcon.png             # icon (optional)
 ```
 
 `AppImage` is the most portable Linux format: one file, no install step, runs on
-any modern distro. `deno desktop` builds it directly: it packs the app directory
+any modern distro. `ende desktop` builds it directly: it packs the app directory
 into a SquashFS image and prepends the AppImage Type-2 runtime, adding the
 required `AppRun`, `.desktop`, and icon entries. There is no external tool to
 install (no `appimagetool`), and it works from any build host, so you can
@@ -137,11 +132,11 @@ about 66 MB to 19 MB, in exchange for a one-time decompression on first launch.
 
 ```sh
 # Self-extracting, compressed bundle
-deno desktop --compress main.ts
+ende desktop --compress main.ts
 
 # Choose the codec explicitly
-deno desktop --compress=xz main.ts
-deno desktop --compress=zstd main.ts
+ende desktop --compress=xz main.ts
+ende desktop --compress=zstd main.ts
 ```
 
 `xz` produces the smaller artifact; `zstd` trades some size for faster
@@ -152,15 +147,15 @@ first-launch decompression.
 The output path can be set in three places, in priority order:
 
 1. The `--output` CLI flag.
-2. The `desktop.output` field in `deno.json` (per-platform).
+2. The `desktop.output` field in `ende.json` (per-platform).
 3. The default: the project name, with the platform-appropriate extension.
 
 ```sh
 # Override per build:
-deno desktop --output ./builds/MyApp-1.4.0.dmg main.ts
+ende desktop --output ./builds/MyApp-1.4.0.dmg main.ts
 ```
 
-```jsonc title="deno.json"
+```jsonc title="ende.json"
 {
   "desktop": {
     "output": {
@@ -176,14 +171,14 @@ deno desktop --output ./builds/MyApp-1.4.0.dmg main.ts
 
 Cross-compiling from one OS to another requires:
 
-- The right `denort` binary for the target. Downloaded automatically from
-  `github.com/denoland/deno/releases`, matching your local Deno version.
+- The right `endert` binary for the target. Downloaded automatically from
+  `github.com/theende/ende/releases`, matching your local Ende version.
 - The right backend archive for the target. Downloaded automatically, pinned to
-  your Deno version.
+  your Ende version.
 
-Both downloads are SHA-256 verified and cached under `<deno_dir>/`.
+Both downloads are SHA-256 verified and cached under `<ende_dir>/`.
 
-`deno desktop` also accepts `--engine v8|quickjs`, which selects the JavaScript
+`ende desktop` also accepts `--engine v8|quickjs`, which selects the JavaScript
 engine inside the downloaded runtime library. V8 is the default; the
 experimental QuickJS build is smaller but does not receive the same security
 updates. See
@@ -193,7 +188,7 @@ for the full trade-offs.
 There is **no Rust toolchain involved** in cross-compiling a desktop app. You
 are not compiling Rust on the host; you are downloading prebuilt artifacts for
 the target and packaging them with your code. This is the same model as
-`deno compile --target`.
+`ende compile --target`.
 
 Icon assembly (`.icns`, `.ico`) and the Linux `.AppImage` are produced on any
 host. The one exception is the macOS `.dmg`, which shells out to `hdiutil` and
@@ -217,9 +212,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
+      - name: Install Ende
+        run: |
+          curl -fsSL https://ende.sh/install.sh | sh
+          echo "$HOME/.ende/bin" >> "$GITHUB_PATH"
 
-      - run: deno desktop --target ${{ matrix.target }} main.ts
+      - run: ende desktop --target ${{ matrix.target }} main.ts
 
       - uses: actions/upload-artifact@v4
         with:
@@ -233,7 +231,7 @@ Cross-compiling from a single host (e.g. only running on `ubuntu-latest` with
 
 ## Code signing
 
-On macOS, `deno desktop` code-signs the bundle for you. By default it applies an
+On macOS, `ende desktop` code-signs the bundle for you. By default it applies an
 **ad-hoc** signature (`-`), which gives the app a stable code identity, enough
 for the OS to grant [notification](/runtime/desktop/notifications/) permission,
 but not enough to distribute without Gatekeeper warnings. The CEF helper
@@ -241,10 +239,10 @@ processes' bundle identifiers are harmonized with the main bundle id
 automatically.
 
 To produce a distributable, notarizable bundle, set a real signing identity in
-`deno.json` (signing must run on a macOS host, since it shells out to
+`ende.json` (signing must run on a macOS host, since it shells out to
 `codesign(1)`):
 
-```jsonc title="deno.json"
+```jsonc title="ende.json"
 {
   "desktop": {
     "app": { "identifier": "com.example.myapp" },
@@ -259,12 +257,12 @@ With a real identity, the bundle is signed with Hardened Runtime and a secure
 timestamp. **Notarization is still a separate step**. Submit the signed bundle
 with `xcrun notarytool submit` and staple the ticket.
 
-On Windows, sign the produced executables (the backend `.exe` and `denort.dll`
+On Windows, sign the produced executables (the backend `.exe` and `endert.dll`
 in the output directory) externally for now, e.g.
 `signtool sign /f cert.pfx /tr <timestamp> <file>`.
 
 ## Distributing updates after release
 
 Once your binary is in users' hands, ship updates via
-[`Deno.autoUpdate()`](/runtime/desktop/auto_update/): `bsdiff` patches shipped
+[`Ende.autoUpdate()`](/runtime/desktop/auto_update/): `bsdiff` patches shipped
 from your own server, no app store required.

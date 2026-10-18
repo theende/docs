@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-03-13
 title: "Contributing and support"
-description: "Guide to contributing to the Deno project and ecosystem. Learn about different Deno repositories, contribution guidelines, and how to submit effective pull requests."
+description: "Guide to contributing to the Ende project and ecosystem. Learn about different Ende repositories, contribution guidelines, and how to submit effective pull requests."
 oldUrl:
   - /runtime/manual/contributing/
   - /runtime/manual/contributing/contribute
@@ -11,69 +11,42 @@ oldUrl:
   - /runtime/contributing/examples/
 ---
 
-We welcome and appreciate all contributions to Deno.
+We welcome and appreciate all contributions to Ende.
 
 This page serves as a helper to get you started on contributing.
 
 ## Projects
 
-There are numerous repositories in the [`denoland`](https://github.com/denoland)
-organization that are part of the Deno ecosystem.
+Ende is developed in a few repositories under the
+[`theende`](https://github.com/theende) organization:
 
-Repositories have different scopes, use different programming languages and have
-varying difficulty level when it comes to contributions.
+### [ende](https://github.com/theende/ende)
 
-To help you decide which repository might be the best to start contributing
-(and/or falls into your interest), here's a short comparison (**codebases
-primarily comprise the languages in bold**):
-
-### [deno](https://github.com/denoland/deno)
-
-This is the main repository that provides the `deno` CLI.
+This is the main repository that provides the `ende` CLI.
 
 Languages: **Rust**, **JavaScript**, **TypeScript**
 
-### [deno_std](https://github.com/denoland/deno_std)
+### [std](https://github.com/theende/std)
 
-The standard library for Deno.
+The standard library for Ende, published as `@ende/*` on JSR.
 
 Languages: **TypeScript**, WebAssembly
 
-### [fresh](https://github.com/denoland/fresh)
+### [satz](https://github.com/theende/satz)
 
-The next-gen web framework.
+The static site generator this documentation is built with.
 
 Languages: **TypeScript**, TSX
 
-### [deno_lint](https://github.com/denoland/deno_lint)
+### [docs](https://github.com/theende/docs)
 
-Linter that powers `deno lint` subcommand.
+This documentation.
 
-Languages: **Rust**
+Languages: **Markdown**, **TypeScript**
 
-### [deno_doc](https://github.com/denoland/deno_doc)
-
-Documentation generator that powers `deno doc` subcommand, and reference
-documentation on https://docs.deno.com/api, and https://jsr.io.
-
-Languages: **Rust**
-
-### [rusty_v8](https://github.com/denoland/rusty_v8)
-
-Rust bindings for the V8 JavaScript engine. Very technical and low-level.
-
-Languages: **Rust**
-
-### [serde_v8](https://github.com/denoland/deno_core/tree/main/serde_v8)
-
-Library that provides bijection layer between V8 and Rust objects. Based on
-[`serde`](https://crates.io/crates/serde) library. Very technical and low-level.
-
-Languages: **Rust**
-
-### [deno_docker](https://github.com/denoland/deno_docker)
-
-Official Docker images for Deno.
+Ende also builds on libraries from the [`denoland`](https://github.com/denoland)
+organization, such as [rusty_v8](https://github.com/denoland/rusty_v8) and
+[deno_lint](https://github.com/denoland/deno_lint).
 
 ## General remarks
 
@@ -81,7 +54,7 @@ Official Docker images for Deno.
 
 - Please don't make [the benchmarks](https://deno.land/benchmarks) worse.
 
-- Ask for help in the [community chat room](https://discord.gg/deno).
+- Ask for help in the [community chat room](https://discord.gg/ende).
 
 - If you are going to work on an issue, mention so in the issue's comments
   _before_ you start working on the issue.
@@ -125,7 +98,7 @@ together.
 
 ### JavaScript and TypeScript
 
-All publicly exposed APIs and types, both via the `deno` module as well as the
+All publicly exposed APIs and types, both via the `ende` module as well as the
 global/`window` namespace should have JSDoc documentation. This documentation is
 parsed and available to the TypeScript compiler, and therefore easy to provide
 further downstream. JSDoc blocks come just prior to the statement they apply to
@@ -153,12 +126,12 @@ verify your optimizations are effective.
 ### Using Samply
 
 [Samply](https://github.com/mstange/samply) is a sampling profiler for macOS and
-Linux that works well with Deno. It produces flamegraphs that help you visualize
+Linux that works well with Ende. It produces flamegraphs that help you visualize
 where CPU time is being spent.
 
 ```sh
 # Basic usage
-samply record -r 20000 deno run -A main.js
+samply record -r 20000 ende run -A main.js
 ```
 
 You can analyze the generated flamegraph to identify:

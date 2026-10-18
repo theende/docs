@@ -1,44 +1,44 @@
 ---
 last_modified: 2026-06-17
-title: "deno completions"
+title: "ende completions"
 oldUrl: /runtime/manual/tools/completions/
 command: completions
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno completions"
-description: "Generate shell completions for Deno"
+openGraphTitle: "ende completions"
+description: "Generate shell completions for Ende"
 ---
 
-You can use the output script to configure autocompletion for `deno` commands.
-For example: `deno un` -> <kbd>Tab</kbd> -> `deno uninstall`.
+You can use the output script to configure autocompletion for `ende` commands.
+For example: `ende un` -> <kbd>Tab</kbd> -> `ende uninstall`.
 
 > [!NOTE]
-> If you installed Deno with Homebrew, shell completions are installed and kept
+> If you installed Ende with Homebrew, shell completions are installed and kept
 > up to date for you, as long as your shell is configured to load completions
 > from Homebrew's completions directory. In that case you do not need to run
-> `deno completions` manually.
+> `ende completions` manually.
 
 ## Examples
 
 ### Configure Bash shell completion
 
 ```sh
-deno completions bash > deno.bash
+ende completions bash > ende.bash
 
 if [ -d "/usr/local/etc/bash_completion.d/" ]; then
-  sudo mv deno.bash /usr/local/etc/bash_completion.d/
-  source /usr/local/etc/bash_completion.d/deno.bash
+  sudo mv ende.bash /usr/local/etc/bash_completion.d/
+  source /usr/local/etc/bash_completion.d/ende.bash
 elif [ -d "/usr/share/bash-completion/completions/" ]; then
-  sudo mv deno.bash /usr/share/bash-completion/completions/
-  source /usr/share/bash-completion/completions/deno.bash
+  sudo mv ende.bash /usr/share/bash-completion/completions/
+  source /usr/share/bash-completion/completions/ende.bash
 else
-  echo "Please move deno.bash to the appropriate bash completions directory"
+  echo "Please move ende.bash to the appropriate bash completions directory"
 fi
 ```
 
 ### Configure PowerShell shell completion
 
 ```sh
-deno completions powershell | Out-String | Invoke-Expression
+ende completions powershell | Out-String | Invoke-Expression
 ```
 
 ### Configure zsh shell completion
@@ -54,14 +54,14 @@ compinit
 Then run the following commands:
 
 ```sh
-deno completions zsh > _deno
-mv _deno ~/.zsh/completion/_deno
+ende completions zsh > _ende
+mv _ende ~/.zsh/completion/_ende
 autoload -U compinit && compinit
 ```
 
 ### Configure fish shell completion
 
 ```sh
-deno completions fish > completions.fish
+ende completions fish > completions.fish
 chmod +x ./completions.fish
 ```

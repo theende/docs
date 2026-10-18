@@ -4,9 +4,6 @@
 // following redirect pages. Redirect pages are checked too: the go links
 // (`/go/<name>/`) are printed by the CLI.
 //
-// Links into the API and standard library reference are listed as pending
-// rather than broken: that reference isn't generated yet.
-//
 //   ende task build && ende task check:links
 
 import { walk } from "@ende/fs/walk";
@@ -17,7 +14,6 @@ const root = decodeURIComponent(SITE.pathname);
 const ATTRIBUTE = /\s(?:href|src)="([^"]*)"/g;
 const ID = /\s(?:id|name)="([^"]*)"/g;
 const REDIRECT = /<meta http-equiv="refresh" content="0; url=([^"]*)">/;
-const PENDING = ["/api/", "/runtime/reference/std/"];
 
 const pages = new Map<string, string>();
 
@@ -100,7 +96,6 @@ async function check(link: string, from: URL): Promise<string | undefined> {
 }
 
 const broken: string[] = [];
-const pending = new Set<string>();
 let links = 0;
 
 for await (const entry of walk(root, { exts: [".html"], includeDirs: false })) {
@@ -120,16 +115,6 @@ for await (const entry of walk(root, { exts: [".html"], includeDirs: false })) {
     ) continue;
 
     links++;
-    const target = new URL(link, base);
-
-    if (
-      target.origin === base.origin &&
-      PENDING.some((prefix) => target.pathname.startsWith(prefix))
-    ) {
-      pending.add(target.pathname);
-      continue;
-    }
-
     const problem = await check(link, base);
 
     if (problem) broken.push(`/${path}: ${link} (${problem})`);
@@ -142,6 +127,4 @@ if (broken.length > 0) {
   Ende.exit(1);
 }
 
-console.log(
-  `All ${links} internal links resolve, apart from links to ${pending.size} pending reference pages`,
-);
+console.log(`All ${links} internal links resolve`);

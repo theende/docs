@@ -79,7 +79,7 @@ export function parseExample(id: string, file: string): Example {
         trimmedLine.startsWith("// deno-fmt-ignore") ||
         trimmedLine.startsWith("//deno-fmt-ignore")
       ) {
-        // skip deno directives
+        // skip ende directives
       } else if (trimmedLine.startsWith("//-")) {
         code += line.replace("//-", "//") + "\n";
       } else if (trimmedLine.startsWith("//")) {
@@ -100,7 +100,7 @@ export function parseExample(id: string, file: string): Example {
         trimmedLine.startsWith("// deno-fmt-ignore") ||
         trimmedLine.startsWith("//deno-fmt-ignore")
       ) {
-        // skip deno directives
+        // skip ende directives
       } else if (trimmedLine.startsWith("//")) {
         text += " " + trimmedLine.slice(2).trim();
       } else {
@@ -138,7 +138,7 @@ export function parseExample(id: string, file: string): Example {
 
   const additionalResources: [string, string][] = [];
   for (const resource of resources) {
-    // @resource {https://jsr.io/@std/http/server/~/} std/http/server
+    // @resource {https://jsr.io/@ende/http/server/~/} std/http/server
     const [_, url, title] = resource.match(/^\{(.*?)\}\s(.*)/) || [];
     if (!url || !title) {
       throw new Error(`Invalid resource: ${resource}`);

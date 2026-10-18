@@ -1,14 +1,14 @@
 ---
 last_modified: 2026-06-17
 title: "Executable scripts"
-description: "Guide to creating executable scripts with Deno. Learn about hashbangs, file permissions, cross-platform compatibility, and how to create command-line tools that can run directly from the terminal."
+description: "Guide to creating executable scripts with Ende. Learn about hashbangs, file permissions, cross-platform compatibility, and how to create command-line tools that can run directly from the terminal."
 url: /examples/hashbang_tutorial/
 oldUrl:
   - /runtime/manual/examples/hashbang/
   - /runtime/tutorials/hashbang/
 ---
 
-Making Deno scripts executable can come in handy when creating small tools or
+Making Ende scripts executable can come in handy when creating small tools or
 utilities for tasks like file manipulation, data processing or repetitive tasks
 that you might want to run from the command line. Executable scripts allow you
 to create ad-hoc solutions without setting up an entire project.
@@ -26,35 +26,35 @@ that should be used to run the script.
 > [Git Bash](https://git-scm.com/downloads).
 
 We'll make a small command-line greeter that reads its first argument from
-[Deno.args](/api/deno/~/Deno.args) and falls back to a default when none is
-supplied. This is the shape almost every Deno CLI tool starts with.
+[Ende.args](/api/ende/~/Ende.args/) and falls back to a default when none is
+supplied. This is the shape almost every Ende CLI tool starts with.
 
 Create a file named `hashbang.ts` with the following content:
 
 ```ts title="hashbang.ts"
-#!/usr/bin/env -S deno run
-const name = Deno.args[0] ?? "world";
+#!/usr/bin/env -S ende run
+const name = Ende.args[0] ?? "world";
 
 console.log(`Hello, ${name}!`);
 ```
 
 The first line is the hashbang. It tells the system to run the file with
-`/usr/bin/env`, which then locates `deno` on your `PATH` and invokes `deno run`
-on the script. The `-S` flag splits `deno run` into separate arguments so `env`
+`/usr/bin/env`, which then locates `ende` on your `PATH` and invokes `ende run`
+on the script. The `-S` flag splits `ende run` into separate arguments so `env`
 treats them correctly; without `-S` the whole string would be passed as a single
-argument name and `env` would fail to find a program called `deno run`. There
-are no `--allow-*` flags here because the script only reads from `Deno.args`,
-which is always available. Deno prompts for permissions only when the script
+argument name and `env` would fail to find a program called `ende run`. There
+are no `--allow-*` flags here because the script only reads from `Ende.args`,
+which is always available. Ende prompts for permissions only when the script
 tries to use a sandboxed API.
 
 > [!NOTE]
 > The `-S` flag is an extension provided by GNU coreutils and BSD/macOS `env`.
 > It is not part of POSIX, so on systems that ship a more minimal `env` (for
 > example some embedded or BusyBox environments) the hashbang may not work. On
-> those systems, run the script explicitly with `deno run script.ts` instead.
+> those systems, run the script explicitly with `ende run script.ts` instead.
 
-`Deno.args` is an array of the arguments that follow the script name on the
-command line. `Deno.args[0]` is the first one; `?? "world"` substitutes
+`Ende.args` is an array of the arguments that follow the script name on the
+command line. `Ende.args[0]` is the first one; `?? "world"` substitutes
 `"world"` when no argument was supplied.
 
 ### Execute the script
@@ -84,13 +84,13 @@ run the script with just the file name:
 
 ```shell title="my_script"
 $ cat my_script
-#!/usr/bin/env -S deno run --allow-env --ext=js
+#!/usr/bin/env -S ende run --allow-env --ext=js
 console.log("Hello!");
 $ ./my_script
 Hello!
 ```
 
-🦕 Now you can directly execute Deno scripts from the command line! Remember to
+🦕 Now you can directly execute Ende scripts from the command line! Remember to
 set the execute permission (`chmod +x`) for your script file, and you’re all set
 to build anything from simple utilities to complex tools. Check out the
-[Deno examples](/examples/) for inspiration on what you can script.
+[Ende examples](/examples/) for inspiration on what you can script.

@@ -1,19 +1,14 @@
 ---
 last_modified: 2026-06-25
 title: "Notifications"
-description: "Show native OS notifications from deno desktop apps with the standard Web Notifications API: permission flow, options, and events."
+description: "Show native OS notifications from ende desktop apps with the standard Web Notifications API: permission flow, options, and events."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-`deno desktop` implements the standard
+`ende desktop` implements the standard
 [Web Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notification).
 The same `Notification` constructor you would use in a browser shows a **native
 OS notification** (macOS User Notifications, Windows toast notifications, or the
-Linux desktop notification service) from your Deno-side code.
+Linux desktop notification service) from your Ende-side code.
 
 ```ts
 const n = new Notification("Build complete", {
@@ -23,8 +18,8 @@ const n = new Notification("Build complete", {
 n.addEventListener("click", () => win.focus()); // bring the app to front
 ```
 
-`Notification` is only defined in apps compiled with `deno desktop`. In a plain
-`deno run` script it does not exist.
+`Notification` is only defined in apps compiled with `ende desktop`. In a plain
+`ende run` script it does not exist.
 
 ## Permissions
 
@@ -64,7 +59,7 @@ are shown without an explicit grant.
 > [!NOTE] macOS requires a code-signed bundle
 >
 > macOS only hands out notification permission to an app with a stable code
-> identity. `deno desktop` ad-hoc-signs every bundle it produces (and re-signs
+> identity. `ende desktop` ad-hoc-signs every bundle it produces (and re-signs
 > the cached runtime in `--hmr` mode) so this works out of the box. See
 > [Distribution](/runtime/desktop/distribution/#code-signing) for configuring a
 > real signing identity.
@@ -104,9 +99,9 @@ round-trip through the `icon` property, but the OS notification is shown without
 an icon. To use a file on disk, read it and encode it as a `data:` URL:
 
 ```ts
-import { encodeBase64 } from "jsr:@std/encoding/base64";
+import { encodeBase64 } from "jsr:@ende/encoding/base64";
 
-const bytes = await Deno.readFile("./icons/alert.png");
+const bytes = await Ende.readFile("./icons/alert.png");
 const dataUrl = "data:image/png;base64," + encodeBase64(bytes);
 new Notification("Heads up", { icon: dataUrl });
 ```

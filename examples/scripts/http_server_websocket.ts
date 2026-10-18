@@ -10,8 +10,8 @@
  * An example of an HTTP server that handles websocket requests.
  */
 
-// To start the server on the default port, call `Deno.serve` with the handler.
-Deno.serve((req) => {
+// To start the server on the default port, call `Ende.serve` with the handler.
+Ende.serve((req) => {
   // First, we verify if the client is negotiating to upgrade to websockets.
   // If not, we can give a status of 426 to specify we don't support plain
   // http requests.
@@ -20,7 +20,7 @@ Deno.serve((req) => {
   }
 
   // We can then upgrade the request to a websocket
-  const { socket, response } = Deno.upgradeWebSocket(req);
+  const { socket, response } = Ende.upgradeWebSocket(req);
 
   // We now have access to a standard websocket object.
   // Let's handle the "open" event

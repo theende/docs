@@ -1,7 +1,7 @@
 ---
 last_modified: 2025-04-11
 title: "Write a file server"
-description: "Tutorial on building a file server with Deno. Learn how to handle HTTP requests, serve static files, implement streaming responses, and use the standard library's file server module for production deployments."
+description: "Tutorial on building a file server with Ende. Learn how to handle HTTP requests, serve static files, implement streaming responses, and use the standard library's file server module for production deployments."
 url: /examples/file_server_tutorial/
 oldUrl:
   - /runtime/manual/examples/file_server/
@@ -10,17 +10,17 @@ oldUrl:
 
 A file server listens for incoming HTTP requests and serves files from the local
 file system. This tutorial demonstrates how to create a simple file server using
-Deno's built-in [file system APIs](/api/deno/file-system).
+Ende's built-in [file system APIs](/api/ende/file-system/).
 
 ## Write a simple File Server
 
 To start, create a new file called `file-server.ts`.
 
-We'll use Deno's built in [HTTP server](/api/deno/~/Deno.serve) to listen for
+We'll use Ende's built in [HTTP server](/api/ende/~/Ende.serve/) to listen for
 incoming requests. In your new `file-server.ts` file, add the following code:
 
 ```ts title="file-server.ts"
-Deno.serve(
+Ende.serve(
   { hostname: "localhost", port: 8080 },
   async (request) => {
     const url = new URL(request.url);
@@ -39,7 +39,7 @@ Deno.serve(
 ### Open a file and stream its contents
 
 When a request is received, we'll attempt to open the file specified in the
-request URL with [`Deno.open`](/api/deno/~/Deno.open).
+request URL with [`Ende.open`](/api/ende/~/Ende.open/).
 
 If the requested file exists, we'll convert it into a readable stream of data
 with the
@@ -55,7 +55,7 @@ code:
 
 ```ts
 try {
-  const file = await Deno.open("." + filepath, { read: true });
+  const file = await Ende.open("." + filepath, { read: true });
   return new Response(file.readable);
 } catch {
   return new Response("404 Not Found", { status: 404 });
@@ -64,35 +64,32 @@ try {
 
 ### Run the file server
 
-Run your new file server with the `deno run` command, allowing read access and
+Run your new file server with the `ende run` command, allowing read access and
 network access:
 
 ```shell
-deno run --allow-read=. --allow-net file-server.ts
+ende run --allow-read=. --allow-net file-server.ts
 ```
 
-## Using the file server provided by the Deno Standard Library
+## Using the file server provided by the Ende Standard Library
 
-Writing a file server from scratch is a good exercise to understand how Deno's
+Writing a file server from scratch is a good exercise to understand how Ende's
 HTTP server works. However, writing production ready file server from scratch
 can be complex and error-prone. It's better to use a tested and reliable
 solution.
 
-The Deno Standard Library provides you with a
-[file server](https://jsr.io/@std/http/doc/file-server/~) so that you don't have
-to write your own.
+The Ende Standard Library provides you with a
+[file server](https://jsr.io/@ende/http/doc/file-server/~) so that you don't
+have to write your own.
 
 To use it, first install the remote script to your local file system:
 
 ```shell
-# Deno 1.x
-deno install --allow-net --allow-read jsr:@std/http/file-server
-# Deno 2.x
-deno install --global --allow-net --allow-read jsr:@std/http/file-server
+ende install --global --allow-net --allow-read jsr:@ende/http/file-server
 ```
 
-> This will install the script to the Deno installation root, e.g.
-> `/home/user/.deno/bin/file-server`.
+> This will install the script to the Ende installation root, e.g.
+> `/home/user/.ende/bin/file-server`.
 
 You can now run the script with the simplified script name:
 
@@ -108,21 +105,21 @@ To see the complete list of options available with the file server, run
 If you visit [http://0.0.0.0:8000/](http://0.0.0.0:8000/) in your web browser
 you will see the contents of your local directory.
 
-### Using the @std/http file server in a Deno project
+### Using the @ende/http file server in an Ende project
 
-To use the file-server in a [Deno project](/runtime/), you can add it to your
-`deno.json` file with:
+To use the file-server in a [Ende project](/runtime/), you can add it to your
+`ende.json` file with:
 
 ```sh
-deno add jsr:@std/http
+ende add jsr:@ende/http
 ```
 
 And then import it in your project:
 
 ```ts title="file-server.ts"
-import { serveDir } from "@std/http/file-server";
+import { serveDir } from "@ende/http/file-server";
 
-Deno.serve((req) => {
+Ende.serve((req) => {
   const pathname = new URL(req.url).pathname;
   if (pathname.startsWith("/static")) {
     return serveDir(req, {
@@ -133,12 +130,12 @@ Deno.serve((req) => {
 });
 ```
 
-This code will set up an HTTP server with `Deno.serve`. When a request comes in,
+This code will set up an HTTP server with `Ende.serve`. When a request comes in,
 it checks if the requested path starts with “/static”. If so, it serves files
 from the specified directory. Otherwise, it responds with an empty response.
 
 🦕 Now you know how to write your own simple file server, and how to use the
-file-server utility provided by the Deno Standard Library. You're equipped to
+file-server utility provided by the Ende Standard Library. You're equipped to
 tackle a whole variety of tasks - whether it’s serving static files, handling
 uploads, transforming data, or managing access control - you're ready to serve
-files with Deno.
+files with Ende.

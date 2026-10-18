@@ -1,16 +1,11 @@
 ---
 last_modified: 2026-06-25
 title: "Dialogs"
-description: "prompt(), alert(), and confirm() show native popup dialogs in deno desktop apps instead of terminal prompts."
+description: "prompt(), alert(), and confirm() show native popup dialogs in ende desktop apps instead of terminal prompts."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
 The familiar browser globals `prompt()`, `alert()`, and `confirm()` work inside
-`deno desktop` apps, but instead of reading from the terminal, they show
+`ende desktop` apps, but instead of reading from the terminal, they show
 **native popup dialogs**.
 
 This makes desktop apps feel native without any platform-specific code, and
@@ -53,7 +48,7 @@ if (name !== null) {
 ## When they fire
 
 These functions block the calling code (synchronously) until the user responds.
-They run **on the Deno runtime thread**, not the webview, so they do not freeze
+They run **on the Ende runtime thread**, not the webview, so they do not freeze
 the rendered UI, but they do pause your handler.
 
 ```ts
@@ -71,11 +66,11 @@ page), the webview's own native dialogs are used instead: `window.alert()`,
 `window.confirm()`, and `window.prompt()` as the browser implements them. The
 behavior is similar: a native modal scoped to that webview.
 
-## Differences from terminal Deno
+## Differences from terminal Ende
 
-In a normal `deno run` script, these functions read from / write to the
+In a normal `ende run` script, these functions read from / write to the
 terminal: `prompt` reads a line of stdin, `confirm` accepts `y` / `n`. That
-terminal behavior would be invisible inside a desktop app, so `deno desktop`
+terminal behavior would be invisible inside a desktop app, so `ende desktop`
 swaps them out for native dialogs without any code change on your part.
 
 ## File and folder dialogs
@@ -85,7 +80,7 @@ first-class API. Until they are, two workarounds exist:
 
 1. **Use the webview's `<input type="file">`**. The webview shows the OS-native
    picker, and the resulting `File` object can be sent over a binding for the
-   Deno side to handle:
+   Ende side to handle:
 
    ```html
    <input id="f" type="file" accept=".json">
@@ -99,7 +94,7 @@ first-class API. Until they are, two workarounds exist:
 
    ```ts
    win.bind("handleFile", async (name, bytes) => {
-     await Deno.writeFile(name + ".bak", new Uint8Array(bytes));
+     await Ende.writeFile(name + ".bak", new Uint8Array(bytes));
    });
    ```
 
@@ -111,7 +106,7 @@ A native file-picker API is on the roadmap.
 ## Notifications
 
 System notifications have a dedicated API: the standard Web `Notification`
-constructor, callable from your Deno-side code. See
+constructor, callable from your Ende-side code. See
 [Notifications](/runtime/desktop/notifications/).
 
 ## Clipboard

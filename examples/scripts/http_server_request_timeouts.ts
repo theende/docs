@@ -31,7 +31,7 @@ function doWork(ms: number, signal: AbortSignal): Promise<Response> {
   });
 }
 
-Deno.serve(async (req) => {
+Ende.serve(async (req) => {
   const url = new URL(req.url);
   // /slow takes longer than the deadline, anything else finishes quickly.
   const workMs = url.pathname === "/slow" ? 3000 : 10;
@@ -59,7 +59,7 @@ Deno.serve(async (req) => {
     throw err;
   } finally {
     // Always clear the timer. A leaked timer keeps the event loop busy and
-    // trips the timer sanitizer when the handler runs under Deno.test.
+    // trips the timer sanitizer when the handler runs under Ende.test.
     clearTimeout(deadline);
   }
 });

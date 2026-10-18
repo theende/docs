@@ -1,7 +1,7 @@
 ---
 last_modified: 2025-08-20
 title: File-based routing
-description: "Tutorial on implementing file-based routing in Deno. Learn how to create a dynamic routing system similar to Next.js, handle HTTP methods, manage nested routes, and build a flexible server architecture."
+description: "Tutorial on implementing file-based routing in Ende. Learn how to create a dynamic routing system similar to Next.js, handle HTTP methods, manage nested routes, and build a flexible server architecture."
 url: /examples/file_based_routing_tutorial/
 oldUrl:
   - /examples/http-server-file-router/
@@ -39,7 +39,7 @@ async function handler(req: Request): Promise<Response> {
   return new Response("Method not implemented", { status: 501 });
 }
 
-Deno.serve(handler);
+Ende.serve(handler);
 ```
 
 The `handler` function sets up a path variable which contains the path,
@@ -54,7 +54,7 @@ request method. If the method handler is found, it calls the method handler with
 the request object. If the method handler is not found, it returns a 501
 response.
 
-Finally, it serves the handler function using `Deno.serve`.
+Finally, it serves the handler function using `Ende.serve`.
 
 > The path could be any valid URL path such as `/users`, `/posts`, etc. For
 > paths like `/users`, the file `./users.ts` will be imported. However, deeper
@@ -82,7 +82,7 @@ export function GET(_req: Request): Response {
 To start the server, run the following command:
 
 ```sh
-deno run --allow-net --allow-read server.ts
+ende run --allow-net --allow-read server.ts
 ```
 
 This will start the server on `localhost:8080`. You can now make a `GET` request

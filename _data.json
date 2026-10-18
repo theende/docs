@@ -10,6 +10,10 @@
       "href": "/examples/"
     },
     {
+      "name": "API",
+      "href": "/api/"
+    },
+    {
       "name": "Lint rules",
       "href": "/lint/"
     }

@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Doc: Deno.serve
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.serve} Doc: Ende.serve
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Response} MDN: Response
  * @group Network
  *
@@ -17,5 +17,5 @@ function handler(_req: Request): Response {
   return new Response("Hello, World!");
 }
 
-// To start the server on the default port, call `Deno.serve` with the handler.
-Deno.serve(handler);
+// To start the server on the default port, call `Ende.serve` with the handler.
+Ende.serve(handler);

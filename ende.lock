@@ -9,6 +9,7 @@
     "jsr:@deno/graph@~0.89.2": "0.89.4",
     "jsr:@denosaurs/emoji@~0.3.1": "0.3.1",
     "jsr:@denosaurs/plug@1": "1.1.0",
+    "jsr:@ende/path@2026.10.14": "2026.10.14",
     "jsr:@eta-dev/eta@*": "3.5.0",
     "jsr:@hono/hono@*": "4.13.13",
     "jsr:@libs/qrcode@*": "3.1.0",
@@ -144,6 +145,9 @@
         "jsr:@std/fs@1",
         "jsr:@std/path@1"
       ]
+    },
+    "@ende/path@2026.10.14": {
+      "integrity": "38edb916b9221a033d342f9e259c35bacc66a7411aef283f685b1bdb229764f0"
     },
     "@eta-dev/eta@3.5.0": {
       "integrity": "6b70827efc14c7cbf08498ac7a922ecab003641caf3852a6cb5b1b12ee58fb37"

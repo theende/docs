@@ -3,18 +3,18 @@
  * @difficulty beginner
  * @tags cli
  * @run -R <url>
- * @resource {https://jsr.io/@std/path/doc} Doc: @std/path
- * @resource {https://docs.deno.com/api/deno/~/Deno.cwd} Deno: Deno.cwd
+ * @resource {https://jsr.io/@ende/path/doc} Doc: @ende/path
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.cwd} Ende: Ende.cwd
  * @group File System
  *
  * Many applications need to manipulate file paths in one way or another.
- * The Deno Standard Library provides simple utilities for this.
+ * The Ende Standard Library provides simple utilities for this.
  */
 
-// First we will import the module from the Deno Standard Library
-import * as path from "jsr:@std/path";
-import * as posix from "jsr:@std/path/posix";
-import * as windows from "jsr:@std/path/windows";
+// First we will import the module from the Ende Standard Library
+import * as path from "jsr:@ende/path";
+import * as posix from "jsr:@ende/path/posix";
+import * as windows from "jsr:@ende/path/windows";
 
 // Converting from a file url to a directory can be done simply by the `fromFileUrl`
 // method from the appropriate implementation.
@@ -22,20 +22,20 @@ const p1 = posix.fromFileUrl("file:///home/foo");
 const p2 = windows.fromFileUrl("file:///home/foo");
 console.log(`Path 1: ${p1} Path 2: ${p2}`);
 
-// We can also choose to not specify the platform and automatically use whatever Deno is running on
+// We can also choose to not specify the platform and automatically use whatever Ende is running on
 const p3 = path.fromFileUrl("file:///home/foo");
 console.log(`Path on current OS: ${p3}`);
 
 // We can get the last part of a file path using the basename method
-const p = path.basename("./deno/is/awesome/mod.ts");
+const p = path.basename("./ende/is/awesome/mod.ts");
 console.log(p); // mod.ts
 
 // We can get the directory of a file path using the dirname method
-const base = path.dirname("./deno/is/awesome/mod.ts");
-console.log(base); // ./deno/is/awesome
+const base = path.dirname("./ende/is/awesome/mod.ts");
+console.log(base); // ./ende/is/awesome
 
 // We can get the extension of a file path using the extname method
-const ext = path.extname("./deno/is/awesome/mod.ts");
+const ext = path.extname("./ende/is/awesome/mod.ts");
 console.log(ext); // .ts
 
 // We can format a path using a FormatInputPathObject
@@ -54,7 +54,7 @@ const joinPath = path.join("foo", "bar");
 console.log(joinPath);
 
 // We can get the current working directory using the built-in cwd method
-const current = Deno.cwd();
+const current = Ende.cwd();
 console.log(current);
 
 // We can get the directory name of the current module using the built-in

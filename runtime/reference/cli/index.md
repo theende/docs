@@ -1,78 +1,83 @@
 ---
 last_modified: 2026-06-16
-title: "Deno CLI Subcommands"
+title: "Ende CLI Subcommands"
 oldUrl: "/runtime/reference/cli/all_commands"
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno help"
+openGraphTitle: "ende help"
 ---
 
-The Deno CLI (Command Line Interface) allows you to interact with the Deno
+The Ende CLI (Command Line Interface) allows you to interact with the Ende
 runtime environment from your terminal or command prompt. The CLI has a number
 of subcommands that can be used to perform different tasks, check the links
 below for more information on each subcommand.
 
 ## Execution
 
-- [deno run](/runtime/reference/cli/run/) - run a script
-- [deno serve](/runtime/reference/cli/serve/) - run a web server
-- [deno task](/runtime/reference/cli/task/) - run a task
-- [deno repl](/runtime/reference/cli/repl/) - starts a read-eval-print-loop
-- [deno eval](/runtime/reference/cli/eval/) - evaluate provided script
+- [ende run](/runtime/reference/cli/run/) - run a script
+- [ende serve](/runtime/reference/cli/serve/) - run a web server
+- [ende task](/runtime/reference/cli/task/) - run a task
+- [ende repl](/runtime/reference/cli/repl/) - starts a read-eval-print-loop
+- [ende eval](/runtime/reference/cli/eval/) - evaluate provided script
+- [ende watch](/runtime/reference/cli/watch/) - run a program, hot-replacing
+  modules on change
 
 ## Dependency management
 
-- [deno add](/runtime/reference/cli/add) - add dependencies
-- deno approve-scripts - manage lifecycle scripts of npm packages
-- [deno audit](/runtime/reference/cli/audit) - audit dependencies
-- [deno bump-version](/runtime/reference/cli/bump_version/) - bump the project
-  version in `deno.json` or `package.json`
-- deno cache - _(Deprecated. Please use
-  [deno install](/runtime/reference/cli/install/))_
-- [deno install](/runtime/reference/cli/install/) - install a dependency or a
+- [ende add](/runtime/reference/cli/add) - add dependencies
+- [ende bump-version](/runtime/reference/cli/bump_version/) - bump the project
+  version in `ende.json`
+- [ende ci](/runtime/reference/cli/ci/) - install dependencies strictly from the
+  lockfile
+- ende cache - _(Deprecated. Please use
+  [ende install](/runtime/reference/cli/install/))_
+- [ende install](/runtime/reference/cli/install/) - install a dependency or a
   script
-- [deno uninstall](/runtime/reference/cli/uninstall/) - uninstall a dependency
+- [ende link](/runtime/reference/cli/link/) - link a local JSR package into the
+  project
+- [ende list](/runtime/reference/cli/list/) - list the project's dependencies
+- [ende uninstall](/runtime/reference/cli/uninstall/) - uninstall a dependency
   or a script
-- [deno remove](/runtime/reference/cli/remove) - Remove dependencies
-- [deno outdated](/runtime/reference/cli/outdated) - view or update outdated
+- [ende remove](/runtime/reference/cli/remove) - Remove dependencies
+- [ende outdated](/runtime/reference/cli/outdated) - view or update outdated
   dependencies
-- [deno why](/runtime/reference/cli/why/) - explain why a package is in the
+- [ende unlink](/runtime/reference/cli/unlink/) - remove a linked package
+- [ende update](/runtime/reference/cli/update/) - update dependencies
+- [ende why](/runtime/reference/cli/why/) - explain why a package is in the
   dependency tree
 
 ## Tooling
 
-- [deno bench](/runtime/reference/cli/bench/) - benchmarking tool
-- [deno check](/runtime/reference/cli/check/) - type check your program without
+- [ende bench](/runtime/reference/cli/bench/) - benchmarking tool
+- [ende check](/runtime/reference/cli/check/) - type check your program without
   running it
-- [deno compile](/runtime/reference/cli/compile/) - compile a program into a
+- [ende clean](/runtime/reference/cli/clean/) - remove the cache directory
+- [ende compile](/runtime/reference/cli/compile/) - compile a program into a
   standalone executable
-- [deno completions](/runtime/reference/cli/completions/) - generate shell
+- [ende completions](/runtime/reference/cli/completions/) - generate shell
   completions
-- [deno coverage](/runtime/reference/cli/coverage/) - generate test coverage
+- [ende coverage](/runtime/reference/cli/coverage/) - generate test coverage
   reports
-- [deno create](/runtime/reference/cli/create/) - scaffold a new project from a
+- [ende create](/runtime/reference/cli/create/) - scaffold a new project from a
   template
-- [deno doc](/runtime/reference/cli/doc/) - generate documentation for a module
-- deno deploy - Manage and publish your projects on the web
-- [deno desktop](/runtime/reference/cli/desktop/) - build a desktop app from the
-  current Deno project
-- [deno fmt](/runtime/reference/cli/fmt/) - format your code
-- [deno info](/runtime/reference/cli/info/) - inspect an ES module and all of
+- [ende doc](/runtime/reference/cli/doc/) - generate documentation for a module
+- [ende desktop](/runtime/reference/cli/desktop/) - build a desktop app from the
+  current Ende project
+- [ende fmt](/runtime/reference/cli/fmt/) - format your code
+- [ende info](/runtime/reference/cli/info/) - inspect an ES module and all of
   its dependencies
-- [deno init](/runtime/reference/cli/init/) - create a new project
-- [deno jupyter](/runtime/reference/cli/jupyter/) - run a Jupyter notebook
-- [deno lint](/runtime/reference/cli/lint/) - lint your code
-- [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
-- deno pack - create an npm tarball from the current Deno project
-- [deno publish](/runtime/reference/cli/publish/) - publish a module to JSR
-- [deno test](/runtime/reference/cli/test/) - run your tests
-- [deno transpile](/runtime/reference/cli/transpile/) - transpile TypeScript,
+- [ende init](/runtime/reference/cli/init/) - create a new project
+- [ende lint](/runtime/reference/cli/lint/) - lint your code
+- [ende lsp](/runtime/reference/cli/lsp/) - language server protocol integration
+- [ende publish](/runtime/reference/cli/publish/) - publish a module to JSR
+- [ende test](/runtime/reference/cli/test/) - run your tests
+- [ende transpile](/runtime/reference/cli/transpile/) - transpile TypeScript,
   JSX, or TSX to JavaScript
-- [deno types](/runtime/reference/cli/types/) - print runtime types
-- [deno upgrade](/runtime/reference/cli/upgrade/) - upgrade Deno to the latest
+- [ende types](/runtime/reference/cli/types/) - print runtime types
+- [ende upgrade](/runtime/reference/cli/upgrade/) - upgrade Ende to the latest
   version
-- [deno x](/runtime/reference/cli/x/) - run an npm or JSR package
+- [ende x](/runtime/reference/cli/x/) - run a JSR package or a script URL
 
 ## Other
 
 - [Unstable feature flags](/runtime/reference/cli/unstable_flags/)
-- [Integrating the Deno LSP](/runtime/reference/lsp_integration/)
+- [Integrating the Ende LSP](/runtime/reference/lsp_integration/)

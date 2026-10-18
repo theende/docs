@@ -3,17 +3,17 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/json} Doc: @std/json
+ * @resource {https://jsr.io/@ende/json} Doc: @ende/json
  * @resource {https://jsonlines.org} Spec: JSON Lines
  * @group Encoding
  *
  * JSON Lines, also called NDJSON, stores one JSON value per line. Log
  * files, data exports and streaming APIs use it because each line can be
  * processed on its own, without parsing the whole document. The Standard
- * Library provides stream transforms for both directions in jsr:@std/json.
+ * Library provides stream transforms for both directions in jsr:@ende/json.
  */
-import { JsonParseStream, JsonStringifyStream } from "jsr:@std/json";
-import { TextLineStream } from "jsr:@std/streams";
+import { JsonParseStream, JsonStringifyStream } from "jsr:@ende/json";
+import { TextLineStream } from "jsr:@ende/streams";
 
 // This is a typical log in JSON Lines format, one JSON object per line.
 const ndjson = `{"level":"info","message":"server started"}

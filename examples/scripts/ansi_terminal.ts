@@ -3,8 +3,8 @@
  * @difficulty intermediate
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/fmt/doc/colors/~} Doc: @std/fmt colors
- * @resource {https://docs.deno.com/api/deno/~/Deno.stdout} Doc: Deno.stdout
+ * @resource {https://jsr.io/@ende/fmt/doc/colors/~} Doc: @ende/fmt colors
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.stdout} Doc: Ende.stdout
  * @group CLI
  *
  * Terminals interpret special byte sequences, called ANSI escape codes, as
@@ -13,15 +13,15 @@
  * self-updating status lines without any dependencies.
  */
 
-import { green } from "jsr:@std/fmt@^1.0.0/colors";
-import { delay } from "jsr:@std/async@^1.0.0/delay";
+import { green } from "jsr:@ende/fmt@^2026.10.15/colors";
+import { delay } from "jsr:@ende/async@^2026.10.15/delay";
 
 // Escape sequences start with the escape byte, written \x1b, followed by [
 // and a command. Writing raw bytes to stdout keeps full control over when
 // a newline is emitted.
 const encoder = new TextEncoder();
 function write(text: string) {
-  Deno.stdout.writeSync(encoder.encode(text));
+  Ende.stdout.writeSync(encoder.encode(text));
 }
 
 // Colors and text styles are select graphic rendition commands. The
@@ -31,7 +31,7 @@ console.log("\x1b[31mred\x1b[0m \x1b[1mbold\x1b[0m \x1b[4munderline\x1b[0m");
 
 // For colors alone you rarely need raw codes. The standard library wraps
 // them in plain functions that emit the same bytes:
-console.log(green("green via @std/fmt/colors"));
+console.log(green("green via @ende/fmt/colors"));
 
 // Now the classic trick behind installers and download counters: a single
 // status line that rewrites itself. The sequence \x1b[2K erases the whole
@@ -45,7 +45,7 @@ const steps = ["Resolving packages", "Downloading", "Linking", "Cleaning up"];
 
 // Redrawing a line only works on an interactive terminal. When output is
 // piped, print ordinary lines instead.
-if (Deno.stdout.isTerminal()) {
+if (Ende.stdout.isTerminal()) {
   write("\x1b[?25l");
   try {
     for (let i = 0; i < steps.length; i++) {
@@ -71,9 +71,9 @@ if (Deno.stdout.isTerminal()) {
 
 // When piped, the fallback prints each step on its own line:
 //
-//   deno run ansi_terminal.ts | cat
+//   ende run ansi_terminal.ts | cat
 //   red bold underline
-//   green via @std/fmt/colors
+//   green via @ende/fmt/colors
 //   Resolving packages...
 //   Downloading...
 //   Linking...

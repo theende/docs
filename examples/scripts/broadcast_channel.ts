@@ -4,14 +4,12 @@
  * @tags cli, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel} MDN: BroadcastChannel
- * @resource {https://docs.deno.com/deploy/classic/api/runtime-broadcast-channel/} Deno Deploy: BroadcastChannel
  * @group Web Standard APIs
  *
  * BroadcastChannel is a named bus. Every channel opened with the same name
  * receives what the others post, with no direct references between them.
- * That makes it a simple way for the main thread and workers to talk. On
- * Deno Deploy the same API even spans separate instances of an
- * application. This example runs a worker from an inline module and
+ * That makes it a simple way for the main thread and workers to talk. This
+ * example runs a worker from an inline module and
  * exchanges messages with it over a shared channel name.
  */
 

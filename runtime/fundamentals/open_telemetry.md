@@ -1,10 +1,10 @@
 ---
 last_modified: 2026-06-17
 title: OpenTelemetry
-description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
+description: "Learn how to implement observability in Ende applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
 
-Deno has built in support for [OpenTelemetry](https://opentelemetry.io/).
+Ende has built in support for [OpenTelemetry](https://opentelemetry.io/).
 
 > OpenTelemetry is a collection of APIs, SDKs, and tools. Use it to instrument,
 > generate, collect, and export telemetry data (metrics, logs, and traces) to
@@ -12,26 +12,26 @@ Deno has built in support for [OpenTelemetry](https://opentelemetry.io/).
 >
 > <i>- https://opentelemetry.io/</i>
 
-This integration enables you to monitor your Deno applications using
+This integration enables you to monitor your Ende applications using
 OpenTelemetry observability tooling with instruments like logs, metrics, and
 traces.
 
-Deno provides the following features:
+Ende provides the following features:
 
 - Exporting of collected metrics, traces, and logs to a server using the
   OpenTelemetry protocol.
-- [Automatic instrumentation](#auto-instrumentation) of the Deno runtime with
+- [Automatic instrumentation](#auto-instrumentation) of the Ende runtime with
   OpenTelemetry metrics, traces, and logs.
 - [Collection of user defined metrics, traces, and logs](#user-metrics) created
-  with the `npm:@opentelemetry/api` package.
+  through `Ende.telemetry`.
 
 ## Quick start
 
 To enable the OpenTelemetry integration set the environment variable
-`OTEL_DENO=true`:
+`OTEL_ENDE=true`:
 
 ```sh
-OTEL_DENO=true deno run my_script.ts
+OTEL_ENDE=true ende run my_script.ts
 ```
 
 This will automatically collect and export runtime observability data to an
@@ -44,7 +44,7 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 > metrics directly to stderr in a human-readable format:
 >
 > ```sh
-> OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console deno run my_script.ts
+> OTEL_ENDE=true OTEL_EXPORTER_OTLP_PROTOCOL=console ende run my_script.ts
 > ```
 >
 > Example output:
@@ -55,7 +55,7 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 >   scope: example-tracer
 >   key: value
 > LOG [INFO] 2025-03-14T13:47:07.235Z "hello from inner"
->   scope: deno@2.7.5
+>   scope: ende@2.7.5
 >   trace: 00000000000000000000000000000001/0000000000000002
 > ```
 
@@ -82,35 +82,34 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 > ```
 
 This will automatically collect and export runtime observability data like
-`console.log`, traces for HTTP requests, and metrics for the Deno runtime.
+`console.log`, traces for HTTP requests, and metrics for the Ende runtime.
 [Learn more about auto instrumentation](#auto-instrumentation).
 
-You can also create your own metrics, traces, and logs using the
-`npm:@opentelemetry/api` package.
+You can also create your own metrics, traces, and logs through `Ende.telemetry`.
 [Learn more about user defined metrics](#user-metrics).
 
 ## Auto instrumentation
 
-Deno automatically collects and exports some observability data to the OTLP
+Ende automatically collects and exports some observability data to the OTLP
 endpoint.
 
-This data is exported in the built-in instrumentation scope of the Deno runtime.
-This scope has the name `deno`. The version of the Deno runtime is the version
-of the `deno` instrumentation scope. (e.g. `deno:2.1.4`).
+This data is exported in the built-in instrumentation scope of the Ende runtime.
+This scope has the name `ende`. The version of the Ende runtime is the version
+of the `ende` instrumentation scope. (e.g. `ende:2.1.4`).
 
 ### Traces
 
-Deno automatically creates spans for various operations, such as:
+Ende automatically creates spans for various operations, such as:
 
-- Incoming HTTP requests served with [`Deno.serve`](/api/deno/~/Deno.serve).
-- Outgoing HTTP requests made with [`fetch`](/api/web/~/fetch).
+- Incoming HTTP requests served with [`Ende.serve`](/api/ende/~/Ende.serve/).
+- Outgoing HTTP requests made with [`fetch`](/api/web/~/fetch/).
 - HTTP/2 traffic over `node:http2`, both client requests and incoming server
-  requests, with trace context propagated across services (added in Deno 2.9).
-- [`Deno.cron()`](/api/deno/~/Deno.cron) job invocations (added in Deno 2.7).
+  requests, with trace context propagated across services.
+- [`Ende.cron()`](/api/ende/~/Ende.cron/) job invocations.
 
-#### [`Deno.serve`](/api/deno/~/Deno.serve)
+#### [`Ende.serve`](/api/ende/~/Ende.serve/)
 
-When you use [`Deno.serve`](/api/deno/~/Deno.serve) to create an HTTP server, a
+When you use [`Ende.serve`](/api/ende/~/Ende.serve/) to create an HTTP server, a
 span is created for each incoming request. The span automatically ends when
 response headers are sent (not when the response body is done sending).
 
@@ -128,40 +127,13 @@ After the request is handled, the following attributes are added:
 
 - `http.response.status_code`: The status code of the response.
 
-Deno does not automatically add a `http.route` attribute to the span as the
+Ende does not automatically add a `http.route` attribute to the span as the
 route is not known by the runtime, and instead is determined by the routing
-logic in a user's handler function. If you want to add a `http.route` attribute
-to the span, you can do so in your handler function using
-`npm:@opentelemetry/api`. In this case you should also update the span name to
-include the route.
+logic in a user's handler function.
 
-```ts
-import { trace } from "npm:@opentelemetry/api@1";
+#### [`fetch`](/api/web/~/fetch/)
 
-const INDEX_ROUTE = new URLPattern({ pathname: "/" });
-const BOOK_ROUTE = new URLPattern({ pathname: "/book/:id" });
-
-Deno.serve(async (req) => {
-  const span = trace.getActiveSpan();
-  if (INDEX_ROUTE.test(req.url)) {
-    span.setAttribute("http.route", "/");
-    span.updateName(`${req.method} /`);
-
-    // handle index route
-  } else if (BOOK_ROUTE.test(req.url)) {
-    span.setAttribute("http.route", "/book/:id");
-    span.updateName(`${req.method} /book/:id`);
-
-    // handle book route
-  } else {
-    return new Response("Not found", { status: 404 });
-  }
-});
-```
-
-#### [`fetch`](/api/web/~/fetch)
-
-When you use [`fetch`](/api/web/~/fetch) to make an HTTP request, a span is
+When you use [`fetch`](/api/web/~/fetch/) to make an HTTP request, a span is
 created for the request. The span automatically ends when the response headers
 are received.
 
@@ -183,16 +155,15 @@ After the response is received, the following attributes are added:
 
 The following metrics are automatically collected and exported:
 
-#### [`Deno.serve`](/api/deno/~/Deno.serve) / [`Deno.serveHttp`](/api/deno/~/Deno.serveHttp)
+#### [`Ende.serve`](/api/ende/~/Ende.serve/)
 
 ##### `http.server.request.duration`
 
 A histogram of the duration of incoming HTTP requests served with
-[`Deno.serve`](/api/deno/~/Deno.serve) or
-[`Deno.serveHttp`](/api/deno/~/Deno.serveHttp). The time that is measured is
-from when the request is received to when the response headers are sent. This
-does not include the time to send the response body. The unit of this metric is
-seconds. The histogram buckets are
+[`Ende.serve`](/api/ende/~/Ende.serve/). The time that is measured is from when
+the request is received to when the response headers are sent. This does not
+include the time to send the response body. The unit of this metric is seconds.
+The histogram buckets are
 `[0.005, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1.0, 2.5, 5.0, 7.5, 10.0]`.
 
 This metric is recorded with the following attributes:
@@ -211,11 +182,10 @@ This metric is recorded with the following attributes:
 ##### `http.server.active_requests`
 
 A gauge of the number of active requests being handled by
-[`Deno.serve`](/api/deno/~/Deno.serve) or
-[`Deno.serveHttp`](/api/deno/~/Deno.serveHttp) at any given time. This is the
-number of requests that have been received but not yet responded to (where the
-response headers have not yet been sent). This metric is recorded with the
-following attributes:
+[`Ende.serve`](/api/ende/~/Ende.serve/) at any given time. This is the number of
+requests that have been received but not yet responded to (where the response
+headers have not yet been sent). This metric is recorded with the following
+attributes:
 
 - `http.request.method`: The HTTP method of the request.
 - `url.scheme`: The scheme of the request URL.
@@ -225,9 +195,8 @@ following attributes:
 ##### `http.server.request.body.size`
 
 A histogram of the size of the request body of incoming HTTP requests served
-with [`Deno.serve`](/api/deno/~/Deno.serve) or
-[`Deno.serveHttp`](/api/deno/~/Deno.serveHttp). The unit of this metric is
-bytes. The histogram buckets are
+with [`Ende.serve`](/api/ende/~/Ende.serve/). The unit of this metric is bytes.
+The histogram buckets are
 `[0, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000]`.
 
 This metric is recorded with the following attributes:
@@ -246,9 +215,8 @@ This metric is recorded with the following attributes:
 ##### `http.server.response.body.size`
 
 A histogram of the size of the response body of incoming HTTP requests served
-with [`Deno.serve`](/api/deno/~/Deno.serve) or
-[`Deno.serveHttp`](/api/deno/~/Deno.serveHttp). The unit of this metric is
-bytes. The histogram buckets are
+with [`Ende.serve`](/api/ende/~/Ende.serve/). The unit of this metric is bytes.
+The histogram buckets are
 `[0, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000]`.
 
 This metric is recorded with the following attributes:
@@ -270,15 +238,15 @@ The following logs are automatically collected and exported:
 
 - Any logs created with `console.*` methods such as `console.log` and
   `console.error`.
-- Any logs created by the Deno runtime, such as debug logs, `Downloading` logs,
+- Any logs created by the Ende runtime, such as debug logs, `Downloading` logs,
   and similar.
-- Any errors that cause the Deno runtime to exit (both from user code, and from
+- Any errors that cause the Ende runtime to exit (both from user code, and from
   the runtime itself).
 
 Logs raised from JavaScript code will be exported with the relevant span
 context, if the log occurred inside of an active span.
 
-`console` auto instrumentation can be configured using the `OTEL_DENO_CONSOLE`
+`console` auto instrumentation can be configured using the `OTEL_ENDE_CONSOLE`
 environment variable:
 
 - `capture`: Logs are emitted to stdout/stderr and are also exported with
@@ -290,20 +258,20 @@ environment variable:
 
 ### Permission audit
 
-Deno can route the permission audit log into the OpenTelemetry exporter
+Ende can route the permission audit log into the OpenTelemetry exporter
 alongside the rest of your traces, metrics, and logs. Set
-`DENO_AUDIT_PERMISSIONS=otel` (instead of a file path) and each permission
+`ENDE_AUDIT_PERMISSIONS=otel` (instead of a file path) and each permission
 access — allowed or denied — is emitted as an OpenTelemetry log record with
 these attributes:
 
-- `deno.permission.type` — the permission name (`read`, `net`, `env`, …).
-- `deno.permission.value` — the specific value being checked (a path, host,
+- `ende.permission.type` — the permission name (`read`, `net`, `env`, …).
+- `ende.permission.value` — the specific value being checked (a path, host,
   variable name, etc.).
-- `deno.permission.stack` — the JavaScript stack frames at the access site, only
-  present when `DENO_TRACE_PERMISSIONS` is also set.
+- `ende.permission.stack` — the JavaScript stack frames at the access site, only
+  present when `ENDE_TRACE_PERMISSIONS` is also set.
 
 ```sh
-OTEL_DENO=true DENO_AUDIT_PERMISSIONS=otel deno run -A main.ts
+OTEL_ENDE=true ENDE_AUDIT_PERMISSIONS=otel ende run -A main.ts
 ```
 
 This is useful when you already collect OpenTelemetry data: the audit lands in
@@ -315,22 +283,11 @@ and the JSONL file-path mode.
 ## User metrics
 
 In addition to the automatically collected telemetry data, you can also create
-your own metrics and traces using the `npm:@opentelemetry/api` package.
-
-You do not need to configure the `npm:@opentelemetry/api` package to use it with
-Deno. Deno sets up the `npm:@opentelemetry/api` package automatically. There is
-no need to call `metrics.setGlobalMeterProvider()`,
-`trace.setGlobalTracerProvider()`, or `context.setGlobalContextManager()`. All
-configuration of resources, exporter settings, etc. is done via environment
-variables.
-
-Deno works with version `1.x` of the `npm:@opentelemetry/api` package. You can
-either import directly from `npm:@opentelemetry/api@1`, or you can install the
-package locally with `deno add` and import from `@opentelemetry/api`.
-
-```sh
-deno add npm:@opentelemetry/api@1
-```
+your own metrics and traces. `Ende.telemetry` provides a `tracerProvider`, a
+`meterProvider` and a `contextManager` that follow the
+[OpenTelemetry JS API](https://open-telemetry.github.io/opentelemetry-js/). They
+need no setup: all configuration of resources, exporter settings, etc. is done
+via environment variables.
 
 For both traces and metrics, you need to define names for the tracer and meter
 respectively. If you are instrumenting a library, you should name the tracer or
@@ -341,13 +298,10 @@ the library or application.
 
 ### Traces
 
-To create a new span, first import the `trace` object from
-`npm:@opentelemetry/api` and create a new tracer:
+To create a new span, first create a tracer:
 
 ```ts
-import { trace } from "npm:@opentelemetry/api@1";
-
-const tracer = trace.getTracer("my-app", "1.0.0");
+const tracer = Ende.telemetry.tracerProvider.getTracer("my-app", "1.0.0");
 ```
 
 Then, create a new span using the `tracer.startActiveSpan` method and pass a
@@ -362,7 +316,7 @@ function myFunction() {
     } catch (error) {
       span.recordException(error);
       span.setStatus({
-        code: trace.SpanStatusCode.ERROR,
+        code: 2, // SpanStatusCode.ERROR
         message: (error as Error).message,
       });
       throw error;
@@ -377,11 +331,10 @@ function myFunction() {
 ended even if an error occurs. `span.recordException` and `span.setStatus`
 should also be called in a `catch` block, to record any errors that occur.
 
-Inside of the callback function, the created span is the "active span". You can
-get the active span using `trace.getActiveSpan()`. The "active span" will be
-used as the parent span for any spans created (manually, or automatically by the
-runtime) inside of the callback function (or any functions that are called from
-the callback function).
+Inside of the callback function, the created span is the "active span". The
+"active span" will be used as the parent span for any spans created (manually,
+or automatically by the runtime) inside of the callback function (or any
+functions that are called from the callback function).
 [Learn more about context propagation](#context-propagation).
 
 The `startActiveSpan` method returns the return value of the callback function.
@@ -414,10 +367,8 @@ exception stack trace and name and attaches it to the span. **`recordException`
 does not set the span status to `ERROR`, you must do that manually.**
 
 ```ts
-import { SpanStatusCode } from "npm:@opentelemetry/api@1";
-
 span.setStatus({
-  code: SpanStatusCode.ERROR,
+  code: 2, // SpanStatusCode.ERROR
   message: "An error occurred",
 });
 span.recordException(new Error("An error occurred"));
@@ -425,7 +376,7 @@ span.recordException(new Error("An error occurred"));
 // or
 
 span.setStatus({
-  code: SpanStatusCode.OK,
+  code: 1, // SpanStatusCode.OK
 });
 ```
 
@@ -481,13 +432,10 @@ Learn more about the full tracing API in the
 
 ### Metrics
 
-To create a metric, first import the `metrics` object from
-`npm:@opentelemetry/api` and create a new meter:
+To create a metric, first create a meter:
 
 ```ts
-import { metrics } from "npm:@opentelemetry/api@1";
-
-const meter = metrics.getMeter("my-app", "1.0.0");
+const meter = Ende.telemetry.meterProvider.getMeter("my-app", "1.0.0");
 ```
 
 Then, an instrument can be created from the meter, and used to record values:
@@ -576,7 +524,7 @@ Learn more about the full metrics API in the
 
 ### Practical Examples
 
-For practical examples of implementing OpenTelemetry in Deno applications, see
+For practical examples of implementing OpenTelemetry in Ende applications, see
 our tutorials:
 
 - [Basic OpenTelemetry Tutorial](/examples/basic_opentelemetry_tutorial/) - A
@@ -590,9 +538,9 @@ In OpenTelemetry, context propagation is the process of passing some context
 information (such as the current span) from one part of an application to
 another, without having to pass it explicitly as an argument to every function.
 
-In Deno, context propagation is done using the rules of `AsyncContext`, the TC39
+In Ende, context propagation is done using the rules of `AsyncContext`, the TC39
 proposal for async context propagation. The `AsyncContext` API is not yet
-exposed to users in Deno, but it is used internally to propagate the active span
+exposed to users in Ende, but it is used internally to propagate the active span
 and other context information across asynchronous boundaries.
 
 A quick overview how AsyncContext propagation works:
@@ -607,11 +555,11 @@ This means that async context propagation essentially behaves like a global
 variable that is scoped to the current asynchronous task, and is automatically
 copied to any new asynchronous tasks that are started from this current task.
 
-The `context` API from `npm:@opentelemetry/api@1` exposes this functionality to
-users. It works as follows:
+`Ende.telemetry.contextManager` exposes this functionality to users. It works as
+follows:
 
 ```ts
-import { context } from "npm:@opentelemetry/api@1";
+const context = Ende.telemetry.contextManager;
 
 // Get the currently active context
 const currentContext = context.active();
@@ -643,33 +591,12 @@ context.with(newContext, () => {
 console.log(context.active().getValue("id")); // undefined
 ```
 
-The context API integrates with spans too. For example, to run a function in the
-context of a specific span, the span can be added to a context, and then the
-function can be run in that context:
-
-```ts
-import { context, trace } from "npm:@opentelemetry/api@1";
-
-const tracer = trace.getTracer("my-app", "1.0.0");
-
-const span = tracer.startSpan("myFunction");
-const contextWithSpan = trace.setSpan(context.active(), span);
-
-context.with(contextWithSpan, () => {
-  const activeSpan = trace.getActiveSpan();
-  console.log(activeSpan === span); // true
-});
-
-// Don't forget to end the span!
-span.end();
-```
-
 Learn more about the full context API in the
 [OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.ContextAPI.html).
 
 ## Configuration
 
-The OpenTelemetry integration can be enabled by setting the `OTEL_DENO=true`
+The OpenTelemetry integration can be enabled by setting the `OTEL_ENDE=true`
 environment variable.
 
 The endpoint and protocol for the OTLP exporter can be configured using the
@@ -679,10 +606,10 @@ variables. Supported values for `OTEL_EXPORTER_OTLP_PROTOCOL` are:
 - `http/protobuf` (default): Export using Protobuf over HTTP to the configured
   endpoint.
 - `http/json`: Export using JSON over HTTP to the configured endpoint.
-- `grpc`: Export using gRPC (Protobuf over HTTP/2). Available in Deno 2.8+.
-  Useful for collectors that only accept gRPC, such as Azure Container Apps'
-  managed OpenTelemetry agent. The default OTLP gRPC port is `4317`, so you
-  typically also set `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317`.
+- `grpc`: Export using gRPC (Protobuf over HTTP/2). Useful for collectors that
+  only accept gRPC, such as Azure Container Apps' managed OpenTelemetry agent.
+  The default OTLP gRPC port is `4317`, so you typically also set
+  `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317`.
 - `console`: Print spans, logs, and metrics to stderr in a human-readable text
   format. This is useful for debugging and testing instrumentation without
   running an OTLP collector. When using `console`, no endpoint configuration is
@@ -708,12 +635,12 @@ variable, the following attributes are automatically set:
 
 - `service.name`: If `OTEL_SERVICE_NAME` is not set, the value is set to
   `<unknown_service>`.
-- `process.runtime.name`: `deno`
-- `process.runtime.version`: The version of the Deno runtime.
-- `telemetry.sdk.name`: `deno-opentelemetry`
-- `telemetry.sdk.language`: `deno-rust`
-- `telemetry.sdk.version`: The version of the Deno runtime, plus the version of
-  the `opentelemetry` Rust crate being used by Deno, separated by a `-`.
+- `process.runtime.name`: `ende`
+- `process.runtime.version`: The version of the Ende runtime.
+- `telemetry.sdk.name`: `ende-opentelemetry`
+- `telemetry.sdk.language`: `ende-rust`
+- `telemetry.sdk.version`: The version of the Ende runtime, plus the version of
+  the `opentelemetry` Rust crate being used by Ende, separated by a `-`.
 
 Propagators can be configured using the `OTEL_PROPAGATORS` environment variable.
 The default value is `tracecontext,baggage`. Multiple propagators can be
@@ -736,7 +663,7 @@ For the ratio-based samplers, `OTEL_TRACES_SAMPLER_ARG` sets the sampling
 probability as a number between `0` and `1`. It defaults to `1.0`:
 
 ```sh
-OTEL_DENO=true OTEL_TRACES_SAMPLER=traceidratio OTEL_TRACES_SAMPLER_ARG=0.1 deno run -A main.ts
+OTEL_ENDE=true OTEL_TRACES_SAMPLER=traceidratio OTEL_TRACES_SAMPLER_ARG=0.1 ende run -A main.ts
 ```
 
 Metric collection frequency can be configured using the
@@ -753,7 +680,7 @@ environment variables described in the
 
 ## Propagators
 
-Deno supports context propagators which enable automatic propagation of trace
+Ende supports context propagators which enable automatic propagation of trace
 context across process boundaries for distributed tracing, allowing you to track
 requests as they flow through different services.
 
@@ -761,7 +688,7 @@ Propagators are responsible for encoding and decoding context information (like
 trace and span IDs) into and from carrier formats (like HTTP headers). This
 enables the trace context to be maintained across service boundaries.
 
-By default, Deno supports the following propagators:
+By default, Ende supports the following propagators:
 
 - `tracecontext`: The W3C Trace Context propagation format, which is the
   standard way to propagate trace context via HTTP headers.
@@ -769,40 +696,13 @@ By default, Deno supports the following propagators:
   pairs across service boundaries.
 
 > [!NOTE]
-> These propagators automatically work with Deno's [`fetch`](/api/web/~/fetch)
-> API and [`Deno.serve`](/api/deno/~/Deno.serve), enabling end-to-end tracing
+> These propagators automatically work with Ende's [`fetch`](/api/web/~/fetch/)
+> API and [`Ende.serve`](/api/ende/~/Ende.serve/), enabling end-to-end tracing
 > across HTTP requests without manual context management.
-
-You can access the propagation API through the `@opentelemetry/api` package:
-
-```ts
-import { context, propagation, trace } from "npm:@opentelemetry/api@1";
-
-// Extract context from incoming headers
-function extractContextFromHeaders(headers: Headers) {
-  const ctx = context.active();
-  return propagation.extract(ctx, headers);
-}
-
-// Inject context into outgoing headers
-function injectContextIntoHeaders(headers: Headers) {
-  const ctx = context.active();
-  propagation.inject(ctx, headers);
-  return headers;
-}
-
-// Example: Making a fetch request that propagates trace context
-async function tracedFetch(url: string) {
-  const headers = new Headers();
-  injectContextIntoHeaders(headers);
-
-  return await fetch(url, { headers });
-}
-```
 
 ## Limitations
 
-While the OpenTelemetry integration for Deno is in development, there are some
+While the OpenTelemetry integration for Ende is in development, there are some
 limitations to be aware of:
 
 - Traces only support links with no attributes.
@@ -824,10 +724,10 @@ limitations to be aware of:
 - HTTP methods are that are not known are not normalized to `_OTHER` in the
   `http.request.method` span attribute as per the OpenTelemetry semantic
   conventions.
-- The HTTP server span for [`Deno.serve`](/api/deno/~/Deno.serve) does not have
+- The HTTP server span for [`Ende.serve`](/api/ende/~/Ende.serve/) does not have
   an OpenTelemetry status set, and if the handler throws (ie `onError` is
   invoked), the span will not have an error status set and the error will not be
   attached to the span via event.
 - There is no mechanism to add a `http.route` attribute to the HTTP client span
-  for [`fetch`](/api/web/~/fetch), or to update the span name to include the
+  for [`fetch`](/api/web/~/fetch/), or to update the span name to include the
   route.

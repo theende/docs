@@ -1,34 +1,34 @@
 ---
 last_modified: 2026-03-12
-title: "deno bench"
+title: "ende bench"
 oldUrl:
   - /runtime/manual/tools/benchmarker/
   - /runtime/reference/cli/benchmarker/
 command: bench
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno bench"
-description: "Run benchmarks using Deno's built-in bench tool."
+openGraphTitle: "ende bench"
+description: "Run benchmarks using Ende's built-in bench tool."
 ---
 
 ## Quickstart
 
 Firstly, let's create a file `url_bench.ts` and register a bench using the
-[`Deno.bench()`](/api/deno/~/Deno.bench) function.
+[`Ende.bench()`](/api/ende/~/Ende.bench/) function.
 
 ```ts
 // url_bench.ts
-Deno.bench("URL parsing", () => {
+Ende.bench("URL parsing", () => {
   new URL("https://deno.land");
 });
 ```
 
-Secondly, run the benchmark using the `deno bench` subcommand.
+Secondly, run the benchmark using the `ende bench` subcommand.
 
 ```sh
-deno bench url_bench.ts
+ende bench url_bench.ts
 Check file:///path/to/url_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
-Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
+Runtime | Ende 2026.10.17 (x86_64-unknown-linux-gnu)
 
 file:///path/to/url_bench.ts
 
@@ -40,24 +40,24 @@ file:///path/to/url_bench.ts
 ## Writing benchmarks
 
 To define a benchmark you need to register it with a call to the
-[`Deno.bench`](/api/deno/~/Deno.bench) API. There are multiple overloads of this
-API to allow for the greatest flexibility and easy switching between the forms
-(eg. when you need to quickly focus a single bench for debugging, using the
-`only: true` option):
+[`Ende.bench`](/api/ende/~/Ende.bench/) API. There are multiple overloads of
+this API to allow for the greatest flexibility and easy switching between the
+forms (eg. when you need to quickly focus a single bench for debugging, using
+the `only: true` option):
 
 ```ts
 // Compact form: name and function
-Deno.bench("hello world #1", () => {
+Ende.bench("hello world #1", () => {
   new URL("https://deno.land");
 });
 
 // Compact form: named function.
-Deno.bench(function helloWorld3() {
+Ende.bench(function helloWorld3() {
   new URL("https://deno.land");
 });
 
 // Longer form: bench definition.
-Deno.bench({
+Ende.bench({
   name: "hello world #2",
   fn: () => {
     new URL("https://deno.land");
@@ -65,12 +65,12 @@ Deno.bench({
 });
 
 // Similar to compact form, with additional configuration as a second argument.
-Deno.bench("hello world #4", { permissions: { read: true } }, () => {
+Ende.bench("hello world #4", { permissions: { read: true } }, () => {
   new URL("https://deno.land");
 });
 
 // Similar to longer form, with bench function as a second argument.
-Deno.bench(
+Ende.bench(
   { name: "hello world #5", permissions: { read: true } },
   () => {
     new URL("https://deno.land");
@@ -78,7 +78,7 @@ Deno.bench(
 );
 
 // Similar to longer form, with a named bench function as a second argument.
-Deno.bench({ permissions: { read: true } }, function helloWorld6() {
+Ende.bench({ permissions: { read: true } }, function helloWorld6() {
   new URL("https://deno.land");
 });
 ```
@@ -89,7 +89,7 @@ You can also bench asynchronous code by passing a bench function that returns a
 promise. For this you can use the `async` keyword when defining a function:
 
 ```ts
-Deno.bench("async hello world", async () => {
+Ende.bench("async hello world", async () => {
   await 1;
 });
 ```
@@ -103,16 +103,16 @@ it. If the file is small enough the time it takes to open and close the file
 might outweigh the time it takes to read the file itself.
 
 To help with such situations you can
-[`Deno.BenchContext.start`](/api/deno/~/Deno.BenchContext.start) and
-[`Deno.BenchContext.end`](/api/deno/~/Deno.BenchContext.end) to tell the
+[`Ende.BenchContext.start`](/api/ende/~/Ende.BenchContext/#start) and
+[`Ende.BenchContext.end`](/api/ende/~/Ende.BenchContext/#end) to tell the
 benchmarking tool about the critical section you want to measure. Everything
 outside of the section between these two calls will be excluded from the
 measurement.
 
 ```ts
-Deno.bench("foo", async (b) => {
+Ende.bench("foo", async (b) => {
   // Open a file that we will act upon.
-  using file = await Deno.open("a_big_data_file.txt");
+  using file = await Ende.open("a_big_data_file.txt");
 
   // Tell the benchmarking tool that this is the only section you want
   // to measure.
@@ -127,16 +127,16 @@ Deno.bench("foo", async (b) => {
 ```
 
 The above example requires the `--allow-read` flag to run the benchmark:
-`deno bench --allow-read file_reading.ts`.
+`ende bench --allow-read file_reading.ts`.
 
 ## Grouping and baselines
 
 When registering a bench case, it can be assigned to a group, using
-[`Deno.BenchDefinition.group`](/api/deno/~/Deno.BenchDefinition.group) option:
+[`Ende.BenchDefinition.group`](/api/ende/~/Ende.BenchDefinition/#group) option:
 
 ```ts
 // url_bench.ts
-Deno.bench("url parse", { group: "url" }, () => {
+Ende.bench("url parse", { group: "url" }, () => {
   new URL("https://deno.land");
 });
 ```
@@ -146,24 +146,24 @@ perform against a "baseline" case.
 
 In this example we'll check how performant is `Date.now()` compared to
 `performance.now()`, to do that we'll mark the first case as a "baseline" using
-[`Deno.BenchDefinition.baseline`](/api/deno/~/Deno.BenchDefinition.baseline)
+[`Ende.BenchDefinition.baseline`](/api/ende/~/Ende.BenchDefinition/#baseline)
 option:
 
 ```ts
 // time_bench.ts
-Deno.bench("Date.now()", { group: "timing", baseline: true }, () => {
+Ende.bench("Date.now()", { group: "timing", baseline: true }, () => {
   Date.now();
 });
 
-Deno.bench("performance.now()", { group: "timing" }, () => {
+Ende.bench("performance.now()", { group: "timing" }, () => {
   performance.now();
 });
 ```
 
 ```sh
-deno bench time_bench.ts
+ende bench time_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
-Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
+Runtime | Ende 2026.10.17 (x86_64-unknown-linux-gnu)
 
 file:///path/to/time_bench.ts
 
@@ -183,7 +183,7 @@ You can specify multiple groups in the same file.
 
 ## Running benchmarks
 
-To run a benchmark, call `deno bench` with the file that contains your bench
+To run a benchmark, call `ende bench` with the file that contains your bench
 function. You can also omit the file name, in which case all benchmarks in the
 current directory (recursively) that match the glob
 `{*_,*.,}bench.{ts, tsx, mts, js, mjs, jsx}` will be run. If you pass a
@@ -197,32 +197,32 @@ The glob expands to:
 
 ```sh
 # Run all benches in the current directory and all sub-directories
-deno bench
+ende bench
 
 # Run all benches in the util directory
-deno bench util/
+ende bench util/
 
 # Run just my_bench.ts
-deno bench my_bench.ts
+ende bench my_bench.ts
 ```
 
 > ⚠️ If you want to pass additional CLI arguments to the bench files use `--` to
-> inform Deno that remaining arguments are scripts arguments.
+> inform Ende that remaining arguments are scripts arguments.
 
 ```sh
 # Pass additional arguments to the bench file
-deno bench my_bench.ts -- -e --foo --bar
+ende bench my_bench.ts -- -e --foo --bar
 ```
 
-`deno bench` uses the same permission model as `deno run` and therefore will
+`ende bench` uses the same permission model as `ende run` and therefore will
 require, for example, `--allow-write` to write to the file system during
 benching.
 
-To see all runtime options with `deno bench`, you can reference the command line
+To see all runtime options with `ende bench`, you can reference the command line
 help:
 
 ```sh
-deno help bench
+ende help bench
 ```
 
 ## Filtering
@@ -239,15 +239,15 @@ The filter flags accept a string or a pattern as value.
 Assuming the following benches:
 
 ```ts
-Deno.bench({
+Ende.bench({
   name: "my-bench",
   fn: () => {/* bench function zero */},
 });
-Deno.bench({
+Ende.bench({
   name: "bench-1",
   fn: () => {/* bench function one */},
 });
-Deno.bench({
+Ende.bench({
   name: "bench2",
   fn: () => {/* bench function two */},
 });
@@ -257,17 +257,17 @@ This command will run all of these benches because they all contain the word
 "bench".
 
 ```sh
-deno bench --filter "bench" benchmarks/
+ende bench --filter "bench" benchmarks/
 ```
 
 On the flip side, the following command uses a pattern and will run the second
 and third benchmarks.
 
 ```sh
-deno bench --filter "/bench-*\d/" benchmarks/
+ende bench --filter "/bench-*\d/" benchmarks/
 ```
 
-_To let Deno know that you want to use a pattern, wrap your filter with
+_To let Ende know that you want to use a pattern, wrap your filter with
 forward-slashes like the JavaScript syntactic sugar for a regex._
 
 ### Bench definition filtering
@@ -282,9 +282,9 @@ example you only want a benchmark to run on Windows). For this you can use the
 skipped.
 
 ```ts
-Deno.bench({
+Ende.bench({
   name: "bench windows feature",
-  ignore: Deno.build.os !== "windows",
+  ignore: Ende.build.os !== "windows",
   fn() {
     // do windows feature
   },
@@ -302,7 +302,7 @@ overall benchmark run will always fail if any bench is flagged with `only`, as
 this is a temporary measure only which disables nearly all of your benchmarks.
 
 ```ts
-Deno.bench({
+Ende.bench({
   name: "Focus on this bench only",
   only: true,
   fn() {
@@ -316,10 +316,10 @@ Deno.bench({
 To retrieve the output as JSON, use the `--json` flag:
 
 ```sh
-deno bench my_bench.ts --json
+ende bench my_bench.ts --json
 {
   "version": 1,
-  "runtime": "Deno/2.4.2 x86_64-unknown-linux-gnu",
+  "runtime": "Ende/2.4.2 x86_64-unknown-linux-gnu",
   "cpu": "12th Gen Intel(R) Core(TM) i3-12100",
   "benches": [
     {

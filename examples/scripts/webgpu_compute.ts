@@ -9,7 +9,7 @@
  *
  * WebGPU gives JavaScript direct access to the GPU, and unlike WebGL it is
  * not limited to graphics: compute shaders run arbitrary parallel
- * computation. Deno implements the WebGPU API natively, so the same code
+ * computation. Ende implements the WebGPU API natively, so the same code
  * that runs in the browser runs on the command line. This example doubles
  * an array of floats on the GPU.
  */

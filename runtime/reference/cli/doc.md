@@ -1,19 +1,19 @@
 ---
 last_modified: 2026-03-12
-title: "deno doc"
+title: "ende doc"
 oldUrl:
   - /runtime/manual/tools/doc/
   - /runtime/manual/tools/documentation_generator/
   - /runtime/reference/cli/documentation_generator/
 command: doc
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno doc"
+openGraphTitle: "ende doc"
 description: "Generate documentation from your code"
 ---
 
 ## Examples
 
-`deno doc` followed by a list of one or more source files will print the JSDoc
+`ende doc` followed by a list of one or more source files will print the JSDoc
 documentation for each of the module's **exported** members.
 
 For example, given a file `add.ts` with the contents:
@@ -30,43 +30,41 @@ export function add(x: number, y: number): number {
 }
 ```
 
-Running the Deno `doc` command prints the function's JSDoc comment to `stdout`:
+Running the Ende `doc` command prints the function's JSDoc comment to `stdout`:
 
 ```sh
-deno doc add.ts
+ende doc add.ts
 function add(x: number, y: number): number
   Adds x and y. @param {number} x @param {number} y @returns {number} Sum of x and y
 ```
 
-### Documenting an npm or JSR package
+### Documenting a JSR package
 
-Starting in Deno 2.8, `deno doc` accepts `npm:` and `jsr:` specifiers and will
-fetch the package's published types before generating documentation. This is
-useful for exploring a third-party API from the terminal without cloning the
-repository:
+`ende doc` accepts `jsr:` specifiers and will fetch the package's published
+types before generating documentation. This is useful for exploring a
+third-party API from the terminal without cloning the repository:
 
 ```sh
-deno doc npm:code-block-writer
-deno doc jsr:@std/path
+ende doc jsr:@ende/path
 ```
 
-You can pin to a specific version like any other Deno specifier (`npm:zod@4`),
-and combine the specifier with `--html` or `--json` to render the same output
-formats as for local files.
+You can pin to a specific version like any other Ende specifier
+(`jsr:@ende/path@2026.10.15`), and combine the specifier with `--html` or
+`--json` to render the same output formats as for local files.
 
 ## Linting
 
 You can use `--lint` flag to check for problems in your documentation while it's
-being generated. `deno doc` will point out three kinds of problems:
+being generated. `ende doc` will point out three kinds of problems:
 
 1. Error for an exported type from the root module referencing a non-exported
    type.
    - Ensures API consumers have access to all the types the API uses. This can
      be suppressed by exporting the type from a root module (one of the files
-     specified to `deno doc` on the command line) or by marking the type with an
+     specified to `ende doc` on the command line) or by marking the type with an
      `@internal` jsdoc tag.
 1. Error for missing return type or property type on a **public** type.
-   - Ensures `deno doc` displays the return/property type and helps improve type
+   - Ensures `ende doc` displays the return/property type and helps improve type
      checking performance.
 1. Error for missing JS doc comment on a **public** type.
    - Ensures the code is documented. Can be suppressed by adding a jsdoc
@@ -88,7 +86,7 @@ export function getName(person: Person) {
 ```
 
 ```sh
-deno doc --lint mod.ts
+ende doc --lint mod.ts
 Type 'getName' references type 'Person' which is not exported from a root module.
 Missing JS documentation comment.
 Missing return type.
@@ -101,7 +99,7 @@ with non-zero exit code and the output is reported to standard error.
 
 ## Supported JSDoc features and tags
 
-Deno implements a large set of JSDoc tags, but does not strictly adhere to the
+Ende implements a large set of JSDoc tags, but does not strictly adhere to the
 JSDoc standard, but rather align with sensible standards and features provided
 by widely used tools and ecosystems in the same feature-space, like
 [TSDoc](https://tsdoc.org/) and [TypeDoc](https://typedoc.org/).
@@ -178,15 +176,15 @@ modules. Besides just supporting markdown-style links,
 [JSDoc style inline-links](https://jsdoc.app/tags-inline-link) are also
 supported.
 
-For example, you can do`{@link https://docs.deno.com}`, which will be rendered
-as the following 'https://docs.deno.com'. `{@linkcode https://docs.deno.com}`
-can also be used, to make it in a monospace font, and will be rendered roughly
-like this: '`https://docs.deno.com`'.
+For example, you can do`{@link https://docs.ende.sh}`, which will be rendered as
+the following 'https://docs.ende.sh'. `{@linkcode https://docs.ende.sh}` can
+also be used, to make it in a monospace font, and will be rendered roughly like
+this: '`https://docs.ende.sh`'.
 
 You can also specify a replacement label, via
-`{@link https://docs.deno.com | Deno Docs}`, which will use the text after `|`
-as the text to display instead of the link. The previous example would render as
-'[Deno Docs](https://docs.deno.com)'.
+`{@link https://docs.ende.sh | Ende Docs}`, which will use the text after `|` as
+the text to display instead of the link. The previous example would render as
+'[Ende Docs](https://docs.ende.sh)'.
 
 You can add inline links in your descriptions to other symbols via
 `{@link MySymbol}`.
@@ -200,11 +198,11 @@ syntax. You can also link to symbols in a different module via
 Use the `--html` flag to generate a static site with documentation.
 
 ```sh
-deno doc --html --name="My library" ./mod.ts
+ende doc --html --name="My library" ./mod.ts
 
-deno doc --html --name="My library" --output=./documentation/ ./mod.ts
+ende doc --html --name="My library" --output=./documentation/ ./mod.ts
 
-deno doc --html --name="My library" ./sub1/mod.ts ./sub2/mod.ts
+ende doc --html --name="My library" ./sub1/mod.ts ./sub2/mod.ts
 ```
 
 The generated documentation is a static site with multiple pages that can be
@@ -217,5 +215,5 @@ user's browser has JavaScript disabled.
 
 Use the `--json` flag to output the documentation in JSON format. This JSON
 format is consumed by the
-[deno doc website](https://github.com/denoland/docland) and is used to generate
+[ende doc website](https://github.com/denoland/docland) and is used to generate
 module documentation.

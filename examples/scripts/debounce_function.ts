@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/async/doc/~/debounce} Doc: @std/async debounce
- * @resource {https://jsr.io/@std/async/doc/~/DebouncedFunction} Doc: @std/async DebouncedFunction
+ * @resource {https://jsr.io/@ende/async/doc/~/debounce} Doc: @ende/async debounce
+ * @resource {https://jsr.io/@ende/async/doc/~/DebouncedFunction} Doc: @ende/async DebouncedFunction
  * @group Standard library
  *
  * A debounced function waits until calls stop arriving before it runs.
@@ -14,8 +14,8 @@
  * pending call.
  */
 
-import { debounce } from "jsr:@std/async/debounce";
-import { delay } from "jsr:@std/async/delay";
+import { debounce } from "jsr:@ende/async/debounce";
+import { delay } from "jsr:@ende/async/delay";
 
 // Wrap a function with debounce and a wait time in milliseconds. The
 // counter proves how many times the wrapped function actually runs.

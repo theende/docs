@@ -1,15 +1,15 @@
 /**
- * @title User Data Processing with Deno Collections
+ * @title User Data Processing with Ende Collections
  * @difficulty intermediate
  * @tags cli
  * @group Data Processing
  * @run <url>
  *
- * Demonstrates using Deno's @std/collections library for processing user data.
+ * Demonstrates using Ende's @ende/collections library for processing user data.
  * This example uses pick, omit, and partition to manipulate data structures.
  */
 
-import { omit, partition, pick } from "jsr:@std/collections";
+import { omit, partition, pick } from "jsr:@ende/collections";
 
 // Define the User type with fields for id, name, role, age, and country
 type User = {

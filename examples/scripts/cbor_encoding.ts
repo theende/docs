@@ -3,21 +3,21 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/cbor} Doc: @std/cbor
+ * @resource {https://jsr.io/@ende/cbor} Doc: @ende/cbor
  * @resource {https://www.rfc-editor.org/rfc/rfc8949} Spec: CBOR (RFC 8949)
  * @group Encoding
  *
  * CBOR is a binary serialization format standardized as RFC 8949. It backs
  * WebAuthn, IoT protocols and many other systems that need compact
  * self-describing messages. Unlike JSON it has native support for binary
- * data and dates. The Standard Library implements it in jsr:@std/cbor.
+ * data and dates. The Standard Library implements it in jsr:@ende/cbor.
  */
-import { decodeCbor, encodeCbor } from "jsr:@std/cbor";
+import { decodeCbor, encodeCbor } from "jsr:@ende/cbor";
 
 // The value contains a Uint8Array and a Date. Neither would survive
 // JSON.stringify, which has no representation for them.
 const value = {
-  name: "Deno",
+  name: "Ende",
   version: 2,
   active: true,
   signature: new Uint8Array([222, 173, 190, 239]),
@@ -40,7 +40,7 @@ console.log(decoded.released.toISOString()); // 2020-05-13T00:00:00.000Z
 
 // CBOR is also more compact than JSON text. For this small object the
 // encoding saves about a third of the bytes.
-const small = { name: "Deno", version: 2, active: true };
+const small = { name: "Ende", version: 2, active: true };
 console.log(JSON.stringify(small).length); // 41
 console.log(encodeCbor(small).length); // 28
 

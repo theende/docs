@@ -3,18 +3,18 @@
  * @difficulty intermediate
  * @tags cli
  * @run -R -W <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.open} Doc: Deno.open
- * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.open} Doc: Ende.open
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.FsFile} Doc: Ende.FsFile
  * @group File System
  *
  * Sometimes we need more granular control over file operations.
- * Deno provides a low level interface to file operations that
+ * Ende provides a low level interface to file operations that
  * may be used for this purpose.
  */
 
 // For our first example we will demonstrate using a writeable stream.
 // To handle any low level file operations we must first open the file.
-const output = await Deno.open("example.txt", {
+const output = await Ende.open("example.txt", {
   create: true,
   append: true,
 });
@@ -27,7 +27,7 @@ const outputWriter = output.writable.getWriter();
 await outputWriter.ready;
 
 // Let's write some text to the file
-const outputText = "I love Deno!";
+const outputText = "I love Ende!";
 const encoded = new TextEncoder().encode(outputText);
 await outputWriter.write(encoded);
 
@@ -35,7 +35,7 @@ await outputWriter.write(encoded);
 await outputWriter.close();
 
 // For our next example, let's read the text from the file!
-const input = await Deno.open("example.txt");
+const input = await Ende.open("example.txt");
 
 // Let's get a reader from the input
 const inputReader = input.readable.getReader();

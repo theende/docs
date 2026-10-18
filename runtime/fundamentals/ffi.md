@@ -1,44 +1,45 @@
 ---
 last_modified: 2026-06-18
 title: "Foreign Function Interface (FFI)"
-description: "Learn how to use Deno's Foreign Function Interface (FFI) to call native libraries directly from JavaScript or TypeScript. Includes examples, best practices, and security considerations."
+description: "Learn how to use Ende's Foreign Function Interface (FFI) to call native libraries directly from JavaScript or TypeScript. Includes examples, best practices, and security considerations."
 ---
 
-Deno's Foreign Function Interface (FFI) allows JavaScript and TypeScript code to
+Ende's Foreign Function Interface (FFI) allows JavaScript and TypeScript code to
 call functions in dynamic libraries written in languages like C, C++, or Rust.
 This enables you to integrate native code performance and capabilities directly
-into your Deno applications.
+into your Ende applications.
 
-<a href="/api/deno/ffi" class="docs-cta runtime-cta">Deno FFI Reference Docs</a>
+<a href="/api/ende/ffi/" class="docs-cta runtime-cta">Ende FFI Reference
+Docs</a>
 
 ## Introduction to FFI
 
-FFI provides a bridge between Deno's JavaScript runtime and native code. This
+FFI provides a bridge between Ende's JavaScript runtime and native code. This
 allows you to:
 
-- Use existing native libraries within your Deno applications
+- Use existing native libraries within your Ende applications
 - Implement performance-critical code in languages like Rust or C
 - Access operating system APIs and hardware features not directly available in
   JavaScript
 
-Deno's FFI implementation is based on the
-[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, which loads dynamic libraries and
+Ende's FFI implementation is based on the
+[`Ende.dlopen`](/api/ende/~/Ende.dlopen/) API, which loads dynamic libraries and
 creates JavaScript bindings to the functions they export.
 
 ## Security considerations
 
 FFI requires explicit permission using the
 [`--allow-ffi`](/runtime/reference/permissions/#ffi-foreign-function-interface)
-flag, as native code runs outside of Deno's security sandbox:
+flag, as native code runs outside of Ende's security sandbox:
 
 ```sh
-deno run --allow-ffi my_ffi_script.ts
+ende run --allow-ffi my_ffi_script.ts
 ```
 
 > [!NOTE]
 > <strong>Important security warning</strong>: Unlike JavaScript code running in
-> the Deno sandbox, native libraries loaded via FFI have the same access level
-> as the Deno process itself. This means they can:
+> the Ende sandbox, native libraries loaded via FFI have the same access level
+> as the Ende process itself. This means they can:
 >
 > - Access the filesystem
 > - Make network connections
@@ -49,16 +50,16 @@ deno run --allow-ffi my_ffi_script.ts
 
 ## Basic usage
 
-The basic pattern for using FFI in Deno involves:
+The basic pattern for using FFI in Ende involves:
 
 1. Defining the interface for the native functions you want to call
-2. Loading the dynamic library using [`Deno.dlopen()`](/api/deno/~/Deno.dlopen)
+2. Loading the dynamic library using [`Ende.dlopen()`](/api/ende/~/Ende.dlopen/)
 3. Calling the loaded functions
 
 Here's a simple example loading a C library:
 
 ```ts
-const dylib = Deno.dlopen("libexample.so", {
+const dylib = Ende.dlopen("libexample.so", {
   add: { parameters: ["i32", "i32"], result: "i32" },
 });
 
@@ -69,10 +70,10 @@ dylib.close();
 
 ## Loading libraries
 
-The first argument to [`Deno.dlopen()`](/api/deno/~/Deno.dlopen) is the path to
-the dynamic library. Deno hands this path to the operating system's dynamic
+The first argument to [`Ende.dlopen()`](/api/ende/~/Ende.dlopen/) is the path to
+the dynamic library. Ende hands this path to the operating system's dynamic
 loader (`dlopen` on Linux and macOS, `LoadLibrary` on Windows), so the way the
-file is located follows the OS rules, not Deno's module resolution.
+file is located follows the OS rules, not Ende's module resolution.
 
 There are two ways to specify the library:
 
@@ -81,7 +82,7 @@ There are two ways to specify the library:
   path like `"./libexample.so"` is resolved against the **current working
   directory of the process**, not against the location of your `.ts` file. This
   is a common source of "could not open library" errors: running the same script
-  from a different directory changes where Deno looks.
+  from a different directory changes where Ende looks.
 - **A bare name** with no separator (for example `"libexample.so"`) is left to
   the OS to find on its standard search path. On Linux that means
   `LD_LIBRARY_PATH` and the system cache (such as `/usr/lib`); on macOS the
@@ -99,7 +100,7 @@ bare relative string:
 // Always points at libexample.so sitting next to this module.
 const path = new URL("./libexample.so", import.meta.url).pathname;
 
-const dylib = Deno.dlopen(
+const dylib = Ende.dlopen(
   path,
   {
     add: { parameters: ["i32", "i32"], result: "i32" },
@@ -108,19 +109,19 @@ const dylib = Deno.dlopen(
 ```
 
 This pattern also works inside an executable produced by
-[`deno compile`](/runtime/reference/cli/compile/) (see below).
+[`ende compile`](/runtime/reference/cli/compile/) (see below).
 
-### Bundling a library with `deno compile`
+### Bundling a library with `ende compile`
 
-[`Deno.dlopen`](/api/deno/~/Deno.dlopen) needs a real file on disk, so a dynamic
-library is not embedded in a compiled binary automatically. Include it
+[`Ende.dlopen`](/api/ende/~/Ende.dlopen/) needs a real file on disk, so a
+dynamic library is not embedded in a compiled binary automatically. Include it
 explicitly with the `--include` flag:
 
 ```sh
-deno compile --allow-ffi --include libexample.so main.ts
+ende compile --allow-ffi --include libexample.so main.ts
 ```
 
-At runtime Deno unpacks the included library to a temporary directory and points
+At runtime Ende unpacks the included library to a temporary directory and points
 `import.meta.url` at it, so a module that resolves its path with
 `new URL("./libexample.so", import.meta.url).pathname` (as shown above) finds
 the bundled copy and the resulting binary runs on a machine that does not have
@@ -130,14 +131,14 @@ search path described above.
 
 ### Handling load failures
 
-[`Deno.dlopen`](/api/deno/~/Deno.dlopen) throws synchronously when the library
+[`Ende.dlopen`](/api/ende/~/Ende.dlopen/) throws synchronously when the library
 cannot be loaded or when a declared symbol is missing, so wrap the call in a
 `try`/`catch` to fail gracefully:
 
 ```ts
 let dylib;
 try {
-  dylib = Deno.dlopen(
+  dylib = Ende.dlopen(
     "./libexample.so",
     {
       add: { parameters: ["i32", "i32"], result: "i32" },
@@ -147,7 +148,7 @@ try {
   // A missing or unreadable file reports "Could not open library: ...".
   // A missing function reports "Failed to register symbol <name>: ...".
   console.error("Failed to load native library:", err.message);
-  Deno.exit(1);
+  Ende.exit(1);
 }
 ```
 
@@ -157,9 +158,9 @@ loaded but one of the symbols you declared was not found in it.
 
 ## Supported types
 
-Deno's FFI supports a variety of data types for parameters and return values:
+Ende's FFI supports a variety of data types for parameters and return values:
 
-| FFI Type               | Deno                 | C                        | Rust                      |
+| FFI Type               | Ende                 | C                        | Rust                      |
 | ---------------------- | -------------------- | ------------------------ | ------------------------- |
 | `i8`                   | `number`             | `char` / `signed char`   | `i8`                      |
 | `u8`                   | `number`             | `unsigned char`          | `u8`                      |
@@ -179,10 +180,10 @@ Deno's FFI supports a variety of data types for parameters and return values:
 | `function`[3]          | `{} \| null`         | `void (*fun)()`          | `Option<extern "C" fn()>` |
 | `{ struct: [...] }`[4] | `TypedArray`         | `struct MyStruct`        | `MyStruct`                |
 
-As of Deno 1.25, the `pointer` type has been split into a `pointer` and a
-`buffer` type to ensure users take advantage of optimizations for Typed Arrays,
-and as of Deno 1.31 the JavaScript representation of `pointer` has become an
-opaque pointer object or `null` for null pointers.
+The `pointer` type has been split into a `pointer` and a `buffer` type to ensure
+users take advantage of optimizations for Typed Arrays, and the JavaScript
+representation of `pointer` has become an opaque pointer object or `null` for
+null pointers.
 
 - [1] `void` type can only be used as a result type.
 - [2] `buffer` type accepts TypedArrays as parameter, but it always returns a
@@ -229,39 +230,39 @@ Point midpoint(Point a, Point b) {
 Build it as a shared library. The compiler flags and output filename vary by
 platform:
 
-<deno-tabs group-id="operating-systems">
-<deno-tab value="linux" label="Linux" default>
+<ende-tabs group-id="operating-systems">
+<ende-tab value="linux" label="Linux" default>
 
 ```sh
 cc -shared -fPIC -O2 -o libpoint.so point.c
 ```
 
-</deno-tab>
-<deno-tab value="mac" label="macOS">
+</ende-tab>
+<ende-tab value="mac" label="macOS">
 
 ```sh
 cc -dynamiclib -O2 -o libpoint.dylib point.c
 ```
 
-</deno-tab>
-<deno-tab value="windows" label="Windows">
+</ende-tab>
+<ende-tab value="windows" label="Windows">
 
 ```sh
 cl /LD /O2 point.c /Fe:point.dll
 ```
 
-</deno-tab>
-</deno-tabs>
+</ende-tab>
+</ende-tabs>
 
-Then call into it from Deno, using the filename for your platform in
-[`Deno.dlopen`](/api/deno/~/Deno.dlopen). Note that the `struct` definition is
+Then call into it from Ende, using the filename for your platform in
+[`Ende.dlopen`](/api/ende/~/Ende.dlopen/). Note that the `struct` definition is
 an _array of field types_ in declaration order, not an object with named fields:
 
 ```ts title="point.ts"
 // `Point` mirrors the C `struct Point { double x; double y; }`.
 const Point = { struct: ["f64", "f64"] } as const;
 
-const lib = Deno.dlopen(
+const lib = Ende.dlopen(
   "./libpoint.so",
   {
     distance: { parameters: [Point, Point], result: "f64" },
@@ -292,7 +293,7 @@ lib.close();
 Run it with the `--allow-ffi` permission:
 
 ```sh
-deno run --allow-ffi point.ts
+ende run --allow-ffi point.ts
 ```
 
 You should see:
@@ -304,7 +305,7 @@ midpoint = { x: 2.5, y: 4 }
 
 A few things to keep in mind when working with structs:
 
-- **Layout matches the C compiler.** Deno pads struct fields the same way your C
+- **Layout matches the C compiler.** Ende pads struct fields the same way your C
   compiler does. If you need a packed struct, pad it explicitly with `u8`
   fields, as noted in the type table above.
 - **Field order is positional.** The `struct` array is just types, in
@@ -330,7 +331,7 @@ const signatures = {
 } as const;
 
 // Create a callback function
-const callback = new Deno.UnsafeCallback(
+const callback = new Ende.UnsafeCallback(
   { parameters: ["i32"], result: "void" } as const,
   (value) => {
     console.log("Callback received:", value);
@@ -357,7 +358,7 @@ callback.close();
 
 3. Wrap FFI calls in try/catch blocks to handle errors gracefully.
 
-4. Be extremely careful when using FFI, as native code can bypass Deno's
+4. Be extremely careful when using FFI, as native code can bypass Ende's
    security sandbox.
 
 5. Keep the FFI interface as small as possible to reduce the attack surface.
@@ -366,7 +367,7 @@ callback.close();
 
 ### Using a Rust library
 
-Here's an example of creating and using a Rust library with Deno:
+Here's an example of creating and using a Rust library with Ende:
 
 First, create a Rust library:
 
@@ -387,16 +388,16 @@ Compile it as a dynamic library:
 rustc --crate-type cdylib lib.rs
 ```
 
-Then use it from Deno:
+Then use it from Ende:
 
 ```ts
 const libName = {
   windows: "./lib.dll",
   linux: "./liblib.so",
   darwin: "./liblib.dylib",
-}[Deno.build.os];
+}[Ende.build.os];
 
-const dylib = Deno.dlopen(
+const dylib = Ende.dlopen(
   libName,
   {
     fibonacci: { parameters: ["u32"], result: "u32" },
@@ -415,59 +416,28 @@ dylib.close();
 - [Netsaur](https://github.com/denosaurs/netsaur/blob/c1efc3e2df6e2aaf4a1672590a404143203885a6/packages/core/src/backends/cpu/mod.ts)
 - [WebView_deno](https://github.com/webview/webview_deno/blob/main/src/ffi.ts)
 - [Deno_sdl2](https://github.com/littledivy/deno_sdl2/blob/main/mod.ts)
-- [Deno FFI examples repository](https://github.com/denoffi/denoffi_examples)
+- [Ende FFI examples repository](https://github.com/denoffi/denoffi_examples)
 
 These community-maintained repos includes working examples of FFI integrations
 with various native libraries across different operating systems.
 
 ## Related Approaches to Native Code Integration
 
-While Deno's FFI provides a direct way to call native functions, there are other
+While Ende's FFI provides a direct way to call native functions, there are other
 approaches to integrate native code:
-
-### Using Node-API (N-API) with Deno
-
-Deno supports [Node-API (N-API)](https://nodejs.org/api/n-api.html) for
-compatibility with native Node.js addons. This enables you to use existing
-native modules written for Node.js.
-
-Directly loading a Node-API addon:
-
-```ts
-import process from "node:process";
-process.dlopen(module, "./native_module.node", 0);
-```
-
-Using an npm package that uses a Node-API addon:
-
-```ts
-import someNativeAddon from "npm:some-native-addon";
-console.log(someNativeAddon.doSomething());
-```
-
-How is this different from FFI?
-
-| **Aspect**  | **FFI**                | **Node-API Support**                        |
-| ----------- | ---------------------- | ------------------------------------------- |
-| Setup       | No build step required | Requires precompiled binaries or build step |
-| Portability | Tied to library ABI    | ABI-stable across versions                  |
-| Use Case    | Direct library calls   | Reuse Node.js addons                        |
-
-Node-API support is ideal for leveraging existing Node.js native modules,
-whereas FFI is best for direct, lightweight calls to native libraries.
 
 ## Alternatives to FFI
 
 Before using FFI, consider these alternatives:
 
 - [WebAssembly](/runtime/reference/wasm/), for portable native code that runs
-  within Deno's sandbox.
-- Use [`Deno.command`](/api/deno/~/Deno.command) to execute external binaries
+  within Ende's sandbox.
+- Use [`Ende.Command`](/api/ende/~/Ende.Command/) to execute external binaries
   and subprocesses with controlled permissions.
-- Check whether [Deno's native APIs](/api/deno) already provide the
+- Check whether [Ende's native APIs](/api/ende/) already provide the
   functionality you need.
 
-Deno's FFI capabilities provide powerful integration with native code, enabling
+Ende's FFI capabilities provide powerful integration with native code, enabling
 performance optimizations and access to system-level functionality. However,
 this power comes with significant security considerations. Always be cautious
 when working with FFI and ensure you trust the native libraries you're using.

@@ -66,7 +66,7 @@ ${items}
 `;
 }
 
-Deno.serve((req) => {
+Ende.serve((req) => {
   const { pathname } = new URL(req.url);
   if (pathname === "/feed.xml") {
     // application/rss+xml is the registered media type for RSS. Readers

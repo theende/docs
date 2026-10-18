@@ -12,27 +12,50 @@
   "compilerOptions": {
     "jsx": "precompile",
     "jsxImportSource": "@ende/satz",
-    "lib": ["ende.window", "dom", "dom.iterable"]
+    "lib": [
+      "ende.window",
+      "ende.unstable",
+      "dom",
+      "dom.iterable"
+    ]
   },
   "tasks": {
     "build": "ende run -A @ende/satz/cli build",
     "serve": "ende run -A @ende/satz/cli serve",
     "check:links": "ende run -R _tools/check_links.ts",
+    "gen:reference": "ende run -A _tools/gen_reference.ts",
+    "check:reference": "ende run -A _tools/gen_reference.ts --check",
     "test": "ende test -A _tools/frontmatter_test.ts _tools/sidebar_test.ts",
     "test:examples": "ende test -A _tools/examples_test.ts",
-    "check": "ende check _config.ts _lib/ _includes/ _components/ _tools/ js/ search.page.tsx examples/_data.ts examples/_lib/ examples/index.page.tsx examples/index.examples.page.tsx lint/ runtime/_data.ts",
+    "check": "ende check _config.ts _lib/ _includes/ _components/ _tools/ js/ search.page.tsx api/index.page.tsx runtime/reference/std.page.tsx examples/_data.ts examples/_lib/ examples/index.page.tsx examples/index.examples.page.tsx lint/ runtime/_data.ts",
     "check:freshness": "ende run -R --allow-run=git --allow-env _tools/check_freshness.ts",
     "lint:update": "ende run -A _tools/update_lint_rules.ts"
   },
   "fmt": {
-    "exclude": ["_site/", "examples/scripts/", "static/"]
+    "exclude": [
+      "_site/",
+      "_reference/",
+      "examples/scripts/",
+      "static/"
+    ]
   },
   "lint": {
-    "exclude": ["_site/", "examples/scripts/", "static/"],
+    "exclude": [
+      "_site/",
+      "examples/scripts/",
+      "static/"
+    ],
     "rules": {
-      "exclude": ["jsx-key"]
+      "exclude": [
+        "jsx-key"
+      ]
     }
   },
-  "exclude": ["_site/"],
-  "links": ["../satz", "../std/markdown"]
+  "exclude": [
+    "_site/"
+  ],
+  "links": [
+    "../satz",
+    "../std/markdown"
+  ]
 }

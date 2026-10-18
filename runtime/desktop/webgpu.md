@@ -4,31 +4,26 @@ title: "WebGPU rendering"
 description: "Draw to a native window with WebGPU on the raw backend: request an adapter, wrap the window as an UnsafeWindowSurface, configure a canvas context, and run a render loop."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
 The [raw backend](/runtime/desktop/backends/#raw) gives you a native window with
 no web engine attached. Instead of loading HTML, you draw to the window yourself
-with [WebGPU](/api/web/~/GPUDevice). This is the right backend for games,
+with [WebGPU](/api/web/~/GPUDevice/). This is the right backend for games,
 visualizations, emulators, and any app that renders its own pixels rather than a
 document.
 
 The bridge between a window and WebGPU is
-[`Deno.BrowserWindow.getNativeWindow()`](/api/deno/~/Deno.BrowserWindow.prototype.getNativeWindow),
+[`Ende.BrowserWindow.getNativeWindow()`](/api/ende/~/Ende.BrowserWindow/#prototype.getNativeWindow),
 which hands back a
-[`Deno.UnsafeWindowSurface`](/api/deno/~/Deno.UnsafeWindowSurface). That surface
-exposes a WebGPU canvas context, so the same `context.configure()` /
+[`Ende.UnsafeWindowSurface`](/api/ende/~/Ende.UnsafeWindowSurface/). That
+surface exposes a WebGPU canvas context, so the same `context.configure()` /
 `getCurrentTexture()` / `present()` flow you'd use in a browser works against a
 real OS window.
 
 ## Setup
 
 WebGPU is behind an unstable flag, and the raw backend is selected in
-`deno.json`:
+`ende.json`:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "desktop": {
     "backend": "raw"
@@ -54,7 +49,7 @@ const adapter = await navigator.gpu.requestAdapter();
 if (!adapter) throw new Error("no WebGPU adapter available");
 const device = await adapter.requestDevice();
 
-const win = new Deno.BrowserWindow({
+const win = new Ende.BrowserWindow({
   title: "WebGPU",
   width: 640,
   height: 480,
@@ -88,7 +83,7 @@ surface.present();
 Build and run it:
 
 ```sh
-deno desktop main.ts
+ende desktop main.ts
 ./main      # macOS / Linux
 .\main.exe  # Windows
 ```
@@ -109,7 +104,7 @@ const adapter = await navigator.gpu.requestAdapter();
 if (!adapter) throw new Error("no WebGPU adapter available");
 const device = await adapter.requestDevice();
 
-const win = new Deno.BrowserWindow({
+const win = new Ende.BrowserWindow({
   title: "Triangle",
   width: 640,
   height: 480,
@@ -193,7 +188,7 @@ const adapter = await navigator.gpu.requestAdapter();
 if (!adapter) throw new Error("no WebGPU adapter available");
 const device = await adapter.requestDevice();
 
-const win = new Deno.BrowserWindow({ title: "Spin", width: 640, height: 480 });
+const win = new Ende.BrowserWindow({ title: "Spin", width: 640, height: 480 });
 
 const surface = win.getNativeWindow();
 const format = navigator.gpu.getPreferredCanvasFormat();
@@ -290,7 +285,7 @@ function frame() {
   setTimeout(frame, 16); // ~60 fps
 }
 
-win.addEventListener("close", () => Deno.exit(0));
+win.addEventListener("close", () => Ende.exit(0));
 frame();
 ```
 
@@ -302,9 +297,9 @@ alive with nothing on screen.
 ## Key details
 
 - **Request the adapter before wrapping the window.**
-  [`getNativeWindow()`](/api/deno/~/Deno.BrowserWindow.prototype.getNativeWindow)
+  [`getNativeWindow()`](/api/ende/~/Ende.BrowserWindow/#prototype.getNativeWindow)
   needs an active WebGPU context and throws if you call it before
-  [`navigator.gpu.requestAdapter()`](/api/web/~/GPU.prototype.requestAdapter).
+  [`navigator.gpu.requestAdapter()`](/api/web/~/GPU/#prototype.requestAdapter).
 
 - **Size the surface, and resize it.** Set `surface.width` / `surface.height`
   before the first frame, and update them (and let the context reconfigure)
@@ -313,7 +308,7 @@ alive with nothing on screen.
 
 - **`present()` every frame.** Encoding and submitting a render pass draws into
   the swapchain texture;
-  [`present()`](/api/deno/~/Deno.UnsafeWindowSurface.prototype.present) is what
+  [`present()`](/api/ende/~/Ende.UnsafeWindowSurface/#prototype.present) is what
   puts it on screen. Skip it and the window stays blank.
 
 - **Get a fresh texture each frame.** Call
@@ -323,7 +318,7 @@ alive with nothing on screen.
 - **Closing is downgraded to hiding.** Once a surface has been taken from a
   window, [`close()`](/runtime/desktop/windows/#lifecycle) hides the window
   instead of destroying it, so the native handles WebGPU is rendering into are
-  not freed underneath it. Call [`Deno.exit()`](/api/deno/~/Deno.exit) to end
+  not freed underneath it. Call [`Ende.exit()`](/api/ende/~/Ende.exit/) to end
   the process, as the render loop above does on the `close` event.
 
 ## Related
@@ -331,7 +326,7 @@ alive with nothing on screen.
 - [Backends](/runtime/desktop/backends/) — when to choose `raw` over `cef` /
   `webview`.
 - [Windows](/runtime/desktop/windows/) —
-  [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) lifecycle, sizing, and
+  [`Ende.BrowserWindow`](/api/ende/~/Ende.BrowserWindow/) lifecycle, sizing, and
   events.
-- [WebGPU API](/api/web/~/GPUDevice) and the
+- [WebGPU API](/api/web/~/GPUDevice/) and the
   [WGSL specification](https://www.w3.org/TR/WGSL/).

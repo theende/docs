@@ -1,12 +1,12 @@
 ---
 last_modified: 2025-03-10
 title: "Initialize a project"
-description: "Guide to creating and structuring new Deno projects. Learn about starting a new project, task configuration, dependency management, and best practices for growing applications."
+description: "Guide to creating and structuring new Ende projects. Learn about starting a new project, task configuration, dependency management, and best practices for growing applications."
 url: /examples/initialize_project_tutorial/
 oldUrl:
 ---
 
-While it is possible to run scripts directly with `deno run`, for larger
+While it is possible to run scripts directly with `ende run`, for larger
 projects it is recommended to create a sensible directory structure. This way
 you can organize your code, manage dependencies, script tasks and run tests more
 easily.
@@ -14,7 +14,7 @@ easily.
 Initialize a new project by running the following command:
 
 ```sh
-$ deno init my_project
+$ ende init my_project
 ✅ Project initialized
 
 Run these commands to get started
@@ -22,13 +22,13 @@ Run these commands to get started
   cd my_project
 
   # Run the server
-  deno run --allow-net main.ts
+  ende run --allow-net main.ts
 
   # Run the server and watch for file changes
-  deno task dev
+  ende task dev
 
   # Run the tests
-  deno test
+  ende test
 ```
 
 Where `my_project` is the name of your project. You can
@@ -42,21 +42,21 @@ Navigate to the project directory:
 cd my_project
 ```
 
-Then you can run the project directly using the `deno task` command:
+Then you can run the project directly using the `ende task` command:
 
 ```sh
-$ deno task dev
-Task dev deno run --watch --allow-net main.ts
+$ ende task dev
+Task dev ende run --watch --allow-net main.ts
 Watcher Process started.
 Listening on http://0.0.0.0:8000/ (http://localhost:8000/)
 ```
 
-Take a look in the `deno.json` file in your new project. You should see a `dev`
+Take a look in the `ende.json` file in your new project. You should see a `dev`
 task in the "tasks" field.
 
-```json title="deno.json"
+```json title="ende.json"
 "tasks": {
-  "dev": "deno run --watch --allow-net main.ts"
+  "dev": "ende run --watch --allow-net main.ts"
 },
 ```
 
@@ -70,7 +70,7 @@ action if you open the `main.ts` file and make a change.
 In the project directory run:
 
 ```sh
-$ deno test
+$ ende test
 Check main_test.ts
 running 2 tests from ./main_test.ts
 returns html on / ... ok (11ms)
@@ -80,7 +80,7 @@ ok | 2 passed | 0 failed (13ms)
 ```
 
 This will execute all the tests in the project. You can read more about
-[testing in Deno](/runtime/test/) and we'll cover tests in a little more depth
+[testing in Ende](/runtime/test/) and we'll cover tests in a little more depth
 in a later tutorial. At the moment you have one test file, `main_test.ts`, which
 tests the request handler in `main.ts`.
 
@@ -93,14 +93,14 @@ request handler are a starting point to build on.
 
 Beyond the initial files, you’ll likely create additional modules (files) to
 organize your code. Consider grouping related functionality into separate files.
-Remember that Deno [supports ES modules](/runtime/fundamentals/modules/), so you
+Remember that Ende [supports ES modules](/runtime/fundamentals/modules/), so you
 can use import and export statements to structure your code.
 
-Example folder structure for a deno project:
+Example folder structure for a ende project:
 
 ```sh
 my_project/
-├── deno.json
+├── ende.json
 ├── main.ts
 ├── main_test.ts
 ├── routes/
@@ -120,7 +120,7 @@ This kind of structure keeps your project clean and makes it easier to find and
 manage files.
 
 🦕 Congratulations! Now you know how to create a brand new project with
-`deno init`. Remember that Deno encourages simplicity and avoids complex build
+`ende init`. Remember that Ende encourages simplicity and avoids complex build
 tools. Keep your project modular, testable, and organized. As your project
 grows, adapt the structure to fit your needs. And most importantly, have fun
-exploring Deno’s capabilities!
+exploring Ende’s capabilities!

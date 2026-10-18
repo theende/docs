@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-25
 title: "Web Platform APIs"
-description: "A guide to the Web Platform APIs available in Deno. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
+description: "A guide to the Web Platform APIs available in Ende. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:
   - /runtime/manual/runtime/navigator_api/
   - /runtime/manual/runtime/web_platform_apis/
@@ -10,36 +10,36 @@ oldUrl:
   - /runtime/manual/runtime/workers/
 ---
 
-One way Deno simplifies web and cloud development is by using standard Web
+One way Ende simplifies web and cloud development is by using standard Web
 Platform APIs (like `fetch`, WebSockets and more) over proprietary APIs. This
 means if you've ever built for the browser, you're likely already familiar with
-Deno, and if you're learning Deno, you're also investing in your knowledge of
+Ende, and if you're learning Ende, you're also investing in your knowledge of
 the web.
 
 <a href="/api/web/" class="docs-cta runtime-cta">Explore supported Web APIs</a>
 
-Below we'll highlight some of the standard Web APIs that Deno supports.
+Below we'll highlight some of the standard Web APIs that Ende supports.
 
-To check if a Web Platform API is available in Deno, you can click on
+To check if a Web Platform API is available in Ende, you can click on
 [the interface on MDN](https://developer.mozilla.org/en-US/docs/Web/API#interfaces)
 and refer to
 [its Browser Compatibility table](https://developer.mozilla.org/en-US/docs/Web/API/AbortController#browser_compatibility).
 
 ## fetch
 
-The [`fetch`](/api/web/~/fetch) API can be used to make HTTP requests. It is
+The [`fetch`](/api/web/~/fetch/) API can be used to make HTTP requests. It is
 implemented as specified in the
 [WHATWG `fetch` spec](https://fetch.spec.whatwg.org/).
 
 ### Spec deviations
 
-- The Deno user agent does not have a cookie jar. As such, the `set-cookie`
+- The Ende user agent does not have a cookie jar. As such, the `set-cookie`
   header on a response is not processed, or filtered from the visible response
   headers.
-- Deno does not follow the same-origin policy, because the Deno user agent
+- Ende does not follow the same-origin policy, because the Ende user agent
   currently does not have the concept of origins, and it does not have a cookie
-  jar. This means Deno does not need to protect against leaking authenticated
-  data cross origin. Because of this Deno does not implement the following
+  jar. This means Ende does not need to protect against leaking authenticated
+  data cross origin. Because of this Ende does not implement the following
   sections of the WHATWG `fetch` specification:
   - Section `3.1. 'Origin' header`.
   - Section `3.2. CORS protocol`.
@@ -52,14 +52,14 @@ implemented as specified in the
 - The specification is vague on how
   [`file:` URLs are to be handled](https://fetch.spec.whatwg.org/#scheme-fetch).
   Firefox is the only mainstream browser that implements fetching `file:` URLs,
-  and even then it doesn't work by default. As of Deno 1.16, Deno supports
-  fetching local files. See the next section for details.
+  and even then it doesn't work by default. Ende supports fetching local files.
+  See the next section for details.
 - The `request` and `response` header guards are implemented, but unlike
   browsers do not have any constraints on which header names are allowed.
 - The `referrer`, `referrerPolicy`, `mode`, `credentials`, `cache`, `integrity`,
   `keepalive`, and `window` properties and their relevant behaviours in
   `RequestInit` are not implemented. The relevant fields are not present on the
-  [`Request`](/api/web/~/Request) object.
+  [`Request`](/api/web/~/Request/) object.
 - The `priority` member of `RequestInit` (`"auto"`, `"high"`, or `"low"`) is
   accepted and validated. Following the Fetch standard it is write-only, so it
   is not exposed back as a property on the `Request` object.
@@ -71,11 +71,11 @@ implemented as specified in the
 
 ### Fetching local files
 
-Deno supports fetching `file:` URLs. This makes it easier to write code that
+Ende supports fetching `file:` URLs. This makes it easier to write code that
 uses the same code path on a server as local, as well as easier to author code
-that works both with the Deno CLI and Deno Deploy.
+that runs in several places.
 
-Deno only supports absolute file URLs, this means that `fetch("./some.json")`
+Ende only supports absolute file URLs, this means that `fetch("./some.json")`
 will not work. It should be noted though that if [`--location`](#location) is
 specified, relative URLs use the `--location` as the base, but a `file:` URL
 cannot be passed as the `--location`.
@@ -104,25 +104,25 @@ Notes on fetching local files:
 
 ## Structured Clone & Transferable Objects
 
-Deno supports [`structuredClone()`](/api/web/~/structuredClone) and
-[`postMessage()`](/api/web/~/Worker) for cloning and transferring objects across
-contexts (e.g. between the main thread and Web Workers).
+Ende supports [`structuredClone()`](/api/web/~/structuredClone/) and
+[`postMessage()`](/api/web/~/Worker/) for cloning and transferring objects
+across contexts (e.g. between the main thread and Web Workers).
 
 ### Serializable types
 
 These types can be cloned with `structuredClone()` and sent via `postMessage()`:
 
-| Type                                      | Notes                                                                                        |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Primitives                                | `string`, `number`, `boolean`, `null`, `undefined`, `bigint`                                 |
-| `Array`, `Object`, `Map`, `Set`           | Including nested structures and circular references                                          |
-| `Date`, `RegExp`                          |                                                                                              |
-| `ArrayBuffer`, `TypedArray`, `DataView`   | Copied by default, or transferred (see below)                                                |
-| `Error` types                             | `Error`, `EvalError`, `RangeError`, `ReferenceError`, `SyntaxError`, `TypeError`, `URIError` |
-| [`Blob`](/api/web/~/Blob)                 | Requires Deno 2.8+                                                                           |
-| [`File`](/api/web/~/File)                 | Requires Deno 2.8+                                                                           |
-| [`DOMException`](/api/web/~/DOMException) |                                                                                              |
-| [`CryptoKey`](/api/web/~/CryptoKey)       |                                                                                              |
+| Type                                       | Notes                                                                                        |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| Primitives                                 | `string`, `number`, `boolean`, `null`, `undefined`, `bigint`                                 |
+| `Array`, `Object`, `Map`, `Set`            | Including nested structures and circular references                                          |
+| `Date`, `RegExp`                           |                                                                                              |
+| `ArrayBuffer`, `TypedArray`, `DataView`    | Copied by default, or transferred (see below)                                                |
+| `Error` types                              | `Error`, `EvalError`, `RangeError`, `ReferenceError`, `SyntaxError`, `TypeError`, `URIError` |
+| [`Blob`](/api/web/~/Blob/)                 | Supported                                                                                    |
+| [`File`](/api/web/~/File/)                 | Supported                                                                                    |
+| [`DOMException`](/api/web/~/DOMException/) |                                                                                              |
+| [`CryptoKey`](/api/web/~/CryptoKey/)       |                                                                                              |
 
 ### Transferable types
 
@@ -130,13 +130,13 @@ These types can be _transferred_ (not copied) via the `transfer` option in
 `structuredClone()` or the `transfer` list in `postMessage()`. After transfer,
 the original object becomes unusable:
 
-| Type                                            | Notes                                    |
-| ----------------------------------------------- | ---------------------------------------- |
-| [`ArrayBuffer`](/api/web/~/ArrayBuffer)         | Moves the backing memory to the receiver |
-| [`MessagePort`](/api/web/~/MessagePort)         | Transfers the port to another context    |
-| [`ReadableStream`](/api/web/~/ReadableStream)   | Transfers the stream to another context  |
-| [`WritableStream`](/api/web/~/WritableStream)   | Transfers the stream to another context  |
-| [`TransformStream`](/api/web/~/TransformStream) | Transfers the stream to another context  |
+| Type                                                                                                          | Notes                                    |
+| ------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| [`ArrayBuffer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) | Moves the backing memory to the receiver |
+| [`MessagePort`](/api/web/~/MessagePort/)                                                                      | Transfers the port to another context    |
+| [`ReadableStream`](/api/web/~/ReadableStream/)                                                                | Transfers the stream to another context  |
+| [`WritableStream`](/api/web/~/WritableStream/)                                                                | Transfers the stream to another context  |
+| [`TransformStream`](/api/web/~/TransformStream/)                                                              | Transfers the stream to another context  |
 
 ```ts
 // Clone a Blob
@@ -153,40 +153,40 @@ ch.port1.postMessage(buffer, [buffer]);
 
 ## CustomEvent and EventTarget
 
-The [DOM Event API](/api/web/~/Event) can be used to dispatch and listen to
+The [DOM Event API](/api/web/~/Event/) can be used to dispatch and listen to
 events happening in an application. It is implemented as specified in the
 [WHATWG DOM spec](https://dom.spec.whatwg.org/#events).
 
 ### Spec deviations
 
-- Events do not bubble, because Deno does not have a DOM hierarchy, so there is
+- Events do not bubble, because Ende does not have a DOM hierarchy, so there is
   no tree for Events to bubble/capture through.
 - `timeStamp` property is always set to `0`.
 
 ## Typings
 
 The TypeScript definitions for the implemented web APIs can be found in the
-[`lib.deno.shared_globals.d.ts`](https://github.com/denoland/deno/blob/main/cli/tsc/dts/lib.deno.shared_globals.d.ts)
+[`lib.ende.shared_globals.d.ts`](https://github.com/theende/ende/blob/primary/cli/tsc/dts/lib.ende.shared_globals.d.ts)
 and
-[`lib.deno.window.d.ts`](https://github.com/denoland/deno/blob/main/cli/tsc/dts/lib.deno.window.d.ts)
+[`lib.ende.window.d.ts`](https://github.com/theende/ende/blob/primary/cli/tsc/dts/lib.ende.window.d.ts)
 files.
 
 Definitions that are specific to workers can be found in the
-[`lib.deno.worker.d.ts`](https://github.com/denoland/deno/blob/main/cli/tsc/dts/lib.deno.worker.d.ts)
+[`lib.ende.worker.d.ts`](https://github.com/theende/ende/blob/primary/cli/tsc/dts/lib.ende.worker.d.ts)
 file.
 
 ## Location
 
-Deno supports the [`location`](/api/web/~/Location) global from the web.
+Ende supports the [`location`](/api/web/~/Location/) global from the web.
 
 ### Location flag
 
-There is no "web page" whose URL we can use for a location in a Deno process. We
-instead allow users to emulate a document location by specifying one on the CLI
-using the `--location` flag. It can be a `http` or `https` URL.
+There is no "web page" whose URL we can use for a location in an Ende process.
+We instead allow users to emulate a document location by specifying one on the
+CLI using the `--location` flag. It can be a `http` or `https` URL.
 
 ```ts
-// deno run --location https://example.com/path main.ts
+// ende run --location https://example.com/path main.ts
 
 console.log(location.href);
 // "https://example.com/path"
@@ -196,17 +196,17 @@ You must pass `--location <href>` for this to work. If you don't, any access to
 the `location` global will throw an error.
 
 ```ts
-// deno run main.ts
+// ende run main.ts
 
 console.log(location.href);
 // error: Uncaught ReferenceError: Access to "location", run again with --location <href>.
 ```
 
 Setting `location` or any of its fields will normally cause navigation in
-browsers. This is not applicable in Deno, so it will throw in this situation.
+browsers. This is not applicable in Ende, so it will throw in this situation.
 
 ```ts
-// deno run --location https://example.com/path main.ts
+// ende run --location https://example.com/path main.ts
 
 location.pathname = "./foo";
 // error: Uncaught NotSupportedError: Cannot set "location.pathname".
@@ -216,12 +216,12 @@ location.pathname = "./foo";
 
 On the web, resource resolution (excluding modules) typically uses the value of
 `location.href` as the root on which to base any relative URLs. This affects
-some web APIs adopted by Deno.
+some web APIs adopted by Ende.
 
 #### Fetch API
 
 ```ts
-// deno run --location https://api.github.com/ --allow-net main.ts
+// ende run --location https://api.github.com/ --allow-net main.ts
 
 const response = await fetch("./orgs/denoland");
 // Fetches "https://api.github.com/orgs/denoland".
@@ -233,7 +233,7 @@ since there is no web-analogous location to base it onto.
 #### Worker modules
 
 ```ts
-// deno run --location https://example.com/index.html --allow-net main.ts
+// ende run --location https://example.com/index.html --allow-net main.ts
 
 const worker = new Worker("./workers/hello.ts", { type: "module" });
 // Fetches worker module at "https://example.com/workers/hello.ts".
@@ -242,7 +242,7 @@ const worker = new Worker("./workers/hello.ts", { type: "module" });
 > [!NOTE]
 > For the above use cases, it is preferable to pass URLs in full rather than
 > relying on `--location`. You can manually base a relative URL using the
-> [`URL`](/api/web/~/URL) constructor if needed.
+> [`URL`](/api/web/~/URL/) constructor if needed.
 
 The `--location` flag is intended for those who have a specific purpose in mind
 for emulating a document location and are aware that this will only work at
@@ -251,15 +251,15 @@ dependency which is frivolously accessing the `location` global.
 
 ## Web Storage
 
-The [Web Storage API](/api/web/storage) provides an API for storing string keys
+The [Web Storage API](/api/web/storage/) provides an API for storing string keys
 and values. Persisting data works similar to a browser, and has a 10MB storage
 limit. The global `sessionStorage` object only persists data for the current
 execution context, while `localStorage` persists data from execution to
 execution.
 
 In a browser, `localStorage` persists data uniquely per origin (effectively the
-protocol plus hostname plus port). As of Deno 1.16, Deno has a set of rules to
-determine what is a unique storage location:
+protocol plus hostname plus port). Ende has a set of rules to determine what is
+a unique storage location:
 
 - When using the `--location` flag, the origin for the location is used to
   uniquely store the data. That means a location of `http://example.com/a.ts`
@@ -267,20 +267,20 @@ determine what is a unique storage location:
   same storage, but `https://example.com/` would be different.
 - If there is no location specifier, but there is a `--config` configuration
   file specified, the absolute path to that configuration file is used. That
-  means `deno run --config deno.jsonc a.ts` and
-  `deno run --config deno.jsonc b.ts` would share the same storage, but
-  `deno run --config tsconfig.json a.ts` would be different.
-- If there is no configuration or location specifier, Deno uses the absolute
-  path to the main module to determine what storage is shared. The Deno REPL
+  means `ende run --config ende.jsonc a.ts` and
+  `ende run --config ende.jsonc b.ts` would share the same storage, but
+  `ende run --config tsconfig.json a.ts` would be different.
+- If there is no configuration or location specifier, Ende uses the absolute
+  path to the main module to determine what storage is shared. The Ende REPL
   generates a "synthetic" main module that is based off the current working
-  directory where `deno` is started from. This means that multiple invocations
+  directory where `ende` is started from. This means that multiple invocations
   of the REPL from the same path will share the persisted `localStorage` data.
 
 To set, get and remove items from `localStorage`, you can use the following:
 
 ```ts
 // Set an item in localStorage
-localStorage.setItem("myDemo", "Deno App");
+localStorage.setItem("myDemo", "Ende App");
 
 // Read an item from localStorage
 const cat = localStorage.getItem("myDemo");
@@ -294,17 +294,17 @@ localStorage.clear();
 
 ## Web Workers
 
-Deno supports the [`Web Worker API`](/api/web/workers).
+Ende supports the [`Web Worker API`](/api/web/workers/).
 
 Workers can be used to run code on multiple threads. Each instance of `Worker`
 is run on a separate thread, dedicated only to that worker.
 
-Currently Deno supports only `module` type workers; thus it's essential to pass
+Currently Ende supports only `module` type workers; thus it's essential to pass
 the `type: "module"` option when creating a new worker.
 
 Use of relative module specifiers in the main worker are only supported with
 `--location <href>` passed on the CLI. This is not recommended for portability.
-You can instead use the [`URL`](/api/web/~/URL) constructor and
+You can instead use the [`URL`](/api/web/~/URL/) constructor and
 `import.meta.url` to easily create a specifier for some nearby script. Dedicated
 workers, however, have a location and this capability by default.
 
@@ -320,12 +320,12 @@ new Worker("./worker.js", { type: "module" });
 
 As with regular modules, you can use top-level `await` in worker modules.
 However, you should be careful to always register the message handler before the
-first `await`, since messages can be lost otherwise. This is not a bug in Deno,
+first `await`, since messages can be lost otherwise. This is not a bug in Ende,
 it's just an unfortunate interaction of features, and it also happens in all
 browsers that support module workers.
 
 ```ts
-import { delay } from "jsr:@std/async@1/delay";
+import { delay } from "jsr:@ende/async@^2026.10.15/delay";
 
 // First await: waits for a second, then continues running the module.
 await delay(1000);
@@ -367,11 +367,11 @@ self.onmessage = (evt) => {
 };
 ```
 
-Running `deno run --allow-read main.ts` prints `result from worker: 42`.
+Running `ende run --allow-read main.ts` prints `result from worker: 42`.
 
 ### Instantiation permissions
 
-Creating a new `Worker` instance is similar to a dynamic import; therefore Deno
+Creating a new `Worker` instance is similar to a dynamic import; therefore Ende
 requires appropriate permission for this action.
 
 For workers using local modules; `--allow-read` permission is required:
@@ -386,10 +386,10 @@ self.close();
 ```
 
 ```shell
-$ deno run main.ts
+$ ende run main.ts
 error: Uncaught PermissionDenied: read access to "./worker.ts", run again with the --allow-read flag
 
-$ deno run --allow-read main.ts
+$ ende run --allow-read main.ts
 hello world
 ```
 
@@ -406,14 +406,14 @@ self.close();
 ```
 
 ```shell
-$ deno run main.ts
+$ ende run main.ts
 error: Uncaught PermissionDenied: net access to "https://example.com/worker.ts", run again with the --allow-net flag
 
-$ deno run --allow-net main.ts
+$ ende run --allow-net main.ts
 hello world
 ```
 
-### Using Deno in a worker
+### Using Ende in a worker
 
 ```js title="main.js"
 const worker = new Worker(import.meta.resolve("./worker.js"), {
@@ -426,7 +426,7 @@ worker.postMessage({ filename: "./log.txt" });
 ```js title="worker.js"
 self.onmessage = async (e) => {
   const { filename } = e.data;
-  const text = await Deno.readTextFile(filename);
+  const text = await Ende.readTextFile(filename);
   console.log(text);
   self.close();
 };
@@ -437,14 +437,14 @@ hello world
 ```
 
 ```shell
-$ deno run --allow-read main.js
+$ ende run --allow-read main.js
 hello world
 ```
 
 ### Specifying worker permissions
 
 > [!CAUTION]
-> This is an unstable Deno feature. Learn more about
+> This is an unstable Ende feature. Learn more about
 > [unstable features](/runtime/fundamentals/stability_and_releases/#unstable-apis).
 
 The permissions available for the worker are analogous to the CLI permission
@@ -454,7 +454,7 @@ permission options [here](/runtime/fundamentals/security/).
 
 By default a worker will inherit permissions from the thread it was created in,
 however in order to allow users to limit the access of this worker we provide
-the `deno.permissions` option in the worker API.
+the `ende.permissions` option in the worker API.
 
 For permissions that support granular access you can pass in a list of the
 desired resources the worker will have access to, and for those who only have
@@ -463,7 +463,7 @@ the on/off option you can pass true/false respectively:
 ```ts
 const worker = new Worker(import.meta.resolve("./worker.js"), {
   type: "module",
-  deno: {
+  ende: {
     permissions: {
       net: [
         "deno.land",
@@ -488,10 +488,10 @@ const worker = new Worker(
   new URL("./worker/worker.js", import.meta.url).href,
   {
     type: "module",
-    deno: {
+    ende: {
       permissions: {
         read: [
-          "/home/user/Documents/deno/worker/file_1.txt",
+          "/home/user/Documents/ende/worker/file_1.txt",
           "./worker/file_2.txt",
         ],
       },
@@ -500,14 +500,14 @@ const worker = new Worker(
 );
 ```
 
-Both `deno.permissions` and its children support the option `"inherit"`, which
+Both `ende.permissions` and its children support the option `"inherit"`, which
 implies it will borrow its parent permissions:
 
 ```ts
 // This worker will inherit its parent permissions
 const worker = new Worker(import.meta.resolve("./worker.js"), {
   type: "module",
-  deno: {
+  ende: {
     permissions: "inherit",
   },
 });
@@ -517,7 +517,7 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 // This worker will inherit only the net permissions of its parent
 const worker = new Worker(import.meta.resolve("./worker.js"), {
   type: "module",
-  deno: {
+  ende: {
     permissions: {
       env: false,
       hrtime: false,
@@ -531,7 +531,7 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 });
 ```
 
-Not specifying the `deno.permissions` option or one of its children will cause
+Not specifying the `ende.permissions` option or one of its children will cause
 the worker to inherit by default:
 
 ```ts
@@ -545,7 +545,7 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 // This worker will inherit all the permissions of its parent BUT net
 const worker = new Worker(import.meta.resolve("./worker.js"), {
   type: "module",
-  deno: {
+  ende: {
     permissions: {
       net: false,
     },
@@ -554,13 +554,13 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 ```
 
 You can disable the permissions of the worker all together by passing `"none"`
-to the `deno.permissions` option:
+to the `ende.permissions` option:
 
 ```ts
 // This worker will not have any permissions enabled
 const worker = new Worker(import.meta.resolve("./worker.js"), {
   type: "module",
-  deno: {
+  ende: {
     permissions: "none",
   },
 });
@@ -568,7 +568,7 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 
 ## OffscreenCanvas
 
-Starting in Deno 2.8, the
+The
 [`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
 API is available. `OffscreenCanvas` is a canvas that lives outside any DOM and
 can be used anywhere (including Web Workers) for off-thread rendering and image
@@ -586,7 +586,7 @@ generation.
   for rendering with WebGPU.
 
 Calling `getContext` with `"2d"`, `"webgl"`, or `"webgl2"` returns `null`; these
-contexts are not implemented in Deno.
+contexts are not implemented in Ende.
 
 ### Example: encoding an image to PNG
 
@@ -594,7 +594,7 @@ Decode an image into an `ImageBitmap`, place it on an `OffscreenCanvas` via the
 `bitmaprenderer` context, and write the result to disk:
 
 ```ts
-const data = await Deno.readFile("./input.jpg");
+const data = await Ende.readFile("./input.jpg");
 const bitmap = await createImageBitmap(new Blob([data]));
 
 const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
@@ -602,7 +602,7 @@ const ctx = canvas.getContext("bitmaprenderer")!;
 ctx.transferFromImageBitmap(bitmap);
 
 const blob = await canvas.convertToBlob({ type: "image/png" });
-await Deno.writeFile(
+await Ende.writeFile(
   "./output.png",
   new Uint8Array(await blob.arrayBuffer()),
 );
@@ -617,9 +617,9 @@ Typical uses:
 
 ## Geometry Interfaces
 
-Starting in Deno 2.8, the
-[Geometry Interfaces Module Level 1](https://drafts.fxtf.org/geometry/) types
-are available as globals. These are the same types you'd find in a browser:
+The [Geometry Interfaces Module Level 1](https://drafts.fxtf.org/geometry/)
+types are available as globals. These are the same types you'd find in a
+browser:
 
 - [`DOMMatrix`](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix) /
   [`DOMMatrixReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly):
@@ -645,13 +645,13 @@ geometry types.
 
 ## navigator
 
-Deno implements a subset of the
+Ende implements a subset of the
 [`navigator`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)
 global. The following properties are available:
 
-- `navigator.userAgent` — always `"Deno/<version>"`
+- `navigator.userAgent` — always `"Ende/<version>"`
 - `navigator.platform` — the underlying OS platform (e.g. `"Linux x86_64"`,
-  `"MacIntel"`, `"Win32"`). Added in Deno 2.7.
+  `"MacIntel"`, `"Win32"`).
 - `navigator.hardwareConcurrency` — number of logical CPU cores
 - `navigator.userAgentData` — a
   [`NavigatorUAData`](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorUAData)
@@ -667,17 +667,17 @@ global. The following properties are available:
   and `navigator.locks.query()`.
 
 ```ts
-console.log(navigator.userAgent); // "Deno/2.7.0"
+console.log(navigator.userAgent); // "Ende/2.7.0"
 console.log(navigator.platform); // e.g. "Linux x86_64", "MacIntel", "Win32"
 console.log(navigator.hardwareConcurrency); // e.g. 8
-console.log(navigator.userAgentData.brands); // e.g. [{ brand: "Deno", version: "2" }]
+console.log(navigator.userAgentData.brands); // e.g. [{ brand: "Ende", version: "2" }]
 ```
 
 ## Temporal
 
 The [Temporal API](https://tc39.es/proposal-temporal/docs/) is a modern
-date/time library that replaces `Date` for most use cases. It was stabilized in
-Deno 2.7 and is available as a global without any flags.
+date/time library that replaces `Date` for most use cases. It is available as a
+global without any flags.
 
 ```ts
 // Current date/time in local timezone
@@ -693,11 +693,9 @@ const zonedNow = Temporal.Now.zonedDateTimeISO("America/New_York");
 console.log(zonedNow.timeZoneId); // "America/New_York"
 ```
 
-Prior to Deno 2.7, Temporal required the `--unstable-temporal` flag.
-
 ## CompressionStream and DecompressionStream
 
-Deno supports
+Ende supports
 [`CompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream)
 and
 [`DecompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/DecompressionStream)
@@ -710,11 +708,11 @@ for streaming compression and decompression.
 | gzip        | `"gzip"`        | RFC 1952           |
 | deflate     | `"deflate"`     | zlib (RFC 1950)    |
 | deflate-raw | `"deflate-raw"` | raw DEFLATE (1951) |
-| Brotli      | `"brotli"`      | Added in Deno 2.7  |
+| Brotli      | `"brotli"`      | 7                  |
 
 ```ts
 // Compress with Brotli
-const input = new TextEncoder().encode("Hello, Deno!");
+const input = new TextEncoder().encode("Hello, Ende!");
 const cs = new CompressionStream("brotli");
 const writer = cs.writable.getWriter();
 writer.write(input);
@@ -727,12 +725,12 @@ const writer2 = ds.writable.getWriter();
 writer2.write(new Uint8Array(compressed));
 writer2.close();
 const result = await new Response(ds.readable).text();
-console.log(result); // "Hello, Deno!"
+console.log(result); // "Hello, Ende!"
 ```
 
 ## Web Crypto
 
-Deno supports the
+Ende supports the
 [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
 via `crypto.subtle`.
 
@@ -741,7 +739,7 @@ via `crypto.subtle`.
 `SubtleCrypto.supports()` is a static method for synchronously checking whether
 a given algorithm and operation combination is available, without running the
 operation or catching an error. It takes the operation name, the algorithm, and
-an optional third argument, and returns a boolean. Added in Deno 2.9.
+an optional third argument, and returns a boolean.
 
 ```ts
 SubtleCrypto.supports("digest", "SHA3-256"); // true
@@ -771,15 +769,14 @@ draft.
 
 ### SHA-3 hash algorithms
 
-Starting with Deno 2.7, the SHA-3 family of hash algorithms is supported by
-`crypto.subtle.digest`:
+The SHA-3 family of hash algorithms is supported by `crypto.subtle.digest`:
 
 - `SHA3-256`
 - `SHA3-384`
 - `SHA3-512`
 
 ```ts
-const data = new TextEncoder().encode("Hello, Deno!");
+const data = new TextEncoder().encode("Hello, Ende!");
 const hash = await crypto.subtle.digest("SHA3-256", data);
 console.log(new Uint8Array(hash));
 ```
@@ -798,7 +795,7 @@ const signature = await crypto.subtle.sign("HMAC", key, data);
 
 ### Extendable-output functions
 
-Deno 2.9 adds the SHAKE, cSHAKE, TurboSHAKE, and KangarooTwelve
+Ende supports the SHAKE, cSHAKE, TurboSHAKE, and KangarooTwelve
 extendable-output functions (XOFs). Unlike a fixed-size hash, an XOF can produce
 a digest of any length, so `crypto.subtle.digest` requires an `outputLength`
 option giving the output size in bits. `outputLength` must be a positive
@@ -810,7 +807,7 @@ multiple of 8. The supported names are:
 - `KT128` (also accepted as `KangarooTwelve`) and `KT256`
 
 ```ts
-const data = new TextEncoder().encode("Hello, Deno!");
+const data = new TextEncoder().encode("Hello, Ende!");
 
 // 256-bit (32-byte) SHAKE256 digest.
 const digest = await crypto.subtle.digest(
@@ -858,8 +855,8 @@ const digest = await crypto.subtle.digest(
 ### KMAC
 
 `KMAC128` and `KMAC256` are keyed message authentication codes built on cSHAKE.
-Added in Deno 2.9. Generate a key with a `length` in bits, then sign and verify
-with an `outputLength` in bits and an optional `customization` `BufferSource`:
+Generate a key with a `length` in bits, then sign and verify with an
+`outputLength` in bits and an optional `customization` `BufferSource`:
 
 ```ts
 const key = await crypto.subtle.generateKey(
@@ -868,11 +865,11 @@ const key = await crypto.subtle.generateKey(
   ["sign", "verify"],
 );
 
-const data = new TextEncoder().encode("Hello, Deno!");
+const data = new TextEncoder().encode("Hello, Ende!");
 const params = {
   name: "KMAC128",
   outputLength: 256,
-  customization: new TextEncoder().encode("Deno"),
+  customization: new TextEncoder().encode("Ende"),
 };
 const mac = await crypto.subtle.sign(params, key, data);
 const valid = await crypto.subtle.verify(params, key, mac, data);
@@ -884,11 +881,11 @@ KMAC keys can be imported and exported in the `"raw"`, `"raw-secret"`, and
 ### Argon2
 
 `Argon2d`, `Argon2i`, and `Argon2id` are password-hashing key-derivation
-functions. Added in Deno 2.9. Import the password as a key in the `"raw-secret"`
-format with the `deriveBits` usage, then call `deriveBits`. The parameters are
-`memory` (memory cost in kibibytes), `passes` (iterations), `parallelism`
-(degree of parallelism), and a `nonce` `BufferSource` (the salt). `secretValue`
-and `associatedData` are optional `BufferSource` values:
+functions. Import the password as a key in the `"raw-secret"` format with the
+`deriveBits` usage, then call `deriveBits`. The parameters are `memory` (memory
+cost in kibibytes), `passes` (iterations), `parallelism` (degree of
+parallelism), and a `nonce` `BufferSource` (the salt). `secretValue` and
+`associatedData` are optional `BufferSource` values:
 
 ```ts
 const password = new TextEncoder().encode("correct horse battery staple");
@@ -915,8 +912,8 @@ const derived = await crypto.subtle.deriveBits(
 
 ### ChaCha20-Poly1305
 
-Deno 2.9 supports the `ChaCha20-Poly1305` authenticated encryption algorithm
-through `generateKey`, `encrypt`, and `decrypt`. Keys are always 256 bits:
+Ende supports the `ChaCha20-Poly1305` authenticated encryption algorithm through
+`generateKey`, `encrypt`, and `decrypt`. Keys are always 256 bits:
 
 ```ts
 const key = await crypto.subtle.generateKey(
@@ -932,7 +929,7 @@ every message encrypted under the same key:
 
 ```ts
 const nonce = crypto.getRandomValues(new Uint8Array(12));
-const data = new TextEncoder().encode("Hello, Deno!");
+const data = new TextEncoder().encode("Hello, Ende!");
 
 const ciphertext = await crypto.subtle.encrypt(
   { name: "ChaCha20-Poly1305", nonce },
@@ -945,14 +942,14 @@ const plaintext = await crypto.subtle.decrypt(
   key,
   ciphertext,
 );
-console.log(new TextDecoder().decode(plaintext)); // "Hello, Deno!"
+console.log(new TextDecoder().decode(plaintext)); // "Hello, Ende!"
 ```
 
 The returned ciphertext includes the 16-byte Poly1305 authentication tag.
 
 ### Post-quantum cryptography
 
-Deno 2.9 implements the NIST post-quantum algorithms from the WICG
+Ende implements the NIST post-quantum algorithms from the WICG
 [Modern Algorithms in the Web Cryptography API](https://wicg.github.io/webcrypto-modern-algos/)
 draft: ML-DSA and SLH-DSA signatures, and ML-KEM key encapsulation.
 
@@ -970,7 +967,7 @@ const { publicKey, privateKey } = await crypto.subtle.generateKey(
   ["sign", "verify"],
 );
 
-const data = new TextEncoder().encode("Hello, Deno!");
+const data = new TextEncoder().encode("Hello, Ende!");
 const signature = await crypto.subtle.sign(
   { name: "ML-DSA-65" },
   privateKey,
@@ -1023,7 +1020,7 @@ const { publicKey, privateKey } = await crypto.subtle.generateKey(
   ["sign", "verify"],
 );
 
-const data = new TextEncoder().encode("Hello, Deno!");
+const data = new TextEncoder().encode("Hello, Ende!");
 const signature = await crypto.subtle.sign(
   { name: "SLH-DSA-SHAKE-128f" },
   privateKey,
@@ -1081,45 +1078,44 @@ returns its matching encapsulation (public) key.
 
 ## createImageBitmap
 
-Deno supports
+Ende supports
 [`createImageBitmap()`](https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap)
 for decoding images into `ImageBitmap` objects that can be used with
 [`OffscreenCanvas`](#offscreencanvas).
 
 ### Supported input formats
 
-| Format | Notes             |
-| ------ | ----------------- |
-| PNG    |                   |
-| JPEG   |                   |
-| BMP    |                   |
-| GIF    | Added in Deno 2.7 |
-| WebP   | Added in Deno 2.7 |
+| Format | Notes |
+| ------ | ----- |
+| PNG    |       |
+| JPEG   |       |
+| BMP    |       |
+| GIF    | 7     |
+| WebP   | 7     |
 
 ```ts
-const data = await Deno.readFile("./image.gif");
+const data = await Ende.readFile("./image.gif");
 const bitmap = await createImageBitmap(new Blob([data]));
 console.log(bitmap.width, bitmap.height);
 ```
 
 ## File locking
 
-[`Deno.FsFile`](/api/deno/~/Deno.FsFile) supports advisory file locking to
+[`Ende.FsFile`](/api/ende/~/Ende.FsFile/) supports advisory file locking to
 coordinate access between processes:
 
-- [`lock(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.lock) — acquires a
+- [`lock(exclusive?)`](/api/ende/~/Ende.FsFile/#prototype.lock) — acquires a
   lock. Shared (read) by default; pass `true` for exclusive (write). Blocks if
   an incompatible lock is held.
-- [`lockSync(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.lockSync) —
+- [`lockSync(exclusive?)`](/api/ende/~/Ende.FsFile/#prototype.lockSync) —
   synchronous variant of `lock()`.
-- [`tryLock(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.tryLock) —
+- [`tryLock(exclusive?)`](/api/ende/~/Ende.FsFile/#prototype.tryLock) —
   non-blocking. Returns `true` if the lock was acquired, `false` otherwise.
-  Added in Deno 2.7.
-- [`tryLockSync(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.tryLockSync) —
+- [`tryLockSync(exclusive?)`](/api/ende/~/Ende.FsFile/#prototype.tryLockSync) —
   synchronous variant of `tryLock()`.
 
 ```ts
-const file = await Deno.open("./data.txt", { read: true, write: true });
+const file = await Ende.open("./data.txt", { read: true, write: true });
 
 const locked = await file.tryLock(true); // exclusive
 if (locked) {
@@ -1141,12 +1137,11 @@ Only the following APIs are implemented:
 - [CacheStorage::has()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/has)
 - [CacheStorage::delete()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/delete)
 - [CacheStorage::keys()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/keys)
-  (Deno 2.8+)
+
 - [Cache::match()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/match)
 - [Cache::put()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/put)
 - [Cache::delete()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/delete)
 - [Cache::keys()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/keys)
-  (Deno 2.8+)
 
 A few things that are different compared to browsers:
 

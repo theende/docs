@@ -1,16 +1,16 @@
 ---
 last_modified: 2025-04-02
 title: "Lint Plugins"
-description: "Guide to creating and using custom lint plugins in Deno. Learn how to write custom lint rules, use selectors for AST matching, implement fixes, and test your plugins using Deno's lint plugin API."
+description: "Guide to creating and using custom lint plugins in Ende. Learn how to write custom lint rules, use selectors for AST matching, implement fixes, and test your plugins using Ende's lint plugin API."
 ---
 
 > [!NOTE]
-> The lint plugin API is available in Deno `2.2.0` and later, with no unstable
+> The lint plugin API is available in Ende `2.2.0` and later, with no unstable
 > flag required. The API is still evolving and may change in a future release.
 
 The built-in linter can be extended with plugins to add custom lint rules.
 
-Whilst Deno ships with [many lint rules](/lint/) out of the box, there are cases
+Whilst Ende ships with [many lint rules](/lint/) out of the box, there are cases
 where you need a custom rule tailored particularly to your project - whether to
 catch a context-specific problem or enforce company-wide conventions.
 
@@ -22,12 +22,12 @@ doesn't provide 100% compatibility, the existing knowledge of authoring ESLint
 plugins can be mostly reused if you happen to have written custom
 [ESLint](https://eslint.org/) rules in the past.
 
-Plugins are loaded via the `lint.plugins` setting in `deno.json`.
+Plugins are loaded via the `lint.plugins` setting in `ende.json`.
 
-The value is an array of plugin specifiers. These can be paths, `npm:`, or
-`jsr:` specifiers.
+The value is an array of plugin specifiers. These can be paths or `jsr:`
+specifiers.
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "lint": {
     "plugins": ["./my-plugin.ts"]
@@ -41,13 +41,13 @@ A plugin always has the same shape. It has a default export which is your plugin
 object.
 
 > [!NOTE]
-> Deno provides type declarations for the lint plugins API.
+> Ende provides type declarations for the lint plugins API.
 >
-> All the typings are available under the [`Deno.lint`](/api/deno/~/Deno.lint)
+> All the typings are available under the [`Ende.lint`](/api/ende/~/Ende.lint/)
 > namespace.
 
 ```ts title="my-plugin.ts"
-const plugin: Deno.lint.Plugin = {
+const plugin: Ende.lint.Plugin = {
   // The name of your plugin. Will be shown in error output
   name: "my-plugin",
   // Object with rules. The property name is the rule name and
@@ -67,7 +67,7 @@ const plugin: Deno.lint.Plugin = {
                 node,
                 message: "should be _b",
                 // Optional: Provide a fix, which can be applied when
-                // the user runs `deno lint --fix`
+                // the user runs `ende lint --fix`
                 fix(fixer) {
                   return fixer.replaceText(node, "_b");
                 },
@@ -90,7 +90,7 @@ express via a selector, similar to CSS selectors. By using a string as the
 property name in the returned visitor object, we can specify a custom selector.
 
 ```ts title="my-plugin.ts"
-const plugin: Deno.lint.Plugin = {
+const plugin: Ende.lint.Plugin = {
   name: "my-plugin",
   rules: {
     "my-rule": {
@@ -136,7 +136,7 @@ supported syntax for selectors is:
 | `IfStatement.test`        | Field selector `.<field>`              |
 
 There is also the `:exit` pseudo that is only valid at the end of the whole
-selector. When it's present, Deno will call the function while going **up** the
+selector. When it's present, Ende will call the function while going **up** the
 tree instead of when going down.
 
 > [!TIP]
@@ -148,8 +148,8 @@ tree instead of when going down.
 ## Applying fixes
 
 A custom lint rule can supply a function to apply a fix when reporting a
-problem. The optional `fix()` method is called when running `deno lint --fix` or
-applying a fix from inside your editor through the Deno LSP.
+problem. The optional `fix()` method is called when running `ende lint --fix` or
+applying a fix from inside your editor through the Ende LSP.
 
 The `fix()` method receives a `fixer` instance which contains helper methods to
 make creating a fix easier. A fix consists of a start position, an end position
@@ -201,7 +201,7 @@ can hook into the linter via the `destroy()` hook. It is called after a file has
 been linted and just before the plugin context is destroyed.
 
 ```ts title="my-plugin.ts"
-const plugin: Deno.lint.Plugin = {
+const plugin: Ende.lint.Plugin = {
   name: "my-plugin",
   rules: {
     "my-rule": {
@@ -224,15 +224,15 @@ export default plugin;
 > of the files linted.
 >
 > Prefer not to keep a global state, and do cleanup in the `destroy` hook, in
-> case `deno lint` decides to reuse the existing plugin instance.
+> case `ende lint` decides to reuse the existing plugin instance.
 
 ## Excluding custom rules
 
 Similar to built-in rules, you can disable custom rules provided by a plugin. To
-do so, add it to the `lint.rules.exclude` key in `deno.json`. The format of a
+do so, add it to the `lint.rules.exclude` key in `ende.json`. The format of a
 custom lint rule is always `<plugin-name>/<rule-name>`.
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "lint": {
     "plugins": ["./my-plugin.ts"],
@@ -264,18 +264,18 @@ The syntax for the ignore comment is:
 
 ## Testing plugins
 
-The [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) API provides a
+The [`Ende.lint.runPlugin`](/api/ende/~/Ende.lint.runPlugin/) API provides a
 convenient way to test your plugins. It allows you to assert that the plugin
 produces expected diagnostics given the particular input.
 
 Let's use the example plugin, defined above:
 
 ```ts title="my-plugin_test.ts"
-import { assertEquals } from "jsr:@std/assert";
+import { assertEquals } from "jsr:@ende/assert";
 import myPlugin from "./my-plugin.ts";
 
-Deno.test("my-plugin", () => {
-  const diagnostics = Deno.lint.runPlugin(
+Ende.test("my-plugin", () => {
+  const diagnostics = Ende.lint.runPlugin(
     myPlugin,
     "main.ts", // Dummy filename, file doesn't need to exist.
     "const _a = 'a';",
@@ -290,11 +290,11 @@ Deno.test("my-plugin", () => {
 ```
 
 > [!NOTE]
-> The [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) API is only
-> available in the `deno test` and `deno bench` subcommands.
+> The [`Ende.lint.runPlugin`](/api/ende/~/Ende.lint.runPlugin/) API is only
+> available in the `ende test` and `ende bench` subcommands.
 >
 > Trying to use it with any other subcommand will throw an error.
 
-Consult [the API reference](/api/deno/) for more information on
-[`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) and
-[`Deno.lint.Diagnostic`](/api/deno/~/Deno.lint.Diagnostic).
+Consult [the API reference](/api/ende/) for more information on
+[`Ende.lint.runPlugin`](/api/ende/~/Ende.lint.runPlugin/) and
+[`Ende.lint.Diagnostic`](/api/ende/~/Ende.lint.Diagnostic/).

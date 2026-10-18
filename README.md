@@ -1,8 +1,8 @@
-# Deno Docs
+# Ende Docs
 
 This repository contains the website running
-[docs.deno.com](https://docs.deno.com). The intent of this project is to
-centralize all official Deno documentation content in a single website. The site
+[docs.ende.sh](https://docs.ende.sh). The intent of this project is to
+centralize all official Ende documentation content in a single website. The site
 is built with [satz](https://jsr.io/@ende/satz), a static site generator for
 [Ende](https://ende.sh) built on the `@ende/*` standard library.
 
@@ -42,7 +42,7 @@ reference are reported as pending until that reference is generated again.
 
 The actual content of the docs site is found mostly in these folders:
 
-- `runtime` - docs for the Deno CLI / runtime
+- `runtime` - docs for the Ende CLI / runtime
 - `examples` - docs for the [Examples](#Examples) section
 - `lint/rules` - one page per lint rule
 
@@ -53,10 +53,10 @@ marker is the callout's title, followed by a `>` line:
 ```md
 > [!TIP] Want to type-check only?
 >
-> Use `deno check` instead.
+> Use `ende check` instead.
 ```
 
-A code block's file name goes in its fence: `` ```json title="deno.json" ``.
+A code block's file name goes in its fence: `` ```json title="ende.json" ``.
 
 Left navigation for the different doc sections are configured in the `_data.ts`
 files in their respective content directories.
@@ -91,13 +91,11 @@ the guide.
 
 ### Mark version-specific behavior
 
-When documenting behavior that was added or changed in a specific Deno version,
-say so where it's documented: use an info admonition titled with the version
-(`:::info Deno 2.8`) for a behavior change worth a callout, or an inline "(Deno
-2.8+)" for a brief mention. This keeps pages visibly current, matches how people
-search ("what's new in Deno 2.8"), and tells readers on older versions why
-something doesn't work for them. Don't version-mark behavior older than the
-previous major release.
+When documenting behavior that was added or changed in a specific Ende release,
+say so where it's documented: a note callout titled with the release
+(`> [!NOTE] Ende 2026.10.17`) for a change worth a callout, or an inline "(Ende
+2026.10.17+)" for a brief mention. Releases are ChronVer dates. Don't mark
+behavior that predates Ende's first release (2026.10.14).
 
 ## Reference docs
 
@@ -125,13 +123,13 @@ is marked as being added in version `20.6.0`.
 
 ## Contribution
 
-We are very grateful for any help you can offer to improve Deno's documentation!
+We are very grateful for any help you can offer to improve Ende's documentation!
 For any small copy changes or fixes, please feel free to
 [submit a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
-directly to the `main` branch of this repository.
+directly to the `primary` branch of this repository.
 
 For larger changes, please
-[create a GitHub issue first](https://github.com/denoland/deno-docs/issues) to
+[create a GitHub issue first](https://github.com/theende/docs/issues) to
 describe your proposed updates. It will be better to get feedback on your
 concept first before going to the trouble of writing a large number of docs!
 
@@ -143,21 +141,21 @@ authored.
 
 ## Examples
 
-[Deno by Example](https://docs.deno.com/examples) is a collection of small
+[Ende by Example](https://docs.ende.sh/examples) is a collection of small
 snippets of code, tutorials and videos showcasing various functions of the APIs
-implemented in Deno.
+implemented in Ende.
 
 ### Adding an example script
 
 - Examples are written in TypeScript
 - Each example should be a single file, no more than 50 lines
 - Each example should be a self-contained unit, and should depend on no
-  dependencies other than Deno builtins and the standard library, unless a
+  dependencies other than Ende builtins and the standard library, unless a
   third-party library is strictly required.
 - Each example should be runnable without additional dependencies on all systems
   (exceptions can be made for platform specific functionality)
 - Examples should be introduce at most one (or in exceptional cases two or
-  three) concepts in Deno / Web APIs. Existing concepts should be linked to.
+  three) concepts in Ende / Web APIs. Existing concepts should be linked to.
 - Code should be kept _really simple_, and should be easy to read and understand
   by anyone. Do not use complicated code constructs, or hard to follow builtins
   like `Array.reduce`
@@ -186,7 +184,7 @@ describes the example:
 You should add a title, a difficulty level (`beginner` or `intermediate`), and a
 list of tags (`cli`, `deploy`, `web` depending on where an example is runnable).
 The `@run` tag should be included if the example can be run locally by just
-doing `deno run <url>`. If running requires permissions, add these:
+doing `ende run <url>`. If running requires permissions, add these:
 
 ```ts
 /**
@@ -206,11 +204,11 @@ in the example page.
 
 ## Special thanks for historical contributions
 
-This repository was created using content from the
+This repository is a fork of the [Deno docs](https://github.com/denoland/docs),
+which were created using content from the
 [Deno Manual](https://github.com/denoland/manual), a project contributed to by
 hundreds of developers since 2018. You can view a list of historical
-contributors to the Deno documentation in this repository and the manual with
-this command:
+contributors in this repository with this command:
 
 ```bash
 git shortlog -s -n

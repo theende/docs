@@ -4,7 +4,7 @@ import Header from "../_components/Header.tsx";
 import type { NavLink } from "../_lib/types.ts";
 
 const DEFAULT_DESCRIPTION =
-  "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
+  "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Ende";
 
 /** The HTML document around every page: head, header, the page, footer. */
 export default function Layout(props: LayoutProps) {
@@ -19,7 +19,7 @@ export default function Layout(props: LayoutProps) {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light dark" />
-        <title>{title ? `${title} | Deno Docs` : "Deno Docs"}</title>
+        <title>{title ? `${title} | Ende Docs` : "Ende Docs"}</title>
         <meta name="description" content={description} />
         {!is404 && (
           <link rel="canonical" href={`https://docs.ende.sh${props.url}`} />

@@ -15,10 +15,10 @@ const LAST_MODIFIED_DIRS = [
 const LAST_MODIFIED_EXCLUDES = ["runtime/reference/std/"];
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-Deno.test("Frontmatter titles must not contain backticks", async (t) => {
+Ende.test("Frontmatter titles must not contain backticks", async (t) => {
   for (const dir of DIRS_TO_CHECK) {
     for await (const entry of walk(dir, { exts: [".md", ".mdx"] })) {
-      const content = await Deno.readTextFile(entry.path);
+      const content = await Ende.readTextFile(entry.path);
       if (!content.startsWith("---")) continue;
 
       const { attrs } = extract<{ title?: string }>(content);
@@ -34,17 +34,17 @@ Deno.test("Frontmatter titles must not contain backticks", async (t) => {
   }
 });
 
-Deno.test("CLI command page titles must be just the command name", async (t) => {
+Ende.test("CLI command page titles must be just the command name", async (t) => {
   for await (
     const entry of walk("./runtime/reference/cli", { exts: [".md"] })
   ) {
-    const content = await Deno.readTextFile(entry.path);
+    const content = await Ende.readTextFile(entry.path);
     if (!content.startsWith("---")) continue;
 
     const { attrs } = extract<{ title?: string; command?: string }>(content);
     if (typeof attrs.command !== "string") continue;
 
-    const expected = `deno ${attrs.command}`;
+    const expected = `ende ${attrs.command}`;
 
     await t.step(entry.path, () => {
       assertEquals(
@@ -56,7 +56,7 @@ Deno.test("CLI command page titles must be just the command name", async (t) => 
   }
 });
 
-Deno.test("Content pages must have a valid last_modified field", async (t) => {
+Ende.test("Content pages must have a valid last_modified field", async (t) => {
   const today = new Date().toISOString().slice(0, 10);
 
   for (const dir of LAST_MODIFIED_DIRS) {
@@ -64,7 +64,7 @@ Deno.test("Content pages must have a valid last_modified field", async (t) => {
       const rel = entry.path.replace(/^\.\//, "");
       if (LAST_MODIFIED_EXCLUDES.some((p) => rel.startsWith(p))) continue;
 
-      const content = await Deno.readTextFile(entry.path);
+      const content = await Ende.readTextFile(entry.path);
       if (content.trim() === "") continue; // empty placeholder, not a page
 
       await t.step(entry.path, () => {

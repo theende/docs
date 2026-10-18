@@ -1,6 +1,6 @@
 ---
 last_modified: 2026-07-02
-title: "deno install"
+title: "ende install"
 oldUrl:
   - /runtime/manual/tools/script_installer/
   - /runtime/reference/cli/script_installer/
@@ -8,140 +8,74 @@ oldUrl:
   - /runtime/reference/cli/cache/
 command: install
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno install"
+openGraphTitle: "ende install"
 description: "Install and cache dependencies for your project"
 ---
 
-`deno install` installs dependencies and caches them for your project. For more
-on how Deno handles modules, see
+`ende install` installs dependencies and caches them for your project. For more
+on how Ende handles modules, see
 [Modules and dependencies](/runtime/fundamentals/modules/).
 
 ## Examples
 
-### deno install
+### ende install
 
 Use this command to install all dependencies defined in
-[`deno.json`](/runtime/fundamentals/configuration/) and/or `package.json`.
+[`ende.json`](/runtime/fundamentals/configuration/). They are installed in the
+global cache.
 
-The dependencies will be installed in the global cache, but if your project has
-a `package.json` file, a local `node_modules` directory will be set up as well.
+### ende install [PACKAGES]
 
-### deno install [PACKAGES]
-
-Use this command to install particular packages and add them to `deno.json` or
-`package.json`.
+Use this command to install particular packages and add them to `ende.json`.
 
 ```sh
-deno install jsr:@std/testing npm:express
+ende install jsr:@ende/testing jsr:@ende/path
 ```
-
-> [!NOTE] Deno 2.8
->
-> Unprefixed package names are treated as npm packages by default, so the `npm:`
-> prefix is no longer required at the CLI. `deno install express` is equivalent
-> to `deno install npm:express`. JSR packages still need the `jsr:` prefix to
-> stay unambiguous. The `npm:` prefix remains required in `import` specifiers.
 
 > [!TIP]
-> You can also use `deno add` which is an alias to `deno install [PACKAGES]`
+> You can also use `ende add` which is an alias to `ende install [PACKAGES]`
 
-If your project has a `package.json` file, the packages coming from npm will be
-added to `dependencies` in `package.json`. Otherwise all packages will be added
-to `deno.json`.
-
-### deno install --os and --arch
-
-Starting in Deno 2.8, `deno install` accepts `--os` and `--arch` flags so you
-can install npm packages targeting a different platform than the one you're
-running on. This is most useful for pre-installing packages with native binaries
-— for example, building a deployment artifact on a macOS dev machine that will
-eventually run on Linux/arm64.
-
-The flags accept Node.js-compatible values, the same strings that
-`process.platform` and `process.arch` produce.
-
-```sh
-# Install npm packages for linux/arm64
-deno install --os linux --arch arm64
-
-# Install for windows/x64
-deno install --os win32 --arch x64
-
-# Override just the architecture; --os defaults to the current system
-deno install --arch x64
-```
-
-`--os` and `--arch` are local-install-only and conflict with `--global`.
-
-### deno install --package-json
-
-By default, Deno picks the configuration file to write to (`deno.json` or
-`package.json`) based on which one is closest to the current working directory.
-Starting in Deno 2.8, `--package-json` forces dependencies to be written to
-`package.json`, regardless of any nearby `deno.json`. If no `package.json`
-exists yet, one is created.
-
-```sh
-deno install --package-json npm:express jsr:@std/path
-```
-
-JSR packages added with `--package-json` are written in their npm-compatible
-form (`npm:@jsr/...`). The same flag works on `deno add`, `deno remove`, and
-`deno uninstall`.
-
-To make this behavior the default without passing the flag every time, set
-[`"preferPackageJson": true`](/runtime/reference/deno_json/#prefer-packagejson-for-dependencies)
-in `deno.json`.
-
-### deno install --entrypoint [FILES]
+### ende install --entrypoint [FILES]
 
 Use this command to install all dependencies that are used in the provided files
 and their dependencies.
 
-This is particularly useful if you use `jsr:`, `npm:`, `http:` or `https:`
-specifiers in your code and want to cache all the dependencies before deploying
-your project.
+This is particularly useful if you use `jsr:`, `http:` or `https:` specifiers in
+your code and want to cache all the dependencies before deploying your project.
 
 ```js title="main.js"
-import * as colors from "jsr:@std/fmt/colors";
-import express from "npm:express";
+import * as colors from "jsr:@ende/fmt/colors";
+import { join } from "jsr:@ende/path";
 ```
 
 ```sh
-deno install -e main.js
-Download jsr:@std/fmt
-Download npm:express
+ende install -e main.js
+Download jsr:@ende/fmt
+Download jsr:@ende/path
 ```
 
-> [!TIP]
-> If you want to set up a local `node_modules` directory, you can pass the
-> `--node-modules-dir=auto` flag.
->
-> Some dependencies might not work correctly without a local `node_modules`
-> directory.
-
-### deno install --global [PACKAGE_OR_URL]
+### ende install --global [PACKAGE_OR_URL]
 
 Use this command to install the provided package or script as a globally
 available binary on your system.
 
-This command creates a thin, executable shell script which invokes `deno` using
+This command creates a thin, executable shell script which invokes `ende` using
 the specified CLI flags and main module. It is placed in the installation root.
 
 Example:
 
 ```sh
-deno install --global --allow-net --allow-read jsr:@std/http/file-server
-Download jsr:@std/http/file-server...
+ende install --global --allow-net --allow-read jsr:@ende/http/file-server
+Download jsr:@ende/http/file-server...
 
 ✅ Successfully installed file-server.
-/Users/deno/.deno/bin/file-server
+/Users/ende/.ende/bin/file-server
 ```
 
 To change the executable name, use `-n`/`--name`:
 
 ```sh
-deno install -g -N -R -n serve jsr:@std/http/file-server
+ende install -g -N -R -n serve jsr:@ende/http/file-server
 ```
 
 The executable name is inferred by default:
@@ -156,28 +90,28 @@ The executable name is inferred by default:
 To change the installation root, use `--root`:
 
 ```sh
-deno install -g -N -R --root /usr/local/bin jsr:@std/http/file-server
+ende install -g -N -R --root /usr/local/bin jsr:@ende/http/file-server
 ```
 
 The installation root is determined, in order of precedence:
 
 - `--root` option
-- `DENO_INSTALL_ROOT` environment variable
-- `$HOME/.deno`
+- `ENDE_INSTALL_ROOT` environment variable
+- `$HOME/.ende`
 
 Executables are placed in the `bin` subdirectory of the installation root,
 unless the root path already ends with `bin`, in which case it is used directly.
 The resulting directory must be added to the path manually if required.
 
 ```sh
-echo 'export PATH="$HOME/.deno/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/.ende/bin:$PATH"' >> ~/.bashrc
 ```
 
 You must specify permissions that will be used to run the script at installation
 time.
 
 ```sh
-deno install -g -N -R jsr:@std/http/file-server -- -p 8080
+ende install -g -N -R jsr:@ende/http/file-server -- -p 8080
 ```
 
 The above command creates an executable called `file_server` that runs with
@@ -204,101 +138,33 @@ When you create an executable script make sure to let users know by adding an
 example installation command to your repository:
 
 ```sh
-# Install using deno install
+# Install using ende install
 
-deno install -n awesome_cli https://example.com/awesome/cli.ts
+ende install -n awesome_cli https://example.com/awesome/cli.ts
 ```
 
-### deno install --global --compile [PACKAGE_OR_URL]
+### ende install --global --compile [PACKAGE_OR_URL]
 
 Use this command to compile a package or script into a standalone,
 self-contained binary. The resulting executable can be distributed and run
-without requiring Deno to be installed on the target system.
+without requiring Ende to be installed on the target system.
 
 ```sh
-deno install --global --compile -A npm:@anthropic-ai/claude-code
+ende install --global --compile -A -n satz jsr:@ende/satz/cli
 ```
 
-This combines the behavior of [`deno compile`](/runtime/reference/cli/compile/)
+This combines the behavior of [`ende compile`](/runtime/reference/cli/compile/)
 with global installation — producing a native binary placed in the installation
 root (same as `--global` without `--compile`).
-
-### deno install --prod
-
-Use this command to install only production dependencies, skipping
-`devDependencies` from `package.json`.
-
-```sh
-deno install --prod
-```
-
-This is useful when deploying an application where development dependencies like
-test frameworks or build tools are not needed.
-
-The `--prod` flag conflicts with `--global` and `--dev`.
-
-In CI environments, prefer [`deno ci --prod`](/runtime/reference/cli/ci/), which
-also enforces a frozen lockfile and removes any pre-existing `node_modules`
-before installing.
-
-#### --skip-types
-
-When combined with `--prod`, the `--skip-types` flag additionally skips
-`@types/*` packages from both `package.json` dependencies and `deno.json`
-imports:
-
-```sh
-deno install --prod --skip-types
-```
-
-> [!CAUTION]
-> The `--skip-types` flag identifies type packages by checking if the package
-> name starts with `@types/`. This heuristic may not cover all type-only
-> packages.
-
-#### --prod with --entrypoint
-
-When `--prod` is combined with `--entrypoint`, the module graph is built as
-"code only", which excludes type-only dependencies:
-
-```sh
-deno install --prod --entrypoint main.ts
-```
-
-This provides the most precise production install — only dependencies that are
-actually imported at runtime by the specified entrypoint (and its transitive
-imports) will be installed.
-
-## Native Node.js addons
-
-A lot of popular npm packages like
-[`npm:sqlite3`](https://www.npmjs.com/package/sqlite3) or
-[`npm:duckdb`](https://www.npmjs.com/package/duckdb) depend on
-["lifecycle scripts"](https://docs.npmjs.com/cli/v10/using-npm/scripts#life-cycle-scripts),
-eg. `preinstall` or `postinstall` scripts. Most often running these scripts is
-required for a package to work correctly.
-
-Unlike npm, Deno does not run these scripts by default as they pose a potential
-security vulnerability.
-
-You can still run these scripts by passing the `--allow-scripts=<packages>` flag
-when running `deno install`:
-
-```sh
-deno install --allow-scripts=npm:sqlite3
-```
-
-_Install all dependencies and allow `npm:sqlite3` package to run its lifecycle
-scripts_.
 
 ## --quiet flag
 
 The `--quiet` flag suppresses diagnostic output when installing dependencies.
-When used with `deno install`, it will hide progress indicators, download
+When used with `ende install`, it will hide progress indicators, download
 information, and success messages.
 
 ```sh
-deno install --quiet jsr:@std/http/file-server
+ende install --quiet jsr:@ende/http/file-server
 ```
 
 This is useful for scripting environments or when you want cleaner output in CI
@@ -306,17 +172,17 @@ pipelines.
 
 ## Uninstall
 
-You can uninstall dependencies or binary script with `deno uninstall` command:
+You can uninstall dependencies or binary script with `ende uninstall` command:
 
 ```sh
-deno uninstall express
+ende uninstall express
 Removed express
 ```
 
 ```sh
-deno uninstall -g file-server
-deleted /Users/deno/.deno/bin/file-server
+ende uninstall -g file-server
+deleted /Users/ende/.ende/bin/file-server
 ✅ Successfully uninstalled file-server
 ```
 
-See [`deno uninstall` page for more details](/runtime/reference/cli/uninstall/).
+See [`ende uninstall` page for more details](/runtime/reference/cli/uninstall/).

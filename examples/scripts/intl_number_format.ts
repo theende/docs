@@ -70,6 +70,6 @@ const percentExact = new Intl.NumberFormat("en-US", {
 console.log(percentExact.format(0.485)); // 48.5%
 
 // formatRange renders a span of two values with locale aware punctuation.
-// Deno supports it on every Intl.NumberFormat instance.
+// Ende supports it on every Intl.NumberFormat instance.
 console.log(usd.formatRange(40, 60)); // $40.00 – $60.00
 console.log(new Intl.NumberFormat("en-US").formatRange(2.9, 3.1)); // 2.9–3.1

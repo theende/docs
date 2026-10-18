@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N --unstable-net <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.listenDatagram} Doc: Deno.listenDatagram
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.listenDatagram} Doc: Ende.listenDatagram
  * @resource {/examples/udp_connector} Example: UDP Connector
  * @group Unstable APIs
  *
@@ -15,7 +15,7 @@
 const decoder = new TextDecoder();
 
 // Instantiate an instance of a UDP listener on localhost port 10000.
-const listener = Deno.listenDatagram({
+const listener = Ende.listenDatagram({
   port: 10000,
   transport: "udp",
 });

@@ -3,27 +3,27 @@
  * @difficulty beginner
  * @tags cli
  * @run -R -W --allow-run <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lock} Doc: Deno.FsFile.lock
- * @resource {https://docs.deno.com/api/deno/~/Deno.Command} Doc: Deno.Command
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.FsFile.prototype.lock} Doc: Ende.FsFile.lock
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.Command} Doc: Ende.Command
  * @group File System
  *
  * When two processes write the same file at the same time, the result is a
  * mess. File locks coordinate access: while one process holds an exclusive
  * lock, others that ask for it wait. This example holds a lock in the main
- * process and spawns a second Deno process that blocks until the lock is
+ * process and spawns a second Ende process that blocks until the lock is
  * released.
  */
 
 // We work in a temporary directory with one shared file.
-const dir = await Deno.makeTempDir();
+const dir = await Ende.makeTempDir();
 const path = `${dir}/shared.txt`;
-await Deno.writeTextFile(path, "shared state");
+await Ende.writeTextFile(path, "shared state");
 
 // This script runs in the second process. It opens the same file and asks
 // for an exclusive lock. The lock(true) call does not fail when the file
 // is already locked, it simply waits, so we measure how long it blocked.
 const childScript = `
-const file = await Deno.open(Deno.args[0], { read: true, write: true });
+const file = await Ende.open(Ende.args[0], { read: true, write: true });
 console.log("child:  requesting exclusive lock");
 const start = Date.now();
 await file.lock(true);
@@ -31,18 +31,18 @@ console.log("child:  lock acquired after " + (Date.now() - start) + " ms");
 await file.unlock();
 file.close();
 `;
-await Deno.writeTextFile(`${dir}/child.ts`, childScript);
+await Ende.writeTextFile(`${dir}/child.ts`, childScript);
 
 // The main process takes the exclusive lock first. Passing true means
 // exclusive (one holder); without it the lock is shared, which lets many
 // readers coexist while still excluding writers.
-const file = await Deno.open(path, { read: true, write: true });
+const file = await Ende.open(path, { read: true, write: true });
 await file.lock(true);
 console.log("parent: holding exclusive lock");
 
 // Now we start the child. It inherits stdout, so its messages appear
 // interleaved with ours and tell the story in order.
-const child = new Deno.Command(Deno.execPath(), {
+const child = new Ende.Command(Ende.execPath(), {
   args: ["run", "--allow-read", "--allow-write", `${dir}/child.ts`, path],
   stdout: "inherit",
   stderr: "inherit",
@@ -75,4 +75,4 @@ file.close();
 
 // Locks are advisory: they only coordinate processes that ask for the
 // lock, and they are released automatically when a process exits.
-await Deno.remove(dir, { recursive: true });
+await Ende.remove(dir, { recursive: true });

@@ -1,99 +1,78 @@
 ---
 last_modified: 2026-06-29
 title: "Workspaces and monorepos"
-description: "A guide to managing workspaces and monorepos in Deno. Learn about workspace configuration, package management, dependency resolution, and how to structure multi-package projects effectively."
+description: "A guide to managing workspaces and monorepos in Ende. Learn about workspace configuration, package management, dependency resolution, and how to structure multi-package projects effectively."
 oldUrl: /runtime/manual/basics/workspaces
 ---
 
-Deno supports workspaces, also known as "monorepos", which allow you to manage
+Ende supports workspaces, also known as "monorepos", which allow you to manage
 multiple related and interdependent packages simultaneously.
 
 A "workspace" is a collection of folders containing
-[`deno.json`](/runtime/fundamentals/configuration/) or `package.json`
-configuration files. The root `deno.json` file defines the workspace:
+[`ende.json`](/runtime/fundamentals/configuration/) configuration files. The
+root `ende.json` file defines the workspace:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": ["./add", "./subtract"]
 }
 ```
 
 This configures a workspace with `add` and `subtract` members, which are
-directories expected to have `deno.json(c)` and/or `package.json` files.
-
-Each workspace member directory can contain:
-
-- Only a `deno.json` (Deno-first package)
-- Both a `deno.json` and a `package.json` (hybrid package – useful while
-  migrating or when you need Node metadata as well as Deno config)
-- Only a `package.json` (Node-first package that still participates in the Deno
-  workspace)
-
-When a member contains only a `package.json`, you can still import it from
-anywhere else in the workspace using the `name` field specified in that
-`package.json` (for example
-`import { something } from "@scope/my-node-only-pkg";`). Deno will resolve that
-bare specifier as long as the directory is listed in the root workspace
-configuration. This lets you gradually adopt Deno tooling without having to add
-a `deno.json` to every existing Node package up front.
-
-> [!NOTE] Naming
->
-> Deno uses `workspace` rather than npm's `workspaces` to represent a singular
-> workspace with multiple members.
+directories expected to have an `ende.json(c)` file.
 
 ## Example
 
-Let's expand on the `deno.json` workspace example and see its functionality. The
+Let's expand on the `ende.json` workspace example and see its functionality. The
 file hierarchy looks like this:
 
 ```sh
 /
-├── deno.json
+├── ende.json
 ├── main.ts
 ├── add/
-│     ├── deno.json
+│     ├── ende.json
 │     └── mod.ts
 └── subtract/
-      ├── deno.json
+      ├── ende.json
       └── mod.ts
 ```
 
 There are two workspace members (add and subtract), each with `mod.ts` files.
-There is also a root `deno.json` and a `main.ts`.
+There is also a root `ende.json` and a `main.ts`.
 
-The top-level `deno.json` configuration file defines the workspace and a
+The top-level `ende.json` configuration file defines the workspace and a
 top-level import map applied to all members:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": ["./add", "./subtract"],
   "imports": {
-    "chalk": "npm:chalk@5"
+    "@ende/fmt": "jsr:@ende/fmt@^2026.10.15"
   }
 }
 ```
 
-The root `main.ts` file uses the `chalk` bare specifier from the import map and
-imports the `add` and `subtract` functions from the workspace members. Note that
-it imports them using `@scope/add` and `@scope/subtract`, even though these are
-not proper URLs and aren't in the import map. How are they resolved?
+The root `main.ts` file uses the `@ende/fmt` bare specifier from the import map
+and imports the `add` and `subtract` functions from the workspace members. Note
+that it imports them using `@scope/add` and `@scope/subtract`, even though these
+are not proper URLs and aren't in the import map. How are they resolved?
 
 ```ts title="main.ts"
-import chalk from "chalk";
+import { green, red } from "@ende/fmt/colors";
 import { add } from "@scope/add";
 import { subtract } from "@scope/subtract";
 
-console.log("1 + 2 =", chalk.green(add(1, 2)));
-console.log("2 - 4 =", chalk.red(subtract(2, 4)));
+console.log("1 + 2 =", green(String(add(1, 2))));
+console.log("2 - 4 =", red(String(subtract(2, 4))));
 ```
 
-In the `add/` subdirectory, we define a `deno.json` with a `"name"` field, which
-is important for referencing the workspace member. The `deno.json` file also
+In the `add/` subdirectory, we define a `ende.json` with a `"name"` field, which
+is important for referencing the workspace member. The `ende.json` file also
 contains example configurations, like turning off semicolons when using
-`deno fmt`.
+`ende fmt`.
 
-```json title="add/deno.json"
+```json title="add/ende.json"
 {
   "name": "@scope/add",
   "version": "0.1.0",
@@ -110,10 +89,10 @@ export function add(a: number, b: number): number {
 }
 ```
 
-The `subtract/` subdirectory is similar but does not have the same `deno fmt`
+The `subtract/` subdirectory is similar but does not have the same `ende fmt`
 configuration.
 
-```json title="subtract/deno.json"
+```json title="subtract/ende.json"
 {
   "name": "@scope/subtract",
   "version": "0.3.0",
@@ -132,44 +111,38 @@ export function subtract(a: number, b: number): number {
 Let's run it:
 
 ```sh
-> deno run main.ts
+> ende run main.ts
 1 + 2 = 3
 2 - 4 = -2
 ```
 
-There's a lot to unpack here, showcasing some of the Deno workspace features:
+There's a lot to unpack here, showcasing some of the Ende workspace features:
 
 1. This monorepo consists of two packages, placed in `./add` and `./subtract`
    directories.
 
-1. By using `name` and `version` options in members' `deno.json` files, it's
+1. By using `name` and `version` options in members' `ende.json` files, it's
    possible to refer to them using "bare specifiers" across the whole workspace.
    In this case, the packages are named `@scope/add` and `@scope/subtract`,
    where `scope` is the "scope" name you can choose. With these two options,
    it's not necessary to use long and relative file paths in import statements.
 
-1. `npm:chalk@5` package is a shared dependency in the entire workspace.
-   Workspace members "inherit" `imports` of the workspace root, allowing to
-   easily manage a single version of a dependency across the codebase.
+1. `jsr:@ende/fmt` is a shared dependency in the entire workspace. Workspace
+   members "inherit" `imports` of the workspace root, allowing to easily manage
+   a single version of a dependency across the codebase.
 
-1. `add` subdirectory specifies in its `deno.json` that `deno fmt` should not
+1. `add` subdirectory specifies in its `ende.json` that `ende fmt` should not
    apply semicolons when formatting the code. This makes for a much smoother
    transition for existing projects, without a need to change tens or hundreds
    of files in one go.
 
----
-
-Deno workspaces are flexible and can work with Node packages. To make migration
-for existing Node.js projects easier you can have both Deno-first and Node-first
-packages in a single workspace.
-
 ## Workspace path patterns
 
-Deno supports pattern matching for workspace member folders, making it easier to
+Ende supports pattern matching for workspace member folders, making it easier to
 manage workspaces with many members or with a specific directory structure. You
 can use wildcard patterns to include multiple directories at once:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": [
     "some-dir/*",
@@ -179,7 +152,7 @@ can use wildcard patterns to include multiple directories at once:
 ```
 
 > [!NOTE]
-> Pattern support was added in Deno 2.1.
+> Pattern support was.
 
 The pattern matching syntax follows specific rules regarding folder depth:
 
@@ -203,7 +176,7 @@ to a single level. For example, `packages/**` matches `packages/foo`,
 `packages/foo/subpackage`, and any deeper directories that contain a config
 file:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": ["packages/**"]
 }
@@ -215,7 +188,7 @@ Prefix a pattern with `!` to exclude directories that an earlier pattern would
 otherwise include. This is handy when a wildcard sweeps up a directory you don't
 want as a workspace member. Both literal paths and globs work after the `!`:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": [
     "packages/*",
@@ -228,40 +201,40 @@ want as a workspace member. Both literal paths and globs work after the `!`:
 Here `packages/*` includes every directory under `packages`, then the two
 exclusions drop `packages/internal` and any `fixtures` directory one level down.
 
-## How Deno resolves workspace dependencies
+## How Ende resolves workspace dependencies
 
 When running a project in a workspace that imports from another workspace
-member, Deno follows these steps to resolve the dependencies:
+member, Ende follows these steps to resolve the dependencies:
 
-1. Deno starts in the directory of the executing project (e.g., project A)
-2. It looks up in the parent directory for a root `deno.json` file
+1. Ende starts in the directory of the executing project (e.g., project A)
+2. It looks up in the parent directory for a root `ende.json` file
 3. If found, it checks for the `workspace` property in that file
-4. For each import statement in project A, Deno checks if the import matches a
-   package name defined in any workspace member's `deno.json`
-5. If a matching package name is found, Deno verifies that the containing
+4. For each import statement in project A, Ende checks if the import matches a
+   package name defined in any workspace member's `ende.json`
+5. If a matching package name is found, Ende verifies that the containing
    directory is listed in the root workspace configuration
 6. The import is then resolved to the correct file using the `exports` field in
-   the workspace member's `deno.json`
+   the workspace member's `ende.json`
 
 For example, given this structure:
 
 ```sh
 /
-├── deno.json         # workspace: ["./project-a", "./project-b"]
+├── ende.json         # workspace: ["./project-a", "./project-b"]
 ├── project-a/
-│   ├── deno.json     # name: "@scope/project-a"
+│   ├── ende.json     # name: "@scope/project-a"
 │   └── mod.ts        # imports from "@scope/project-b"
 └── project-b/
-    ├── deno.json     # name: "@scope/project-b"
+    ├── ende.json     # name: "@scope/project-b"
     └── mod.ts
 ```
 
-When `project-a/mod.ts` imports from `"@scope/project-b"`, Deno:
+When `project-a/mod.ts` imports from `"@scope/project-b"`, Ende:
 
 1. Sees the import statement
-2. Checks parent directory's `deno.json`
+2. Checks parent directory's `ende.json`
 3. Finds `project-b` in the workspace array
-4. Verifies `project-b/deno.json` exists and has matching package name
+4. Verifies `project-b/ende.json` exists and has matching package name
 5. Resolves the import using `project-b`'s exports
 
 ### Important note for containerization
@@ -269,19 +242,19 @@ When `project-a/mod.ts` imports from `"@scope/project-b"`, Deno:
 When containerizing a workspace member that depends on other workspace members,
 you must include:
 
-1. The root `deno.json` file
+1. The root `ende.json` file
 2. All dependent workspace packages
 3. The same directory structure as your development environment
 
 For example, if dockerizing `project-a` above, your Dockerfile should:
 
 ```dockerfile
-COPY deno.json /app/deno.json
+COPY ende.json /app/ende.json
 COPY project-a/ /app/project-a/
 COPY project-b/ /app/project-b/
 ```
 
-This preserves the workspace resolution mechanism that Deno uses to find and
+This preserves the workspace resolution mechanism that Ende uses to find and
 import workspace dependencies.
 
 ## Multiple package entries
@@ -294,7 +267,7 @@ but often you'll want to have multiple entries that group relevant aspects of
 your package. This can be done by passing an `object` instead of a `string` to
 `exports`:
 
-```json title="my-package/deno.json"
+```json title="my-package/ende.json"
 {
   "name": "@scope/my-package",
   "version": "0.3.0",
@@ -307,7 +280,7 @@ your package. This can be done by passing an `object` instead of a `string` to
 ```
 
 The `"."` entry is the default entry that's picked when importing
-`@scope/my-package`. Therefore, the above `deno.json` example provides the
+`@scope/my-package`. Therefore, the above `ende.json` example provides the
 following entries:
 
 - `@scope/my-package`
@@ -316,17 +289,17 @@ following entries:
 
 ## Publishing workspace packages to registries
 
-Workspaces make it easy to publish packages to registries like JSR or NPM. You
-can publish individual workspace members while keeping their development
-connected in your monorepo.
+Workspaces make it easy to publish packages to registries like JSR. You can
+publish individual workspace members while keeping their development connected
+in your monorepo.
 
 #### Publishing to JSR
 
 To publish a workspace package to JSR, follow these steps:
 
-1. Ensure each package has the appropriate metadata in its `deno.json`:
+1. Ensure each package has the appropriate metadata in its `ende.json`:
 
-```json title="my-package/deno.json"
+```json title="my-package/ende.json"
 {
   "name": "@scope/my-package",
   "version": "1.0.0",
@@ -341,37 +314,32 @@ To publish a workspace package to JSR, follow these steps:
 
 ```sh
 cd my-package
-deno publish
+ende publish
 ```
 
 #### Excluding a workspace member from publish
 
 Workspaces often contain members that are not meant to be published, such as
 internal helpers, examples, or packages that only exist to host shared `tasks`.
-By default `deno publish` will try to publish every workspace member that has a
+By default `ende publish` will try to publish every workspace member that has a
 `name` and `exports`, and will error if any of them is missing a `version`.
 
-To opt a member out of `deno publish`, set `"publish": false` in that member's
-`deno.json`:
+To opt a member out of `ende publish`, set `"publish": false` in that member's
+`ende.json`:
 
-```jsonc title="internal-helpers/deno.json"
+```jsonc title="internal-helpers/ende.json"
 {
   "name": "@scope/internal-helpers",
   "tasks": {
-    "build": "deno run -A scripts/build.ts"
+    "build": "ende run -A scripts/build.ts"
   },
   "publish": false
 }
 ```
 
 The member is still part of the workspace. Its `tasks` run, its `imports` are
-resolved, and other members can depend on it, but `deno publish` skips it
+resolved, and other members can depend on it, but `ende publish` skips it
 entirely and won't complain about a missing `version`.
-
-This applies to `deno.json` members only. Workspace members defined solely by a
-`package.json` are npm packages and are never candidates for `deno publish`
-(which targets JSR), so no opt-out is needed for them. `package.json`'s
-`"private": true` field is not read by Deno.
 
 #### Managing interdependent packages
 
@@ -382,121 +350,21 @@ packages work as expected:
 
 ```sh
 # Test a published package
-deno add jsr:@scope/my-published-package
-deno test integration-test.ts
+ende add jsr:@scope/my-published-package
+ende test integration-test.ts
 ```
 
-When publishing packages that depend on other workspace members, Deno will
+When publishing packages that depend on other workspace members, Ende will
 automatically replace workspace references with proper registry references in
 the published code.
 
-## Migrating from `npm` workspaces
-
-Deno workspaces support using a Deno-first package from an existing npm package.
-In this example, we mix and match a Deno library called `@deno/hi`, with a
-Node.js library called `@deno/log` that we developed a couple years back.
-
-We'll need to include a `deno.json` configuration file in the root:
-
-```json title="deno.json"
-{
-  "workspace": {
-    "members": ["hi"]
-  }
-}
-```
-
-Alongside our existing package.json workspace:
-
-```json title="package.json"
-{
-  "workspaces": ["log"]
-}
-```
-
-The workspace currently has a log npm package:
-
-```json title="log/package.json"
-{
-  "name": "@deno/log",
-  "version": "0.5.0",
-  "type": "module",
-  "main": "index.js"
-}
-```
-
-```js title="log/index.js"
-export function log(output) {
-  console.log(output);
-}
-```
-
-Let's create an `@deno/hi` Deno-first package that imports `@deno/log`:
-
-```json title="hi/deno.json"
-{
-  "name": "@deno/hi",
-  "version": "0.2.0",
-  "exports": "./mod.ts",
-  "imports": {
-    "log": "npm:@deno/log@^0.5"
-  }
-}
-```
-
-```ts title="hi/mod.ts"
-import { log } from "log";
-
-export function sayHiTo(name: string) {
-  log(`Hi, ${name}!`);
-}
-```
-
-Now, we can write a `main.ts` file that imports and calls `hi`:
-
-```ts title="main.ts"
-import { sayHiTo } from "@deno/hi";
-
-sayHiTo("friend");
-```
-
-```sh
-$ deno run main.ts
-Hi, friend!
-```
-
-You can even have both `deno.json` and `package.json` in your existing Node.js
-package. Additionally, you could remove the package.json in the root and specify
-the npm package in the deno.json workspace members. That allows you to gradually
-migrate to Deno, without putting a lot of upfront work.
-
-For example, you can add `log/deno.json` to configure Deno's linter and
-formatter:
-
-```jsonc
-{
-  "fmt": {
-    "semiColons": false
-  },
-  "lint": {
-    "rules": {
-      "exclude": ["no-unused-vars"]
-    }
-  }
-}
-```
-
-Running `deno fmt` in the workspace, will format the `log` package to not have
-any semicolons, and `deno lint` won't complain if you leave an unused var in one
-of the source files.
-
-## Configuring built-in Deno tools
+## Configuring built-in Ende tools
 
 Some configuration options only make sense at the root of the workspace, eg.
 specifying `nodeModulesDir` option in one of the members is not available and
-Deno will warn if an option needs to be applied at the workspace root.
+Ende will warn if an option needs to be applied at the workspace root.
 
-Here's a full matrix of various `deno.json` options available at the workspace
+Here's a full matrix of various `ende.json` options available at the workspace
 root and its members:
 
 | Option               | Workspace | Package | Notes                                                                                                                                                                                                           |
@@ -531,14 +399,14 @@ root and its members:
 | test.include         | ✅        | ✅      |                                                                                                                                                                                                                 |
 | test.exclude         | ✅        | ✅      |                                                                                                                                                                                                                 |
 | test.files           | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
-| publish              | ❌        | ✅      | Set to `false` to exclude a member from `deno publish`. See [Excluding a workspace member from publish](#excluding-a-workspace-member-from-publish).                                                            |
+| publish              | ❌        | ✅      | Set to `false` to exclude a member from `ende publish`. See [Excluding a workspace member from publish](#excluding-a-workspace-member-from-publish).                                                            |
 | publish.include      | ✅        | ✅      |                                                                                                                                                                                                                 |
 | publish.exclude      | ✅        | ✅      |                                                                                                                                                                                                                 |
 | bench.include        | ✅        | ✅      |                                                                                                                                                                                                                 |
 | bench.exclude        | ✅        | ✅      |                                                                                                                                                                                                                 |
 | bench.files          | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
 | lock                 | ✅        | ❌      | Only a single lock file may exist per resolver, and only resolver may exist per workspace, so conditional enablement of the lockfile per package does not make sense.                                           |
-| unstable             | ✅        | ❌      | For simplicities sake, we do not allow unstable flags, because a lot of the CLI assumes that unstable flags are immutable and global to the entire process. Also weird interaction with DENO_UNSTABLE_\* flags. |
+| unstable             | ✅        | ❌      | For simplicities sake, we do not allow unstable flags, because a lot of the CLI assumes that unstable flags are immutable and global to the entire process. Also weird interaction with ENDE_UNSTABLE_\* flags. |
 | name                 | ❌        | ✅      |                                                                                                                                                                                                                 |
 | version              | ❌        | ✅      |                                                                                                                                                                                                                 |
 | exports              | ❌        | ✅      |                                                                                                                                                                                                                 |
@@ -546,7 +414,7 @@ root and its members:
 
 ## Running commands across workspaces
 
-Deno provides several ways to run commands across all or specific workspace
+Ende provides several ways to run commands across all or specific workspace
 members:
 
 ### Type checking
@@ -556,7 +424,7 @@ inherited between root and member, much like
 [TSConfig `extends`](https://www.typescriptlang.org/tsconfig/#extends). For
 example:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": ["./web"],
   "compilerOptions": {
@@ -565,7 +433,7 @@ example:
 }
 ```
 
-```json title="web/deno.json"
+```json title="web/ende.json"
 {
   "compilerOptions": {
     "lib": ["esnext", "dom"]
@@ -585,19 +453,19 @@ Files in the `web` subdirectory will be configured with the following options:
 ```
 
 Each member will be partitioned and checked separately from one another. Just
-run `deno check` from the workspace root:
+run `ende check` from the workspace root:
 
 ```sh
-deno check
+ende check
 ```
 
 ### Running tests
 
-To run tests across all workspace members, simply execute `deno test` from the
+To run tests across all workspace members, simply execute `ende test` from the
 workspace root:
 
 ```sh
-deno test
+ende test
 ```
 
 This will run tests in all workspace members according to their individual test
@@ -609,13 +477,13 @@ To run tests for a specific workspace member, you can either:
 
 ```sh
 cd my-directory
-deno test
+ende test
 ```
 
 2. Or specify the path from the workspace root:
 
 ```sh
-deno test my-directory/
+ende test my-directory/
 ```
 
 ### Formatting and linting
@@ -624,12 +492,12 @@ Similar to testing, formatting and linting commands run across all workspace
 members by default:
 
 ```sh
-deno fmt
-deno lint
+ende fmt
+ende lint
 ```
 
 Each workspace member follows its own formatting and linting rules as defined in
-its `deno.json` file, with some settings inherited from the root configuration
+its `ende.json` file, with some settings inherited from the root configuration
 as shown in the table above.
 
 ### Using workspace tasks
@@ -637,24 +505,24 @@ as shown in the table above.
 You can define tasks at both the workspace root and in individual workspace
 members:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": ["./add", "./subtract"],
   "tasks": {
     "build": "echo 'Building all packages'",
-    "test:all": "deno test"
+    "test:all": "ende test"
   }
 }
 ```
 
-```json title="add/deno.json"
+```json title="add/ende.json"
 {
   "name": "@scope/add",
   "version": "0.1.0",
   "exports": "./mod.ts",
   "tasks": {
     "build": "echo 'Building add package'",
-    "test": "deno test"
+    "test": "ende test"
   }
 }
 ```
@@ -662,15 +530,14 @@ members:
 To run a task defined in a specific package:
 
 ```sh
-deno task --cwd=add build
+ende task --cwd=add build
 ```
 
 ## Sharing and managing dependencies
 
 Workspace members can share dependencies, depend on each other, and resolve
 version conflicts member by member. To pin one version of a dependency for the
-whole workspace, see [`catalog:`](#centralized-dependency-versions-with-catalog)
-below.
+whole workspace, declare it in the root's `imports`.
 
 Workspaces provide powerful ways to share and manage dependencies across
 projects:
@@ -680,12 +547,12 @@ projects:
 Common development dependencies like testing libraries can be defined at the
 workspace root:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "workspace": ["./add", "./subtract"],
   "imports": {
-    "@std/testing/": "jsr:@std/testing@^0.218.0/",
-    "chai": "npm:chai@^4.3.7"
+    "@ende/testing/": "jsr:@ende/testing@^2026.10.15/",
+    "@ende/expect": "jsr:@ende/expect@^2026.10.15"
   }
 }
 ```
@@ -730,179 +597,3 @@ This approach allows you to:
 2. Share code between packages without publishing to a registry
 3. Test and develop interdependent modules together
 4. Gradually migrate monolithic codebases to modular architecture
-
-### Using workspace protocol in package.json
-
-Deno supports workspace protocol specifiers in `package.json` files. These are
-useful when you have npm packages that depend on other packages within the
-workspace:
-
-```json title="package.json"
-{
-  "name": "my-npm-package",
-  "dependencies": {
-    "another-workspace-package": "workspace:*"
-  }
-}
-```
-
-The following workspace protocol specifiers are supported:
-
-- `workspace:*` - Use the latest version available in the workspace
-- `workspace:~` - Use the workspace version with only patch-level changes
-- `workspace:^` - Use the workspace version with semver-compatible changes
-
-## Centralized dependency versions with `catalog:`
-
-When several workspace members depend on the same npm package, keeping their
-versions in sync usually means editing every member's `package.json` whenever
-you bump a version. The `catalog:` protocol — added in Deno 2.8 and compatible
-with the equivalent feature in pnpm, Bun, and Yarn — lets the workspace root
-declare a single version requirement, and each member references it by name.
-
-A `catalog:` reference can appear in a member's `package.json` dependencies or,
-since Deno 2.9, in the `imports` of a member's `deno.json`. The catalog
-definition itself lives in either `deno.json` or `package.json` at the workspace
-root.
-
-> [!NOTE] Catalogs are npm-only
->
-> Catalogs only manage **npm** dependencies. A catalog entry is a bare package
-> name mapped to a version requirement, and a `catalog:` reference always
-> resolves to an `npm:` specifier — there is no way to point a catalog entry at
-> a `jsr:` package. Manage `jsr:` dependencies through `imports` directly
-> instead. Because catalog entries are treated as npm packages, `deno update`
-> and `deno outdated` resolve them against the npm registry.
-
-Define a catalog in the root `deno.json`:
-
-```jsonc title="deno.json"
-{
-  "workspace": ["./packages/a", "./packages/b"],
-  "catalog": {
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "chalk": "^5.3.0"
-  }
-}
-```
-
-A member references the entry with `catalog:` (the default catalog):
-
-```json title="packages/a/package.json"
-{
-  "dependencies": {
-    "react": "catalog:",
-    "react-dom": "catalog:"
-  }
-}
-```
-
-To bump everyone to a new React version, edit the catalog once.
-
-### Named catalogs
-
-Use the plural `catalogs` field when different members need different versions
-of the same package — for example, while migrating between major versions:
-
-```jsonc title="deno.json"
-{
-  "workspace": ["./packages/a", "./packages/b"],
-  "catalogs": {
-    "react18": {
-      "react": "^18.3.0",
-      "react-dom": "^18.3.0"
-    },
-    "react19": {
-      "react": "^19.0.0",
-      "react-dom": "^19.0.0"
-    }
-  }
-}
-```
-
-Members select a catalog by name:
-
-```json title="packages/a/package.json"
-{
-  "dependencies": {
-    "react": "catalog:react18",
-    "react-dom": "catalog:react18"
-  }
-}
-```
-
-```json title="packages/b/package.json"
-{
-  "dependencies": {
-    "react": "catalog:react19",
-    "react-dom": "catalog:react19"
-  }
-}
-```
-
-`catalog:` (with no name) and `catalog:default` are equivalent and resolve to
-the singular `catalog` field.
-
-### Catalogs in `package.json`
-
-Catalogs can also live in the root `package.json`, which keeps configuration
-together for projects that haven't moved to `deno.json`:
-
-```json title="package.json"
-{
-  "catalog": {
-    "react": "^19.0.0"
-  },
-  "catalogs": {
-    "testing": {
-      "vitest": "^2.0.0"
-    }
-  }
-}
-```
-
-If both `deno.json` and `package.json` define catalogs at the workspace root,
-`package.json` wins entirely — the two are not merged.
-
-### Restrictions
-
-- Catalogs are npm-only. Every entry resolves to an `npm:` package, so `jsr:`
-  (and other non-npm) dependencies cannot be managed through a catalog.
-- Catalogs are root-only. Defining `catalog` or `catalogs` inside a workspace
-  member emits a diagnostic.
-- Members must reference a catalog name that exists. A missing entry produces a
-  resolution error during install or run.
-
-## npm and pnpm workspace compatibility
-
-Deno works seamlessly with standard npm workspaces defined in `package.json`:
-
-```json title="package.json"
-{
-  "workspaces": ["packages/*"]
-}
-```
-
-For pnpm users, Deno supports typical pnpm workspace configurations. However, if
-you're using a `pnpm-workspace.yaml` file, you'll need to migrate to a
-`deno.json` workspace configuration:
-
-```yaml title="pnpm-workspace.yaml (to be replaced)"
-packages:
-  - "packages/*"
-```
-
-Should be converted to:
-
-```json title="deno.json"
-{
-  "workspace": ["packages/*"]
-}
-```
-
-This allows for smooth integration between Deno and npm/pnpm ecosystems during
-migration or in hybrid projects.
-
-For more information on configuring your project, check out the
-[Configuration with deno.json](/runtime/fundamentals/configuration/) tutorial.

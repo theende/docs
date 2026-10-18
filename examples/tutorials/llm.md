@@ -1,7 +1,7 @@
 ---
 last_modified: 2025-09-29
-title: "Build a Real-time LLM Chat App with Deno"
-description: "Learn how to integrate Large Language Models (LLM) with Deno to create an interactive roleplay chat application with AI characters using OpenAI or Anthropic APIs."
+title: "Build a Real-time LLM Chat App with Ende"
+description: "Learn how to integrate Large Language Models (LLM) with Ende to create an interactive roleplay chat application with AI characters using OpenAI or Anthropic APIs."
 url: /examples/llm_tutorial/
 ---
 
@@ -13,26 +13,14 @@ by LLMs interact with users in a roleplay game setting.
 You can see the code for the
 [finished app on GitHub](https://github.com/denoland/tutorial-with-llm).
 
-> [!NOTE] Deploy your own
->
-> Want to skip the tutorial and deploy the finished app right now? Click the
-> button below to instantly deploy your own copy of the complete LLM chat
-> application to Deno Deploy. You'll get a live, working application that you
-> can customize and modify as you learn!
->
-> [![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-llm&mode=dynamic&entrypoint=main.ts&install=deno+install)
->
-> Once you have deployed, add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` in
-> the project "Settings".
-
 ## Initialize a new project
 
 First, create a new directory for your project and initialize it:
 
 ```bash
-mkdir deno-llm-chat
-cd deno-llm-chat
-deno init
+mkdir ende-llm-chat
+cd ende-llm-chat
+ende init
 ```
 
 ## Project structure
@@ -43,7 +31,7 @@ integration, game logic, and server management:
 ```sh
 ├── main.ts                 # Main server entry point
 ├── main_test.ts            # Test file
-├── deno.json               # Deno configuration
+├── ende.json               # Ende configuration
 ├── .env                    # Environment variables (API keys)
 ├── src/
 │   ├── config/
@@ -64,26 +52,26 @@ integration, game logic, and server management:
 
 ## Set up dependencies
 
-Add the required dependencies to your `deno.json`:
+Add the required dependencies to your `ende.json`:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "tasks": {
-    "dev": "deno run -A --env-file --watch main.ts",
-    "start": "deno run --allow-net --allow-env --allow-read main.ts",
-    "test": "deno test --allow-net --allow-env"
+    "dev": "ende run -A --env-file --watch main.ts",
+    "start": "ende run --allow-net --allow-env --allow-read main.ts",
+    "test": "ende test --allow-net --allow-env"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1",
-    "@std/http": "jsr:@std/http@1",
-    "@std/uuid": "jsr:@std/uuid@1",
-    "@std/json": "jsr:@std/json@1"
+    "@ende/assert": "jsr:@ende/assert@^2026.10.15",
+    "@ende/http": "jsr:@ende/http@^2026.10.15",
+    "@ende/uuid": "jsr:@ende/uuid@^2026.10.15",
+    "@ende/json": "jsr:@ende/json@^2026.10.15"
   },
   "compilerOptions": {
     "lib": [
       "dom",
       "dom.asynciterable",
-      "deno.ns"
+      "ende.ns"
     ]
   }
 }
@@ -134,15 +122,15 @@ export class LLMProvider {
 
   constructor(config?: Partial<LLMConfig>) {
     const apiKey = config?.apiKey ||
-      Deno.env.get("OPENAI_API_KEY") ||
-      Deno.env.get("ANTHROPIC_API_KEY");
+      Ende.env.get("OPENAI_API_KEY") ||
+      Ende.env.get("ANTHROPIC_API_KEY");
 
     // Auto-detect provider based on available API keys
     let provider = config?.provider;
     if (!provider && apiKey) {
-      if (Deno.env.get("OPENAI_API_KEY")) {
+      if (Ende.env.get("OPENAI_API_KEY")) {
         provider = "openai";
-      } else if (Deno.env.get("ANTHROPIC_API_KEY")) {
+      } else if (Ende.env.get("ANTHROPIC_API_KEY")) {
         provider = "anthropic";
       }
     }
@@ -609,7 +597,7 @@ export class WebSocketHandler {
   }
 
   handleConnection(request: Request): Response {
-    const { socket, response } = Deno.upgradeWebSocket(request);
+    const { socket, response } = Ende.upgradeWebSocket(request);
 
     const connectionId = crypto.randomUUID();
     this.connections.set(connectionId, socket);
@@ -833,7 +821,7 @@ async function handler(req: Request): Promise<Response> {
 
 async function getIndexHTML(): Promise<string> {
   try {
-    return await Deno.readTextFile("./static/index.html");
+    return await Ende.readTextFile("./static/index.html");
   } catch {
     // Return a basic HTML template if file doesn't exist
     return `
@@ -850,10 +838,10 @@ async function getIndexHTML(): Promise<string> {
   }
 }
 
-const port = parseInt(Deno.env.get("PORT") || "8000");
+const port = parseInt(Ende.env.get("PORT") || "8000");
 console.log(`🎭 LLM Chat server starting on http://localhost:${port}`);
 
-Deno.serve({ port }, handler);
+Ende.serve({ port }, handler);
 ```
 
 In the `main.ts` file we set up an HTTP server and a WebSocket server to handle
@@ -892,7 +880,7 @@ into your `style.css`.
 Start your development server:
 
 ```bash
-deno task dev
+ende task dev
 ```
 
 Your LLM chat application will be available at `http://localhost:8000`. The
@@ -903,34 +891,6 @@ application will:
 3. **Handle rate limiting** gracefully with retries and fallbacks
 4. **Provide real-time interaction** through WebSockets
 
-## Deploy your application to the cloud
-
-Now that you have your working LLM chat application, you can deploy it to the
-cloud with Deno Deploy.
-
-For the best experience, you can deploy your app directly from GitHub, which
-will set up automated deployments. Create a GitHub repository and push your app
-there.
-
-[Create a new GitHub repository](https://github.com/new), then initialize and
-push your app to GitHub:
-
-```sh
-git init -b main
-git remote add origin https://github.com/<your_github_username>/<your_repo_name>.git
-git add .
-git commit -am 'initial commit'
-git push -u origin main
-```
-
-Once your app is on GitHub, you can
-[deploy it to Deno Deploy](https://console.deno.com/).
-
-Don't forget to add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` environment
-variables in the project "Settings".
-
-For a walkthrough of deploying your app, check out the Deno Deploy tutorial.
-
 ## Testing
 
 We've provided tests to verify your setup, copy the
@@ -938,7 +898,7 @@ We've provided tests to verify your setup, copy the
 file to your project directory and run the included tests to verify your setup:
 
 ```bash
-deno task test
+ende task test
 ```
 
 🦕 You now have a working LLM chat application, with realtime interaction, rate

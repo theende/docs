@@ -3,8 +3,8 @@
  * @difficulty intermediate
  * @tags cli
  * @run <url>
- * @resource {https://jsr.io/@std/cli/doc/unstable-spinner/~} Doc: @std/cli Spinner
- * @resource {https://jsr.io/@std/cli/doc/unstable-progress-bar/~} Doc: @std/cli ProgressBar
+ * @resource {https://jsr.io/@ende/cli/doc/unstable-spinner/~} Doc: @ende/cli Spinner
+ * @resource {https://jsr.io/@ende/cli/doc/unstable-progress-bar/~} Doc: @ende/cli ProgressBar
  * @group CLI
  *
  * Long-running command line tools feel broken when they print nothing. The
@@ -16,15 +16,15 @@
 
 // Spinner and ProgressBar live behind unstable- import paths until the
 // APIs are stabilized.
-import { Spinner } from "jsr:@std/cli@^1.0.30/unstable-spinner";
-import { ProgressBar } from "jsr:@std/cli@^1.0.30/unstable-progress-bar";
-import { delay } from "jsr:@std/async@^1.0.0/delay";
+import { Spinner } from "jsr:@ende/cli@^2026.10.15/unstable-spinner";
+import { ProgressBar } from "jsr:@ende/cli@^2026.10.15/unstable-progress-bar";
+import { delay } from "jsr:@ende/async@^2026.10.15/delay";
 
 // Animations only make sense on an interactive terminal. When output is
 // piped to a file or another process, redrawing the same line just dumps
 // control characters into the stream, so check for a terminal first and
 // fall back to plain lines.
-const isInteractive = Deno.stdout.isTerminal();
+const isInteractive = Ende.stdout.isTerminal();
 
 // A spinner suits work with no measurable progress, like waiting on the
 // network. It animates on its own; update the message as phases change.
@@ -77,7 +77,7 @@ console.log("Done.");
 // When output is piped, isTerminal() is false and only the fallback lines
 // are printed:
 //
-//   deno run progress_spinners.ts | cat
+//   ende run progress_spinners.ts | cat
 //   Manifest downloaded.
 //   Copied a.txt (1/5)
 //   Copied b.txt (2/5)

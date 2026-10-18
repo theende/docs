@@ -23,7 +23,7 @@ the use of `window` only if it's completely replaceable with `self`,
 ```typescript
 const a = await window.fetch("https://deno.land");
 
-const b = window.Deno.metrics();
+const b = window.Ende.metrics();
 ```
 
 **Valid:**
@@ -33,9 +33,9 @@ const a1 = await fetch("https://deno.land");
 const a2 = await globalThis.fetch("https://deno.land");
 const a3 = await self.fetch("https://deno.land");
 
-const b1 = Deno.metrics();
-const b2 = globalThis.Deno.metrics();
-const b3 = self.Deno.metrics();
+const b1 = Ende.metrics();
+const b2 = globalThis.Ende.metrics();
+const b3 = self.Ende.metrics();
 
 // `alert` is allowed to call with `window` because it's not supported in Workers
 window.alert("🍣");

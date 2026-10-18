@@ -2,7 +2,7 @@
  * @title Distribute work across a worker pool
  * @difficulty intermediate
  * @tags cli
- * @resource {https://docs.deno.com/examples/web_workers/} Example: Web workers
+ * @resource {https://docs.ende.sh/examples/web_workers/} Example: Web workers
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers} MDN: Using web workers
  * @group Web standard APIs
  *

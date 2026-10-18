@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-30
 title: "Modules"
-description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
+description: "Learn how Ende's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:
   - /runtime/manual/basics/modules/
   - /runtime/manual/basics/modules/module_metadata/
@@ -9,25 +9,15 @@ oldUrl:
   - /runtime/manual/basics/import_maps/
 ---
 
-Deno uses
+Ende uses
 [ECMAScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 as its primary module system, the official standard for JavaScript. You share
 code between files with standard `import` and `export` statements and run it
 directly, with no bundler or build step. This is the same module system browsers
 use, so the code you write stays portable across environments.
 
-Deno also runs Node's older CommonJS modules (`require` and `module.exports`),
-so existing npm packages and Node projects work without conversion. The two
-systems are fully supported and interoperate, but ECMAScript modules are
-recommended for new code; reach for CommonJS mainly when a dependency or an
-existing project still uses it.
-
-Deno decides which system a file uses from its extension and the nearest
-`package.json`: a `.mjs` file is always an ES module, a `.cjs` file is always
-CommonJS, and `.js` and `.ts` files are treated as ES modules unless a
-`package.json` sets `"type": "commonjs"`. The rest of this page covers ES
-modules; see CommonJS support for how `require`, module resolution, and
-ESM/CommonJS interop work.
+Ende runs ECMAScript modules only: CommonJS (`require` and `module.exports`) is
+not supported.
 
 ## Importing modules
 
@@ -46,7 +36,7 @@ import { add } from "./calc.ts";
 console.log(add(1, 2)); // 3
 ```
 
-You can run this example by calling `deno run main.ts` in the directory that
+You can run this example by calling `ende run main.ts` in the directory that
 contains both `main.ts` and `calc.ts`.
 
 With ECMAScript modules, local import specifiers must always include the full
@@ -78,7 +68,7 @@ is only fetched and evaluated when the call executes. This is useful for loading
 code conditionally or keeping a rarely used feature out of the startup path:
 
 ```ts
-if (Deno.args.includes("--greet")) {
+if (Ende.args.includes("--greet")) {
   const { greet } = await import("./greet.ts");
   greet();
 }
@@ -121,7 +111,7 @@ walkthrough, see the
 
 ## Import attributes
 
-Deno supports the `with { type: "json" }` import attribute syntax for importing
+Ende supports the `with { type: "json" }` import attribute syntax for importing
 JSON files:
 
 ```ts
@@ -130,7 +120,7 @@ import data from "./data.json" with { type: "json" };
 console.log(data.property); // Access JSON data as an object
 ```
 
-Starting with Deno 2.4 it's possible to import `text` and `bytes` modules too.
+It's possible to import `text` and `bytes` modules too.
 
 ```ts
 import text from "./log.txt" with { type: "text" };
@@ -143,7 +133,7 @@ console.log(text);
 
 > [!NOTE] `text` imports
 >
-> Stable in Deno 2.8 and no longer require a flag.
+> Stable; no flag needed.
 
 ```ts
 import bytes from "./image.png" with { type: "bytes" };
@@ -162,13 +152,13 @@ console.log(bytes);
 >
 > Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
 > `unstable.raw-import` option in
-> [`deno.json`](/runtime/fundamentals/configuration/).
+> [`ende.json`](/runtime/fundamentals/configuration/).
 
 A stylesheet can be imported with `with { type: "css" }`. The import evaluates
 to a
 [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet),
 matching what browsers ship. This is mainly useful for running unmodified
-browser module graphs in Deno, such as server-side rendering or testing web
+browser module graphs in Ende, such as server-side rendering or testing web
 components, where a CSS import would otherwise stop the module graph from
 loading:
 
@@ -192,7 +182,7 @@ loaded as part of the module graph and need no permission. Only a dynamic import
 whose specifier can't be analyzed, such as `import(base + "styles.css")`, reads
 the file at runtime and therefore requires read permission (`--allow-read`).
 
-Deno implements the small slice of the `CSSStyleSheet` interface that browser
+Ende implements the small slice of the `CSSStyleSheet` interface that browser
 module graphs rely on:
 
 - `cssRules` returns the sheet's top-level rules. Unlike the browser, this is a
@@ -214,7 +204,7 @@ for (const rule of sheet.cssRules) {
 sheet.replaceSync("body { color: red; }");
 ```
 
-Because Deno has no DOM, a sheet can't be adopted anywhere; the implementation
+Because Ende has no DOM, a sheet can't be adopted anywhere; the implementation
 is backed by the raw CSS text rather than a full CSS object model. `cssRules`
 uses a naive top-level rule split, so the live mutation methods `insertRule` and
 `deleteRule` are not implemented.
@@ -223,11 +213,11 @@ uses a naive top-level rule split, so the live mutation methods `insertRule` and
 >
 > Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
 > `unstable.raw-import` option in
-> [`deno.json`](/runtime/fundamentals/configuration/).
+> [`ende.json`](/runtime/fundamentals/configuration/).
 
 ## Deferred module evaluation
 
-Starting in Deno 2.8, the
+The
 [TC39 Deferred Module Evaluation proposal](https://github.com/tc39/proposal-defer-import-eval)
 is supported. The `import defer` syntax loads a module (including its
 dependencies) but does **not** execute its top-level code until you first read a
@@ -251,7 +241,7 @@ and may change. Standard `import` remains the right default.
 
 ## WebAssembly modules
 
-Deno supports importing Wasm modules directly:
+Ende supports importing Wasm modules directly:
 
 ```ts
 import { add } from "./add.wasm";
@@ -269,7 +259,7 @@ To learn more, visit
 
 ## Data URL imports
 
-Deno supports importing of data URLs, which allows you to import content that
+Ende supports importing of data URLs, which allows you to import content that
 isn't in a separate file. This is useful for testing, prototyping, or when you
 need to programmatically generate modules.
 
@@ -306,35 +296,31 @@ during tests.
 
 ## Importing third party modules and libraries
 
-When working with third-party modules in Deno, use the same `import` syntax as
+When working with third-party modules in Ende, use the same `import` syntax as
 you do for local code. Third party modules are typically imported from a remote
-registry and start with `jsr:` or `npm:`.
+registry and start with `jsr:`.
 
 ```ts title="main.ts"
 import { camelCase } from "jsr:@luca/cases@1.0.0";
-import { say } from "npm:cowsay@1.6.0";
 ```
 
-Deno recommends [JSR](https://jsr.io), the modern JavaScript registry, for third
+Ende recommends [JSR](https://jsr.io), the modern JavaScript registry, for third
 party modules. There, you'll find plenty of well documented ES modules for your
-projects, including the [Deno Standard Library](/runtime/reference/std/).
-
-You can read more about Deno's support for npm packages here.
+projects, including the [Ende Standard Library](/runtime/reference/std/).
 
 ## Managing third party modules and libraries
 
 Typing out the module name with the full version specifier can become tedious
 when importing them in multiple files. You can centralize management of remote
-modules with an `imports` field in your `deno.json` file. We call this `imports`
+modules with an `imports` field in your `ende.json` file. We call this `imports`
 field the **import map**, which is based on the [Import Maps Standard].
 
 [Import Maps Standard]: https://html.spec.whatwg.org/multipage/webappapis.html#import-maps
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "imports": {
-    "@luca/cases": "jsr:@luca/cases@^1.0.0",
-    "cowsay": "npm:cowsay@^1.6.0"
+    "@luca/cases": "jsr:@luca/cases@^1.0.0"
   }
 }
 ```
@@ -343,72 +329,71 @@ With remapped specifiers, the code looks cleaner:
 
 ```ts title="main.ts"
 import { camelCase } from "@luca/cases";
-import { say } from "cowsay";
 ```
 
 The remapped name can be any valid specifier. It's a very powerful feature in
-Deno that can remap anything. Learn more in the
-[configuration dependencies section](/runtime/reference/deno_json/#dependencies).
+Ende that can remap anything. Learn more in the
+[configuration dependencies section](/runtime/reference/ende_json/#dependencies).
 
-## Differentiating between `imports` or `importMap` in `deno.json` and `--import-map` option
+## Differentiating between `imports` or `importMap` in `ende.json` and `--import-map` option
 
 The [Import Maps Standard] requires two entries for each module: one for the
 module specifier and another for the specifier with a trailing `/`. This is
 because the standard allows only one entry per module specifier, and the
 trailing `/` indicates that the specifier refers to a directory. For example,
 when using the `--import-map import_map.json` option, the `import_map.json` file
-must include both entries for each module (note the use of `jsr:/@std/async`
-instead of `jsr:@std/async`):
+must include both entries for each module (note the use of `jsr:/@ende/async`
+instead of `jsr:@ende/async`):
 
 ```json title="import_map.json"
 {
   "imports": {
-    "@std/async": "jsr:@std/async@^1.0.0",
-    "@std/async/": "jsr:/@std/async@^1.0.0/"
+    "@ende/async": "jsr:@ende/async@^2026.10.15",
+    "@ende/async/": "jsr:/@ende/async@^1.0.0/"
   }
 }
 ```
 
-An `import_map.json` file referenced by the `importMap` field in `deno.json`
+An `import_map.json` file referenced by the `importMap` field in `ende.json`
 behaves exactly the same as using the `--import-map` option, with the same
 requirements for including both entries for each module as shown above.
 
-In contrast, `deno.json` extends the import maps standard. When you use the
-imports field in `deno.json`, you only need to specify the module specifier
+In contrast, `ende.json` extends the import maps standard. When you use the
+imports field in `ende.json`, you only need to specify the module specifier
 without the trailing `/`:
 
-```json title="deno.json"
+```json title="ende.json"
 {
   "imports": {
-    "@std/async": "jsr:@std/async@^1.0.0"
+    "@ende/async": "jsr:@ende/async@^2026.10.15"
   }
 }
 ```
 
 ## Managing dependencies
 
-Now that you understand how Deno resolves and imports modules, see the
+Now that you understand how Ende resolves and imports modules, see the
 [Dependency management guide](/runtime/packages/) for the day-to-day tasks:
-adding and removing packages with `deno add` / `deno
+adding and removing packages with `ende add` / `ende
 remove`, pinning versions,
 overriding and vendoring dependencies, lockfiles and integrity checking, supply
 chain management, publishing your own modules, and using private registries.
 
 ## Updating versions from the command line
 
-You don't have to edit version numbers in `deno.json` by hand. To move
+You don't have to edit version numbers in `ende.json` by hand. To move
 dependencies to newer versions, run
-[`deno outdated`](/runtime/reference/cli/outdated/) to see what's behind, then
-`deno outdated --update` to bump them:
+[`ende outdated`](/runtime/reference/cli/outdated/) to see what's behind, then
+`ende outdated --update` to bump them:
 
 ```sh
-deno outdated            # list dependencies with newer versions available
-deno outdated --update   # update them in deno.json
+ende outdated            # list dependencies with newer versions available
+ende outdated --update   # update them in ende.json
 ```
 
 To increment your own package's `version` field between releases, use
-[`deno bump-version`](/runtime/reference/cli/bump_version/):
+[`ende bump-version`](/runtime/reference/cli/bump_version/):
 
 ```sh
-deno bump-version patch  # 1.4.6 -> 1.4.7 (also: minor, major, or a prerelease)
+ende bump-version patch  # 1.4.6 -> 1.4.7 (also: minor, major, or a prerelease)
 ```

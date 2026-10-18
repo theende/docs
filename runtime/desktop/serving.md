@@ -1,17 +1,12 @@
 ---
 last_modified: 2026-06-25
 title: "HTTP serving"
-description: "How Deno.serve() works inside a desktop app: automatic port binding, the DENO_SERVE_ADDRESS env var, and serving local UI to the embedded webview."
+description: "How Ende.serve() works inside a desktop app: automatic port binding, the ENDE_SERVE_ADDRESS env var, and serving local UI to the embedded webview."
 ---
 
-> [!NOTE] Available in Deno 2.9
->
-> `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-> version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
-
-A `deno desktop` app serves its UI over local HTTP and points the embedded
-webview at it. This keeps the app structure identical to a normal Deno website.
-[`Deno.serve()`](/api/deno/~/Deno.serve) is the entry point and every request
+A `ende desktop` app serves its UI over local HTTP and points the embedded
+webview at it. This keeps the app structure identical to a normal Ende website.
+[`Ende.serve()`](/api/ende/~/Ende.serve/) is the entry point and every request
 flows through your handler, but with no port to manage and no remote network
 exposure.
 
@@ -19,19 +14,19 @@ exposure.
 
 When the binary starts:
 
-1. The runtime picks an unused local port and sets the `DENO_SERVE_ADDRESS`
+1. The runtime picks an unused local port and sets the `ENDE_SERVE_ADDRESS`
    environment variable to `tcp:127.0.0.1:<port>`.
-2. Your code calls `Deno.serve(...)`. The serve API reads `DENO_SERVE_ADDRESS`
-   (set by Deno itself in this mode, not by the user) and binds to that port,
+2. Your code calls `Ende.serve(...)`. The serve API reads `ENDE_SERVE_ADDRESS`
+   (set by Ende itself in this mode, not by the user) and binds to that port,
    ignoring whatever port you pass.
 3. The webview navigates to `http://127.0.0.1:<port>` once the listener is
    ready.
 
-You write the same handler you would for any Deno HTTP server. There is no
+You write the same handler you would for any Ende HTTP server. There is no
 desktop-specific serving API.
 
 ```ts title="main.ts"
-Deno.serve((req) => {
+Ende.serve((req) => {
   const url = new URL(req.url);
   if (url.pathname === "/api/hello") {
     return Response.json({ hello: "world" });
@@ -51,7 +46,7 @@ const HOMEPAGE = `<!doctype html>
 ```
 
 ```sh
-deno desktop main.ts
+ende desktop main.ts
 ```
 
 The default-export form works too:
@@ -70,18 +65,15 @@ The local-HTTP architecture trades a tiny amount of overhead for properties that
 matter for desktop apps:
 
 - **Same code in browser and desktop.** The homepage, fetch, websockets, and
-  cookies all behave identically in `deno run` and `deno desktop`. You can
+  cookies all behave identically in `ende run` and `ende desktop`. You can
   develop in a browser tab and ship the same code as a desktop binary.
 - **No special module system.** Imports, static assets, and module-level code
   all run the way they would for a web server.
-- **Frameworks run unchanged.** Next.js, Astro, Fresh, and others already ship a
-  production HTTP server. `deno desktop` runs that server and points the webview
-  at it. See [Frameworks](/runtime/desktop/frameworks/).
 
 The cost is a single network hop within `127.0.0.1` per request. For UI serving
 (HTML, CSS, bundled JS, JSON API responses) this is negligible.
 
-For high-throughput Deno → webview communication where the overhead matters, use
+For high-throughput Ende → webview communication where the overhead matters, use
 [bindings](/runtime/desktop/bindings/), which bypass HTTP entirely and route
 through in-process channels.
 
@@ -89,26 +81,26 @@ through in-process channels.
 
 The bound address is **always** `127.0.0.1` (or `[::1]`). The compiled binary
 never binds to a public interface, even if you pass `0.0.0.0` to
-[`Deno.serve()`](/api/deno/~/Deno.serve). Other apps and other users on the same
-machine cannot reach your server.
+[`Ende.serve()`](/api/ende/~/Ende.serve/). Other apps and other users on the
+same machine cannot reach your server.
 
 If you need to serve users on other machines (a self-hosted local server), do
-not use `deno desktop` for that part of your stack. Use `deno run` with an
+not use `ende desktop` for that part of your stack. Use `ende run` with an
 explicit address, or build a separate service.
 
 ## Custom port behavior
 
-You cannot override the port [`Deno.serve()`](/api/deno/~/Deno.serve) binds to
-inside `deno desktop`. This is intentional: the webview needs to navigate to the
+You cannot override the port [`Ende.serve()`](/api/ende/~/Ende.serve/) binds to
+inside `ende desktop`. This is intentional: the webview needs to navigate to the
 same port the runtime is listening on, and the runtime is the source of truth
 for that value.
 
-If you need to know where the server is bound, read `DENO_SERVE_ADDRESS`. It is
+If you need to know where the server is bound, read `ENDE_SERVE_ADDRESS`. It is
 in `tcp:127.0.0.1:<port>` form, so split off the port when you need an `http://`
 URL:
 
 ```ts
-const addr = Deno.env.get("DENO_SERVE_ADDRESS")!; // "tcp:127.0.0.1:54321"
+const addr = Ende.env.get("ENDE_SERVE_ADDRESS")!; // "tcp:127.0.0.1:54321"
 const port = addr.split(":").pop();
 console.log("Serving on:", `http://127.0.0.1:${port}`);
 ```
@@ -120,7 +112,7 @@ from the same local HTTP server by default. Use different paths per window to
 differentiate:
 
 ```ts
-const port = Deno.env.get("DENO_SERVE_ADDRESS")!.split(":").pop();
-const settings = new Deno.BrowserWindow();
+const port = Ende.env.get("ENDE_SERVE_ADDRESS")!.split(":").pop();
+const settings = new Ende.BrowserWindow();
 settings.navigate(`http://127.0.0.1:${port}/settings`);
 ```

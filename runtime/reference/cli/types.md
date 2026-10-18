@@ -1,35 +1,36 @@
 ---
 last_modified: 2025-03-10
-title: "deno types"
+title: "ende types"
 oldUrl: /runtime/manual/tools/types/
 command: types
 openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno types"
-description: "Print Deno's built-in TypeScript type declarations"
+openGraphTitle: "ende types"
+description: "Print Ende's built-in TypeScript type declarations"
 ---
 
-`deno types` prints the TypeScript type declarations for all Deno-specific APIs.
-This is useful for editors and tools that need Deno's type information.
+`ende types` prints the TypeScript type declarations for all Ende-specific APIs.
+This is useful for editors and tools that need Ende's type information.
 
 ## Basic usage
 
 Print type declarations to stdout:
 
 ```sh
-deno types
+ende types
 ```
 
 Save to a file for use with an editor or type checker:
 
 ```sh
-deno types > deno.d.ts
+ende types > ende.d.ts
 ```
 
 ## When to use this
 
-Most editors with the [Deno extension](/runtime/reference/vscode/) handle types
-automatically. You may need `deno types` if you are:
+Editors connected to the
+[Ende language server](/runtime/getting_started/setup_your_environment/) handle
+types automatically. You may need `ende types` if you are:
 
-- Using an editor without Deno LSP support
+- Using an editor without Ende LSP support
 - Generating type declarations for a build pipeline
-- Inspecting which APIs are available at your current Deno version
+- Inspecting which APIs are available at your current Ende version

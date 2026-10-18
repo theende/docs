@@ -3,12 +3,12 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://jsr.io/@std/semver/doc/~/parse} Doc: @std/semver parse
- * @resource {https://jsr.io/@std/semver/doc/~/satisfies} Doc: @std/semver satisfies
+ * @resource {https://jsr.io/@ende/semver/doc/~/parse} Doc: @ende/semver parse
+ * @resource {https://jsr.io/@ende/semver/doc/~/satisfies} Doc: @ende/semver satisfies
  * @group Standard library
  *
  * Version strings cannot be compared as plain text, because "1.10.0"
- * sorts before "1.2.0" alphabetically. The @std/semver package parses
+ * sorts before "1.2.0" alphabetically. The @ende/semver package parses
  * semantic versions into objects and compares them by their numeric
  * parts, with full support for ranges like ^1.2.0.
  */
@@ -20,7 +20,7 @@ import {
   parse,
   parseRange,
   satisfies,
-} from "jsr:@std/semver";
+} from "jsr:@ende/semver";
 
 // Parse turns a version string into an object with numeric fields.
 const version = parse("1.2.3-rc.1");

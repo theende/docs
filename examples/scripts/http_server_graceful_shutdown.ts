@@ -3,19 +3,19 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.HttpServer} Deno: HttpServer
- * @resource {https://docs.deno.com/api/deno/~/Deno.addSignalListener} Deno: addSignalListener
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.HttpServer} Ende: HttpServer
+ * @resource {https://docs.ende.sh/api/ende/~/Ende.addSignalListener} Ende: addSignalListener
  * @group Network
  *
  * Killing a server mid-request drops connections and loses work. A graceful
  * shutdown stops accepting new connections, lets in-flight requests finish,
- * and only then exits. Deno.serve returns an HttpServer whose shutdown
- * method does exactly that, much like server.close in node:http.
+ * and only then exits. Ende.serve returns an HttpServer whose shutdown
+ * method does exactly that.
  */
 
 // A deliberately slow endpoint so a request can be in flight during
 // shutdown. The root responds immediately.
-const server = Deno.serve(async (req) => {
+const server = Ende.serve(async (req) => {
   const url = new URL(req.url);
   if (url.pathname === "/slow") {
     await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -31,7 +31,7 @@ async function shutdown(signal: string) {
   // exit anyway after a deadline.
   const hardExit = setTimeout(() => {
     console.error("Drain timed out, exiting now");
-    Deno.exit(1);
+    Ende.exit(1);
   }, 10_000);
 
   // shutdown() stops the listener so no new connections are accepted, then
@@ -41,8 +41,8 @@ async function shutdown(signal: string) {
   // Clear the timer and remove the signal listeners. Both keep the event
   // loop alive, so the process exits on its own once they are gone.
   clearTimeout(hardExit);
-  Deno.removeSignalListener("SIGINT", onSigint);
-  Deno.removeSignalListener("SIGTERM", onSigterm);
+  Ende.removeSignalListener("SIGINT", onSigint);
+  Ende.removeSignalListener("SIGTERM", onSigterm);
   console.log("All requests drained, bye");
 }
 
@@ -52,9 +52,9 @@ const onSigterm = () => shutdown("SIGTERM");
 // SIGINT is what Ctrl+C sends, SIGTERM is what process managers, docker
 // stop, and Kubernetes send first. Note that SIGTERM listeners are not
 // supported on Windows.
-Deno.addSignalListener("SIGINT", onSigint);
-if (Deno.build.os !== "windows") {
-  Deno.addSignalListener("SIGTERM", onSigterm);
+Ende.addSignalListener("SIGINT", onSigint);
+if (Ende.build.os !== "windows") {
+  Ende.addSignalListener("SIGTERM", onSigterm);
 }
 
 // Start a slow request, then send SIGTERM while it is still running:

@@ -15,7 +15,7 @@ import { parse, stringify } from "jsr:@libs/xml";
 // An RSS-style document with attributes, nesting, and repeated elements.
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <feed>
-  <title>Deno releases</title>
+  <title>Ende releases</title>
   <entry id="1" draft="false">
     <title>Deno 2.0</title>
   </entry>
@@ -34,7 +34,7 @@ const doc = parse(xml) as unknown as {
   };
 };
 
-console.log(doc.feed.title); // Deno releases
+console.log(doc.feed.title); // Ende releases
 console.log(doc.feed.entry.length); // 2
 console.log(doc.feed.entry[1]["@id"]); // 2
 

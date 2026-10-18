@@ -10,10 +10,5 @@ node_modules
 # Committed despite a global *.lock ignore, so builds use the pinned versions.
 !ende.lock
 
-# other generated content
-runtime/reference/std
-!runtime/reference/std/_overrides
-!runtime/reference/std/_overrides/**
-
 .DS_Store
 .env

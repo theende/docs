@@ -14,9 +14,9 @@
  *  protect against cross-site request forgery.
  */
 
-import { unescape } from "jsr:@std/html/entities";
+import { unescape } from "jsr:@ende/html/entities";
 
-// Set up an async function to use with Deno.serve().
+// Set up an async function to use with Ende.serve().
 async function handler(req: Request) {
   // Get the method from the incoming Request. The default is a GET request.
   const method: string = req.method;
@@ -48,7 +48,7 @@ async function handler(req: Request) {
     &#x3C;/form&#x3E;
   `;
 
-  // We need to specify the 'text/html' Content-Type to actually render the HTML form, this would normally be handled by a web framework, this example is designed to show the simplest way to handle a file upload over HTTP with Deno.
+  // We need to specify the 'text/html' Content-Type to actually render the HTML form, this would normally be handled by a web framework, this example is designed to show the simplest way to handle a file upload over HTTP with Ende.
   const responseOptions: RequestInit = {
     headers: {
       "Content-Type": "text/html",
@@ -59,5 +59,5 @@ async function handler(req: Request) {
   return new Response(unescape(inputForm), responseOptions);
 }
 
-// Lastly we pass the handler we created to Deno.serve().
-Deno.serve(handler);
+// Lastly we pass the handler we created to Ende.serve().
+Ende.serve(handler);

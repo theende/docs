@@ -15,8 +15,8 @@
 // Serve this script's own source file so the example is self-contained.
 const filePath = import.meta.filename!;
 
-Deno.serve(async (req) => {
-  const stat = await Deno.stat(filePath);
+Ende.serve(async (req) => {
+  const stat = await Ende.stat(filePath);
 
   // A weak etag (W/ prefix) derived from mtime and size is cheap and good
   // enough for cache validation. Hash the content instead if you need a
@@ -38,7 +38,7 @@ Deno.serve(async (req) => {
     return new Response(null, { status: 304, headers });
   }
 
-  const file = await Deno.open(filePath, { read: true });
+  const file = await Ende.open(filePath, { read: true });
   return new Response(file.readable, { headers });
 });
 
