@@ -126,7 +126,7 @@ Ende.serve({ port: 8080 }, async (req) => {
 
   await Ende.writeTextFile(
     `./reports/${report.timestamp}.json`,
-    JSON.stringify(report, null, 2),
+    JSON.stringify(report, null, 2)
   );
   return new Response(null, { status: 204 });
 });

@@ -16,24 +16,22 @@ export default function Layout(props: LayoutProps) {
   return (
     <html lang="en">
       <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="color-scheme" content="light dark" />
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="color-scheme" content="light dark"/>
         <title>{title ? `${title} | Ende Docs` : "Ende Docs"}</title>
-        <meta name="description" content={description} />
-        {!is404 && (
-          <link rel="canonical" href={`https://docs.ende.sh${props.url}`} />
-        )}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="description" content={description}/>
+        {!is404 && <link rel="canonical" href={`https://docs.ende.sh${props.url}`}/>}
+        <link rel="icon" href="/favicon.ico"/>
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
         <script type="module" src="/js/copy.js"></script>
         <script type="module" src="/js/tabs.js"></script>
       </head>
       <body>
         <a href="#content">Skip to main content</a>
-        <Header navigation={props.navigation as NavLink[]} url={props.url} />
+        <Header navigation={props.navigation as NavLink[]} url={props.url}/>
         {props.content}
-        <Footer />
+        <Footer/>
       </body>
     </html>
   );

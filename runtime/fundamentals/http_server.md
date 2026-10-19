@@ -105,8 +105,8 @@ Ende.serve((req) => {
   return new Response(body, {
     status: 404,
     headers: {
-      "content-type": "application/json; charset=utf-8",
-    },
+      "content-type": "application/json; charset=utf-8"
+    }
   });
 });
 ```
@@ -127,12 +127,12 @@ Ende.serve((req) => {
     },
     cancel() {
       clearInterval(timer);
-    },
+    }
   });
   return new Response(body.pipeThrough(new TextEncoderStream()), {
     headers: {
-      "content-type": "text/plain; charset=utf-8",
-    },
+      "content-type": "text/plain; charset=utf-8"
+    }
   });
 });
 ```
@@ -223,7 +223,7 @@ PEM-encoded contents of the certificate and private key — not file paths.
 Ende.serve({
   port: 8443,
   cert: Ende.readTextFileSync("./cert.pem"),
-  key: Ende.readTextFileSync("./key.pem"),
+  key: Ende.readTextFileSync("./key.pem")
 }, (_req) => new Response("Hello over HTTPS!"));
 ```
 
@@ -378,7 +378,7 @@ export default {
   fetch(request) {
     const userAgent = request.headers.get("user-agent") || "Unknown";
     return new Response(`User Agent: ${userAgent}`);
-  },
+  }
 } satisfies Ende.ServeDefaultExport;
 ```
 

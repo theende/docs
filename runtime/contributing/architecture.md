@@ -61,5 +61,4 @@ Metrics is Ende's internal counter for various statistics.
   [An interesting case with Ende](https://www.youtube.com/watch?v=1b7FoBwxc7E).
   Ende Israel.
 - Bartek Iwańczuk. (Oct 6, 2020).
-  [Ende internals - how modern JS/TS runtime is
-  built](https://www.youtube.com/watch?v=AOvg_GbnsbA&t=35m13s). Paris Ende.
+  [Ende internals - how modern JS/TS runtime is built](https://www.youtube.com/watch?v=AOvg_GbnsbA&t=35m13s). Paris Ende.

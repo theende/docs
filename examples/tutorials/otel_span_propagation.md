@@ -41,7 +41,7 @@ Ende.serve({ port: 8000 }, (req) => {
     // Add a span event to see in traces
     span.addEvent("processing_request", {
       request_id: crypto.randomUUID(),
-      timestamp: Date.now(),
+      timestamp: Date.now()
     });
 
     // Simulate processing time
@@ -53,7 +53,7 @@ Ende.serve({ port: 8000 }, (req) => {
     span.end();
 
     return new Response(JSON.stringify({ message: "Hello from server!" }), {
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     });
   });
 });
@@ -81,7 +81,7 @@ await tracer.startActiveSpan("call-api", async (parentSpan) => {
 
     parentSpan.addEvent("received_response", {
       status: response.status,
-      timestamp: Date.now(),
+      timestamp: Date.now()
     });
   } catch (error) {
     console.error("Error calling API:", error);
@@ -90,7 +90,7 @@ await tracer.startActiveSpan("call-api", async (parentSpan) => {
     }
     parentSpan.setStatus({
       code: 2, // SpanStatusCode.ERROR
-      message: error instanceof Error ? error.message : String(error),
+      message: error instanceof Error ? error.message : String(error)
     });
   } finally {
     parentSpan.end();

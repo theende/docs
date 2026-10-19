@@ -72,7 +72,7 @@ const env = await load({
   // optional: choose a specific path (defaults to ".env")
   envPath: ".env.local",
   // optional: also export to the process environment (so Ende.env can read it)
-  export: true,
+  export: true
 });
 
 console.log(env.GREETING);

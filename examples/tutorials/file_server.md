@@ -25,7 +25,7 @@ Ende.serve(
   async (request) => {
     const url = new URL(request.url);
     const filepath = decodeURIComponent(url.pathname);
-  },
+  }
 );
 ```
 
@@ -123,7 +123,7 @@ Ende.serve((req) => {
   const pathname = new URL(req.url).pathname;
   if (pathname.startsWith("/static")) {
     return serveDir(req, {
-      fsRoot: "path/to/static/files/dir",
+      fsRoot: "path/to/static/files/dir"
     });
   }
   return new Response();

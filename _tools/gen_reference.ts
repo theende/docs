@@ -21,7 +21,7 @@
 
 const args = {
   check: Ende.args.includes("--check"),
-  update: Ende.args.includes("--update"),
+  update: Ende.args.includes("--update")
 };
 const out = new URL("../_reference/", import.meta.url);
 const sourcesFile = new URL("sources.json", out);
@@ -43,22 +43,20 @@ type JsonObject = { [key: string]: Json };
 async function run(
   cwd: string,
   args: string[],
-  env: Record<string, string> = {},
+  env: Record<string, string> = {}
 ): Promise<string> {
   const output = await new Ende.Command(Ende.execPath(), {
     args,
     cwd,
     env,
     stdout: "piped",
-    stderr: "piped",
+    stderr: "piped"
   }).output();
   const decoder = new TextDecoder();
 
   if (!output.success) {
     throw new Error(
-      `ende ${args.join(" ")} (in ${cwd}) failed:\n${
-        decoder.decode(output.stderr)
-      }`,
+      `ende ${args.join(" ")} (in ${cwd}) failed:\n${decoder.decode(output.stderr)}`
     );
   }
 
@@ -68,7 +66,7 @@ async function run(
 /** Drops what the reference doesn't use: positions, and `repr` (the printer builds types from their parts). */
 function slim(
   value: Json,
-  keepLine: (filename: string) => string | undefined,
+  keepLine: (filename: string) => string | undefined
 ): Json {
   if (Array.isArray(value)) return value.map((item) => slim(item, keepLine));
   if (value === null || typeof value !== "object") return value;
@@ -90,7 +88,7 @@ function slim(
       const file = keepLine(target.filename as string);
       result.target = {
         file: file ?? (target.filename as string),
-        line: target.line,
+        line: target.line
       };
       continue;
     }
@@ -143,7 +141,7 @@ async function latestSources(): Promise<Sources> {
 
   for (const name of names) {
     const meta = await fetchJson<{ latest: string }>(
-      `https://jsr.io/@ende/${name}/meta.json`,
+      `https://jsr.io/@ende/${name}/meta.json`
     );
     std[name] = meta.latest;
   }
@@ -158,12 +156,12 @@ async function builtin(sources: Sources): Promise<string> {
   if (version !== sources.ende) {
     throw new Error(
       `The reference is pinned to Ende ${sources.ende}, but this is Ende ${version}. ` +
-        `Install that release and run this again: curl -fsSL https://ende.sh/install.sh | sh -s v${sources.ende}`,
+        `Install that release and run this again: curl -fsSL https://ende.sh/install.sh | sh -s v${sources.ende}`
     );
   }
 
   const runtime = JSON.parse(
-    await run(dir, ["doc", "--json", "--no-config", "--builtin"]),
+    await run(dir, ["doc", "--json", "--no-config", "--builtin"])
   ) as DocOutput;
   // `ende doc --builtin` leaves out the desktop-only declarations, and the
   // binary has no other way to print them, so they come from the release tag.
@@ -171,17 +169,17 @@ async function builtin(sources: Sources): Promise<string> {
   await Ende.writeTextFile(
     desktopFile,
     await fetchText(
-      `https://raw.githubusercontent.com/theende/ende/v${sources.ende}/cli/tsc/dts/lib.ende.desktop.d.ts`,
-    ),
+      `https://raw.githubusercontent.com/theende/ende/v${sources.ende}/cli/tsc/dts/lib.ende.desktop.d.ts`
+    )
   );
   const desktop = JSON.parse(
-    await run(dir, ["doc", "--json", "--no-config", desktopFile]),
+    await run(dir, ["doc", "--json", "--no-config", desktopFile])
   ) as DocOutput;
   await Ende.remove(dir, { recursive: true });
 
   if (runtime.version !== 2 || desktop.version !== 2) {
     throw new Error(
-      `Unexpected ende doc JSON version ${runtime.version}/${desktop.version}`,
+      `Unexpected ende doc JSON version ${runtime.version}/${desktop.version}`
     );
   }
 
@@ -207,7 +205,7 @@ async function builtin(sources: Sources): Promise<string> {
 
   const data = {
     ende: sources.ende,
-    symbols: slim(symbols, () => undefined),
+    symbols: slim(symbols, () => undefined)
   };
   return JSON.stringify(data) + "\n";
 }
@@ -221,11 +219,10 @@ function fromJsr(filename: string): string | undefined {
 
 async function stdPackage(name: string, version: string): Promise<string> {
   const meta = await fetchJson<{ exports: Record<string, string> }>(
-    `https://jsr.io/@ende/${name}/${version}_meta.json`,
+    `https://jsr.io/@ende/${name}/${version}_meta.json`
   );
   const base = `jsr:@ende/${name}@${version}`;
-  const specifier = (path: string) =>
-    path === "." ? base : `${base}/${path.replace(/^\.\//, "")}`;
+  const specifier = (path: string) => path === "." ? base : `${base}/${path.replace(/^\.\//, "")}`;
   const dir = await Ende.makeTempDir();
   // Documenting doesn't run any code, so the minimum dependency age (which
   // holds back versions published in the last day) is turned off. It's set
@@ -237,8 +234,8 @@ async function stdPackage(name: string, version: string): Promise<string> {
       "doc",
       "--json",
       "--no-config",
-      ...Object.keys(meta.exports).map(specifier),
-    ], { ENDE_MINIMUM_DEPENDENCY_AGE: "0" }),
+      ...Object.keys(meta.exports).map(specifier)
+    ], { ENDE_MINIMUM_DEPENDENCY_AGE: "0" })
   ) as DocOutput;
   await Ende.remove(dir, { recursive: true });
 
@@ -256,12 +253,10 @@ async function stdPackage(name: string, version: string): Promise<string> {
       // references; the reference shows those by name.
       symbols: slim(
         node.symbols.filter((symbol) =>
-          (symbol.declarations as JsonObject[]).some((declaration) =>
-            declaration.declarationKind !== "private"
-          )
+          (symbol.declarations as JsonObject[]).some((declaration) => declaration.declarationKind !== "private")
         ),
-        fromJsr,
-      ),
+        fromJsr
+      )
     };
   });
 
@@ -312,9 +307,7 @@ if (args.check) {
 
   if (stale.length > 0) {
     console.error(
-      `_reference/ is out of date (${
-        stale.join(", ")
-      }). Run: ende task gen:reference`,
+      `_reference/ is out of date (${stale.join(", ")}). Run: ende task gen:reference`
     );
     Ende.exit(1);
   }
@@ -332,11 +325,9 @@ if (args.check) {
 
   const bytes = [...generated.values()].reduce(
     (sum, text) => sum + text.length,
-    0,
+    0
   );
   console.log(
-    `Wrote ${generated.size} files to _reference/ (${
-      (bytes / 1e6).toFixed(1)
-    } MB)`,
+    `Wrote ${generated.size} files to _reference/ (${(bytes / 1e6).toFixed(1)} MB)`
   );
 }

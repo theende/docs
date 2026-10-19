@@ -172,7 +172,7 @@ const root = new URL("../../_reference/", import.meta.url);
 
 export function tag(
   jsDoc: JsDoc | undefined,
-  kind: string,
+  kind: string
 ): JsDocTag | undefined {
   return jsDoc?.tags?.find((tag) => tag.kind === kind);
 }
@@ -188,7 +188,7 @@ export function summary(jsDoc: JsDoc | null | undefined): string | undefined {
   return paragraph
     .replace(
       /\{@link(?:code|plain)?\s+([^}|\s]+)(?:\s*\|\s*|\s+)?([^}]*)\}/g,
-      (_, target, text) => text.trim() || target,
+      (_, target, text) => text.trim() || target
     )
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
     .trim();
@@ -215,7 +215,7 @@ export function membersOf(symbol: DocSymbol): Member[] {
     name: string,
     group: string,
     kind: Member["kind"],
-    entry: Property | Method | Signature,
+    entry: Property | Method | Signature
   ) => {
     const existing = members.get(anchor);
     if (existing) existing.entries.push(entry);
@@ -228,7 +228,7 @@ export function membersOf(symbol: DocSymbol): Member[] {
         "constructor",
         "Constructors",
         "constructor",
-        signature,
+        signature
       );
     }
     for (const signature of literal.callSignatures ?? []) {
@@ -237,7 +237,7 @@ export function membersOf(symbol: DocSymbol): Member[] {
         "Call signature",
         "Call signatures",
         "call",
-        signature,
+        signature
       );
     }
     for (const signature of literal.indexSignatures ?? []) {
@@ -246,7 +246,7 @@ export function membersOf(symbol: DocSymbol): Member[] {
         "Index signature",
         "Index signatures",
         "index",
-        signature,
+        signature
       );
     }
     for (const property of literal.properties ?? []) {
@@ -255,7 +255,7 @@ export function membersOf(symbol: DocSymbol): Member[] {
         property.name,
         "Properties",
         "property",
-        property,
+        property
       );
     }
     for (const method of literal.methods ?? []) {
@@ -274,7 +274,7 @@ export function membersOf(symbol: DocSymbol): Member[] {
             "constructor",
             "Constructors",
             "constructor",
-            constructor,
+            constructor
           );
         }
         for (const property of def.properties ?? []) {
@@ -284,7 +284,7 @@ export function membersOf(symbol: DocSymbol): Member[] {
             property.name,
             isStatic ? "Static properties" : "Properties",
             "property",
-            property,
+            property
           );
         }
         for (const method of def.methods ?? []) {
@@ -294,7 +294,7 @@ export function membersOf(symbol: DocSymbol): Member[] {
             method.name,
             isStatic ? "Static methods" : "Methods",
             "method",
-            method,
+            method
           );
         }
         break;
@@ -326,17 +326,15 @@ export function membersOf(symbol: DocSymbol): Member[] {
     "Static methods",
     "Properties",
     "Methods",
-    "Members",
+    "Members"
   ];
-  return [...members.values()].sort((a, b) =>
-    order.indexOf(a.group) - order.indexOf(b.group)
-  );
+  return [...members.values()].sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group));
 }
 
 /** Splits `Ende.FsFile.prototype.lock` into the longest prefix `find` knows and the rest. */
 function memberLookup(
   name: string,
-  find: (head: string) => SymbolPage | undefined,
+  find: (head: string) => SymbolPage | undefined
 ): string | undefined {
   const parts = name.split(".");
 
@@ -350,12 +348,10 @@ function memberLookup(
       const anchor of [
         rest,
         `prototype.${rest}`,
-        rest.replace(/^prototype\./, ""),
+        rest.replace(/^prototype\./, "")
       ]
     ) {
-      const member = page.members.find((member) =>
-        member.anchor === `${page.prefix}${anchor}`
-      );
+      const member = page.members.find((member) => member.anchor === `${page.prefix}${anchor}`);
       if (member) return `${page.base}#${member.anchor}`;
     }
 
@@ -386,7 +382,7 @@ let following = 0;
 function prefixed(symbol: DocSymbol, prefix: string): Member[] {
   return membersOf(symbol).map((member) => ({
     ...member,
-    anchor: `${prefix}${member.anchor}`,
+    anchor: `${prefix}${member.anchor}`
   }));
 }
 
@@ -425,7 +421,7 @@ function shareCaseInsensitive(pages: SymbolPage[]): SymbolPage[] {
 function normalize(name: string): string {
   return name.trim().replace(/\(\)$/, "").replace(/^globalThis\./, "").replace(
     /^Deno(?=\.|$)/,
-    "Ende",
+    "Ende"
   );
 }
 
@@ -444,19 +440,18 @@ let builtinPromise: Promise<Builtin> | undefined;
 export function loadBuiltin(): Promise<Builtin> {
   builtinPromise ??= (async () => {
     const data = JSON.parse(
-      await Ende.readTextFile(new URL("builtin.json", root)),
+      await Ende.readTextFile(new URL("builtin.json", root))
     ) as { ende: string | null; symbols: DocSymbol[] };
     const byName = new Map<string, SymbolPage>();
     const created: SymbolPage[] = [];
-    const global: Lookup = (name) =>
-      memberLookup(normalize(name), (head) => byName.get(head));
+    const global: Lookup = (name) => memberLookup(normalize(name), (head) => byName.get(head));
 
     const page = (
       symbol: DocSymbol,
       qualified: string,
       section: Section,
       fallbackCategory: string,
-      scopes: string[],
+      scopes: string[]
     ): SymbolPage => {
       const url = section === "ende"
         ? `/api/ende/~/${qualified}/`
@@ -480,21 +475,19 @@ export function loadBuiltin(): Promise<Builtin> {
         section,
         category,
         lookup,
-        children: [],
+        children: []
       };
 
       byName.set(qualified, result);
       created.push(result);
 
-      const namespace = symbol.declarations.find((declaration) =>
-        declaration.kind === "namespace"
-      );
+      const namespace = symbol.declarations.find((declaration) => declaration.kind === "namespace");
       for (const element of (namespace?.def.elements ?? []) as DocSymbol[]) {
         result.children.push(
           page(element, `${qualified}.${element.name}`, section, category, [
             `${qualified}.`,
-            ...scopes,
-          ]),
+            ...scopes
+          ])
         );
       }
 
@@ -508,7 +501,7 @@ export function loadBuiltin(): Promise<Builtin> {
         const elements = symbol.declarations[0].def.elements as DocSymbol[];
         for (const element of elements) {
           pages.push(
-            page(element, `Ende.${element.name}`, "ende", "Other", ["Ende."]),
+            page(element, `Ende.${element.name}`, "ende", "Other", ["Ende."])
           );
         }
       } else {
@@ -544,7 +537,7 @@ export interface Std {
   /** The page of each name a module exports. */
   exportsOf(
     pkg: StdPackage,
-    module: StdModule,
+    module: StdModule
   ): { name: string; page: SymbolPage }[];
   /** Finds a std page from a JSR doc URL (`https://jsr.io/@ende/html/doc/~/escape`). */
   fromJsrUrl(url: string): string | undefined;
@@ -561,8 +554,8 @@ export function loadStd(): Promise<Std> {
       if (entry.isFile && entry.name.endsWith(".json")) {
         packages.push(
           JSON.parse(
-            await Ende.readTextFile(new URL(`std/${entry.name}`, root)),
-          ),
+            await Ende.readTextFile(new URL(`std/${entry.name}`, root))
+          )
         );
       }
     }
@@ -570,9 +563,7 @@ export function loadStd(): Promise<Std> {
 
     const short = (pkg: StdPackage) => pkg.name.replace(/^@ende\//, "");
     const moduleUrl = (pkg: StdPackage, module: StdModule) =>
-      `/runtime/reference/std/${short(pkg)}/${
-        module.path ? `${module.path}/` : ""
-      }`;
+      `/runtime/reference/std/${short(pkg)}/${module.path ? `${module.path}/` : ""}`;
     const created: SymbolPage[] = [];
     // By package: identity → page, and module path → name → page.
     const byIdentity = new Map<StdPackage, Map<string, SymbolPage>>();
@@ -622,7 +613,7 @@ export function loadStd(): Promise<Std> {
             : `${pkg.name}/${module.path}`,
           lookup: () => undefined,
           std: { package: pkg, module },
-          children: [],
+          children: []
         };
         identities.set(id, result);
         created.push(result);
@@ -643,9 +634,7 @@ export function loadStd(): Promise<Std> {
     for (const page of created) {
       const { package: pkg, module } = page.std!;
       const rootModule = pkg.modules.find((candidate) => candidate.path === "");
-      const scopes = [module, rootModule, ...pkg.modules].filter((candidate) =>
-        candidate !== undefined
-      ) as StdModule[];
+      const scopes = [module, rootModule, ...pkg.modules].filter((candidate) => candidate !== undefined) as StdModule[];
       const local = (head: string) => {
         for (const scope of scopes) {
           const found = byModule.get(scope)?.get(head);
@@ -654,13 +643,12 @@ export function loadStd(): Promise<Std> {
         return undefined;
       };
 
-      page.lookup = (name) =>
-        memberLookup(normalize(name), local) ?? builtin.lookup(name);
+      page.lookup = (name) => memberLookup(normalize(name), local) ?? builtin.lookup(name);
     }
 
     const fromJsrUrl = (url: string): string | undefined => {
       const match = url.match(
-        /^https:\/\/jsr\.io\/@ende\/([^/]+)(?:@[^/]+)?\/doc(?:\/([^~]*?))?\/?(?:~\/([^#?]+))?\/?$/,
+        /^https:\/\/jsr\.io\/@ende\/([^/]+)(?:@[^/]+)?\/doc(?:\/([^~]*?))?\/?(?:~\/([^#?]+))?\/?$/
       );
       if (!match) return undefined;
 
@@ -685,7 +673,7 @@ export function loadStd(): Promise<Std> {
         [...(byModule.get(module) ?? new Map()).entries()]
           .map(([name, page]) => ({ name, page }))
           .sort((a, b) => a.name.localeCompare(b.name)),
-      fromJsrUrl,
+      fromJsrUrl
     };
   })();
 
@@ -695,7 +683,7 @@ export function loadStd(): Promise<Std> {
 /** The categories of a section, sorted, with their URLs. */
 export function categories(
   pages: SymbolPage[],
-  section: Section,
+  section: Section
 ): { name: string; slug: string; url: string; pages: SymbolPage[] }[] {
   const groups = new Map<string, SymbolPage[]>();
 
@@ -705,13 +693,11 @@ export function categories(
   }
 
   return [...groups.entries()]
-    .sort(([a], [b]) =>
-      a === "Other" ? 1 : b === "Other" ? -1 : a.localeCompare(b)
-    )
+    .sort(([a], [b]) => a === "Other" ? 1 : b === "Other" ? -1 : a.localeCompare(b))
     .map(([name, pages]) => ({
       name,
       slug: categorySlug(name),
       url: `/api/${section}/${categorySlug(name)}/`,
-      pages: pages.sort((a, b) => a.title.localeCompare(b.title)),
+      pages: pages.sort((a, b) => a.title.localeCompare(b.title))
     }));
 }

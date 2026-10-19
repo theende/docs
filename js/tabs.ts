@@ -48,10 +48,10 @@ class GroupSelectEvent extends Event {
 
 for (const tabGroup of document.querySelectorAll<HTMLElement>(".ende-tabs")) {
   const buttons = tabGroup.querySelectorAll<HTMLElement>(
-    ".ende-tabs-buttons button",
+    ".ende-tabs-buttons button"
   )!;
   const tabs = tabGroup.querySelectorAll<HTMLElement>(
-    ".ende-tabs-content div",
+    ".ende-tabs-content div"
   )!;
 
   const groupId = tabGroup.dataset.id!;
@@ -90,9 +90,7 @@ for (const tabGroup of document.querySelectorAll<HTMLElement>(".ende-tabs")) {
     }
   }
 
-  const anyTabActive = Array.from(tabs).some((tab) =>
-    tab.dataset.active === "true"
-  );
+  const anyTabActive = Array.from(tabs).some((tab) => tab.dataset.active === "true");
 
   if (!anyTabActive && tabs.length > 0) {
     const firstTabId = tabs[0].dataset.tab!;

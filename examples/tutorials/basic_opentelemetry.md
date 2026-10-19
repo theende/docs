@@ -28,12 +28,12 @@ const meter = Ende.telemetry.meterProvider.getMeter("my-server", "1.0.0");
 
 // Create some metrics
 const requestCounter = meter.createCounter("http_requests_total", {
-  description: "Total number of HTTP requests",
+  description: "Total number of HTTP requests"
 });
 
 const requestDuration = meter.createHistogram("http_request_duration_ms", {
   description: "HTTP request duration in milliseconds",
-  unit: "ms",
+  unit: "ms"
 });
 
 // Start the server
@@ -56,7 +56,7 @@ Ende.serve({ port: 8000 }, (req) => {
       // Add an event to the span
       span.addEvent("request_started", {
         timestamp: startTime,
-        request_path: path,
+        request_path: path
       });
 
       // Simulate some processing time
@@ -68,20 +68,20 @@ Ende.serve({ port: 8000 }, (req) => {
 
       // Create the response
       const response = new Response(`Hello from ${path}!`, {
-        headers: { "Content-Type": "text/plain" },
+        headers: { "Content-Type": "text/plain" }
       });
 
       // Record metrics
       requestCounter.add(1, {
         method: req.method,
         path,
-        status: 200,
+        status: 200
       });
 
       const duration = performance.now() - startTime;
       requestDuration.record(duration, {
         method: req.method,
-        path,
+        path
       });
 
       span.setAttribute("request.duration_ms", duration);
@@ -93,7 +93,7 @@ Ende.serve({ port: 8000 }, (req) => {
         span.recordException(error);
         span.setStatus({
           code: 2, // SpanStatusCode.ERROR
-          message: error.message,
+          message: error.message
         });
       }
 

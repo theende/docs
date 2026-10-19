@@ -20,7 +20,7 @@ early-return from a function.
 const a = {
   set foo(x: number) {
     return "something";
-  },
+  }
 };
 
 class B {
@@ -34,7 +34,7 @@ const c = {
     if (x) {
       return 42;
     }
-  },
+  }
 };
 ```
 
@@ -47,7 +47,7 @@ const a = {
     if (x % 2 == 0) {
       return;
     }
-  },
+  }
 };
 
 // not a setter, but a getter
@@ -61,6 +61,6 @@ class B {
 const c = {
   set(x: number) {
     return "something";
-  },
+  }
 };
 ```

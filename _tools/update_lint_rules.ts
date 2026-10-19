@@ -12,7 +12,7 @@ interface EndeLintRulesOutput {
 
 async function getCurrentLintRules(): Promise<EndeLintRulesOutput> {
   const output = await new Ende.Command(Ende.execPath(), {
-    args: ["lint", "--rules", "--json"],
+    args: ["lint", "--rules", "--json"]
   }).outputSync();
 
   if (!output.success) {
@@ -39,7 +39,7 @@ async function checkIfDocsExistAndUpdate(lintRulesData: EndeLintRulesOutput) {
 
     let fmData: { body: string; attrs: { tags?: string[] } } = {
       body: "",
-      attrs: {},
+      attrs: {}
     };
 
     try {
@@ -67,6 +67,6 @@ if (missingDocs.length !== 0) {
   throw new Error(
     `Some rules are missing docs:\n${
       missingDocs.join("\n")
-    }\n\nAdd Markdown files to lint/rules/ directory and write the docs.`,
+    }\n\nAdd Markdown files to lint/rules/ directory and write the docs.`
   );
 }

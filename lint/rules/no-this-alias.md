@@ -19,7 +19,7 @@ const obj = {
       this.count++;
       console.log(this.count);
     }, 300);
-  },
+  }
 };
 
 obj.doSomethingLater();
@@ -42,7 +42,7 @@ const obj = {
       self.count++;
       console.log(self.count);
     }, 300);
-  },
+  }
 };
 
 obj.doSomethingLater();
@@ -61,7 +61,7 @@ const obj = {
       this.count++;
       console.log(this.count);
     }, 300);
-  },
+  }
 };
 
 obj.doSomethingLater();

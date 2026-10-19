@@ -15,7 +15,7 @@ import {
   type Signature,
   summary,
   type SymbolPage,
-  tag,
+  tag
 } from "./doc.ts";
 import { docHtml, type Rewrite } from "./markdown.ts";
 import { paramHtml, paramsHtml, typeHtml, typeParamsHtml } from "./printer.ts";
@@ -29,7 +29,7 @@ function Doc(
     text?: string;
     lookup: Lookup;
     rewrite: Rewrite;
-  },
+  }
 ) {
   const html = docHtml(text, lookup, rewrite);
   return html ? raw(html) : null;
@@ -42,15 +42,12 @@ function isExperimental(page: SymbolPage, jsDoc?: JsDoc): boolean {
 
 /** Kind, stability, platform and permission notes for a declaration. */
 function Badges(
-  { page, declaration }: { page: SymbolPage; declaration: Declaration },
+  { page, declaration }: { page: SymbolPage; declaration: Declaration }
 ) {
   const notes: string[] = [
-    declaration.kind === "typeAlias" ? "type alias" : declaration.kind,
+    declaration.kind === "typeAlias" ? "type alias" : declaration.kind
   ];
-  const permissions =
-    tag(declaration.jsDoc, "tags")?.tags?.filter((name) =>
-      name.startsWith("allow-")
-    ) ?? [];
+  const permissions = tag(declaration.jsDoc, "tags")?.tags?.filter((name) => name.startsWith("allow-")) ?? [];
 
   if (isExperimental(page, declaration.jsDoc)) notes.push("experimental");
   if (tag(declaration.jsDoc, "deprecated")) notes.push("deprecated");
@@ -65,7 +62,7 @@ function Badges(
 function signatureHtml(
   page: SymbolPage,
   declaration: Declaration,
-  name: string,
+  name: string
 ): string {
   const link = page.lookup;
   const def = declaration.def ?? {};
@@ -74,18 +71,14 @@ function signatureHtml(
 
   switch (declaration.kind) {
     case "function":
-      return `${def.isAsync ? "async " : ""}function${
-        def.isGenerator ? "*" : ""
-      } ${n}${typeParams}${paramsHtml(def.params, link)}: ${
-        typeHtml(def.returnType, link)
-      }`;
+      return `${def.isAsync ? "async " : ""}function${def.isGenerator ? "*" : ""} ${n}${typeParams}${
+        paramsHtml(def.params, link)
+      }: ${typeHtml(def.returnType, link)}`;
     case "class": {
       const extendsHtml = def.extends
         ? ` extends ${
           link(def.extends)
-            ? `<a href="${escape(link(def.extends)!)}">${
-              escape(def.extends)
-            }</a>`
+            ? `<a href="${escape(link(def.extends)!)}">${escape(def.extends)}</a>`
             : escape(def.extends)
         }${
           def.superTypeParams?.length
@@ -97,20 +90,14 @@ function signatureHtml(
         }`
         : "";
       const implementsHtml = def.implements?.length
-        ? ` implements ${
-          def.implements.map((type: never) => typeHtml(type, link)).join(", ")
-        }`
+        ? ` implements ${def.implements.map((type: never) => typeHtml(type, link)).join(", ")}`
         : "";
-      return `${
-        def.isAbstract ? "abstract " : ""
-      }class ${n}${typeParams}${extendsHtml}${implementsHtml}`;
+      return `${def.isAbstract ? "abstract " : ""}class ${n}${typeParams}${extendsHtml}${implementsHtml}`;
     }
     case "interface":
       return `interface ${n}${typeParams}${
         def.extends?.length
-          ? ` extends ${
-            def.extends.map((type: never) => typeHtml(type, link)).join(", ")
-          }`
+          ? ` extends ${def.extends.map((type: never) => typeHtml(type, link)).join(", ")}`
           : ""
       }`;
     case "typeAlias":
@@ -142,12 +129,12 @@ function Parameters(
     jsDoc?: JsDoc;
     lookup: Lookup;
     rewrite: Rewrite;
-  },
+  }
 ) {
   const docs = new Map(
     (jsDoc?.tags ?? []).filter((t) => t.kind === "param").map((
-      t,
-    ) => [t.name ?? "", t.doc ?? ""]),
+      t
+    ) => [t.name ?? "", t.doc ?? ""])
   );
   const params = signature.params ?? [];
   if (docs.size === 0 || params.length === 0) return null;
@@ -187,7 +174,7 @@ function Tags(
     jsDoc?: JsDoc;
     lookup: Lookup;
     rewrite: Rewrite;
-  },
+  }
 ) {
   const tags = jsDoc?.tags ?? [];
   const deprecated = tag(jsDoc, "deprecated");
@@ -203,7 +190,7 @@ function Tags(
           <p>
             <strong>Deprecated.</strong>
           </p>
-          <Doc text={deprecated.doc} lookup={lookup} rewrite={rewrite} />
+          <Doc text={deprecated.doc} lookup={lookup} rewrite={rewrite}/>
         </blockquote>
       )}
       {defaults && (defaults.value ?? defaults.doc) && (
@@ -216,7 +203,7 @@ function Tags(
           <p>
             <strong>Returns</strong>
           </p>
-          <Doc text={returns.doc} lookup={lookup} rewrite={rewrite} />
+          <Doc text={returns.doc} lookup={lookup} rewrite={rewrite}/>
         </>
       )}
       {examples.map((example) => {
@@ -226,7 +213,7 @@ function Tags(
         const title = titled && first.trim()
           ? docHtml(first.trim(), lookup, rewrite).replace(
             /^<p>|<\/p>\n?$/g,
-            "",
+            ""
           )
           : "";
         return (
@@ -250,7 +237,7 @@ function Tags(
           <ul>
             {see.map((t) => (
               <li>
-                <Doc text={t.doc} lookup={lookup} rewrite={rewrite} />
+                <Doc text={t.doc} lookup={lookup} rewrite={rewrite}/>
               </li>
             ))}
           </ul>
@@ -263,18 +250,16 @@ function Tags(
 function memberSignature(
   member: Member,
   entry: Property | Method | Signature,
-  page: SymbolPage,
+  page: SymbolPage
 ): string {
   const link = page.lookup;
 
   switch (member.kind) {
     case "property": {
       const property = entry as Property;
-      return `${property.isStatic ? "static " : ""}${
-        property.readonly ? "readonly " : ""
-      }${escape(property.name)}${property.optional ? "?" : ""}: ${
-        typeHtml(property.tsType, link)
-      }`;
+      return `${property.isStatic ? "static " : ""}${property.readonly ? "readonly " : ""}${escape(property.name)}${
+        property.optional ? "?" : ""
+      }: ${typeHtml(property.tsType, link)}`;
     }
     case "method": {
       const method = entry as Method;
@@ -284,9 +269,7 @@ function memberSignature(
         : method.kind === "setter"
         ? "set "
         : "";
-      return `${method.isStatic ? "static " : ""}${prefix}${
-        escape(method.name)
-      }${method.optional ? "?" : ""}${
+      return `${method.isStatic ? "static " : ""}${prefix}${escape(method.name)}${method.optional ? "?" : ""}${
         typeParamsHtml(signature.typeParams, link)
       }${paramsHtml(signature.params, link)}${
         method.kind === "setter"
@@ -296,31 +279,27 @@ function memberSignature(
     }
     case "constructor": {
       const signature = entry as Signature;
-      return `new ${escape(page.title.split(".").at(-1)!)}${
-        typeParamsHtml(signature.typeParams, link)
-      }${paramsHtml(signature.params, link)}${
-        signature.returnType ? `: ${typeHtml(signature.returnType, link)}` : ""
-      }`;
+      return `new ${escape(page.title.split(".").at(-1)!)}${typeParamsHtml(signature.typeParams, link)}${
+        paramsHtml(signature.params, link)
+      }${signature.returnType ? `: ${typeHtml(signature.returnType, link)}` : ""}`;
     }
     case "call": {
       const signature = entry as Signature;
-      return `${typeParamsHtml(signature.typeParams, link)}${
-        paramsHtml(signature.params, link)
-      }: ${typeHtml(signature.tsType ?? signature.returnType, link)}`;
+      return `${typeParamsHtml(signature.typeParams, link)}${paramsHtml(signature.params, link)}: ${
+        typeHtml(signature.tsType ?? signature.returnType, link)
+      }`;
     }
     case "index": {
       const signature = entry as Signature & { params: never[] };
       return `${signature.readonly ? "readonly " : ""}[${
         (signature.params ?? []).map((param) => paramHtml(param, link)).join(
-          ", ",
+          ", "
         )
       }]: ${typeHtml(signature.tsType, link)}`;
     }
     case "enum": {
       const value = entry as { name: string; init?: never };
-      return `${escape(value.name)}${
-        value.init ? ` = ${typeHtml(value.init, link)}` : ""
-      }`;
+      return `${escape(value.name)}${value.init ? ` = ${typeHtml(value.init, link)}` : ""}`;
     }
   }
 }
@@ -330,7 +309,7 @@ function MemberView(
     member: Member;
     page: SymbolPage;
     rewrite: Rewrite;
-  },
+  }
 ) {
   return (
     <section>
@@ -342,16 +321,16 @@ function MemberView(
         const signature = (entry as Method).functionDef ?? (entry as Signature);
         return (
           <>
-            <Code html={memberSignature(member, entry, page)} />
+            <Code html={memberSignature(member, entry, page)}/>
             {tag(jsDoc, "experimental") && <p>experimental</p>}
-            <Doc text={jsDoc?.doc} lookup={page.lookup} rewrite={rewrite} />
+            <Doc text={jsDoc?.doc} lookup={page.lookup} rewrite={rewrite}/>
             <Parameters
               signature={signature}
               jsDoc={jsDoc}
               lookup={page.lookup}
               rewrite={rewrite}
             />
-            <Tags jsDoc={jsDoc} lookup={page.lookup} rewrite={rewrite} />
+            <Tags jsDoc={jsDoc} lookup={page.lookup} rewrite={rewrite}/>
           </>
         );
       })}
@@ -384,17 +363,17 @@ export function SymbolList({ pages }: { pages: SymbolPage[] }) {
 
 /** A symbol's page: its declarations, doc comment and members, then the symbols it shares the page with. */
 export function SymbolView(
-  { page, rewrite }: { page: SymbolPage; rewrite: Rewrite },
+  { page, rewrite }: { page: SymbolPage; rewrite: Rewrite }
 ) {
   return (
     <>
-      <SymbolBody page={page} rewrite={rewrite} />
+      <SymbolBody page={page} rewrite={rewrite}/>
       {page.others.map((other) => (
         <section>
           <h2 id={other.prefix.slice(0, -1)}>
             <code>{other.title}</code>
           </h2>
-          <SymbolBody page={other} rewrite={rewrite} />
+          <SymbolBody page={other} rewrite={rewrite}/>
         </section>
       ))}
     </>
@@ -402,31 +381,27 @@ export function SymbolView(
 }
 
 function SymbolBody(
-  { page, rewrite }: { page: SymbolPage; rewrite: Rewrite },
+  { page, rewrite }: { page: SymbolPage; rewrite: Rewrite }
 ) {
   const { symbol, std, members } = page;
   const groups = [...new Set(members.map((member) => member.group))];
   const specifier = std
     ? `jsr:${std.package.name}${std.module.path ? `/${std.module.path}` : ""}`
     : undefined;
-  const location = symbol.declarations.find((declaration) =>
-    declaration.location
-  )
+  const location = symbol.declarations.find((declaration) => declaration.location)
     ?.location;
 
   return (
     <>
       {specifier && (
         <Code
-          html={`import { ${escape(symbol.name)} } from ${
-            escape(JSON.stringify(specifier))
-          };`}
+          html={`import { ${escape(symbol.name)} } from ${escape(JSON.stringify(specifier))};`}
         />
       )}
       {symbol.declarations.map((declaration) => (
         <section>
-          <Badges page={page} declaration={declaration} />
-          <Code html={signatureHtml(page, declaration, page.title)} />
+          <Badges page={page} declaration={declaration}/>
+          <Code html={signatureHtml(page, declaration, page.title)}/>
           <Doc
             text={declaration.jsDoc?.doc}
             lookup={page.lookup}
@@ -450,14 +425,14 @@ function SymbolBody(
       {page.children.length > 0 && (
         <section>
           <h2 id={`${page.prefix}members`}>Members</h2>
-          <SymbolList pages={page.children} />
+          <SymbolList pages={page.children}/>
         </section>
       )}
       {groups.map((group) => (
         <section>
           <h2 id={groupSlug(page, group)}>{group}</h2>
           {members.filter((member) => member.group === group).map((member) => (
-            <MemberView member={member} page={page} rewrite={rewrite} />
+            <MemberView member={member} page={page} rewrite={rewrite}/>
           ))}
         </section>
       ))}

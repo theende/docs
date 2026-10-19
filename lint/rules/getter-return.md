@@ -12,7 +12,7 @@ value then this contract is broken.
 
 ```typescript
 let foo = {
-  get bar() {},
+  get bar() {}
 };
 
 class Person {
@@ -26,7 +26,7 @@ class Person {
 let foo = {
   get bar() {
     return true;
-  },
+  }
 };
 
 class Person {

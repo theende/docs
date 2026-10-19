@@ -8,61 +8,61 @@ export const items = [
     title: "Run a script",
     href: "/examples/run_script_tutorial/",
     type: "tutorial",
-    category: "Basics",
+    category: "Basics"
   },
   {
     title: "Hello World",
     href: "/examples/hello_world/",
     type: "example",
-    category: "Basics",
+    category: "Basics"
   },
   {
     title: "Built in TypeScript support",
     href: "/examples/typescript_support/",
     type: "example",
-    category: "Basics",
+    category: "Basics"
   },
   {
     title: "Initialize a project",
     href: "/examples/initialize_project_tutorial/",
     type: "tutorial",
-    category: "Basics",
+    category: "Basics"
   },
   {
     title: "Executable scripts",
     href: "/examples/hashbang_tutorial/",
     type: "tutorial",
-    category: "Basics",
+    category: "Basics"
   },
   {
     title: "Sleep and delay execution",
     href: "/examples/sleep_delay/",
     type: "example",
-    category: "Basics",
+    category: "Basics"
   },
   {
     title: "Check if two values are deeply equal",
     href: "/examples/deep_equal/",
     type: "example",
-    category: "Basics",
+    category: "Basics"
   },
   {
     title: "Import and export functions",
     href: "/examples/import_export/",
     type: "example",
-    category: "Basics",
+    category: "Basics"
   },
   {
     title: "Simple file server",
     href: "/examples/file_server_tutorial/",
     type: "tutorial",
-    category: "Basics",
+    category: "Basics"
   },
   {
     title: "Generating documentation with ende doc",
     href: "/examples/ende_doc_tutorial/",
     type: "tutorial",
-    category: "Basics",
+    category: "Basics"
   },
 
   // Modules and package management
@@ -70,37 +70,37 @@ export const items = [
     title: "Add and remove dependencies",
     href: "/examples/add_remove_dependencies_tutorial/",
     type: "tutorial",
-    category: "Modules and package management",
+    category: "Modules and package management"
   },
   {
     title: "Lock dependencies with ende.lock",
     href: "/examples/dependency_lockfile_tutorial/",
     type: "tutorial",
-    category: "Modules and package management",
+    category: "Modules and package management"
   },
   {
     title: "Use local and unpublished packages",
     href: "/examples/local_unpublished_packages_tutorial/",
     type: "tutorial",
-    category: "Modules and package management",
+    category: "Modules and package management"
   },
   {
     title: "Configure a monorepo with workspaces",
     href: "/examples/workspaces_monorepo_tutorial/",
     type: "tutorial",
-    category: "Modules and package management",
+    category: "Modules and package management"
   },
   {
     title: "Run Ende in GitHub Actions",
     href: "/examples/ende_github_actions_tutorial/",
     type: "tutorial",
-    category: "Modules and package management",
+    category: "Modules and package management"
   },
   {
     title: "Module Metadata",
     href: "/examples/module_metadata_tutorial/",
     type: "tutorial",
-    category: "Modules and package management",
+    category: "Modules and package management"
   },
 
   // Network
@@ -108,145 +108,145 @@ export const items = [
     title: "HTTP requests",
     href: "/examples/http_requests/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP Server: Hello world",
     href: "/examples/http_server/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Routing",
     href: "/examples/http_server_routing/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Serving files",
     href: "/examples/http_server_files/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Streaming",
     href: "/examples/http_server_streaming/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Server-sent events",
     href: "/examples/http_server_sse/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: TLS",
     href: "/examples/http_server_tls/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Hot reload",
     href: "/examples/http_server_hot_reload/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Scaling across CPU cores",
     href: "/examples/http_server_parallel/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Proxy HTTP requests",
     href: "/examples/http_proxy/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Fetch over a Unix socket",
     href: "/examples/fetch_unix_socket/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Hono HTTP server",
     href: "/examples/hono/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: WebSockets",
     href: "/examples/http_server_websocket/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Piping streams",
     href: "/examples/piping_streams/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Outbound WebSockets",
     href: "/examples/websocket/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "TCP Echo Server",
     href: "/examples/tcp_echo_server/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "TCP connector: Ping",
     href: "/examples/tcp_connector/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "TCP listener: Ping",
     href: "/examples/tcp_listener/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "TCP/TLS connector: Ping",
     href: "/examples/tls_connector/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "TCP/TLS listener: Ping",
     href: "/examples/tls_listener/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Running DNS queries",
     href: "/examples/dns_queries/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "File Based Routing",
     href: "/examples/file_based_routing_tutorial/",
     type: "tutorial",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "UDP listener: Ping",
     href: "/examples/udp_listener/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "UDP connector: Ping",
     href: "/examples/udp_connector/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
 
   // File system
@@ -254,115 +254,115 @@ export const items = [
     title: "Path operations",
     href: "/examples/path_operations/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Convert between file URLs and paths",
     href: "/examples/file_url_path/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Get the MIME type of a file",
     href: "/examples/mime_type/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Copy a file",
     href: "/examples/copy_file/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Write a file incrementally",
     href: "/examples/write_file_incremental/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Reading files",
     href: "/examples/reading_files/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Writing files",
     href: "/examples/writing_files/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Deleting files",
     href: "/examples/deleting_files/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Checking for file existence",
     href: "/examples/checking_file_existence/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Checking for directory existence",
     href: "/examples/checking_directory_existence/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Moving/Renaming files",
     href: "/examples/moving_renaming_files/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Creating & removing directories",
     href: "/examples/create_remove_directories/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Watching the filesystem",
     href: "/examples/watching_files/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Walking directories",
     href: "/examples/walking_directories/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Unix cat",
     href: "/examples/unix_cat/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Creating & resolving symlinks",
     href: "/examples/symlinks/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Temporary files & directories",
     href: "/examples/temporary_files/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Streaming file operations",
     href: "/examples/streaming_files/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "File system events",
     href: "/examples/file_system_events_tutorial/",
     type: "tutorial",
-    category: "File system",
+    category: "File system"
   },
 
   // System
@@ -370,61 +370,61 @@ export const items = [
     title: "Listen for OS signals",
     href: "/examples/os_signals/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Create a subprocess",
     href: "/examples/subprocess_tutorial/",
     type: "tutorial",
-    category: "System",
+    category: "System"
   },
   {
     title: "Collecting output from subprocesses",
     href: "/examples/subprocesses_output/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Reading system metrics",
     href: "/examples/reading_system_metrics/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Process information",
     href: "/examples/pid/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Read from stdin",
     href: "/examples/reading_stdin/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Write to stdout",
     href: "/examples/write_stdout/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Environment variables",
     href: "/examples/environment_variables/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Subprocesses: Spawning",
     href: "/examples/subprocesses_spawn/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Handle OS signals",
     href: "/examples/os_signals_tutorial/",
     type: "tutorial",
-    category: "System",
+    category: "System"
   },
 
   // Web standard APIs
@@ -432,55 +432,55 @@ export const items = [
     title: "Temporal API",
     href: "/examples/temporal/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Better debugging with the console API",
     href: "/examples/debugging_with_console_tutorial/",
     type: "tutorial",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Manipulating & parsing URLs",
     href: "/examples/url_parsing/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Escape an HTML string",
     href: "/examples/escape_html/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Fetch and stream data",
     href: "/examples/fetch_data_tutorial/",
     type: "tutorial",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Set timeout and intervals",
     href: "/examples/timers/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Logging with colors",
     href: "/examples/color_logging/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Web workers",
     href: "/examples/web_workers/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Web assembly",
     href: "/examples/webassembly/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
 
   // Standard library
@@ -488,13 +488,13 @@ export const items = [
     title: "User Data Processing with Ende Collections",
     href: "/examples/data_processing/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Exponential backoff",
     href: "/examples/exponential_backoff/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
 
   // Encoding
@@ -502,91 +502,91 @@ export const items = [
     title: "Hex and base64 encoding",
     href: "/examples/hex_base64_encoding/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Parsing and serializing TOML",
     href: "/examples/parsing_serializing_toml/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Importing JSON",
     href: "/examples/importing_json/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Parsing and serializing CSV",
     href: "/examples/parsing_serializing_csv/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Parsing and serializing JSON",
     href: "/examples/parsing_serializing_json/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Parsing and serializing YAML",
     href: "/examples/parsing_serializing_yaml/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Manipulating byte arrays",
     href: "/examples/byte_manipulation/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Convert an ArrayBuffer",
     href: "/examples/convert_arraybuffer/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Convert a Uint8Array",
     href: "/examples/convert_uint8array/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Convert a Blob",
     href: "/examples/convert_blob/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Convert a ReadableStream",
     href: "/examples/convert_readablestream/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Convert a string to bytes and back",
     href: "/examples/convert_string/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Compress and decompress data",
     href: "/examples/compress_decompress/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Importing text",
     href: "/examples/importing_text/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Importing bytes",
     href: "/examples/importing_bytes/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
 
   // CLI
@@ -594,25 +594,25 @@ export const items = [
     title: "Input prompts",
     href: "/examples/prompts/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
   {
     title: "Permission management",
     href: "/examples/permissions/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
   {
     title: "Command line arguments",
     href: "/examples/command_line_arguments/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
   {
     title: "Getting the Ende version",
     href: "/examples/ende_version/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
 
   // Cryptography
@@ -620,49 +620,49 @@ export const items = [
     title: "Generating & validating UUIDs",
     href: "/examples/uuids/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "ULID",
     href: "/examples/ulid/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "Hashing",
     href: "/examples/hashing/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "Hashing and verifying passwords",
     href: "/examples/hash_password/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "RSASSA-PKCS1-v1_5 Signature and Verification",
     href: "/examples/rsa_signature/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "HMAC Generation and Verification",
     href: "/examples/hmac_generate_verify/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "AES Encryption and Decryption",
     href: "/examples/aes_encryption/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "Shamir's Secret Sharing",
     href: "/examples/sss/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
 
   // Testing
@@ -670,55 +670,55 @@ export const items = [
     title: "Writing tests",
     href: "/examples/writing_tests/",
     type: "example",
-    category: "Testing",
+    category: "Testing"
   },
   {
     title: "Basics of testing",
     href: "/examples/testing_tutorial/",
     type: "tutorial",
-    category: "Testing",
+    category: "Testing"
   },
   {
     title: "Mocking and test doubles",
     href: "/runtime/test/mocking/",
     type: "tutorial",
-    category: "Testing",
+    category: "Testing"
   },
   {
     title: "Snapshot testing",
     href: "/runtime/test/snapshots/",
     type: "tutorial",
-    category: "Testing",
+    category: "Testing"
   },
   {
     title: "Spy functions",
     href: "/examples/spy_functions/",
     type: "example",
-    category: "Testing",
+    category: "Testing"
   },
   {
     title: "Testing web applications",
     href: "/examples/web_testing_tutorial/",
     type: "tutorial",
-    category: "Testing",
+    category: "Testing"
   },
   {
     title: "BDD testing",
     href: "/examples/bdd_tutorial/",
     type: "tutorial",
-    category: "Testing",
+    category: "Testing"
   },
   {
     title: "Skipping and focusing tests",
     href: "/examples/tests_skip_focus/",
     type: "example",
-    category: "Testing",
+    category: "Testing"
   },
   {
     title: "Filtering and controlling test runs",
     href: "/examples/tests_run_control/",
     type: "example",
-    category: "Testing",
+    category: "Testing"
   },
 
   // Web frameworks and libraries
@@ -726,13 +726,13 @@ export const items = [
     title: "HTTP server file upload",
     href: "/examples/http_server_file_upload/",
     type: "example",
-    category: "Web frameworks and libraries",
+    category: "Web frameworks and libraries"
   },
   {
     title: "Build a word finder app",
     href: "/examples/word_finder_tutorial/",
     type: "tutorial",
-    category: "Web frameworks and libraries",
+    category: "Web frameworks and libraries"
   },
 
   // Databases
@@ -740,7 +740,7 @@ export const items = [
     title: "Overview",
     href: "/examples/connecting_to_databases_tutorial/",
     type: "tutorial",
-    category: "Databases",
+    category: "Databases"
   },
 
   // Scheduling
@@ -748,7 +748,7 @@ export const items = [
     title: "Ende.cron",
     href: "/examples/cron/",
     type: "example",
-    category: "Scheduling",
+    category: "Scheduling"
   },
 
   // AI
@@ -756,7 +756,7 @@ export const items = [
     title: "LLM Chat app",
     href: "/examples/llm_tutorial/",
     type: "tutorial",
-    category: "AI",
+    category: "AI"
   },
 
   // Deploying Ende projects
@@ -766,578 +766,578 @@ export const items = [
     title: "Basic OpenTelemetry setup",
     href: "/examples/basic_opentelemetry_tutorial/",
     type: "tutorial",
-    category: "OpenTelemetry",
+    category: "OpenTelemetry"
   },
   {
     title: "Export telemetry to Grafana",
     href: "/examples/grafana_tutorial/",
     type: "tutorial",
-    category: "OpenTelemetry",
+    category: "OpenTelemetry"
   },
   {
     title: "Export telemetry to Hyperdx",
     href: "/examples/hyperdx_tutorial/",
     type: "tutorial",
-    category: "OpenTelemetry",
+    category: "OpenTelemetry"
   },
   {
     title: "Export telemetry to Honeycomb",
     href: "/examples/honeycomb_tutorial/",
     type: "tutorial",
-    category: "OpenTelemetry",
+    category: "OpenTelemetry"
   },
   {
     title: "Span propagation",
     href: "/examples/otel_span_propagation_tutorial/",
     type: "tutorial",
-    category: "OpenTelemetry",
+    category: "OpenTelemetry"
   },
 
   {
     title: "Re-map import paths",
     href: "/examples/import_maps_tutorial/",
     type: "tutorial",
-    category: "Modules and package management",
+    category: "Modules and package management"
   },
   {
     title: "Debugging with Chrome DevTools",
     href: "/runtime/fundamentals/debugging/",
     type: "tutorial",
-    category: "CLI",
+    category: "CLI"
   },
 
   {
     title: "WebSocket server: Broadcasting messages",
     href: "/examples/websocket_pubsub/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "WebSocket server: Per-socket state",
     href: "/examples/websocket_context/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Extract links and metadata from HTML",
     href: "/examples/extract_html_data/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Set the time zone",
     href: "/examples/set_timezone/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Find an executable on the PATH",
     href: "/examples/find_executable/",
     type: "example",
-    category: "System",
+    category: "System"
   },
 
   {
     title: "Pipe data into a subprocess",
     href: "/examples/subprocess_stdin/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Run a subprocess with custom env and cwd",
     href: "/examples/subprocess_env_cwd/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Detect a TTY and get terminal size",
     href: "/examples/terminal_detection/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Get operating system information",
     href: "/examples/os_info/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "List network interfaces",
     href: "/examples/network_interfaces/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Set and read process exit codes",
     href: "/examples/exit_codes/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Read and change file metadata",
     href: "/examples/file_metadata/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Find files with glob patterns",
     href: "/examples/glob_patterns/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Lock files across processes",
     href: "/examples/file_locking/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Truncate a file",
     href: "/examples/truncate_file/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Create hard links",
     href: "/examples/hard_links/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
   {
     title: "Compile a script into an executable",
     href: "/examples/ende_compile/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
   {
     title: "Write benchmarks with Ende.bench",
     href: "/examples/write_benchmarks/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
   {
     title: "Find and update outdated dependencies",
     href: "/examples/ende_outdated/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
   {
     title: "Show progress bars and spinners",
     href: "/examples/progress_spinners/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
   {
     title: "Control the terminal with ANSI escape codes",
     href: "/examples/ansi_terminal/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
   {
     title: "Build a CLI with subcommands",
     href: "/examples/cli_subcommands/",
     type: "example",
-    category: "CLI",
+    category: "CLI"
   },
 
   {
     title: "Match URLs with URLPattern",
     href: "/examples/url_pattern/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Cancel async work with AbortController",
     href: "/examples/abort_controller/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Set a timeout on fetch",
     href: "/examples/fetch_timeout/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Deep clone objects with structuredClone",
     href: "/examples/structured_clone/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Build and send forms with FormData",
     href: "/examples/form_data/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Create and dispatch custom events",
     href: "/examples/event_target/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Communicate between workers with BroadcastChannel",
     href: "/examples/broadcast_channel/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Transform data with TransformStream",
     href: "/examples/transform_stream/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Format numbers and currencies",
     href: "/examples/intl_number_format/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Format dates for any locale",
     href: "/examples/intl_date_format/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Format relative time",
     href: "/examples/intl_relative_time/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Pluralize and format lists",
     href: "/examples/intl_plural_list/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Split text by words, sentences, and graphemes",
     href: "/examples/intl_segmenter/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Measure performance with marks and measures",
     href: "/examples/performance_timing/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Cache HTTP responses with the Web Cache API",
     href: "/examples/web_cache_api/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Sign and verify data with ECDSA",
     href: "/examples/ecdsa_signing/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "Derive encryption keys from passwords",
     href: "/examples/derive_aes_key/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "Generate secure random values",
     href: "/examples/secure_random_values/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "Compare secrets in constant time",
     href: "/examples/timing_safe_comparison/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
   {
     title: "Hash large files with streams",
     href: "/examples/hash_file_streams/",
     type: "example",
-    category: "Cryptography",
+    category: "Cryptography"
   },
 
   {
     title: "Debounce a function",
     href: "/examples/debounce_function/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Run async tasks with a concurrency limit",
     href: "/examples/concurrency_limit/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Add a timeout to any promise",
     href: "/examples/promise_timeout/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Memoize an expensive function",
     href: "/examples/memoize_function/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Parse and compare semver versions",
     href: "/examples/semver_versions/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Convert string case",
     href: "/examples/string_case/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Escape text for regular expressions",
     href: "/examples/regexp_escape/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Structured logging",
     href: "/examples/structured_logging/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Format bytes and durations for humans",
     href: "/examples/format_bytes_duration/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Parse and format dates",
     href: "/examples/date_format_parse/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Parsing and serializing INI",
     href: "/examples/parsing_serializing_ini/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Parsing JSONC",
     href: "/examples/parsing_jsonc/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Parse large CSV files as streams",
     href: "/examples/csv_streaming/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Stream JSON Lines data",
     href: "/examples/json_lines/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Encode and decode MessagePack",
     href: "/examples/msgpack_encoding/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Encode and decode CBOR",
     href: "/examples/cbor_encoding/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Create and extract tar archives",
     href: "/examples/tar_archives/",
     type: "example",
-    category: "File system",
+    category: "File system"
   },
 
   {
     title: "HTTP server: CORS",
     href: "/examples/http_server_cors/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Cookies",
     href: "/examples/http_server_cookies/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Sessions",
     href: "/examples/http_server_sessions/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Basic authentication",
     href: "/examples/http_server_basic_auth/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Rate limiting",
     href: "/examples/http_server_rate_limit/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Graceful shutdown",
     href: "/examples/http_server_graceful_shutdown/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Caching headers",
     href: "/examples/http_server_static_caching/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Request timeouts",
     href: "/examples/http_server_request_timeouts/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Health checks",
     href: "/examples/http_server_health_checks/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Paginating results",
     href: "/examples/http_server_pagination/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "HTTP server: Verifying webhook signatures",
     href: "/examples/http_server_webhooks/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Sign in with GitHub (OAuth)",
     href: "/examples/oauth_github/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Generate an RSS feed",
     href: "/examples/http_server_rss/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Generate sitemap.xml and robots.txt",
     href: "/examples/http_server_sitemap/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Download a file with progress",
     href: "/examples/download_progress/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Route fetch through an HTTP proxy",
     href: "/examples/fetch_http_proxy/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Find a free port",
     href: "/examples/find_free_port/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Render markdown to HTML",
     href: "/examples/render_markdown/",
     type: "example",
-    category: "Web frameworks and libraries",
+    category: "Web frameworks and libraries"
   },
   {
     title: "Generate a QR code",
     href: "/examples/generate_qr_code/",
     type: "example",
-    category: "Web frameworks and libraries",
+    category: "Web frameworks and libraries"
   },
   {
     title: "Call C functions with FFI",
     href: "/examples/ffi/",
     type: "example",
-    category: "System",
+    category: "System"
   },
   {
     title: "Upgrade a TCP connection to TLS (STARTTLS)",
     href: "/examples/starttls/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Communicate over QUIC",
     href: "/examples/quic/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Connect two peers with WebTransport",
     href: "/examples/web_transport/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Two-way streaming with WebSocketStream",
     href: "/examples/websocket_stream/",
     type: "example",
-    category: "Network",
+    category: "Network"
   },
   {
     title: "Run a compute shader with WebGPU",
     href: "/examples/webgpu_compute/",
     type: "example",
-    category: "Web standard APIs",
+    category: "Web standard APIs"
   },
   {
     title: "Extract front matter from markdown",
     href: "/examples/front_matter/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Generate seeded random numbers",
     href: "/examples/seeded_random/",
     type: "example",
-    category: "Standard library",
+    category: "Standard library"
   },
   {
     title: "Parse and generate XML",
     href: "/examples/parse_xml/",
     type: "example",
-    category: "Encoding",
+    category: "Encoding"
   },
   {
     title: "Distribute work across a worker pool",
     href: "/examples/worker_pool/",
     type: "example",
-    category: "Web standard APIs",
-  },
+    category: "Web standard APIs"
+  }
 ];
 
 // Section order on the landing page and in the sidebar.
@@ -1358,7 +1358,7 @@ export const categoryOrder = [
   "Scheduling",
   "AI",
   "Deploying Ende projects",
-  "OpenTelemetry",
+  "OpenTelemetry"
 ];
 
 // Grouped, alphabetized view consumed by the landing page and sidebars.
@@ -1366,9 +1366,7 @@ export const sidebar = categoryOrder.map((title) => ({
   title,
   items: items
     .filter((item) => item.category === title)
-    .toSorted((a, b) =>
-      a.title.localeCompare(b.title, "en", { sensitivity: "base" })
-    ),
+    .toSorted((a, b) => a.title.localeCompare(b.title, "en", { sensitivity: "base" }))
 }));
 
 export const featuredItems = [
@@ -1376,26 +1374,26 @@ export const featuredItems = [
     title: "HTTP Server: Hello world",
     href: "/examples/http_server/",
     type: "example",
-    description: "Spin up a web server with Ende.serve in a few lines.",
+    description: "Spin up a web server with Ende.serve in a few lines."
   },
   {
     title: "Writing tests",
     href: "/examples/writing_tests/",
     type: "example",
-    description: "Use the built-in test runner, no dependencies needed.",
+    description: "Use the built-in test runner, no dependencies needed."
   },
   {
     title: "Connecting to databases",
     href: "/examples/connecting_to_databases_tutorial/",
     type: "tutorial",
-    description: "Postgres, MySQL, MongoDB, SQLite and more.",
+    description: "Postgres, MySQL, MongoDB, SQLite and more."
   },
   {
     title: "Built in TypeScript support",
     href: "/examples/typescript_support/",
     type: "video",
-    description: "Run TypeScript directly, with zero configuration.",
-  },
+    description: "Run TypeScript directly, with zero configuration."
+  }
 ];
 
 export const sectionTitle = "Examples";

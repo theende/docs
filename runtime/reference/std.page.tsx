@@ -1,18 +1,7 @@
 import { raw } from "@ende/satz/jsx-runtime";
-import {
-  loadStd,
-  type Std,
-  type StdModule,
-  type StdPackage,
-  summary,
-} from "../../_lib/reference/doc.ts";
+import { loadStd, type Std, type StdModule, type StdPackage, summary } from "../../_lib/reference/doc.ts";
 import { docHtml, type Rewrite } from "../../_lib/reference/markdown.ts";
-import {
-  symbolDescription,
-  SymbolList,
-  symbolToc,
-  SymbolView,
-} from "../../_lib/reference/render.tsx";
+import { symbolDescription, SymbolList, symbolToc, SymbolView } from "../../_lib/reference/render.tsx";
 import type { Sidebar } from "../../_lib/types.ts";
 
 function specifier(pkg: StdPackage, module: StdModule): string {
@@ -26,10 +15,10 @@ function sidebar(std: Std): Sidebar {
       href: "/runtime/reference/std/",
       items: std.packages.map((pkg) => ({
         title: pkg.name,
-        href: std.packageUrl(pkg),
-      })),
+        href: std.packageUrl(pkg)
+      }))
     },
-    { title: "API reference", href: "/api/" },
+    { title: "API reference", href: "/api/" }
   ];
 }
 
@@ -40,7 +29,7 @@ function ModuleView(
     pkg: StdPackage;
     module: StdModule;
     rewrite: Rewrite;
-  },
+  }
 ) {
   const exports = std.exportsOf(pkg, module);
   const lookup = (name: string) =>
@@ -78,7 +67,7 @@ function ModuleView(
       {exports.length > 0 && (
         <section>
           <h2 id="exports">Exports</h2>
-          <SymbolList pages={exports.map((entry) => entry.page)} />
+          <SymbolList pages={exports.map((entry) => entry.page)}/>
         </section>
       )}
     </>
@@ -91,9 +80,7 @@ function PackageView({ std, pkg }: { std: Std; pkg: StdPackage }) {
     <>
       <pre><code>ende add jsr:{pkg.name}</code></pre>
       <p>
-        Version {pkg.version} on{" "}
-        <a href={`https://jsr.io/${pkg.name}`}>JSR</a>. Import one of its
-        modules:
+        Version {pkg.version} on <a href={`https://jsr.io/${pkg.name}`}>JSR</a>. Import one of its modules:
       </p>
       <ul>
         {pkg.modules.map((module) => {
@@ -121,16 +108,13 @@ export default async function* () {
   yield {
     url: "/runtime/reference/std/",
     title: "Standard library",
-    description:
-      "Ende's standard library: the @ende/* packages on JSR, with their modules and APIs.",
+    description: "Ende's standard library: the @ende/* packages on JSR, with their modules and APIs.",
     sidebar: side,
     content: (
       <>
         <p>
-          The standard library is a set of packages published on{" "}
-          <a href="https://jsr.io/@ende">JSR</a> under{" "}
-          <code>@ende</code>. Add one to a project with{" "}
-          <code>ende add jsr:@ende/&lt;package&gt;</code>.
+          The standard library is a set of packages published on <a href="https://jsr.io/@ende">JSR</a> under{" "}
+          <code>@ende</code>. Add one to a project with <code>ende add jsr:@ende/&lt;package&gt;</code>.
         </p>
         <ul>
           {std.packages.map((pkg) => {
@@ -148,7 +132,7 @@ export default async function* () {
           })}
         </ul>
       </>
-    ),
+    )
   };
 
   for (const pkg of std.packages) {
@@ -158,7 +142,7 @@ export default async function* () {
         title: pkg.name,
         description: summary(pkg.modules[0].doc),
         sidebar: side,
-        content: <PackageView std={std} pkg={pkg} />,
+        content: <PackageView std={std} pkg={pkg}/>
       };
     }
 
@@ -168,9 +152,7 @@ export default async function* () {
         title: specifier(pkg, module),
         description: summary(module.doc),
         sidebar: side,
-        content: (
-          <ModuleView std={std} pkg={pkg} module={module} rewrite={rewrite} />
-        ),
+        content: <ModuleView std={std} pkg={pkg} module={module} rewrite={rewrite}/>
       };
     }
   }
@@ -182,7 +164,7 @@ export default async function* () {
       description: symbolDescription(page),
       sidebar: side,
       toc: symbolToc(page),
-      content: <SymbolView page={page} rewrite={rewrite} />,
+      content: <SymbolView page={page} rewrite={rewrite}/>
     };
   }
 }

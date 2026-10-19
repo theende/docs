@@ -27,8 +27,8 @@ export function parseExample(id: string, file: string): Example {
   const files: ExampleFile[] = [
     {
       name: "",
-      snippets: [],
-    },
+      snippets: []
+    }
   ];
   let parseMode = "code";
   let currentFile = files[0];
@@ -51,7 +51,7 @@ export function parseExample(id: string, file: string): Example {
         } else {
           currentFile = {
             name,
-            snippets: [],
+            snippets: []
           };
           files.push(currentFile);
         }
@@ -68,7 +68,7 @@ export function parseExample(id: string, file: string): Example {
         } else {
           currentFile = {
             name,
-            snippets: [],
+            snippets: []
           };
           files.push(currentFile);
         }
@@ -156,6 +156,6 @@ export function parseExample(id: string, file: string): Example {
     run: kvs.run,
     files,
     group: kvs.group || "Misc",
-    sortOrder: kvs.sortOrder || 999999,
+    sortOrder: kvs.sortOrder || 999999
   };
 }

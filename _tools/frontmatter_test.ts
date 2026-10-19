@@ -9,7 +9,7 @@ const DIRS_TO_CHECK = ["./runtime", "./examples"];
 const LAST_MODIFIED_DIRS = [
   "./runtime",
   "./examples",
-  "./ai",
+  "./ai"
 ];
 // Generated or synced subtrees that aren't hand-edited content pages.
 const LAST_MODIFIED_EXCLUDES = ["runtime/reference/std/"];
@@ -27,7 +27,7 @@ Ende.test("Frontmatter titles must not contain backticks", async (t) => {
       await t.step(entry.path, () => {
         assert(
           !attrs.title!.includes("`"),
-          `Title contains backticks: "${attrs.title}". Use plain text instead.`,
+          `Title contains backticks: "${attrs.title}". Use plain text instead.`
         );
       });
     }
@@ -50,7 +50,7 @@ Ende.test("CLI command page titles must be just the command name", async (t) => 
       assertEquals(
         attrs.title,
         expected,
-        `Title should be "${expected}", got "${attrs.title}". Put descriptions in the "description" field instead.`,
+        `Title should be "${expected}", got "${attrs.title}". Put descriptions in the "description" field instead.`
       );
     });
   }
@@ -70,14 +70,14 @@ Ende.test("Content pages must have a valid last_modified field", async (t) => {
       await t.step(entry.path, () => {
         assert(
           content.startsWith("---"),
-          `Missing frontmatter; add a "last_modified: ${today}" field.`,
+          `Missing frontmatter; add a "last_modified: ${today}" field.`
         );
 
         const { attrs } = extract<{ last_modified?: unknown }>(content);
         const value = attrs.last_modified;
         assert(
           value != null,
-          `Missing "last_modified" field; add "last_modified: ${today}".`,
+          `Missing "last_modified" field; add "last_modified: ${today}".`
         );
 
         // YAML parses an unquoted date into a Date; accept either form.
@@ -86,11 +86,11 @@ Ende.test("Content pages must have a valid last_modified field", async (t) => {
           : String(value).trim();
         assert(
           DATE_RE.test(date),
-          `"last_modified" must be a YYYY-MM-DD date, got "${date}".`,
+          `"last_modified" must be a YYYY-MM-DD date, got "${date}".`
         );
         assert(
           date <= today,
-          `"last_modified" is in the future ("${date}"); today is ${today}.`,
+          `"last_modified" is in the future ("${date}"); today is ${today}.`
         );
       });
     }

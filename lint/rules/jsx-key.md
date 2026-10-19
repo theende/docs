@@ -11,8 +11,8 @@ frameworks to optimize checking the order of elements.
 ```tsx
 const foo = [<div>foo</div>];
 const foo = [<>foo</>];
-[1, 2, 3].map(() => <div />);
-Array.from([1, 2, 3], () => <div />);
+[1, 2, 3].map(() => <div/>);
+Array.from([1, 2, 3], () => <div/>);
 ```
 
 **Valid:**
@@ -20,6 +20,6 @@ Array.from([1, 2, 3], () => <div />);
 ```tsx
 const foo = [<div key="a">foo</div>];
 const foo = [<Fragment key="b">foo</Fragment>];
-[1, 2, 3].map((x) => <div key={x} />);
-Array.from([1, 2, 3], (x) => <div key={x} />);
+[1, 2, 3].map((x) => <div key={x}/>);
+Array.from([1, 2, 3], (x) => <div key={x}/>);
 ```

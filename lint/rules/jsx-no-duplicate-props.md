@@ -9,9 +9,9 @@ often leading to unexpected results.
 **Invalid:**
 
 ```tsx
-<div id="1" id="2" />;
-<App a a />;
-<App a {...b} a />;
+<div id="1" id="2"/>;
+<App a a/>;
+<App a {...b} a/>;
 ```
 
 **Valid:**

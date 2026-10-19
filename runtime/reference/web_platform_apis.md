@@ -347,7 +347,7 @@ results back:
 
 ```ts title="main.ts"
 const worker = new Worker(import.meta.resolve("./worker.ts"), {
-  type: "module",
+  type: "module"
 });
 
 // Receive results from the worker
@@ -417,7 +417,7 @@ hello world
 
 ```js title="main.js"
 const worker = new Worker(import.meta.resolve("./worker.js"), {
-  type: "module",
+  type: "module"
 });
 
 worker.postMessage({ filename: "./log.txt" });
@@ -466,15 +466,15 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
   ende: {
     permissions: {
       net: [
-        "deno.land",
+        "deno.land"
       ],
       read: [
         new URL("./file_1.txt", import.meta.url),
-        new URL("./file_2.txt", import.meta.url),
+        new URL("./file_2.txt", import.meta.url)
       ],
-      write: false,
-    },
-  },
+      write: false
+    }
+  }
 });
 ```
 
@@ -492,11 +492,11 @@ const worker = new Worker(
       permissions: {
         read: [
           "/home/user/Documents/ende/worker/file_1.txt",
-          "./worker/file_2.txt",
-        ],
-      },
-    },
-  },
+          "./worker/file_2.txt"
+        ]
+      }
+    }
+  }
 );
 ```
 
@@ -508,8 +508,8 @@ implies it will borrow its parent permissions:
 const worker = new Worker(import.meta.resolve("./worker.js"), {
   type: "module",
   ende: {
-    permissions: "inherit",
-  },
+    permissions: "inherit"
+  }
 });
 ```
 
@@ -525,9 +525,9 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
       ffi: false,
       read: false,
       run: false,
-      write: false,
-    },
-  },
+      write: false
+    }
+  }
 });
 ```
 
@@ -537,7 +537,7 @@ the worker to inherit by default:
 ```ts
 // This worker will inherit its parent permissions
 const worker = new Worker(import.meta.resolve("./worker.js"), {
-  type: "module",
+  type: "module"
 });
 ```
 
@@ -547,9 +547,9 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
   type: "module",
   ende: {
     permissions: {
-      net: false,
-    },
-  },
+      net: false
+    }
+  }
 });
 ```
 
@@ -561,8 +561,8 @@ to the `ende.permissions` option:
 const worker = new Worker(import.meta.resolve("./worker.js"), {
   type: "module",
   ende: {
-    permissions: "none",
-  },
+    permissions: "none"
+  }
 });
 ```
 
@@ -604,7 +604,7 @@ ctx.transferFromImageBitmap(bitmap);
 const blob = await canvas.convertToBlob({ type: "image/png" });
 await Ende.writeFile(
   "./output.png",
-  new Uint8Array(await blob.arrayBuffer()),
+  new Uint8Array(await blob.arrayBuffer())
 );
 ```
 
@@ -788,7 +788,7 @@ when you generate or import the key:
 const key = await crypto.subtle.generateKey(
   { name: "HMAC", hash: "SHA3-256" },
   true,
-  ["sign", "verify"],
+  ["sign", "verify"]
 );
 const signature = await crypto.subtle.sign("HMAC", key, data);
 ```
@@ -812,7 +812,7 @@ const data = new TextEncoder().encode("Hello, Ende!");
 // 256-bit (32-byte) SHAKE256 digest.
 const digest = await crypto.subtle.digest(
   { name: "SHAKE256", outputLength: 256 },
-  data,
+  data
 );
 console.log(new Uint8Array(digest).length); // 32
 ```
@@ -826,9 +826,9 @@ const digest = await crypto.subtle.digest(
   {
     name: "cSHAKE128",
     outputLength: 256,
-    customization: new TextEncoder().encode("my-app"),
+    customization: new TextEncoder().encode("my-app")
   },
-  data,
+  data
 );
 ```
 
@@ -838,7 +838,7 @@ which must be in the range `0x01` to `0x7F`:
 ```ts
 const digest = await crypto.subtle.digest(
   { name: "TurboSHAKE256", outputLength: 512, domainSeparation: 0x1f },
-  data,
+  data
 );
 ```
 
@@ -848,7 +848,7 @@ const digest = await crypto.subtle.digest(
 ```ts
 const digest = await crypto.subtle.digest(
   { name: "KT128", outputLength: 256 },
-  data,
+  data
 );
 ```
 
@@ -862,14 +862,14 @@ Generate a key with a `length` in bits, then sign and verify with an
 const key = await crypto.subtle.generateKey(
   { name: "KMAC128", length: 128 },
   true,
-  ["sign", "verify"],
+  ["sign", "verify"]
 );
 
 const data = new TextEncoder().encode("Hello, Ende!");
 const params = {
   name: "KMAC128",
   outputLength: 256,
-  customization: new TextEncoder().encode("Ende"),
+  customization: new TextEncoder().encode("Ende")
 };
 const mac = await crypto.subtle.sign(params, key, data);
 const valid = await crypto.subtle.verify(params, key, mac, data);
@@ -894,7 +894,7 @@ const key = await crypto.subtle.importKey(
   password,
   "Argon2id",
   false,
-  ["deriveBits"],
+  ["deriveBits"]
 );
 
 const derived = await crypto.subtle.deriveBits(
@@ -903,10 +903,10 @@ const derived = await crypto.subtle.deriveBits(
     memory: 65536,
     passes: 3,
     parallelism: 4,
-    nonce: crypto.getRandomValues(new Uint8Array(16)),
+    nonce: crypto.getRandomValues(new Uint8Array(16))
   },
   key,
-  256, // output length in bits
+  256 // output length in bits
 );
 ```
 
@@ -919,7 +919,7 @@ Ende supports the `ChaCha20-Poly1305` authenticated encryption algorithm through
 const key = await crypto.subtle.generateKey(
   { name: "ChaCha20-Poly1305" },
   true,
-  ["encrypt", "decrypt"],
+  ["encrypt", "decrypt"]
 );
 ```
 
@@ -934,13 +934,13 @@ const data = new TextEncoder().encode("Hello, Ende!");
 const ciphertext = await crypto.subtle.encrypt(
   { name: "ChaCha20-Poly1305", nonce },
   key,
-  data,
+  data
 );
 
 const plaintext = await crypto.subtle.decrypt(
   { name: "ChaCha20-Poly1305", nonce },
   key,
-  ciphertext,
+  ciphertext
 );
 console.log(new TextDecoder().decode(plaintext)); // "Hello, Ende!"
 ```
@@ -964,20 +964,20 @@ the public key:
 const { publicKey, privateKey } = await crypto.subtle.generateKey(
   { name: "ML-DSA-65" },
   true,
-  ["sign", "verify"],
+  ["sign", "verify"]
 );
 
 const data = new TextEncoder().encode("Hello, Ende!");
 const signature = await crypto.subtle.sign(
   { name: "ML-DSA-65" },
   privateKey,
-  data,
+  data
 );
 const valid = await crypto.subtle.verify(
   { name: "ML-DSA-65" },
   publicKey,
   signature,
-  data,
+  data
 );
 console.log(valid); // true
 ```
@@ -991,7 +991,7 @@ const context = new TextEncoder().encode("v1");
 const signature = await crypto.subtle.sign(
   { name: "ML-DSA-65", context },
   privateKey,
-  data,
+  data
 );
 ```
 
@@ -1017,14 +1017,14 @@ including the optional `context`:
 const { publicKey, privateKey } = await crypto.subtle.generateKey(
   { name: "SLH-DSA-SHAKE-128f" },
   true,
-  ["sign", "verify"],
+  ["sign", "verify"]
 );
 
 const data = new TextEncoder().encode("Hello, Ende!");
 const signature = await crypto.subtle.sign(
   { name: "SLH-DSA-SHAKE-128f" },
   privateKey,
-  data,
+  data
 );
 ```
 
@@ -1048,7 +1048,7 @@ same key:
 const { publicKey, privateKey } = await crypto.subtle.generateKey(
   { name: "ML-KEM-768" },
   true,
-  ["encapsulateKey", "decapsulateKey"],
+  ["encapsulateKey", "decapsulateKey"]
 );
 
 // Sender: encapsulate a shared AES-GCM key to the recipient's public key.
@@ -1057,7 +1057,7 @@ const { ciphertext, sharedKey } = await crypto.subtle.encapsulateKey(
   publicKey,
   { name: "AES-GCM", length: 256 },
   false,
-  ["encrypt", "decrypt"],
+  ["encrypt", "decrypt"]
 );
 
 // Recipient: decapsulate the ciphertext to recover the same key.
@@ -1067,7 +1067,7 @@ const recovered = await crypto.subtle.decapsulateKey(
   ciphertext,
   { name: "AES-GCM", length: 256 },
   false,
-  ["encrypt", "decrypt"],
+  ["encrypt", "decrypt"]
 );
 ```
 

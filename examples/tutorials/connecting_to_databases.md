@@ -66,12 +66,12 @@ const client = new Client({
   port: Number(Ende.env.get("PGPORT") || "5432"),
   user: Ende.env.get("PGUSER") || "postgres",
   password: Ende.env.get("PGPASSWORD") || "postgres",
-  database: Ende.env.get("PGDATABASE") || "postgres",
+  database: Ende.env.get("PGDATABASE") || "postgres"
 });
 
 await client.connect();
 const result = await client.queryObject<{ version: string }>(
-  "SELECT version() AS version",
+  "SELECT version() AS version"
 );
 console.log("Postgres version:", result.rows[0].version);
 await client.end();

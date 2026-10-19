@@ -20,7 +20,7 @@ import { parseArgs } from "jsr:@ende/cli/parse-args";
 
 const flags = parseArgs(Ende.args, {
   string: ["name"],
-  default: { name: "world" },
+  default: { name: "world" }
 });
 
 console.log(`Hello, ${flags.name}!`);

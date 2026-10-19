@@ -47,8 +47,8 @@ Ende.test({
   only: false, // Optional: set to true to only run this test
   permissions: { // Optional: specify required permissions
     read: true,
-    write: false,
-  },
+    write: false
+  }
 });
 ```
 
@@ -215,7 +215,7 @@ import {
   assertRejects, // Check that Promise rejects
   assertStrictEquals, // Check that values are strictly equal (===)
   assertStringIncludes, // Check that string contains substring
-  assertThrows, // Check that function throws an error
+  assertThrows // Check that function throws an error
 } from "jsr:@ende/assert";
 
 Ende.test("assertion examples", () => {
@@ -231,7 +231,7 @@ Ende.test("assertion examples", () => {
   // Object assertions
   assertObjectMatch(
     { name: "Jane", age: 25, city: "Tokyo" },
-    { name: "Jane" }, // Only checks specified properties
+    { name: "Jane" } // Only checks specified properties
   );
 
   // Strict equality (type + value)
@@ -243,7 +243,7 @@ Ende.test("assertion examples", () => {
       throw new Error("Something went wrong");
     },
     Error,
-    "Something went wrong",
+    "Something went wrong"
   );
 });
 ```
@@ -307,7 +307,7 @@ export function validateUser(user: any): { valid: boolean; errors: string[] } {
 
   return {
     valid: errors.length === 0,
-    errors,
+    errors
   };
 }
 
@@ -320,7 +320,7 @@ Ende.test("validateUser", async (t) => {
     const user = {
       name: "John Doe",
       email: "john@example.com",
-      age: 30,
+      age: 30
     };
 
     const result = validateUser(user);
@@ -332,7 +332,7 @@ Ende.test("validateUser", async (t) => {
     const user = {
       name: "",
       email: "invalid-email",
-      age: 16,
+      age: 16
     };
 
     const result = validateUser(user);
@@ -345,7 +345,7 @@ Ende.test("validateUser", async (t) => {
 
   await t.step("should handle missing properties", () => {
     const user = {
-      name: "Jane Doe",
+      name: "Jane Doe"
       // email and age missing
     };
 
@@ -405,9 +405,9 @@ Ende.test("fetchUserData success", async () => {
       Promise.resolve(
         new Response(
           JSON.stringify({ id: "123", name: "Test User" }),
-          { status: 200 },
-        ),
-      ),
+          { status: 200 }
+        )
+      )
   );
 
   const userData = await fetchUserData("123");
@@ -419,13 +419,13 @@ Ende.test("fetchUserData failure", async () => {
   using _fetchStub = stub(
     globalThis,
     "fetch",
-    () => Promise.resolve(new Response("Not Found", { status: 404 })),
+    () => Promise.resolve(new Response("Not Found", { status: 404 }))
   );
 
   await assertRejects(
     () => fetchUserData("nonexistent"),
     Error,
-    "Failed to fetch user: 404",
+    "Failed to fetch user: 404"
   );
 });
 ```
@@ -469,7 +469,7 @@ const api = {
   fetchData: async () => {
     const response = await fetch("https://api.example.com/data");
     return response.json();
-  },
+  }
 };
 
 // In your test file

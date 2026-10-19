@@ -15,7 +15,7 @@ code in order to work in more scenarios.
 import { Person } from "./person.ts";
 
 const person: Person = {
-  name: "David",
+  name: "David"
 };
 console.log(person);
 ```
@@ -24,7 +24,7 @@ console.log(person);
 import { output, Person } from "./person.ts";
 
 const person: Person = {
-  name: "David",
+  name: "David"
 };
 output(person);
 ```
@@ -35,7 +35,7 @@ output(person);
 import type { Person } from "./person.ts";
 
 const person: Person = {
-  name: "David",
+  name: "David"
 };
 console.log(person);
 ```
@@ -44,7 +44,7 @@ console.log(person);
 import { output, type Person } from "./person.ts";
 
 const person: Person = {
-  name: "David",
+  name: "David"
 };
 output(person);
 ```

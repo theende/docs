@@ -46,7 +46,7 @@ export function outputB() {
   console.log("Module B's mainModule url", Ende.mainModule);
   console.log(
     "Is module B the main module via import.meta.main?",
-    import.meta.main,
+    import.meta.main
   );
 }
 ```
@@ -59,11 +59,11 @@ function outputA() {
   console.log("Module A's mainModule url", Ende.mainModule);
   console.log(
     "Is module A the main module via import.meta.main?",
-    import.meta.main,
+    import.meta.main
   );
   console.log(
     "Resolved specifier for ./module_b.ts",
-    import.meta.resolve("./module_b.ts"),
+    import.meta.resolve("./module_b.ts")
   );
 }
 

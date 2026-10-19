@@ -86,7 +86,7 @@ async function check(link: string, from: URL): Promise<string | undefined> {
 
     const fragment = decodeURIComponent(url.hash.slice(1));
     const ids = new Set(
-      [...html.matchAll(ID)].map((match) => unescape(match[1])),
+      [...html.matchAll(ID)].map((match) => unescape(match[1]))
     );
 
     return ids.has(fragment) ? undefined : `no #${fragment} on ${url.pathname}`;
@@ -102,7 +102,7 @@ for await (const entry of walk(root, { exts: [".html"], includeDirs: false })) {
   const path = relative(root, entry.path).replaceAll(SEPARATOR, "/");
   const html = (await read(path))!;
   const base = new URL(
-    "https://site.invalid/" + path.replace(/(^|\/)index\.html$/, "$1"),
+    "https://site.invalid/" + path.replace(/(^|\/)index\.html$/, "$1")
   );
 
   for (const [, raw] of html.matchAll(ATTRIBUTE)) {

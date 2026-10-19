@@ -8,7 +8,7 @@ const TAGS = ["recommended", "fresh", "jsx", "react", "jsr", "workspace"];
 
 /** Every lint rule with its first paragraph, filterable by name and tag. */
 export default function LintRulesIndex(
-  { lintRulePages }: { lintRulePages: LintRule[] },
+  { lintRulePages }: { lintRulePages: LintRule[] }
 ) {
   return (
     <>
@@ -17,26 +17,22 @@ export default function LintRulesIndex(
         <a href="/runtime/reference/cli/lint/">
           <code>ende lint</code>
         </a>{" "}
-        command. You can enable sets of rules in <code>ende.json(c)</code>{" "}
-        by adding their tags (e.g. <code>recommended</code>,{" "}
-        <code>react</code>) to the{" "}
+        command. You can enable sets of rules in <code>ende.json(c)</code> by adding their tags (e.g.{" "}
+        <code>recommended</code>, <code>react</code>) to the{" "}
         <a href="/runtime/reference/ende_json/#linting">
           <code>lint.rules.tags</code>
         </a>{" "}
         array.
       </p>
       <p>
-        If no tag is provided, then the <code>recommended</code>{" "}
-        set of rules will be enabled by default.
+        If no tag is provided, then the <code>recommended</code> set of rules will be enabled by default.
       </p>
       <p>
         To turn a rule off, add it to{" "}
         <a href="/runtime/reference/cli/lint/#configuring-rules-in-endejson">
           <code>lint.rules.exclude</code>
         </a>{" "}
-        in{" "}
-        <code>ende.json</code>, or suppress a single diagnostic in your code
-        with a{" "}
+        in <code>ende.json</code>, or suppress a single diagnostic in your code with a{" "}
         <a href="/runtime/reference/cli/lint/#ignore-directives">
           <code>deno-lint-ignore</code>
         </a>{" "}
@@ -44,7 +40,7 @@ export default function LintRulesIndex(
       </p>
       <p>
         <label>
-          Search lint rules <input type="search" id="lint-rule-search" />
+          Search lint rules <input type="search" id="lint-rule-search"/>
         </label>
       </p>
       <p>

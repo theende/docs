@@ -21,7 +21,7 @@ function code(text: string): string {
 export function resolveLinkTags(
   text: string,
   lookup: Lookup,
-  rewrite: Rewrite,
+  rewrite: Rewrite
 ): string {
   return text.replace(LINK_TAG, (_, style, target: string, label: string) => {
     const shown = label.trim() || target;
@@ -42,7 +42,7 @@ export function docHtml(
   text: string | undefined,
   lookup: Lookup,
   rewrite: Rewrite,
-  headingIds = false,
+  headingIds = false
 ): string {
   if (!text?.trim()) return "";
 
@@ -52,6 +52,6 @@ export function docHtml(
     rewriteLink: (href) =>
       headingIds && href.startsWith("#")
         ? `#${slug(decodeURIComponent(href.slice(1)))}`
-        : rewrite(href) ?? href,
+        : rewrite(href) ?? href
   });
 }

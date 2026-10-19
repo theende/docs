@@ -34,7 +34,7 @@ class Also_Not_Valid_Class {}
 export * as not_camelCased from "mod.ts";
 
 enum snake_case_enum {
-  snake_case_variant,
+  snake_case_variant
 }
 
 type snake_case_type = { some_property: number };
@@ -67,7 +67,7 @@ import { not_camelCased as camelCased } from "external-module.js";
 export * as camelCased from "mod.ts";
 
 enum PascalCaseEnum {
-  PascalCaseVariant,
+  PascalCaseVariant
 }
 
 type PascalCaseType = { someProperty: number };

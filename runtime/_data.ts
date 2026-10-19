@@ -6,17 +6,17 @@ export const sidebar = [
     items: [
       {
         title: "Welcome to Ende",
-        href: "/runtime/",
+        href: "/runtime/"
       },
       {
         title: "Installation",
-        href: "/runtime/getting_started/installation/",
+        href: "/runtime/getting_started/installation/"
       },
       {
         title: "Setup your environment",
-        href: "/runtime/getting_started/setup_your_environment/",
-      },
-    ],
+        href: "/runtime/getting_started/setup_your_environment/"
+      }
+    ]
   },
   {
     title: "Guides",
@@ -28,9 +28,9 @@ export const sidebar = [
         items: [
           {
             title: "Watch mode and HMR",
-            href: "/runtime/run/watch_mode/",
-          },
-        ],
+            href: "/runtime/run/watch_mode/"
+          }
+        ]
       },
       {
         title: "Dependency management",
@@ -39,29 +39,29 @@ export const sidebar = [
         items: [
           {
             title: "Publishing",
-            href: "/runtime/packages/publishing/",
+            href: "/runtime/packages/publishing/"
           },
           {
             title: "Supply chain",
-            href: "/runtime/packages/supply_chain/",
+            href: "/runtime/packages/supply_chain/"
           },
           {
             title: "Private repositories",
-            href: "/runtime/packages/private_repositories/",
-          },
-        ],
+            href: "/runtime/packages/private_repositories/"
+          }
+        ]
       },
       {
         title: "Web development",
-        href: "/runtime/fundamentals/web_dev/",
+        href: "/runtime/fundamentals/web_dev/"
       },
       {
         title: "JSX and React",
-        href: "/runtime/reference/jsx/",
+        href: "/runtime/reference/jsx/"
       },
       {
         title: "HTTP Server",
-        href: "/runtime/fundamentals/http_server/",
+        href: "/runtime/fundamentals/http_server/"
       },
       {
         title: "Testing",
@@ -70,37 +70,37 @@ export const sidebar = [
         items: [
           {
             title: "Mocking",
-            href: "/runtime/test/mocking/",
+            href: "/runtime/test/mocking/"
           },
           {
             title: "Snapshots",
-            href: "/runtime/test/snapshots/",
+            href: "/runtime/test/snapshots/"
           },
           {
             title: "Coverage",
-            href: "/runtime/test/coverage/",
+            href: "/runtime/test/coverage/"
           },
           {
             title: "Documentation tests",
-            href: "/runtime/test/doc_tests/",
+            href: "/runtime/test/doc_tests/"
           },
           {
             title: "Sanitizers",
-            href: "/runtime/test/sanitizers/",
+            href: "/runtime/test/sanitizers/"
           },
           {
             title: "Migrating from Jest",
-            href: "/runtime/test/migrate_from_jest/",
-          },
-        ],
+            href: "/runtime/test/migrate_from_jest/"
+          }
+        ]
       },
       {
         title: "Linting and formatting",
-        href: "/runtime/lint_and_format/",
+        href: "/runtime/lint_and_format/"
       },
       {
         title: "Building CLI apps",
-        href: "/runtime/cli_apps/",
+        href: "/runtime/cli_apps/"
       },
       {
         title: "Desktop apps",
@@ -109,153 +109,153 @@ export const sidebar = [
         items: [
           {
             title: "Configuration",
-            href: "/runtime/desktop/configuration/",
+            href: "/runtime/desktop/configuration/"
           },
           {
             title: "Backends",
-            href: "/runtime/desktop/backends/",
+            href: "/runtime/desktop/backends/"
           },
           {
             title: "HTTP serving",
-            href: "/runtime/desktop/serving/",
+            href: "/runtime/desktop/serving/"
           },
           {
             title: "Windows",
-            href: "/runtime/desktop/windows/",
+            href: "/runtime/desktop/windows/"
           },
           {
             title: "WebGPU rendering",
-            href: "/runtime/desktop/webgpu/",
+            href: "/runtime/desktop/webgpu/"
           },
           {
             title: "Bindings",
-            href: "/runtime/desktop/bindings/",
+            href: "/runtime/desktop/bindings/"
           },
           {
             title: "Menus",
-            href: "/runtime/desktop/menus/",
+            href: "/runtime/desktop/menus/"
           },
           {
             title: "Tray and dock",
-            href: "/runtime/desktop/tray_and_dock/",
+            href: "/runtime/desktop/tray_and_dock/"
           },
           {
             title: "Dialogs",
-            href: "/runtime/desktop/dialogs/",
+            href: "/runtime/desktop/dialogs/"
           },
           {
             title: "Notifications",
-            href: "/runtime/desktop/notifications/",
+            href: "/runtime/desktop/notifications/"
           },
           {
             title: "Hot module replacement",
-            href: "/runtime/desktop/hmr/",
+            href: "/runtime/desktop/hmr/"
           },
           {
             title: "DevTools",
-            href: "/runtime/desktop/devtools/",
+            href: "/runtime/desktop/devtools/"
           },
           {
             title: "Auto-update",
-            href: "/runtime/desktop/auto_update/",
+            href: "/runtime/desktop/auto_update/"
           },
           {
             title: "Error reporting",
-            href: "/runtime/desktop/error_reporting/",
+            href: "/runtime/desktop/error_reporting/"
           },
           {
             title: "Distribution",
-            href: "/runtime/desktop/distribution/",
+            href: "/runtime/desktop/distribution/"
           },
           {
             title: "Comparison",
-            href: "/runtime/desktop/comparison/",
-          },
-        ],
+            href: "/runtime/desktop/comparison/"
+          }
+        ]
       },
       {
         title: "Deploying your app",
-        href: "/runtime/deploy/",
-      },
-    ],
+        href: "/runtime/deploy/"
+      }
+    ]
   },
   {
     title: "Concepts",
     items: [
       {
         title: "TypeScript",
-        href: "/runtime/fundamentals/typescript/",
+        href: "/runtime/fundamentals/typescript/"
       },
       {
         title: "Security",
-        href: "/runtime/fundamentals/security/",
+        href: "/runtime/fundamentals/security/"
       },
       {
         title: "Modules",
-        href: "/runtime/fundamentals/modules/",
+        href: "/runtime/fundamentals/modules/"
       },
       {
         title: "Config files",
-        href: "/runtime/fundamentals/configuration/",
+        href: "/runtime/fundamentals/configuration/"
       },
       {
         title: "Workspaces",
-        href: "/runtime/fundamentals/workspaces/",
+        href: "/runtime/fundamentals/workspaces/"
       },
       {
         title: "Stability and releases",
-        href: "/runtime/fundamentals/stability_and_releases/",
-      },
-    ],
+        href: "/runtime/fundamentals/stability_and_releases/"
+      }
+    ]
   },
   {
     title: "Diagnostics",
     items: [
       {
         title: "Debugging",
-        href: "/runtime/fundamentals/debugging/",
+        href: "/runtime/fundamentals/debugging/"
       },
       {
         title: "CPU profiling",
-        href: "/runtime/fundamentals/cpu_profiling/",
+        href: "/runtime/fundamentals/cpu_profiling/"
       },
       {
         title: "OpenTelemetry",
-        href: "/runtime/fundamentals/open_telemetry/",
-      },
-    ],
+        href: "/runtime/fundamentals/open_telemetry/"
+      }
+    ]
   },
   {
     title: "Advanced",
     items: [
       {
         title: "FFI",
-        href: "/runtime/fundamentals/ffi/",
+        href: "/runtime/fundamentals/ffi/"
       },
       {
         title: "WebAssembly",
-        href: "/runtime/reference/wasm/",
+        href: "/runtime/reference/wasm/"
       },
       {
         title: "Cron",
-        href: "/runtime/fundamentals/cron/",
+        href: "/runtime/fundamentals/cron/"
       },
       {
         title: "Lint plugins",
-        href: "/runtime/reference/lint_plugins/",
+        href: "/runtime/reference/lint_plugins/"
       },
       {
         title: "Continuous integration",
-        href: "/runtime/reference/continuous_integration/",
-      },
-    ],
+        href: "/runtime/reference/continuous_integration/"
+      }
+    ]
   },
   {
     title: "Reference",
     items: [
       {
         title: "Overview",
-        href: "/runtime/reference/",
+        href: "/runtime/reference/"
       },
       {
         title: "CLI",
@@ -264,213 +264,213 @@ export const sidebar = [
         items: [
           {
             title: "ende add",
-            href: "/runtime/reference/cli/add/",
+            href: "/runtime/reference/cli/add/"
           },
           {
             title: "ende bench",
-            href: "/runtime/reference/cli/bench/",
+            href: "/runtime/reference/cli/bench/"
           },
           {
             title: "ende bump-version",
-            href: "/runtime/reference/cli/bump_version/",
+            href: "/runtime/reference/cli/bump_version/"
           },
           {
             title: "ende check",
-            href: "/runtime/reference/cli/check/",
+            href: "/runtime/reference/cli/check/"
           },
           {
             title: "ende ci",
-            href: "/runtime/reference/cli/ci/",
+            href: "/runtime/reference/cli/ci/"
           },
           {
             title: "ende clean",
-            href: "/runtime/reference/cli/clean/",
+            href: "/runtime/reference/cli/clean/"
           },
           {
             title: "ende compile",
-            href: "/runtime/reference/cli/compile/",
+            href: "/runtime/reference/cli/compile/"
           },
           {
             title: "ende create",
-            href: "/runtime/reference/cli/create/",
+            href: "/runtime/reference/cli/create/"
           },
           {
             title: "ende completions",
-            href: "/runtime/reference/cli/completions/",
+            href: "/runtime/reference/cli/completions/"
           },
           {
             title: "ende coverage",
-            href: "/runtime/reference/cli/coverage/",
+            href: "/runtime/reference/cli/coverage/"
           },
           {
             title: "ende desktop",
-            href: "/runtime/reference/cli/desktop/",
+            href: "/runtime/reference/cli/desktop/"
           },
           {
             title: "ende doc",
-            href: "/runtime/reference/cli/doc/",
+            href: "/runtime/reference/cli/doc/"
           },
           {
             title: "ende eval",
-            href: "/runtime/reference/cli/eval/",
+            href: "/runtime/reference/cli/eval/"
           },
           {
             title: "ende fmt",
-            href: "/runtime/reference/cli/fmt/",
+            href: "/runtime/reference/cli/fmt/"
           },
           {
             title: "ende info",
-            href: "/runtime/reference/cli/info/",
+            href: "/runtime/reference/cli/info/"
           },
           {
             title: "ende init",
-            href: "/runtime/reference/cli/init/",
+            href: "/runtime/reference/cli/init/"
           },
           {
             title: "ende install",
-            href: "/runtime/reference/cli/install/",
+            href: "/runtime/reference/cli/install/"
           },
           {
             title: "ende link",
-            href: "/runtime/reference/cli/link/",
+            href: "/runtime/reference/cli/link/"
           },
           {
             title: "ende lint",
-            href: "/runtime/reference/cli/lint/",
+            href: "/runtime/reference/cli/lint/"
           },
           {
             title: "ende list",
-            href: "/runtime/reference/cli/list/",
+            href: "/runtime/reference/cli/list/"
           },
           {
             title: "ende outdated",
-            href: "/runtime/reference/cli/outdated/",
+            href: "/runtime/reference/cli/outdated/"
           },
           {
             title: "ende publish",
-            href: "/runtime/reference/cli/publish/",
+            href: "/runtime/reference/cli/publish/"
           },
           {
             title: "ende lsp",
-            href: "/runtime/reference/cli/lsp/",
+            href: "/runtime/reference/cli/lsp/"
           },
           {
             title: "ende remove",
-            href: "/runtime/reference/cli/remove/",
+            href: "/runtime/reference/cli/remove/"
           },
           {
             title: "ende repl",
-            href: "/runtime/reference/cli/repl/",
+            href: "/runtime/reference/cli/repl/"
           },
           {
             title: "ende run",
-            href: "/runtime/reference/cli/run/",
+            href: "/runtime/reference/cli/run/"
           },
           {
             title: "ende serve",
-            href: "/runtime/reference/cli/serve/",
+            href: "/runtime/reference/cli/serve/"
           },
           {
             title: "ende task",
-            href: "/runtime/reference/cli/task/",
+            href: "/runtime/reference/cli/task/"
           },
           {
             title: "ende test",
-            href: "/runtime/reference/cli/test/",
+            href: "/runtime/reference/cli/test/"
           },
           {
             title: "ende transpile",
-            href: "/runtime/reference/cli/transpile/",
+            href: "/runtime/reference/cli/transpile/"
           },
           {
             title: "ende types",
-            href: "/runtime/reference/cli/types/",
+            href: "/runtime/reference/cli/types/"
           },
           {
             title: "ende uninstall",
-            href: "/runtime/reference/cli/uninstall/",
+            href: "/runtime/reference/cli/uninstall/"
           },
           {
             title: "ende unlink",
-            href: "/runtime/reference/cli/unlink/",
+            href: "/runtime/reference/cli/unlink/"
           },
           {
             title: "ende update",
-            href: "/runtime/reference/cli/update/",
+            href: "/runtime/reference/cli/update/"
           },
           {
             title: "ende upgrade",
-            href: "/runtime/reference/cli/upgrade/",
+            href: "/runtime/reference/cli/upgrade/"
           },
           {
             title: "ende unstable flags",
-            href: "/runtime/reference/cli/unstable_flags/",
+            href: "/runtime/reference/cli/unstable_flags/"
           },
           {
             title: "ende watch",
-            href: "/runtime/reference/cli/watch/",
+            href: "/runtime/reference/cli/watch/"
           },
           {
             title: "ende why",
-            href: "/runtime/reference/cli/why/",
+            href: "/runtime/reference/cli/why/"
           },
           {
             title: "ende x",
-            href: "/runtime/reference/cli/x/",
-          },
-        ],
+            href: "/runtime/reference/cli/x/"
+          }
+        ]
       },
       {
         title: "ende.json",
-        href: "/runtime/reference/ende_json/",
+        href: "/runtime/reference/ende_json/"
       },
       {
         title: "TypeScript",
-        href: "/runtime/reference/ts_config_migration/",
+        href: "/runtime/reference/ts_config_migration/"
       },
       {
         title: "Environment variables",
-        href: "/runtime/reference/env_variables/",
+        href: "/runtime/reference/env_variables/"
       },
       {
         title: "Deprecated APIs",
-        href: "/runtime/reference/migrate_deprecations/",
+        href: "/runtime/reference/migrate_deprecations/"
       },
       {
         title: "Permissions",
-        href: "/runtime/reference/permissions/",
+        href: "/runtime/reference/permissions/"
       },
       {
         title: "LSP integration",
-        href: "/runtime/reference/lsp_integration/",
+        href: "/runtime/reference/lsp_integration/"
       },
       {
         title: "Lint rules",
-        href: "/lint/",
-      },
-    ],
+        href: "/lint/"
+      }
+    ]
   },
   {
     title: "Contributing",
     items: [
       {
         title: "Overview",
-        href: "/runtime/contributing/",
+        href: "/runtime/contributing/"
       },
       {
         title: "Architecture",
-        href: "/runtime/contributing/architecture/",
+        href: "/runtime/contributing/architecture/"
       },
       {
         title: "Style guide",
-        href: "/runtime/contributing/style_guide/",
+        href: "/runtime/contributing/style_guide/"
       },
       {
         title: "Help",
-        href: "/runtime/help/",
-      },
-    ],
-  },
+        href: "/runtime/help/"
+      }
+    ]
+  }
 ] satisfies Sidebar;
 
 export const sectionTitle = "Runtime";

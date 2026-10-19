@@ -14,7 +14,7 @@ function unstableFlags(run: string | undefined): string[] {
 
 async function typecheck(args: string[]): Promise<Ende.CommandOutput> {
   return await new Ende.Command(Ende.execPath(), {
-    args: ["check", ...args],
+    args: ["check", ...args]
   }).output();
 }
 
@@ -26,7 +26,7 @@ Ende.test("Check examples", async (t) => {
 
     await t.step("Check graph: " + path, async () => {
       const result = await new Ende.Command(Ende.execPath(), {
-        args: ["info", path],
+        args: ["info", path]
       }).output();
       assertEquals(result.code, 0);
       assertNotMatch(decoder.decode(result.stdout), /\(resolve error\)/);

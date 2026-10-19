@@ -60,7 +60,7 @@ Here's a simple example loading a C library:
 
 ```ts
 const dylib = Ende.dlopen("libexample.so", {
-  add: { parameters: ["i32", "i32"], result: "i32" },
+  add: { parameters: ["i32", "i32"], result: "i32" }
 });
 
 console.log(dylib.symbols.add(5, 3)); // 8
@@ -103,8 +103,8 @@ const path = new URL("./libexample.so", import.meta.url).pathname;
 const dylib = Ende.dlopen(
   path,
   {
-    add: { parameters: ["i32", "i32"], result: "i32" },
-  } as const,
+    add: { parameters: ["i32", "i32"], result: "i32" }
+  } as const
 );
 ```
 
@@ -141,8 +141,8 @@ try {
   dylib = Ende.dlopen(
     "./libexample.so",
     {
-      add: { parameters: ["i32", "i32"], result: "i32" },
-    } as const,
+      add: { parameters: ["i32", "i32"], result: "i32" }
+    } as const
   );
 } catch (err) {
   // A missing or unreadable file reports "Could not open library: ...".
@@ -266,8 +266,8 @@ const lib = Ende.dlopen(
   "./libpoint.so",
   {
     distance: { parameters: [Point, Point], result: "f64" },
-    midpoint: { parameters: [Point, Point], result: Point },
-  } as const,
+    midpoint: { parameters: [Point, Point], result: Point }
+  } as const
 );
 
 // Build struct values as a TypedArray whose bytes match the C layout.
@@ -322,12 +322,12 @@ You can pass JavaScript functions as callbacks to native code:
 const signatures = {
   setCallback: {
     parameters: ["function"],
-    result: "void",
+    result: "void"
   },
   runCallback: {
     parameters: [],
-    result: "void",
-  },
+    result: "void"
+  }
 } as const;
 
 // Create a callback function
@@ -335,7 +335,7 @@ const callback = new Ende.UnsafeCallback(
   { parameters: ["i32"], result: "void" } as const,
   (value) => {
     console.log("Callback received:", value);
-  },
+  }
 );
 
 // Pass the callback to the native library
@@ -394,14 +394,14 @@ Then use it from Ende:
 const libName = {
   windows: "./lib.dll",
   linux: "./liblib.so",
-  darwin: "./liblib.dylib",
+  darwin: "./liblib.dylib"
 }[Ende.build.os];
 
 const dylib = Ende.dlopen(
   libName,
   {
-    fibonacci: { parameters: ["u32"], result: "u32" },
-  } as const,
+    fibonacci: { parameters: ["u32"], result: "u32" }
+  } as const
 );
 
 // Calculate the 10th Fibonacci number

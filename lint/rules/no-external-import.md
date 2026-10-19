@@ -34,11 +34,7 @@ import { assertEquals } from "./deps.ts";
 ```typescript
 // deps.ts
 
-export {
-  assert,
-  assertEquals,
-  assertStringIncludes,
-} from "https://deno.land/std@0.126.0/testing/asserts.ts";
+export { assert, assertEquals, assertStringIncludes } from "https://deno.land/std@0.126.0/testing/asserts.ts";
 ```
 
 you can refer to the explanation of this convention here

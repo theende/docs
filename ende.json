@@ -32,6 +32,17 @@
     "lint:update": "ende run -A _tools/update_lint_rules.ts"
   },
   "fmt": {
+    "lineWidth": 120,
+    "useBraces": "maintain",
+    "singleBodyPosition": "maintain",
+    "trailingCommas": "never",
+    "proseWrap": "preserve",
+    "typescript": {
+      "jsxSelfClosingElement.spaceBeforeSlash": false,
+      "conditionalExpression.operatorPosition": "maintain",
+      "conditionalExpression.preferSingleLine": false,
+      "conditionalExpression.linePerExpression": true
+    },
     "exclude": [
       "_site/",
       "_reference/",

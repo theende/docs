@@ -28,7 +28,7 @@ const port = base.split(":").pop();
 const settings = new Ende.BrowserWindow({
   title: "Settings",
   width: 420,
-  height: 320,
+  height: 320
 });
 settings.navigate(`http://127.0.0.1:${port}/settings`);
 ```
@@ -124,7 +124,7 @@ const win = new Ende.BrowserWindow({
   width: saved.width ?? 800,
   height: saved.height ?? 600,
   x: saved.x,
-  y: saved.y,
+  y: saved.y
 });
 
 async function save() {
@@ -209,7 +209,7 @@ win.addEventListener("keydown", (e) => {
 
 ```ts
 const result = await win.executeJs(
-  "document.querySelectorAll('li').length",
+  "document.querySelectorAll('li').length"
 );
 console.log(result); // number of <li> on the current page
 ```

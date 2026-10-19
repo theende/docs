@@ -17,10 +17,8 @@ function Items({ items, url }: { items: SidebarItem[]; url: string }) {
     <ul>
       {items.map((item) => (
         <li>
-          <Link item={item} url={url} />
-          {item.items && item.items.length > 0 && (
-            <Items items={item.items} url={url} />
-          )}
+          <Link item={item} url={url}/>
+          {item.items && item.items.length > 0 && <Items items={item.items} url={url}/>}
         </li>
       ))}
     </ul>
@@ -29,7 +27,7 @@ function Items({ items, url }: { items: SidebarItem[]; url: string }) {
 
 /** A section's sidebar: its groups of links, the current page marked. */
 export default function SidebarNav(
-  { sidebar, url }: { sidebar: Sidebar; url: string },
+  { sidebar, url }: { sidebar: Sidebar; url: string }
 ) {
   return (
     <nav aria-label="Section">
@@ -49,7 +47,7 @@ export default function SidebarNav(
                 : section.title}
             </h2>
           )}
-          {section.items && <Items items={section.items} url={url} />}
+          {section.items && <Items items={section.items} url={url}/>}
         </section>
       ))}
     </nav>

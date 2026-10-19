@@ -12,7 +12,7 @@ Linux desktop notification service) from your Ende-side code.
 
 ```ts
 const n = new Notification("Build complete", {
-  body: "Your binary is ready.",
+  body: "Your binary is ready."
 });
 
 n.addEventListener("click", () => win.focus()); // bring the app to front
@@ -74,7 +74,7 @@ new Notification("New message", {
   icon: "data:image/png;base64,iVBORw0KGgo…",
   tag: "chat-alice",
   requireInteraction: true,
-  silent: false,
+  silent: false
 });
 ```
 

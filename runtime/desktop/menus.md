@@ -57,16 +57,16 @@ win.setApplicationMenu([
             label: "New",
             id: "new",
             accelerator: "CmdOrCtrl+N",
-            enabled: true,
-          },
+            enabled: true
+          }
         },
         {
           item: {
             label: "Open…",
             id: "open",
             accelerator: "CmdOrCtrl+O",
-            enabled: true,
-          },
+            enabled: true
+          }
         },
         "separator",
         {
@@ -74,12 +74,12 @@ win.setApplicationMenu([
             label: "Save",
             id: "save",
             accelerator: "CmdOrCtrl+S",
-            enabled: true,
-          },
+            enabled: true
+          }
         },
-        { role: { role: "quit" } },
-      ],
-    },
+        { role: { role: "quit" } }
+      ]
+    }
   },
   {
     submenu: {
@@ -90,10 +90,10 @@ win.setApplicationMenu([
         "separator",
         { role: { role: "cut" } },
         { role: { role: "copy" } },
-        { role: { role: "paste" } },
-      ],
-    },
-  },
+        { role: { role: "paste" } }
+      ]
+    }
+  }
 ]);
 ```
 
@@ -175,7 +175,7 @@ const contextMenu: Ende.MenuItem[] = [
   { item: { label: "Copy", id: "copy", enabled: true } },
   { item: { label: "Paste", id: "paste", enabled: true } },
   "separator",
-  { item: { label: "Properties…", id: "props", enabled: true } },
+  { item: { label: "Properties…", id: "props", enabled: true } }
 ];
 
 // Trigger from a right-click. The webview may not forward the browser
@@ -214,12 +214,12 @@ function rebuildEditMenu(canUndo: boolean) {
               label: "Undo",
               id: "undo",
               accelerator: "CmdOrCtrl+Z",
-              enabled: canUndo,
-            },
-          },
-        ],
-      },
-    },
+              enabled: canUndo
+            }
+          }
+        ]
+      }
+    }
   ]);
 }
 ```
@@ -233,7 +233,7 @@ Set `enabled: false` to gray out an item:
 
 ```ts
 const save: Ende.MenuItem = {
-  item: { label: "Save", id: "save", enabled: false },
+  item: { label: "Save", id: "save", enabled: false }
 };
 ```
 

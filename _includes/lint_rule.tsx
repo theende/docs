@@ -27,8 +27,7 @@ function RuleSets({ tags, rule }: { tags: string[]; rule: string }) {
           )
           : (
             <>
-              this rule is included in the following rule sets:{" "}
-              {tags.map((tag, i) => (
+              this rule is included in the following rule sets: {tags.map((tag, i) => (
                 <>
                   {i > 0 && ", "}
                   <code>{tag}</code>
@@ -44,10 +43,8 @@ function RuleSets({ tags, rule }: { tags: string[]; rule: string }) {
       <p>Enable the full set using the Ende CLI:</p>
       <pre><code>{tags.map((tag) => `ende lint --rules-tags=${tag}`).join("\n# or ...\n")}</code></pre>
       <p>
-        This rule can be explicitly included in or excluded from the rules
-        present in the current tag by adding it to the <code>include</code> or
-        {" "}
-        <code>exclude</code> array in <code>ende.json</code>:
+        This rule can be explicitly included in or excluded from the rules present in the current tag by adding it to
+        the <code>include</code> or <code>exclude</code> array in <code>ende.json</code>:
       </p>
       <pre><code>{`{
   "lint": {

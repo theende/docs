@@ -4,8 +4,8 @@ import oldUrls from "./oldurls.json" with { type: "json" };
 const redirects: Record<string, string> = {
   ...oldUrls,
   ...Object.fromEntries(
-    Object.entries(goLinks).map(([name, url]) => [`/go/${name}/`, url]),
-  ),
+    Object.entries(goLinks).map(([name, url]) => [`/go/${name}/`, url])
+  )
 };
 
 export default {
@@ -18,8 +18,8 @@ export default {
     "ende.json",
     "ende.lock",
     "go.json",
-    "oldurls.json",
+    "oldurls.json"
   ],
   copy: { static: "/", "examples/scripts": "/examples/scripts/" },
-  redirects,
+  redirects
 };

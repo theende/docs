@@ -28,8 +28,8 @@ command line.
 // define command used to create the subprocess
 const command = new Ende.Command("echo", {
   args: [
-    "Hello from Ende!",
-  ],
+    "Hello from Ende!"
+  ]
 });
 
 // create subprocess and collect output
@@ -64,21 +64,19 @@ started subprocess you must use the `"piped"` option.
 This example is the equivalent of running `yes &> ./process_output` in bash.
 
 ```ts title="subprocess_piping_to_files.ts"
-import {
-  mergeReadableStreams,
-} from "jsr:@ende/streams@^2026.10.15/merge-readable-streams";
+import { mergeReadableStreams } from "jsr:@ende/streams@^2026.10.15/merge-readable-streams";
 
 // create the file to attach the process to
 const file = await Ende.open("./process_output.txt", {
   read: true,
   write: true,
-  create: true,
+  create: true
 });
 
 // start the process
 const command = new Ende.Command("yes", {
   stdout: "piped",
-  stderr: "piped",
+  stderr: "piped"
 });
 
 const process = command.spawn();
@@ -86,7 +84,7 @@ const process = command.spawn();
 // example of combining stdout and stderr while sending to a file
 const joined = mergeReadableStreams(
   process.stdout,
-  process.stderr,
+  process.stderr
 );
 
 // returns a promise that resolves when the process is killed/closed
@@ -114,10 +112,10 @@ are similar to those available on `Response` objects:
 const command = new Ende.Command("ende", {
   args: [
     "eval",
-    "console.log(JSON.stringify({message: 'Hello from subprocess'}))",
+    "console.log(JSON.stringify({message: 'Hello from subprocess'}))"
   ],
   stdout: "piped",
-  stderr: "piped",
+  stderr: "piped"
 });
 
 const process = command.spawn();
@@ -160,7 +158,7 @@ console.log(new TextDecoder().decode(output.stdout));
 
 // Spawn with options
 const formatted = Ende.spawn("ende", ["fmt", "--check"], {
-  stdout: "inherit",
+  stdout: "inherit"
 });
 
 // Synchronous execution
@@ -182,7 +180,7 @@ Available convenience methods include:
 ```ts title="subprocess_json_parsing.ts"
 const command = new Ende.Command("ende", {
   args: ["eval", "console.log(JSON.stringify({name: 'Ende', version: '2.0'}))"],
-  stdout: "piped",
+  stdout: "piped"
 });
 
 const process = command.spawn();

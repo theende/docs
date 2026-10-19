@@ -13,21 +13,21 @@ assignments to that key and can cause unexpected behaviour.
 ```typescript
 const foo = {
   bar: "baz",
-  bar: "qux",
+  bar: "qux"
 };
 ```
 
 ```typescript
 const foo = {
   "bar": "baz",
-  bar: "qux",
+  bar: "qux"
 };
 ```
 
 ```typescript
 const foo = {
   0x1: "baz",
-  1: "qux",
+  1: "qux"
 };
 ```
 
@@ -36,6 +36,6 @@ const foo = {
 ```typescript
 const foo = {
   bar: "baz",
-  quxx: "qux",
+  quxx: "qux"
 };
 ```

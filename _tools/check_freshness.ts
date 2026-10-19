@@ -16,11 +16,11 @@ async function git(...args: string[]): Promise<string> {
   const { code, stdout, stderr } = await new Ende.Command("git", {
     args,
     stdout: "piped",
-    stderr: "piped",
+    stderr: "piped"
   }).output();
   if (code !== 0) {
     throw new Error(
-      `git ${args.join(" ")} failed:\n${new TextDecoder().decode(stderr)}`,
+      `git ${args.join(" ")} failed:\n${new TextDecoder().decode(stderr)}`
     );
   }
   return new TextDecoder().decode(stdout);
@@ -31,7 +31,7 @@ async function showFile(ref: string, path: string): Promise<string | null> {
   const { code, stdout } = await new Ende.Command("git", {
     args: ["show", `${ref}:${path}`],
     stdout: "piped",
-    stderr: "null",
+    stderr: "null"
   }).output();
   if (code !== 0) return null;
   return new TextDecoder().decode(stdout);
@@ -68,12 +68,12 @@ async function resolveBase(): Promise<string> {
     const { code } = await new Ende.Command("git", {
       args: ["rev-parse", "--verify", "--quiet", ref],
       stdout: "null",
-      stderr: "null",
+      stderr: "null"
     }).output();
     if (code === 0) return ref;
   }
   throw new Error(
-    "Could not determine a base ref. Set BASE_SHA or ensure origin/main exists.",
+    "Could not determine a base ref. Set BASE_SHA or ensure origin/main exists."
   );
 }
 
@@ -91,7 +91,7 @@ async function main() {
     "diff",
     "--name-status",
     "-M",
-    mergeBase,
+    mergeBase
   );
 
   for (const line of nameStatus.split("\n")) {
@@ -121,21 +121,21 @@ async function main() {
 
     if (headLM === null) {
       violations.push(
-        `${newPath}: the 'last_modified' field was removed; keep it and set it to ${today}.`,
+        `${newPath}: the 'last_modified' field was removed; keep it and set it to ${today}.`
       );
       continue;
     }
 
     if (!DATE_RE.test(headLM)) {
       violations.push(
-        `${newPath}: 'last_modified' must be a YYYY-MM-DD date, got "${headLM}".`,
+        `${newPath}: 'last_modified' must be a YYYY-MM-DD date, got "${headLM}".`
       );
       continue;
     }
 
     if (headLM > today) {
       violations.push(
-        `${newPath}: 'last_modified' is in the future ("${headLM}"); today is ${today}.`,
+        `${newPath}: 'last_modified' is in the future ("${headLM}"); today is ${today}.`
       );
       continue;
     }
@@ -148,24 +148,24 @@ async function main() {
     // gets.
     if (baseLM !== null && headLM === baseLM && headLM !== today) {
       violations.push(
-        `${newPath}: page changed but 'last_modified' was not updated (still ${headLM}); set it to ${today}.`,
+        `${newPath}: page changed but 'last_modified' was not updated (still ${headLM}); set it to ${today}.`
       );
     }
   }
 
   if (violations.length > 0) {
     console.error(
-      `\nFreshness check failed for ${violations.length} page(s):\n`,
+      `\nFreshness check failed for ${violations.length} page(s):\n`
     );
     for (const v of violations) console.error(`  - ${v}`);
     console.error(
-      `\nWhen you change a page that tracks 'last_modified', bump that field to the date of the change.\n`,
+      `\nWhen you change a page that tracks 'last_modified', bump that field to the date of the change.\n`
     );
     Ende.exit(1);
   }
 
   console.log(
-    "Freshness check passed: all changed pages have a fresh 'last_modified'.",
+    "Freshness check passed: all changed pages have a fresh 'last_modified'."
   );
 }
 

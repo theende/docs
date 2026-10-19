@@ -5,8 +5,7 @@ import { loadExamples } from "./_lib/examples.ts";
 import type { ExampleFromFileSystem } from "./_lib/types.ts";
 
 function ExamplePage({ example }: { example: ExampleFromFileSystem }) {
-  const source =
-    `https://github.com/theende/docs/blob/primary/examples/scripts/${example.name}`;
+  const source = `https://github.com/theende/docs/blob/primary/examples/scripts/${example.name}`;
   const rawUrl = `https://docs.ende.sh/examples/scripts/${example.name}`;
   const run = example.parsed.run;
 
@@ -22,9 +21,7 @@ function ExamplePage({ example }: { example: ExampleFromFileSystem }) {
           {file.snippets.map((snippet) => (
             <>
               {snippet.text && <p>{snippet.text}</p>}
-              {snippet.code && (
-                <pre><code class="language-ts">{raw(highlight(snippet.code, "ts")!)}</code></pre>
-              )}
+              {snippet.code && <pre><code class="language-ts">{raw(highlight(snippet.code, "ts")!)}</code></pre>}
             </>
           ))}
         </section>
@@ -63,7 +60,7 @@ export default async function* () {
     yield {
       url: `/examples/${example.label}/`,
       title: example.parsed.title,
-      content: <ExamplePage example={example} />,
+      content: <ExamplePage example={example}/>
     };
   }
 }

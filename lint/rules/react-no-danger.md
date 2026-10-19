@@ -9,7 +9,7 @@ vulnerabilities if used incorrectly.
 **Invalid:**
 
 ```tsx
-const hello = <div dangerouslySetInnerHTML={{ __html: "Hello World!" }} />;
+const hello = <div dangerouslySetInnerHTML={{ __html: "Hello World!" }}/>;
 ```
 
 **Valid:**

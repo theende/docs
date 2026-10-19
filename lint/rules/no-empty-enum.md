@@ -18,6 +18,6 @@ enum Foo {}
 
 ```typescript
 enum Foo {
-  ONE = "ONE",
+  ONE = "ONE"
 }
 ```

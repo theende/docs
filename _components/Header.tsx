@@ -2,7 +2,7 @@ import type { NavLink } from "../_lib/types.ts";
 
 /** The site header: home link, top navigation and the search form. */
 export default function Header(
-  { navigation, url }: { navigation: NavLink[]; url: string },
+  { navigation, url }: { navigation: NavLink[]; url: string }
 ) {
   return (
     <header>
@@ -26,7 +26,7 @@ export default function Header(
         </ul>
       </nav>
       <form action="/search/" method="get" role="search">
-        <input type="search" name="q" aria-label="Search the docs" />
+        <input type="search" name="q" aria-label="Search the docs"/>
         <button type="submit">Search</button>
       </form>
     </header>

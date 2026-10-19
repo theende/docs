@@ -25,7 +25,7 @@ delete c; // would return false
 
 ```typescript
 let obj = {
-  a: 1,
+  a: 1
 };
 delete obj.a; // return true
 ```

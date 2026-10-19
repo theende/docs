@@ -445,7 +445,7 @@ sufficient, even when the value matches the one Ende was started with:
 // Fails under `--allow-run=echo`, succeeds under `--allow-run` or `--allow-all`.
 new Ende.Command("echo", {
   args: ["hello"],
-  env: { LD_PRELOAD: "/path/to/lib.so" },
+  env: { LD_PRELOAD: "/path/to/lib.so" }
 }).outputSync();
 ```
 

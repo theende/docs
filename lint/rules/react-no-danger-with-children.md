@@ -17,5 +17,5 @@ will be ignored.
 **Valid:**
 
 ```tsx
-<div dangerouslySetInnerHTML={{ __html: "<h1>hello</h1>" }} />;
+<div dangerouslySetInnerHTML={{ __html: "<h1>hello</h1>" }}/>;
 ```

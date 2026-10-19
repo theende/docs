@@ -61,9 +61,9 @@ function App({ name }: { name: string }) {
 }
 
 Ende.serve(async () => {
-  const html = await (<App name="Ende" />).toString();
+  const html = await (<App name="Ende"/>).toString();
   return new Response(`<!DOCTYPE html>${html}`, {
-    headers: { "content-type": "text/html; charset=utf-8" },
+    headers: { "content-type": "text/html; charset=utf-8" }
   });
 });
 ```

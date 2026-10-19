@@ -9,13 +9,13 @@ value can be omitted with the shorthand syntax.
 **Invalid:**
 
 ```tsx
-const foo = <Foo isFoo={true} />;
-const foo = <Foo isFoo={false} />;
+const foo = <Foo isFoo={true}/>;
+const foo = <Foo isFoo={false}/>;
 ```
 
 **Valid:**
 
 ```tsx
-const foo = <Foo isFoo />;
-const foo = <Foo isFoo={false} />;
+const foo = <Foo isFoo/>;
+const foo = <Foo isFoo={false}/>;
 ```

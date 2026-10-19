@@ -2,7 +2,7 @@ const searchbar = document.getElementById("lint-rule-search") as
   | HTMLInputElement
   | null;
 const tagButtons = document.querySelectorAll<HTMLButtonElement>(
-  "[data-tag-btn]",
+  "[data-tag-btn]"
 );
 const activeTags = new Set<string>();
 

@@ -173,7 +173,7 @@ Dynamic imports work the same way:
 
 ```ts
 const { default: sheet } = await import("./styles.css", {
-  with: { type: "css" },
+  with: { type: "css" }
 });
 ```
 

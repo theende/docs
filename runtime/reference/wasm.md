@@ -230,7 +230,7 @@ with `fetch` to perform all three steps in one go:
 
 ```ts
 const { instance, module } = await WebAssembly.instantiateStreaming(
-  fetch("https://wpt.live/wasm/incrementer.wasm"),
+  fetch("https://wpt.live/wasm/incrementer.wasm")
 );
 
 const increment = instance.exports.increment as (input: number) => number;
@@ -243,7 +243,7 @@ instead use [`compileStreaming`](/api/web/~/WebAssembly.compileStreaming/):
 
 ```ts
 const module = await WebAssembly.compileStreaming(
-  fetch("https://wpt.live/wasm/incrementer.wasm"),
+  fetch("https://wpt.live/wasm/incrementer.wasm")
 );
 
 /* do some more stuff */

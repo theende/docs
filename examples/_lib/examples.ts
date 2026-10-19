@@ -14,7 +14,7 @@ export async function loadExamples(): Promise<ExampleFromFileSystem[]> {
       name: entry.name,
       content,
       label: entry.name.replace(/\.ts$/, ""),
-      parsed: parseExample(entry.name, content),
+      parsed: parseExample(entry.name, content)
     });
   }
 

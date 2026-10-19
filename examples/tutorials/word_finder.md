@@ -147,7 +147,7 @@ import { search } from "./search.js";
 import { renderHtml } from "./render.js";
 
 const dictionary = (await Ende.readTextFile("/usr/share/dict/words")).split(
-  "\n",
+  "\n"
 );
 
 const app = new Application();

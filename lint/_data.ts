@@ -20,14 +20,14 @@ async function lintRules(): Promise<LintRule[]> {
 
     const name = basename(entry.name, ".md");
     const { attrs, body } = extract<{ tags?: string[] }>(
-      await Ende.readTextFile(new URL(entry.name, dir)),
+      await Ende.readTextFile(new URL(entry.name, dir))
     );
 
     rules.push({
       title: name,
       href: `/lint/rules/${name}/`,
       tags: attrs.tags ?? [],
-      summary: body.trim().split(/\n\s*\n/)[0],
+      summary: body.trim().split(/\n\s*\n/)[0]
     });
   }
 
@@ -44,8 +44,8 @@ export const sidebar = [
   {
     title: "List of rules",
     href: sectionHref,
-    items: lintRulePages,
-  },
+    items: lintRulePages
+  }
 ] satisfies Sidebar;
 
 export default { sidebar, sectionTitle, sectionHref, lintRulePages };

@@ -1,23 +1,23 @@
 export const TAGS = {
   cli: {
     title: "cli",
-    description: "Works in Ende CLI",
+    description: "Works in Ende CLI"
   },
   web: {
     title: "web",
-    description: "Works in on the Web",
-  },
+    description: "Works in on the Web"
+  }
 };
 
 export const DIFFICULTIES = {
   beginner: {
     title: "Beginner",
-    description: "No significant prior knowledge is required for this example.",
+    description: "No significant prior knowledge is required for this example."
   },
   intermediate: {
     title: "Intermediate",
-    description: "Some prior knowledge is needed for this example.",
-  },
+    description: "Some prior knowledge is needed for this example."
+  }
 };
 
 export type ExampleFromFileSystem = {

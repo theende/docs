@@ -26,7 +26,7 @@ const f3 = async () => doSomething();
 const obj = {
   async method() {
     doSomething();
-  },
+  }
 };
 
 class MyClass {

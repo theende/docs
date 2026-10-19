@@ -39,14 +39,7 @@ module from the [Ende Standard Library](https://jsr.io/@ende/testing/doc/bdd).
 First, let's import the necessary functions:
 
 ```ts
-import {
-  afterAll,
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  it,
-} from "jsr:@ende/testing/bdd";
+import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from "jsr:@ende/testing/bdd";
 import { assertEquals, assertThrows } from "jsr:@ende/assert";
 ```
 
@@ -186,7 +179,7 @@ describe("Calculator", () => {
       assertThrows(
         () => calculator.divide(0),
         Error,
-        "Cannot divide by zero",
+        "Cannot divide by zero"
       );
     });
   });

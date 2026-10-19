@@ -55,7 +55,7 @@ Ende.test({
     using file = await Ende.open("hello.txt");
     // ...
   },
-  sanitizeResources: true,
+  sanitizeResources: true
 });
 ```
 
@@ -74,7 +74,7 @@ Ende.test({
   name: "async operation test",
   async fn() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-  },
+  }
 });
 ```
 
@@ -87,7 +87,7 @@ Ende.test({
   async fn() {
     await someAsyncWork();
   },
-  sanitizeOps: true,
+  sanitizeOps: true
 });
 ```
 
@@ -104,7 +104,7 @@ override lower ones.
      name: "strict",
      sanitizeOps: true,
      sanitizeResources: true,
-     fn() {/* … */},
+     fn() {/* … */}
    });
    ```
 
@@ -148,7 +148,7 @@ Ende.test({
   fn() {
     Ende.exit(0);
   },
-  sanitizeExit: false,
+  sanitizeExit: false
 });
 
 // This test never runs, because the process exits during "false success" test
@@ -156,6 +156,6 @@ Ende.test({
   name: "failing test",
   fn() {
     throw new Error("this test fails");
-  },
+  }
 });
 ```

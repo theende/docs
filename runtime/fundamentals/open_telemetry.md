@@ -317,7 +317,7 @@ function myFunction() {
       span.recordException(error);
       span.setStatus({
         code: 2, // SpanStatusCode.ERROR
-        message: (error as Error).message,
+        message: (error as Error).message
       });
       throw error;
     } finally {
@@ -369,14 +369,14 @@ does not set the span status to `ERROR`, you must do that manually.**
 ```ts
 span.setStatus({
   code: 2, // SpanStatusCode.ERROR
-  message: "An error occurred",
+  message: "An error occurred"
 });
 span.recordException(new Error("An error occurred"));
 
 // or
 
 span.setStatus({
-  code: 1, // SpanStatusCode.OK
+  code: 1 // SpanStatusCode.OK
 });
 ```
 
@@ -391,7 +391,7 @@ Links are references to other spans.
 // Add an event to the span
 span.addEvent("button_clicked", {
   id: "submit-button",
-  action: "submit",
+  action: "submit"
 });
 
 // Add an event with a timestamp
@@ -443,7 +443,7 @@ Then, an instrument can be created from the meter, and used to record values:
 ```ts
 const counter = meter.createCounter("my_counter", {
   description: "A simple counter",
-  unit: "1",
+  unit: "1"
 });
 
 counter.add(1);
@@ -496,7 +496,7 @@ is ready to record a value, for example just before exporting.
 ```ts
 const counter = meter.createObservableCounter("my_counter", {
   description: "A simple counter",
-  unit: "1",
+  unit: "1"
 });
 counter.addCallback((res) => {
   res.observe(1);

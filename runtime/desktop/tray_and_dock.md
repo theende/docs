@@ -22,7 +22,7 @@ tray.setTooltip("My App");
 
 tray.setMenu([
   { item: { label: "Open", id: "open", enabled: true } },
-  { item: { label: "Quit", id: "quit", enabled: true } },
+  { item: { label: "Quit", id: "quit", enabled: true } }
 ]);
 
 tray.addEventListener("menuclick", (e) => {
@@ -95,8 +95,8 @@ tray.setMenu([
       label: "Settings…",
       id: "settings",
       accelerator: "CmdOrCtrl+,",
-      enabled: true,
-    },
+      enabled: true
+    }
   },
   "separator",
   {
@@ -104,9 +104,9 @@ tray.setMenu([
       label: "Quit",
       id: "quit",
       accelerator: "CmdOrCtrl+Q",
-      enabled: true,
-    },
-  },
+      enabled: true
+    }
+  }
 ]);
 
 tray.addEventListener("menuclick", (e) => {
@@ -151,7 +151,7 @@ tray.setIcon(await Ende.readFile("./icons/tray.png"));
 const panel = tray.attachPanel({
   url: `http://127.0.0.1:${port}/panel`,
   width: 360,
-  height: 480,
+  height: 480
 });
 
 panel.window.bind("doThing", async () => {/* … */});
@@ -249,7 +249,7 @@ via Spotlight or the tray icon. No-op on Windows and Linux.
 ```ts
 Ende.dock.setMenu([
   { item: { label: "New Window", id: "new", enabled: true } },
-  { item: { label: "Quit", id: "quit", enabled: true } },
+  { item: { label: "Quit", id: "quit", enabled: true } }
 ]);
 Ende.dock.setMenu(null); // remove the menu
 
@@ -286,7 +286,7 @@ tray.setIcon(await Ende.readFile("./icons/tray.png"));
 tray.setTooltip("My App");
 tray.setMenu([
   { item: { label: "Show window", id: "show", enabled: true } },
-  { item: { label: "Quit", id: "quit", enabled: true } },
+  { item: { label: "Quit", id: "quit", enabled: true } }
 ]);
 
 tray.addEventListener("menuclick", (e) => {

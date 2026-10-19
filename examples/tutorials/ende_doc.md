@@ -140,7 +140,7 @@ export interface MathConfig {
 export function calculate(
   dividend: number,
   divisor: number,
-  config: MathConfig = {},
+  config: MathConfig = {}
 ): number {
   const { precision = 10, roundToInt = false } = config;
 

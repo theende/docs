@@ -7,7 +7,7 @@ import type { SidebarItem } from "../_lib/types.ts";
 // Each cap below is that sidebar's current maximum — tighten it as labels are
 // shortened; raising one should be a deliberate design decision.
 const SIDEBARS = [
-  { name: "runtime", sidebar: runtimeSidebar, maxLabelLength: 22 },
+  { name: "runtime", sidebar: runtimeSidebar, maxLabelLength: 22 }
 ];
 
 // Minimal shape for walking a sidebar tree. The exported `sidebar` data is
@@ -40,7 +40,7 @@ for (const { name, sidebar, maxLabelLength } of SIDEBARS) {
       `These ${name} sidebar labels exceed ${maxLabelLength} characters:\n` +
         tooLong.map((label) => `  ${label.length}  "${label}"`).join("\n") +
         `\nShorten them, or raise the cap for "${name}" in sidebar_test.ts if ` +
-        `this is an intentional design change.`,
+        `this is an intentional design change.`
     );
   });
 }

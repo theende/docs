@@ -58,7 +58,7 @@ export default function Doc(props: LayoutProps) {
 
   return (
     <div>
-      {sidebar.length > 0 && <SidebarNav sidebar={sidebar} url={props.url} />}
+      {sidebar.length > 0 && <SidebarNav sidebar={sidebar} url={props.url}/>}
       <main id="content" tabIndex={-1}>
         <article>
           {title && <h1>{title}</h1>}
@@ -74,7 +74,7 @@ export default function Doc(props: LayoutProps) {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
-                  timeZone: "UTC",
+                  timeZone: "UTC"
                 })}
               </time>
             </p>
@@ -90,14 +90,13 @@ export default function Doc(props: LayoutProps) {
           )}
           {(previous || next) && (
             <nav aria-label="Previous and next page">
-              {previous && (
-                <a href={previous.href} rel="prev">← {previous.title}</a>
-              )} {next && <a href={next.href} rel="next">{next.title} →</a>}
+              {previous && <a href={previous.href} rel="prev">← {previous.title}</a>}{" "}
+              {next && <a href={next.href} rel="next">{next.title} →</a>}
             </nav>
           )}
         </footer>
       </main>
-      {toc.length > 0 && <Toc toc={toc} />}
+      {toc.length > 0 && <Toc toc={toc}/>}
     </div>
   );
 }

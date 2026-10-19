@@ -70,14 +70,14 @@ const plugin: Ende.lint.Plugin = {
                 // the user runs `ende lint --fix`
                 fix(fixer) {
                   return fixer.replaceText(node, "_b");
-                },
+                }
               });
             }
-          },
+          }
         };
-      },
-    },
-  },
+      }
+    }
+  }
 };
 export default plugin;
 ```
@@ -101,13 +101,13 @@ const plugin: Ende.lint.Plugin = {
           'CallExpression[callee.name="require"]'(node) {
             context.report({
               node,
-              message: "Don't use require() calls to load modules",
+              message: "Don't use require() calls to load modules"
             });
-          },
+          }
         };
-      },
-    },
-  },
+      }
+    }
+  }
 };
 export default plugin;
 ```
@@ -161,7 +161,7 @@ context.report({
   message: "should be _b",
   fix(fixer) {
     return fixer.replaceText(node, "_b");
-  },
+  }
 });
 ```
 
@@ -190,7 +190,7 @@ context.report({
     const original = context.sourceCode.getText(node);
     const newText = `{ ${original} }`;
     return fixer.replaceText(node, newText);
-  },
+  }
 });
 ```
 
@@ -212,9 +212,9 @@ const plugin: Ende.lint.Plugin = {
       // and each rule context is destroyed.
       destroy() {
         // do some cleanup stuff if you need to
-      },
-    },
-  },
+      }
+    }
+  }
 };
 export default plugin;
 ```
@@ -278,7 +278,7 @@ Ende.test("my-plugin", () => {
   const diagnostics = Ende.lint.runPlugin(
     myPlugin,
     "main.ts", // Dummy filename, file doesn't need to exist.
-    "const _a = 'a';",
+    "const _a = 'a';"
   );
 
   assertEquals(diagnostics.length, 1);

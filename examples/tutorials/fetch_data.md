@@ -100,7 +100,7 @@ const file = await Ende.open("./logo.svg", { read: true });
 
 await fetch("https://example.com/", {
   method: "POST",
-  body: file.readable,
+  body: file.readable
 });
 ```
 

@@ -41,7 +41,7 @@ interface Database {
 // Function to test
 function saveUser(
   user: User,
-  database: Database,
+  database: Database
 ): Promise<User & { id: number }> {
   return database.save(user);
 }
@@ -49,7 +49,7 @@ function saveUser(
 Ende.test("saveUser calls database.save", async () => {
   // A stand-in database whose save method is wrapped in a spy
   const mockDatabase = {
-    save: spy((user: User) => Promise.resolve({ id: 1, ...user })),
+    save: spy((user: User) => Promise.resolve({ id: 1, ...user }))
   };
 
   const user: User = { name: "Test User" };
@@ -81,7 +81,7 @@ import { assertSpyCalls, spy } from "jsr:@ende/testing/mock";
 
 Ende.test("using disposable spies", () => {
   const calculator = {
-    add: (a: number, b: number) => a + b,
+    add: (a: number, b: number) => a + b
   };
 
   // Restored automatically when it goes out of scope
@@ -113,7 +113,7 @@ const deps = {
   getUserName(_id: number): string {
     // In a real app, this might call a database
     return "Original User";
-  },
+  }
 };
 
 // Function under test
@@ -150,7 +150,7 @@ type User = { id: number; name: string };
 const database = {
   getUserById(id: number): User | undefined {
     return { id, name: "Ada Lovelace" };
-  },
+  }
 };
 
 function findOrThrow(id: number): User {
@@ -175,7 +175,7 @@ Ende.test("stub with multiple return values", () => {
   using fetchDataStub = stub(
     dataService,
     "fetchData",
-    returnsNext(["first result", "second result"]),
+    returnsNext(["first result", "second result"])
   );
 
   assertEquals(dataService.fetchData(), "first result");

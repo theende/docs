@@ -1,19 +1,8 @@
 import { raw } from "@ende/satz/jsx-runtime";
 import { endeCategories, webCategories } from "../_lib/reference/categories.ts";
-import {
-  type Builtin,
-  categories,
-  loadBuiltin,
-  loadStd,
-  type Section,
-} from "../_lib/reference/doc.ts";
+import { type Builtin, categories, loadBuiltin, loadStd, type Section } from "../_lib/reference/doc.ts";
 import { docHtml, type Rewrite } from "../_lib/reference/markdown.ts";
-import {
-  symbolDescription,
-  SymbolList,
-  symbolToc,
-  SymbolView,
-} from "../_lib/reference/render.tsx";
+import { symbolDescription, SymbolList, symbolToc, SymbolView } from "../_lib/reference/render.tsx";
 import type { Sidebar } from "../_lib/types.ts";
 
 const SECTIONS: {
@@ -27,15 +16,15 @@ const SECTIONS: {
     title: "Ende namespace",
     intro:
       "The `Ende` global holds the APIs that aren't web standards: files, networking, subprocesses, permissions, testing and more. `Deno` is an alias of `Ende`.",
-    descriptions: endeCategories,
+    descriptions: endeCategories
   },
   {
     section: "web",
     title: "Web platform APIs",
     intro:
       "The web standard globals Ende implements, such as `fetch`, streams, URLs, Web Crypto, WebSockets and WebGPU.",
-    descriptions: webCategories,
-  },
+    descriptions: webCategories
+  }
 ];
 
 function sidebar(builtin: Builtin): Sidebar {
@@ -48,11 +37,11 @@ function sidebar(builtin: Builtin): Sidebar {
         href: `/api/${section}/`,
         items: categories(builtin.pages, section).map((category) => ({
           title: category.name,
-          href: category.url,
-        })),
+          href: category.url
+        }))
       })),
-      { title: "Standard library", href: "/runtime/reference/std/" },
-    ],
+      { title: "Standard library", href: "/runtime/reference/std/" }
+    ]
   }];
 }
 
@@ -62,8 +51,7 @@ export default async function* () {
   const std = await loadStd();
   const rewrite: Rewrite = (href) => std.fromJsrUrl(href);
   const side = sidebar(builtin);
-  const markdown = (text: string) =>
-    raw(docHtml(text, builtin.lookup, rewrite));
+  const markdown = (text: string) => raw(docHtml(text, builtin.lookup, rewrite));
 
   yield {
     url: "/api/",
@@ -74,8 +62,7 @@ export default async function* () {
       <>
         <p>
           The reference is generated from Ende's own type declarations
-          {builtin.ende ? ` (Ende ${builtin.ende})` : ""}{" "}
-          and the standard library's published packages on JSR.
+          {builtin.ende ? ` (Ende ${builtin.ende})` : ""} and the standard library's published packages on JSR.
         </p>
         <ul>
           {SECTIONS.map(({ section, title, intro }) => (
@@ -84,12 +71,11 @@ export default async function* () {
             </li>
           ))}
           <li>
-            <a href="/runtime/reference/std/">Standard library</a> — the{" "}
-            <code>@ende/*</code> packages on JSR.
+            <a href="/runtime/reference/std/">Standard library</a> — the <code>@ende/*</code> packages on JSR.
           </li>
         </ul>
       </>
-    ),
+    )
   };
 
   for (const { section, title, intro, descriptions } of SECTIONS) {
@@ -103,7 +89,7 @@ export default async function* () {
       toc: groups.map((group) => ({
         depth: 2,
         text: group.name,
-        slug: group.slug,
+        slug: group.slug
       })),
       content: (
         <>
@@ -113,11 +99,11 @@ export default async function* () {
               <h2 id={group.slug}>
                 <a href={group.url}>{group.name}</a>
               </h2>
-              <SymbolList pages={group.pages} />
+              <SymbolList pages={group.pages}/>
             </section>
           ))}
         </>
-      ),
+      )
     };
 
     for (const group of groups) {
@@ -129,9 +115,9 @@ export default async function* () {
         content: (
           <>
             {descriptions[group.name] && markdown(descriptions[group.name])}
-            <SymbolList pages={group.pages} />
+            <SymbolList pages={group.pages}/>
           </>
-        ),
+        )
       };
     }
   }
@@ -143,7 +129,7 @@ export default async function* () {
       description: symbolDescription(page),
       sidebar: side,
       toc: symbolToc(page),
-      content: <SymbolView page={page} rewrite={rewrite} />,
+      content: <SymbolView page={page} rewrite={rewrite}/>
     };
   }
 }

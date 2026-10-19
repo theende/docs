@@ -31,7 +31,7 @@ async function descriptions(): Promise<Record<string, string>> {
     if (!entry.isFile || !entry.name.endsWith(".md")) continue;
 
     const { attrs } = extract<{ url?: string; description?: string }>(
-      await Ende.readTextFile(new URL(entry.name, tutorials)),
+      await Ende.readTextFile(new URL(entry.name, tutorials))
     );
     const description = firstSentence(attrs.description);
     if (attrs.url && description) result[attrs.url] = description;
@@ -47,17 +47,15 @@ export default async function ExamplesIndex() {
   return (
     <>
       <p>
-        A collection of walkthrough tutorials, examples, videos and guides to
-        teach you about the Ende runtime and how to use it with your favorite
-        tools.
+        A collection of walkthrough tutorials, examples, videos and guides to teach you about the Ende runtime and how
+        to use it with your favorite tools.
       </p>
       <section>
         <h2 id="featured">Featured</h2>
         <ul>
           {featuredItems.map((item) => (
             <li>
-              <a href={item.href}>{item.title}</a> ({item.type}):{" "}
-              {item.description}
+              <a href={item.href}>{item.title}</a> ({item.type}): {item.description}
             </li>
           ))}
         </ul>

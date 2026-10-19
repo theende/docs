@@ -349,7 +349,7 @@ with any `--inspect` flag, each spawned worker appears as a separate target in
 
 ```ts title="main.ts"
 const worker = new Worker(import.meta.resolve("./worker.ts"), {
-  type: "module",
+  type: "module"
 });
 worker.postMessage("start");
 ```

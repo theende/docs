@@ -143,7 +143,7 @@ export class LLMProvider {
       maxTokens: 150,
       temperature: 0.8,
       ...config,
-      apiKey,
+      apiKey
     };
 
     console.log(`LLM Provider initialized: ${this.config.provider}`);
@@ -187,14 +187,14 @@ export class LLMProvider {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${this.config.apiKey}`,
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         model: this.config.model,
         messages: [{ role: "user", content: prompt }],
         max_tokens: this.config.maxTokens,
-        temperature: this.config.temperature,
-      }),
+        temperature: this.config.temperature
+      })
     });
 
     if (!response.ok) {
@@ -212,14 +212,14 @@ export class LLMProvider {
       headers: {
         "x-api-key": this.config.apiKey!,
         "Content-Type": "application/json",
-        "anthropic-version": "2023-06-01",
+        "anthropic-version": "2023-06-01"
       },
       body: JSON.stringify({
         model: this.config.model,
         max_tokens: this.config.maxTokens,
         messages: [{ role: "user", content: prompt }],
-        temperature: this.config.temperature,
-      }),
+        temperature: this.config.temperature
+      })
     });
 
     if (!response.ok) {
@@ -237,7 +237,7 @@ export class LLMProvider {
       "That's an interesting approach to the situation.",
       "I see what you're getting at. Here's what I think...",
       "Fascinating! I would approach it this way...",
-      "Good point! That gives me an idea...",
+      "Good point! That gives me an idea..."
     ];
 
     return responses[Math.floor(Math.random() * responses.length)];
@@ -282,7 +282,7 @@ export class Character {
     name: string,
     characterClass: string,
     personality: string,
-    llmProvider: LLMProvider,
+    llmProvider: LLMProvider
   ) {
     this.name = name;
     this.class = characterClass;
@@ -292,7 +292,7 @@ export class Character {
 
   async generateResponse(
     context: string,
-    userMessage: string,
+    userMessage: string
   ): Promise<string> {
     // Build the character's prompt with personality and context
     const characterPrompt = `
@@ -331,7 +331,7 @@ Respond as ${this.name} in character. Keep responses under 150 words and maintai
     return {
       name: this.name,
       class: this.class,
-      personality: this.personality,
+      personality: this.personality
     };
   }
 
@@ -365,7 +365,7 @@ export const defaultCharacters: CharacterConfig[] = [
     class: "Fighter",
     personality:
       "Brave and loyal team leader, always ready to protect allies. Takes charge in dangerous situations but listens to party input.",
-    backstory: "A former city guard seeking adventure and justice.",
+    backstory: "A former city guard seeking adventure and justice."
   },
   {
     name: "Lyra",
@@ -373,16 +373,15 @@ export const defaultCharacters: CharacterConfig[] = [
     class: "Wizard",
     personality:
       "Curious and analytical strategist, loves solving puzzles. Uses magic creatively to support the party.",
-    backstory: "A scholar of ancient magic seeking forgotten spells.",
+    backstory: "A scholar of ancient magic seeking forgotten spells."
   },
   {
     name: "Finn",
     emoji: "🗡️",
     class: "Rogue",
-    personality:
-      "Witty and sneaky scout, prefers clever solutions. Acts quickly and adapts to what allies need.",
-    backstory: "A former street thief now using skills for good.",
-  },
+    personality: "Witty and sneaky scout, prefers clever solutions. Acts quickly and adapts to what allies need.",
+    backstory: "A former street thief now using skills for good."
+  }
 ];
 ```
 
@@ -436,7 +435,7 @@ export class GameManager {
 
   async startNewGame(
     gmPrompt: string,
-    characterConfigs: StartGameRequest["characters"],
+    characterConfigs: StartGameRequest["characters"]
   ): Promise<string> {
     const gameId = crypto.randomUUID();
 
@@ -446,7 +445,7 @@ export class GameManager {
         config.name,
         config.class,
         config.personality,
-        this.llmProvider,
+        this.llmProvider
       )
     );
 
@@ -457,7 +456,7 @@ export class GameManager {
       messages: [],
       currentTurn: 0,
       isActive: true,
-      createdAt: new Date(),
+      createdAt: new Date()
     };
 
     this.games.set(gameId, gameState);
@@ -465,10 +464,8 @@ export class GameManager {
     // Add initial system message
     this.addMessage(gameId, {
       speaker: "System",
-      message: `Game started! Players: ${
-        characters.map((c) => c.name).join(", ")
-      }`,
-      type: "system",
+      message: `Game started! Players: ${characters.map((c) => c.name).join(", ")}`,
+      type: "system"
     });
 
     console.log(`New game started: ${gameId}`);
@@ -477,7 +474,7 @@ export class GameManager {
 
   async handlePlayerMessage(
     gameId: string,
-    message: string,
+    message: string
   ): Promise<GameMessage[]> {
     const game = this.games.get(gameId);
     if (!game || !game.isActive) {
@@ -488,7 +485,7 @@ export class GameManager {
     this.addMessage(gameId, {
       speaker: "Player",
       message,
-      type: "gm",
+      type: "gm"
     });
 
     // Generate responses from each character
@@ -502,7 +499,7 @@ export class GameManager {
         const characterMessage = this.addMessage(gameId, {
           speaker: character.name,
           message: response,
-          type: "character",
+          type: "character"
         });
 
         responses.push(characterMessage);
@@ -524,7 +521,7 @@ export class GameManager {
       `Scenario: ${game.gmPrompt}`,
       `Current turn: ${game.currentTurn}`,
       "Recent events:",
-      ...recentMessages.map((m) => `${m.speaker}: ${m.message}`),
+      ...recentMessages.map((m) => `${m.speaker}: ${m.message}`)
     ].join("\n");
 
     return context;
@@ -532,7 +529,7 @@ export class GameManager {
 
   private addMessage(
     gameId: string,
-    messageData: Omit<GameMessage, "id" | "timestamp">,
+    messageData: Omit<GameMessage, "id" | "timestamp">
   ): GameMessage {
     const game = this.games.get(gameId);
     if (!game) throw new Error("Game not found");
@@ -540,7 +537,7 @@ export class GameManager {
     const message: GameMessage = {
       id: crypto.randomUUID(),
       timestamp: new Date(),
-      ...messageData,
+      ...messageData
     };
 
     game.messages.push(message);
@@ -606,7 +603,7 @@ export class WebSocketHandler {
       console.log(`WebSocket connection opened: ${connectionId}`);
       this.sendMessage(socket, {
         type: "connection",
-        data: { connectionId, message: "Connected to LLM Chat server" },
+        data: { connectionId, message: "Connected to LLM Chat server" }
       });
     };
 
@@ -657,9 +654,8 @@ export class WebSocketHandler {
         type: "game_started",
         data: {
           gameId,
-          message:
-            "Game started successfully! You can now send messages to interact with your characters.",
-        },
+          message: "Game started successfully! You can now send messages to interact with your characters."
+        }
       });
     } catch (error) {
       this.sendError(socket, `Failed to start game: ${error.message}`);
@@ -668,7 +664,7 @@ export class WebSocketHandler {
 
   private async handleSendMessage(
     socket: WebSocket,
-    message: WebSocketMessage,
+    message: WebSocketMessage
   ) {
     try {
       const { gameId, data } = message;
@@ -679,12 +675,12 @@ export class WebSocketHandler {
 
       const responses = await this.gameManager.handlePlayerMessage(
         gameId,
-        data.message,
+        data.message
       );
 
       this.sendMessage(socket, {
         type: "character_responses",
-        data: { gameId, responses },
+        data: { gameId, responses }
       });
     } catch (error) {
       this.sendError(socket, `Failed to process message: ${error.message}`);
@@ -705,8 +701,8 @@ export class WebSocketHandler {
           gameId,
           characters: game.characters.map((c) => c.getCharacterInfo()),
           messages: game.messages.slice(-10), // Last 10 messages
-          isActive: game.isActive,
-        },
+          isActive: game.isActive
+        }
       });
     } catch (error) {
       this.sendError(socket, `Failed to get game state: ${error.message}`);
@@ -722,7 +718,7 @@ export class WebSocketHandler {
   private sendError(socket: WebSocket, error: string) {
     this.sendMessage(socket, {
       type: "error",
-      data: { error },
+      data: { error }
     });
   }
 }
@@ -758,12 +754,12 @@ async function handler(req: Request): Promise<Response> {
   switch (url.pathname) {
     case "/":
       return new Response(await getIndexHTML(), {
-        headers: { "content-type": "text/html" },
+        headers: { "content-type": "text/html" }
       });
 
     case "/api/characters":
       return new Response(JSON.stringify(defaultCharacters), {
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json" }
       });
 
     case "/api/game/start":
@@ -772,18 +768,18 @@ async function handler(req: Request): Promise<Response> {
           const body = await req.json();
           const gameId = await gameManager.startNewGame(
             body.gmPrompt,
-            body.characters,
+            body.characters
           );
           return new Response(JSON.stringify({ gameId }), {
-            headers: { "content-type": "application/json" },
+            headers: { "content-type": "application/json" }
           });
         } catch (error) {
           return new Response(
             JSON.stringify({ error: error.message }),
             {
               status: 400,
-              headers: { "content-type": "application/json" },
-            },
+              headers: { "content-type": "application/json" }
+            }
           );
         }
       }
@@ -795,18 +791,18 @@ async function handler(req: Request): Promise<Response> {
           const body = await req.json();
           const responses = await gameManager.handlePlayerMessage(
             body.gameId,
-            body.message,
+            body.message
           );
           return new Response(JSON.stringify({ responses }), {
-            headers: { "content-type": "application/json" },
+            headers: { "content-type": "application/json" }
           });
         } catch (error) {
           return new Response(
             JSON.stringify({ error: error.message }),
             {
               status: 400,
-              headers: { "content-type": "application/json" },
-            },
+              headers: { "content-type": "application/json" }
+            }
           );
         }
       }

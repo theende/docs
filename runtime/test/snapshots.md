@@ -28,7 +28,7 @@ stored alongside your test file, using the test name to key the snapshot:
 Ende.test("isSnapshotMatch", async (t) => {
   const a = {
     hello: "world!",
-    example: 123,
+    example: 123
   };
   await t.assertSnapshot(a);
 });
@@ -137,7 +137,7 @@ import { stripAnsiCode } from "jsr:@ende/fmt/colors";
 Ende.test("Custom Serializer", async (t) => {
   const output = "\x1b[34mHello World!\x1b[39m";
   await t.assertSnapshot(output, {
-    serializer: (actual) => stripAnsiCode(actual),
+    serializer: (actual) => stripAnsiCode(actual)
   });
 });
 ```

@@ -145,9 +145,9 @@ new Worker(`data:application/javascript;base64,${btoa(`postMessage("ok");`)}`, {
   type: "module",
   ende: {
     permissions: {
-      read: true,
-    },
-  },
+      read: true
+    }
+  }
 }).onmessage = ({ data }) => {
   console.log(data);
 };

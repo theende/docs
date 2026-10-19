@@ -61,7 +61,7 @@ Ende.bench({
   name: "hello world #2",
   fn: () => {
     new URL("https://deno.land");
-  },
+  }
 });
 
 // Similar to compact form, with additional configuration as a second argument.
@@ -74,7 +74,7 @@ Ende.bench(
   { name: "hello world #5", permissions: { read: true } },
   () => {
     new URL("https://deno.land");
-  },
+  }
 );
 
 // Similar to longer form, with a named bench function as a second argument.
@@ -241,15 +241,15 @@ Assuming the following benches:
 ```ts
 Ende.bench({
   name: "my-bench",
-  fn: () => {/* bench function zero */},
+  fn: () => {/* bench function zero */}
 });
 Ende.bench({
   name: "bench-1",
-  fn: () => {/* bench function one */},
+  fn: () => {/* bench function one */}
 });
 Ende.bench({
   name: "bench2",
-  fn: () => {/* bench function two */},
+  fn: () => {/* bench function two */}
 });
 ```
 
@@ -287,7 +287,7 @@ Ende.bench({
   ignore: Ende.build.os !== "windows",
   fn() {
     // do windows feature
-  },
+  }
 });
 ```
 
@@ -307,7 +307,7 @@ Ende.bench({
   only: true,
   fn() {
     // bench complicated stuff
-  },
+  }
 });
 ```
 

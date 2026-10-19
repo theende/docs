@@ -39,7 +39,7 @@ Create a one-file desktop app:
 ```ts title="main.ts"
 Ende.serve(() =>
   new Response("<h1>Hello, desktop</h1>", {
-    headers: { "content-type": "text/html" },
+    headers: { "content-type": "text/html" }
   })
 );
 ```

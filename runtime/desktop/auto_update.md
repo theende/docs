@@ -61,7 +61,7 @@ Ende.autoUpdate({
   },
   onRollback(reason) {
     console.warn("Previous launch failed; rolled back:", reason);
-  },
+  }
 });
 ```
 
@@ -132,7 +132,7 @@ verbatim as the `signed` string and only its contents are trusted.
 ```ts
 Ende.autoUpdate({
   url: "https://releases.example.com/my-app",
-  publicKey: "<base64-encoded 32-byte Ed25519 public key>",
+  publicKey: "<base64-encoded 32-byte Ed25519 public key>"
 });
 ```
 
@@ -213,7 +213,7 @@ keys and pick on the client:
 const arch = Ende.build.os + "-" + Ende.build.arch;
 Ende.autoUpdate({
   url: "https://releases.example.com/" + arch,
-  interval: 60 * 60 * 1000,
+  interval: 60 * 60 * 1000
 });
 ```
 

@@ -126,7 +126,7 @@ import { assertEquals } from "jsr:@ende/assert";
 
 // Component that fetches data
 async function fetchUserData(
-  userId: string,
+  userId: string
 ): Promise<{ name: string; email: string }> {
   const response = await fetch(`https://api.example.com/users/${userId}`);
   if (!response.ok) {
@@ -144,7 +144,7 @@ Ende.test("fetch request test", async () => {
     if (url === "https://api.example.com/users/123") {
       return new Response(
         JSON.stringify({ name: "John Doe", email: "john@example.com" }),
-        { status: 200, headers: { "Content-Type": "application/json" } },
+        { status: 200, headers: { "Content-Type": "application/json" } }
       );
     }
     return new Response("Not found", { status: 404 });
@@ -191,7 +191,7 @@ import { assertEquals, assertExists } from "jsr:@ende/assert";
 Ende.test("complex web component test", async (t) => {
   const doc = new DOMParser().parseFromString(
     "<!DOCTYPE html><html></html>",
-    "text/html",
+    "text/html"
   );
   const body = doc.createElement("body");
   const container = doc.createElement("div");

@@ -32,7 +32,7 @@ Ende.serve((req) => {
     return Response.json({ hello: "world" });
   }
   return new Response(HOMEPAGE, {
-    headers: { "content-type": "text/html" },
+    headers: { "content-type": "text/html" }
   });
 });
 
@@ -55,7 +55,7 @@ The default-export form works too:
 export default {
   fetch(req: Request): Response {
     return new Response("Hello!");
-  },
+  }
 };
 ```
 

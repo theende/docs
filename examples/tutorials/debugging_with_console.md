@@ -54,12 +54,12 @@ easier inspection.
 const people = {
   "john": {
     "age": 30,
-    "city": "New York",
+    "city": "New York"
   },
   "jane": {
     "age": 25,
-    "city": "Los Angeles",
-  },
+    "city": "Los Angeles"
+  }
 };
 
 console.table(people);

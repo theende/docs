@@ -52,7 +52,7 @@ const device = await adapter.requestDevice();
 const win = new Ende.BrowserWindow({
   title: "WebGPU",
   width: 640,
-  height: 480,
+  height: 480
 });
 
 // Wrap the native window as a surface and configure a WebGPU context on it.
@@ -73,8 +73,8 @@ encoder.beginRenderPass({
     view: context.getCurrentTexture().createView(),
     clearValue: { r: 0, g: 0.5, b: 0.5, a: 1 },
     loadOp: "clear",
-    storeOp: "store",
-  }],
+    storeOp: "store"
+  }]
 }).end();
 device.queue.submit([encoder.finish()]);
 surface.present();
@@ -107,7 +107,7 @@ const device = await adapter.requestDevice();
 const win = new Ende.BrowserWindow({
   title: "Triangle",
   width: 640,
-  height: 480,
+  height: 480
 });
 
 const surface = win.getNativeWindow();
@@ -150,14 +150,14 @@ const shader = device.createShaderModule({
     fn fs(in: VertexOut) -> @location(0) vec4f {
       return vec4f(in.color, 1.0);
     }
-  `,
+  `
 });
 
 const pipeline = device.createRenderPipeline({
   layout: "auto",
   vertex: { module: shader, entryPoint: "vs" },
   fragment: { module: shader, entryPoint: "fs", targets: [{ format }] },
-  primitive: { topology: "triangle-list" },
+  primitive: { topology: "triangle-list" }
 });
 
 const encoder = device.createCommandEncoder();
@@ -166,8 +166,8 @@ const pass = encoder.beginRenderPass({
     view: context.getCurrentTexture().createView(),
     clearValue: { r: 0.05, g: 0.05, b: 0.08, a: 1 },
     loadOp: "clear",
-    storeOp: "store",
-  }],
+    storeOp: "store"
+  }]
 });
 pass.setPipeline(pipeline);
 pass.draw(3);
@@ -238,24 +238,24 @@ const shader = device.createShaderModule({
     fn fs(in: VertexOut) -> @location(0) vec4f {
       return vec4f(in.color, 1.0);
     }
-  `,
+  `
 });
 
 const uniform = device.createBuffer({
   size: 4, // one f32
-  usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+  usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
 });
 
 const pipeline = device.createRenderPipeline({
   layout: "auto",
   vertex: { module: shader, entryPoint: "vs" },
   fragment: { module: shader, entryPoint: "fs", targets: [{ format }] },
-  primitive: { topology: "triangle-list" },
+  primitive: { topology: "triangle-list" }
 });
 
 const bindGroup = device.createBindGroup({
   layout: pipeline.getBindGroupLayout(0),
-  entries: [{ binding: 0, resource: { buffer: uniform } }],
+  entries: [{ binding: 0, resource: { buffer: uniform } }]
 });
 
 const start = performance.now();
@@ -272,8 +272,8 @@ function frame() {
       view: context.getCurrentTexture().createView(),
       clearValue: { r: 0.05, g: 0.05, b: 0.08, a: 1 },
       loadOp: "clear",
-      storeOp: "store",
-    }],
+      storeOp: "store"
+    }]
   });
   pass.setPipeline(pipeline);
   pass.setBindGroup(0, bindGroup);

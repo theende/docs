@@ -34,13 +34,11 @@ function show(query: string) {
       }
 
       return item;
-    }),
+    })
   );
   status.textContent = query.trim() === ""
     ? ""
-    : `${results.length} result${
-      results.length === 1 ? "" : "s"
-    } for “${query}”`;
+    : `${results.length} result${results.length === 1 ? "" : "s"} for “${query}”`;
 }
 
 const initial = new URLSearchParams(location.search).get("q") ?? "";

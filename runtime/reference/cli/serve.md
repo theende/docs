@@ -19,7 +19,7 @@ with a `fetch` handler. For a full guide on building HTTP servers, see
 export default {
   fetch(_req: Request) {
     return new Response("Hello world!");
-  },
+  }
 } satisfies Ende.ServeDefaultExport;
 ```
 
@@ -74,7 +74,7 @@ metadata:
 ```typescript
 type ServeHandler = (
   request: Request,
-  info: ServeHandlerInfo,
+  info: ServeHandlerInfo
 ) => Response | Promise<Response>;
 
 interface ServeHandlerInfo {
@@ -98,13 +98,13 @@ export default {
     console.log(`${request.method} ${request.url} from ${hostname}:${port}`);
 
     return new Response("Hello, World!", {
-      headers: { "content-type": "text/plain" },
+      headers: { "content-type": "text/plain" }
     });
   },
 
   onListen({ hostname, port }) {
     console.log(`Server running at http://${hostname}:${port}/`);
-  },
+  }
 } satisfies Ende.ServeDefaultExport;
 ```
 
@@ -126,7 +126,7 @@ export default {
     }
 
     return new Response("Not found", { status: 404 });
-  },
+  }
 } satisfies Ende.ServeDefaultExport;
 ```
 

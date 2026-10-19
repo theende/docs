@@ -1,5 +1,5 @@
 import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
-  type: "json",
+  type: "json"
 };
 import { markdown } from "./markdown.ts";
 import type { TocEntry } from "./types.ts";
@@ -30,7 +30,7 @@ const ENCAPSULATED_ANSI_RE = new RegExp(ENCAPSULATED_ANSI, "g");
 const START_AND_END_ANSI_RE = new RegExp(`^(?:${ANSI}).+?(?:${ANSI})$`);
 const SUBSEQUENT_ENCAPSULATED_ANSI_RE = new RegExp(
   `${ENCAPSULATED_ANSI}( ?)${ENCAPSULATED_ANSI}`,
-  "g",
+  "g"
 );
 
 const FLAGS_RE = /[^`]--\S+/g;
@@ -45,8 +45,7 @@ function valueType(usage: string): string | null {
 function aboutMarkdown(about: string): string {
   let text = about.replaceAll(
     SUBSEQUENT_ENCAPSULATED_ANSI_RE,
-    (_, _open1, text1, _close1, space, open2, text2, close2) =>
-      `${open2}${text1}${space}${text2}${close2}`,
+    (_, _open1, text1, _close1, space, open2, text2, close2) => `${open2}${text1}${space}${text2}${close2}`
   ).replaceAll(SUBSEQUENT_ANSI_RE, "");
 
   let lines = text.split("\n");
@@ -73,7 +72,7 @@ function aboutMarkdown(about: string): string {
       }
 
       return inner;
-    },
+    }
   );
 }
 
@@ -85,9 +84,7 @@ function Option({ group, arg }: { group: string; arg: Arg }) {
   let docs: string | null = null;
 
   const helpLines = help.split("\n");
-  const docsLine = helpLines.findLastIndex((line) =>
-    line.toLowerCase().trim().startsWith("docs:")
-  );
+  const docsLine = helpLines.findLastIndex((line) => line.toLowerCase().trim().startsWith("docs:"));
   if (docsLine !== -1) {
     help = helpLines.slice(0, docsLine).join("\n");
     docs = helpLines[docsLine].trim().slice("docs:".length).trim();
@@ -104,7 +101,7 @@ function Option({ group, arg }: { group: string; arg: Arg }) {
       {help &&
         markdown(
           help.replaceAll(FLAGS_RE, "`$&`") +
-            (help.endsWith(".") || help.endsWith("]") ? "" : "."),
+            (help.endsWith(".") || help.endsWith("]") ? "" : ".")
         )}
     </div>
   );
@@ -112,11 +109,9 @@ function Option({ group, arg }: { group: string; arg: Arg }) {
 
 /** The usage, description and options of `ende <name>`, and their headings for the ToC. */
 export function renderCommand(
-  name: string,
+  name: string
 ): { rendered: unknown; toc: TocEntry[] } {
-  const command = (CLI_REFERENCE.subcommands as Command[]).find((command) =>
-    command.name === name
-  );
+  const command = (CLI_REFERENCE.subcommands as Command[]).find((command) => command.name === name);
 
   if (!command) throw new Error(`No CLI command named ${name}`);
 
@@ -143,7 +138,7 @@ export function renderCommand(
             <h2 id={id}>{heading}</h2>
             {flags
               .toSorted((a, b) => a.long!.localeCompare(b.long!))
-              .map((arg) => <Option group={id} arg={arg} />)}
+              .map((arg) => <Option group={id} arg={arg}/>)}
           </section>
         );
       })}

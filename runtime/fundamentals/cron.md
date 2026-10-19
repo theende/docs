@@ -75,7 +75,7 @@ Ende.cron(
   { backoffSchedule: [1000, 5000, 10000] },
   () => {
     throw new Error("Will be retried up to three times.");
-  },
+  }
 );
 ```
 

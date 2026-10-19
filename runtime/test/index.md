@@ -46,7 +46,7 @@ Ende.test({
   fn: () => {
     const data = Ende.readTextFileSync("./somefile.txt");
     assertEquals(data, "expected content");
-  },
+  }
 });
 ```
 
@@ -128,7 +128,7 @@ Ende.test({
   async fn() {
     const response = await fetch("https://example.com");
     await response.body?.cancel();
-  },
+  }
 });
 ```
 
@@ -150,7 +150,7 @@ Ende.test({
   async fn() {
     const response = await fetch("https://example.com");
     await response.body?.cancel();
-  },
+  }
 });
 
 Ende.test({
@@ -158,7 +158,7 @@ Ende.test({
   repeats: 5, // run 5 times; fail if any run fails
   fn() {
     // ...
-  },
+  }
 });
 ```
 
@@ -189,7 +189,7 @@ import { assertEquals } from "jsr:@ende/assert";
 
 Ende.test.each([
   [1, 1, 2],
-  [2, 3, 5],
+  [2, 3, 5]
 ])("add(%i, %i) = %i", (a, b, expected) => {
   assertEquals(a + b, expected);
 });
@@ -201,7 +201,7 @@ Object or primitive cases are passed as a single argument. For object cases,
 ```ts
 Ende.test.each([
   { a: 1, b: 1, sum: 2 },
-  { a: 2, b: 3, sum: 5 },
+  { a: 2, b: 3, sum: 5 }
 ])("$a + $b = $sum", ({ a, b, sum }) => {
   assertEquals(a + b, sum);
 });
@@ -388,7 +388,7 @@ Ende.test({
   ignore: Ende.build.os !== "darwin", // This test will be ignored if not running on macOS
   fn() {
     // do MacOS feature here
-  },
+  }
 });
 ```
 
@@ -423,7 +423,7 @@ Ende.test({
   only: true, // Only this test will run
   fn() {
     // test complicated stuff here
-  },
+  }
 });
 ```
 
@@ -545,7 +545,7 @@ Ende.test({
     const result = await getFileText();
     console.log(result);
     assertEquals(result, "the content of the file");
-  },
+  }
 });
 
 Ende.test({
@@ -555,7 +555,7 @@ Ende.test({
     const result = await getFileText();
     console.log(result);
     assertEquals(result, "oops don't have permission");
-  },
+  }
 });
 ```
 
@@ -578,11 +578,11 @@ Ende.test({
     env: ["API_KEY"], // Allow access to specific env variables
     run: false, // Deny subprocess execution
     ffi: false, // Deny loading dynamic libraries
-    hrtime: false, // Deny high-resolution time
+    hrtime: false // Deny high-resolution time
   },
   fn() {
     // Test code that respects these permission boundaries
-  },
+  }
 });
 ```
 

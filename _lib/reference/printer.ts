@@ -19,7 +19,7 @@ function needsParens(type: TsType): boolean {
     "fnOrConstructor",
     "conditional",
     "typeOperator",
-    "infer",
+    "infer"
   ]
     .includes(type.kind);
 }
@@ -36,7 +36,7 @@ function name(text: string, link: Linker): string {
 
 export function typeParamsHtml(
   params: TypeParam[] | undefined,
-  link: Linker,
+  link: Linker
 ): string {
   if (!params || params.length === 0) return "";
 
@@ -54,9 +54,7 @@ export function typeParamsHtml(
 
 export function paramHtml(param: Param, link: Linker): string {
   const type = (text: string, tsType?: TsType, optional?: boolean) =>
-    `${text}${optional ? "?" : ""}${
-      tsType ? `: ${typeHtml(tsType, link)}` : ""
-    }`;
+    `${text}${optional ? "?" : ""}${tsType ? `: ${typeHtml(tsType, link)}` : ""}`;
 
   switch (param.kind) {
     case "identifier":
@@ -64,29 +62,21 @@ export function paramHtml(param: Param, link: Linker): string {
     case "rest":
       return type(
         `...${paramHtml({ ...param.arg, tsType: undefined } as Param, link)}`,
-        param.tsType,
+        param.tsType
       );
     case "assign":
       return `${paramHtml(param.left, link)} = ${escape(param.right)}`;
     case "array":
       return type(
-        `[${
-          list((param.elements ?? []).map((element) =>
-            element ? paramHtml(element, link) : ""
-          ))
-        }]`,
+        `[${list((param.elements ?? []).map((element) => element ? paramHtml(element, link) : ""))}]`,
         param.tsType,
-        param.optional,
+        param.optional
       );
     case "object":
       return type(
-        `{ ${
-          list((param.props ?? []).map((prop) =>
-            escape(prop.key ?? prop.name ?? "…")
-          ))
-        } }`,
+        `{ ${list((param.props ?? []).map((prop) => escape(prop.key ?? prop.name ?? "…")))} }`,
         param.tsType,
-        param.optional,
+        param.optional
       );
     default:
       return escape((param as { name?: string }).name ?? "…");
@@ -99,7 +89,7 @@ export function paramsHtml(params: Param[] | undefined, link: Linker): string {
 
 function literalHtml(
   value: NonNullable<TsType["value"]> & { kind: string },
-  link: Linker,
+  link: Linker
 ): string {
   switch (value.kind) {
     case "string":
@@ -130,32 +120,30 @@ export function typeLiteralHtml(literal: TsTypeLiteral, link: Linker): string {
 
   for (const signature of literal.constructors ?? []) {
     members.push(
-      `new ${typeParamsHtml(signature.typeParams, link)}${
-        paramsHtml(signature.params, link)
-      }${
+      `new ${typeParamsHtml(signature.typeParams, link)}${paramsHtml(signature.params, link)}${
         signature.returnType ? `: ${typeHtml(signature.returnType, link)}` : ""
-      }`,
+      }`
     );
   }
   for (const signature of literal.callSignatures ?? []) {
     members.push(
-      `${typeParamsHtml(signature.typeParams, link)}${
-        paramsHtml(signature.params, link)
-      }${signature.tsType ? `: ${typeHtml(signature.tsType, link)}` : ""}`,
+      `${typeParamsHtml(signature.typeParams, link)}${paramsHtml(signature.params, link)}${
+        signature.tsType ? `: ${typeHtml(signature.tsType, link)}` : ""
+      }`
     );
   }
   for (const signature of literal.indexSignatures ?? []) {
     members.push(
-      `${signature.readonly ? "readonly " : ""}[${
-        list(signature.params.map((param) => paramHtml(param, link)))
-      }]${signature.tsType ? `: ${typeHtml(signature.tsType, link)}` : ""}`,
+      `${signature.readonly ? "readonly " : ""}[${list(signature.params.map((param) => paramHtml(param, link)))}]${
+        signature.tsType ? `: ${typeHtml(signature.tsType, link)}` : ""
+      }`
     );
   }
   for (const property of literal.properties ?? []) {
     members.push(
-      `${property.readonly ? "readonly " : ""}${escape(property.name)}${
-        property.optional ? "?" : ""
-      }${property.tsType ? `: ${typeHtml(property.tsType, link)}` : ""}`,
+      `${property.readonly ? "readonly " : ""}${escape(property.name)}${property.optional ? "?" : ""}${
+        property.tsType ? `: ${typeHtml(property.tsType, link)}` : ""
+      }`
     );
   }
   for (const method of literal.methods ?? []) {
@@ -165,11 +153,9 @@ export function typeLiteralHtml(literal: TsTypeLiteral, link: Linker): string {
       ? "set "
       : "";
     members.push(
-      `${prefix}${escape(method.name)}${method.optional ? "?" : ""}${
-        typeParamsHtml(method.typeParams, link)
-      }${paramsHtml(method.params, link)}${
-        method.returnType ? `: ${typeHtml(method.returnType, link)}` : ""
-      }`,
+      `${prefix}${escape(method.name)}${method.optional ? "?" : ""}${typeParamsHtml(method.typeParams, link)}${
+        paramsHtml(method.params, link)
+      }${method.returnType ? `: ${typeHtml(method.returnType, link)}` : ""}`
     );
   }
 
@@ -202,41 +188,35 @@ export function typeHtml(type: TsType | undefined, link: Linker): string {
     case "union":
       return list(
         (value as TsType[]).map((member) => typeHtml(member, link)),
-        " | ",
+        " | "
       );
     case "intersection":
       return list(
         (value as TsType[]).map((member) => typeHtml(member, link)),
-        " &amp; ",
+        " &amp; "
       );
     case "array":
       return `${wrapped(value, link)}[]`;
     case "tuple":
-      return `[${
-        list((value as TsType[]).map((member) => typeHtml(member, link)))
-      }]`;
+      return `[${list((value as TsType[]).map((member) => typeHtml(member, link)))}]`;
     case "typeOperator":
       return `${escape(value.operator)} ${wrapped(value.tsType, link)}`;
     case "parenthesized":
       return `(${typeHtml(value, link)})`;
     case "rest":
-      return `...${
-        typeHtml(value ?? (type as unknown as { tsType: TsType }).tsType, link)
-      }`;
+      return `...${typeHtml(value ?? (type as unknown as { tsType: TsType }).tsType, link)}`;
     case "optional":
       return `${wrapped(value, link)}?`;
     case "typeQuery":
       return `typeof ${name(value, link)}`;
     case "fnOrConstructor":
-      return `${value.constructor ? "new " : ""}${
-        typeParamsHtml(value.typeParams, link)
-      }${paramsHtml(value.params, link)} =&gt; ${typeHtml(value.tsType, link)}`;
+      return `${value.constructor ? "new " : ""}${typeParamsHtml(value.typeParams, link)}${
+        paramsHtml(value.params, link)
+      } =&gt; ${typeHtml(value.tsType, link)}`;
     case "conditional":
-      return `${typeHtml(value.checkType, link)} extends ${
-        typeHtml(value.extendsType, link)
-      } ? ${typeHtml(value.trueType, link)} : ${
-        typeHtml(value.falseType, link)
-      }`;
+      return `${typeHtml(value.checkType, link)} extends ${typeHtml(value.extendsType, link)} ? ${
+        typeHtml(value.trueType, link)
+      } : ${typeHtml(value.falseType, link)}`;
     case "infer":
       return `infer ${escape(value.typeParam.name)}${
         value.typeParam.constraint
@@ -244,9 +224,7 @@ export function typeHtml(type: TsType | undefined, link: Linker): string {
           : ""
       }`;
     case "indexedAccess":
-      return `${value.readonly ? "readonly " : ""}${
-        wrapped(value.objType, link)
-      }[${typeHtml(value.indexType, link)}]`;
+      return `${value.readonly ? "readonly " : ""}${wrapped(value.objType, link)}[${typeHtml(value.indexType, link)}]`;
     case "mapped": {
       const readonly = value.readonly === true
         ? "readonly "
@@ -262,12 +240,10 @@ export function typeHtml(type: TsType | undefined, link: Linker): string {
         : value.optional === "-"
         ? "-?"
         : "";
-      const key = `${escape(value.typeParam.name)} in ${
-        typeHtml(value.typeParam.constraint, link)
-      }${value.nameType ? ` as ${typeHtml(value.nameType, link)}` : ""}`;
-      return `{ ${readonly}[${key}]${optional}: ${
-        typeHtml(value.tsType, link)
-      } }`;
+      const key = `${escape(value.typeParam.name)} in ${typeHtml(value.typeParam.constraint, link)}${
+        value.nameType ? ` as ${typeHtml(value.nameType, link)}` : ""
+      }`;
+      return `{ ${readonly}[${key}]${optional}: ${typeHtml(value.tsType, link)} }`;
     }
     case "typeLiteral":
       return typeLiteralHtml(value, link);
@@ -275,9 +251,7 @@ export function typeHtml(type: TsType | undefined, link: Linker): string {
       const subject = value.param.type === "this"
         ? "this"
         : escape(value.param.name);
-      return `${value.asserts ? "asserts " : ""}${subject}${
-        value.type ? ` is ${typeHtml(value.type, link)}` : ""
-      }`;
+      return `${value.asserts ? "asserts " : ""}${subject}${value.type ? ` is ${typeHtml(value.type, link)}` : ""}`;
     }
     case "importType":
       return `import(${escape(JSON.stringify(value.specifier))})${
