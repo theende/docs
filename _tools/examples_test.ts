@@ -7,7 +7,7 @@ const decoder = new TextDecoder();
 
 /** The `--unstable-*` flags an example declares in its `@run` line. The
  * typecheck below enables exactly the unstable APIs the example needs, so
- * it stays correct as Ende's flag set changes without a hardcoded list. */
+ * it stays correct as Ende’s flag set changes without a hardcoded list. */
 function unstableFlags(run: string | undefined): string[] {
   return run?.match(/--unstable-[a-z-]+/g) ?? [];
 }
@@ -22,7 +22,8 @@ Ende.test("Check examples", async (t) => {
   for await (const item of walk("./examples/scripts/")) {
     const path = join("examples/scripts", item.name);
 
-    if (!path.endsWith(".ts")) continue;
+    if (!path.endsWith(".ts"))
+      continue;
 
     await t.step("Check graph: " + path, async () => {
       const result = await new Ende.Command(Ende.execPath(), {
@@ -53,16 +54,19 @@ Ende.test("Check examples", async (t) => {
       // Reconstruct the files into a temp directory and typecheck every
       // TypeScript entry together so cross-file imports resolve.
       const dir = await Ende.makeTempDir();
+
       try {
         const entries: string[] = [];
+
         for (const file of parsed.files) {
           const rel = file.name.replace(/^\.\//, "");
           const code = file.snippets.map((s) => s.code).join("\n");
           await Ende.writeTextFile(join(dir, rel), code);
-          if (rel.endsWith(".ts") || rel.endsWith(".js")) {
+
+          if (rel.endsWith(".ts") || rel.endsWith(".js"))
             entries.push(join(dir, rel));
-          }
         }
+
         const result = await typecheck([...flags, ...entries]);
         assertEquals(result.code, 0, decoder.decode(result.stderr));
       } finally {

@@ -29,38 +29,48 @@ const tasks: Task[] = [];
 // unit test. Every command declares just its own flags.
 function runInit(args: string[]): number {
   const flags = parseArgs(args, {
-    string: ["name"],
     default: { name: "my-todos" },
+    string: ["name"]
   });
+
   console.log(`Initialized task list "${flags.name}".`);
+
   return 0;
 }
 
 function runAdd(args: string[]): number {
   const flags = parseArgs(args, {
-    string: ["title"],
     boolean: ["urgent"],
+    string: ["title"]
   });
+
   // Validate required flags and signal failure with a nonzero exit code.
   if (!flags.title) {
     console.error("error: add requires --title");
     return 1;
   }
+
   tasks.push({ title: flags.title, urgent: flags.urgent });
   console.log(`Added "${flags.title}"${flags.urgent ? " (urgent)" : ""}.`);
+
   return 0;
 }
 
 function runList(args: string[]): number {
   const flags = parseArgs(args, { boolean: ["urgent-only"] });
-  const visible = flags["urgent-only"] ? tasks.filter((t) => t.urgent) : tasks;
+  const visible = flags["urgent-only"] ?
+    tasks.filter((t) => t.urgent) :
+    tasks;
+
   if (visible.length === 0) {
     console.log("No tasks yet.");
     return 0;
   }
+
   for (const [i, task] of visible.entries()) {
     console.log(`${i + 1}. ${task.title}${task.urgent ? " (urgent)" : ""}`);
   }
+
   return 0;
 }
 
@@ -81,21 +91,32 @@ Commands:
 // shells can detect misuse.
 function main(args: string[]): number {
   const [command, ...rest] = args;
+
   switch (command) {
     case undefined:
-    case "help":
+    case "help": {
       printHelp();
       return 0;
-    case "init":
+    }
+
+    case "init": {
       return runInit(rest);
-    case "add":
+    }
+
+    case "add": {
       return runAdd(rest);
-    case "list":
+    }
+
+    case "list": {
       return runList(rest);
-    default:
+    }
+
+    default: {
       console.error(`error: unknown command "${command}"`);
-      console.error('Run "todo help" for a list of commands.');
+      console.error(`Run "todo help" for a list of commands.`);
+
       return 2;
+    }
   }
 }
 

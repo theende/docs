@@ -28,51 +28,57 @@ await resp.arrayBuffer();
 
 // The response body can also be streamed in chunks.
 resp = await fetch("https://example.com");
+
 for await (const chunk of resp.body!) {
   console.log("chunk", chunk);
 }
 
 // When making a request, you can also specify the method, headers, and a body.
 resp = await fetch("https://example.com", {
-  method: "POST",
+  body: JSON.stringify({
+    param: "value"
+  }),
   headers: {
     "Content-Type": "application/json",
-    "X-API-Key": "foobar",
+    "X-API-Key": "foobar"
   },
-  body: JSON.stringify({
-    param: "value",
-  }),
+  method: "POST"
 });
 
 // `fetch` also accepts a `Request` object instead of URL + options.
 const req = new Request("https://example.com", {
-  method: "DELETE",
+  method: "DELETE"
 });
+
 resp = await fetch(req);
 
 // Instead of a string, the body can also be any typed array, blob, or
 // a URLSearchParams object.
 const url = "https://example.com";
+
 new Request(url, {
-  method: "POST",
   body: new Uint8Array([1, 2, 3]),
+  method: "POST"
 });
+
 new Request(url, {
-  method: "POST",
   body: new Blob(["Hello, World!"]),
+  method: "POST"
 });
+
 new Request(url, {
-  method: "POST",
   body: new URLSearchParams({ "foo": "bar" }),
+  method: "POST"
 });
 
 // Forms can also be sent with `fetch` by using a `FormData` object as the body.
 const formData = new FormData();
 formData.append("name", "Ende");
 formData.append("file", new Blob(["Hello, World!"]), "hello.txt");
+
 resp = await fetch("https://example.com", {
-  method: "POST",
   body: formData,
+  method: "POST"
 });
 
 // Fetch also supports streaming the request body.
@@ -80,9 +86,10 @@ const bodyStream = new ReadableStream({
   start(controller) {
     controller.enqueue(new TextEncoder().encode("Hello, World!"));
     controller.close();
-  },
+  }
 });
+
 resp = await fetch("https://example.com", {
-  method: "POST",
   body: bodyStream,
+  method: "POST"
 });

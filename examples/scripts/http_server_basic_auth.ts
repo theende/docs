@@ -31,17 +31,24 @@ async function safeCompare(a: string, b: string): Promise<boolean> {
 
 async function authorized(req: Request): Promise<boolean> {
   const header = req.headers.get("authorization");
-  if (!header?.startsWith("Basic ")) return false;
+
+  if (!header?.startsWith("Basic "))
+    return false;
 
   // The value after the scheme is base64 of "username:password".
   let decoded: string;
+
   try {
     decoded = atob(header.slice("Basic ".length));
   } catch {
     return false;
   }
+
   const colon = decoded.indexOf(":");
-  if (colon === -1) return false;
+
+  if (colon === -1)
+    return false;
+
   const user = decoded.slice(0, colon);
   const pass = decoded.slice(colon + 1);
 
@@ -49,6 +56,7 @@ async function authorized(req: Request): Promise<boolean> {
   // take the same time.
   const userOk = await safeCompare(user, USERNAME);
   const passOk = await safeCompare(pass, PASSWORD);
+
   return userOk && passOk;
 }
 
@@ -57,10 +65,11 @@ Ende.serve(async (req) => {
     // The www-authenticate header names the scheme and realm. Browsers
     // respond to it by showing a login dialog.
     return new Response("Unauthorized\n", {
-      status: 401,
-      headers: { "www-authenticate": 'Basic realm="example", charset="UTF-8"' },
+      headers: { "www-authenticate": `Basic realm="example", charset="UTF-8"` },
+      status: 401
     });
   }
+
   return new Response("Welcome, admin\n");
 });
 

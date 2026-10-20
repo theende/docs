@@ -4,28 +4,33 @@ import type { SidebarItem } from "../_lib/types.ts";
 
 // Long nav labels wrap onto two lines and blow out the sidebar width, so a
 // sidebar must not introduce a label longer than the longest it already has.
-// Each cap below is that sidebar's current maximum — tighten it as labels are
+// Each cap below is that sidebar’s current maximum — tighten it as labels are
 // shortened; raising one should be a deliberate design decision.
 const SIDEBARS = [
-  { name: "runtime", sidebar: runtimeSidebar, maxLabelLength: 22 }
+  { maxLabelLength: 22, name: "runtime", sidebar: runtimeSidebar }
 ];
 
 // Minimal shape for walking a sidebar tree. The exported `sidebar` data is
 // structurally compatible with this (sections and items both have a title and
 // optional nested items).
 interface LabelNode {
-  title?: SidebarItem["title"];
   items?: LabelNode[];
+  title?: SidebarItem["title"];
 }
 
 // Recursively collect every string label from a sidebar tree. Non-string titles
 // (rendered JSX, e.g. icons) have no meaningful character length, so skip them.
 function collectLabels(nodes: readonly LabelNode[]): string[] {
   const labels: string[] = [];
+
   for (const node of nodes) {
-    if (typeof node.title === "string") labels.push(node.title);
-    if (node.items) labels.push(...collectLabels(node.items));
+    if (typeof node.title === "string")
+      labels.push(node.title);
+
+    if (node.items)
+      labels.push(...collectLabels(node.items));
   }
+
   return labels;
 }
 

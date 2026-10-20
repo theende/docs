@@ -6,7 +6,7 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.Command} Doc: Ende.Command
  * @group System
  *
- * We don't often write programs in isolation. In a lot of cases we want
+ * We don’t often write programs in isolation. In a lot of cases we want
  * to interact with the outside system and spawning a subprocess is a
  * common way to do this.
  */

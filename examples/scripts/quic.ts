@@ -36,7 +36,10 @@ const listener = endpoint.listen({ cert, key, alpnProtocols: ["echo"] });
     const conn = await incoming.accept();
     const { value: stream } = await conn.incomingBidirectionalStreams
       .getReader().read();
-    if (!stream) continue;
+
+    if (!stream)
+      continue;
+
     const message = await new Response(stream.readable).text();
     const writer = stream.writable.getWriter();
     await writer.write(new TextEncoder().encode(`echo: ${message}`));
@@ -47,10 +50,10 @@ const listener = endpoint.listen({ cert, key, alpnProtocols: ["echo"] });
 // Connect as a client. caCerts trusts our self-signed certificate; with a
 // real certificate it is not needed.
 const client = await Ende.connectQuic({
-  hostname: "localhost",
-  port: 4433,
-  caCerts: [cert],
   alpnProtocols: ["echo"],
+  caCerts: [cert],
+  hostname: "localhost",
+  port: 4433
 });
 
 // Open a bidirectional stream, send a message, close our sending side,

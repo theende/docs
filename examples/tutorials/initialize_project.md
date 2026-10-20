@@ -80,7 +80,7 @@ ok | 2 passed | 0 failed (13ms)
 ```
 
 This will execute all the tests in the project. You can read more about
-[testing in Ende](/runtime/test/) and we'll cover tests in a little more depth
+[testing in Ende](/runtime/test/) and we’ll cover tests in a little more depth
 in a later tutorial. At the moment you have one test file, `main_test.ts`, which
 tests the request handler in `main.ts`.
 
@@ -119,7 +119,7 @@ my_project/
 This kind of structure keeps your project clean and makes it easier to find and
 manage files.
 
-🦕 Congratulations! Now you know how to create a brand new project with
+💀 Congratulations! Now you know how to create a brand new project with
 `ende init`. Remember that Ende encourages simplicity and avoids complex build
 tools. Keep your project modular, testable, and organized. As your project
 grows, adapt the structure to fit your needs. And most importantly, have fun

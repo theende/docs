@@ -19,7 +19,7 @@ import {
   maxSatisfying,
   parse,
   parseRange,
-  satisfies,
+  satisfies
 } from "jsr:@ende/semver";
 
 // Parse turns a version string into an object with numeric fields.

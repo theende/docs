@@ -22,16 +22,19 @@ console.log("Temp file data:", data);
 // A custom prefix and suffix for the temporary file can be specified.
 const tempFilePath2 = await Ende.makeTempFile({
   prefix: "logs_",
-  suffix: ".txt",
+  suffix: ".txt"
 });
+
 console.log("Temp file path 2:", tempFilePath2);
 
 // The directory that temporary files are created in can be customized too.
 // Here we use a relative ./tmp directory.
 await Ende.mkdir("./tmp", { recursive: true });
+
 const tempFilePath3 = await Ende.makeTempFile({
-  dir: "./tmp",
+  dir: "./tmp"
 });
+
 console.log("Temp file path 3:", tempFilePath3);
 
 // A temporary directory can also be created.
@@ -40,10 +43,11 @@ console.log("Temp dir path:", tempDirPath);
 
 // It has the same prefix, suffix, and directory options as `makeTempFile()`.
 const tempDirPath2 = await Ende.makeTempDir({
-  prefix: "logs_",
-  suffix: "_folder",
   dir: "./tmp",
+  prefix: "logs_",
+  suffix: "_folder"
 });
+
 console.log("Temp dir path 2:", tempDirPath2);
 
 // Synchronous versions of the above functions are also available.

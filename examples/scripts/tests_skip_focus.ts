@@ -21,11 +21,11 @@ Ende.test("addition", () => {
 // To skip a test, set the ignore option. The test is reported as ignored
 // rather than silently dropped, so it stays visible as a todo.
 Ende.test({
-  name: "subtraction",
-  ignore: true,
   fn() {
     assertEquals(2 - 1, 1);
   },
+  ignore: true,
+  name: "subtraction"
 });
 
 // The shorthand reads nicely when there is no other option to set.
@@ -36,11 +36,11 @@ Ende.test.ignore("multiplication", () => {
 // The ignore option takes any boolean, which makes platform-specific or
 // environment-specific skips one-liners.
 Ende.test({
-  name: "windows paths",
-  ignore: Ende.build.os !== "windows",
   fn() {
     // Only runs on Windows.
   },
+  ignore: Ende.build.os !== "windows",
+  name: "windows paths"
 });
 
 // Running the file reports each skipped test:

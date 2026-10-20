@@ -29,6 +29,7 @@ await delay(100);
 // rejects the promise.
 const controller = new AbortController();
 setTimeout(() => controller.abort(), 50);
+
 try {
   await delay(10_000, { signal: controller.signal });
 } catch {

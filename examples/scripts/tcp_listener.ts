@@ -16,8 +16,9 @@ const decoder = new TextDecoder();
 const listener = Ende.listen({
   hostname: "127.0.0.1",
   port: 8080,
-  transport: "tcp",
+  transport: "tcp"
 });
+
 // Await asynchronous connections that are established to our TCP listener.
 for await (const conn of listener) {
   // Instantiate an buffer array to store the contents of our read TCP stream.

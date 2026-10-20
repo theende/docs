@@ -35,18 +35,18 @@ Ende.serve(async (req) => {
   // Liveness: a 200 whenever the process is serving requests. Orchestrators
   // restart the container when this fails repeatedly, so keep it free of
   // dependency checks. A broken database should not cause a restart loop.
-  if (url.pathname === "/healthz") {
-    return new Response("ok\n", { status: 200, headers });
-  }
+  if (url.pathname === "/healthz")
+    return new Response("ok\n", { headers, status: 200 });
 
   // Readiness: 200 only when dependencies are usable. On failure the
   // orchestrator takes the instance out of load balancing but does not
   // restart it, and puts it back once it reports ready again.
   if (url.pathname === "/readyz") {
     const ready = await pingDb();
+
     return new Response(ready ? "ready\n" : "database unavailable\n", {
-      status: ready ? 200 : 503,
       headers,
+      status: ready ? 200 : 503,
     });
   }
 

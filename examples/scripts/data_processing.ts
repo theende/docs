@@ -5,7 +5,7 @@
  * @group Data Processing
  * @run <url>
  *
- * Demonstrates using Ende's @ende/collections library for processing user data.
+ * Demonstrates using Ende’s @ende/collections library for processing user data.
  * This example uses pick, omit, and partition to manipulate data structures.
  */
 
@@ -13,11 +13,11 @@ import { omit, partition, pick } from "jsr:@ende/collections";
 
 // Define the User type with fields for id, name, role, age, and country
 type User = {
+  age: number;
+  country: string;
   id: number;
   name: string;
   role: string;
-  age: number;
-  country: string;
 };
 
 // Sample array of user data for demonstration purposes
@@ -26,7 +26,7 @@ const users: User[] = [
   { id: 2, name: "Bob", role: "user", age: 25, country: "Canada" },
   { id: 3, name: "Charlie", role: "user", age: 28, country: "USA" },
   { id: 4, name: "Dave", role: "admin", age: 35, country: "Canada" },
-  { id: 5, name: "Eve", role: "user", age: 22, country: "UK" },
+  { id: 5, name: "Eve", role: "user", age: 22, country: "UK" }
 ];
 
 // 1. Pick specific fields from each user for selective data extraction
@@ -43,7 +43,7 @@ console.log("Omitted user data:", omitUsers);
 // Using partition to split users array into two groups: admins and regular users
 const [admins, regularUsers] = partition(
   users,
-  (user) => user.role === "admin", // Condition to check if user role is admin
+  (user) => user.role === "admin" // Condition to check if user role is admin
 );
 console.log("Admins:", admins);
 console.log("Regular Users:", regularUsers);

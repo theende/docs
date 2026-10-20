@@ -8,7 +8,7 @@
  * @group File System
  *
  * When creating files it can be useful to first ensure that
- * such a file doesn't already exist.
+ * such a file doesn’t already exist.
  * There are a number of ways to do this.
  */
 
@@ -29,8 +29,8 @@ await exists("./directory", { isFile: true }); // false
 try {
   const stats = await Ende.lstat("example.txt");
 } catch (err) {
-  if (!(err instanceof Ende.errors.NotFound)) {
+  if (!(err instanceof Ende.errors.NotFound))
     throw err;
-  }
+
   console.log("File does not exist");
 }

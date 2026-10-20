@@ -23,7 +23,7 @@ const logFile = "/tmp/structured_logging_example.log";
 const fileHandler = new log.FileHandler("WARN", {
   filename: logFile,
   formatter: (record) =>
-    JSON.stringify({ level: record.levelName, message: record.msg }),
+    JSON.stringify({ level: record.levelName, message: record.msg })
 });
 
 // Setup wires handlers to the default logger. The console handler only
@@ -31,11 +31,11 @@ const fileHandler = new log.FileHandler("WARN", {
 log.setup({
   handlers: {
     console: new log.ConsoleHandler("INFO", { useColors: false }),
-    file: fileHandler,
+    file: fileHandler
   },
   loggers: {
-    default: { level: "DEBUG", handlers: ["console", "file"] },
-  },
+    default: { handlers: ["console", "file"], level: "DEBUG" }
+  }
 });
 
 // This record is below INFO, so neither handler prints or stores it.

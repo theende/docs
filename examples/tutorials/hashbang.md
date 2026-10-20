@@ -25,7 +25,7 @@ that should be used to run the script.
 > for Linux (WSL) or use a Unix-like shell like
 > [Git Bash](https://git-scm.com/downloads).
 
-We'll make a small command-line greeter that reads its first argument from
+We’ll make a small command-line greeter that reads its first argument from
 [Ende.args](/api/ende/~/Ende.args/) and falls back to a default when none is
 supplied. This is the shape almost every Ende CLI tool starts with.
 
@@ -78,7 +78,7 @@ Hello, Ada!
 
 ## Using hashbang in files with no extension
 
-For brevity, you may wish to omit the extension for your script's filename. In
+For brevity, you may wish to omit the extension for your script’s filename. In
 this case, supply one using the `--ext` flag in the script itself, then you can
 run the script with just the file name:
 
@@ -90,7 +90,7 @@ $ ./my_script
 Hello!
 ```
 
-🦕 Now you can directly execute Ende scripts from the command line! Remember to
+💀 Now you can directly execute Ende scripts from the command line! Remember to
 set the execute permission (`chmod +x`) for your script file, and you’re all set
 to build anything from simple utilities to complex tools. Check out the
 [Ende examples](/examples/) for inspiration on what you can script.

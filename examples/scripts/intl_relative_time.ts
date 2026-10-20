@@ -45,15 +45,15 @@ const units: [Intl.RelativeTimeFormatUnit, number][] = [
   ["day", 24 * 60 * 60 * 1000],
   ["hour", 60 * 60 * 1000],
   ["minute", 60 * 1000],
-  ["second", 1000],
+  ["second", 1000]
 ];
 
 function timeAgo(deltaMs: number): string {
   for (const [unit, ms] of units) {
-    if (Math.abs(deltaMs) >= ms) {
+    if (Math.abs(deltaMs) >= ms)
       return auto.format(Math.round(deltaMs / ms), unit);
-    }
   }
+
   return auto.format(0, "second");
 }
 
@@ -72,7 +72,9 @@ console.log(timeAgo(70 * 24 * 60 * 60 * 1000)); // in 2 months
 // in the unit you ask for, ready to feed the formatter.
 const now = Temporal.Instant.from("2026-06-11T12:00:00Z")
   .toZonedDateTimeISO("UTC");
+
 const earlier = Temporal.Instant.from("2026-06-08T12:00:00Z")
   .toZonedDateTimeISO("UTC");
+
 const elapsed = earlier.since(now, { largestUnit: "day" });
 console.log(auto.format(elapsed.days, "day")); // 3 days ago

@@ -39,5 +39,5 @@ console.log(formatDuration(97_000, { ignoreZero: true })); // 1m 37s
 
 // The full style spells the units out, and digital renders a clock
 // style string.
-console.log(formatDuration(97_000, { style: "full", ignoreZero: true })); // 1 minute, 37 seconds
+console.log(formatDuration(97_000, { ignoreZero: true, style: "full" })); // 1 minute, 37 seconds
 console.log(formatDuration(97_000, { style: "digital" })); // 00:00:01:37:000:000:000

@@ -7,13 +7,15 @@ export async function loadExamples(): Promise<ExampleFromFileSystem[]> {
   const examples: ExampleFromFileSystem[] = [];
 
   for await (const entry of Ende.readDir(dir)) {
-    if (!entry.isFile || !entry.name.endsWith(".ts")) continue;
+    if (!entry.isFile || !entry.name.endsWith(".ts"))
+      continue;
 
     const content = await Ende.readTextFile(new URL(entry.name, dir));
+
     examples.push({
-      name: entry.name,
       content,
       label: entry.name.replace(/\.ts$/, ""),
+      name: entry.name,
       parsed: parseExample(entry.name, content)
     });
   }

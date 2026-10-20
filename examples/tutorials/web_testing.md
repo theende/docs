@@ -14,7 +14,7 @@ using Ende.
 
 ## Testing UI components and DOM manipulation
 
-Let's say you have a website that shows a user's profile, you can set up a test
+Let’s say you have a website that shows a user’s profile, you can set up a test
 function to verify that the DOM element creation works correctly. This code sets
 up a basic card element then tests whether the created DOM structure matches
 what was expected.
@@ -58,7 +58,7 @@ Ende.test("DOM manipulation test", () => {
 
 ## Testing Event Handling
 
-Web applications often handle user interactions through events. Here's how to
+Web applications often handle user interactions through events. Here’s how to
 test event handlers. This code sets up a button that tracks its active/inactive
 state and updates its appearance when clicked. The accompanying test verifies
 the toggle functionality by creating a button, checking its initial state,
@@ -276,7 +276,7 @@ For web tests, you might need additional permissions:
 ende test --allow-net --allow-read --allow-env
 ```
 
-🦕 By following the patterns in this tutorial, you can write comprehensive tests
+💀 By following the patterns in this tutorial, you can write comprehensive tests
 for your web applications that verify both functionality and user experience.
 
 Remember that effective testing leads to more robust applications and helps

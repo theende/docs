@@ -30,7 +30,7 @@ try {
 const meeting = Temporal.PlainDateTime.from("2026-06-12T09:30:00");
 console.log(meeting.toLocaleString("en-US", {
   dateStyle: "long",
-  timeStyle: "short",
+  timeStyle: "short"
 })); // June 12, 2026 at 9:30 AM
 
 // Date arithmetic is explicit about units, and the calendar handles month
@@ -40,7 +40,7 @@ console.log(date.add({ weeks: 2 }).toString()); // 2026-06-26
 // until produces the duration between two dates; total converts it to a
 // single unit.
 const release = Temporal.PlainDate.from("2026-09-01");
-const days = date.until(release).total({ unit: "days", relativeTo: date });
+const days = date.until(release).total({ relativeTo: date, unit: "days" });
 console.log(days); // 81
 
 // Calendar facts are properties, no formulas needed.
@@ -54,5 +54,6 @@ console.log(date.daysInMonth); // 30
 import { parse } from "jsr:@ende/datetime/parse";
 const legacy = parse("06/12/2026", "MM/dd/yyyy");
 const imported = Temporal.Instant.fromEpochMilliseconds(legacy.getTime())
-  .toZonedDateTimeISO(Temporal.Now.timeZoneId()).toPlainDate();
+  .toZonedDateTimeISO(Temporal.Now.timeZoneId())
+  .toPlainDate();
 console.log(imported.toString()); // 2026-06-12

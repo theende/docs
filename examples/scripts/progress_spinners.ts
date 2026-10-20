@@ -30,15 +30,17 @@ const isInteractive = Ende.stdout.isTerminal();
 // network. It animates on its own; update the message as phases change.
 if (isInteractive) {
   const spinner = new Spinner({
-    message: "Contacting server...",
     color: "yellow",
+    message: "Contacting server..."
   });
+
   spinner.start();
   await delay(1500);
   spinner.message = "Downloading manifest...";
   await delay(1500);
   spinner.stop();
 }
+
 console.log("Manifest downloaded.");
 
 // A progress bar suits work with a known total. Progress is reported by
@@ -46,18 +48,21 @@ console.log("Manifest downloaded.");
 // redraws on a one second interval by default, and the formatter option
 // controls the layout of the line.
 const files = ["a.txt", "b.txt", "c.txt", "d.txt", "e.txt"];
+
 if (isInteractive) {
   const bar = new ProgressBar({
-    max: files.length,
-    fillChar: "#",
     emptyChar: "-",
+    fillChar: "#",
     formatter: (f) =>
       `[${f.styledTime}] [${f.progressBar}] ${f.value}/${f.max} files`,
+    max: files.length
   });
+
   for (const _file of files) {
     await delay(400);
     bar.value += 1;
   }
+
   await bar.stop();
 } else {
   // The non-interactive fallback logs one line per step instead.
@@ -66,6 +71,7 @@ if (isInteractive) {
     console.log(`Copied ${file} (${i + 1}/${files.length})`);
   }
 }
+
 console.log("Done.");
 
 // In a terminal the spinner animates in place while the message changes,

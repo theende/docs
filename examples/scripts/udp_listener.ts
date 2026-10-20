@@ -17,7 +17,7 @@ const decoder = new TextDecoder();
 // Instantiate an instance of a UDP listener on localhost port 10000.
 const listener = Ende.listenDatagram({
   port: 10000,
-  transport: "udp",
+  transport: "udp"
 });
 
 // Await asynchronous messages that are sent to our UDP listener.

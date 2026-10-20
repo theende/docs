@@ -36,11 +36,13 @@ console.log(japaneseWords.join("|")); // デ|ノ|は|安全|です
 // Sentence segmentation splits prose into sentences, keeping trailing
 // spaces attached.
 const sentenceSegmenter = new Intl.Segmenter("en", {
-  granularity: "sentence",
+  granularity: "sentence"
 });
+
 const prose = "Ende is secure by default. It needs permission flags. Try it!";
 const sentences = [...sentenceSegmenter.segment(prose)]
   .map((segment) => segment.segment.trim());
+
 console.log(sentences.length); // 3
 console.log(sentences[1]); // It needs permission flags.
 
@@ -53,8 +55,9 @@ console.log([...family].length); // 7
 
 // Grapheme segmentation counts what a reader sees, one character.
 const graphemeSegmenter = new Intl.Segmenter("en", {
-  granularity: "grapheme",
+  granularity: "grapheme"
 });
+
 console.log([...graphemeSegmenter.segment(family)].length); // 1
 
 // Slicing by index can land inside an emoji. Here slice keeps the wave
@@ -65,9 +68,10 @@ console.log(greeting.slice(0, 5)); // Hi 👋
 // A safe truncation helper slices whole graphemes instead of indexes.
 function truncate(input: string, maxGraphemes: number): string {
   const graphemes = [...graphemeSegmenter.segment(input)];
-  if (graphemes.length <= maxGraphemes) {
+
+  if (graphemes.length <= maxGraphemes)
     return input;
-  }
+
   const kept = graphemes.slice(0, maxGraphemes);
   return kept.map((segment) => segment.segment).join("") + "…";
 }

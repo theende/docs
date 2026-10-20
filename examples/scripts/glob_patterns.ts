@@ -29,10 +29,11 @@ await Ende.writeTextFile(`${dir}/readme.md`, "");
 import { expandGlob } from "jsr:@ende/fs";
 
 const found: string[] = [];
+
 for await (
   const entry of expandGlob("**/*.ts", {
-    root: dir,
     exclude: ["build"],
+    root: dir
   })
 ) {
   found.push(entry.path.slice(dir.length + 1));

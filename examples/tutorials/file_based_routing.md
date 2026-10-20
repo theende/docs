@@ -8,7 +8,7 @@ oldUrl:
   - /runtime/tutorials/file_based_routing/
 ---
 
-If you've used frameworks like [Next.js](https://nextjs.org/), you might be
+If you’ve used frameworks like [Next.js](https://nextjs.org/), you might be
 familiar with file based routing - you add a file in a specific directory and it
 automatically becomes a route. This tutorial demonstrates how to create a simple
 HTTP server that uses file based routing.
@@ -64,7 +64,7 @@ Finally, it serves the handler function using `Ende.serve`.
 ## Handle requests
 
 Create a new file called `users.ts` in the same directory as `server.ts`. This
-file will be used to handle requests to the `/users` path. We'll use a `GET`
+file will be used to handle requests to the `/users` path. We’ll use a `GET`
 request as an example. You could add more HTTP methods such as `POST`, `PUT`,
 `DELETE`, etc.
 
@@ -93,7 +93,7 @@ This command requires the `--allow-net` and `--allow-read`
 network to start the server and to read the `users.ts` file from the file
 system.
 
-🦕 Now you can set up routing in your apps based on file structure. You can
+💀 Now you can set up routing in your apps based on file structure. You can
 extend this example to add more routes and methods as needed.
 
 <small>Thanks to [@naishe](https://github.com/naishe) for contributing this

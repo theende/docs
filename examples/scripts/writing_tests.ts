@@ -26,10 +26,11 @@ Ende.test("assert works correctly", () => {
 // with some steps in between. This is also made simple with the built-in test runner.
 Ende.test("testing steps", async (t) => {
   const file = await Ende.open("example.txt", {
-    read: true,
-    write: true,
     create: true,
+    read: true,
+    write: true
   });
+
   const encoder = new TextEncoder();
   const data = encoder.encode("Hello world!");
 
@@ -53,9 +54,9 @@ Ende.test("testing steps", async (t) => {
 // test are freed. There are situations where this is not useful behavior. We can use
 // the more complex test definition to disable this behavior
 Ende.test({
-  name: "leaky test",
   async fn() {
     await Ende.open("example.txt");
   },
-  sanitizeResources: false,
+  name: "leaky test",
+  sanitizeResources: false
 });

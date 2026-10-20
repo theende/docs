@@ -6,8 +6,8 @@ interface EndeLintRuleDesc {
 }
 
 interface EndeLintRulesOutput {
-  version: string;
   rules: EndeLintRuleDesc[];
+  version: string;
 }
 
 async function getCurrentLintRules(): Promise<EndeLintRulesOutput> {
@@ -15,9 +15,8 @@ async function getCurrentLintRules(): Promise<EndeLintRulesOutput> {
     args: ["lint", "--rules", "--json"]
   }).outputSync();
 
-  if (!output.success) {
+  if (!output.success)
     throw new Error("Failed to run `ende lint --rules --json`");
-  }
 
   const data = new TextDecoder().decode(output.stdout);
   return JSON.parse(data) satisfies EndeLintRulesOutput;
@@ -28,8 +27,8 @@ const missingDocs: string[] = [];
 async function checkIfDocsExistAndUpdate(lintRulesData: EndeLintRulesOutput) {
   for (const lintRule of lintRulesData.rules) {
     const name = lintRule.code;
-
     let content = "";
+
     try {
       content = await Ende.readTextFile(`./lint/rules/${name}.md`);
     } catch {
@@ -37,9 +36,9 @@ async function checkIfDocsExistAndUpdate(lintRulesData: EndeLintRulesOutput) {
       continue;
     }
 
-    let fmData: { body: string; attrs: { tags?: string[] } } = {
-      body: "",
-      attrs: {}
+    let fmData: { attrs: { tags?: string[] }; body: string; } = {
+      attrs: {},
+      body: ""
     };
 
     try {

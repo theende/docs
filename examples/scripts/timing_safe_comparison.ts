@@ -19,14 +19,17 @@ import { timingSafeEqual } from "jsr:@ende/crypto/timing-safe-equal";
 // timingSafeEqual compares two buffers of the same length in constant
 // time. Digests are a natural fit since they always have a fixed length.
 const encoder = new TextEncoder();
+
 const digestA = await crypto.subtle.digest(
   "SHA-256",
-  encoder.encode("my-api-key"),
+  encoder.encode("my-api-key")
 );
+
 const digestB = await crypto.subtle.digest(
   "SHA-256",
-  encoder.encode("my-api-key"),
+  encoder.encode("my-api-key")
 );
+
 console.log(timingSafeEqual(digestA, digestB)); // true
 
 // Raw secrets often differ in length, and a length mismatch alone leaks
@@ -35,8 +38,9 @@ console.log(timingSafeEqual(digestA, digestB)); // true
 async function safeCompare(actual: string, expected: string) {
   const [a, b] = await Promise.all([
     crypto.subtle.digest("SHA-256", encoder.encode(actual)),
-    crypto.subtle.digest("SHA-256", encoder.encode(expected)),
+    crypto.subtle.digest("SHA-256", encoder.encode(expected))
   ]);
+
   return timingSafeEqual(a, b);
 }
 
@@ -51,7 +55,8 @@ import { crypto as stdCrypto } from "jsr:@ende/crypto";
 
 const fast = await stdCrypto.subtle.digest(
   "BLAKE3",
-  encoder.encode("my-api-key"),
+  encoder.encode("my-api-key")
 );
+
 console.log(new Uint8Array(fast).length); // 32
 console.log(timingSafeEqual(fast, fast.slice(0))); // true

@@ -29,12 +29,14 @@ console.log(type); // application/octet-stream
 
 // A typical use: serving content with the right header.
 const path = "data.json";
-const body = new Blob(['{ "hello": "world" }']).stream();
+const body = new Blob([`{ "hello": "world" }`]).stream();
+
 const response = new Response(body, {
   headers: {
-    "content-type": contentType(extname(path)) ?? "application/octet-stream",
-  },
+    "content-type": contentType(extname(path)) ?? "application/octet-stream"
+  }
 });
+
 console.log(response.headers.get("content-type")); // application/json
 
 // Note that the lookup trusts the file name. To identify a file by its

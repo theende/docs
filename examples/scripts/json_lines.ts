@@ -43,8 +43,9 @@ for await (const entry of entries) {
 // to append to a file or send over a socket.
 const events = [
   { id: 1, type: "click" },
-  { id: 2, type: "scroll" },
+  { id: 2, type: "scroll" }
 ];
+
 const lines = ReadableStream.from(events)
   .pipeThrough(new JsonStringifyStream());
 

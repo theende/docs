@@ -19,37 +19,40 @@
 const { privateKey, publicKey } = await crypto.subtle.generateKey(
   { name: "ECDSA", namedCurve: "P-256" },
   true,
-  ["sign", "verify"],
+  ["sign", "verify"]
 );
 
 // Sign a message. ECDSA hashes the data first, here with SHA-256, and the
 // signature changes on every run because ECDSA mixes in a random nonce.
 const message = new TextEncoder().encode("release v2.0.0");
 const signature = await crypto.subtle.sign(
-  { name: "ECDSA", hash: "SHA-256" },
+  { hash: "SHA-256", name: "ECDSA" },
   privateKey,
-  message,
+  message
 );
+
 console.log(new Uint8Array(signature).toHex()); // e.g. 989b58f4b154...
 
 // Verify the signature against the original message with the public key.
 const valid = await crypto.subtle.verify(
-  { name: "ECDSA", hash: "SHA-256" },
+  { hash: "SHA-256", name: "ECDSA" },
   publicKey,
   signature,
-  message,
+  message
 );
+
 console.log(valid); // true
 
 // A tampered message fails verification, even for a one character change.
 const tampered = new TextEncoder().encode("release v2.0.1");
+
 console.log(
   await crypto.subtle.verify(
-    { name: "ECDSA", hash: "SHA-256" },
+    { hash: "SHA-256", name: "ECDSA" },
     publicKey,
     signature,
-    tampered,
-  ),
+    tampered
+  )
 ); // false
 
 // Export the public key as JWK to share it with whoever needs to verify
@@ -65,13 +68,14 @@ const imported = await crypto.subtle.importKey(
   jwk,
   { name: "ECDSA", namedCurve: "P-256" },
   true,
-  ["verify"],
+  ["verify"]
 );
+
 console.log(
   await crypto.subtle.verify(
-    { name: "ECDSA", hash: "SHA-256" },
+    { hash: "SHA-256", name: "ECDSA" },
     imported,
     signature,
-    message,
-  ),
+    message
+  )
 ); // true

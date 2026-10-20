@@ -30,7 +30,7 @@ export default function SidebarNav(
   { sidebar, url }: { sidebar: Sidebar; url: string }
 ) {
   return (
-    <nav aria-label="Section">
+    <nav aria-label="Section" id="sidebar">
       {sidebar.map((section) => (
         <section>
           {section.title && (

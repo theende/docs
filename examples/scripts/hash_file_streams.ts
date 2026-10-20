@@ -10,7 +10,7 @@
  * The Web Crypto digest function takes a single buffer, so hashing a file
  * with it means reading the whole file into memory first. The Standard
  * Library ships a drop-in crypto wrapper whose digest also accepts async
- * iterables, such as a file's readable stream, and hashes chunk by chunk
+ * iterables, such as a file’s readable stream, and hashes chunk by chunk
  * in constant memory.
  */
 
@@ -35,7 +35,7 @@ const oneShot = await crypto.subtle.digest("SHA-256", whole);
 
 // Both approaches produce the same digest.
 console.log(
-  new Uint8Array(streamed).toHex() === new Uint8Array(oneShot).toHex(),
+  new Uint8Array(streamed).toHex() === new Uint8Array(oneShot).toHex()
 ); // true
 
 await Ende.remove(path);

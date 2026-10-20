@@ -15,8 +15,8 @@ observability platforms like [Honeycomb](https://honeycomb.io).
 Honeycomb is an observability platform designed for debugging and understanding
 complex, modern distributed systems.
 
-In this tutorial, we'll build a simple application and export its telemetry data
-to Honeycomb. We'll cover:
+In this tutorial, we’ll build a simple application and export its telemetry data
+to Honeycomb. We’ll cover:
 
 - [Set up your chat app](#set-up-your-chat-app)
 - [Set up a Docker collector](#set-up-a-docker-collector)
@@ -28,7 +28,7 @@ You can find the complete source code for this tutorial
 
 ## Set up your chat app
 
-For this tutorial, we'll use a simple chat application to demonstrate how to
+For this tutorial, we’ll use a simple chat application to demonstrate how to
 export telemetry data. You can find the
 [code for the app on GitHub](https://github.com/denoland/examples/tree/main/with-honeycomb).
 
@@ -51,7 +51,7 @@ OPENAI_API_KEY=your_openai_api_key
 
 ## Set up a Docker collector
 
-Next, we'll set up a Docker container to run the OpenTelemetry collector. The
+Next, we’ll set up a Docker container to run the OpenTelemetry collector. The
 collector is responsible for receiving telemetry data from your application and
 exporting it to Honeycomb.
 
@@ -125,8 +125,8 @@ The `receivers` section configures how the collector receives data. It sets up
 an OTLP (OpenTelemetry Protocol) receiver that listens on two protocols, `gRPC`
 and `HTTP`, the `0.0.0.0` address means it will accept data from any source.
 
-The `exporters` section defines where the collected data should be sent. It's
-configured to send data to Honeycomb's API endpoint at `api.honeycomb.io:443`.
+The `exporters` section defines where the collected data should be sent. It’s
+configured to send data to Honeycomb’s API endpoint at `api.honeycomb.io:443`.
 The configuration requires an API key for authentication, swap
 `$_HONEYCOMB_API_KEY` for your actual Honeycomb API key.
 
@@ -163,7 +163,7 @@ This command:
 
 - Points the OpenTelemetry exporter to your local collector (`localhost:4318`)
 - Names your service "chat-app" in Honeycomb
-- Enables Ende's OpenTelemetry integration
+- Enables Ende’s OpenTelemetry integration
 - Runs your application with the necessary permissions
 
 To generate some telemetry data, make a few requests to your running application
@@ -172,13 +172,13 @@ in your browser at [`http://localhost:8000`](http://localhost:8000).
 Each request will:
 
 1. Generate traces as it flows through your application
-2. Send logs from your application's console output
+2. Send logs from your application’s console output
 3. Create metrics about the request performance
 4. Forward all this data through the collector to Honeycomb
 
 ## Viewing telemetry data
 
-After making some requests to your application, you'll see three types of data
+After making some requests to your application, you’ll see three types of data
 in your Honeycomb.io dashboard:
 
 1. **Traces** - End-to-end request flows through your system
@@ -191,7 +191,7 @@ You can drill down into individual spans to debug performance issues:
 
 ![Viewing expanded traces in Honeycomb](./images/how-to/honeycomb/honeycomb-4.webp)
 
-🦕 Now that you have telemetry export working, you could:
+💀 Now that you have telemetry export working, you could:
 
 1. Add custom spans and attributes to better understand your application
 2. Set up alerts based on latency or error conditions

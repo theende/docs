@@ -22,21 +22,24 @@
 const libNames: Partial<Record<typeof Ende.build.os, string>> = {
   darwin: "/usr/lib/libSystem.B.dylib",
   linux: "libc.so.6",
-  windows: "msvcrt.dll",
+  windows: "msvcrt.dll"
 };
+
 const libName = libNames[Ende.build.os];
-if (!libName) throw new Error(`Unsupported OS: ${Ende.build.os}`);
+
+if (!libName)
+  throw new Error(`Unsupported OS: ${Ende.build.os}`);
 
 // Open the library and declare the symbols to bind. Each entry gives the
 // parameter types and result type in C terms: buffer accepts a TypedArray
 // and passes a pointer to its bytes, usize is an unsigned size_t, and
 // function accepts a pointer to a callback.
 const libc = Ende.dlopen(libName, {
-  strlen: { parameters: ["buffer"], result: "usize" },
   qsort: {
     parameters: ["buffer", "usize", "usize", "function"],
-    result: "void",
+    result: "void"
   },
+  strlen: { parameters: ["buffer"], result: "usize" }
 });
 
 // Call strlen with a NUL-terminated byte buffer. C strings end with a zero
@@ -54,8 +57,9 @@ const comparator = new Ende.UnsafeCallback(
   (a, b) => {
     const x = new Ende.UnsafePointerView(a!).getInt32();
     const y = new Ende.UnsafePointerView(b!).getInt32();
+
     return x - y;
-  },
+  }
 );
 
 // Sort an Int32Array in place by handing qsort the buffer, the element

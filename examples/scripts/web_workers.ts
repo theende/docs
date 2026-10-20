@@ -32,8 +32,8 @@ self.onmessage = async (e) => {
 const worker = new Worker(
   new URL("./worker.ts", import.meta.url).href,
   {
-    type: "module",
-  },
+    type: "module"
+  }
 );
 
 // We can send a message to the worker by using the `postMessage` method
@@ -45,19 +45,19 @@ worker.postMessage({ filename: "./log.txt" });
 const worker2 = new Worker(
   new URL("./worker.ts", import.meta.url).href,
   {
-    type: "module",
     ende: {
       permissions: {
         read: [
           new URL("./file_1.txt", import.meta.url),
           new URL("./file_2.txt", import.meta.url),
-        ],
-      },
+        ]
+      }
     },
-  },
+    type: "module"
+  }
 );
 
 // Because we instantiated this worker with specific permissions, this will
-// cause the worker to try to read a file it doesn't have access to and thus
+// cause the worker to try to read a file it doesn’t have access to and thus
 // will throw a permission error.
 worker2.postMessage({ filename: "./log.txt" });

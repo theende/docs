@@ -11,7 +11,7 @@
  */
 import { parse, stringify } from "jsr:@ende/toml";
 
-// To parse a TOML string, you can use the standard library's TOML
+// To parse a TOML string, you can use the standard library’s TOML
 // parse function. The value is returned as a JavaScript object.
 const text = `
 int = 1_000_000
@@ -30,14 +30,15 @@ console.log(data.int);
 console.log(data.bin.length);
 
 // To turn a JavaScript object into a TOML string, you can use the standard
-// library's TOML stringify function.
+// library’s TOML stringify function.
 const obj = {
-  ping: "pong",
   complex: [
     { name: "bob", age: 10 },
     { name: "alice", age: 12 },
   ],
+  ping: "pong"
 };
+
 const toml = stringify(obj);
 console.log(toml);
 //- ping = "pong"

@@ -24,6 +24,7 @@ console.log(await deadline(fast, 1_000)); // fetched 3 records
 // When the time limit hits first, deadline rejects with a DOMException
 // named TimeoutError.
 const slow = delay(2_000, { persistent: false }).then(() => "too late");
+
 try {
   await deadline(slow, 100);
 } catch (err) {

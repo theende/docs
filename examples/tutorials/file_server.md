@@ -1,7 +1,7 @@
 ---
 last_modified: 2025-04-11
 title: "Write a file server"
-description: "Tutorial on building a file server with Ende. Learn how to handle HTTP requests, serve static files, implement streaming responses, and use the standard library's file server module for production deployments."
+description: "Tutorial on building a file server with Ende. Learn how to handle HTTP requests, serve static files, implement streaming responses, and use the standard library’s file server module for production deployments."
 url: /examples/file_server_tutorial/
 oldUrl:
   - /runtime/manual/examples/file_server/
@@ -10,13 +10,13 @@ oldUrl:
 
 A file server listens for incoming HTTP requests and serves files from the local
 file system. This tutorial demonstrates how to create a simple file server using
-Ende's built-in [file system APIs](/api/ende/file-system/).
+Ende’s built-in [file system APIs](/api/ende/file-system/).
 
 ## Write a simple File Server
 
 To start, create a new file called `file-server.ts`.
 
-We'll use Ende's built in [HTTP server](/api/ende/~/Ende.serve/) to listen for
+We’ll use Ende’s built in [HTTP server](/api/ende/~/Ende.serve/) to listen for
 incoming requests. In your new `file-server.ts` file, add the following code:
 
 ```ts title="file-server.ts"
@@ -29,7 +29,7 @@ Ende.serve(
 );
 ```
 
-> If you're not familiar with the `URL` object, you can learn more about it in
+> If you’re not familiar with the `URL` object, you can learn more about it in
 > the [URL API](https://developer.mozilla.org/en-US/docs/Web/API/URL)
 > documentation. The
 > [decodeURIComponent function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent)
@@ -38,17 +38,17 @@ Ende.serve(
 
 ### Open a file and stream its contents
 
-When a request is received, we'll attempt to open the file specified in the
+When a request is received, we’ll attempt to open the file specified in the
 request URL with [`Ende.open`](/api/ende/~/Ende.open/).
 
-If the requested file exists, we'll convert it into a readable stream of data
+If the requested file exists, we’ll convert it into a readable stream of data
 with the
 [ReadableStream API](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream),
-and stream its contents to the response. We don't know how large the requested
+and stream its contents to the response. We don’t know how large the requested
 file might be, so streaming it will prevent memory issues when serving large
 files or multiple requests concurrently.
 
-If the file does not exist, we'll return a "404 Not Found" response.
+If the file does not exist, we’ll return a "404 Not Found" response.
 
 In the body of the request handler, below the two variables, add the following
 code:
@@ -73,13 +73,13 @@ ende run --allow-read=. --allow-net file-server.ts
 
 ## Using the file server provided by the Ende Standard Library
 
-Writing a file server from scratch is a good exercise to understand how Ende's
+Writing a file server from scratch is a good exercise to understand how Ende’s
 HTTP server works. However, writing production ready file server from scratch
-can be complex and error-prone. It's better to use a tested and reliable
+can be complex and error-prone. It’s better to use a tested and reliable
 solution.
 
 The Ende Standard Library provides you with a
-[file server](https://jsr.io/@ende/http/doc/file-server/~) so that you don't
+[file server](https://jsr.io/@ende/http/doc/file-server/~) so that you don’t
 have to write your own.
 
 To use it, first install the remote script to your local file system:
@@ -134,8 +134,8 @@ This code will set up an HTTP server with `Ende.serve`. When a request comes in,
 it checks if the requested path starts with “/static”. If so, it serves files
 from the specified directory. Otherwise, it responds with an empty response.
 
-🦕 Now you know how to write your own simple file server, and how to use the
-file-server utility provided by the Ende Standard Library. You're equipped to
+💀 Now you know how to write your own simple file server, and how to use the
+file-server utility provided by the Ende Standard Library. You’re equipped to
 tackle a whole variety of tasks - whether it’s serving static files, handling
-uploads, transforming data, or managing access control - you're ready to serve
+uploads, transforming data, or managing access control - you’re ready to serve
 files with Ende.

@@ -16,17 +16,18 @@
 // with data:, followed by a blank line.
 function handler(_req: Request): Response {
   let timer: ReturnType<typeof setInterval>;
+
   const body = new ReadableStream({
+    // Stop producing events when the client disconnects.
+    cancel() {
+      clearInterval(timer);
+    },
     start(controller) {
       timer = setInterval(() => {
         const event = `data: ${new Date().toISOString()}\n\n`;
         controller.enqueue(new TextEncoder().encode(event));
       }, 1000);
-    },
-    // Stop producing events when the client disconnects.
-    cancel() {
-      clearInterval(timer);
-    },
+    }
   });
 
   // The content type is what makes this server-sent events. Disabling
@@ -34,7 +35,7 @@ function handler(_req: Request): Response {
   return new Response(body, {
     headers: {
       "content-type": "text/event-stream",
-      "cache-control": "no-store",
+      "cache-control": "no-store"
     },
   });
 }

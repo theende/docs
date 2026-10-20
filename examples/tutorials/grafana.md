@@ -21,8 +21,8 @@ Grafana also offers a hosted version called
 [Grafana Cloud](https://grafana.com/products/cloud/). This tutorial will help
 you configure your project to export OTel data to Grafana Cloud.
 
-In this tutorial, we'll build a simple application and export its telemetry data
-to Grafana Cloud. We'll cover:
+In this tutorial, we’ll build a simple application and export its telemetry data
+to Grafana Cloud. We’ll cover:
 
 - [Set up your chat app](#set-up-your-chat-app)
 - [Set up a Docker collector](#set-up-a-docker-collector)
@@ -34,7 +34,7 @@ You can find the complete source code for this tutorial
 
 ## Set up your chat app
 
-For this tutorial, we'll use a simple chat application to demonstrate how to
+For this tutorial, we’ll use a simple chat application to demonstrate how to
 export telemetry data. You can find the
 [code for the app on GitHub](https://github.com/denoland/examples/tree/main/with-grafana).
 
@@ -57,7 +57,7 @@ OPENAI_API_KEY=your_openai_api_key
 
 ## Set up a Docker collector
 
-Next, we'll set up a Docker container to run the OpenTelemetry collector. The
+Next, we’ll set up a Docker container to run the OpenTelemetry collector. The
 collector is responsible for receiving telemetry data from your application and
 exporting it to Grafana Cloud.
 
@@ -87,7 +87,7 @@ the container. The file is renamed to `/otel-config.yml` inside the container.
 run when the container starts. It tells the OpenTelemetry Collector to use the
 configuration file we copied in the previous step.
 
-Next, let's setup a Grafana Cloud account and grab some info.
+Next, let’s setup a Grafana Cloud account and grab some info.
 
 If you have not already,
 [create a free Grafana Cloud account](https://grafana.com/auth/sign-up/create-user).
@@ -99,7 +99,7 @@ Next, find "OpenTelemetry" and click "Configure".
 
 ![Find and configure OpenTelemetry](./images/how-to/grafana/grafana-2.png)
 
-This page will provide you with all the details you'll need to configure your
+This page will provide you with all the details you’ll need to configure your
 OpenTelemetry collector. Make note of your **OTLP Endpoint**, **Instance ID**,
 and **Password / API Token** (you will have to generate one).
 
@@ -193,7 +193,7 @@ This command:
 
 - Points the OpenTelemetry exporter to your local collector (`localhost:4318`)
 - Names your service "chat-app" in Grafana Cloud
-- Enables Ende's OpenTelemetry integration
+- Enables Ende’s OpenTelemetry integration
 - Runs your application with the necessary permissions
 
 To generate some telemetry data, make a few requests to your running application
@@ -202,13 +202,13 @@ in your browser at [`http://localhost:8000`](http://localhost:8000).
 Each request will:
 
 1. Generate traces as it flows through your application
-2. Send logs from your application's console output
+2. Send logs from your application’s console output
 3. Create metrics about the request performance
 4. Forward all this data through the collector to Grafana Cloud
 
 ## Viewing telemetry data
 
-After making some requests to your application, you'll see three types of data
+After making some requests to your application, you’ll see three types of data
 in your Grafana Cloud dashboard:
 
 1. **Traces** - End-to-end request flows through your system
@@ -221,7 +221,7 @@ You can drill down into individual spans to debug performance issues:
 
 ![Viewing traces in Grafana](./images/how-to/grafana/grafana-traces.png)
 
-🦕 Now that you have telemetry export working, you could:
+💀 Now that you have telemetry export working, you could:
 
 1. Add custom spans and attributes to better understand your application
 2. Set up alerts based on latency or error conditions

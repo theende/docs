@@ -20,7 +20,7 @@ const routes = [
   { path: "/", lastmod: "2026-06-01" },
   { path: "/about", lastmod: "2026-05-12" },
   { path: "/blog", lastmod: "2026-06-10" },
-  { path: "/blog/hello-world", lastmod: "2026-05-20" },
+  { path: "/blog/hello-world", lastmod: "2026-05-20" }
 ];
 
 // A urlset with one url element per route. lastmod uses the W3C date
@@ -53,13 +53,13 @@ Ende.serve((req) => {
 
   if (pathname === "/sitemap.xml") {
     return new Response(sitemap(), {
-      headers: { "content-type": "application/xml; charset=utf-8" },
+      headers: { "content-type": "application/xml; charset=utf-8" }
     });
   }
 
   if (pathname === "/robots.txt") {
     return new Response(robots, {
-      headers: { "content-type": "text/plain; charset=utf-8" },
+      headers: { "content-type": "text/plain; charset=utf-8" }
     });
   }
 

@@ -35,18 +35,22 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
 
 // Compile the shader and build a compute pipeline around its entry point.
 const module = device.createShaderModule({ code: shader });
+
 const pipeline = device.createComputePipeline({
-  layout: "auto",
   compute: { module },
+  layout: "auto"
 });
 
 // Upload the input data into a storage buffer on the GPU.
 const input = new Float32Array([1, 2, 3, 4]);
+
 const storageBuffer = device.createBuffer({
   size: input.byteLength,
-  usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC |
-    GPUBufferUsage.COPY_DST,
+  usage: GPUBufferUsage.STORAGE |
+    GPUBufferUsage.COPY_SRC |
+    GPUBufferUsage.COPY_DST
 });
+
 device.queue.writeBuffer(storageBuffer, 0, input);
 
 // GPU buffers cannot be read directly from JavaScript, so create a second
@@ -54,16 +58,17 @@ device.queue.writeBuffer(storageBuffer, 0, input);
 // results.
 const readBuffer = device.createBuffer({
   size: input.byteLength,
-  usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ,
+  usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ
 });
 
-// Bind the storage buffer to the shader's binding 0, then record the
+// Bind the storage buffer to the shader’s binding 0, then record the
 // commands: run the pipeline with enough workgroups to cover the array,
 // and copy the results into the readable buffer.
 const bindGroup = device.createBindGroup({
-  layout: pipeline.getBindGroupLayout(0),
   entries: [{ binding: 0, resource: { buffer: storageBuffer } }],
+  layout: pipeline.getBindGroupLayout(0)
 });
+
 const encoder = device.createCommandEncoder();
 const pass = encoder.beginComputePass();
 pass.setPipeline(pipeline);

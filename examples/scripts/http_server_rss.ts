@@ -17,17 +17,17 @@ const SITE = "https://example.com";
 
 const posts = [
   {
-    slug: "tips-tricks",
-    title: "Tips & tricks for <template> elements",
     description: "Why & how to use them",
     published: new Date("2026-06-01T10:00:00Z"),
+    slug: "tips-tricks",
+    title: "Tips & tricks for <template> elements"
   },
   {
-    slug: "hello-world",
-    title: "Hello world",
     description: "The first post",
     published: new Date("2026-05-20T08:30:00Z"),
-  },
+    slug: "hello-world",
+    title: "Hello world"
+  }
 ];
 
 // XML has five characters that must not appear raw in text content. The
@@ -68,13 +68,15 @@ ${items}
 
 Ende.serve((req) => {
   const { pathname } = new URL(req.url);
+
   if (pathname === "/feed.xml") {
     // application/rss+xml is the registered media type for RSS. Readers
     // also accept application/xml, but be precise when you can.
     return new Response(buildFeed(), {
-      headers: { "content-type": "application/rss+xml; charset=utf-8" },
+      headers: { "content-type": "application/rss+xml; charset=utf-8" }
     });
   }
+
   return new Response("see /feed.xml\n");
 });
 

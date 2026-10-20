@@ -30,13 +30,15 @@ console.log(doc.title); // Example Domain
 // Social preview cards read Open Graph meta tags. Collect every og:
 // property into a record.
 const og: Record<string, string> = {};
-for (const meta of doc.querySelectorAll('meta[property^="og:"]')) {
+
+for (const meta of doc.querySelectorAll(`meta[property^="og:"]`)) {
   const property = meta.getAttribute("property")!.slice(3);
   og[property] = meta.getAttribute("content") ?? "";
 }
+
 console.log(og); // {} (example.com has no Open Graph tags)
 
 // Pages without Open Graph tags usually still have a description.
-const description = doc.querySelector('meta[name="description"]')
+const description = doc.querySelector(`meta[name="description"]`)
   ?.getAttribute("content");
 console.log(description ?? "(no description)");

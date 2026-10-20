@@ -23,11 +23,12 @@ const proxy = Ende.serve({ port: 8080 }, async (req) => {
   console.log("proxy saw:", req.method, req.url);
   const headers = new Headers(req.headers);
   headers.delete("host");
+
   return await fetch(req.url, {
-    method: req.method,
-    headers,
     body: req.body,
-    redirect: "manual",
+    headers,
+    method: req.method,
+    redirect: "manual"
   });
 });
 
@@ -35,7 +36,7 @@ const proxy = Ende.serve({ port: 8080 }, async (req) => {
 // Passing it through the client option of fetch routes only that call
 // through the proxy; every other fetch in the process is unaffected.
 const client = Ende.createHttpClient({
-  proxy: { url: "http://localhost:8080/" },
+  proxy: { url: "http://localhost:8080/" }
 });
 
 const response = await fetch("http://example.com/", { client });

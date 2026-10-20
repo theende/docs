@@ -32,7 +32,7 @@ import { decodeTime } from "jsr:@ende/ulid@^2026.10.15";
 const myULID = ulid();
 console.log(decodeTime(myULID));
 
-// Optionally, if you're not on a distributed system and want monotonic ULIDs,
+// Optionally, if you’re not on a distributed system and want monotonic ULIDs,
 // you can use the monotonic ULID generator instead.
 import { monotonicUlid } from "jsr:@ende/ulid@^2026.10.15";
 console.log(monotonicUlid(150000)); // 000XAL6S41ACTAV9WEVGEMMVR8

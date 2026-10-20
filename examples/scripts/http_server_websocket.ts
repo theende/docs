@@ -13,17 +13,16 @@
 // To start the server on the default port, call `Ende.serve` with the handler.
 Ende.serve((req) => {
   // First, we verify if the client is negotiating to upgrade to websockets.
-  // If not, we can give a status of 426 to specify we don't support plain
+  // If not, we can give a status of 426 to specify we don’t support plain
   // http requests.
-  if (req.headers.get("upgrade") != "websocket") {
+  if (req.headers.get("upgrade") !== "websocket")
     return new Response(null, { status: 426 });
-  }
 
   // We can then upgrade the request to a websocket
-  const { socket, response } = Ende.upgradeWebSocket(req);
+  const { response, socket } = Ende.upgradeWebSocket(req);
 
   // We now have access to a standard websocket object.
-  // Let's handle the "open" event
+  // Let’s handle the "open" event
   socket.addEventListener("open", () => {
     console.log("a client connected!");
   });
@@ -31,9 +30,8 @@ Ende.serve((req) => {
   // We can also handle messages in a similar way. Here we set up
   // a simple ping / pong example.
   socket.addEventListener("message", (event) => {
-    if (event.data === "ping") {
+    if (event.data === "ping")
       socket.send("pong");
-    }
   });
 
   // Lastly we return the response created from upgradeWebSocket.

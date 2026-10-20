@@ -9,7 +9,7 @@
  *
  * A handler that depends on a slow upstream can hold a connection open
  * forever. A per-request deadline turns that into a fast 504 instead. This
- * example aborts the handler's work when a deadline passes or when the
+ * example aborts the handler’s work when a deadline passes or when the
  * client disconnects, whichever comes first.
  */
 
@@ -19,11 +19,14 @@ const DEADLINE_MS = 1000;
 // signal to fetch, a database driver, or another cancellable API.
 function doWork(ms: number, signal: AbortSignal): Promise<Response> {
   return new Promise((resolve, reject) => {
-    if (signal.aborted) return reject(signal.reason);
+    if (signal.aborted)
+      return reject(signal.reason);
+
     const timer = setTimeout(
       () => resolve(new Response("Work finished\n")),
-      ms,
+      ms
     );
+
     signal.addEventListener("abort", () => {
       clearTimeout(timer);
       reject(signal.reason);
@@ -41,21 +44,23 @@ Ende.serve(async (req) => {
   // work means an impatient client also cancels upstream calls instead of
   // leaving them running.
   const controller = new AbortController();
+
   const deadline = setTimeout(() => {
     controller.abort(new DOMException("Deadline exceeded", "TimeoutError"));
   }, DEADLINE_MS);
+
   req.signal.addEventListener(
     "abort",
     () => controller.abort(req.signal.reason),
-    { once: true },
+    { once: true }
   );
 
   try {
     return await doWork(workMs, controller.signal);
   } catch (err) {
-    if (err instanceof DOMException && err.name === "TimeoutError") {
+    if (err instanceof DOMException && err.name === "TimeoutError")
       return new Response("Gateway timeout\n", { status: 504 });
-    }
+
     throw err;
   } finally {
     // Always clear the timer. A leaked timer keeps the event loop busy and

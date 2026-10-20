@@ -10,7 +10,7 @@ oldUrl:
 
 ## Getting Started
 
-In this tutorial we'll create a simple Word Finder web application using Ende.
+In this tutorial we’ll create a simple Word Finder web application using Ende.
 No prior knowledge of Ende is required.
 
 ## Introduction
@@ -18,7 +18,7 @@ No prior knowledge of Ende is required.
 Our Word Finder application will take a pattern string provided by the user and
 return all words in the English dictionary that match the pattern. The pattern
 can include alphabetical characters as well as `_` and `?`. The `?` can stand
-for any letter that isn't present in the pattern. `_` can stand for any letter.
+for any letter that isn’t present in the pattern. `_` can stand for any letter.
 
 For example, the pattern `c?t` matches "cat" and "cut". The pattern `go?d`
 matches the words "goad" and "gold" (but not "good").
@@ -50,45 +50,46 @@ export function renderHtml(pattern, words) {
 
   return `<html>
     <head>
-        <title>Ende Word Finder</title>
-        <meta name="version" content="1.0" />
+      <title>Ende Word Finder</title>
+      <meta name="version" content="1.0"/>
     </head>
+
     <body>
-        <h1>Ende Word Finder</h1>
+      <h1>Ende Word Finder</h1>
 
-        <form id="perform-search" name="perform-search" method="get" action="/api/search">
-            <label for="search-text">Search text:</label>
-            <input id="search-text" name="search-text" type="text" value="${pattern}" />
-            <input type="submit" />
-        </form>
+      <form id="perform-search" name="perform-search" method="get" action="/api/search">
+        <label for="search-text">Search text:</label>
+        <input id="search-text" name="search-text" type="text" value="${pattern}"/>
+        <input type="submit"/>
+      </form>
 
-        ${searchResultsContent}
+      ${searchResultsContent}
 
-        <h2>Instructions</h2>
+      <h2>Instructions</h2>
 
-        <p>
-            Enter a word using _ and ? as needed for unknown characters. Using ? means to include letters that aren't already used (you can think of it as a "Wheel of Fortune" placeholder). Using _ will find words that contain any character (whether it's currently "revealed" or not).
-            <br />
-            <br />
-            For example, d__d would return:
-            <ul>
-                <li>dand</li>
-                <li>daud</li>
-                <li>dead</li>
-                <li>deed</li>
-                <li>dird</li>
-                <li>dodd</li>
-                <li>dowd</li>
-                <li>duad</li>
-                <li>dyad</li>
-            </ul>
-            <br />
-            And go?d would return:
-            <ul>
-                <li>goad</li>
-                <li>gold</li>
-            </ul>
-        </p>
+      <p>
+        Enter a word using _ and ? as needed for unknown characters. Using ? means to include letters that aren’t already used (you can think of it as a "Wheel of Fortune" placeholder). Using _ will find words that contain any character (whether it’s currently "revealed" or not).
+        <br/>
+        <br/>
+        For example, d__d would return:
+        <ul>
+          <li>dand</li>
+          <li>daud</li>
+          <li>dead</li>
+          <li>deed</li>
+          <li>dird</li>
+          <li>dodd</li>
+          <li>dowd</li>
+          <li>duad</li>
+          <li>dyad</li>
+        </ul>
+        <br/>
+        And go?d would return:
+        <ul>
+          <li>goad</li>
+          <li>gold</li>
+        </ul>
+      </p>
     </body>
   </html>
   `;
@@ -135,7 +136,7 @@ export function search(pattern, dictionary) {
 ## Running an Ende Server
 
 [Oak](https://jsr.io/@oak/oak) is a framework that lets you easily setup a
-server in Ende (analogous to JavaScript's Express) and we'll be using it to host
+server in Ende (analogous to JavaScript’s Express) and we’ll be using it to host
 our application. Our server will use our search function to populate our HTML
 template with data and then return the customized HTML back to the viewer. We
 can conveniently rely on the `/usr/share/dict/words` file as our dictionary

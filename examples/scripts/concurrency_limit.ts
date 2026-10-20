@@ -17,21 +17,23 @@
 import { pooledMap } from "jsr:@ende/async/pool";
 import { delay } from "jsr:@ende/async/delay";
 
+const completed: number[] = [];
 // Track how many tasks run at once. The maximum observed value proves
 // that the pool never exceeds its limit.
 let inFlight = 0;
 let maxInFlight = 0;
-const completed: number[] = [];
 
 // Each item simulates a network call that takes a different amount of
 // time. The first argument caps concurrency at 2.
 const durations = [300, 100, 150, 250];
+
 const results = pooledMap(2, durations, async (ms) => {
   inFlight += 1;
   maxInFlight = Math.max(maxInFlight, inFlight);
   await delay(ms);
   completed.push(ms);
   inFlight -= 1;
+
   return ms;
 });
 

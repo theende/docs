@@ -5,9 +5,9 @@ description: "Learn how to integrate Large Language Models (LLM) with Ende to cr
 url: /examples/llm_tutorial/
 ---
 
-Large Language Models (LLMs) like OpenAI's GPT and Anthropic's Claude are
+Large Language Models (LLMs) like OpenAI’s GPT and Anthropic’s Claude are
 powerful tools for creating intelligent, conversational applications. In this
-tutorial, we'll build a real-time chat application where AI characters powered
+tutorial, we’ll build a real-time chat application where AI characters powered
 by LLMs interact with users in a roleplay game setting.
 
 You can see the code for the
@@ -25,7 +25,7 @@ ende init
 
 ## Project structure
 
-We'll create a modular structure that separates concerns between LLM
+We’ll create a modular structure that separates concerns between LLM
 integration, game logic, and server management:
 
 ```sh
@@ -80,7 +80,7 @@ Add the required dependencies to your `ende.json`:
 ## Configure environment variables
 
 Create a `.env` file for your API keys. The application supports both OpenAI and
-Anthropic. Comment out the config that you won't be using with a `#`.
+Anthropic. Comment out the config that you won’t be using with a `#`.
 
 ```bash title=".env"
 # Choose one of the following LLM providers:
@@ -234,8 +234,8 @@ export class LLMProvider {
   private mockResponse(prompt: string): string {
     const responses = [
       "I understand! Let me think about this...",
-      "That's an interesting approach to the situation.",
-      "I see what you're getting at. Here's what I think...",
+      "That’s an interesting approach to the situation.",
+      "I see what you’re getting at. Here’s what I think...",
       "Fascinating! I would approach it this way...",
       "Good point! That gives me an idea..."
     ];
@@ -294,7 +294,7 @@ export class Character {
     context: string,
     userMessage: string
   ): Promise<string> {
-    // Build the character's prompt with personality and context
+    // Build the character’s prompt with personality and context
     const characterPrompt = `
 You are ${this.name}, a ${this.class} with this personality: ${this.personality}
 
@@ -323,7 +323,7 @@ Respond as ${this.name} in character. Keep responses under 150 words and maintai
       return response;
     } catch (error) {
       console.error(`Error generating response for ${this.name}:`, error);
-      return `*${this.name} seems lost in thought and doesn't respond*`;
+      return `*${this.name} seems lost in thought and doesn’t respond*`;
     }
   }
 
@@ -342,7 +342,7 @@ Respond as ${this.name} in character. Keep responses under 150 words and maintai
 ```
 
 Here we define the `Character` class, which represents each player character in
-the game. This class will handle generating responses based on the character's
+the game. This class will handle generating responses based on the character’s
 personality and the current game context.
 
 ## Set up character configurations
@@ -387,7 +387,7 @@ export const defaultCharacters: CharacterConfig[] = [
 
 These templates are what the `Character` class will use to instantiate each
 character with their unique traits. The LLM will use these traits to generate
-responses that are consistent with each character's personality and backstory.
+responses that are consistent with each character’s personality and backstory.
 
 ## Build the Game Manager
 
@@ -732,7 +732,7 @@ sync.
 
 ## Create the main server
 
-Now let's tie everything together in `main.ts`:
+Now let’s tie everything together in `main.ts`:
 
 ```typescript title="main.ts"
 import { GameManager } from "./src/game/GameManager.ts";
@@ -746,30 +746,33 @@ async function handler(req: Request): Promise<Response> {
   const url = new URL(req.url);
 
   // Handle WebSocket connections
-  if (req.headers.get("upgrade") === "websocket") {
+  if (req.headers.get("upgrade") === "websocket")
     return wsHandler.handleConnection(req);
-  }
 
   // Serve static files and API endpoints
   switch (url.pathname) {
-    case "/":
+    case "/": {
       return new Response(await getIndexHTML(), {
         headers: { "content-type": "text/html" }
       });
+    }
 
-    case "/api/characters":
+    case "/api/characters": {
       return new Response(JSON.stringify(defaultCharacters), {
         headers: { "content-type": "application/json" }
       });
+    }
 
-    case "/api/game/start":
+    case "/api/game/start": {
       if (req.method === "POST") {
         try {
           const body = await req.json();
+
           const gameId = await gameManager.startNewGame(
             body.gmPrompt,
             body.characters
           );
+
           return new Response(JSON.stringify({ gameId }), {
             headers: { "content-type": "application/json" }
           });
@@ -777,22 +780,26 @@ async function handler(req: Request): Promise<Response> {
           return new Response(
             JSON.stringify({ error: error.message }),
             {
-              status: 400,
-              headers: { "content-type": "application/json" }
+              headers: { "content-type": "application/json" },
+              status: 400
             }
           );
         }
       }
-      break;
 
-    case "/api/game/message":
+      break;
+    }
+
+    case "/api/game/message": {
       if (req.method === "POST") {
         try {
           const body = await req.json();
+
           const responses = await gameManager.handlePlayerMessage(
             body.gameId,
             body.message
           );
+
           return new Response(JSON.stringify({ responses }), {
             headers: { "content-type": "application/json" }
           });
@@ -800,16 +807,19 @@ async function handler(req: Request): Promise<Response> {
           return new Response(
             JSON.stringify({ error: error.message }),
             {
-              status: 400,
-              headers: { "content-type": "application/json" }
+              headers: { "content-type": "application/json" },
+              status: 400
             }
           );
         }
       }
-      break;
 
-    default:
+      break;
+    }
+
+    default: {
       return new Response("Not Found", { status: 404 });
+    }
   }
 
   return new Response("Method Not Allowed", { status: 405 });
@@ -819,7 +829,7 @@ async function getIndexHTML(): Promise<string> {
   try {
     return await Ende.readTextFile("./static/index.html");
   } catch {
-    // Return a basic HTML template if file doesn't exist
+    // Return a basic HTML template if file doesn’t exist
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -852,7 +862,7 @@ The frontend of our app will live in the `static` directory. Create an
 
 ### `index.html`
 
-We'll create a very basic layout with a textarea to collect the user's scenario
+We’ll create a very basic layout with a textarea to collect the user’s scenario
 input and a section to show the response messages with a text input to send
 messages. Copy the content from
 [this html file](https://github.com/denoland/tutorial-with-llm/blob/main/static/index.html)
@@ -860,14 +870,14 @@ into your `index.html`.
 
 ### `app.js`
 
-In `app.js`, we'll add the JavaScript to handle user input and display
+In `app.js`, we’ll add the JavaScript to handle user input and display
 responses. Copy the content from
 [this js file](https://github.com/denoland/tutorial-with-llm/blob/main/static/app.js)
 into your `app.js`.
 
 ### `style.css`
 
-We'll add some basic styles to make our app look nicer. Copy the content from
+We’ll add some basic styles to make our app look nicer. Copy the content from
 [this css file](https://github.com/denoland/tutorial-with-llm/blob/main/static/style.css)
 into your `style.css`.
 
@@ -889,7 +899,7 @@ application will:
 
 ## Testing
 
-We've provided tests to verify your setup, copy the
+We’ve provided tests to verify your setup, copy the
 [`main.test.ts`](https://github.com/denoland/tutorial-with-llm/blob/main/tests/main.test.ts)
 file to your project directory and run the included tests to verify your setup:
 
@@ -897,7 +907,7 @@ file to your project directory and run the included tests to verify your setup:
 ende task test
 ```
 
-🦕 You now have a working LLM chat application, with realtime interaction, rate
+💀 You now have a working LLM chat application, with realtime interaction, rate
 limiting and error handling. Next you can customise it to your own play style!
 Consider giving the LLM instructions on how to behave in different scenarios, or
 how to respond to specific user inputs. You can add these into the character

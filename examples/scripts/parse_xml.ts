@@ -29,8 +29,8 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 // become an array.
 const doc = parse(xml) as unknown as {
   feed: {
+    entry: { "@draft": string; "@id": string; title: string; }[];
     title: string;
-    entry: { "@id": string; "@draft": string; title: string }[];
   };
 };
 
@@ -50,10 +50,11 @@ const generated = stringify({
   sitemap: {
     url: [
       { loc: "https://example.com/", "@priority": "1.0" },
-      { loc: "https://example.com/docs", "@priority": "0.8" },
-    ],
-  },
+      { loc: "https://example.com/docs", "@priority": "0.8" }
+    ]
+  }
 });
+
 console.log(generated);
 // <sitemap>
 //   <url priority="1.0">

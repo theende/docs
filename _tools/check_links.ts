@@ -19,17 +19,20 @@ const pages = new Map<string, string>();
 
 /** The HTML of the page at `path` (relative to the site), or `undefined`. */
 async function read(path: string): Promise<string | undefined> {
-  if (pages.has(path)) return pages.get(path);
+  if (pages.has(path))
+    return pages.get(path);
 
   let html: string | undefined;
 
   try {
     html = await Ende.readTextFile(join(root, path));
   } catch (error) {
-    if (!(error instanceof Ende.errors.NotFound)) throw error;
+    if (!(error instanceof Ende.errors.NotFound))
+      throw error;
   }
 
-  if (html !== undefined) pages.set(path, html);
+  if (html !== undefined)
+    pages.set(path, html);
 
   return html;
 }
@@ -37,15 +40,17 @@ async function read(path: string): Promise<string | undefined> {
 /** The file a URL path names: `/a/` and `/a` are `a/index.html` when that exists. */
 async function resolveFile(pathname: string): Promise<string | undefined> {
   const path = decodeURIComponent(pathname).replace(/^\//, "");
-  const candidates = path === "" || path.endsWith("/")
-    ? [`${path}index.html`]
-    : [path, `${path}/index.html`];
+  const candidates = path === "" || path.endsWith("/") ?
+    [`${path}index.html`] :
+    [path, `${path}/index.html`];
 
   for (const candidate of candidates) {
     try {
-      if ((await Ende.stat(join(root, candidate))).isFile) return candidate;
+      if ((await Ende.stat(join(root, candidate))).isFile)
+        return candidate;
     } catch (error) {
-      if (!(error instanceof Ende.errors.NotFound)) throw error;
+      if (!(error instanceof Ende.errors.NotFound))
+        throw error;
     }
   }
 
@@ -53,23 +58,31 @@ async function resolveFile(pathname: string): Promise<string | undefined> {
 }
 
 function unescape(text: string): string {
-  return text.replaceAll("&quot;", '"').replaceAll("&#39;", "'")
-    .replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
+  return text
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#39;", "'")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;", "&");
 }
 
-/** Why `link` (found on the page at `from`) is broken, or `undefined` when it isn't. */
+/** Why `link` (found on the page at `from`) is broken, or `undefined` when it isn’t. */
 async function check(link: string, from: URL): Promise<string | undefined> {
   let url = new URL(link, from);
 
   for (let hops = 0; hops < 5; hops++) {
-    if (url.origin !== from.origin) return undefined;
+    if (url.origin !== from.origin)
+      return undefined;
 
     const file = await resolveFile(url.pathname);
 
-    if (file === undefined) return "no such page";
+    if (file === undefined)
+      return "no such page";
 
     if (!file.endsWith(".html")) {
-      return url.hash ? "a fragment on a file that isn't HTML" : undefined;
+      return url.hash ?
+        "a fragment on a file that isn’t HTML" :
+        undefined;
     }
 
     const html = (await read(file))!;
@@ -77,19 +90,25 @@ async function check(link: string, from: URL): Promise<string | undefined> {
 
     if (redirect) {
       const target = new URL(unescape(redirect[1]), url);
-      if (!target.hash) target.hash = url.hash;
+
+      if (!target.hash)
+        target.hash = url.hash;
+
       url = target;
       continue;
     }
 
-    if (!url.hash) return undefined;
+    if (!url.hash)
+      return undefined;
 
     const fragment = decodeURIComponent(url.hash.slice(1));
     const ids = new Set(
       [...html.matchAll(ID)].map((match) => unescape(match[1]))
     );
 
-    return ids.has(fragment) ? undefined : `no #${fragment} on ${url.pathname}`;
+    return ids.has(fragment) ?
+      undefined :
+      `no #${fragment} on ${url.pathname}`;
   }
 
   return "too many redirects";
@@ -117,7 +136,8 @@ for await (const entry of walk(root, { exts: [".html"], includeDirs: false })) {
     links++;
     const problem = await check(link, base);
 
-    if (problem) broken.push(`/${path}: ${link} (${problem})`);
+    if (problem)
+      broken.push(`/${path}: ${link} (${problem})`);
   }
 }
 

@@ -11,7 +11,7 @@ subcommands.
 
 ## A minimal workflow
 
-Ende's [install script](/runtime/getting_started/installation/) installs it on
+Ende’s [install script](/runtime/getting_started/installation/) installs it on
 the runner. This workflow checks formatting, lints, and runs tests on every push
 and pull request:
 
@@ -49,7 +49,7 @@ being refreshed. That catches "bumped a version but forgot to commit the
 lockfile" mistakes before they reach production.
 
 > [!NOTE]
-> `ende ci` requires a committed `ende.lock`. If your repository doesn't have
+> `ende ci` requires a committed `ende.lock`. If your repository doesn’t have
 > one yet, run `ende install` locally and commit the resulting lockfile.
 
 For cross-platform matrices, coverage uploads, and other CI providers, see

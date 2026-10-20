@@ -18,8 +18,9 @@ console.log(file.version);
 
 // Dynamic imports are also supported.
 const module = await import("./version.json", {
-  with: { type: "json" },
+  with: { type: "json" }
 });
+
 console.log(module.default.version);
 
 /* File: ./version.json

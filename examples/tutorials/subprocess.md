@@ -114,8 +114,8 @@ const command = new Ende.Command("ende", {
     "eval",
     "console.log(JSON.stringify({message: 'Hello from subprocess'}))"
   ],
-  stdout: "piped",
-  stderr: "piped"
+  stderr: "piped",
+  stdout: "piped"
 });
 
 const process = command.spawn();

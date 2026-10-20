@@ -15,22 +15,22 @@
 // State for one connection. The upgrade request is the natural place to
 // pull it from: query parameters, cookies, or an auth header.
 interface Session {
-  username: string;
   joined: Date;
+  username: string;
 }
 
 const sessions = new Map<WebSocket, Session>();
 
 Ende.serve((req) => {
-  if (req.headers.get("upgrade") !== "websocket") {
+  if (req.headers.get("upgrade") !== "websocket")
     return new Response("This endpoint expects a WebSocket", { status: 426 });
-  }
-  const { socket, response } = Ende.upgradeWebSocket(req);
+
+  const { response, socket } = Ende.upgradeWebSocket(req);
 
   // Read the username from the connection URL, e.g. /?username=ada.
   const username = new URL(req.url).searchParams.get("username") ?? "guest";
 
-  // Each handler closes over this connection's socket, and the Map lets
+  // Each handler closes over this connection’s socket, and the Map lets
   // any other part of the server look the session up later.
   socket.onopen = () => {
     sessions.set(socket, { username, joined: new Date() });
@@ -58,6 +58,6 @@ Ende.serve((req) => {
 //   welcome, ada
 //   ada said: hi
 
-// Note that Ende's WebSocket upgrade does not negotiate per-message
+// Note that Ende’s WebSocket upgrade does not negotiate per-message
 // compression; large payloads are sent as-is, so compress them yourself if
 // it matters.

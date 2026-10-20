@@ -7,7 +7,7 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.upgradeWebTransport} Doc: Ende.upgradeWebTransport
  * @group Network
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>WebTransport is the web platform's API for low-latency, multiplexed
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>WebTransport is the web platform’s API for low-latency, multiplexed
  * communication over HTTP/3. Browsers can use it where raw QUIC and TCP
  * sockets are unavailable, and unlike WebSockets it offers many independent
  * streams plus unreliable datagrams. Ende provides both the client API and,
@@ -26,7 +26,7 @@ const key = Ende.readTextFileSync("./server.key");
 // Ende.upgradeWebTransport performs the WebTransport handshake on an
 // accepted QUIC connection.
 const endpoint = new Ende.QuicEndpoint({ hostname: "localhost", port: 4433 });
-const listener = endpoint.listen({ cert, key, alpnProtocols: ["h3"] });
+const listener = endpoint.listen({ alpnProtocols: ["h3"], cert, key });
 
 (async () => {
   for await (const incoming of listener) {
@@ -36,7 +36,10 @@ const listener = endpoint.listen({ cert, key, alpnProtocols: ["h3"] });
     // Echo the first message on each incoming bidirectional stream.
     const { value: stream } = await transport.incomingBidirectionalStreams
       .getReader().read();
-    if (!stream) continue;
+
+    if (!stream)
+      continue;
+
     const { value } = await stream.readable.getReader().read();
     const writer = stream.writable.getWriter();
     await writer.write(value);
@@ -52,8 +55,9 @@ const der = Ende.readFileSync("./server.der"); // openssl x509 -in server.crt -o
 const certHash = await crypto.subtle.digest("SHA-256", der);
 
 const transport = new WebTransport("https://localhost:4433", {
-  serverCertificateHashes: [{ algorithm: "sha-256", value: certHash }],
+  serverCertificateHashes: [{ algorithm: "sha-256", value: certHash }]
 });
+
 await transport.ready;
 
 // Streams work like their QUIC counterparts: open a bidirectional stream,

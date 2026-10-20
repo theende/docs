@@ -16,11 +16,11 @@ import { decode, encode } from "jsr:@ende/msgpack";
 
 // We encode a value that could just as well be JSON.
 const value = {
-  name: "Ende",
-  version: 2,
-  tags: ["fast", "secure"],
   active: true,
+  name: "Ende",
   score: 99.5,
+  tags: ["fast", "secure"],
+  version: 2
 };
 
 // To encode, pass the value to the encode function. The result is a

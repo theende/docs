@@ -15,11 +15,11 @@
 // First, we open a file we want to write to
 const download = await Ende.open("example.html", { create: true, write: true });
 
-// Now let's make a request to a web page
+// Now let’s make a request to a web page
 const req = await fetch("https://examples.ende.sh");
 
 // We can pipe this response straight into the file. In a more realistic example, we would
-// handle a bad request, but here we'll just use the nullish coalescing operator. Instead of
+// handle a bad request, but here we’ll just use the nullish coalescing operator. Instead of
 // opening the file and manually piping the fetch body to it, we could also just use `Ende.writeFile`.
 req.body?.pipeTo(download.writable);
 
@@ -36,12 +36,12 @@ class HighlightTransformStream extends TransformStream<string, string> {
     super({
       transform: (chunk, controller) => {
         controller.enqueue(chunk.replaceAll("<", bgBrightYellow("<")));
-      },
+      }
     });
   }
 }
 
-// Let's open our file for reading
+// Let’s open our file for reading
 const example = await Ende.open("example.html", { read: true });
 
 // Now we can pipe the result from the file, into a TextDecoderStream, into our custom transform class,

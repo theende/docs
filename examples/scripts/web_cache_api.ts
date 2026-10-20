@@ -17,10 +17,12 @@
 // This server counts how many requests actually reach it. Port 0 asks
 // the operating system for any free port.
 let requestCount = 0;
+
 const server = Ende.serve({ port: 0, onListen: () => {} }, () => {
   requestCount++;
+
   return new Response(JSON.stringify({ message: "hello" }), {
-    headers: { "content-type": "application/json" },
+    headers: { "content-type": "application/json" }
   });
 });
 
@@ -33,11 +35,13 @@ const cache = await caches.open("example-cache-v1");
 // original.
 async function cachedFetch(url: string): Promise<Response> {
   const cached = await cache.match(url);
-  if (cached) {
+
+  if (cached)
     return cached;
-  }
+
   const response = await fetch(url);
   await cache.put(url, response.clone());
+
   return response;
 }
 

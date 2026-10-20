@@ -15,21 +15,22 @@ import { qrcode } from "jsr:@libs/qrcode";
 // The default output is an SVG string, ready to embed in a page or write
 // to a file. SVG scales to any size without blurring, which suits print
 // and high-resolution screens.
-const svg = qrcode("https://deno.com", { output: "svg" });
+const svg = qrcode("https://ende.sh", { output: "svg" });
 await Ende.writeTextFile("ende-qr.svg", svg);
 console.log(svg.startsWith("<?xml")); // true
 
 // The error-correction level trades data capacity for resilience: a higher
 // level still scans when part of the code is damaged or covered, at the
 // cost of a denser image. Levels are LOW, MEDIUM, QUARTILE, and HIGH.
-const robust = qrcode("https://deno.com", {
-  output: "svg",
+const robust = qrcode("https://ende.sh", {
   ecl: "HIGH",
+  output: "svg"
 });
+
 console.log(robust.length > svg.length); // true
 
 // Without an output option you get the raw module matrix: a 2D array of
 // booleans where true is a dark cell. Use it to render the code yourself,
 // for example onto a canvas or into another image format.
-const matrix = qrcode("https://deno.com");
+const matrix = qrcode("https://ende.sh");
 console.log(`${matrix.length}x${matrix[0].length} grid`); // 29x29 grid

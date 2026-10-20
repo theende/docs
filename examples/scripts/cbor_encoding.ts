@@ -17,11 +17,11 @@ import { decodeCbor, encodeCbor } from "jsr:@ende/cbor";
 // The value contains a Uint8Array and a Date. Neither would survive
 // JSON.stringify, which has no representation for them.
 const value = {
-  name: "Ende",
-  version: 2,
   active: true,
-  signature: new Uint8Array([222, 173, 190, 239]),
+  name: "Ende",
   released: new Date("2020-05-13T00:00:00Z"),
+  signature: new Uint8Array([222, 173, 190, 239]),
+  version: 2
 };
 
 // To encode, pass the value to the encodeCbor function. The result is a
@@ -40,7 +40,7 @@ console.log(decoded.released.toISOString()); // 2020-05-13T00:00:00.000Z
 
 // CBOR is also more compact than JSON text. For this small object the
 // encoding saves about a third of the bytes.
-const small = { name: "Ende", version: 2, active: true };
+const small = { active: true, name: "Ende", version: 2 };
 console.log(JSON.stringify(small).length); // 41
 console.log(encodeCbor(small).length); // 28
 

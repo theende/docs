@@ -46,7 +46,7 @@ const channel = new BroadcastChannel("jobs");
 channel.onmessage = (event) => {
   if (event.data.type === "ready") {
     console.log("worker is listening"); // worker is listening
-    channel.postMessage({ type: "job", name: "resize avatar.png" });
+    channel.postMessage({ name: "resize avatar.png", type: "job" });
   } else if (event.data.type === "result") {
     console.log(event.data.note); // finished resize avatar.png
     // Close the channel so the process can exit. The worker already

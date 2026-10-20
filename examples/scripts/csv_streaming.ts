@@ -19,13 +19,14 @@ import { CsvParseStream } from "jsr:@ende/csv";
 // multi-gigabyte export.
 const dir = await Ende.makeTempDir();
 const path = `${dir}/measurements.csv`;
+
 await Ende.writeTextFile(
   path,
   `city,temperature,humidity
 Berlin,18.5,60
 Madrid,24.1,35
 Oslo,11.2,72
-`,
+`
 );
 
 // Open the file and build a pipeline. The raw bytes pass through a
@@ -55,8 +56,9 @@ const file2 = await Ende.open(headerless);
 const rows = file2.readable
   .pipeThrough(new TextDecoderStream())
   .pipeThrough(
-    new CsvParseStream({ columns: ["city", "temperature", "humidity"] }),
+    new CsvParseStream({ columns: ["city", "temperature", "humidity"] })
   );
+
 for await (const row of rows) {
   console.log(row);
 }

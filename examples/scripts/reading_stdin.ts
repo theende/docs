@@ -35,6 +35,7 @@ async function processLines() {
   const lines = Ende.stdin.readable
     .pipeThrough(new TextDecoderStream())
     .pipeThrough(new TextLineStream());
+
   for await (const line of lines) {
     console.log(`line: ${line}`);
   }

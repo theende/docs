@@ -18,7 +18,7 @@ code.
 
 > [!NOTE] Automatic documentation with JSR
 >
-> If you're publishing your package to
+> If you’re publishing your package to
 > [JSR (JavaScript Registry)](https://jsr.io), you get beautiful documentation
 > automatically generated for free! JSR uses the same `ende doc` technology
 > under the hood to create searchable, web-based documentation for all published
@@ -27,7 +27,7 @@ code.
 
 ## Setting up a sample project
 
-Let's create a sample library to demonstrate `ende doc` features. We'll build a
+Let’s create a sample library to demonstrate `ende doc` features. We’ll build a
 simple mathematics utilities library with proper documentation.
 
 ````ts title="math.ts"
@@ -205,9 +205,9 @@ you can grep for them or filter them in tooling:
 - `missing-return-type` — an exported function has no explicit return type
   annotation.
 - `private-type-ref` — a public export references a type that is not itself
-  exported, so consumers can't name it.
+  exported, so consumers can’t name it.
 
-Let's create a file with some documentation issues to see the linter in action:
+Let’s create a file with some documentation issues to see the linter in action:
 
 ```ts title="bad_example.ts"
 // Missing JSDoc comment
@@ -310,10 +310,10 @@ Generate documentation in JSON format for use with other tools:
 ende doc --json math.ts > documentation.json
 ```
 
-The JSON output provides a low-level representation of your code's structure,
+The JSON output provides a low-level representation of your code’s structure,
 including symbol definitions and basic type information. This format is
 primarily useful for building custom documentation tools or integrating with
-other systems that need programmatic access to your code's API surface.
+other systems that need programmatic access to your code’s API surface.
 
 ## Best practices for JSDoc comments
 
@@ -460,7 +460,7 @@ ende task doc:lint
 ende task doc:json
 ```
 
-🦕 The `ende doc` command is a powerful tool for generating professional
+💀 The `ende doc` command is a powerful tool for generating professional
 documentation from your Ende projects.
 
 Good documentation makes your code more maintainable and helps other developers

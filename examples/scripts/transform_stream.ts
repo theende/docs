@@ -20,14 +20,15 @@
 const upper = new TransformStream<string, string>({
   transform(chunk, controller) {
     controller.enqueue(chunk.toUpperCase());
-  },
+  }
 });
 
 // ReadableStream.from turns an iterable into a stream, and Array.fromAsync
 // collects a stream back into an array, which keeps the example compact.
 const shouted = await Array.fromAsync(
-  ReadableStream.from(["hello", "streams"]).pipeThrough(upper),
+  ReadableStream.from(["hello", "streams"]).pipeThrough(upper)
 );
+
 console.log(shouted); // [ "HELLO", "STREAMS" ]
 
 // Transforms can carry state between chunks. This splitter buffers the
@@ -36,6 +37,7 @@ console.log(shouted); // [ "HELLO", "STREAMS" ]
 // emit anything still sitting in the buffer.
 function lineSplitter(): TransformStream<string, string> {
   let buffer = "";
+
   return new TransformStream({
     transform(chunk, controller) {
       buffer += chunk;
@@ -44,19 +46,21 @@ function lineSplitter(): TransformStream<string, string> {
       for (const line of lines) controller.enqueue(line);
     },
     flush(controller) {
-      if (buffer.length > 0) controller.enqueue(buffer);
-    },
+      if (buffer.length > 0)
+        controller.enqueue(buffer);
+    }
   });
 }
 
 // A second stateful transform numbers whatever lines flow through it.
 function lineNumberer(): TransformStream<string, string> {
   let lineNumber = 0;
+
   return new TransformStream({
     transform(line, controller) {
       lineNumber += 1;
       controller.enqueue(`${lineNumber}: ${line}`);
-    },
+    }
   });
 }
 
@@ -68,6 +72,7 @@ const numbered = await Array.fromAsync(
     .pipeThrough(lineSplitter())
     .pipeThrough(lineNumberer()),
 );
+
 console.log(numbered); // [ "1: alpha", "2: bravo", "3: charlie" ]
 
 // Backpressure is automatic: when the consumer is slow, the transform

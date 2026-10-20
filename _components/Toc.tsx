@@ -5,8 +5,10 @@ export default function Toc({ toc }: { toc: TocEntry[] }) {
   const groups: { entry: TocEntry; children: TocEntry[] }[] = [];
 
   for (const entry of toc) {
-    if (entry.depth === 2) groups.push({ entry, children: [] });
-    else if (entry.depth === 3) groups.at(-1)?.children.push(entry);
+    if (entry.depth === 2)
+      groups.push({ children: [], entry });
+    else if (entry.depth === 3)
+      groups.at(-1)?.children.push(entry);
   }
 
   if (groups.length === 0) return null;

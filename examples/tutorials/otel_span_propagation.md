@@ -7,7 +7,7 @@ url: /examples/otel_span_propagation_tutorial/
 
 Modern applications are often built as distributed systems with multiple
 services communicating with each other. When debugging issues or optimizing
-performance in these systems, it's crucial to be able to trace requests as they
+performance in these systems, it’s crucial to be able to trace requests as they
 flow through different services. This is where distributed tracing comes in.
 
 The runtime now automatically preserves trace context across service boundaries,
@@ -25,7 +25,7 @@ Our example system will consist of two parts:
 
 ### The server
 
-We'll set up a simple HTTP server that responds to GET requests with a JSON
+We’ll set up a simple HTTP server that responds to GET requests with a JSON
 message:
 
 ```ts title="server.ts"
@@ -49,7 +49,7 @@ Ende.serve({ port: 8000 }, (req) => {
 
     console.log("Server: Processing request in trace context");
 
-    // End the span when we're done
+    // End the span when we’re done
     span.end();
 
     return new Response(JSON.stringify({ message: "Hello from server!" }), {
@@ -61,7 +61,7 @@ Ende.serve({ port: 8000 }, (req) => {
 
 ### The client
 
-Now, let's create a client that will make requests to our server:
+Now, let’s create a client that will make requests to our server:
 
 ```ts title="client.ts"
 const tracer = Ende.telemetry.tracerProvider.getTracer("api-client", "1.0.0");
@@ -127,7 +127,7 @@ a child span for the fetch operation and Injects the trace context into the
 outgoing request headers.
 
 When the server receives this request, Ende extracts the trace context from the
-request headers and establishes the server span as a child of the client's span.
+request headers and establishes the server span as a child of the client’s span.
 
 ## Running the example
 
@@ -152,11 +152,11 @@ You should see:
 
 ## Viewing traces
 
-To actually see the traces, you'll need an OpenTelemetry collector and a
+To actually see the traces, you’ll need an OpenTelemetry collector and a
 visualization tool,
 [for example Grafana Tempo](/runtime/fundamentals/open_telemetry/#quick-start).
 
-When you visualize the traces, you'll see:
+When you visualize the traces, you’ll see:
 
 1. A parent span from the client
 2. Connected to a child span for the HTTP request
@@ -167,8 +167,8 @@ For example, in Grafana, the trace visualization may look like this:
 
 ![Viewing expanded traces in Grafana](./images/how-to/grafana/propagation.png)
 
-🦕 Now that you understand distributed tracing with Ende, you could extend this
+💀 Now that you understand distributed tracing with Ende, you could extend this
 to more complex systems with multiple services and async operations.
 
-With Ende's automatic context propagation, implementing distributed tracing in
+With Ende’s automatic context propagation, implementing distributed tracing in
 your applications has never been easier!

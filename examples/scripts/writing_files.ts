@@ -41,7 +41,7 @@ const writer = file.writable.getWriter();
 await writer.write(new TextEncoder().encode("World!"));
 
 // Closing the writer automatically closes the file.
-// If you don't use a writer, make sure to close the file after you are done with it.
+// If you don’t use a writer, make sure to close the file after you are done with it.
 await writer.close();
 
 // The `-W` permission is required to write files.

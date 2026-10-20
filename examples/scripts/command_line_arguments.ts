@@ -26,10 +26,11 @@ import { parseArgs } from "jsr:@ende/cli/parse-args";
 // NOTE: this function is based on [`minimist`](https://github.com/minimistjs/minimist), not compatible with the `parseArgs()` function in `node:util`.
 const flags = parseArgs(Ende.args, {
   boolean: ["help", "color"],
-  string: ["version"],
   default: { color: true },
   negatable: ["color"],
+  string: ["version"]
 });
+
 console.log("Wants help?", flags.help);
 console.log("Version:", flags.version);
 console.log("Wants color?:", flags.color);

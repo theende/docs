@@ -24,8 +24,9 @@ console.log(data.numbers.length);
 // JSON.stringify function.
 const obj = {
   hello: "world",
-  numbers: [1, 2, 3],
+  numbers: [1, 2, 3]
 };
+
 const json = JSON.stringify(obj);
 console.log(json);
 //- {"hello":"world","numbers":[1,2,3]}

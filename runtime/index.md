@@ -14,7 +14,7 @@ oldUrl:
   - /runtime/getting_started/first_project/
 ---
 
-[Ende](https://ende.sh) is an
+[Ende](https://ende.sh) ([/ˈɛndə/](https://ipa-reader.com/?text=ˈɛndə), pronounced `en-duh`) is an
 [open source](https://github.com/theende/ende/blob/primary/LICENSE.md)
 JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great
 developer experience. It is a fork of [Deno](https://github.com/denoland/deno),

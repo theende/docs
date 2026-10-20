@@ -8,7 +8,7 @@
  * @group Web frameworks and libraries
  *
  * The @ende/markdown module parses CommonMark and GitHub Flavored Markdown
- * and renders it to HTML: tables, task lists, footnotes and GitHub's alerts.
+ * and renders it to HTML: tables, task lists, footnotes and GitHub’s alerts.
  * It is the renderer behind this documentation site.
  */
 import { parse, render, toc } from "jsr:@ende/markdown@^2026.10.17";
@@ -35,7 +35,7 @@ const ast = parse(markdown, { gfm: true });
 // render returns an HTML fragment, not a full document. Headings get ids,
 // so they can be linked to.
 const body = render(ast);
-console.log(body.includes('<h1 id="release-notes">')); // true
+console.log(body.includes(`<h1 id="release-notes">`)); // true
 
 // toc lists the headings, for a table of contents.
 console.log(toc(ast)); // [ { depth: 1, text: "Release notes", slug: "release-notes" } ]

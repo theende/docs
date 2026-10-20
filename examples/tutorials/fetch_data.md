@@ -8,7 +8,7 @@ oldUrl:
   - /runtime/tutorials/fetch_data/
 ---
 
-Ende brings several familiar Web APIs to the server-side environment. If you've
+Ende brings several familiar Web APIs to the server-side environment. If you’ve
 worked with browsers you may recognize the [`fetch()`](/api/web/fetch/) method
 and the [`streams`](/api/web/streams/) API, which are used to make network
 requests and access streams of data over the network. Ende implements these
@@ -18,7 +18,7 @@ APIs, allowing you to fetch and stream data from the web.
 
 When building a web application, developers will often need to retrieve
 resources from somewhere else on the web. We can do so with the `fetch` API.
-We'll look at how to fetch different shapes of data from a url and how to handle
+We’ll look at how to fetch different shapes of data from a url and how to handle
 an error if the request fails.
 
 Create a new file called `fetch.js` and add the following code:
@@ -56,7 +56,7 @@ console.
 
 ### HTTP/2
 
-You don't need to do anything special to use HTTP/2. When you `fetch()` an
+You don’t need to do anything special to use HTTP/2. When you `fetch()` an
 `https://` URL, Ende negotiates the protocol with the server over TLS (via ALPN)
 and uses HTTP/2 automatically when the server supports it, falling back to
 HTTP/1.1 otherwise. The `fetch` API is the same either way, so the same code
@@ -68,21 +68,21 @@ automatically when serving over TLS.
 ## Streaming data
 
 Sometimes you may want to send or receive large files over the network. When you
-don't know the size of a file in advance, streaming is a more efficient way to
+don’t know the size of a file in advance, streaming is a more efficient way to
 handle the data. The client can read from the stream until it says it is done.
 
-Ende provides a way to stream data using the `Streams API`. We'll look at how to
+Ende provides a way to stream data using the `Streams API`. We’ll look at how to
 convert a file into a readable or writable stream and how to send and receive
 files using streams.
 
 Create a new file called `stream.js`.
 
-We'll use the `fetch` API to retrieve a file. Then we'll use the
+We’ll use the `fetch` API to retrieve a file. Then we’ll use the
 [`Ende.open`](/api/ende/~/Ende.open/) method to create and open a writable file
 and the [`pipeTo`](/api/web/~/ReadableStream/#pipeTo) method from the Streams
 API to send the byte stream to the created file.
 
-Next, we'll use the `readable` property on a `POST` request to send the byte
+Next, we’ll use the `readable` property on a `POST` request to send the byte
 stream of the file to a server.
 
 ```ts title="stream.js"
@@ -116,8 +116,8 @@ You should see the file `logo.svg` created and populated in the current
 directory and, if you owned example.com you would see the file being sent to the
 server.
 
-🦕 Now you know how to fetch and stream data across a network and how to stream
-that data to and from files! Whether you're serving static files, processing
+💀 Now you know how to fetch and stream data across a network and how to stream
+that data to and from files! Whether you’re serving static files, processing
 uploads, generating dynamic content or streaming large datasets, Ende’s file
 handling and streaming capabilities are great tools to have in your developer
 toolbox!

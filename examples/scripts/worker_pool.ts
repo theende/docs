@@ -21,24 +21,29 @@
 self.onmessage = (e: MessageEvent<number>) => {
   const limit = e.data;
   let count = 0;
+
   for (let i = 2; i <= limit; i++) {
     let isPrime = true;
+
     for (let j = 2; j * j <= i; j++) {
       if (i % j === 0) {
         isPrime = false;
         break;
       }
     }
-    if (isPrime) count++;
+
+    if (isPrime)
+      count++;
   }
-  self.postMessage({ limit, count });
+
+  self.postMessage({ count, limit });
 };
 
 // File: ./main.ts
 
 // A queue of independent tasks, more than we have cores.
 const tasks = [1e6, 2e6, 3e6, 4e6, 5e6, 6e6, 7e6, 8e6];
-const results: { limit: number; count: number }[] = [];
+const results: { count: number; limit: number; }[] = [];
 
 // navigator.hardwareConcurrency reports the number of logical cores.
 // Spawning more workers than that only adds scheduling overhead.
@@ -49,27 +54,33 @@ console.log(`pool size: ${poolSize}`); // pool size: 8
 // for the result, assign the next. When the queue is empty the worker is
 // terminated and its slot resolves.
 let nextTask = 0;
+
 await Promise.all(
   Array.from({ length: poolSize }, () => {
     const worker = new Worker(new URL("./worker.ts", import.meta.url), {
-      type: "module",
+      type: "module"
     });
+
     return new Promise<void>((resolve) => {
       const assign = () => {
         if (nextTask >= tasks.length) {
           worker.terminate();
           resolve();
+
           return;
         }
+
         worker.postMessage(tasks[nextTask++]);
       };
+
       worker.onmessage = (e) => {
         results.push(e.data);
         assign();
       };
+
       assign();
     });
-  }),
+  })
 );
 
 // Results arrive in completion order, not submission order, so sort them

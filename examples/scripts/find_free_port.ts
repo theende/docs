@@ -34,6 +34,7 @@ const server2 = Ende.serve(
   { port: 0, onListen: () => {} },
   () => new Response("Hello from port 0\n"),
 );
+
 console.log(server2.addr.port); // e.g. 61679
 
 // Both servers answer normally on their assigned ports.

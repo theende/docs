@@ -30,23 +30,23 @@ console.log(form.getAll("tag")); // [ "fast", "secure" ]
 
 // A FormData object is iterable. File entries come back as File objects.
 for (const [key, value] of form) {
-  if (value instanceof File) {
+  if (value instanceof File)
     console.log(`${key}: file ${value.name}, ${value.size} bytes`); // readme: file readme.txt, 17 bytes
-  } else {
+  else
     console.log(`${key}: ${value}`); // name: Ende, then tag: fast, then tag: secure
-  }
 }
 
 // Start a local server that parses the form and echoes back what it got.
 const server = Ende.serve({ port: 0, onListen() {} }, async (req) => {
   const data = await req.formData();
   const file = data.get("readme") as File;
+
   return Response.json({
     contentType: req.headers.get("content-type")?.split(";")[0],
-    name: data.get("name"),
-    tags: data.getAll("tag"),
     fileName: file.name,
     fileText: await file.text(),
+    name: data.get("name"),
+    tags: data.getAll("tag")
   });
 });
 
@@ -54,9 +54,10 @@ const server = Ende.serve({ port: 0, onListen() {} }, async (req) => {
 // multipart/form-data and sets the content type header, including the
 // part boundary, automatically. Never set that header yourself.
 const res = await fetch(`http://localhost:${server.addr.port}/`, {
-  method: "POST",
   body: form,
+  method: "POST"
 });
+
 const echoed = await res.json();
 
 console.log(echoed.contentType); // multipart/form-data

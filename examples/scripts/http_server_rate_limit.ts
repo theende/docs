@@ -16,12 +16,12 @@
 
 // Each client may average REFILL_RATE requests per second, with bursts of
 // up to BURST requests when the bucket is full.
-const REFILL_RATE = 1;
 const BURST = 5;
+const REFILL_RATE = 1;
 
 interface Bucket {
-  tokens: number;
   last: number;
+  tokens: number;
 }
 
 // Buckets are keyed by client IP and live in memory.
@@ -29,7 +29,7 @@ const buckets = new Map<string, Bucket>();
 
 function take(ip: string): boolean {
   const now = Date.now();
-  const bucket = buckets.get(ip) ?? { tokens: BURST, last: now };
+  const bucket = buckets.get(ip) ?? { last: now, tokens: BURST };
 
   // Refill lazily based on how much time passed since the last request,
   // instead of running a timer per client.
@@ -38,7 +38,9 @@ function take(ip: string): boolean {
   bucket.last = now;
   buckets.set(ip, bucket);
 
-  if (bucket.tokens < 1) return false;
+  if (bucket.tokens < 1)
+    return false;
+
   bucket.tokens -= 1;
   return true;
 }
@@ -47,12 +49,16 @@ function take(ip: string): boolean {
 // periodic sweep keeps the Map from growing forever. Ende.unrefTimer marks
 // the interval as non-blocking, so the process can still exit normally.
 const IDLE_MS = (BURST / REFILL_RATE) * 1000;
+
 const sweeper = setInterval(() => {
   const cutoff = Date.now() - IDLE_MS;
+
   for (const [ip, bucket] of buckets) {
-    if (bucket.last < cutoff) buckets.delete(ip);
+    if (bucket.last < cutoff)
+      buckets.delete(ip);
   }
 }, 30_000);
+
 Ende.unrefTimer(sweeper);
 
 Ende.serve((_req, info) => {
@@ -64,8 +70,8 @@ Ende.serve((_req, info) => {
     // retry-after tells well-behaved clients how long to back off. One
     // token takes 1 / REFILL_RATE seconds to appear.
     return new Response("too many requests\n", {
-      status: 429,
       headers: { "retry-after": String(Math.ceil(1 / REFILL_RATE)) },
+      status: 429
     });
   }
 

@@ -24,7 +24,7 @@ console.log(await Ende.realPath("link"));
 // them like text files
 console.log(await Ende.readTextFile("link"));
 
-// In certain cases, soft links don't work. In this case we
+// In certain cases, soft links don’t work. In this case we
 // can choose to make "hard links".
 await Ende.link("example.txt", "hardlink");
 console.log(await Ende.readTextFile("hardlink"));

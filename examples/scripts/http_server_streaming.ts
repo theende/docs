@@ -13,7 +13,13 @@
 function handler(_req: Request): Response {
   // Set up a variable to store a timer ID, and the ReadableStream.
   let timer: ReturnType<typeof setInterval> | undefined = undefined;
+
   const body = new ReadableStream({
+    // If the stream is closed (the client disconnects), cancel the interval.
+    cancel() {
+      if (timer !== undefined)
+        clearInterval(timer);
+    },
     // When the stream is first created, start an interval that will emit a
     // chunk every second containing the current time.
     start(controller) {
@@ -21,21 +27,15 @@ function handler(_req: Request): Response {
         const message = `It is ${new Date().toISOString()}\n`;
         controller.enqueue(new TextEncoder().encode(message));
       }, 1000);
-    },
-    // If the stream is closed (the client disconnects), cancel the interval.
-    cancel() {
-      if (timer !== undefined) {
-        clearInterval(timer);
-      }
-    },
+    }
   });
 
   // Return a response with the stream as the body.
   return new Response(body, {
     headers: {
       "content-type": "text/plain",
-      "x-content-type-options": "nosniff",
-    },
+      "x-content-type-options": "nosniff"
+    }
   });
 }
 
@@ -43,6 +43,7 @@ function handler(_req: Request): Response {
 // turns any async iterable into a stream usable as a Response body.
 async function* ticks(): AsyncGenerator<Uint8Array> {
   const encoder = new TextEncoder();
+
   for (let i = 1; i <= 3; i++) {
     yield encoder.encode(`tick ${i}\n`);
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -51,11 +52,13 @@ async function* ticks(): AsyncGenerator<Uint8Array> {
 
 function iteratorHandler(_req: Request): Response {
   return new Response(ReadableStream.from(ticks()), {
-    headers: { "content-type": "text/plain" },
+    headers: { "content-type": "text/plain" }
   });
 }
 
 // Serve the interval stream on / and the generator stream on /ticks.
 Ende.serve((req) =>
-  new URL(req.url).pathname === "/ticks" ? iteratorHandler(req) : handler(req)
+  new URL(req.url).pathname === "/ticks" ?
+    iteratorHandler(req) :
+    handler(req)
 );

@@ -5,7 +5,7 @@ description: "Manage project dependencies with ende add and ende remove: JSR pac
 url: /examples/add_remove_dependencies_tutorial/
 ---
 
-Ende manages dependencies through your project's `ende.json` import map. The
+Ende manages dependencies through your project’s `ende.json` import map. The
 `ende add` and `ende remove` commands edit it for you, and `ende install` with a
 package argument does the same.
 

@@ -15,14 +15,14 @@
 // Ende.serve listens on a Unix socket when given a path instead of a port.
 const server = Ende.serve(
   { path: "/tmp/example.sock" },
-  () => new Response("Hello over a Unix socket"),
+  () => new Response("Hello over a Unix socket")
 );
 
 // On the client side, create an HTTP client that connects through the
-// socket, and pass it to fetch. The URL's hostname is ignored; only the
+// socket, and pass it to fetch. The URL’s hostname is ignored; only the
 // path and headers matter to the server.
 const client = Ende.createHttpClient({
-  proxy: { transport: "unix", path: "/tmp/example.sock" },
+  proxy: { path: "/tmp/example.sock", transport: "unix" }
 });
 
 const response = await fetch("http://localhost/", { client });

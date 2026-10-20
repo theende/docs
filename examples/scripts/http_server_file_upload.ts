@@ -26,20 +26,20 @@ async function handler(req: Request) {
     // Get the file from the submitted FormData.
     const formData: FormData = await req.formData();
     const file: File | null = formData?.get("file") as File;
-    // If we did not receive a file respond with a 400 status code and a message to explain.
-    if (!file) {
-      return new Response("File required but not provided.", { status: 400 });
-    }
 
-    // Here you would do more with the received file, in this example we're
+    // If we did not receive a file respond with a 400 status code and a message to explain.
+    if (!file)
+      return new Response("File required but not provided.", { status: 400 });
+
+    // Here you would do more with the received file, in this example we’re
     //  responding with the filename and the raw file byte code.
     return new Response(
-      `File name: ${file.name} \n File content: ${await file.bytes()}`,
+      `File name: ${file.name} \n File content: ${await file.bytes()}`
     );
   }
 
-  // For all other requests other than POST (e.g. GET), let's create an HTML form element
-  //  with an encType of 'multipart/form-data' and an input field for the user to select a
+  // For all other requests other than POST (e.g. GET), let’s create an HTML form element
+  //  with an encType of "multipart/form-data" and an input field for the user to select a
   // file from their computer.
   const inputForm = `
     &#x3C;form method=&#x22;POST&#x22; enctype=&#x22;multipart/form-data&#x22;&#x3E;
@@ -48,12 +48,13 @@ async function handler(req: Request) {
     &#x3C;/form&#x3E;
   `;
 
-  // We need to specify the 'text/html' Content-Type to actually render the HTML form, this would normally be handled by a web framework, this example is designed to show the simplest way to handle a file upload over HTTP with Ende.
+  // We need to specify the "text/html" Content-Type to actually render the HTML form, this would normally be handled by a web framework, this example is designed to show the simplest way to handle a file upload over HTTP with Ende.
   const responseOptions: RequestInit = {
     headers: {
-      "Content-Type": "text/html",
-    },
+      "Content-Type": "text/html"
+    }
   };
+
   // Note: We are only using unescape() here because our HTML string has been encoded for
   //  display in the documentation.
   return new Response(unescape(inputForm), responseOptions);

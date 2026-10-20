@@ -17,13 +17,15 @@
 // the same offset, limit, or cursor values instead.
 const items = Array.from({ length: 25 }, (_, i) => ({
   id: i + 1,
-  name: `Item ${i + 1}`,
+  name: `Item ${i + 1}`
 }));
 
 // Clamp client input so a request can never ask for the whole table or
 // pass something negative.
 function clamp(value: number, min: number, max: number): number {
-  if (Number.isNaN(value)) return min;
+  if (Number.isNaN(value))
+    return min;
+
   return Math.min(max, Math.max(min, value));
 }
 
@@ -37,15 +39,16 @@ Ende.serve((req) => {
     const offset = clamp(
       Number(url.searchParams.get("offset") ?? "0"),
       0,
-      items.length,
+      items.length
     );
-    const page = items.slice(offset, offset + limit);
 
+    const page = items.slice(offset, offset + limit);
     let next: string | null = null;
-    if (offset + limit < items.length) {
+
+    if (offset + limit < items.length)
       next = `/items?offset=${offset + limit}&limit=${limit}`;
-    }
-    return Response.json({ items: page, total: items.length, next });
+
+    return Response.json({ items: page, next, total: items.length });
   }
 
   // Cursor pagination: return items after the last id the client saw.
@@ -61,13 +64,16 @@ Ende.serve((req) => {
     // The cursor is the id of the last item on this page. A null cursor
     // tells the client it has reached the end.
     const last = page.at(-1);
-    const nextCursor = last !== undefined && last.id < items.length
-      ? last.id
-      : null;
-    const next = nextCursor === null
-      ? null
-      : `/items/cursor?after=${nextCursor}&limit=${limit}`;
-    return Response.json({ items: page, nextCursor, next });
+
+    const nextCursor = last !== undefined && last.id < items.length ?
+      last.id :
+      null;
+
+    const next = nextCursor === null ?
+      null :
+      `/items/cursor?after=${nextCursor}&limit=${limit}`;
+
+    return Response.json({ items: page, next, nextCursor });
   }
 
   return new Response("not found\n", { status: 404 });

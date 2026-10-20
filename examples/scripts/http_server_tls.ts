@@ -23,11 +23,11 @@
 // permission, and serving needs -N.
 Ende.serve(
   {
-    port: 8443,
     cert: Ende.readTextFileSync("localhost-cert.pem"),
     key: Ende.readTextFileSync("localhost-key.pem"),
+    port: 8443
   },
-  () => new Response("Hello over TLS"),
+  () => new Response("Hello over TLS")
 );
 
 // Test it with curl, telling it to trust the self-signed certificate:

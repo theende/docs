@@ -34,11 +34,12 @@ console.log(test(markdown)); // true
 // removed, and the raw front matter text. Type the attributes with a
 // generic parameter to get typed access.
 type PostMeta = {
-  title: string;
   date: Date;
-  tags: string[];
   draft: boolean;
+  tags: string[];
+  title: string;
 };
+
 const { attrs, body } = extractYaml<PostMeta>(markdown);
 
 console.log(attrs.title); // My first post

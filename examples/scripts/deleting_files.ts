@@ -32,7 +32,6 @@ await Ende.remove("./dir", { recursive: true });
 try {
   await Ende.remove("example.txt");
 } catch (err) {
-  if (!(err instanceof Ende.errors.NotFound)) {
+  if (!(err instanceof Ende.errors.NotFound))
     throw err;
-  }
 }

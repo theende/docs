@@ -10,10 +10,10 @@ export default function Search() {
     <>
       <form id="search-form" role="search">
         <input
-          type="search"
+          aria-label="Search the docs"
           id="search-query"
           name="q"
-          aria-label="Search the docs"
+          type="search"
         />
         <button type="submit">Search</button>
       </form>

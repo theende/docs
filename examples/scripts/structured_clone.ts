@@ -15,7 +15,7 @@
 
 // Spread syntax and Object.assign only copy one level deep. structuredClone
 // copies the whole tree, so mutating the copy leaves the original alone.
-const original = { user: { name: "Ada" }, tags: ["math", "code"] };
+const original = { tags: ["math", "code"], user: { name: "Ada" } };
 const copy = structuredClone(original);
 
 copy.user.name = "Grace";
@@ -29,10 +29,10 @@ console.log(copy.tags.length); // 3
 // Built-in types like Map, Set, Date, and Uint8Array survive the clone as
 // real instances, not as plain objects or strings.
 const record = {
-  scores: new Map([["ada", 99]]),
-  visited: new Set(["home", "docs"]),
-  created: new Date("2024-01-15T00:00:00Z"),
   bytes: new Uint8Array([1, 2, 3]),
+  created: new Date("2024-01-15T00:00:00Z"),
+  scores: new Map([["ada", 99]]),
+  visited: new Set(["home", "docs"])
 };
 const recordCopy = structuredClone(record);
 
@@ -75,9 +75,11 @@ try {
 // but the prototype is not, so methods are gone on the copy.
 class Point {
   x: number;
+
   constructor(x: number) {
     this.x = x;
   }
+
   double(): number {
     return this.x * 2;
   }

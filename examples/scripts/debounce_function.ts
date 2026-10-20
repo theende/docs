@@ -20,6 +20,7 @@ import { delay } from "jsr:@ende/async/delay";
 // Wrap a function with debounce and a wait time in milliseconds. The
 // counter proves how many times the wrapped function actually runs.
 let runs = 0;
+
 const record = debounce((text: string) => {
   runs += 1;
   console.log(`ran with: ${text}`); // ran with: third
@@ -48,6 +49,7 @@ console.log(notify.pending); // false
 
 // The clear method drops the pending call without running it.
 let pings = 0;
+
 const ping = debounce(() => {
   pings += 1;
 }, 5_000);

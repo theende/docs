@@ -1,10 +1,8 @@
+const activeTags = new Set<string>();
 const searchbar = document.getElementById("lint-rule-search") as
   | HTMLInputElement
   | null;
-const tagButtons = document.querySelectorAll<HTMLButtonElement>(
-  "[data-tag-btn]"
-);
-const activeTags = new Set<string>();
+const tagButtons = document.querySelectorAll<HTMLButtonElement>("[data-tag-btn]");
 
 /**
  * Shows or hides each rule box based on the current search query and active tag filters.
@@ -41,9 +39,8 @@ function handleTagFilterButtonClick(button: HTMLButtonElement) {
   updateVisibility();
 }
 
-if (searchbar) {
+if (searchbar)
   searchbar.addEventListener("input", updateVisibility);
-}
 
 for (const button of tagButtons) {
   button.addEventListener("click", () => handleTagFilterButtonClick(button));

@@ -39,8 +39,9 @@ const paged = new URLPattern({ search: "page=:page" });
 console.log(paged.exec("https://example.com/list?page=4")?.search.groups.page); // 4
 
 const section = new URLPattern({ hash: "section-:name" });
+
 console.log(
-  section.exec("https://example.com/docs#section-install")?.hash.groups.name,
+  section.exec("https://example.com/docs#section-install")?.hash.groups.name
 ); // install
 
 // A router is just an ordered list of pattern and handler pairs. The first
@@ -52,15 +53,18 @@ const routes: [URLPattern, Handler][] = [
   [new URLPattern({ pathname: "/users/:id" }), (g) => `user ${g.id}`],
   [
     new URLPattern({ pathname: "/users/:id/posts/:post" }),
-    (g) => `post ${g.post} by user ${g.id}`,
-  ],
+    (g) => `post ${g.post} by user ${g.id}`
+  ]
 ];
 
 function route(url: string): string {
   for (const [pattern, handler] of routes) {
     const result = pattern.exec(url);
-    if (result) return handler(result.pathname.groups);
+
+    if (result)
+      return handler(result.pathname.groups);
   }
+
   return "404 not found";
 }
 

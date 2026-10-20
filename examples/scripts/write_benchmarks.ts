@@ -23,20 +23,20 @@ const needle = "item-9999";
 // Benchmarks that belong to the same group are compared with each other in
 // the summary. Exactly one of them can be marked as the baseline.
 Ende.bench({
-  name: "Array.prototype.includes",
-  group: "lookup",
   baseline: true,
   fn: () => {
     itemsArray.includes(needle);
   },
+  group: "lookup",
+  name: "Array.prototype.includes"
 });
 
 Ende.bench({
-  name: "Set.prototype.has",
-  group: "lookup",
   fn: () => {
     itemsSet.has(needle);
   },
+  group: "lookup",
+  name: "Set.prototype.has"
 });
 
 // Sometimes a benchmark needs setup that should not be measured. The bench

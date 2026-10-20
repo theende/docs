@@ -11,7 +11,7 @@
  */
 import { parse, stringify } from "jsr:@ende/yaml";
 
-// To parse a YAML string, you can use the standard library's YAML
+// To parse a YAML string, you can use the standard library’s YAML
 // parse function. The value is returned as a JavaScript object.
 const text = `
 foo: bar
@@ -19,16 +19,17 @@ baz:
   - qux
   - quux
 `;
-const data = parse(text) as { foo: string; baz: string[] };
+const data = parse(text) as { baz: string[]; foo: string; };
 console.log(data.foo);
 console.log(data.baz.length);
 
 // To turn a JavaScript object into a YAML string, you can use the standard
-// library's YAML stringify function.
+// library’s YAML stringify function.
 const obj = {
   hello: "world",
-  numbers: [1, 2, 3],
+  numbers: [1, 2, 3]
 };
+
 const yaml = stringify(obj);
 console.log(yaml);
 //- hello: world

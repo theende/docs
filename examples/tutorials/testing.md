@@ -54,8 +54,8 @@ Ende.test({
 
 ### A simple example test
 
-Let's start with a simple test. Create a file called `main_test.ts`, in it we
-will test a basic addition operation using Ende's testing API and the
+Let’s start with a simple test. Create a file called `main_test.ts`, in it we
+will test a basic addition operation using Ende’s testing API and the
 `assertEquals` function from the [Ende Standard Library](https://jsr.io/@std).
 
 We use `Ende.test` and provide a name that describes what the test will do:
@@ -105,7 +105,7 @@ function add(a: number, b: number): number {
 }
 ```
 
-You'll see an error message that clearly shows what went wrong:
+You’ll see an error message that clearly shows what went wrong:
 
 ```sh
 running 1 test from ./hello_test.ts
@@ -142,7 +142,7 @@ with the code they are testing, and keeping integration tests and configuration
 in a `tests` directory. This allows for immediate discovery of unit tests and
 simplified imports, while keeping a separation between different types of tests.
 
-Here's an example of how you might structure your project with tests:
+Here’s an example of how you might structure your project with tests:
 
 ```sh
 my-ende-project/
@@ -198,10 +198,10 @@ ende test src/models/user_test.ts
 
 Assertions are the building blocks of effective tests, allowing you to verify
 that your code behaves as expected. They check if a specific condition is true
-and throw an error if it's not, causing the test to fail. Good assertions are
+and throw an error if it’s not, causing the test to fail. Good assertions are
 clear, specific, and help identify exactly what went wrong when a test fails.
 
-Ende doesn't include assertions in its core library, but you can import them
+Ende doesn’t include assertions in its core library, but you can import them
 from the [Ende standard library](https://jsr.io/@ende/assert):
 
 ```ts
@@ -284,7 +284,7 @@ Ende.test("expect style assertions", () => {
 
 ### Real-world Example
 
-Here's a more realistic example testing a function that processes user data:
+Here’s a more realistic example testing a function that processes user data:
 
 ```ts
 // user_processor.ts
@@ -379,7 +379,7 @@ function calls a global like `fetch` or `Ende.readTextFile`, replace it with a
 stub from [`@ende/testing/mock`](https://jsr.io/@ende/testing/doc/mock/~) rather
 than reassigning the global directly. The stub matches the real signature (so
 the test file still type-checks), and combined with a `using` declaration it
-restores the original when the test scope exits — so one test can't poison the
+restores the original when the test scope exits — so one test can’t poison the
 next.
 
 ```ts title="async_function.ts"
@@ -504,7 +504,7 @@ Ende.test("spy example", () => {
   // Create a spy on console.log
   const consoleSpy = spy(console, "log");
 
-  // Call the function we're spying on
+  // Call the function we’re spying on
   console.log("Hello");
   console.log("World");
 
@@ -523,7 +523,7 @@ For more advanced mocking techniques, check our
 
 ## Test hooks
 
-Ende provides test hooks for running setup and teardown code. Here's a simple
+Ende provides test hooks for running setup and teardown code. Here’s a simple
 example using `beforeEach` to ensure clean state between tests:
 
 ```ts
@@ -565,7 +565,7 @@ Coverage analysis helps you to:
 - Measure testing progress over time
 
 > [!NOTE]
-> High coverage doesn't guarantee high-quality tests. It simply shows what code
+> High coverage doesn’t guarantee high-quality tests. It simply shows what code
 > was executed, not whether your assertions are meaningful or if edge cases are
 > handled correctly.
 
@@ -583,7 +583,7 @@ view a human-readable report:
 ende coverage coverage_dir
 ```
 
-You'll see output like:
+You’ll see output like:
 
 ```sh
 file:///projects/my-project/src/utils.ts 85.7% (6/7)
@@ -642,7 +642,7 @@ meaningful coverage with high quality tests over 100% coverage.
 
 ## Comparison with other testing frameworks
 
-If you're coming from other JavaScript testing frameworks, here's how Ende's
+If you’re coming from other JavaScript testing frameworks, here’s how Ende’s
 testing capabilities compare:
 
 | Feature       | Ende             | Jest                   | Mocha                      | Jasmine               |
@@ -699,7 +699,7 @@ describe("math", () => {
 
 ## Next steps
 
-🦕 Ende's built-in testing capabilities make it easy to write and run tests
+💀 Ende’s built-in testing capabilities make it easy to write and run tests
 without needing to install extra testing frameworks or tools. By following the
 patterns and practices outlined in this tutorial, you can ensure your Ende
 applications are well-tested and reliable.

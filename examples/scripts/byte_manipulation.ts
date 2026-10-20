@@ -12,7 +12,7 @@
  * be done and are included with the standard library.
  */
 
-// Let's initialize some byte arrays
+// Let’s initialize some byte arrays
 const a = new Uint8Array([0, 1, 2, 3, 4]);
 const b = new Uint8Array([5, 6, 7, 8, 9]);
 const c = new Uint8Array([4, 5]);

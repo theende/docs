@@ -25,9 +25,9 @@ Each member gets its own `ende.json` with a `name`, a `version`, and an
 
 ```json title="utils/ende.json"
 {
+  "exports": "./mod.ts",
   "name": "@acme/utils",
-  "version": "0.1.0",
-  "exports": "./mod.ts"
+  "version": "0.1.0"
 }
 ```
 
@@ -39,9 +39,9 @@ export function greet(name: string): string {
 
 ```json title="app/ende.json"
 {
+  "exports": "./main.ts",
   "name": "@acme/app",
-  "version": "0.1.0",
-  "exports": "./main.ts"
+  "version": "0.1.0"
 }
 ```
 
@@ -90,12 +90,12 @@ once:
 
 ```json title="ende.json"
 {
-  "workspace": ["./utils", "./app"],
   "imports": {
     "@ende/assert": "jsr:@ende/assert@^2026.10.15"
-  }
+  },
+  "workspace": ["./utils", "./app"]
 }
 ```
 
-A member can declare its own `imports` too; within that member's folder, its
-entries override the root's.
+A member can declare its own `imports` too; within that member’s folder, its
+entries override the root’s.

@@ -12,13 +12,13 @@
  * flag. The server exports its handler instead of calling Ende.serve.
  */
 
-// With ende serve, the module's default export provides the fetch handler.
+// With ende serve, the module’s default export provides the fetch handler.
 // The runtime owns the listening socket, which is what lets it share the
 // port between workers.
 export default {
   fetch(_req: Request): Response {
     return new Response("Hello, World!");
-  },
+  }
 } satisfies Ende.ServeDefaultExport;
 
 // Start one worker per CPU core:

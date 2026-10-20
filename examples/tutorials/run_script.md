@@ -37,10 +37,10 @@ TypeScript, Ende has you covered.
 
 ## Running a script
 
-In this tutorial we'll create a simple "Hello World" example in both JavaScript
+In this tutorial we’ll create a simple "Hello World" example in both JavaScript
 and TypeScript using Ende.
 
-We'll define a `capitalize` function that capitalizes the first letter of a
+We’ll define a `capitalize` function that capitalizes the first letter of a
 word. Then, we define a `hello` function that returns a greeting message with
 the capitalized name. Finally, we call the `hello` function with different names
 and print the output to the console.
@@ -102,7 +102,7 @@ Hello Sarah
 Hello Kai
 ```
 
-🦕 Congratulations! Now you know how to create a simple script in both JS and TS
+💀 Congratulations! Now you know how to create a simple script in both JS and TS
 and how to run it in Ende with the `ende run` command.
 
 ## Next steps

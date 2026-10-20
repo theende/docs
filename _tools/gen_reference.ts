@@ -1,9 +1,9 @@
 // Generates the API reference data under `_reference/` from released
 // artifacts only, at the versions pinned in `_reference/sources.json`:
 //
-// - `builtin.json`: the runtime's declarations (`ende doc --builtin`), with the
+// - `builtin.json`: the runtime’s declarations (`ende doc --builtin`), with the
 //   `Ende` members only desktop apps have (`cli/tsc/dts/lib.ende.desktop.d.ts`
-//   at the pinned release's tag) merged into the `Ende` namespace. The `ende`
+//   at the pinned release’s tag) merged into the `Ende` namespace. The `ende`
 //   running this script must be the pinned release.
 // - `std/<package>.json`: each pinned `@ende/*` std package, documented from
 //   its published version on JSR.
@@ -17,7 +17,7 @@
 //   ende task check:reference          # fails on drift
 
 // The script imports nothing and runs `ende` outside the docs directory, so it
-// doesn't depend on the docs' ende.json (whose `links` need sibling checkouts).
+// doesn’t depend on the docs’ ende.json (whose `links` need sibling checkouts).
 
 const args = {
   check: Ende.args.includes("--check"),
@@ -33,7 +33,7 @@ const SKIPPED_PACKAGES = new Set(["internal"]);
 interface Sources {
   /** The Ende release, e.g. `2026.10.17`. */
   ende: string;
-  /** Each std package's version, by name without the `@ende/` scope. */
+  /** Each std package’s version, by name without the `@ende/` scope. */
   std: Record<string, string>;
 }
 
@@ -49,9 +49,10 @@ async function run(
     args,
     cwd,
     env,
-    stdout: "piped",
-    stderr: "piped"
+    stderr: "piped",
+    stdout: "piped"
   }).output();
+
   const decoder = new TextDecoder();
 
   if (!output.success) {
@@ -63,33 +64,42 @@ async function run(
   return decoder.decode(output.stdout);
 }
 
-/** Drops what the reference doesn't use: positions, and `repr` (the printer builds types from their parts). */
+/** Drops what the reference doesn’t use: positions, and `repr` (the printer builds types from their parts). */
 function slim(
   value: Json,
   keepLine: (filename: string) => string | undefined
 ): Json {
-  if (Array.isArray(value)) return value.map((item) => slim(item, keepLine));
-  if (value === null || typeof value !== "object") return value;
+  if (Array.isArray(value))
+    return value.map((item) => slim(item, keepLine));
+
+  if (value === null || typeof value !== "object")
+    return value;
 
   const result: JsonObject = {};
 
   for (const [key, child] of Object.entries(value)) {
-    if (key === "repr") continue;
+    if (key === "repr")
+      continue;
 
     if (key === "location") {
       const location = child as JsonObject;
       const file = keepLine(location.filename as string);
-      if (file !== undefined) result.location = { file, line: location.line };
+
+      if (file !== undefined)
+        result.location = { file, line: location.line };
+
       continue;
     }
 
     if (key === "target" && child !== null && typeof child === "object") {
       const target = child as JsonObject;
       const file = keepLine(target.filename as string);
+
       result.target = {
         file: file ?? (target.filename as string),
         line: target.line
       };
+
       continue;
     }
 
@@ -100,16 +110,15 @@ function slim(
 }
 
 interface DocOutput {
-  version: number;
   nodes: Record<string, { module_doc?: Json; symbols: JsonObject[] }>;
+  version: number;
 }
 
 async function fetchText(url: string): Promise<string> {
   const response = await fetch(url);
 
-  if (!response.ok) {
+  if (!response.ok)
     throw new Error(`GET ${url} failed: ${response.status}`);
-  }
 
   return await response.text();
 }
@@ -123,13 +132,16 @@ async function latestSources(): Promise<Sources> {
   const ende = (await fetchText("https://dl.ende.sh/release-latest.txt"))
     .trim()
     .replace(/^v/, "");
+
   const { items } = await fetchJson<{
     items: {
+      githubRepository: { name: string; owner: string; } | null;
       name: string;
-      githubRepository: { owner: string; name: string } | null;
     }[];
   }>("https://api.jsr.io/scopes/ende/packages?limit=100");
+
   const std: Record<string, string> = {};
+
   const names = items
     .filter((item) =>
       item.githubRepository?.owner === "theende" &&
@@ -166,15 +178,18 @@ async function builtin(sources: Sources): Promise<string> {
   // `ende doc --builtin` leaves out the desktop-only declarations, and the
   // binary has no other way to print them, so they come from the release tag.
   const desktopFile = `${dir}/lib.ende.desktop.d.ts`;
+
   await Ende.writeTextFile(
     desktopFile,
     await fetchText(
       `https://raw.githubusercontent.com/theende/ende/v${sources.ende}/cli/tsc/dts/lib.ende.desktop.d.ts`
     )
   );
+
   const desktop = JSON.parse(
     await run(dir, ["doc", "--json", "--no-config", desktopFile])
   ) as DocOutput;
+
   await Ende.remove(dir, { recursive: true });
 
   if (runtime.version !== 2 || desktop.version !== 2) {
@@ -194,7 +209,8 @@ async function builtin(sources: Sources): Promise<string> {
   for (
     const element of endeNamespace(Object.values(desktop.nodes)[0].symbols)
   ) {
-    if (known.has(element.name)) continue;
+    if (known.has(element.name))
+      continue;
 
     for (const declaration of element.declarations as JsonObject[]) {
       declaration.desktop = true;
@@ -207,14 +223,15 @@ async function builtin(sources: Sources): Promise<string> {
     ende: sources.ende,
     symbols: slim(symbols, () => undefined)
   };
+
   return JSON.stringify(data) + "\n";
 }
 
 /** A file of a published JSR package as `@ende/<package>/<version>/<path>`, the path of its page on jsr.io. */
 function fromJsr(filename: string): string | undefined {
-  return filename.startsWith("https://jsr.io/@ende/")
-    ? filename.slice("https://jsr.io/".length)
-    : undefined;
+  return filename.startsWith("https://jsr.io/@ende/") ?
+    filename.slice("https://jsr.io/".length) :
+    undefined;
 }
 
 async function stdPackage(name: string, version: string): Promise<string> {
@@ -224,10 +241,10 @@ async function stdPackage(name: string, version: string): Promise<string> {
   const base = `jsr:@ende/${name}@${version}`;
   const specifier = (path: string) => path === "." ? base : `${base}/${path.replace(/^\.\//, "")}`;
   const dir = await Ende.makeTempDir();
-  // Documenting doesn't run any code, so the minimum dependency age (which
-  // holds back versions published in the last day) is turned off. It's set
+  // Documenting doesn’t run any code, so the minimum dependency age (which
+  // holds back versions published in the last day) is turned off. It’s set
   // through the environment because `ende doc` ignores the
-  // `--minimum-dependency-age` flag. --no-config keeps the docs' own ende.json
+  // `--minimum-dependency-age` flag. --no-config keeps the docs’ own ende.json
   // out of it.
   const output = JSON.parse(
     await run(dir, [
@@ -237,19 +254,20 @@ async function stdPackage(name: string, version: string): Promise<string> {
       ...Object.keys(meta.exports).map(specifier)
     ], { ENDE_MINIMUM_DEPENDENCY_AGE: "0" })
   ) as DocOutput;
+
   await Ende.remove(dir, { recursive: true });
 
   const modules = Object.entries(meta.exports).map(([path, file]) => {
     const node = output.nodes[specifier(path)];
-    if (node === undefined) {
+
+    if (node === undefined)
       throw new Error(`ende doc returned nothing for @ende/${name} ${path}`);
-    }
 
     return {
-      path: path.replace(/^\.\/?/, ""),
-      file: `@ende/${name}/${version}/${file.replace(/^\.\//, "")}`,
       doc: slim(node.module_doc ?? null, fromJsr),
-      // Declarations that aren't exported are only the targets of type
+      file: `@ende/${name}/${version}/${file.replace(/^\.\//, "")}`,
+      path: path.replace(/^\.\/?/, ""),
+      // Declarations that aren’t exported are only the targets of type
       // references; the reference shows those by name.
       symbols: slim(
         node.symbols.filter((symbol) =>
@@ -287,16 +305,18 @@ async function existing(): Promise<Map<string, string>> {
         }
       }
     } catch (error) {
-      if (!(error instanceof Ende.errors.NotFound)) throw error;
+      if (!(error instanceof Ende.errors.NotFound))
+        throw error;
     }
   }
 
   return files;
 }
 
-const sources: Sources = args.update
-  ? await latestSources()
-  : JSON.parse(await Ende.readTextFile(sourcesFile));
+const sources: Sources = args.update ?
+  await latestSources() :
+  JSON.parse(await Ende.readTextFile(sourcesFile));
+
 const generated = await generate(sources);
 
 if (args.check) {
@@ -315,8 +335,10 @@ if (args.check) {
   console.log(`_reference/ is up to date (${generated.size} files)`);
 } else {
   await Ende.remove(out, { recursive: true }).catch((error) => {
-    if (!(error instanceof Ende.errors.NotFound)) throw error;
+    if (!(error instanceof Ende.errors.NotFound))
+      throw error;
   });
+
   await Ende.mkdir(new URL("std/", out), { recursive: true });
 
   for (const [path, text] of generated) {

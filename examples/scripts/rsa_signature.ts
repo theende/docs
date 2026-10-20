@@ -5,28 +5,28 @@
  * @run <url>
  * @group Cryptography
  *
- * This example demonstrates RSA signature and verification using Ende's built-in SubtleCrypto API.
+ * This example demonstrates RSA signature and verification using Ende’s built-in SubtleCrypto API.
  */
 
 // Convert the text to a Uint8Array using TextEncoder (required for signing)
 const data = new TextEncoder().encode("Hello, Deno 2.0!");
 
-const { publicKey, privateKey } = await crypto.subtle.generateKey(
+const { privateKey, publicKey } = await crypto.subtle.generateKey(
   {
-    name: "RSASSA-PKCS1-v1_5",
-    modulusLength: 2048, // 2048-bit key for strong security
-    publicExponent: new Uint8Array([1, 0, 1]), // Public exponent: 65537
     hash: { name: "SHA-256" },
+    modulusLength: 2048, // 2048-bit key for strong security
+    name: "RSASSA-PKCS1-v1_5",
+    publicExponent: new Uint8Array([1, 0, 1]) // Public exponent: 65537
   },
   true,
-  ["verify", "sign"],
+  ["verify", "sign"]
 );
 
 // Sign the data using the private key
 const signature = await crypto.subtle.sign(
   { name: "RSASSA-PKCS1-v1_5" },
   privateKey,
-  data,
+  data
 );
 
 // Log the signature as a byte array
@@ -37,7 +37,7 @@ const verification = await crypto.subtle.verify(
   { name: "RSASSA-PKCS1-v1_5" },
   publicKey,
   signature,
-  data,
+  data
 );
 
 console.log("Verification:", verification);

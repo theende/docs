@@ -18,7 +18,7 @@ import {
   randomIntegerBetween,
   randomSeeded,
   sample,
-  shuffle,
+  shuffle
 } from "jsr:@ende/random";
 
 // randomSeeded creates a generator from a bigint seed. It is a drop-in

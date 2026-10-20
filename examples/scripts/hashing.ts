@@ -9,12 +9,12 @@
  * @group Cryptography
  *
  * Hashing data is a common operation that is facilitated
- * through Ende's support for the Web Crypto API. In addition,
- * the Ende Standard Library's implementation extends the standard API, allowing for
+ * through Ende’s support for the Web Crypto API. In addition,
+ * the Ende Standard Library’s implementation extends the standard API, allowing for
  * more advanced uses.
  */
 
-// In our first example, we'll hash the contents of a string variable.
+// In our first example, we’ll hash the contents of a string variable.
 const message = "The easiest, most secure JavaScript runtime.";
 
 // Before we can pass our message to the hashing function,
@@ -23,16 +23,16 @@ const messageBuffer = new TextEncoder().encode(message);
 
 // Here, we use the built-in crypto.subtle.digest method to hash our original message.
 // The hash is returned as an ArrayBuffer. To obtain a string
-// we'll need to do a little more work.
+// we’ll need to do a little more work.
 const hashBuffer = await crypto.subtle.digest("SHA-256", messageBuffer);
 
 // We can encode this into a string using the standard
-// library's encodeHex method.
+// library’s encodeHex method.
 import { encodeHex } from "jsr:@ende/encoding/hex";
 const hash = encodeHex(hashBuffer);
 console.log(hash);
 
-// For our second example, we'll hash the contents of a file.
+// For our second example, we’ll hash the contents of a file.
 // Hashing a file is a common operation and doing this
 // without loading the whole file into memory is a typical
 // requirement.
@@ -49,7 +49,7 @@ const file = await Ende.open("example.txt", { read: true });
 // We obtain an async iterable using the readable property.
 const readableStream = file.readable;
 
-// This time, when we call crypto.subtle.digest, we're using the
+// This time, when we call crypto.subtle.digest, we’re using the
 // imported version that allows us to operate on the
 // async iterable.
 const fileHashBuffer = await crypto.subtle.digest("SHA-256", readableStream);

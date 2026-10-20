@@ -20,6 +20,7 @@ import { delay } from "jsr:@ende/async@^2026.10.15/delay";
 // and a command. Writing raw bytes to stdout keeps full control over when
 // a newline is emitted.
 const encoder = new TextEncoder();
+
 function write(text: string) {
   Ende.stdout.writeSync(encoder.encode(text));
 }
@@ -47,11 +48,13 @@ const steps = ["Resolving packages", "Downloading", "Linking", "Cleaning up"];
 // piped, print ordinary lines instead.
 if (Ende.stdout.isTerminal()) {
   write("\x1b[?25l");
+
   try {
     for (let i = 0; i < steps.length; i++) {
       write(`\x1b[2K\r[${i + 1}/${steps.length}] ${steps[i]}...`);
       await delay(600);
     }
+
     write("\x1b[2K\rInstall complete.\n");
   } finally {
     write("\x1b[?25h");
@@ -61,6 +64,7 @@ if (Ende.stdout.isTerminal()) {
     console.log(`${step}...`);
     await delay(100);
   }
+
   console.log("Install complete.");
 }
 

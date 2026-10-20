@@ -3,24 +3,25 @@ import { DIFFICULTIES, Example, ExampleFile, TAGS } from "./types.ts";
 export function parseExample(id: string, file: string): Example {
   // Extract the multi line JS doc comment at the top of the file
   const [, jsdoc, rest] = file.match(/^\s*\/\*\*(.*?)\*\/\s*(.*)/s) || [];
-
   // Extract the @key value pairs from the JS doc comment
   let description = "";
   const kvs: Record<string, string> = {};
   const resources = [];
+
   for (let line of jsdoc.split("\n")) {
     line = line.trim().replace(/^\*/, "").trim();
     const [, key, value] = line.match(/^\s*@(\w+)\s+(.*)/) || [];
+
     if (key) {
-      if (key === "resource") {
+      if (key === "resource")
         resources.push(value);
-      } else {
+      else
         kvs[key] = value.trim();
-      }
     } else {
       description += " " + line;
     }
   }
+
   description = description.trim();
 
   // Separate the code into snippets.
@@ -30,22 +31,26 @@ export function parseExample(id: string, file: string): Example {
       snippets: []
     }
   ];
-  let parseMode = "code";
-  let currentFile = files[0];
-  let text = "";
+
   let code = "";
+  let currentFile = files[0];
+  let parseMode = "code";
+  let text = "";
 
   for (const line of rest.split("\n")) {
     const trimmedLine = line.trim();
+
     if (parseMode == "code") {
       if (line.startsWith("// File:")) {
         if (text || code.trimEnd()) {
           code = code.trimEnd();
-          currentFile.snippets.push({ text, code });
+          currentFile.snippets.push({ code, text });
           text = "";
           code = "";
         }
+
         const name = line.slice(8).trim();
+
         if (currentFile.snippets.length == 0) {
           currentFile.name = name;
         } else {
@@ -53,6 +58,7 @@ export function parseExample(id: string, file: string): Example {
             name,
             snippets: []
           };
+
           files.push(currentFile);
         }
       } else if (line.startsWith("/* File:")) {
@@ -62,7 +68,9 @@ export function parseExample(id: string, file: string): Example {
           text = "";
           code = "";
         }
+
         const name = line.slice(8).trim();
+
         if (currentFile.snippets.length == 0) {
           currentFile.name = name;
         } else {
@@ -70,8 +78,10 @@ export function parseExample(id: string, file: string): Example {
             name,
             snippets: []
           };
+
           files.push(currentFile);
         }
+
         parseMode = "file";
       } else if (
         trimmedLine.startsWith("// deno-lint-ignore") ||
@@ -87,6 +97,7 @@ export function parseExample(id: string, file: string): Example {
           code = code.trimEnd();
           currentFile.snippets.push({ text, code });
         }
+
         text = trimmedLine.slice(2).trim();
         code = "";
         parseMode = "comment";
@@ -108,54 +119,55 @@ export function parseExample(id: string, file: string): Example {
         parseMode = "code";
       }
     } else if (parseMode == "file") {
-      if (line == "*/") {
+      if (line == "*/")
         parseMode = "code";
-      } else {
+      else
         code += line + "\n";
-      }
     }
   }
+
   if (text || code.trimEnd()) {
     code = code.trimEnd();
     currentFile.snippets.push({ text, code });
   }
 
-  if (!kvs.title) {
+  if (!kvs.title)
     throw new Error("Missing title in JS doc comment.");
-  }
 
   const tags = kvs.tags.split(",").map((s) => s.trim() as keyof typeof TAGS);
+
   for (const tag of tags) {
-    if (!TAGS[tag]) {
-      throw new Error(`Unknown tag '${tag}'`);
-    }
+    if (!TAGS[tag])
+      throw new Error(`Unknown tag "${tag}"`);
   }
 
   const difficulty = kvs.difficulty as keyof typeof DIFFICULTIES;
-  if (!DIFFICULTIES[difficulty]) {
-    throw new Error(`Unknown difficulty '${difficulty}'`);
-  }
+
+  if (!DIFFICULTIES[difficulty])
+    throw new Error(`Unknown difficulty "${difficulty}"`);
 
   const additionalResources: [string, string][] = [];
+
   for (const resource of resources) {
     // @resource {https://jsr.io/@ende/http/server/~/} std/http/server
     const [_, url, title] = resource.match(/^\{(.*?)\}\s(.*)/) || [];
-    if (!url || !title) {
+
+    if (!url || !title)
       throw new Error(`Invalid resource: ${resource}`);
-    }
+
     additionalResources.push([url, title]);
   }
 
   return {
-    id,
-    title: kvs.title,
+    additionalResources,
     description,
     difficulty,
-    tags,
-    additionalResources,
-    run: kvs.run,
     files,
     group: kvs.group || "Misc",
-    sortOrder: kvs.sortOrder || 999999
+    id,
+    run: kvs.run,
+    sortOrder: kvs.sortOrder || 999999,
+    tags,
+    title: kvs.title
   };
 }

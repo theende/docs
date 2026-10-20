@@ -18,17 +18,16 @@ const clients = new Set<WebSocket>();
 function broadcast(message: string) {
   for (const client of clients) {
     // A socket may be mid-handshake or closing; only send when open.
-    if (client.readyState === WebSocket.OPEN) {
+    if (client.readyState === WebSocket.OPEN)
       client.send(message);
-    }
   }
 }
 
 Ende.serve((req) => {
-  if (req.headers.get("upgrade") !== "websocket") {
+  if (req.headers.get("upgrade") !== "websocket")
     return new Response("This endpoint expects a WebSocket", { status: 426 });
-  }
-  const { socket, response } = Ende.upgradeWebSocket(req);
+
+  const { response, socket } = Ende.upgradeWebSocket(req);
 
   // Register the socket once the connection is established, and clean up
   // when it goes away for any reason.
@@ -36,6 +35,7 @@ Ende.serve((req) => {
     clients.add(socket);
     broadcast(`${clients.size} clients connected`);
   };
+
   socket.onclose = () => {
     clients.delete(socket);
     broadcast(`${clients.size} clients connected`);

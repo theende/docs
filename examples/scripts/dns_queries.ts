@@ -12,7 +12,7 @@
  * on the machine.
  */
 
-// In the most basic basic case, we can query a domain's A record.
+// In the most basic basic case, we can query a domain’s A record.
 // This will give us a list of ipv4 addresses.
 const a = await Ende.resolveDns("example.com", "A");
 console.log(a);
@@ -26,6 +26,6 @@ console.log(mx);
 // We are also optionally able to specify a nameserver via an ip address
 // and (optionally) a port number. To override the system configuration.
 const aaaa = await Ende.resolveDns("example.com", "AAAA", {
-  nameServer: { ipAddr: "8.8.8.8", port: 53 },
+  nameServer: { ipAddr: "8.8.8.8", port: 53 }
 });
 console.log(aaaa);

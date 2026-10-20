@@ -8,7 +8,7 @@ url: /examples/hyperdx_tutorial/
 [HyperDX](https://hyperdx.io) is an open source observability platform that
 unifies logs, traces, metrics, exceptions, and session replays into a single
 interface. It helps developers debug applications faster by providing a complete
-view of your system's behavior and performance.
+view of your system’s behavior and performance.
 
 [OpenTelemetry](https://opentelemetry.io/) (often abbreviated as OTel) provides
 a standardized way to collect and export telemetry data. Ende includes built-in
@@ -16,7 +16,7 @@ OpenTelemetry support, allowing you to instrument your applications without
 additional dependencies. This integration works seamlessly with platforms like
 HyperDX to collect and visualize telemetry data.
 
-In this tutorial, we'll build a simple application and export its telemetry data
+In this tutorial, we’ll build a simple application and export its telemetry data
 to HyperDX:
 
 - [Set up your chat app](#set-up-the-app)
@@ -29,7 +29,7 @@ You can find the complete source code for this tutorial
 
 ## Set up the app
 
-For this tutorial, we'll use a simple chat application to demonstrate how to
+For this tutorial, we’ll use a simple chat application to demonstrate how to
 export telemetry data. You can find the
 [code for the app on GitHub](https://github.com/denoland/examples/tree/main/with-hyperdx).
 
@@ -52,7 +52,7 @@ OPENAI_API_KEY=your_openai_api_key
 
 ## Set up the collector
 
-First, create a free HyperDX account to get your API key. Then, we'll set up two
+First, create a free HyperDX account to get your API key. Then, we’ll set up two
 files to configure the OpenTelemetry collector:
 
 1. Create a `Dockerfile`:
@@ -141,7 +141,7 @@ This command:
 
 - Points the OpenTelemetry exporter to your local collector (`localhost:4318`)
 - Names your service "chat-app" in HyperDX
-- Enables Ende's OpenTelemetry integration
+- Enables Ende’s OpenTelemetry integration
 - Runs your application with the necessary permissions
 
 To generate some telemetry data, make a few requests to your running application
@@ -150,13 +150,13 @@ in your browser at [`http://localhost:8000`](http://localhost:8000).
 Each request will:
 
 1. Generate traces as it flows through your application
-2. Send logs from your application's console output
+2. Send logs from your application’s console output
 3. Create metrics about the request performance
 4. Forward all this data through the collector to HyperDX
 
 ## Viewing telemetry data
 
-In your HyperDX dashboard, you'll see different views of your telemetry data:
+In your HyperDX dashboard, you’ll see different views of your telemetry data:
 
 ### Logs View
 
@@ -175,7 +175,7 @@ See all logs within a single request:
 Monitor system performance:
 ![Viewing metrics in HyperDX](./images/how-to/hyperdx/hyperdx-4.webp)
 
-🦕 Now that you have telemetry export working, you could:
+💀 Now that you have telemetry export working, you could:
 
 1. Add custom spans and attributes to better understand your application
 2. Set up alerts based on latency or error conditions
@@ -184,5 +184,5 @@ Monitor system performance:
    - [Digital Ocean](https://docs.ende.sh/examples/digital_ocean_tutorial/)
    - [AWS Lightsail](https://docs.ende.sh/examples/aws_lightsail_tutorial/)
 
-🦕 For more details on OpenTelemetry configuration with HyperDX, see their
+💀 For more details on OpenTelemetry configuration with HyperDX, see their
 [documentation](https://www.hyperdx.io/docs/install/opentelemetry).

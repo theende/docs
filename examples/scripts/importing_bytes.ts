@@ -21,8 +21,9 @@ console.log(bytes);
 
 // Dynamic imports are also supported.
 const text = await import("./image.png", {
-  with: { type: "bytes" },
+  with: { type: "bytes" }
 });
+
 console.log(text);
 
 /* File: ./image.png

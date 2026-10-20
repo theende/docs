@@ -18,6 +18,7 @@ import { LruCache, type MemoizationCacheResult, memoize } from "jsr:@ende/cache"
 
 // A counter reveals how often the real function body runs.
 let calls = 0;
+
 function slowSquare(n: number): number {
   calls += 1;
   return n * n;
@@ -42,8 +43,8 @@ console.log(fastSquare.cache.size); // 2
 // An LruCache keeps at most maxSize entries and evicts the least
 // recently used one when a new entry would exceed the limit.
 const lru = new LruCache<string, MemoizationCacheResult<number>>(2);
-
 let lookups = 0;
+
 const lookup = memoize((id: number): number => {
   lookups += 1;
   return id * 10;

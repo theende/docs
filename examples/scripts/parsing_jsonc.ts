@@ -34,7 +34,7 @@ console.log(config); // { name: "my-app", port: 8080, features: [ "http", "webso
 
 // The return type is JsonValue, so cast it to the shape you expect before
 // accessing properties.
-const { name, port } = config as { name: string; port: number };
+const { name, port } = config as { name: string; port: number; };
 console.log(name, port); // my-app 8080
 
 // The built-in JSON.parse rejects the same text, because comments and

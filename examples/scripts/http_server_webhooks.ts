@@ -22,9 +22,9 @@ const SECRET = "it-is-a-secret-to-everybody";
 const key = await crypto.subtle.importKey(
   "raw",
   new TextEncoder().encode(SECRET),
-  { name: "HMAC", hash: "SHA-256" },
+  { hash: "SHA-256", name: "HMAC" },
   false,
-  ["verify"],
+  ["verify"]
 );
 
 async function verify(req: Request): Promise<unknown | null> {
@@ -35,9 +35,12 @@ async function verify(req: Request): Promise<unknown | null> {
 
   // The header carries the hex digest behind a sha256= prefix.
   const header = req.headers.get("x-hub-signature-256") ?? "";
-  if (!header.startsWith("sha256=")) return null;
+
+  if (!header.startsWith("sha256="))
+    return null;
 
   let signature: BufferSource;
+
   try {
     signature = Uint8Array.fromHex(header.slice("sha256=".length));
   } catch {
@@ -48,21 +51,22 @@ async function verify(req: Request): Promise<unknown | null> {
   // Comparing hex strings with === instead would leak how many leading
   // characters matched through response timing.
   const valid = await crypto.subtle.verify("HMAC", key, signature, body);
-  if (!valid) return null;
+
+  if (!valid)
+    return null;
 
   // Only now is it safe to parse and act on the payload.
   return JSON.parse(new TextDecoder().decode(body));
 }
 
 Ende.serve(async (req) => {
-  if (req.method !== "POST") {
+  if (req.method !== "POST")
     return new Response("method not allowed\n", { status: 405 });
-  }
 
   const payload = await verify(req);
-  if (payload === null) {
+
+  if (payload === null)
     return new Response("invalid signature\n", { status: 401 });
-  }
 
   console.log("verified webhook:", payload);
   return new Response("ok\n");

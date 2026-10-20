@@ -23,7 +23,7 @@ console.log(text1);
 
 // Dynamic imports are also supported.
 const text2 = (await import("./log.txt", {
-  with: { type: "text" },
+  with: { type: "text" }
 })).default;
 
 console.log(text2);

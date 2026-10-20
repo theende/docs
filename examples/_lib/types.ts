@@ -1,44 +1,44 @@
 export const TAGS = {
   cli: {
-    title: "cli",
-    description: "Works in Ende CLI"
+    description: "Works in Ende CLI",
+    title: "cli"
   },
   web: {
-    title: "web",
-    description: "Works in on the Web"
+    description: "Works in on the Web",
+    title: "web"
   }
 };
 
 export const DIFFICULTIES = {
   beginner: {
-    title: "Beginner",
-    description: "No significant prior knowledge is required for this example."
+    description: "No significant prior knowledge is required for this example.",
+    title: "Beginner"
   },
   intermediate: {
-    title: "Intermediate",
-    description: "Some prior knowledge is needed for this example."
+    description: "Some prior knowledge is needed for this example.",
+    title: "Intermediate"
   }
 };
 
 export type ExampleFromFileSystem = {
-  name: string;
   content: string;
-  label: string;
-  parsed: Example;
   externalURL?: string;
+  label: string;
+  name: string;
+  parsed: Example;
 };
 
 export interface Example {
-  id: string;
-  title: string;
+  additionalResources: [string, string][];
   description: string;
   difficulty: keyof typeof DIFFICULTIES;
-  tags: (keyof typeof TAGS)[];
-  additionalResources: [string, string][];
-  run?: string;
   files: ExampleFile[];
   group: string;
+  id: string;
+  run?: string;
   sortOrder: string | number;
+  tags: (keyof typeof TAGS)[];
+  title: string;
 }
 
 export interface ExampleFile {
@@ -47,8 +47,8 @@ export interface ExampleFile {
 }
 
 export interface ExampleSnippet {
-  text: string;
   code: string;
+  text: string;
 }
 
 export interface VideoReference {

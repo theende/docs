@@ -44,8 +44,8 @@ console.log("parent: holding exclusive lock");
 // interleaved with ours and tell the story in order.
 const child = new Ende.Command(Ende.execPath(), {
   args: ["run", "--allow-read", "--allow-write", `${dir}/child.ts`, path],
-  stdout: "inherit",
   stderr: "inherit",
+  stdout: "inherit"
 }).spawn();
 
 // We hold the lock for two seconds. During this time the child starts up,
@@ -54,7 +54,7 @@ await new Promise((resolve) => setTimeout(resolve, 2000));
 console.log("parent: releasing lock");
 await file.unlock();
 
-// The moment we release, the child's lock call resolves and it finishes.
+// The moment we release, the child’s lock call resolves and it finishes.
 await child.status;
 
 // To attempt a lock without blocking, use tryLock. It returns true when
@@ -62,9 +62,10 @@ await child.status;
 // a skip-if-busy pattern better than waiting.
 const again = await file.tryLock(true);
 console.log("parent: tryLock after child released:", again); // true
-if (again) {
+
+if (again)
   await file.unlock();
-}
+
 file.close();
 
 // The whole run prints, with the wait time varying slightly:

@@ -29,15 +29,15 @@ Ende.serve((req: Request) => {
     // We can also serve a whole directory using the serveDir utility
     // method. By default it serves the current directory but this
     // can be changed using the "fsRoot" option. We can use the "urlRoot"
-    // option to strip off the start of the url in the case we don't
+    // option to strip off the start of the url in the case we don’t
     // serve the directory at the top level.
     return serveDir(req, {
       fsRoot: "public",
-      urlRoot: "static",
+      urlRoot: "static"
     });
   }
 
   return new Response("404: Not Found", {
-    status: 404,
+    status: 404
   });
 });

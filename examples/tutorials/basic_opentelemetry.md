@@ -6,7 +6,7 @@ url: /examples/basic_opentelemetry_tutorial/
 ---
 
 OpenTelemetry provides powerful observability tools for your applications. With
-Ende's built-in OpenTelemetry support, you can easily instrument your code to
+Ende’s built-in OpenTelemetry support, you can easily instrument your code to
 collect metrics, traces, and logs.
 
 This tutorial will walk you through setting up a simple Ende application with
@@ -18,7 +18,7 @@ OpenTelemetry instrumentation.
 
 ## Step 1: Create a Simple HTTP Server
 
-Let's start by creating a basic HTTP server that simulates a small web
+Let’s start by creating a basic HTTP server that simulates a small web
 application:
 
 ```ts title="server.ts"
@@ -133,7 +133,7 @@ OTEL_ENDE=true OTEL_SERVICE_NAME=my-server ende run --allow-net server.ts
 
 ## Step 3: Create a Test Client
 
-Let's create a simple client to send requests to our server:
+Let’s create a simple client to send requests to our server:
 
 ```ts title="client.ts"
 // Send 10 requests to different paths
@@ -164,7 +164,7 @@ ende run --allow-net client.ts
 ## Step 5: View the Telemetry Data
 
 By default, Ende exports telemetry data to `http://localhost:4318` using the
-OTLP protocol. You'll need an OpenTelemetry collector to receive and visualize
+OTLP protocol. You’ll need an OpenTelemetry collector to receive and visualize
 this data.
 
 ### Setting up a Local Collector
@@ -189,11 +189,11 @@ In Grafana, you can:
 2. View **Metrics** in Mimir/Prometheus to see request counts and durations
 3. View **Logs** in Loki to see any logs from your application
 
-## Understanding What You're Seeing
+## Understanding What You’re Seeing
 
 ### Traces
 
-In the Traces view, you'll see spans for:
+In the Traces view, you’ll see spans for:
 
 - Each HTTP request processed by your server
 - Each fetch request made by your client
@@ -219,14 +219,14 @@ You can also see built-in Ende metrics like:
 
 ### Logs
 
-In the Logs view, you'll see all console logs from your application with correct
+In the Logs view, you’ll see all console logs from your application with correct
 trace context.
 
 ## Troubleshooting
 
-If you're not seeing data in your collector:
+If you’re not seeing data in your collector:
 
-1. Check that you've set `OTEL_ENDE=true`
+1. Check that you’ve set `OTEL_ENDE=true`
 2. Verify the collector is running and accessible at the default endpoint
 3. Check if you need to set `OTEL_EXPORTER_OTLP_ENDPOINT` to a different URL
 4. Look for errors in your Ende console output
@@ -234,7 +234,7 @@ If you're not seeing data in your collector:
 Remember that OpenTelemetry support in Ende is still marked as unstable and may
 change in future versions.
 
-🦕 This tutorial provides a simple starting point for users who want to
+💀 This tutorial provides a simple starting point for users who want to
 experiment with OpenTelemetry in Ende without diving into more complex concepts
 immediately.
 

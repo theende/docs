@@ -1,12 +1,12 @@
 ---
 last_modified: 2026-06-12
 title: "Use local and unpublished packages"
-description: "Work with code that isn't on a registry: link a local package copy with the links field, import straight from HTTPS URLs including private GitHub repos, and know which specifiers Ende does not support."
+description: "Work with code that isn’t on a registry: link a local package copy with the links field, import straight from HTTPS URLs including private GitHub repos, and know which specifiers Ende does not support."
 url: /examples/local_unpublished_packages_tutorial/
 ---
 
 Not every dependency lives on JSR. Ende has two supported ways to use code that
-isn't published anywhere: the `links` field for local directories, and plain
+isn’t published anywhere: the `links` field for local directories, and plain
 HTTPS imports for code reachable by URL.
 
 ## Link a local package with `links`
@@ -52,7 +52,7 @@ $ ende run main.ts
 Hello, local package!
 ```
 
-The linked directory is used instead of the registry; the package doesn't even
+The linked directory is used instead of the registry; the package doesn’t even
 have to be published. Edits in `greeter/` are picked up directly.
 
 > [!NOTE]
@@ -75,7 +75,7 @@ Download https://raw.githubusercontent.com/denoland/std/cdf74a86680beb4ef74c95e0
 true
 ```
 
-Pin the URL to a tag or commit hash rather than a branch, so the code can't
+Pin the URL to a tag or commit hash rather than a branch, so the code can’t
 change underneath you.
 
 For private repositories, set `ENDE_AUTH_TOKENS` to a personal access token

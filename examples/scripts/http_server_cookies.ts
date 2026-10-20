@@ -22,18 +22,20 @@ Ende.serve((req) => {
 
   if (url.pathname === "/login") {
     const headers = new Headers({ "content-type": "text/plain" });
+
     // setCookie appends a set-cookie header. httpOnly hides the cookie from
     // document.cookie, secure restricts it to HTTPS, and sameSite Lax keeps
     // it off cross-site subrequests. Use all three for session cookies.
     setCookie(headers, {
-      name: "session",
-      value: crypto.randomUUID(),
       httpOnly: true,
-      secure: true,
-      sameSite: "Lax",
       maxAge: 3600,
+      name: "session",
       path: "/",
+      sameSite: "Lax",
+      secure: true,
+      value: crypto.randomUUID()
     });
+
     return new Response("Logged in\n", { headers });
   }
 
@@ -45,9 +47,9 @@ Ende.serve((req) => {
     return new Response("Logged out\n", { headers });
   }
 
-  if (cookies.session) {
+  if (cookies.session)
     return new Response(`Welcome back, session ${cookies.session}\n`);
-  }
+
   return new Response("No session yet. Visit /login first.\n");
 });
 

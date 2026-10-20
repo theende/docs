@@ -32,7 +32,7 @@ console.log(output === input); // true
 // Both streams also support the deflate format, and deflate-raw for the
 // variant without headers.
 const deflated = await new Response(
-  new Blob([input]).stream().pipeThrough(new CompressionStream("deflate")),
+  new Blob([input]).stream().pipeThrough(new CompressionStream("deflate"))
 ).bytes();
 console.log(deflated.length); // 41
 

@@ -14,8 +14,8 @@
  */
 
 interface Session {
-  username: string;
   expires: number;
+  username: string;
 }
 
 // Session data lives on the server. The cookie holds nothing but the id, so
@@ -26,14 +26,20 @@ const TTL_MS = 60 * 60 * 1000;
 function getSessionId(req: Request): string | null {
   const cookie = req.headers.get("cookie") ?? "";
   const match = cookie.match(/(?:^|;\s*)session=([0-9a-f-]+)/);
+
   return match ? match[1] : null;
 }
 
 function getSession(req: Request): Session | null {
   const id = getSessionId(req);
-  if (id === null) return null;
+
+  if (id === null)
+    return null;
+
   const session = sessions.get(id);
-  if (session === undefined) return null;
+
+  if (session === undefined)
+    return null;
 
   // Expired sessions are pruned lazily, on the first access after their
   // deadline. No background timer is needed.
@@ -41,6 +47,7 @@ function getSession(req: Request): Session | null {
     sessions.delete(id);
     return null;
   }
+
   return session;
 }
 
@@ -51,23 +58,24 @@ Ende.serve(async (req) => {
     // A real login checks credentials first. Here any username is accepted.
     const { username } = await req.json();
     const id = crypto.randomUUID();
-    sessions.set(id, { username, expires: Date.now() + TTL_MS });
+    sessions.set(id, { expires: Date.now() + TTL_MS, username });
 
     // httpOnly hides the cookie from client-side JavaScript, which blocks
     // session theft through XSS. Add Secure when serving over HTTPS.
     return new Response("logged in\n", {
       headers: {
         "set-cookie":
-          `session=${id}; HttpOnly; Path=/; SameSite=Lax; Max-Age=3600`,
-      },
+          `session=${id}; HttpOnly; Path=/; SameSite=Lax; Max-Age=3600`
+      }
     });
   }
 
   if (pathname === "/me") {
     const session = getSession(req);
-    if (session === null) {
+
+    if (session === null)
       return new Response("not logged in\n", { status: 401 });
-    }
+
     return new Response(`hello, ${session.username}\n`);
   }
 
@@ -75,9 +83,12 @@ Ende.serve(async (req) => {
     // Destroy the server-side state and clear the cookie. Deleting the Map
     // entry is what actually ends the session.
     const id = getSessionId(req);
-    if (id !== null) sessions.delete(id);
+
+    if (id !== null)
+      sessions.delete(id);
+
     return new Response("logged out\n", {
-      headers: { "set-cookie": "session=; Path=/; Max-Age=0" },
+      headers: { "set-cookie": "session=; Path=/; Max-Age=0" }
     });
   }
 

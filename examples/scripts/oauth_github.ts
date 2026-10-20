@@ -9,7 +9,7 @@
  *
  * The OAuth authorization code flow lets users sign in with an existing
  * account. This server redirects to GitHub, exchanges the returned code for an
- * access token, and reads the user's profile. Register an OAuth app at
+ * access token, and reads the user’s profile. Register an OAuth app at
  * github.com/settings/developers with callback http://localhost:8000/callback,
  * then set GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET.
  */
@@ -27,40 +27,45 @@ async function handler(req: Request): Promise<Response> {
     authorize.searchParams.set("client_id", clientId);
     authorize.searchParams.set("redirect_uri", redirectUri);
     authorize.searchParams.set("scope", "read:user");
+
     return Response.redirect(authorize, 302);
   }
 
   // Step 2: GitHub redirects back here with a short-lived code.
   if (url.pathname === "/callback") {
     const code = url.searchParams.get("code");
-    if (!code) return new Response("Missing code", { status: 400 });
+
+    if (!code)
+      return new Response("Missing code", { status: 400 });
 
     // Step 3: exchange the code for an access token.
     const tokenRes = await fetch(
       "https://github.com/login/oauth/access_token",
       {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-        },
         body: JSON.stringify({
           client_id: clientId,
           client_secret: clientSecret,
           code,
-          redirect_uri: redirectUri,
+          redirect_uri: redirectUri
         }),
-      },
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+        },
+        method: "POST"
+      }
     );
+
     const { access_token } = await tokenRes.json();
 
     // Step 4: call the API as the user with their token.
     const userRes = await fetch("https://api.github.com/user", {
       headers: {
         authorization: `Bearer ${access_token}`,
-        "user-agent": "ende-oauth-example",
-      },
+        "user-agent": "ende-oauth-example"
+      }
     });
+
     const user = await userRes.json();
     return new Response(`Signed in as ${user.login}`);
   }

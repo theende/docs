@@ -6,7 +6,7 @@
  * @group Cryptography
  *
  * This example demonstrates how to generate and verify an HMAC (Hash-based Message Authentication Code)
- * using Ende's built-in SubtleCrypto API with the SHA-256 hash function.
+ * using Ende’s built-in SubtleCrypto API with the SHA-256 hash function.
  */
 
 // Define the secret key for HMAC (in a real application, store this securely)
@@ -21,11 +21,11 @@ const key = await crypto.subtle.importKey(
   "raw", // The format of the key
   keyData, // The key data
   { // Algorithm details
-    name: "HMAC",
     hash: { name: "SHA-256" },
+    name: "HMAC"
   },
   false, // Whether the key is extractable
-  ["sign", "verify"], // Key usages: Sign and Verify
+  ["sign", "verify"] // Key usages: Sign and Verify
 );
 
 // The message to be authenticated

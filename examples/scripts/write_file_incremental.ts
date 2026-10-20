@@ -17,8 +17,8 @@ const dir = await Ende.makeTempDir();
 
 // Open a file for writing, creating it if needed.
 const file = await Ende.open(`${dir}/log.txt`, {
-  write: true,
   create: true,
+  write: true
 });
 
 // Every open file exposes a web standard WritableStream. Its writer
@@ -44,8 +44,8 @@ await appender.close();
 const source = ReadableStream.from(["streamed ", "content\n"])
   .pipeThrough(new TextEncoderStream());
 const target = await Ende.open(`${dir}/stream.txt`, {
-  write: true,
   create: true,
+  write: true
 });
 await source.pipeTo(target.writable);
 console.log(await Ende.readTextFile(`${dir}/stream.txt`)); // streamed content

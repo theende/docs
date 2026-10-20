@@ -20,7 +20,7 @@ console.log(zone); // Europe/Warsaw (or whatever the OS is set to)
 console.log(new Date().toString());
 
 // Start the process with TZ set to pin the zone, for example to keep
-// timestamps in CI logs consistent or to reproduce a user's bug report:
+// timestamps in CI logs consistent or to reproduce a user’s bug report:
 //
 //   TZ=Asia/Tokyo ende run main.ts
 //   Asia/Tokyo
@@ -42,6 +42,7 @@ console.log(tokyoTime.hour); // e.g. 22
 // The Intl API formats a value for another zone the same way.
 const tokyo = new Intl.DateTimeFormat("en-US", {
   timeStyle: "long",
-  timeZone: "Asia/Tokyo",
+  timeZone: "Asia/Tokyo"
 }).format(new Date());
+
 console.log(tokyo);

@@ -19,6 +19,7 @@
 const server = Ende.serve({ port: 8000 }, (req) => {
   const { socket, response } = Ende.upgradeWebSocket(req);
   socket.onmessage = (event) => socket.send(`echo: ${event.data}`);
+
   return response;
 });
 

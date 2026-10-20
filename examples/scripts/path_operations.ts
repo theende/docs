@@ -40,11 +40,12 @@ console.log(ext); // .ts
 
 // We can format a path using a FormatInputPathObject
 const formatPath = path.format({
-  root: "/",
   dir: "/home/user/dir",
   ext: ".html",
   name: "index",
+  root: "/"
 });
+
 console.log(formatPath); // "/home/user/dir/index.html"
 
 // When we want to make our code cross-platform, we can use the join method.

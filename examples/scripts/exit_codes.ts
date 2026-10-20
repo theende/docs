@@ -21,6 +21,7 @@
 globalThis.addEventListener("beforeunload", () => {
   console.log("beforeunload: event loop is out of work"); // beforeunload: event loop is out of work
 });
+
 globalThis.addEventListener("unload", () => {
   console.log("unload: process is exiting"); // unload: process is exiting
 });

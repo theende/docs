@@ -20,6 +20,7 @@ const server = Ende.serve({ port: 0, onListen() {} }, async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   return new Response("finally done");
 });
+
 const url = `http://localhost:${server.addr.port}/`;
 
 // Pass the signal to fetch, then call abort on the controller. The fetch

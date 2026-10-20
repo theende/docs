@@ -8,7 +8,7 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.memoryUsage} Doc: Ende.memoryUsage
  * @group System
  *
- * This example demonstrates how to use Ende's built-in methods to read
+ * This example demonstrates how to use Ende’s built-in methods to read
  * system metrics such as memory information, load averages and memory usage.
  */
 
@@ -25,7 +25,7 @@ console.log(`Swap Total: ${memoryInfo.swapTotal / 1024 / 1024} MB`);
 console.log(`Swap Free: ${memoryInfo.swapFree / 1024 / 1024} MB`);
 
 // Load averages indicate the average number of active processes over these time periods, providing insights
-// into the system's CPU load and overall activity.
+// into the system’s CPU load and overall activity.
 const loadAvg = Ende.loadavg();
 console.log("Load Averages:");
 console.log(`1 Minute Load Average: ${loadAvg[0]}`);

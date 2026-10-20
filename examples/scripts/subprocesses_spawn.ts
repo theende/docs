@@ -6,7 +6,7 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.Command} Doc: Ende.Command
  * @group System
  *
- * For more complex usecases, we don't simply want the output of some
+ * For more complex usecases, we don’t simply want the output of some
  * command. In this case, we can spawn a subprocess and interact with
  * it using convenience methods for reading output streams.
  */
@@ -20,7 +20,7 @@ const command = new Ende.Command("ende", {
     "-",
   ],
   stdin: "piped",
-  stdout: "piped",
+  stdout: "piped"
 });
 
 // In a slightly more complex case, we want to interact with a spawned
@@ -30,7 +30,7 @@ const process = command.spawn();
 // We can now pipe the input into stdin. To do this we must first get
 // a writer from the stream and write to it
 const writer = process.stdin.getWriter();
-await writer.write(new TextEncoder().encode("console.log('hello')"));
+await writer.write(new TextEncoder().encode(`console.log("hello")`));
 writer.releaseLock();
 
 // We must then close stdin

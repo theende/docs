@@ -29,10 +29,11 @@ debug=true
 // properties and each section becomes a nested object. The type argument
 // describes the shape you expect.
 const config = parse<{
-  theme: string;
   port: string;
-  server: { host: string; debug: string };
+  server: { debug: string; host: string; };
+  theme: string;
 }>(text);
+
 console.log(config.theme); // dark
 console.log(config.server); // { host: "localhost", debug: "true" }
 
@@ -45,26 +46,32 @@ console.log(typeof config.port); // string
 // it returns ends up in the result.
 const typed = parse<{
   port: number;
-  server: { host: string; debug: boolean };
+  server: { debug: boolean; host: string; };
 }>(text, {
   reviver(_key, value, _section) {
-    if (value === "true") return true;
-    if (value === "false") return false;
+    if (value === "true")
+      return true;
+
+    if (value === "false")
+      return false;
+
     const num = Number(value);
     return Number.isNaN(num) ? value : num;
   },
 });
+
 console.log(typed.port); // 8080
-console.log(typed.server); // { host: "localhost", debug: true }
+console.log(typed.server); // { debug: true, host: "localhost" }
 
 // To serialize, pass an object to the stringify function. Nested objects
 // turn back into sections, and numbers and booleans are written as their
 // plain text form.
 const ini = stringify({
-  theme: "dark",
   port: 8080,
-  server: { host: "localhost", debug: true },
+  server: { debug: true, host: "localhost" },
+  theme: "dark"
 });
+
 console.log(ini);
 //- theme=dark
 //- port=8080

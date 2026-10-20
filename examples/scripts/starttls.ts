@@ -45,7 +45,7 @@ await send(conn, "STARTTLS");
 console.log((await read(conn)).trim()); // 220 2.0.0 Ready to start TLS
 
 // Ende.startTls wraps the existing connection in TLS. The hostname is used
-// to verify the server's certificate, exactly as in Ende.connectTls. The
+// to verify the server’s certificate, exactly as in Ende.connectTls. The
 // original conn must not be used afterwards.
 const tlsConn = await Ende.startTls(conn, { hostname: "smtp.gmail.com" });
 

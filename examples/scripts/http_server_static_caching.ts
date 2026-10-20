@@ -12,7 +12,7 @@
  * matching if-none-match revalidation with 304 Not Modified and no body.
  */
 
-// Serve this script's own source file so the example is self-contained.
+// Serve this script’s own source file so the example is self-contained.
 const filePath = import.meta.filename!;
 
 Ende.serve(async (req) => {
@@ -25,18 +25,17 @@ Ende.serve(async (req) => {
   const etag = `W/"${mtime.getTime().toString(16)}-${stat.size.toString(16)}"`;
 
   const headers = {
-    "etag": etag,
-    "last-modified": mtime.toUTCString(),
     // Clients may reuse the file for 60 seconds, then must revalidate.
     "cache-control": "max-age=60, must-revalidate",
     "content-type": "text/plain; charset=utf-8",
+    "etag": etag,
+    "last-modified": mtime.toUTCString()
   };
 
   // The client revalidates by echoing the etag in if-none-match. If it
   // still matches, a bodyless 304 tells it to keep using its copy.
-  if (req.headers.get("if-none-match") === etag) {
-    return new Response(null, { status: 304, headers });
-  }
+  if (req.headers.get("if-none-match") === etag)
+    return new Response(null, { headers, status: 304 });
 
   const file = await Ende.open(filePath, { read: true });
   return new Response(file.readable, { headers });

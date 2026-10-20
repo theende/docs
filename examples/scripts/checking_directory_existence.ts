@@ -6,7 +6,7 @@
  * @group File System
  *
  * When creating directories it can be useful to first ensure that
- * such a directory doesn't already exist.
+ * such a directory doesn’t already exist.
  * There are a number of ways to do this.
  */
 
@@ -30,8 +30,8 @@ try {
   await Ende.lstat("./example_directory");
   console.log("Folder exists");
 } catch (err) {
-  if (!(err instanceof Ende.errors.NotFound)) {
+  if (!(err instanceof Ende.errors.NotFound))
     throw err;
-  }
+
   console.log("Folder does not exist");
 }

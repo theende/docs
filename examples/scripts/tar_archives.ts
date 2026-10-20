@@ -29,21 +29,23 @@ await Ende.writeTextFile(`${dir}/project/config.json`, `{"name":"sample"}`);
 const readmeStat = await Ende.stat(`${dir}/project/readme.txt`);
 const configStat = await Ende.stat(`${dir}/project/config.json`);
 const archive = await Ende.create(`${dir}/project.tar.gz`);
+
 const inputs: TarStreamInput[] = [
-  { type: "directory", path: "project" },
+  { path: "project", type: "directory" },
   {
-    type: "file",
     path: "project/readme.txt",
-    size: readmeStat.size,
     readable: (await Ende.open(`${dir}/project/readme.txt`)).readable,
+    size: readmeStat.size,
+    type: "file"
   },
   {
-    type: "file",
     path: "project/config.json",
-    size: configStat.size,
     readable: (await Ende.open(`${dir}/project/config.json`)).readable,
-  },
+    size: configStat.size,
+    type: "file"
+  }
 ];
+
 await ReadableStream.from(inputs)
   .pipeThrough(new TarStream())
   .pipeThrough(new CompressionStream("gzip"))
@@ -66,10 +68,12 @@ const entries = tarball.readable
 for await (const entry of entries) {
   console.log(entry.path);
   const target = `${outDir}/${normalize(entry.path)}`;
+
   if (entry.readable === undefined) {
     await Ende.mkdir(target, { recursive: true });
     continue;
   }
+
   const file = await Ende.create(target);
   await entry.readable.pipeTo(file.writable);
 }

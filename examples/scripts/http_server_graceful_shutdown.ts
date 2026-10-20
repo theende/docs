@@ -17,10 +17,12 @@
 // shutdown. The root responds immediately.
 const server = Ende.serve(async (req) => {
   const url = new URL(req.url);
+
   if (url.pathname === "/slow") {
     await new Promise((resolve) => setTimeout(resolve, 3000));
     return new Response("Slow work finished\n");
   }
+
   return new Response("Hello\n");
 });
 
@@ -43,6 +45,7 @@ async function shutdown(signal: string) {
   clearTimeout(hardExit);
   Ende.removeSignalListener("SIGINT", onSigint);
   Ende.removeSignalListener("SIGTERM", onSigterm);
+
   console.log("All requests drained, bye");
 }
 
@@ -53,9 +56,9 @@ const onSigterm = () => shutdown("SIGTERM");
 // stop, and Kubernetes send first. Note that SIGTERM listeners are not
 // supported on Windows.
 Ende.addSignalListener("SIGINT", onSigint);
-if (Ende.build.os !== "windows") {
+
+if (Ende.build.os !== "windows")
   Ende.addSignalListener("SIGTERM", onSigterm);
-}
 
 // Start a slow request, then send SIGTERM while it is still running:
 //

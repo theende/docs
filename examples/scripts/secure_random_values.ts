@@ -36,9 +36,11 @@ function randomInt(min: number, max: number): number {
   const range = max - min;
   const limit = Math.floor(2 ** 32 / range) * range;
   const sample = new Uint32Array(1);
+
   do {
     crypto.getRandomValues(sample);
   } while (sample[0] >= limit);
+
   return min + (sample[0] % range);
 }
 

@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-05-14
 title: "Behavior-Driven Development (BDD)"
-description: "Implementing Behavior-Driven Development with Ende's Standard Library's BDD module. Create readable, well organised tests with effective assertions."
+description: "Implementing Behavior-Driven Development with Ende’s Standard Library’s BDD module. Create readable, well organised tests with effective assertions."
 url: /examples/bdd_tutorial/
 ---
 
@@ -10,9 +10,9 @@ encourages collaboration between developers, QA, and non-technical stakeholders.
 BDD focuses on defining the behavior of an application through examples written
 in a natural, ubiquitous language that all stakeholders can understand.
 
-Ende's Standard Library provides a BDD-style testing module that allows you to
-structure tests in a way that's both readable for non-technical stakeholders and
-practical for implementation. In this tutorial, we'll explore how to use the BDD
+Ende’s Standard Library provides a BDD-style testing module that allows you to
+structure tests in a way that’s both readable for non-technical stakeholders and
+practical for implementation. In this tutorial, we’ll explore how to use the BDD
 module to create descriptive test suites for your applications.
 
 ## Introduction to BDD
@@ -21,7 +21,7 @@ BDD extends
 [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development)
 (TDD) by writing tests in a natural language that is easy to read. Rather than
 thinking about "tests," BDD encourages us to consider "specifications" or
-"specs" that describe how software should behave from the user's perspective.
+"specs" that describe how software should behave from the user’s perspective.
 This approach helps to keep tests focused on what the code should do rather than
 how it is implemented.
 
@@ -31,12 +31,12 @@ The basic elements of BDD include:
 - **It** statements that express a single behavior
 - **Before/After** hooks for setup and teardown operations
 
-## Using Ende's BDD module
+## Using Ende’s BDD module
 
-To get started with BDD testing in Ende, we'll use the `@ende/testing/bdd`
+To get started with BDD testing in Ende, we’ll use the `@ende/testing/bdd`
 module from the [Ende Standard Library](https://jsr.io/@ende/testing/doc/bdd).
 
-First, let's import the necessary functions:
+First, let’s import the necessary functions:
 
 ```ts
 import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from "jsr:@ende/testing/bdd";
@@ -50,12 +50,12 @@ These imports provide the core BDD functions:
 - `beforeEach`/`afterEach` run before or after each test case
 - `beforeAll`/`afterAll` run once before or after all tests in a describe block
 
-We'll also use assertion functions from
+We’ll also use assertion functions from
 [`@ende/assert`](https://jsr.io/@ende/assert) to verify our expectations.
 
 ### Writing your first BDD test
 
-Let's create a simple calculator module and test it using BDD:
+Let’s create a simple calculator module and test it using BDD:
 
 ```ts title="calculator.ts"
 export class Calculator {
@@ -94,7 +94,7 @@ export class Calculator {
 }
 ```
 
-Now, let's test this calculator using the BDD style:
+Now, let’s test this calculator using the BDD style:
 
 ```ts title="calculator_test.ts"
 import { afterEach, beforeEach, describe, it } from "jsr:@ende/testing/bdd";
@@ -192,7 +192,7 @@ To run this test, use the `ende test` command:
 ende test calculator_test.ts
 ```
 
-You'll see output similar to this:
+You’ll see output similar to this:
 
 ```sh
 running 1 test from file:///path/to/calculator_test.ts
@@ -255,7 +255,7 @@ These hooks are useful for:
 - Setting up and tearing down database connections
 - Creating and cleaning up shared resources
 
-Here's a runnable example that tests a small HTTP service. Spinning a server up
+Here’s a runnable example that tests a small HTTP service. Spinning a server up
 and down for every single test would be wasteful — and slow, once you have a
 handful of cases — so the server starts once in `beforeAll` and shuts down once
 in `afterAll`:
@@ -270,7 +270,7 @@ describe("User API", () => {
 
   beforeAll(() => {
     // Start the test server once before any test runs. Port 0 asks the
-    // OS for a free port, so parallel test files don't collide.
+    // OS for a free port, so parallel test files don’t collide.
     server = Ende.serve({ port: 0, onListen() {} }, (req) => {
       const { pathname } = new URL(req.url);
       if (pathname === "/users/1") {
@@ -326,11 +326,11 @@ ok | 1 passed (2 steps) | 0 failed (11ms)
 > original. When tests need a clean slate, set up the cheap, per-test state in
 > `beforeEach` and leave only the expensive, read-mostly setup in `beforeAll`.
 
-### Aborting a suite when a precondition isn't met
+### Aborting a suite when a precondition isn’t met
 
 Sometimes a whole suite depends on something external — a database connection, a
-service running on a known port, a file on disk. If that precondition isn't
-satisfied, you usually don't want the rest of the suite to run and produce
+service running on a known port, a file on disk. If that precondition isn’t
+satisfied, you usually don’t want the rest of the suite to run and produce
 dozens of confusing failures. There are two patterns that work well with
 `@ende/testing/bdd`.
 
@@ -362,8 +362,8 @@ describe("Database operations", () => {
 ```
 
 **Skip the suite with the `ignore` option.** If the precondition being unmet is
-expected (for example, the integration database isn't available in a
-contributor's local environment), it's nicer to skip the suite cleanly rather
+expected (for example, the integration database isn’t available in a
+contributor’s local environment), it’s nicer to skip the suite cleanly rather
 than fail it. Both `describe` and `it` accept an `ignore` option that takes a
 boolean — compute it once at the top of the file and pass it in:
 
@@ -400,10 +400,10 @@ need to skip part of a suite.
 
 ## Gherkin vs. JavaScript-style BDD
 
-If you're familiar with Cucumber or other BDD frameworks, you might be expecting
+If you’re familiar with Cucumber or other BDD frameworks, you might be expecting
 Gherkin syntax with "Given-When-Then" statements.
 
-Ende's BDD module uses a JavaScript-style syntax rather than Gherkin. This
+Ende’s BDD module uses a JavaScript-style syntax rather than Gherkin. This
 approach is similar to other JavaScript testing frameworks like Mocha or
 Jasmine. However, you can still follow BDD principles by:
 
@@ -545,9 +545,9 @@ it("should fetch user data asynchronously", async () => {
 });
 ```
 
-🦕 By following the BDD principles and practices outlined in this tutorial, you
-can build more reliable software and solidify your reasoning about the 'business
-logic' of your code.
+💀 By following the BDD principles and practices outlined in this tutorial, you
+can build more reliable software and solidify your reasoning about the “business
+logic” of your code.
 
 Remember that BDD is not just about the syntax or tools but about the
 collaborative approach to defining and verifying application behavior. The most
@@ -555,5 +555,5 @@ successful BDD implementations combine these technical practices with regular
 conversations between developers, testers, product and business stakeholders.
 
 To continue learning about testing in Ende, explore other modules in the
-Standard Library's testing suite, such as [mocking](/runtime/test/mocking/) and
+Standard Library’s testing suite, such as [mocking](/runtime/test/mocking/) and
 [snapshot testing](/runtime/test/snapshots/).

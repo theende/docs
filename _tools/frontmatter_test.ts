@@ -11,7 +11,7 @@ const LAST_MODIFIED_DIRS = [
   "./examples",
   "./ai"
 ];
-// Generated or synced subtrees that aren't hand-edited content pages.
+// Generated or synced subtrees that aren’t hand-edited content pages.
 const LAST_MODIFIED_EXCLUDES = ["runtime/reference/std/"];
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -19,10 +19,14 @@ Ende.test("Frontmatter titles must not contain backticks", async (t) => {
   for (const dir of DIRS_TO_CHECK) {
     for await (const entry of walk(dir, { exts: [".md", ".mdx"] })) {
       const content = await Ende.readTextFile(entry.path);
-      if (!content.startsWith("---")) continue;
+
+      if (!content.startsWith("---"))
+        continue;
 
       const { attrs } = extract<{ title?: string }>(content);
-      if (typeof attrs.title !== "string") continue;
+
+      if (typeof attrs.title !== "string")
+        continue;
 
       await t.step(entry.path, () => {
         assert(
@@ -39,10 +43,14 @@ Ende.test("CLI command page titles must be just the command name", async (t) => 
     const entry of walk("./runtime/reference/cli", { exts: [".md"] })
   ) {
     const content = await Ende.readTextFile(entry.path);
-    if (!content.startsWith("---")) continue;
+
+    if (!content.startsWith("---"))
+      continue;
 
     const { attrs } = extract<{ title?: string; command?: string }>(content);
-    if (typeof attrs.command !== "string") continue;
+
+    if (typeof attrs.command !== "string")
+      continue;
 
     const expected = `ende ${attrs.command}`;
 
@@ -62,10 +70,14 @@ Ende.test("Content pages must have a valid last_modified field", async (t) => {
   for (const dir of LAST_MODIFIED_DIRS) {
     for await (const entry of walk(dir, { exts: [".md", ".mdx"] })) {
       const rel = entry.path.replace(/^\.\//, "");
-      if (LAST_MODIFIED_EXCLUDES.some((p) => rel.startsWith(p))) continue;
+
+      if (LAST_MODIFIED_EXCLUDES.some((p) => rel.startsWith(p)))
+        continue;
 
       const content = await Ende.readTextFile(entry.path);
-      if (content.trim() === "") continue; // empty placeholder, not a page
+
+      if (content.trim() === "")
+        continue; // empty placeholder, not a page
 
       await t.step(entry.path, () => {
         assert(
@@ -81,9 +93,10 @@ Ende.test("Content pages must have a valid last_modified field", async (t) => {
         );
 
         // YAML parses an unquoted date into a Date; accept either form.
-        const date = value instanceof Date
-          ? value.toISOString().slice(0, 10)
-          : String(value).trim();
+        const date = value instanceof Date ?
+          value.toISOString().slice(0, 10) :
+          String(value).trim();
+
         assert(
           DATE_RE.test(date),
           `"last_modified" must be a YYYY-MM-DD date, got "${date}".`

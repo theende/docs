@@ -18,9 +18,11 @@
 // difference between two calls times a block of code.
 const start = performance.now();
 let total = 0;
+
 for (let i = 0; i < 1_000_000; i++) {
   total += Math.sqrt(i);
 }
+
 const elapsed = performance.now() - start;
 console.log(`loop took ${elapsed.toFixed(1)} ms`); // e.g. loop took 2.8 ms
 

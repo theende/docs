@@ -13,8 +13,8 @@
 
 // Define an interface in TypeScript
 interface Person {
-  name: string;
   age: number;
+  name: string;
 }
 
 // Provide a typed input to a function
@@ -23,4 +23,4 @@ function greet(person: Person) {
 }
 
 // Everything works with zero config!
-console.log(greet({ name: "Alice", age: 36 }));
+console.log(greet({ age: 36, name: "Alice" }));

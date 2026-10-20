@@ -25,7 +25,7 @@ function sigIntHandler() {
 // which is sent when the user presses Ctrl+C.
 Ende.addSignalListener("SIGINT", sigIntHandler);
 
-// While we're waiting for the signal, we can do other things,
+// While we’re waiting for the signal, we can do other things,
 // like count seconds, or start a server.
 const interval = setInterval(() => {
   i++;

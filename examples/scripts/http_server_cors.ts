@@ -19,17 +19,19 @@
 // browser rejects * in that mode.
 const allowedOrigins = new Set([
   "http://localhost:5173",
-  "https://app.example.com",
+  "https://app.example.com"
 ]);
 
 function corsHeaders(req: Request): Headers {
   const headers = new Headers();
   const origin = req.headers.get("origin");
+
   if (origin && allowedOrigins.has(origin)) {
     headers.set("access-control-allow-origin", origin);
     // The response now differs per origin, so shared caches must key on it.
     headers.set("vary", "origin");
   }
+
   return headers;
 }
 
@@ -43,7 +45,8 @@ Ende.serve((req) => {
     headers.set("access-control-allow-methods", "GET, POST, PUT, DELETE");
     headers.set("access-control-allow-headers", "content-type, authorization");
     headers.set("access-control-max-age", "86400");
-    return new Response(null, { status: 204, headers });
+
+    return new Response(null, { headers, status: 204 });
   }
 
   // Actual responses only need the allow-origin header (plus

@@ -15,15 +15,16 @@
  */
 
 // Ende.spawn takes the command, its arguments, and options. The env option
-// adds variables on top of the inherited environment, and the child's
+// adds variables on top of the inherited environment, and the child’s
 // stdout stream offers the same convenience methods as a fetch Response.
 const withEnv = Ende.spawn(Ende.execPath(), [
   "eval",
-  "console.log(Ende.env.get('GREETING'))",
+  `console.log(Ende.env.get("GREETING"))`
 ], {
   env: { GREETING: "hello from parent" },
-  stdout: "piped",
+  stdout: "piped"
 });
+
 console.log((await withEnv.stdout.text()).trim()); // hello from parent
 await withEnv.status;
 
@@ -33,12 +34,13 @@ await withEnv.status;
 // system may still inject a few variables of its own.
 const cleared = Ende.spawn(Ende.execPath(), [
   "eval",
-  "console.log('has PATH:', Ende.env.has('PATH'))",
+  `console.log("has PATH:", Ende.env.has("PATH"))`
 ], {
-  env: { GREETING: "hello again" },
   clearEnv: true,
-  stdout: "piped",
+  env: { GREETING: "hello again" },
+  stdout: "piped"
 });
+
 console.log((await cleared.stdout.text()).trim()); // has PATH: false
 await cleared.status;
 
@@ -47,14 +49,15 @@ await cleared.status;
 // command to completion and collects everything in one call.
 const withCwd = await Ende.spawnAndWait(Ende.execPath(), [
   "eval",
-  "console.log(Ende.cwd())",
+  "console.log(Ende.cwd())"
 ], {
   cwd: "/",
-  stdout: "piped",
+  stdout: "piped"
 });
+
 console.log(new TextDecoder().decode(withCwd.stdout).trim()); // /
 
-// The parent's own working directory is untouched by the child's cwd.
+// The parent’s own working directory is untouched by the child’s cwd.
 console.log(Ende.cwd() === "/"); // false
 
 // The same options exist on the underlying Ende.Command API, which is the

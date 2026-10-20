@@ -26,12 +26,13 @@ for (const tabGroup of tabGroups) {
       buttonContainer.appendChild(button);
 
       const content = document.createElement("div");
-      content.innerHTML = tab.innerHTML;
+      content.append(...tab.childNodes);
       content.dataset.tab = tab.getAttribute("value")!;
       content.dataset.active = String(selected);
       tabs.appendChild(content);
     }
   }
+
   tabGroup.replaceWith(newGroup);
 }
 
@@ -47,21 +48,22 @@ class GroupSelectEvent extends Event {
 }
 
 for (const tabGroup of document.querySelectorAll<HTMLElement>(".ende-tabs")) {
-  const buttons = tabGroup.querySelectorAll<HTMLElement>(
-    ".ende-tabs-buttons button"
-  )!;
-  const tabs = tabGroup.querySelectorAll<HTMLElement>(
-    ".ende-tabs-content div"
-  )!;
-
+  const buttons = tabGroup.querySelectorAll<HTMLElement>(".ende-tabs-buttons button")!;
   const groupId = tabGroup.dataset.id!;
+  const tabs = tabGroup.querySelectorAll<HTMLElement>(".ende-tabs-content > div")!;
+
   document.addEventListener("ende-tab-select", (event: Event) => {
-    if (!(event instanceof GroupSelectEvent)) return;
-    if (event.groupId !== groupId) return;
+    if (!(event instanceof GroupSelectEvent))
+      return;
+
+    if (event.groupId !== groupId)
+      return;
+
     for (const button of buttons) {
       const active = button.dataset.tab === event.tabId;
       button.dataset.active = String(active);
     }
+
     for (const tab of tabs) {
       const active = tab.dataset.tab === event.tabId;
       tab.dataset.active = String(active);
@@ -77,17 +79,22 @@ for (const tabGroup of document.querySelectorAll<HTMLElement>(".ende-tabs")) {
   }
 
   const storedTabId = localStorage.getItem(`ende-tab-${groupId}`);
+
   if (storedTabId) {
     document.dispatchEvent(new GroupSelectEvent(groupId, storedTabId));
   } else if (groupId === "operating-systems") {
     const ua = navigator.userAgent;
     let detected: string | null = null;
-    if (/Mac/i.test(ua)) detected = "mac";
-    else if (/Win/i.test(ua)) detected = "windows";
-    else if (/Linux/i.test(ua)) detected = "linux";
-    if (detected) {
+
+    if (/Mac/i.test(ua))
+      detected = "mac";
+    else if (/Win/i.test(ua))
+      detected = "windows";
+    else if (/Linux/i.test(ua))
+      detected = "linux";
+
+    if (detected)
       document.dispatchEvent(new GroupSelectEvent(groupId, detected));
-    }
   }
 
   const anyTabActive = Array.from(tabs).some((tab) => tab.dataset.active === "true");

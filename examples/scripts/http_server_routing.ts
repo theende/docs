@@ -18,6 +18,7 @@ const BOOK_ROUTE = new URLPattern({ pathname: "/books/:id" });
 function handler(req: Request): Response {
   // Match the incoming request against the URL patterns.
   const match = BOOK_ROUTE.exec(req.url);
+
   // If there is a match, extract the book ID and return a response.
   if (match) {
     const id = match.pathname.groups.id;
@@ -26,7 +27,7 @@ function handler(req: Request): Response {
 
   // If there is no match, return a 404 response.
   return new Response("Not found (try /books/1)", {
-    status: 404,
+    status: 404
   });
 }
 

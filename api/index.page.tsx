@@ -6,42 +6,42 @@ import { symbolDescription, SymbolList, symbolToc, SymbolView } from "../_lib/re
 import type { Sidebar } from "../_lib/types.ts";
 
 const SECTIONS: {
+  descriptions: Record<string, string>;
+  intro: string;
   section: Exclude<Section, "std">;
   title: string;
-  intro: string;
-  descriptions: Record<string, string>;
 }[] = [
   {
-    section: "ende",
-    title: "Ende namespace",
+    descriptions: endeCategories,
     intro:
-      "The `Ende` global holds the APIs that aren't web standards: files, networking, subprocesses, permissions, testing and more. `Deno` is an alias of `Ende`.",
-    descriptions: endeCategories
+      "The `Ende` global holds the APIs that aren’t web standards: files, networking, subprocesses, permissions, testing and more. `Deno` is an alias of `Ende`.",
+    section: "ende",
+    title: "Ende namespace"
   },
   {
-    section: "web",
-    title: "Web platform APIs",
+    descriptions: webCategories,
     intro:
       "The web standard globals Ende implements, such as `fetch`, streams, URLs, Web Crypto, WebSockets and WebGPU.",
-    descriptions: webCategories
+    section: "web",
+    title: "Web platform APIs"
   }
 ];
 
 function sidebar(builtin: Builtin): Sidebar {
   return [{
-    title: "API reference",
     href: "/api/",
     items: [
       ...SECTIONS.map(({ section, title }) => ({
-        title,
         href: `/api/${section}/`,
         items: categories(builtin.pages, section).map((category) => ({
-          title: category.name,
-          href: category.url
-        }))
+          href: category.url,
+          title: category.name
+        })),
+        title
       })),
-      { title: "Standard library", href: "/runtime/reference/std/" }
-    ]
+      { href: "/runtime/reference/std/", title: "Standard library" }
+    ],
+    title: "API reference"
   }];
 }
 
@@ -54,15 +54,11 @@ export default async function* () {
   const markdown = (text: string) => raw(docHtml(text, builtin.lookup, rewrite));
 
   yield {
-    url: "/api/",
-    title: "API reference",
-    description: "The APIs built into Ende and its standard library.",
-    sidebar: side,
     content: (
       <>
         <p>
-          The reference is generated from Ende's own type declarations
-          {builtin.ende ? ` (Ende ${builtin.ende})` : ""} and the standard library's published packages on JSR.
+          The reference is generated from Ende’s own type declarations
+          {builtin.ende ? ` (Ende ${builtin.ende})` : ""} and the standard library’s published packages on JSR.
         </p>
         <ul>
           {SECTIONS.map(({ section, title, intro }) => (
@@ -75,22 +71,17 @@ export default async function* () {
           </li>
         </ul>
       </>
-    )
+    ),
+    description: "The APIs built into Ende and its standard library.",
+    sidebar: side,
+    title: "API reference",
+    url: "/api/"
   };
 
-  for (const { section, title, intro, descriptions } of SECTIONS) {
+  for (const { descriptions, intro, section, title } of SECTIONS) {
     const groups = categories(builtin.pages, section);
 
     yield {
-      url: `/api/${section}/`,
-      title,
-      description: intro.replaceAll("`", ""),
-      sidebar: side,
-      toc: groups.map((group) => ({
-        depth: 2,
-        text: group.name,
-        slug: group.slug
-      })),
       content: (
         <>
           {markdown(intro)}
@@ -103,33 +94,42 @@ export default async function* () {
             </section>
           ))}
         </>
-      )
+      ),
+      description: intro.replaceAll("`", ""),
+      sidebar: side,
+      toc: groups.map((group) => ({
+        depth: 2,
+        slug: group.slug,
+        text: group.name
+      })),
+      title,
+      url: `/api/${section}/`
     };
 
     for (const group of groups) {
       yield {
-        url: group.url,
-        title: `${group.name} — ${title}`,
-        description: descriptions[group.name]?.split("\n")[0],
-        sidebar: side,
         content: (
           <>
             {descriptions[group.name] && markdown(descriptions[group.name])}
             <SymbolList pages={group.pages}/>
           </>
-        )
+        ),
+        description: descriptions[group.name]?.split("\n")[0],
+        sidebar: side,
+        title: `${group.name} — ${title}`,
+        url: group.url
       };
     }
   }
 
   for (const page of builtin.all) {
     yield {
-      url: page.url,
-      title: page.title,
+      content: <SymbolView page={page} rewrite={rewrite}/>,
       description: symbolDescription(page),
       sidebar: side,
+      title: page.title,
       toc: symbolToc(page),
-      content: <SymbolView page={page} rewrite={rewrite}/>
+      url: page.url
     };
   }
 }

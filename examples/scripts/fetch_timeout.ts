@@ -18,14 +18,17 @@
 const server = Ende.serve({ port: 0, onListen() {} }, async (req) => {
   const delay = Number(new URL(req.url).searchParams.get("delay"));
   await new Promise((resolve) => setTimeout(resolve, delay));
+
   return new Response(`answered after ${delay}ms`);
 });
+
 const base = `http://localhost:${server.addr.port}`;
 
 // When the response arrives before the deadline, the signal does nothing.
 const fast = await fetch(`${base}/?delay=0`, {
-  signal: AbortSignal.timeout(1000),
+  signal: AbortSignal.timeout(1000)
 });
+
 console.log(await fast.text()); // answered after 0ms
 
 // When the deadline passes first, fetch rejects with a DOMException whose
@@ -41,20 +44,21 @@ try {
 try {
   await fetch("http://localhost:9/", { signal: AbortSignal.timeout(1000) });
 } catch (err) {
-  if ((err as Error).name === "TimeoutError") {
+  if ((err as Error).name === "TimeoutError")
     console.log("the server was too slow");
-  } else {
+  else
     console.log(`not a timeout: ${(err as Error).name}`); // not a timeout: TypeError
-  }
 }
 
 // AbortSignal.any combines a deadline with a manual cancel button. The
 // fetch rejects with the reason of whichever signal aborts first.
 const cancelButton = new AbortController();
+
 const signal = AbortSignal.any([
   cancelButton.signal,
   AbortSignal.timeout(2000),
 ]);
+
 setTimeout(() => cancelButton.abort(new Error("user pressed cancel")), 50);
 
 try {

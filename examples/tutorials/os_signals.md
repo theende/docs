@@ -9,7 +9,7 @@ oldUrl:
 ---
 
 > ⚠️ Windows supports listening for `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`,
-> `SIGHUP`, and `SIGWINCH` (all except `SIGINT`/`SIGBREAK` go through libuv's
+> `SIGHUP`, and `SIGWINCH` (all except `SIGINT`/`SIGBREAK` go through libuv’s
 > Windows signal emulation).
 
 ## Concepts
@@ -27,7 +27,7 @@ and
 [`removeEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener)
 APIs.
 
-> ⚠️ Note that listening for OS signals doesn't prevent event loop from
+> ⚠️ Note that listening for OS signals doesn’t prevent event loop from
 > finishing, ie. if there are no more pending async operations the process will
 > exit.
 
@@ -89,6 +89,6 @@ behavior is:
 | `Ende.kill(pid, sig)`            | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGHUP`, `SIGWINCH`, `SIGKILL`, `SIGABRT`, plus signal `0` for a process-health check |
 
 `SIGKILL` and `SIGABRT` are deliberately **not** registerable via
-`addSignalListener` — they're uncatchable / fatal, matching Unix semantics. On
-Windows the catchable signals all forward to libuv's emulation layer; signals
+`addSignalListener` — they’re uncatchable / fatal, matching Unix semantics. On
+Windows the catchable signals all forward to libuv’s emulation layer; signals
 sent via `Ende.kill` ultimately invoke `TerminateProcess`.

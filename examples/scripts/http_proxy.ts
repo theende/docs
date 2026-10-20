@@ -16,7 +16,7 @@
 const UPSTREAM = "https://example.com";
 
 async function handler(req: Request): Promise<Response> {
-  // Build the upstream URL from the incoming request's path and query.
+  // Build the upstream URL from the incoming request’s path and query.
   const url = new URL(req.url);
   const target = new URL(url.pathname + url.search, UPSTREAM);
 
@@ -26,10 +26,10 @@ async function handler(req: Request): Promise<Response> {
   headers.delete("host");
 
   const response = await fetch(target, {
-    method: req.method,
-    headers,
     body: req.body,
-    redirect: "manual",
+    headers,
+    method: req.method,
+    redirect: "manual"
   });
 
   // Responses stream straight through; nothing is buffered in memory.
@@ -38,7 +38,7 @@ async function handler(req: Request): Promise<Response> {
 
 Ende.serve(handler);
 
-// Requests to the proxy now answer with the upstream's content:
+// Requests to the proxy now answer with the upstream’s content:
 //
 //   curl -s http://localhost:8000/ | head -c 15
 //   <!doctype html>

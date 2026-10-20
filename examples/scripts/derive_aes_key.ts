@@ -21,21 +21,22 @@ const ITERATIONS = 600_000;
 // the derived key is used directly to encrypt and is never stored.
 async function deriveKey(
   password: string,
-  salt: Uint8Array<ArrayBuffer>,
+  salt: Uint8Array<ArrayBuffer>
 ): Promise<CryptoKey> {
   const material = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(password),
     "PBKDF2",
     false,
-    ["deriveKey"],
+    ["deriveKey"]
   );
+
   return await crypto.subtle.deriveKey(
-    { name: "PBKDF2", hash: "SHA-256", salt, iterations: ITERATIONS },
+    { hash: "SHA-256", iterations: ITERATIONS, name: "PBKDF2", salt },
     material,
-    { name: "AES-GCM", length: 256 },
+    { length: 256, name: "AES-GCM" },
     false,
-    ["encrypt", "decrypt"],
+    ["encrypt", "decrypt"]
   );
 }
 
@@ -47,24 +48,27 @@ async function encrypt(password: string, plaintext: string) {
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const key = await deriveKey(password, salt);
   const ciphertext = await crypto.subtle.encrypt(
-    { name: "AES-GCM", iv },
+    { iv, name: "AES-GCM" },
     key,
     new TextEncoder().encode(plaintext),
   );
-  return { salt, iv, ciphertext };
+
+  return { ciphertext, iv, salt };
 }
 
 // Decrypt by re-deriving the same key from the password and stored salt.
 async function decrypt(
   password: string,
-  { salt, iv, ciphertext }: Awaited<ReturnType<typeof encrypt>>,
+  { ciphertext, iv, salt }: Awaited<ReturnType<typeof encrypt>>
 ): Promise<string> {
   const key = await deriveKey(password, salt);
+
   const plaintext = await crypto.subtle.decrypt(
-    { name: "AES-GCM", iv },
+    { iv, name: "AES-GCM" },
     key,
-    ciphertext,
+    ciphertext
   );
+
   return new TextDecoder().decode(plaintext);
 }
 

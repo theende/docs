@@ -24,8 +24,9 @@ console.log(text); // Hello
 // the range described by byteOffset and byteLength.
 const exact = bytes.buffer.slice(
   bytes.byteOffset,
-  bytes.byteOffset + bytes.byteLength,
+  bytes.byteOffset + bytes.byteLength
 );
+
 console.log(exact.byteLength); // 5
 
 // If the view is known to span its whole buffer, the buffer property can

@@ -11,11 +11,11 @@
 
 // Instantiate an instance of a TCP listener on localhost port 443.
 const listener = Ende.listenTls({
-  hostname: "127.0.0.1",
-  port: 443,
-  transport: "tcp",
   cert: Ende.readTextFileSync("./server.crt"),
+  hostname: "127.0.0.1",
   key: Ende.readTextFileSync("./server.key"),
+  port: 443,
+  transport: "tcp"
 });
 
 // Await asynchronous connections that are established to our TCP listener.

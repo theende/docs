@@ -32,7 +32,7 @@ url = new URL("https://docs.ende.sh/api/ende?s=Ende.readFile");
 
 console.log(url.searchParams.get("s")); // Ende.readFile
 
-// We're able to manipulate any of these parameters on the fly
+// We’re able to manipulate any of these parameters on the fly
 url.host = "deno.com";
 url.protocol = "http:";
 
