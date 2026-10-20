@@ -135,7 +135,7 @@ async function latestSources(): Promise<Sources> {
 
   const { items } = await fetchJson<{
     items: {
-      githubRepository: { name: string; owner: string; } | null;
+      githubRepository: { name: string; owner: string } | null;
       name: string;
     }[];
   }>("https://api.jsr.io/scopes/ende/packages?limit=100");

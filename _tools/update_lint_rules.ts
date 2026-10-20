@@ -36,7 +36,7 @@ async function checkIfDocsExistAndUpdate(lintRulesData: EndeLintRulesOutput) {
       continue;
     }
 
-    let fmData: { attrs: { tags?: string[] }; body: string; } = {
+    let fmData: { attrs: { tags?: string[] }; body: string } = {
       attrs: {},
       body: ""
     };
