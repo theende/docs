@@ -15,7 +15,7 @@
 
 // We create a new Uint8Array with the bytes of the WebAssembly module.
 // This is usually the output of some compiler and not written by hand.
-// deno-fmt-ignore
+// ende-fmt-ignore
 const bytes = new Uint8Array([
   0,97,115,109,1,0,0,0,1,7,1,96,2,
   127,127,1,127,2,1,0,3,2,1,0,4,1,

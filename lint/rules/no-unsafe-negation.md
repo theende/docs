@@ -19,7 +19,7 @@ it will be less confusing.
 
 **Invalid:**
 
-<!-- deno-fmt-ignore -->
+<!-- ende-fmt-ignore -->
 
 ```typescript
 if (!key in object) {}

@@ -162,10 +162,10 @@ real-world files.
 
 ### JavaScript / TypeScript / JSONC
 
-Ignore formatting code by preceding it with a `// deno-fmt-ignore` comment:
+Ignore formatting code by preceding it with a `// ende-fmt-ignore` comment:
 
 ```ts
-// deno-fmt-ignore
+// ende-fmt-ignore
 export const identity = [
     1, 0, 0,
     0, 1, 0,
@@ -173,12 +173,12 @@ export const identity = [
 ];
 ```
 
-Or ignore an entire file by adding a `// deno-fmt-ignore-file` comment at the
+Or ignore an entire file by adding a `// ende-fmt-ignore-file` comment at the
 top of the file.
 
 ### Markdown / HTML / CSS
 
-Ignore formatting next item by preceding it with `<!--- deno-fmt-ignore -->`
+Ignore formatting next item by preceding it with `<!--- ende-fmt-ignore -->`
 comment:
 
 ```html title="HTML"
@@ -186,22 +186,22 @@ comment:
   <body>
     <p>
       Hello there
-      <!-- deno-fmt-ignore -->
+      <!-- ende-fmt-ignore -->
     </p>
   </body>
 </html>
 ```
 
 To ignore a section of code, surround the code with
-`<!-- deno-fmt-ignore-start -->` and `<!-- deno-fmt-ignore-end -->` comments.
+`<!-- ende-fmt-ignore-start -->` and `<!-- ende-fmt-ignore-end -->` comments.
 
-Or ignore an entire file by adding a `<!-- deno-fmt-ignore-file -->` comment at
+Or ignore an entire file by adding a `<!-- ende-fmt-ignore-file -->` comment at
 the top of the file.
 
 ### YAML
 
-Ignore formatting next item by preceding it with `# deno-fmt-ignore` comment:
+Ignore formatting next item by preceding it with `# ende-fmt-ignore` comment:
 
 ```html title="HTML"
-# deno-fmt-ignore aaaaaa: bbbbbbb
+# ende-fmt-ignore aaaaaa: bbbbbbb
 ```

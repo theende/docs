@@ -30,12 +30,12 @@ function log() {
 
 **Valid:**
 
-It is recommended to explicitly enable the console via a `deno-lint-ignore`
+It is recommended to explicitly enable the console via a `ende-lint-ignore`
 comment for any calls where you actually want to use it.
 
 ```typescript
 function logWarning(message: string) {
-  // deno-lint-ignore no-console
+  // ende-lint-ignore no-console
   console.warn(message);
 }
 ```

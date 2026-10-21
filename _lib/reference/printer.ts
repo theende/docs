@@ -166,7 +166,7 @@ export function typeLiteralHtml(literal: TsTypeLiteral, link: Linker): string {
 export function typeHtml(type: TsType | undefined, link: Linker): string {
   if (!type) return "unknown";
 
-  // deno-lint-ignore no-explicit-any
+  // ende-lint-ignore no-explicit-any
   const value = type.value as any;
 
   switch (type.kind) {

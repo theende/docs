@@ -10,7 +10,7 @@ so using [ignore directives](/go/lint-ignore/) with rule names that should be
 ignored like so:
 
 ```typescript
-// deno-lint-ignore no-explicit-any no-unused-vars
+// ende-lint-ignore no-explicit-any no-unused-vars
 const foo: any = 42;
 ```
 
@@ -21,20 +21,20 @@ This rule checks for the validity of the specified rule names (i.e. whether
 
 ```typescript
 // typo
-// deno-lint-ignore eq-eq-e
+// ende-lint-ignore eq-eq-e
 console.assert(x == 42);
 
 // unknown rule name
-// deno-lint-ignore UNKNOWN_RULE_NAME
+// ende-lint-ignore UNKNOWN_RULE_NAME
 const b = "b";
 ```
 
 **Valid:**
 
 ```typescript
-// deno-lint-ignore eq-eq-eq
+// ende-lint-ignore eq-eq-eq
 console.assert(x == 42);
 
-// deno-lint-ignore no-unused-vars
+// ende-lint-ignore no-unused-vars
 const b = "b";
 ```

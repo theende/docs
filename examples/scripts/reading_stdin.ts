@@ -30,7 +30,7 @@ console.log(`Read ${input.length} characters`);
 // pipelines.
 import { TextLineStream } from "jsr:@ende/streams";
 
-// deno-lint-ignore no-unused-vars
+// ende-lint-ignore no-unused-vars
 async function processLines() {
   const lines = Ende.stdin.readable
     .pipeThrough(new TextDecoderStream())

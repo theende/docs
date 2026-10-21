@@ -4,7 +4,7 @@
 
 import { categorySlug } from "./categories.ts";
 
-// deno-lint-ignore no-explicit-any
+// ende-lint-ignore no-explicit-any
 type Any = any;
 
 export interface JsDocTag {

@@ -67,7 +67,7 @@ fixes automatically. To silence a rule for one line, add an ignore directive
 naming the rule above it:
 
 ```ts
-// deno-lint-ignore require-await
+// ende-lint-ignore require-await
 async function fetchData() {
   return "data";
 }

@@ -301,10 +301,10 @@ example.
 
 Currently, the building process uses `dlint` to validate linting problems in the
 code. If the task requires code that is non-conformant to linter use
-`deno-lint-ignore <code>` directive to suppress the warning.
+`ende-lint-ignore <code>` directive to suppress the warning.
 
 ```typescript
-// deno-lint-ignore no-explicit-any
+// ende-lint-ignore no-explicit-any
 let x: any;
 ```
 

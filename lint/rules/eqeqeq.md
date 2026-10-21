@@ -30,6 +30,6 @@ This rule has no configuration options. If you intentionally want to use `==` or
 and `undefined`), suppress the rule on that line with an ignore directive:
 
 ```typescript
-// deno-lint-ignore eqeqeq
+// ende-lint-ignore eqeqeq
 if (value != null) {}
 ```

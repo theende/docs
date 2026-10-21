@@ -250,7 +250,7 @@ your code. Instead of disabling the custom lint rule entirely, you can disable a
 reported location by placing a code comment before it.
 
 ```ts
-// deno-lint-ignore my-custom-plugin/no-console
+// ende-lint-ignore my-custom-plugin/no-console
 console.log("hey");
 ```
 
@@ -259,7 +259,7 @@ This will disable the lint rule from a lint plugin for this particular line.
 The syntax for the ignore comment is:
 
 ```ts
-// deno-lint-ignore <my-plugin>/<my-rule>
+// ende-lint-ignore <my-plugin>/<my-rule>
 ```
 
 ## Testing plugins

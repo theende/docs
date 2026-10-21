@@ -84,10 +84,10 @@ export function parseExample(id: string, file: string): Example {
 
         parseMode = "file";
       } else if (
-        trimmedLine.startsWith("// deno-lint-ignore") ||
-        trimmedLine.startsWith("//deno-lint-ignore") ||
-        trimmedLine.startsWith("// deno-fmt-ignore") ||
-        trimmedLine.startsWith("//deno-fmt-ignore")
+        trimmedLine.startsWith("// ende-lint-ignore") ||
+        trimmedLine.startsWith("//ende-lint-ignore") ||
+        trimmedLine.startsWith("// ende-fmt-ignore") ||
+        trimmedLine.startsWith("//ende-fmt-ignore")
       ) {
         // skip ende directives
       } else if (trimmedLine.startsWith("//-")) {
@@ -106,10 +106,10 @@ export function parseExample(id: string, file: string): Example {
       }
     } else if (parseMode == "comment") {
       if (
-        trimmedLine.startsWith("// deno-lint-ignore") ||
-        trimmedLine.startsWith("//deno-lint-ignore") ||
-        trimmedLine.startsWith("// deno-fmt-ignore") ||
-        trimmedLine.startsWith("//deno-fmt-ignore")
+        trimmedLine.startsWith("// ende-lint-ignore") ||
+        trimmedLine.startsWith("//ende-lint-ignore") ||
+        trimmedLine.startsWith("// ende-fmt-ignore") ||
+        trimmedLine.startsWith("//ende-fmt-ignore")
       ) {
         // skip ende directives
       } else if (trimmedLine.startsWith("//")) {

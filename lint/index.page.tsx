@@ -34,7 +34,7 @@ export default function LintRulesIndex(
         </a>{" "}
         in <code>ende.json</code>, or suppress a single diagnostic in your code with a{" "}
         <a href="/runtime/reference/cli/lint/#ignore-directives">
-          <code>deno-lint-ignore</code>
+          <code>ende-lint-ignore</code>
         </a>{" "}
         comment.
       </p>
