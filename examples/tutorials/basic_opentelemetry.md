@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-25
+last_modified: 2026-10-20
 title: "Getting Started with OpenTelemetry in Ende"
 description: "Set up basic OpenTelemetry instrumentation in an Ende application. This tutorial covers creating a simple HTTP server with custom metrics and traces, and viewing the telemetry data."
 url: /examples/basic_opentelemetry_tutorial/

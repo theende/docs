@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-10-20
 title: "Mocking and test doubles"
 description: "Isolate the code under test with spies, stubs, mocks, and fake time using the Ende Standard Library's @ende/testing package."
 oldUrl:

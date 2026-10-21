@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Linting and formatting"
 description: "A guide to Ende's built-in code quality tools. Learn how to use ende lint and ende fmt commands, configure rules, integrate with CI/CD pipelines, and maintain consistent code style across your projects."
 oldUrl:

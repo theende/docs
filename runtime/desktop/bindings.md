@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Bindings"
 description: "Call Ende-side functions from webview JavaScript via win.bind(): type-safe RPC over in-process channels, encoded at the boundary with no cross-process round-trip."
 ---

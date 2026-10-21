@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-10-20
 title: "CPU profiling"
 description: "Profile Ende programs with the built-in CPU profiler: collecting profiles, Markdown and flamegraph reports, Chrome DevTools analysis, and profiling tips."
 ---

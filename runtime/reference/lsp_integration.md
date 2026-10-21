@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-02
+last_modified: 2026-10-20
 title: "Language Server Integration"
 description: "Technical guide to integrating Ende's Language Server Protocol (LSP). Learn about LSP implementation details, custom commands, requests, notifications, and testing API integration for editor and tool developers."
 oldUrl:

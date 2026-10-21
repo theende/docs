@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-04-02
+last_modified: 2026-10-20
 title: "Lint Plugins"
 description: "Guide to creating and using custom lint plugins in Ende. Learn how to write custom lint rules, use selectors for AST matching, implement fixes, and test your plugins using Ende's lint plugin API."
 ---

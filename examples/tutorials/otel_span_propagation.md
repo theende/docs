@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-07-11
+last_modified: 2026-10-20
 title: "Distributed Tracing with Context Propagation in Ende"
 description: "Implement end-to-end distributed tracing with automatic context propagation in Ende applications. This tutorial covers creating traced services, automatic propagation of trace context, and visualizing distributed traces."
 url: /examples/otel_span_propagation_tutorial/

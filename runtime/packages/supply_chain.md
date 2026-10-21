@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Supply chain management"
 description: "Keep Ende dependencies deterministic and safe: lockfile discipline, minimum dependency age, intentional updates, and a recommended CI baseline."
 ---

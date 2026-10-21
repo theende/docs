@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Notifications"
 description: "Show native OS notifications from ende desktop apps with the standard Web Notifications API: permission flow, options, and events."
 ---

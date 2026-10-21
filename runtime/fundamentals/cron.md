@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-10-20
 title: "Cron"
 description: "Schedule recurring tasks in Ende with the Ende.cron() runtime API, an unstable feature enabled via --unstable-cron."
 ---

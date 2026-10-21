@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-10-20
 title: "ende completions"
 oldUrl: /runtime/manual/tools/completions/
 command: completions

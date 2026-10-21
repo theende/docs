@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-07-01
+last_modified: 2026-10-20
 title: "ende update"
 command: update
 openGraphLayout: "/open_graph/cli-commands.jsx"

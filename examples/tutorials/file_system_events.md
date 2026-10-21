@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-10-20
 title: "File system events"
 description: "Tutorial on monitoring file system changes with Ende. Learn how to watch directories for file modifications, handle change events, and understand platform-specific behaviors across Linux, macOS, and Windows."
 url: /examples/file_system_events_tutorial/

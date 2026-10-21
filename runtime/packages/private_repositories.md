@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-10-20
 title: "Private repositories"
 description: "Load remote modules from private repositories with ENDE_AUTH_TOKENS: bearer tokens, basic auth, and a GitHub walkthrough."
 oldUrl:

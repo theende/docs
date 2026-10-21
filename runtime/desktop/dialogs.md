@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Dialogs"
 description: "prompt(), alert(), and confirm() show native popup dialogs in ende desktop apps instead of terminal prompts."
 ---

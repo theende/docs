@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-04-11
+last_modified: 2026-10-20
 title: "ende publish"
 oldUrl: /runtime/manual/tools/publish/
 command: publish

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-10-20
 title: "Config files"
 description: "How Ende projects are configured: the ende.json file, .jsonc support and discovery, and an overview of what you can configure. See the ende.json reference for every field."
 oldUrl:

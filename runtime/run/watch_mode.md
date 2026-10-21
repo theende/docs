@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Watch mode and HMR"
 description: "Ende's built-in file watcher: re-run code on change with --watch, control what gets watched, and hot-replace modules with --watch-hmr."
 ---

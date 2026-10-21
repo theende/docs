@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-08
+last_modified: 2026-10-20
 title: "Debugging"
 description: "Debug Ende programs with the V8 inspector: Chrome DevTools and JetBrains setup, network inspection, worker debugging, and the --inspect flag family."
 oldUrl:

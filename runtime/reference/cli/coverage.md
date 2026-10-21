@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-24
+last_modified: 2026-10-20
 title: "ende coverage"
 oldUrl: /runtime/manual/tools/coverage/
 command: coverage

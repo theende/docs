@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-27
+last_modified: 2026-10-20
 title: "Windows"
 description: "Create and manage native windows with Ende.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---

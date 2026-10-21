@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-29
+last_modified: 2026-10-20
 title: "Build a Real-time LLM Chat App with Ende"
 description: "Learn how to integrate Large Language Models (LLM) with Ende to create an interactive roleplay chat application with AI characters using OpenAI or Anthropic APIs."
 url: /examples/llm_tutorial/

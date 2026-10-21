@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-10-20
 title: "TypeScript support"
 description: "TypeScript is a first-class language in Ende. Run .ts files directly with no build step, type-check with ende check, and reuse your tsconfig.json, with no extra toolchain."
 oldUrl:

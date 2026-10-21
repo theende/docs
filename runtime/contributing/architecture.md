@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-10-20
 title: "Architecture Overview"
 description: "Deep dive into Ende's internal architecture, explaining core components like the runtime, compiler, and security sandbox. Learn how Ende processes requests and executes JavaScript/TypeScript code."
 oldUrl: /runtime/manual/references/contributing/architecture/

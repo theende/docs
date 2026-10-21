@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-10-20
 title: "Migrating from Jest"
 description: "Move a Jest test suite to ende test: describe/it via @ende/testing/bdd, expect mappings, mock function equivalents, snapshot testing, fake timers, and translating Jest configuration."
 ---

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Auto-update"
 description: "Ship binary-diff updates to ende desktop apps with Ende.autoUpdate(): bsdiff patches, manifest polling, automatic rollback on failed launch."
 ---

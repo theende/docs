@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-09-16
+last_modified: 2026-10-20
 title: "Snapshot testing"
 description: "Capture program output as reference snapshots with Ende's built-in test runner, compare against them on every run, and update them with ende test --update-snapshots."
 oldUrl:

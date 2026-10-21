@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "ende watch"
 command: watch
 openGraphLayout: "/open_graph/cli-commands.jsx"

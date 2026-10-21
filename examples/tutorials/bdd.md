@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-14
+last_modified: 2026-10-20
 title: "Behavior-Driven Development (BDD)"
 description: "Implementing Behavior-Driven Development with Ende’s Standard Library’s BDD module. Create readable, well organised tests with effective assertions."
 url: /examples/bdd_tutorial/

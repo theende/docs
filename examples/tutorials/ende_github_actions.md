@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-11
+last_modified: 2026-10-20
 title: "Run Ende in GitHub Actions"
 description: "Set up a GitHub Actions workflow for an Ende project: install Ende with its install script, run fmt, lint and test, install with a frozen lockfile, and pin an Ende version."
 url: /examples/ende_github_actions_tutorial/

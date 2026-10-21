@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-10-20
 title: "Lock dependencies with ende.lock"
 description: "Use ende.lock for reproducible installs: what the lockfile records, reviewing lockfile diffs, frozen lockfiles for CI with --frozen-lockfile and ende ci, and regenerating or relocating the lockfile."
 url: /examples/dependency_lockfile_tutorial/

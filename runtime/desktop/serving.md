@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "HTTP serving"
 description: "How Ende.serve() works inside a desktop app: automatic port binding, the ENDE_SERVE_ADDRESS env var, and serving local UI to the embedded webview."
 ---

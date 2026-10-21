@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-27
+last_modified: 2026-10-20
 title: "Desktop apps"
 description: "Build self-contained desktop applications from an Ende project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---

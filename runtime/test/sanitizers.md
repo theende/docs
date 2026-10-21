@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-10-20
 title: "Test sanitizers"
 description: "Ende's test sanitizers catch leaking async operations, resources, and surprise exits in your tests. Learn what each sanitizer checks and how to enable them."
 oldUrl:

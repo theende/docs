@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-18
+last_modified: 2026-10-20
 title: "Removed and deprecated APIs"
 description: "Replacements for the CLI commands and Ende namespace APIs that were removed or deprecated, such as ende vendor, Ende.Buffer and Ende.run."
 oldUrl:

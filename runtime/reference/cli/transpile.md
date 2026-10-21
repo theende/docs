@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-10-20
 title: "ende transpile"
 command: transpile
 openGraphLayout: "/open_graph/cli-commands.jsx"

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "ende link"
 command: link
 openGraphLayout: "/open_graph/cli-commands.jsx"

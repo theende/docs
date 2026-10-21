@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-08-06
+last_modified: 2026-10-20
 title: "Build CLI apps"
 description: "Build command-line tools with Ende: read arguments and stdin, prompt the user, set exit codes, compile to a single self-contained executable, and distribute your tool."
 ---

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-30
+last_modified: 2026-10-20
 title: "Publishing packages"
 description: "Publish Ende packages to JSR with ende publish."
 oldUrl:

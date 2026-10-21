@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-29
+last_modified: 2026-10-20
 title: "AI entrypoint"
 description: "Overview and key resources for LLMs and AI agents using the Ende docs"
 url: /ai/

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Dependency management"
 description: "Use Ende as your package manager for JSR: install, add, update and inspect dependencies, manage the lockfile, and override packages."
 oldUrl:

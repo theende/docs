@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-06
+last_modified: 2026-10-20
 title: "Testing"
 description: "Write and run tests with Ende's built-in test runner: assertions, test steps, hooks, filtering, and reporters, with dedicated guides for mocking, snapshots, and coverage."
 oldUrl:

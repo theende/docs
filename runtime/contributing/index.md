@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-13
+last_modified: 2026-10-20
 title: "Contributing and support"
 description: "Guide to contributing to the Ende project and ecosystem. Learn about different Ende repositories, contribution guidelines, and how to submit effective pull requests."
 oldUrl:

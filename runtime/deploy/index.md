@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-18
+last_modified: 2026-10-20
 title: "Deploying your app"
 description: "Ways to run an Ende app in production: a standalone compiled binary, the runtime on your own host, and containers."
 ---

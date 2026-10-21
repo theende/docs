@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "DevTools"
 description: "Attach Chrome DevTools to a ende desktop app: a single session shows both the Ende runtime V8 and the renderer V8 as inspectable targets."
 ---

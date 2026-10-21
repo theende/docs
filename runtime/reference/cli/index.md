@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-10-20
 title: "Ende CLI Subcommands"
 oldUrl: "/runtime/reference/cli/all_commands"
 openGraphLayout: "/open_graph/cli-commands.jsx"

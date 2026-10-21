@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-10-20
 title: "ende uninstall"
 oldUrl: /runtime/manual/tools/uninstall/
 command: uninstall

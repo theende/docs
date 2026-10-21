@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-08-20
+last_modified: 2026-10-20
 title: File-based routing
 description: "Tutorial on implementing file-based routing in Ende. Learn how to create a dynamic routing system similar to Next.js, handle HTTP methods, manage nested routes, and build a flexible server architecture."
 url: /examples/file_based_routing_tutorial/

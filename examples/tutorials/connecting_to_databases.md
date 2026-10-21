@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-11
+last_modified: 2026-10-20
 title: "Connecting to databases"
 description: "Connect Ende to SQLite and PostgreSQL with database drivers from JSR."
 url: /examples/connecting_to_databases_tutorial/

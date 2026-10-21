@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-30
+last_modified: 2026-10-20
 title: "Modules"
 description: "Learn how Ende's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:

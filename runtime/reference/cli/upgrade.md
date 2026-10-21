@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-15
+last_modified: 2026-10-20
 title: "ende upgrade"
 oldUrl: /runtime/manual/tools/upgrade/
 command: upgrade

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-05
+last_modified: 2026-10-20
 title: "ende check"
 oldUrl: /runtime/manual/tools/check/
 command: check

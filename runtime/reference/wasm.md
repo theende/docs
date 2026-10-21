@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-10-20
 title: "WebAssembly"
 description: "A guide to using WebAssembly (Wasm) in Ende. Learn about module imports, type checking, streaming APIs, optimization techniques, and how to work with various programming languages that compile to Wasm."
 oldUrl:

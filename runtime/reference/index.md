@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-11
+last_modified: 2026-10-20
 title: "Reference"
 description: "Look it up: the full ende CLI, configuration, the standard library, and runtime APIs."
 ---

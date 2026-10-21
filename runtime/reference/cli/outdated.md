@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-10-20
 title: "ende outdated"
 command: outdated
 openGraphLayout: "/open_graph/cli-commands.jsx"

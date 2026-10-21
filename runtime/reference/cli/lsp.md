@@ -1,5 +1,5 @@
 ---
-last_modified: 2024-10-07
+last_modified: 2026-10-20
 title: "ende lsp"
 oldUrl: /runtime/manual/tools/lsp/
 command: lsp

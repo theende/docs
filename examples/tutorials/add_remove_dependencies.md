@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-18
+last_modified: 2026-10-20
 title: "Add and remove dependencies"
 description: "Manage project dependencies with ende add and ende remove: JSR packages, version pinning, and aliasing packages in your import map."
 url: /examples/add_remove_dependencies_tutorial/

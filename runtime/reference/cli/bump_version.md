@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-04-29
+last_modified: 2026-10-20
 title: "ende bump-version"
 command: bump-version
 openGraphLayout: "/open_graph/cli-commands.jsx"

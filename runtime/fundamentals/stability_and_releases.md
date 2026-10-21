@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-16
+last_modified: 2026-10-20
 title: "Stability and releases"
 description: "Ende's stability guarantees and release process: ChronVer releases, upgrading, unstable features, and the standard library."
 oldUrl:

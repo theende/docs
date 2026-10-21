@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-14
+last_modified: 2026-10-20
 title: "Generating documentation with ende doc"
 description: "Learn how to generate professional documentation for your Ende projects using the built-in ende doc command. This tutorial covers JSDoc comments, HTML output, linting, and best practices for documenting your code."
 url: /examples/ende_doc_tutorial/

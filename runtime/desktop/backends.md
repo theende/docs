@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-08
+last_modified: 2026-10-20
 title: "Backends"
 description: "Pick a rendering engine for your desktop app: bundled Chromium, the OS webview, or raw windowing. Tradeoffs and how to switch."
 ---

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-18
+last_modified: 2026-10-20
 title: "ende ci"
 command: ci
 openGraphLayout: "/open_graph/cli-commands.jsx"

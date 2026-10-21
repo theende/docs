@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-08-06
+last_modified: 2026-10-20
 title: "Distribution"
 description: "Cross-compile a ende desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats: .app, .dmg, .exe directory, AppImage."
 ---

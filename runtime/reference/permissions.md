@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-21
+last_modified: 2026-10-20
 title: "Permissions"
 description: "Reference for Ende's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import access with the --allow and --deny flags."
 oldUrl:

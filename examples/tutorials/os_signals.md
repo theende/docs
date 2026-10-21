@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-10-20
 title: "Handle OS signals"
 description: "Tutorial on handling operating system signals in Ende. Learn how to capture SIGINT and SIGBREAK events, manage signal listeners, and implement graceful shutdown handlers in your applications."
 url: /examples/os_signals_tutorial/

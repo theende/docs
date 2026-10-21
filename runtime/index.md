@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-29
+last_modified: 2026-10-20
 title: "Get started with Ende"
 description: "Install Ende and build your first project: why Ende, install, create, run, test, add a dependency, and use the built-in toolchain. No build step, no config."
 pagination_next: /runtime/getting_started/installation/

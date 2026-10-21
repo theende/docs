@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-10-20
 title: "Documentation tests"
 description: "Run the code examples in your JSDoc comments and markdown files as tests with ende test --doc, so your documentation never goes stale."
 oldUrl:

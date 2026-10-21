@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-10-20
 title: "Run a script"
 description: "A guide to creating and running basic scripts with Ende. Learn how to write and execute JavaScript and TypeScript code, understand runtime environments, and get started with fundamental Ende concepts."
 url: /examples/run_script_tutorial/

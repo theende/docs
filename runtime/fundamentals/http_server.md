@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Writing an HTTP Server"
 description: "A guide to creating HTTP servers in Ende. Learn about the Ende.serve API, request handling, WebSocket support, response streaming, and how to build production-ready HTTP/HTTPS servers with automatic compression."
 oldUrl:

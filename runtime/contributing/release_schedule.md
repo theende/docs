@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-18
+last_modified: 2026-10-20
 title: "Release Schedule"
 description: "How Ende is released: ChronVer versions, GitHub releases, and upgrading."
 oldUrl: /runtime/manual/references/contributing/release_schedule/

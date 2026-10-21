@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-18
+last_modified: 2026-10-20
 title: Installation
 description: "Install Ende on macOS, Linux and Windows with the install script or a manual download, then update or uninstall it."
 oldUrl:

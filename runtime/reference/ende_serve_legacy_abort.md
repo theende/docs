@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-02
+last_modified: 2026-10-20
 title: "Ende.serve request abort behavior"
 description: "Understand the legacy request.signal abort behavior in Ende.serve, why it is changing, and how to detect request completion with the --unstable-no-legacy-abort flag."
 ---

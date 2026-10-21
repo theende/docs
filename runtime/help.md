@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-06-19
+last_modified: 2026-10-20
 title: "Where to get help"
 description: "Guide to getting help with Ende. Find community resources, support channels, discussion forums, and how to engage with the Ende community for troubleshooting and assistance."
 oldUrl: /runtime/manual/help/

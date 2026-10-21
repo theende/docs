@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-18
+last_modified: 2026-10-20
 title: "JSX"
 description: "Configure JSX in Ende: choosing a JSX library from JSR, the automatic runtime, rendering JSX to HTML on the server, the precompile transform, and per-file pragmas."
 oldUrl:

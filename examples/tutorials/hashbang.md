@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-10-20
 title: "Executable scripts"
 description: "Guide to creating executable scripts with Ende. Learn about hashbangs, file permissions, cross-platform compatibility, and how to create command-line tools that can run directly from the terminal."
 url: /examples/hashbang_tutorial/

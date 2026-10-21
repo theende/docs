@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-20
+last_modified: 2026-10-20
 title: "Testing web apps"
 description: "A comprehensive guide to testing web applications with Ende"
 url: "/examples/web_testing_tutorial/"

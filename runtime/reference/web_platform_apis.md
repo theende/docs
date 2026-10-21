@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Web Platform APIs"
 description: "A guide to the Web Platform APIs available in Ende. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:

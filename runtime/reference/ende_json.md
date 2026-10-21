@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Configuration file (ende.json)"
 description: "Reference for every ende.json field: dependencies and import maps, tasks, lint and fmt, lockfile, TypeScript compiler options, unstable flags, include/exclude, exports, permissions, compile, and proxies."
 oldUrl:

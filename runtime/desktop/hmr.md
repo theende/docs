@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Hot module replacement"
 description: "ende desktop --hmr keeps the runtime and rendering backend alive across edits: framework dev servers in framework projects, V8 hot-swap in everything else."
 ---

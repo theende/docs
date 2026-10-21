@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-10-20
 title: "Module metadata"
 description: "A guide to working with module metadata in Ende. Learn about import.meta properties, main module detection, file paths, URL resolution, and how to access module context information in your applications."
 url: /examples/module_metadata_tutorial/

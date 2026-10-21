@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-10-20
 title: "Test coverage"
 description: "Collect coverage data with ende test --coverage and turn it into terminal summaries, HTML reports, and lcov files for CI with ende coverage."
 oldUrl:

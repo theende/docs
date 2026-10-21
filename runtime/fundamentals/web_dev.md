@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-10-10
+last_modified: 2026-10-20
 title: "Web development"
 description: "A guide to web development with Ende: the built-in HTTP server, Hono for web apps, and satz for static sites."
 oldUrl:

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-30
+last_modified: 2026-10-20
 title: "Configuration"
 description: "Configure ende desktop in ende.json: app metadata, icons, deep-link URL schemes, backend selection, output paths, error reporting, and the auto-update server."
 ---

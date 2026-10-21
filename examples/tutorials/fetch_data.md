@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-10-20
 title: "Fetch and stream data"
 description: "A tutorial on working with network requests in Ende. Learn how to use the fetch API for HTTP requests, handle responses, implement data streaming, and manage file uploads and downloads."
 url: /examples/fetch_data_tutorial/

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-10-20
 title: "Re-map import paths"
 description: "Use the imports field in ende.json as an import map: path aliases like @/ for src/, bare names for local modules, and scoped overrides for transitive imports."
 url: /examples/import_maps_tutorial/

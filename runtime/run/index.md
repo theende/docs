@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-10-20
 title: "Run code"
 description: "Run JavaScript and TypeScript with Ende: the secure-by-default permission model, running files, URLs and stdin, script arguments, watch mode, and project tasks."
 oldUrl:

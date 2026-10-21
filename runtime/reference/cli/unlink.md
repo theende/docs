@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-10-20
 title: "ende unlink"
 command: unlink
 openGraphLayout: "/open_graph/cli-commands.jsx"

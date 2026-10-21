@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-02
+last_modified: 2026-10-20
 title: "Environment variables"
 description: "A guide to working with environment variables in Ende. Learn about Ende.env API, .env file support, CLI configuration, and special environment variables that control Ende's behavior."
 oldUrl:

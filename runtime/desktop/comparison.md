@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-20
 title: "Comparison with other tools"
 description: "How ende desktop compares to Electron, Electrobun, Tauri, and Dioxus across language, engine, process model, app size, ecosystem, and what's built-in."
 ---

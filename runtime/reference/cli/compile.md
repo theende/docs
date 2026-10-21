@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-08-06
+last_modified: 2026-10-20
 title: "ende compile"
 oldUrl:
   - /runtime/manual/tools/compile/

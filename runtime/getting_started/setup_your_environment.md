@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-02
+last_modified: 2026-10-20
 title: "Set up your environment"
 description: "A guide to setting up your development environment for Ende. Learn how to connect your editor to the Ende language server and enable shell completions for better productivity."
 oldUrl: /runtime/manual/getting_started/setup_your_environment/

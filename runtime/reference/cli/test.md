@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-06
+last_modified: 2026-10-20
 title: "ende test"
 oldUrl: /runtime/manual/tools/test/
 command: test

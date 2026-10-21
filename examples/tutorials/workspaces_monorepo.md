@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-11
+last_modified: 2026-10-20
 title: "Configure a monorepo with workspaces"
 description: "Set up an Ende workspace with multiple packages: member names and exports, glob patterns, root-only options, and shared imports."
 url: /examples/workspaces_monorepo_tutorial/

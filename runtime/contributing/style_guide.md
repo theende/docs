@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-10-20
 title: "Ende Style Guide"
 description: "Comprehensive style guide for contributing to Ende's internal runtime code and standard library. Covers coding conventions, documentation standards, testing requirements, and best practices for TypeScript and Rust development."
 oldUrl:

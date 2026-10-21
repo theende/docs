@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-10-20
 title: OpenTelemetry
 description: "Learn how to implement observability in Ende applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
