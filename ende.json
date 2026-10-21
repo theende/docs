@@ -38,13 +38,9 @@
     "@ende/html": "jsr:@ende/html@^2026.10.15",
     "@ende/markdown": "jsr:@ende/markdown@^2026.10.18",
     "@ende/path": "jsr:@ende/path@^2026.10.15",
-    "@ende/satz": "jsr:@ende/satz@^2026.10.18",
+    "@ende/satz": "jsr:@ende/satz@^2026.10.20",
     "@ende/yaml": "jsr:@ende/yaml@^2026.10.15"
   },
-  "links": [
-    "../satz",
-    "../std/markdown"
-  ],
   "lint": {
     "exclude": [
       "_site/",
