@@ -34,11 +34,11 @@ console.log(JSON.stringify(value).length); // 79
 const decoded = decode(bytes);
 console.log(decoded);
 //- {
-//-   name: "Ende",
-//-   version: 2,
-//-   tags: [ "fast", "secure" ],
 //-   active: true,
-//-   score: 99.5
+//-   name: "Ende",
+//-   score: 99.5,
+//-   tags: [ "fast", "secure" ],
+//-   version: 2
 //- }
 
 // MessagePack supports two types that JSON lacks: raw binary data and

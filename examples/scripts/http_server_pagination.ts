@@ -83,13 +83,13 @@ Ende.serve((req) => {
 // to 10:
 //
 //   curl -s "http://localhost:8000/items?limit=2"
-//   {"items":[{"id":1,"name":"Item 1"},{"id":2,"name":"Item 2"}],"total":25,"next":"/items?offset=2&limit=2"}
+//   {"items":[{"id":1,"name":"Item 1"},{"id":2,"name":"Item 2"}],"next":"/items?offset=2&limit=2","total":25}
 //
 //   curl -s "http://localhost:8000/items?offset=2&limit=2"
-//   {"items":[{"id":3,"name":"Item 3"},{"id":4,"name":"Item 4"}],"total":25,"next":"/items?offset=4&limit=2"}
+//   {"items":[{"id":3,"name":"Item 3"},{"id":4,"name":"Item 4"}],"next":"/items?offset=4&limit=2","total":25}
 //
 //   curl -s "http://localhost:8000/items/cursor?after=4&limit=2"
-//   {"items":[{"id":5,"name":"Item 5"},{"id":6,"name":"Item 6"}],"nextCursor":6,"next":"/items/cursor?after=6&limit=2"}
+//   {"items":[{"id":5,"name":"Item 5"},{"id":6,"name":"Item 6"}],"next":"/items/cursor?after=6&limit=2","nextCursor":6}
 //
 //   curl -s "http://localhost:8000/items?limit=9999"
-//   {"items":[{"id":1,"name":"Item 1"},{"id":2,"name":"Item 2"},{"id":3,"name":"Item 3"},{"id":4,"name":"Item 4"},{"id":5,"name":"Item 5"},{"id":6,"name":"Item 6"},{"id":7,"name":"Item 7"},{"id":8,"name":"Item 8"},{"id":9,"name":"Item 9"},{"id":10,"name":"Item 10"}],"total":25,"next":"/items?offset=10&limit=10"}
+//   {"items":[{"id":1,"name":"Item 1"},{"id":2,"name":"Item 2"},{"id":3,"name":"Item 3"},{"id":4,"name":"Item 4"},{"id":5,"name":"Item 5"},{"id":6,"name":"Item 6"},{"id":7,"name":"Item 7"},{"id":8,"name":"Item 8"},{"id":9,"name":"Item 9"},{"id":10,"name":"Item 10"}],"next":"/items?offset=10&limit=10","total":25}

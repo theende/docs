@@ -36,8 +36,8 @@ const encryptedData = await crypto.subtle.encrypt(
     iv: iv, // Initialization vector must be unique for each encryption
     name: "AES-GCM"
   },
-  data, // The text data to encrypt
-  key // The generated key
+  key, // The generated key
+  data // The text data to encrypt
 );
 
 console.log("Encrypted Data:", new Uint8Array(encryptedData)); // Log the encrypted result as a byte array
@@ -48,8 +48,8 @@ const decryptedData = await crypto.subtle.decrypt(
     iv: iv, // Same IV used for encryption
     name: "AES-GCM"
   },
-  encryptedData, // The encrypted data to decrypt
-  key // The same key used for encryption
+  key, // The same key used for encryption
+  encryptedData // The encrypted data to decrypt
 );
 
 // Convert the decrypted data back to a string using TextDecoder
