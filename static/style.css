@@ -196,7 +196,9 @@ header {
     color: inherit;
 
     @media (min-width: 901px) {
-      display: none;
+      &#toggle-menu {
+        display: none;
+      }
     }
 
     svg {
