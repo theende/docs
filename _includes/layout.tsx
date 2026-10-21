@@ -16,10 +16,15 @@ export default function Layout(props: LayoutProps) {
     <html lang="en">
       <head>
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="color-scheme" content="light dark"/>
-        <title>{title ? `${title} | Ende Docs` : "Ende Docs"}</title>
         <meta name="description" content={description}/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta property="og:description" content={description}/>
+        <meta property="og:image" content="/og.png"/>
+        <meta property="og:title" content={title ? `${title} | Ende Docs` : "Ende Docs"}/>
+
+        <title>{title ? `${title} | Ende Docs` : "Ende Docs"}</title>
+
         {!is404 && <link rel="canonical" href={`https://docs.ende.sh${props.url}`}/>}
         <link rel="preconnect" href="https://rsms.me/"/>
         <link rel="preconnect" href="https://uchu.style/"/>
@@ -32,10 +37,12 @@ export default function Layout(props: LayoutProps) {
 
         <link rel="icon" href="/favicon.svg"/>
         <link rel="stylesheet" href="/style.css"/>
+
         <script type="module" src="/js/copy.js"></script>
         <script type="module" src="/js/tabs.js"></script>
         <script type="module" src="/js/menu.js"></script>
       </head>
+
       <body>
         <Header navigation={props.navigation as NavLink[]} url={props.url}/>
         {props.content}
