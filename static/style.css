@@ -236,6 +236,8 @@ form[role="search"] {
 }
 
 .content {
+  word-wrap: anywhere;
+
   @media (max-width: 900px) {
     padding-top: 2.5rem;
     position: relative;
@@ -313,8 +315,11 @@ form[role="search"] {
   }
 
   > main {
-    grid-area: content;
     width: 100%;
+
+    @media (min-width: 901px) {
+      grid-area: content;
+    }
 
     article {
       padding-bottom: 2rem;
