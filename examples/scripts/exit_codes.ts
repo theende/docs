@@ -8,16 +8,16 @@
  * @group System
  *
  * The exit code is how a program reports success or failure to the shell,
- * where zero means success and anything else means failure. Ende.exit(n)
- * stops the process immediately with code n. Ende.exitCode just records the
+ * where zero means success and anything else means failure. `Ende.exit(n)`
+ * stops the process immediately with code `n`. `Ende.exitCode` just records the
  * code, the program keeps running and exits with it naturally later, which
  * lets cleanup code and remaining work finish first.
  */
 
 // These listeners run when the program is about to exit naturally. The
-// beforeunload event fires when the event loop runs out of work and can be
+// `beforeunload` event fires when the event loop runs out of work and can be
 // cancelled to schedule more. The unload event fires last and cannot be
-// cancelled. Note that Ende.exit skips beforeunload but still fires unload.
+// cancelled. Note that `Ende.exit` skips `beforeunload` but still fires unload.
 globalThis.addEventListener("beforeunload", () => {
   console.log("beforeunload: event loop is out of work"); // beforeunload: event loop is out of work
 });
@@ -41,7 +41,7 @@ console.log(`exit code is now ${Ende.exitCode}`); // exit code is now 1
 //   1
 Ende.exitCode = 0;
 
-// The alternative is Ende.exit, which stops the process at once. Nothing
+// The alternative is `Ende.exit`, which stops the process at once. Nothing
 // after the call runs, so it is commented out here:
 //
 //   Ende.exit(1);

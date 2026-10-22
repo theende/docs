@@ -8,28 +8,28 @@
  * @group Encoding
  *
  * Compressing data before storing or sending it saves space and bandwidth.
- * The web standard CompressionStream and DecompressionStream support gzip
- * and deflate with no dependencies. This example compresses a string and
+ * The web standard `CompressionStream` and `DecompressionStream` support `gzip`
+ * and `deflate` with no dependencies. This example compresses a string and
  * decompresses it back.
  */
 
 // We start with some repetitive data that compresses well.
 const input = "Hello Ende! ".repeat(100);
 
-// To compress, pipe a stream of the data through a CompressionStream and
-// collect the result. Wrapping in a Response makes collecting easy.
+// To compress, pipe a stream of the data through a `CompressionStream` and
+// collect the result. Wrapping in a `Response` makes collecting easy.
 const compressedStream = new Blob([input]).stream()
   .pipeThrough(new CompressionStream("gzip"));
 const compressed = await new Response(compressedStream).bytes();
 console.log(input.length, "->", compressed.length); // 1200 -> 53
 
-// To decompress, pipe the compressed bytes through a DecompressionStream.
+// To decompress, pipe the compressed bytes through a `DecompressionStream`.
 const decompressedStream = new Blob([compressed]).stream()
   .pipeThrough(new DecompressionStream("gzip"));
 const output = await new Response(decompressedStream).text();
 console.log(output === input); // true
 
-// Both streams also support the deflate format, and deflate-raw for the
+// Both streams also support the `deflate` format, and `deflate-raw` for the
 // variant without headers.
 const deflated = await new Response(
   new Blob([input]).stream().pipeThrough(new CompressionStream("deflate"))
@@ -37,12 +37,12 @@ const deflated = await new Response(
 console.log(deflated.length); // 41
 
 // Because these are streams, files of any size can be processed without
-// loading them into memory, straight from file to file. We gzip a file on
+// loading them into memory, straight from file to file. We `gzip` a file on
 // disk and unpack it again.
 const dir = await Ende.makeTempDir();
 await Ende.writeTextFile(`${dir}/large.json`, input);
 
-// To compress a file, pipe its readable stream through a CompressionStream
+// To compress a file, pipe its readable stream through a `CompressionStream`
 // into the output file. The pipe closes both files when it finishes.
 const source = await Ende.open(`${dir}/large.json`);
 const gzFile = await Ende.create(`${dir}/large.json.gz`);
@@ -50,7 +50,7 @@ await source.readable
   .pipeThrough(new CompressionStream("gzip"))
   .pipeTo(gzFile.writable);
 
-// To decompress a gzipped file, pipe it through a DecompressionStream the
+// To decompress a gzipped file, pipe it through a `DecompressionStream` the
 // same way.
 const gzipped = await Ende.open(`${dir}/large.json.gz`);
 const restored = await Ende.create(`${dir}/restored.json`);
@@ -60,5 +60,5 @@ await gzipped.readable
 
 console.log((await Ende.readTextFile(`${dir}/restored.json`)) === input); // true
 
-// Reading and writing files requires the -R and -W permissions.
+// Reading and writing files requires the `-R` and `-W` permissions.
 await Ende.remove(dir, { recursive: true });

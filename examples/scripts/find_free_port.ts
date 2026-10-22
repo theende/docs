@@ -8,14 +8,14 @@
  * @group Network
  *
  * Test servers and helper processes should not fight over hardcoded ports.
- * The getAvailablePort function from @ende/net asks the operating system for
- * a free port, and Ende.serve with port 0 does the same thing in one step.
+ * The `getAvailablePort` function from [`@ende/net`](https://jsr.io/@ende/net) asks the operating system for
+ * a free port, and `Ende.serve` with port `0` does the same thing in one step.
  */
 
 import { getAvailablePort } from "jsr:@ende/net";
 
-// getAvailablePort binds port 0, reads the port the OS picked, and closes
-// the probe listener. Optionally pass { preferredPort: 8000 } to try a
+// `getAvailablePort` binds port `0`, reads the port the OS picked, and closes
+// the probe listener. Optionally pass `{ preferredPort: 8000 }` to try a
 // fixed port first and fall back to a random one.
 const port = getAvailablePort();
 console.log(port); // e.g. 61678
@@ -25,14 +25,14 @@ const server = Ende.serve(
   () => new Response("Hello from a random port\n"),
 );
 
-// Note there is a small race: between getAvailablePort returning and the
-// server starting, another process could grab the port. Asking Ende.serve
-// itself for port 0 has no such window, the listener that gets the random
-// port is the one you keep. Read the assigned port from server.addr.
-// In Node the same trick is server.listen(0) plus server.address().port.
+// Note there is a small race: between `getAvailablePort` returning and the
+// server starting, another process could grab the port. Asking `Ende.serve`
+// itself for port `0` has no such window, the listener that gets the random
+// port is the one you keep. Read the assigned port from `server.addr`.
+// In Node the same trick is `server.listen(0)` plus `server.address().port`.
 const server2 = Ende.serve(
   { port: 0, onListen: () => {} },
-  () => new Response("Hello from port 0\n"),
+  () => new Response("Hello from port 0\n")
 );
 
 console.log(server2.addr.port); // e.g. 61679

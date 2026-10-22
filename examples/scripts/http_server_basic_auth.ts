@@ -8,7 +8,7 @@
  * @group Network
  *
  * Basic authentication sends a username and password base64-encoded in the
- * authorization header. It is only safe over HTTPS, but it is simple and
+ * `authorization` header. It is only safe over HTTPS, but it is simple and
  * still common for internal tools and admin endpoints. This example parses
  * the header and compares credentials in constant time.
  */
@@ -22,7 +22,7 @@ function digest(value: string): Promise<ArrayBuffer> {
   return crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
 }
 
-// Comparing SHA-256 digests instead of the raw strings gives timingSafeEqual
+// Comparing `SHA-256` digests instead of the raw strings gives `timingSafeEqual`
 // two equal-length inputs, so neither how far the comparison got nor the
 // length of the secret leaks through response timing.
 async function safeCompare(a: string, b: string): Promise<boolean> {
@@ -35,7 +35,7 @@ async function authorized(req: Request): Promise<boolean> {
   if (!header?.startsWith("Basic "))
     return false;
 
-  // The value after the scheme is base64 of "username:password".
+  // The value after the scheme is `base64` of `username:password`.
   let decoded: string;
 
   try {
@@ -62,7 +62,7 @@ async function authorized(req: Request): Promise<boolean> {
 
 Ende.serve(async (req) => {
   if (!(await authorized(req))) {
-    // The www-authenticate header names the scheme and realm. Browsers
+    // The `www-authenticate` header names the scheme and realm. Browsers
     // respond to it by showing a login dialog.
     return new Response("Unauthorized\n", {
       headers: { "www-authenticate": `Basic realm="example", charset="UTF-8"` },
@@ -85,7 +85,7 @@ Ende.serve(async (req) => {
 //
 //   Unauthorized
 //
-// curl -u encodes the credentials into the authorization header:
+// `curl -u` encodes the credentials into the `authorization` header:
 //
 //   curl -u admin:hunter2 http://localhost:8000/
 //   Welcome, admin

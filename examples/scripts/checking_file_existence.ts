@@ -16,15 +16,16 @@
 // Note: Can create a race condition if followed by file operation.
 // Consider the alternative below.
 import { exists } from "jsr:@ende/fs/exists";
+
 await exists("./this_file_or_folder_exists"); // true
 await exists("./this_file_or_folder_does_not_exist"); // false
 
-// We can also use this function to check if the item on a path is a file or a directory
+// We can also use this function to check if the item on a path is a file or a directory.
 await exists("./file", { isFile: true }); // true
 await exists("./directory", { isFile: true }); // false
 
 // Do not use the above function if performing a check directly before another operation on that file.
-// Doing so creates a race condition. The `exists` function is not recommended for that usecase.
+// Doing so creates a race condition. The `exists` function is not recommended for that use case.
 // Consider this alternative which checks for existence of a file without doing any other filesystem operations.
 try {
   const stats = await Ende.lstat("example.txt");

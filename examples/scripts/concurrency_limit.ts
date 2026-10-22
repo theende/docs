@@ -8,7 +8,7 @@
  * @group Standard library
  *
  * Firing hundreds of requests at once can overwhelm a server or hit rate
- * limits. The pooledMap function maps an async function over a list while
+ * limits. The `pooledMap` function maps an `async` function over a list while
  * keeping at most a fixed number of tasks running at the same time. This
  * example proves the limit with a counter and shows the order results
  * come back in.
@@ -37,8 +37,8 @@ const results = pooledMap(2, durations, async (ms) => {
   return ms;
 });
 
-// pooledMap returns an async iterable. Collect it with Array.fromAsync
-// or consume it with a for await loop as results become available.
+// `pooledMap` returns an `async` iterable. Collect it with `Array.fromAsync`
+// or consume it with a `for await` loop as results become available.
 const yielded = await Array.fromAsync(results);
 
 // Only 2 tasks ever ran at the same time, even with 4 items queued.

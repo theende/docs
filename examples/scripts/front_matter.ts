@@ -6,9 +6,9 @@
  * @resource {https://jsr.io/@ende/front-matter} @ende/front-matter on JSR
  * @group Encoding
  *
- * Front matter is a metadata block at the top of a markdown file, fenced
- * by --- lines and usually written in YAML. Static site generators and
- * blog engines use it for titles, dates, and tags. The @ende/front-matter
+ * Front matter is a metadata block at the top of a Markdown file, fenced
+ * by `---` lines and usually written in YAML. Static site generators and
+ * blog engines use it for titles, dates, and tags. The [`@ende/front-matter`](https://jsr.io/@ende/front-matter)
  * module parses it and hands back the document body separately.
  */
 import { extractYaml, test } from "jsr:@ende/front-matter";
@@ -26,11 +26,11 @@ draft: false
 This is the body of the post.
 `;
 
-// test() checks whether a document begins with a front matter block at
-// all, so you can handle plain markdown files gracefully.
+// `test()` checks whether a document begins with a front matter block at
+// all, so you can handle plain Markdown files gracefully.
 console.log(test(markdown)); // true
 
-// extractYaml returns the parsed attributes, the body with the block
+// `extractYaml` returns the parsed attributes, the body with the block
 // removed, and the raw front matter text. Type the attributes with a
 // generic parameter to get typed access.
 type PostMeta = {

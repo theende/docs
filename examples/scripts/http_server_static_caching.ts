@@ -8,8 +8,8 @@
  * @group Network
  *
  * Cache headers let clients skip downloads they already have. This server
- * sends cache-control, etag, and last-modified with a file, and answers a
- * matching if-none-match revalidation with 304 Not Modified and no body.
+ * sends `cache-control`, `etag`, and `last-modified` with a file, and answers a
+ * matching `if-none-match` revalidation with `304 Not Modified` and no body.
  */
 
 // Serve this script’s own source file so the example is self-contained.
@@ -18,7 +18,7 @@ const filePath = import.meta.filename!;
 Ende.serve(async (req) => {
   const stat = await Ende.stat(filePath);
 
-  // A weak etag (W/ prefix) derived from mtime and size is cheap and good
+  // A weak `etag` (`W/` prefix) derived from `mtime` and `size` is cheap and good
   // enough for cache validation. Hash the content instead if you need a
   // strong validator, for example to support byte-range resumption.
   const mtime = stat.mtime ?? new Date();
@@ -32,8 +32,8 @@ Ende.serve(async (req) => {
     "last-modified": mtime.toUTCString()
   };
 
-  // The client revalidates by echoing the etag in if-none-match. If it
-  // still matches, a bodyless 304 tells it to keep using its copy.
+  // The client revalidates by echoing the `etag` in `if-none-match`. If it
+  // still matches, a bodyless `304` tells it to keep using its copy.
   if (req.headers.get("if-none-match") === etag)
     return new Response(null, { headers, status: 304 });
 
@@ -53,7 +53,7 @@ Ende.serve(async (req) => {
 //   transfer-encoding: chunked
 //   date: Thu, 11 Jun 2026 18:54:53 GMT
 //
-// Revalidating with that etag transfers no body:
+// Revalidating with that `etag` transfers no body:
 //
 //   curl -i http://localhost:8000/ -H 'if-none-match: W/"19eb80919f8-8bd"'
 //

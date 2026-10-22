@@ -7,7 +7,7 @@
  * @group Web frameworks and libraries
  *
  * A QR code encodes a short piece of text, usually a URL, as a scannable
- * image. The @libs/qrcode module on JSR generates them with no native
+ * image. The [`@libs/qrcode`](https://jsr.io/@libs/qrcode) module on JSR generates them with no native
  * dependencies, returning an SVG string, a data array, or terminal output.
  */
 import { qrcode } from "jsr:@libs/qrcode";
@@ -21,7 +21,7 @@ console.log(svg.startsWith("<?xml")); // true
 
 // The error-correction level trades data capacity for resilience: a higher
 // level still scans when part of the code is damaged or covered, at the
-// cost of a denser image. Levels are LOW, MEDIUM, QUARTILE, and HIGH.
+// cost of a denser image. Levels are `LOW`, `MEDIUM`, `QUARTILE`, and `HIGH`.
 const robust = qrcode("https://ende.sh", {
   ecl: "HIGH",
   output: "svg"

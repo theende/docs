@@ -13,27 +13,27 @@
 // To make a request to a server, you use the `fetch` API.
 let resp = await fetch("https://example.com");
 
-// The response is a `Response` object. This contains the status code, headers,
-// and the body.
+// The response is a `Response` object. This contains the status `code`, `headers`,
+// and the `body`.
 console.log(resp.status); // 200
 console.log(resp.headers.get("Content-Type")); // "text/html"
 console.log(await resp.text()); // "Hello, World!"
 
-// The response body can also be read as JSON, an ArrayBuffer, or a Blob. A body
+// The response `body` can also be read as JSON, an `ArrayBuffer`, or a `Blob`. A `body`
 // can be read only once.
 resp = await fetch("https://example.com");
 await resp.arrayBuffer();
 /** or await resp.json(); */
 /** or await resp.blob(); */
 
-// The response body can also be streamed in chunks.
+// The response `body` can also be streamed in chunks.
 resp = await fetch("https://example.com");
 
 for await (const chunk of resp.body!) {
   console.log("chunk", chunk);
 }
 
-// When making a request, you can also specify the method, headers, and a body.
+// When making a request, you can also specify the `method`, `headers`, and a `body`.
 resp = await fetch("https://example.com", {
   body: JSON.stringify({
     param: "value"
@@ -45,7 +45,7 @@ resp = await fetch("https://example.com", {
   method: "POST"
 });
 
-// `fetch` also accepts a `Request` object instead of URL + options.
+// `fetch` also accepts a `Request` object instead of URL + `options`.
 const req = new Request("https://example.com", {
   method: "DELETE"
 });
@@ -53,7 +53,7 @@ const req = new Request("https://example.com", {
 resp = await fetch(req);
 
 // Instead of a string, the body can also be any typed array, blob, or
-// a URLSearchParams object.
+// a `URLSearchParams` object.
 const url = "https://example.com";
 
 new Request(url, {
@@ -81,7 +81,7 @@ resp = await fetch("https://example.com", {
   method: "POST"
 });
 
-// Fetch also supports streaming the request body.
+// `fetch` also supports streaming the request `body`.
 const bodyStream = new ReadableStream({
   start(controller) {
     controller.enqueue(new TextEncoder().encode("Hello, World!"));

@@ -9,7 +9,7 @@
  *
  * Killing a server mid-request drops connections and loses work. A graceful
  * shutdown stops accepting new connections, lets in-flight requests finish,
- * and only then exits. Ende.serve returns an HttpServer whose shutdown
+ * and only then exits. `Ende.serve` returns an `HttpServer` whose shutdown
  * method does exactly that.
  */
 
@@ -36,7 +36,7 @@ async function shutdown(signal: string) {
     Ende.exit(1);
   }, 10_000);
 
-  // shutdown() stops the listener so no new connections are accepted, then
+  // `shutdown()` stops the listener so no new connections are accepted, then
   // resolves once every in-flight request has completed.
   await server.shutdown();
 
@@ -52,15 +52,15 @@ async function shutdown(signal: string) {
 const onSigint = () => shutdown("SIGINT");
 const onSigterm = () => shutdown("SIGTERM");
 
-// SIGINT is what Ctrl+C sends, SIGTERM is what process managers, docker
-// stop, and Kubernetes send first. Note that SIGTERM listeners are not
+// `SIGINT` is what `Ctrl+C` sends, `SIGTERM` is what process managers, `docker stop`,
+// and Kubernetes send first. Note that `SIGTERM` listeners are not
 // supported on Windows.
 Ende.addSignalListener("SIGINT", onSigint);
 
 if (Ende.build.os !== "windows")
   Ende.addSignalListener("SIGTERM", onSigterm);
 
-// Start a slow request, then send SIGTERM while it is still running:
+// Start a slow request, then send `SIGTERM` while it is still running:
 //
 //   curl http://localhost:8000/slow &
 //   kill -TERM <server pid>
@@ -70,6 +70,6 @@ if (Ende.build.os !== "windows")
 //   SIGTERM received, draining connections...
 //   All requests drained, bye
 //
-// and the curl still prints its full response before the process exits:
+// and the `curl` still prints its full response before the process exits:
 //
 //   Slow work finished

@@ -8,14 +8,14 @@
  * @group Encoding
  *
  * CBOR is a binary serialization format standardized as RFC 8949. It backs
- * WebAuthn, IoT protocols and many other systems that need compact
+ * `WebAuthn`, IoT protocols and many other systems that need compact
  * self-describing messages. Unlike JSON it has native support for binary
- * data and dates. The Standard Library implements it in jsr:@ende/cbor.
+ * data and dates. The Standard Library implements it in `jsr:@ende/cbor`.
  */
 import { decodeCbor, encodeCbor } from "jsr:@ende/cbor";
 
-// The value contains a Uint8Array and a Date. Neither would survive
-// JSON.stringify, which has no representation for them.
+// The value contains a `Uint8Array` and a `Date`. Neither would survive
+// `JSON.stringify`, which has no representation for them.
 const value = {
   active: true,
   name: "Ende",
@@ -24,13 +24,13 @@ const value = {
   version: 2
 };
 
-// To encode, pass the value to the encodeCbor function. The result is a
-// Uint8Array.
+// To encode, pass the value to the `encodeCbor` function. The result is a
+// `Uint8Array`.
 const bytes = encodeCbor(value);
 console.log(bytes.length); // 58
 
-// To decode, pass the bytes to the decodeCbor function. It returns the
-// broad CborType, so cast the result to the shape you expect.
+// To decode, pass the bytes to the `decodeCbor` function. It returns the
+// broad `CborType`, so cast the result to the shape you expect.
 const decoded = decodeCbor(bytes) as typeof value;
 
 // The binary payload and the date both come back as their real types.
@@ -44,6 +44,6 @@ const small = { active: true, name: "Ende", version: 2 };
 console.log(JSON.stringify(small).length); // 41
 console.log(encodeCbor(small).length); // 28
 
-// Supported value types are undefined, null, boolean, number, bigint,
-// string, Uint8Array, Date, arrays and plain objects of those, plus
-// CborTag for the remaining tagged values from the specification.
+// Supported value types are `undefined`, `null`, `boolean`, `number`, `bigint`,
+// `string`, `Uint8Array`, `Date`, arrays and plain objects of those, plus
+// `CborTag` for the remaining tagged values from the specification.

@@ -19,11 +19,11 @@ const original = `${dir}/original.txt`;
 const alias = `${dir}/alias.txt`;
 await Ende.writeTextFile(original, "first");
 
-// Ende.link creates the hard link. Both names now refer to the same data
+// `Ende.link` creates the hard link. Both names now refer to the same data
 // on disk, so this does not copy anything.
 await Ende.link(original, alias);
 
-// The nlink field counts how many names a file has. It is null on
+// The `nlink` field counts how many names a file has. It is `null` on
 // Windows.
 console.log((await Ende.stat(original)).nlink); // 2
 
@@ -42,5 +42,5 @@ await Ende.remove(original);
 console.log(await Ende.readTextFile(alias)); // written via alias
 console.log((await Ende.stat(alias)).nlink); // 1
 
-// Creating links requires the -W permission for both paths.
+// Creating links requires the `-W` permission for both paths.
 await Ende.remove(dir, { recursive: true });

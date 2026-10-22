@@ -13,7 +13,7 @@
  */
 
 // An SSE response is a stream of text blocks. Each event is a line starting
-// with data:, followed by a blank line.
+// with `data:`, followed by a blank line.
 function handler(_req: Request): Response {
   let timer: ReturnType<typeof setInterval>;
 
@@ -34,21 +34,21 @@ function handler(_req: Request): Response {
   // proxy buffering and caching keeps events flowing immediately.
   return new Response(body, {
     headers: {
-      "content-type": "text/event-stream",
-      "cache-control": "no-store"
-    },
+      "cache-control": "no-store",
+      "content-type": "text/event-stream"
+    }
   });
 }
 
 Ende.serve(handler);
 
-// In the browser, EventSource consumes the stream and reconnects
+// In the browser, `EventSource` consumes the stream and reconnects
 // automatically if the connection drops:
 //
 //   const source = new EventSource("http://localhost:8000/");
 //   source.onmessage = (event) => console.log(event.data);
 //
-// From the terminal, curl shows the raw protocol:
+// From the terminal, `curl` shows the raw protocol:
 //
 //   curl http://localhost:8000/
 //   data: 2026-06-11T13:37:00.000Z

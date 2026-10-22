@@ -10,7 +10,7 @@
  * Webhook senders sign each delivery so receivers can prove the payload
  * came from them and was not tampered with in transit. GitHub, Stripe, and
  * many others use an HMAC of the request body with a shared secret. This
- * server verifies a GitHub style x-hub-signature-256 header before trusting
+ * server verifies a GitHub-style `x-hub-signature-256` header before trusting
  * the payload.
  */
 
@@ -18,7 +18,7 @@
 // environment variable instead of hardcoding it.
 const SECRET = "it-is-a-secret-to-everybody";
 
-// Import the secret once at startup as an HMAC-SHA256 verification key.
+// Import the secret once at startup as an `HMAC-SHA256` verification key.
 const key = await crypto.subtle.importKey(
   "raw",
   new TextEncoder().encode(SECRET),
@@ -30,10 +30,10 @@ const key = await crypto.subtle.importKey(
 async function verify(req: Request): Promise<unknown | null> {
   // Read the raw bytes before any JSON parsing. The signature covers the
   // exact bytes that were sent; parsing and re-serializing can change key
-  // order and whitespace, which would produce a different HMAC.
+  // order and whitespace, which would produce a different `HMAC`.
   const body = await req.bytes();
 
-  // The header carries the hex digest behind a sha256= prefix.
+  // The header carries the `hex` digest behind a `sha256=` prefix.
   const header = req.headers.get("x-hub-signature-256") ?? "";
 
   if (!header.startsWith("sha256="))
@@ -47,15 +47,15 @@ async function verify(req: Request): Promise<unknown | null> {
     return null;
   }
 
-  // crypto.subtle.verify recomputes the HMAC and compares in constant time.
-  // Comparing hex strings with === instead would leak how many leading
+  // `crypto.subtle.verify` recomputes the `HMAC` and compares in constant time.
+  // Comparing `hex` strings with `===` instead would leak how many leading
   // characters matched through response timing.
   const valid = await crypto.subtle.verify("HMAC", key, signature, body);
 
   if (!valid)
     return null;
 
-  // Only now is it safe to parse and act on the payload.
+  // Only now is it safe to `parse` and act on the payload.
   return JSON.parse(new TextDecoder().decode(body));
 }
 
@@ -72,9 +72,9 @@ Ende.serve(async (req) => {
   return new Response("ok\n");
 });
 
-// A sender computes the same HMAC over the body and puts it in the header.
-// The HMAC-SHA256 of {"action":"opened"} under the secret above is
-// 04c343e56984578880ead1d6feefa1d581c4336c868f87358b81041f23a1a62a.
+// A sender computes the same `HMAC` over the body and puts it in the header.
+// The `HMAC-SHA256` of `{"action": "opened"}` under the secret above is
+// `04c343e56984578880ead1d6feefa1d581c4336c868f87358b81041f23a1a62a`.
 // Posting that exact body with that signature succeeds, and any change to
 // the body makes the same signature fail:
 //

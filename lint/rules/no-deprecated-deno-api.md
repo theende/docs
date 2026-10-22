@@ -1,5 +1,5 @@
 ---
-title: no-deprecated-deno-api
+title: no-deprecated-ende-api
 tags: [recommended]
 ---
 

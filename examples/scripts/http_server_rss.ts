@@ -41,8 +41,8 @@ function escapeXml(text: string): string {
     .replaceAll("'", "&apos;");
 }
 
-// RSS wants RFC 822 dates, like Mon, 01 Jun 2026 10:00:00 GMT.
-// Date.prototype.toUTCString produces exactly that format.
+// RSS wants RFC 822 dates, like "Mon, 01 Jun 2026 10:00:00 GMT."
+// `Date.prototype.toUTCString` produces that format.
 function buildFeed(): string {
   const items = posts.map((post) =>
     `    <item>
@@ -70,8 +70,8 @@ Ende.serve((req) => {
   const { pathname } = new URL(req.url);
 
   if (pathname === "/feed.xml") {
-    // application/rss+xml is the registered media type for RSS. Readers
-    // also accept application/xml, but be precise when you can.
+    // `application/rss+xml` is the registered media type for RSS. Readers
+    // also accept `application/xml`, but be precise when you can.
     return new Response(buildFeed(), {
       headers: { "content-type": "application/rss+xml; charset=utf-8" }
     });

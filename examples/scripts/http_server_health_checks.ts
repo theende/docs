@@ -22,7 +22,7 @@ setTimeout(() => {
   console.log("Database connected, now ready");
 }, 2000);
 
-// In a real service this would issue a cheap query, like SELECT 1.
+// In a real service this would issue a cheap query, like `SELECT 1`.
 function pingDb(): Promise<boolean> {
   return Promise.resolve(dbConnected);
 }
@@ -32,13 +32,13 @@ Ende.serve(async (req) => {
   // Probes must see the current state, so never let a cache answer them.
   const headers = { "cache-control": "no-store" };
 
-  // Liveness: a 200 whenever the process is serving requests. Orchestrators
+  // Liveness: a `200` whenever the process is serving requests. Orchestrators
   // restart the container when this fails repeatedly, so keep it free of
   // dependency checks. A broken database should not cause a restart loop.
   if (url.pathname === "/healthz")
     return new Response("ok\n", { headers, status: 200 });
 
-  // Readiness: 200 only when dependencies are usable. On failure the
+  // Readiness: `200` only when dependencies are usable. On failure the
   // orchestrator takes the instance out of load balancing but does not
   // restart it, and puts it back once it reports ready again.
   if (url.pathname === "/readyz") {
@@ -46,7 +46,7 @@ Ende.serve(async (req) => {
 
     return new Response(ready ? "ready\n" : "database unavailable\n", {
       headers,
-      status: ready ? 200 : 503,
+      status: ready ? 200 : 503
     });
   }
 

@@ -13,25 +13,25 @@
  */
 
 // Encoding starts from bytes. To encode a string, convert it to a
-// Uint8Array with TextEncoder first.
+// `Uint8Array` with `TextEncoder` first.
 const bytes = new TextEncoder().encode("somestringtoencode");
 
-// To encode the bytes as base64, use the built-in toBase64 method.
+// To encode the bytes as `base64`, use the built-in `toBase64` method.
 const base64Encoded = bytes.toBase64();
 console.log(base64Encoded); // c29tZXN0cmluZ3RvZW5jb2Rl
 
-// To decode base64 back into bytes, use the static fromBase64 method.
+// To decode `base64` back into bytes, use the static `fromBase64` method.
 const base64Decoded = Uint8Array.fromBase64(base64Encoded);
 
-// To get the value back as a string, use TextDecoder.
+// To get the value back as a string, use `TextDecoder`.
 console.log(new TextDecoder().decode(base64Decoded)); // somestringtoencode
 
-// Base64url is the URL-safe variant used in JWTs and web APIs. Pass the
+// `base64url` is the URL-safe variant used in JWTs and web APIs. Pass the
 // alphabet option to encode or decode it.
 const urlSafe = bytes.toBase64({ alphabet: "base64url" });
 console.log(urlSafe); // c29tZXN0cmluZ3RvZW5jb2Rl
 
-// Hex encoding works the same way, with toHex and fromHex.
+// Hex encoding works the same way, with `toHex` and `fromHex`.
 const hexEncoded = bytes.toHex();
 console.log(hexEncoded); // 736f6d65737472696e67746f656e636f6465
 
@@ -39,5 +39,5 @@ console.log(hexEncoded); // 736f6d65737472696e67746f656e636f6465
 const hexDecoded = Uint8Array.fromHex(hexEncoded);
 console.log(new TextDecoder().decode(hexDecoded)); // somestringtoencode
 
-// For formats beyond hex and base64, like base32 or base58, the Ende
-// Standard Library provides encoders in jsr:@ende/encoding.
+// For formats beyond `hex` and `base64`, like `base32` or `base58`, the Ende
+// Standard Library provides encoders in [`jsr:@ende/encoding`](https://jsr.io/@ende/encoding).

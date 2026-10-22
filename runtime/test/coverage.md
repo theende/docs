@@ -192,17 +192,17 @@ coverage ignore comments and it is treated as blank lines rather than counted
 against you:
 
 ```ts
-// deno-coverage-ignore
+// ende-coverage-ignore
 console.log("this single line is ignored");
 
-// deno-coverage-ignore-start
+// ende-coverage-ignore-start
 if (import.meta.main) {
   Ende.serve(handler);
 }
-// deno-coverage-ignore-stop
+// ende-coverage-ignore-stop
 ```
 
-To drop a whole file from the report, put `// deno-coverage-ignore-file` at the
+To drop a whole file from the report, put `// ende-coverage-ignore-file` at the
 top of the file. Every `-start` comment needs a matching `-stop`, and ranges
 cannot be nested. See
 [ignoring code](/runtime/reference/cli/coverage/#ignoring-code) in the reference

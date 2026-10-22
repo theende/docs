@@ -8,7 +8,7 @@
  * @group Network
  *
  * Cookies carry state between requests in the cookie and set-cookie headers.
- * The @ende/http/cookie module parses and serializes them with the right
+ * The [`@ende/http/cookie`](https://jsr.io/@ende/http/doc/cookie) module parses and serializes them with the right
  * attributes. This example sets a session cookie on login, reads it back on
  * later requests, and deletes it on logout.
  */
@@ -17,14 +17,14 @@ import { deleteCookie, getCookies, setCookie } from "jsr:@ende/http/cookie";
 
 Ende.serve((req) => {
   const url = new URL(req.url);
-  // getCookies parses the cookie request header into a plain object.
+  // `getCookies` parses the cookie request header into a plain object.
   const cookies = getCookies(req.headers);
 
   if (url.pathname === "/login") {
     const headers = new Headers({ "content-type": "text/plain" });
 
-    // setCookie appends a set-cookie header. httpOnly hides the cookie from
-    // document.cookie, secure restricts it to HTTPS, and sameSite Lax keeps
+    // `setCookie` appends a `set-cookie` header. `httpOnly` hides the cookie from
+    // `document.cookie`, secure restricts it to HTTPS, and `sameSite: "Lax"` keeps
     // it off cross-site subrequests. Use all three for session cookies.
     setCookie(headers, {
       httpOnly: true,
@@ -41,7 +41,7 @@ Ende.serve((req) => {
 
   if (url.pathname === "/logout") {
     const headers = new Headers({ "content-type": "text/plain" });
-    // deleteCookie sets the same cookie with an expiry in the past. The
+    // `deleteCookie` sets the same cookie with an expiry in the past. The
     // path and domain must match the values used when it was set.
     deleteCookie(headers, "session", { path: "/" });
     return new Response("Logged out\n", { headers });
@@ -53,7 +53,7 @@ Ende.serve((req) => {
   return new Response("No session yet. Visit /login first.\n");
 });
 
-// Log in and inspect the set-cookie header:
+// Log in and inspect the `set-cookie` header:
 //
 //   curl -i http://localhost:8000/login
 //

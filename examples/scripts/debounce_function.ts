@@ -17,7 +17,7 @@
 import { debounce } from "jsr:@ende/async/debounce";
 import { delay } from "jsr:@ende/async/delay";
 
-// Wrap a function with debounce and a wait time in milliseconds. The
+// Wrap a function with `debounce` and a wait time in milliseconds. The
 // counter proves how many times the wrapped function actually runs.
 let runs = 0;
 

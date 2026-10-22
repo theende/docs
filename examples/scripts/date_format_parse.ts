@@ -25,8 +25,8 @@ try {
   console.log("2026-02-30 is not a real date");
 }
 
-// Datetimes parse the same way, and toLocaleString formats them for
-// people using the Intl machinery.
+// `Datetimes` parse the same way, and `toLocaleString` formats them for
+// people using the `Intl` machinery.
 const meeting = Temporal.PlainDateTime.from("2026-06-12T09:30:00");
 console.log(meeting.toLocaleString("en-US", {
   dateStyle: "long",
@@ -37,7 +37,7 @@ console.log(meeting.toLocaleString("en-US", {
 // lengths and leap years.
 console.log(date.add({ weeks: 2 }).toString()); // 2026-06-26
 
-// until produces the duration between two dates; total converts it to a
+// `until` produces the duration between two dates; `total` converts it to a
 // single unit.
 const release = Temporal.PlainDate.from("2026-09-01");
 const days = date.until(release).total({ relativeTo: date, unit: "days" });
@@ -47,11 +47,12 @@ console.log(days); // 81
 console.log(date.dayOfWeek); // 5 (Friday)
 console.log(date.daysInMonth); // 30
 
-// Temporal parses ISO 8601 only. For data in custom patterns, parse from
-// the standard library converts to a Date. It interprets the value in the
-// local time zone, so hand it to Temporal through that same zone to keep
+// `Temporal` parses ISO 8601 only. For data in custom patterns, parse from
+// the standard library converts to a `Date`. It interprets the value in the
+// local time zone, so hand it to `Temporal` through that same zone to keep
 // the calendar date intact.
 import { parse } from "jsr:@ende/datetime/parse";
+
 const legacy = parse("06/12/2026", "MM/dd/yyyy");
 const imported = Temporal.Instant.fromEpochMilliseconds(legacy.getTime())
   .toZonedDateTimeISO(Temporal.Now.timeZoneId())

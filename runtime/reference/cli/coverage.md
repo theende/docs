@@ -50,58 +50,58 @@ comments. Branches and lines in ignored code will be excluded from the report.
 Ignored branches and lines do not count as covered lines. Instead, ignored lines
 of code are treated as empty lines.
 
-To ignore an entire file, add a `// deno-coverage-ignore-file` comment at the
+To ignore an entire file, add a `// ende-coverage-ignore-file` comment at the
 top of the file.
 
 ```ts
-// deno-coverage-ignore-file
+// ende-coverage-ignore-file
 
 // all code in this file is ignored
 ```
 
 Ignored files will not appear in the coverage report.
 
-To ignore a single line, add a `// deno-coverage-ignore` comment on the line
+To ignore a single line, add a `// ende-coverage-ignore` comment on the line
 above the code you want to ignore.
 
 ```ts
-// deno-coverage-ignore
+// ende-coverage-ignore
 console.log("this line is ignored");
 ```
 
-To ignore multiple lines, add a `// deno-coverage-ignore-start` comment above
-the code you want to ignore and a `// deno-coverage-ignore-stop` comment below.
+To ignore multiple lines, add a `// ende-coverage-ignore-start` comment above
+the code you want to ignore and a `// ende-coverage-ignore-stop` comment below.
 
 ```ts
-// deno-coverage-ignore-start
+// ende-coverage-ignore-start
 if (condition) {
   console.log("both the branch and lines are ignored");
 }
-// deno-coverage-ignore-stop
+// ende-coverage-ignore-stop
 ```
 
-All code after a `// deno-coverage-ignore-start` comment is ignored until a
-`// deno-coverage-ignore-stop` is reached.
+All code after a `// ende-coverage-ignore-start` comment is ignored until a
+`// ende-coverage-ignore-stop` is reached.
 
-Each `// deno-coverage-ignore-start` comment must be terminated by a
-`// deno-coverage-ignore-stop` comment, and ignored ranges may not be nested.
+Each `// ende-coverage-ignore-start` comment must be terminated by a
+`// ende-coverage-ignore-stop` comment, and ignored ranges may not be nested.
 When these requirements are not met, some lines may be unintentionally included
 in the coverage report. The `ende coverage` command will log warnings for any
 invalid comments.
 
 ```ts
-// deno-coverage-ignore-start
+// ende-coverage-ignore-start
 if (condition) {
-  // deno-coverage-ignore-start - A warning will be logged because the previous
+  // ende-coverage-ignore-start - A warning will be logged because the previous
   //                              coverage range is unterminated.
   console.log("this code is ignored");
-  // deno-coverage-ignore-stop
+  // ende-coverage-ignore-stop
 }
-// deno-coverage-ignore-stop
+// ende-coverage-ignore-stop
 
 // ...
 
-// deno-coverage-ignore-start - This comment will be ignored and a warning will
+// ende-coverage-ignore-start - This comment will be ignored and a warning will
 //                              be logged, because this range is unterminated.
 console.log("this code is not ignored");
 ```
@@ -110,10 +110,10 @@ Only white space may precede the coverage directive in a coverage comment.
 However, any text may trail the directive.
 
 ```ts
-// deno-coverage-ignore Trailing text is allowed.
+// ende-coverage-ignore Trailing text is allowed.
 console.log("This line is ignored");
 
-// But leading text isn't. deno-coverage-ignore
+// But leading text isn't. ende-coverage-ignore
 console.log("This line is not ignored");
 ```
 
@@ -121,10 +121,10 @@ Coverage comments must start with `//`. Comments starting with `/*` are not
 valid coverage comments.
 
 ```ts
-// deno-coverage-ignore
+// ende-coverage-ignore
 console.log("This line is ignored");
 
-/* deno-coverage-ignore */
+/* ende-coverage-ignore */
 console.log("This line is not ignored");
 ```
 

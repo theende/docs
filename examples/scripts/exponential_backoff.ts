@@ -12,10 +12,10 @@
  * utility provided by the standard library.
  */
 
-// Import the "retry" utility from "@ende/async".
+// Import the `retry` utility from [`@ende/async`](https://jsr.io/@ende/async).
 import { retry, RetryError, type RetryOptions } from "jsr:@ende/async";
 
-// A function that logs "hello world" to the console and returns a rejected Promise.
+// A function that logs "hello world" to the console and returns a rejected `Promise`.
 const fn = () => {
   console.log("hello world");
   return Promise.reject("rejected");
@@ -33,10 +33,10 @@ const options: RetryOptions = {
 };
 
 try {
-  // Wrap the function with the "retry" utility along with the retry configuration.
+  // Wrap the function with the `retry` utility along with the retry configuration.
   await retry(fn, options);
 } catch (err) {
-  // When max attempts are exhausted, a RetryError is thrown containing the original
+  // When max attempts are exhausted, a `RetryError` is thrown containing the original
   // rejection reason "rejected" as its cause property.
   if (err instanceof RetryError) {
     console.log("Retry error :", err.message);

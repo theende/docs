@@ -7,8 +7,8 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/any_static} MDN: AbortSignal.any
  * @group Web Standard APIs
  *
- * fetch has no timeout option, but it accepts an AbortSignal, and
- * AbortSignal.timeout builds one that aborts after a given number of
+ * `fetch` has no timeout option, but it accepts an `AbortSignal`, and
+ * `AbortSignal.timeout` builds one that aborts after a given number of
  * milliseconds. This example times out a slow request, tells timeouts
  * apart from other failures, and combines a timeout with a manual cancel.
  */
@@ -31,8 +31,8 @@ const fast = await fetch(`${base}/?delay=0`, {
 
 console.log(await fast.text()); // answered after 0ms
 
-// When the deadline passes first, fetch rejects with a DOMException whose
-// name is TimeoutError, not AbortError.
+// When the deadline passes first, fetch rejects with a `DOMException` whose
+// name is `TimeoutError`, not `AbortError`.
 try {
   await fetch(`${base}/?delay=1000`, { signal: AbortSignal.timeout(200) });
 } catch (err) {
@@ -40,7 +40,7 @@ try {
 }
 
 // Other failures have different names, so you can tell them apart and only
-// retry what makes sense. A connection error rejects with a TypeError.
+// retry what makes sense. A connection error rejects with a `TypeError`.
 try {
   await fetch("http://localhost:9/", { signal: AbortSignal.timeout(1000) });
 } catch (err) {
@@ -50,8 +50,8 @@ try {
     console.log(`not a timeout: ${(err as Error).name}`); // not a timeout: TypeError
 }
 
-// AbortSignal.any combines a deadline with a manual cancel button. The
-// fetch rejects with the reason of whichever signal aborts first.
+// `AbortSignal.any` combines a deadline with a manual cancel button. The
+// `fetch` rejects with the reason of whichever signal aborts first.
 const cancelButton = new AbortController();
 
 const signal = AbortSignal.any([

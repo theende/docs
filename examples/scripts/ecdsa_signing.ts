@@ -10,11 +10,11 @@
  * A digital signature proves that a message was produced by the holder of a
  * private key and was not modified in transit. Anyone with the matching
  * public key can check the signature, but only the private key can create
- * it. This example uses ECDSA on the P-256 curve from the built-in Web
+ * it. This example uses `ECDSA` on the `P-256` curve from the built-in Web
  * Crypto API.
  */
 
-// Generate an ECDSA key pair on the P-256 curve. The private key signs,
+// Generate an `ECDSA` key pair on the `P-256` curve. The private key signs,
 // the public key verifies.
 const { privateKey, publicKey } = await crypto.subtle.generateKey(
   { name: "ECDSA", namedCurve: "P-256" },
@@ -22,8 +22,8 @@ const { privateKey, publicKey } = await crypto.subtle.generateKey(
   ["sign", "verify"]
 );
 
-// Sign a message. ECDSA hashes the data first, here with SHA-256, and the
-// signature changes on every run because ECDSA mixes in a random nonce.
+// Sign a message. `ECDSA` hashes the data first, here with `SHA-256`, and the
+// signature changes on every run because `ECDSA` mixes in a random nonce.
 const message = new TextEncoder().encode("release v2.0.0");
 const signature = await crypto.subtle.sign(
   { hash: "SHA-256", name: "ECDSA" },
@@ -55,14 +55,14 @@ console.log(
   )
 ); // false
 
-// Export the public key as JWK to share it with whoever needs to verify
-// your signatures. The x and y fields hold the public curve point; a
-// private key JWK would also carry the secret d field, so never share that.
+// Export the public key as `JWK` to share it with whoever needs to verify
+// your signatures. The `x` and `y` fields hold the public curve point; a
+// private key `JWK` would also carry the secret `d` field, so never share that.
 const jwk = await crypto.subtle.exportKey("jwk", publicKey);
 console.log(jwk.kty); // EC
 console.log(jwk.crv); // P-256
 
-// The receiving side imports the JWK and gets a key usable for verify.
+// The receiving side imports the `JWK` and gets a key usable for verify.
 const imported = await crypto.subtle.importKey(
   "jwk",
   jwk,

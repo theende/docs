@@ -1,7 +1,7 @@
 import { join } from "@ende/path";
 import { walk } from "@ende/fs";
 import { assertEquals, assertNotMatch } from "@ende/assert";
-import { parseExample } from "../examples/_lib/parse_example.ts";
+import { commentToMarkdown, parseExample } from "../examples/_lib/parse_example.ts";
 
 const decoder = new TextDecoder();
 
@@ -74,4 +74,31 @@ Ende.test("Check examples", async (t) => {
       }
     });
   }
+});
+
+Ende.test("Indented comment lines render as code blocks", () => {
+  const text = [
+    "Run it:",
+    "",
+    "  ende run server.ts",
+    "",
+    "  Listening on http://0.0.0.0:8000/",
+    "",
+    "Then edit and save."
+  ].join("\n");
+
+  assertEquals(
+    commentToMarkdown(text),
+    [
+      "Run it:",
+      "",
+      "```",
+      "ende run server.ts",
+      "",
+      "Listening on http://0.0.0.0:8000/",
+      "```",
+      "",
+      "Then edit and save."
+    ].join("\n")
+  );
 });

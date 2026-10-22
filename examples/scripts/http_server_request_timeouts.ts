@@ -8,7 +8,7 @@
  * @group Network
  *
  * A handler that depends on a slow upstream can hold a connection open
- * forever. A per-request deadline turns that into a fast 504 instead. This
+ * forever. A per-request deadline turns that into a fast `504` instead. This
  * example aborts the handler’s work when a deadline passes or when the
  * client disconnects, whichever comes first.
  */
@@ -36,11 +36,11 @@ function doWork(ms: number, signal: AbortSignal): Promise<Response> {
 
 Ende.serve(async (req) => {
   const url = new URL(req.url);
-  // /slow takes longer than the deadline, anything else finishes quickly.
+  // `/slow` takes longer than the deadline, anything else finishes quickly.
   const workMs = url.pathname === "/slow" ? 3000 : 10;
 
   // One controller, two reasons to abort: the deadline timer fires, or the
-  // client goes away (req.signal). Passing the combined signal into the
+  // client goes away (`req.signal`). Passing the combined signal into the
   // work means an impatient client also cancels upstream calls instead of
   // leaving them running.
   const controller = new AbortController();
@@ -64,12 +64,12 @@ Ende.serve(async (req) => {
     throw err;
   } finally {
     // Always clear the timer. A leaked timer keeps the event loop busy and
-    // trips the timer sanitizer when the handler runs under Ende.test.
+    // trips the timer sanitizer when the handler runs under `Ende.test`.
     clearTimeout(deadline);
   }
 });
 
-// AbortSignal.any([AbortSignal.timeout(DEADLINE_MS), req.signal]) builds
+// `AbortSignal.any([AbortSignal.timeout(DEADLINE_MS), req.signal])` builds
 // the same combined signal in one line. The explicit timer used above has
 // one advantage: it can be cleared as soon as the work completes.
 //

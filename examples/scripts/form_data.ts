@@ -7,8 +7,8 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Request/formData} MDN: Request.formData
  * @group Web Standard APIs
  *
- * FormData collects key and value pairs, including files, and fetch knows
- * how to send it as a multipart request. On the server, req.formData
+ * `FormData` collects key and value pairs, including files, and `fetch` knows
+ * how to send it as a `multipart` request. On the server, `req.formData`
  * parses it back. This example builds a form, inspects it, and sends it
  * through a real round trip to a local server.
  */
@@ -19,16 +19,16 @@ form.append("name", "Ende");
 form.append("tag", "fast");
 form.append("tag", "secure");
 
-// Files are appended as a Blob or File plus a filename. The Blob type
+// Files are appended as a `Blob` or `File` plus a filename. The `Blob` type
 // becomes the content type of that part.
 const readme = new Blob(["hello from a file"], { type: "text/plain" });
 form.append("readme", readme, "readme.txt");
 
-// get returns the first value for a key, getAll returns every value.
+// `get` returns the first value for a key, `getAll` returns every value.
 console.log(form.get("name")); // Ende
 console.log(form.getAll("tag")); // [ "fast", "secure" ]
 
-// A FormData object is iterable. File entries come back as File objects.
+// A `FormData` object is iterable. `File` entries come back as `File` objects.
 for (const [key, value] of form) {
   if (value instanceof File)
     console.log(`${key}: file ${value.name}, ${value.size} bytes`); // readme: file readme.txt, 17 bytes
@@ -50,8 +50,8 @@ const server = Ende.serve({ port: 0, onListen() {} }, async (req) => {
   });
 });
 
-// Pass the form directly as the request body. fetch encodes it as
-// multipart/form-data and sets the content type header, including the
+// Pass the form directly as the request body. `fetch` encodes it as
+// `multipart/form-data` and sets the content type header, including the
 // part boundary, automatically. Never set that header yourself.
 const res = await fetch(`http://localhost:${server.addr.port}/`, {
   body: form,

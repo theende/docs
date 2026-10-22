@@ -11,7 +11,7 @@
  * or pass data from one program to another.
  */
 
-// Here an environment variable with the name "PORT" is read. If this variable
+// Here an environment variable with the name `PORT` is read. If this variable
 // is set the return value will be a string. If it is unset it will be `undefined`.
 const PORT = Ende.env.get("PORT");
 console.log("PORT:", PORT);

@@ -6,17 +6,17 @@
  * @group Cryptography
  *
  * This example demonstrates how to generate and verify an HMAC (Hash-based Message Authentication Code)
- * using Ende’s built-in SubtleCrypto API with the SHA-256 hash function.
+ * using Ende’s built-in SubtleCrypto API with the `SHA-256` hash function.
  */
 
-// Define the secret key for HMAC (in a real application, store this securely)
+// Define the secret key for HMAC (in a real application, store this securely).
 const secret = "supersecretkey";
 
-// Convert the secret key to a Uint8Array using TextEncoder
+// Convert the secret key to a `Uint8Array` using `TextEncoder`.
 const encoder = new TextEncoder();
 const keyData = encoder.encode(secret);
 
-// Import the secret key into the SubtleCrypto API for HMAC operations
+// Import the secret key into the SubtleCrypto API for HMAC operations.
 const key = await crypto.subtle.importKey(
   "raw", // The format of the key
   keyData, // The key data
@@ -28,20 +28,20 @@ const key = await crypto.subtle.importKey(
   ["sign", "verify"] // Key usages: Sign and Verify
 );
 
-// The message to be authenticated
+// The message to be authenticated.
 const message = "Authenticate this message";
 
-// Convert the message to a Uint8Array
+// Convert the message to a `Uint8Array`.
 const messageData = encoder.encode(message);
 
-// Generate the HMAC signature for the message
+// Generate the HMAC signature for the message.
 const signature = await crypto.subtle.sign("HMAC", key, messageData);
 
-// Output the generated HMAC signature in hexadecimal format
+// Output the generated HMAC signature in hexadecimal format.
 console.log("Generated HMAC:", new Uint8Array(signature).toHex());
 
-// Verify the HMAC signature
+// Verify the HMAC signature.
 const isValid = await crypto.subtle.verify("HMAC", key, signature, messageData);
 
-// Output the verification result
+// Output the verification result.
 console.log("Is the HMAC valid?", isValid);

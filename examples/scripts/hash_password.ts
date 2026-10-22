@@ -8,12 +8,12 @@
  * @group Cryptography
  *
  * Passwords must never be stored in plain text, and a plain digest like
- * SHA-256 is too fast to resist brute force. A password hash needs a salt
- * and a deliberately slow derivation. This example uses PBKDF2 from the
+ * `SHA-256` is too fast to resist brute force. A password hash needs a salt
+ * and a deliberately slow derivation. This example uses `PBKDF2` from the
  * built-in Web Crypto API.
  */
 
-// The OWASP recommended cost for PBKDF2 with SHA-256.
+// The OWASP recommended cost for `PBKDF2` with `SHA-256`.
 const ITERATIONS = 600_000;
 
 // Hash a password with a random salt. Store the salt next to the hash;
@@ -39,7 +39,7 @@ async function verifyPassword(
   return timingSafeEqual(actual, expected);
 }
 
-// The key derivation itself: PBKDF2 with SHA-256, producing 256 bits.
+// The key derivation itself: `PBKDF2` with `SHA-256`, producing 256 bits.
 async function deriveBits(
   password: string,
   salt: Uint8Array<ArrayBuffer>
@@ -72,6 +72,6 @@ console.log(stored.length > 60); // true
 console.log(await verifyPassword("hunter2", stored)); // true
 console.log(await verifyPassword("wrong", stored)); // false
 
-// PBKDF2 ships with the runtime and is OWASP approved. If your threat
-// model calls for a memory-hard algorithm, use an argon2 library instead,
+// `PBKDF2` ships with the runtime and is OWASP approved. If your threat
+// model calls for a memory-hard algorithm, use an `argon2` library instead,
 // the API shape stays the same: hash at signup, verify at login.

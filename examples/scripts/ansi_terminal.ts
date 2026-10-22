@@ -16,8 +16,8 @@
 import { green } from "jsr:@ende/fmt@^2026.10.15/colors";
 import { delay } from "jsr:@ende/async@^2026.10.15/delay";
 
-// Escape sequences start with the escape byte, written \x1b, followed by [
-// and a command. Writing raw bytes to stdout keeps full control over when
+// Escape sequences start with the escape byte, written `\x1b`, followed by `[`
+// and a command. Writing raw bytes to `stdout` keeps full control over when
 // a newline is emitted.
 const encoder = new TextEncoder();
 
@@ -26,7 +26,7 @@ function write(text: string) {
 }
 
 // Colors and text styles are select graphic rendition commands. The
-// sequence \x1b[31m switches to red and \x1b[0m resets all styling. Always
+// sequence `\x1b[31m` switches to red and `\x1b[0m` resets all styling. Always
 // reset, otherwise the style leaks into the next line of output.
 console.log("\x1b[31mred\x1b[0m \x1b[1mbold\x1b[0m \x1b[4munderline\x1b[0m");
 
@@ -35,13 +35,13 @@ console.log("\x1b[31mred\x1b[0m \x1b[1mbold\x1b[0m \x1b[4munderline\x1b[0m");
 console.log(green("green via @ende/fmt/colors"));
 
 // Now the classic trick behind installers and download counters: a single
-// status line that rewrites itself. The sequence \x1b[2K erases the whole
-// current line and \r returns the cursor to column zero, so the next write
-// replaces the line instead of appending. \x1b[?25l hides the cursor while
-// the line is being redrawn and \x1b[?25h shows it again. Restore it in a
-// finally block, otherwise an early exception leaves the terminal without
-// a cursor. Related codes move the cursor instead of erasing: \x1b[1A goes
-// up one line and \x1b[1B goes down.
+// status line that rewrites itself. The sequence `\x1b[2K` erases the whole
+// current line and `\r` returns the cursor to column zero, so the next write
+// replaces the line instead of appending. `\x1b[?25l` hides the cursor while
+// the line is being redrawn and `\x1b[?25h` shows it again. Restore it in a
+// `finally` block, otherwise an early exception leaves the terminal without
+// a cursor. Related codes move the cursor instead of erasing: `\x1b[1A` goes
+// up one line and `\x1b[1B` goes down.
 const steps = ["Resolving packages", "Downloading", "Linking", "Cleaning up"];
 
 // Redrawing a line only works on an interactive terminal. When output is

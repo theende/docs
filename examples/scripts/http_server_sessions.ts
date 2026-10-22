@@ -8,7 +8,7 @@
  * @group Network
  *
  * A session keeps a user logged in across requests. The browser stores only
- * a random session id in a cookie, and the server maps that id to the actual
+ * a random session `id` in a cookie, and the server maps that `id` to the actual
  * session data. This example implements login, a protected endpoint, and
  * logout, with sessions that expire after a fixed lifetime.
  */
@@ -18,7 +18,7 @@ interface Session {
   username: string;
 }
 
-// Session data lives on the server. The cookie holds nothing but the id, so
+// Session data lives on the server. The cookie holds nothing but the `id`, so
 // clients cannot read or forge the data itself.
 const sessions = new Map<string, Session>();
 const TTL_MS = 60 * 60 * 1000;
@@ -55,13 +55,13 @@ Ende.serve(async (req) => {
   const { pathname } = new URL(req.url);
 
   if (req.method === "POST" && pathname === "/login") {
-    // A real login checks credentials first. Here any username is accepted.
+    // A real login checks credentials first. Here any `username` is accepted.
     const { username } = await req.json();
     const id = crypto.randomUUID();
     sessions.set(id, { expires: Date.now() + TTL_MS, username });
 
-    // httpOnly hides the cookie from client-side JavaScript, which blocks
-    // session theft through XSS. Add Secure when serving over HTTPS.
+    // `httpOnly` hides the cookie from client-side JavaScript, which blocks
+    // session theft through XSS. Add `Secure` when serving over HTTPS.
     return new Response("logged in\n", {
       headers: {
         "set-cookie":
@@ -80,7 +80,7 @@ Ende.serve(async (req) => {
   }
 
   if (req.method === "POST" && pathname === "/logout") {
-    // Destroy the server-side state and clear the cookie. Deleting the Map
+    // Destroy the server-side state and clear the cookie. Deleting the `Map`
     // entry is what actually ends the session.
     const id = getSessionId(req);
 
@@ -95,11 +95,11 @@ Ende.serve(async (req) => {
   return new Response("not found\n", { status: 404 });
 });
 
-// An in-memory Map only works while a single process serves all traffic.
+// An in-memory `Map` only works while a single process serves all traffic.
 // For multiple instances or restarts, keep the same cookie scheme but store
 // sessions in a shared store such as a database.
 
-// The full flow with curl, using a cookie jar (-c saves cookies, -b sends
+// The full flow with `curl`, using a cookie jar (`-c` saves cookies, `-b` sends
 // them back):
 //
 //   curl -s -c /tmp/jar -d '{"username":"ada"}' http://localhost:8000/login

@@ -8,9 +8,9 @@
  * @group Encoding
  *
  * Reading a whole CSV file into memory does not work once the file grows to
- * gigabytes. CsvParseStream from jsr:@ende/csv parses records as the bytes
+ * gigabytes. `CsvParseStream` from [`jsr:@ende/csv`](https://jsr.io/@ende/csv) parses records as the bytes
  * arrive, so only one record is in memory at a time. For small files the
- * in-memory parse function shown in /examples/parsing_serializing_csv/ is
+ * in-memory parse function shown in [`/examples/parsing_serializing_csv/`](/examples/parsing_serializing_csv/) is
  * simpler.
  */
 import { CsvParseStream } from "jsr:@ende/csv";
@@ -30,15 +30,15 @@ Oslo,11.2,72
 );
 
 // Open the file and build a pipeline. The raw bytes pass through a
-// TextDecoderStream to become text, then through a CsvParseStream to
-// become records. With skipFirstRow the header line names the fields and
+// `TextDecoderStream` to become text, then through a `CsvParseStream` to
+// become records. With `skipFirstRow` the header line names the fields and
 // every record is an object.
 const file = await Ende.open(path);
 const records = file.readable
   .pipeThrough(new TextDecoderStream())
   .pipeThrough(new CsvParseStream({ skipFirstRow: true }));
 
-// Iterate with for await. The pipeline pulls from the file on demand and
+// Iterate with for `await`. The pipeline pulls from the file on demand and
 // closes it when the iteration ends. Every field value is a string.
 for await (const record of records) {
   console.log(record.city, record.temperature);
@@ -48,7 +48,7 @@ for await (const record of records) {
 //- Oslo 11.2
 
 // Files without a header line work too. The columns option supplies the
-// field names and also types the records, so record.city is checked by the
+// field names and also types the records, so `record.city` is checked by the
 // TypeScript compiler.
 const headerless = `${dir}/headerless.csv`;
 await Ende.writeTextFile(headerless, `Berlin,18.5,60\nMadrid,24.1,35\n`);
@@ -65,5 +65,5 @@ for await (const row of rows) {
 //- { city: "Berlin", temperature: "18.5", humidity: "60" }
 //- { city: "Madrid", temperature: "24.1", humidity: "35" }
 
-// Reading and writing files requires the -R and -W permissions.
+// Reading and writing files requires the `-R` and `-W` permissions.
 await Ende.remove(dir, { recursive: true });

@@ -7,10 +7,10 @@
  * @resource {/examples/command_line_arguments} Example: Command line arguments
  * @group CLI
  *
- * Tools like git and ende itself take a subcommand first and flags after
+ * Tools like `git` and `ende` itself take a subcommand first and flags after
  * it. The pattern is easy to build by hand: treat the first element of
- * Ende.args as the command name, dispatch to a function, and let each
- * command parse its own flags with parseArgs from @ende/cli.
+ * `Ende.args` as the command name, dispatch to a function, and let each
+ * command parse its own flags with `parseArgs` from `@ende/cli`.
  */
 
 import { parseArgs } from "jsr:@ende/cli@^2026.10.15/parse-args";
@@ -135,7 +135,7 @@ if (Ende.args.length === 0) {
   Ende.exit(main(Ende.args));
 }
 
-// parseArgs from jsr:@ende/cli also supports aliases, collectable flags,
+// `parseArgs` from `jsr:@ende/cli` also supports aliases, collectable flags,
 // and negatable booleans when a tool outgrows this one.
 
 // Real runs of the script, with their output:

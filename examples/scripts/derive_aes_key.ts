@@ -8,15 +8,15 @@
  * @group Cryptography
  *
  * A password is not an encryption key: it is short, low entropy, and the
- * wrong size for AES. PBKDF2 stretches a password and a salt into a proper
- * 256 bit key. This example derives an AES-GCM key from a password with
+ * wrong size for `AES`. `PBKDF2` stretches a password and a salt into a proper
+ * 256 bit key. This example derives an `AES-GCM` key from a password with
  * the built-in Web Crypto API and uses it to encrypt and decrypt data.
  */
 
-// The OWASP recommended cost for PBKDF2 with SHA-256.
+// The OWASP recommended cost for `PBKDF2` with `SHA-256`.
 const ITERATIONS = 600_000;
 
-// Derive an AES-GCM key from a password and a salt. This differs from
+// Derive an `AES-GCM` key from a password and a salt. This differs from
 // password storage, where you keep only a digest to compare against; here
 // the derived key is used directly to encrypt and is never stored.
 async function deriveKey(
@@ -40,8 +40,8 @@ async function deriveKey(
   );
 }
 
-// Encrypt with a random salt and a random IV. Neither is a secret, but the
-// IV must never repeat for the same key, and both are needed again to
+// Encrypt with a random salt and a random `IV`. Neither is a secret, but the
+// `IV` must never repeat for the same key, and both are needed again to
 // decrypt, so ship them alongside the ciphertext.
 async function encrypt(password: string, plaintext: string) {
   const salt = crypto.getRandomValues(new Uint8Array(16));
@@ -50,7 +50,7 @@ async function encrypt(password: string, plaintext: string) {
   const ciphertext = await crypto.subtle.encrypt(
     { iv, name: "AES-GCM" },
     key,
-    new TextEncoder().encode(plaintext),
+    new TextEncoder().encode(plaintext)
   );
 
   return { ciphertext, iv, salt };
@@ -72,12 +72,12 @@ async function decrypt(
   return new TextDecoder().decode(plaintext);
 }
 
-// Round trip: encrypt with a password, decrypt with the same password.
+// Round trip: `encrypt` with a password, `decrypt` with the same password.
 const encrypted = await encrypt("correct horse battery staple", "top secret");
 console.log(new Uint8Array(encrypted.ciphertext).toBase64()); // e.g. nD0OJq+JqHEm...
 console.log(await decrypt("correct horse battery staple", encrypted)); // top secret
 
-// A wrong password derives a different key, and AES-GCM authenticates the
+// A wrong password derives a different key, and `AES-GCM` authenticates the
 // ciphertext, so decryption rejects it instead of returning garbage.
 try {
   await decrypt("wrong password", encrypted);

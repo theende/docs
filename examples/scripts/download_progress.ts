@@ -8,8 +8,8 @@
  * @group Network
  *
  * Streaming a download straight to disk keeps memory flat no matter how big
- * the file is. A TransformStream sits in the middle of the pipe, counts the
- * bytes flowing through, and reports progress against the content-length
+ * the file is. A `TransformStream` sits in the middle of the pipe, counts the
+ * bytes flowing through, and reports progress against the `content-length`
  * header. The chunks themselves pass through untouched.
  */
 
@@ -21,7 +21,7 @@ const response = await fetch(url);
 if (!response.ok || response.body === null)
   throw new Error(`download failed: ${response.status}`);
 
-// content-length is the total size in bytes. Servers that compress or
+// `content-length` is the total size in bytes. Servers that compress or
 // stream on the fly may omit it, so treat it as optional.
 const total = Number(response.headers.get("content-length") ?? "0");
 let received = 0;
@@ -54,8 +54,8 @@ const progress = new TransformStream<Uint8Array, Uint8Array>({
   }
 });
 
-// Ende.open returns a file whose writable property is a standard
-// WritableStream, so the response body pipes directly into it. pipeTo
+// `Ende.open` returns a file whose writable property is a standard
+// `WritableStream`, so the response body pipes directly into it. `pipeTo`
 // closes the file when the stream ends.
 const file = await Ende.open(output, {
   create: true,

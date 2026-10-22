@@ -8,7 +8,7 @@
  * @group Network
  *
  * A reverse proxy receives requests and forwards them to another server.
- * Because fetch, Request, and Response are the same objects on both sides,
+ * Because `fetch`, `Request`, and `Response` are the same objects on both sides,
  * a proxy in Ende is a few lines: rewrite the URL, forward, return.
  */
 
@@ -20,8 +20,8 @@ async function handler(req: Request): Promise<Response> {
   const url = new URL(req.url);
   const target = new URL(url.pathname + url.search, UPSTREAM);
 
-  // Forward the method, headers, and body as they came in. The host header
-  // must match the upstream, so let fetch regenerate it.
+  // Forward the `method`, `headers`, and `body` as they came in. The host header
+  // must match the upstream, so let `fetch` regenerate it.
   const headers = new Headers(req.headers);
   headers.delete("host");
 
@@ -44,5 +44,5 @@ Ende.serve(handler);
 //   <!doctype html>
 
 // A real deployment usually adds forwarding headers so the upstream knows
-// the original client, e.g. headers.set("x-forwarded-for", clientIp) using
+// the original client, e.g. `headers.set("x-forwarded-for", clientIp)` using
 // the info argument of the handler.

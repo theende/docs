@@ -9,7 +9,7 @@ oldUrl:
 
 Ende warns when code uses an API that is deprecated, and some older commands and
 APIs are gone. This page lists each with its replacement. The
-[`no-deprecated-deno-api`](/lint/rules/no-deprecated-deno-api/) lint rule flags
+[`no-deprecated-ende-api`](/lint/rules/no-deprecated-ende-api/) lint rule flags
 the deprecated APIs in your code.
 
 ## `ende vendor`

@@ -7,15 +7,15 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.Command} Doc: Ende.Command
  * @group System
  *
- * Before spawning a tool like git or ffmpeg, it is useful to know whether
+ * Before spawning a tool like `git` or `ffmpeg`, it is useful to know whether
  * it is installed and where. This example implements the which command:
  * scan each directory on the PATH for an executable file.
  */
 
 async function which(command: string): Promise<string | null> {
   const PATH = Ende.env.get("PATH") ?? "";
-  // Windows separates entries with ";" and resolves extensions from
-  // PATHEXT; this example covers the common case.
+  // Windows separates entries with `;` and resolves extensions from
+  // `PATHEXT;` this example covers the common case.
   const separator = Ende.build.os === "windows" ? ";" : ":";
 
   for (const dir of PATH.split(separator)) {
@@ -50,4 +50,4 @@ const ffmpeg = await which("ffmpeg");
 if (!ffmpeg)
   console.log("ffmpeg is required: https://ffmpeg.org/download.html");
 
-// Reading the PATH requires -E, and stat-ing the candidates requires -R.
+// Reading the `PATH` requires `-E`, and `stat`-ing the candidates requires `-R`.

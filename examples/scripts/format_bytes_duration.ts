@@ -8,7 +8,7 @@
  * @group Standard library
  *
  * Raw numbers like 1536 bytes or 97000 milliseconds are hard to read in
- * logs and user interfaces. The @ende/fmt package turns byte counts into
+ * logs and user interfaces. The [`@ende/fmt`](https://jsr.io/@ende/fmt) package turns byte counts into
  * strings like 1.54 kB and millisecond durations into strings like
  * 1m 37s, with options for units and precision.
  */
@@ -33,7 +33,7 @@ console.log(formatBytes(1536, { bits: true })); // 1.54 kbit
 // lists every unit, including the zero ones.
 console.log(formatDuration(97_000)); // 0d 0h 1m 37s 0ms 0µs 0ns
 
-// The ignoreZero option keeps only the units that matter, which is the
+// The `ignoreZero` option keeps only the units that matter, which is the
 // form most logs and UIs want.
 console.log(formatDuration(97_000, { ignoreZero: true })); // 1m 37s
 

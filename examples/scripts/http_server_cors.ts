@@ -8,15 +8,15 @@
  * @group Network
  *
  * Browsers block cross-origin requests unless the server opts in with CORS
- * headers. This example answers OPTIONS preflight requests and sets the
- * allow-origin header on actual responses, echoing back origins from a
+ * headers. This example answers `OPTIONS` preflight requests and sets the
+ * `allow-origin` header on actual responses, echoing back origins from a
  * configured allowlist instead of using a wildcard.
  */
 
 // The origins allowed to call this API. Echoing one of these back is safer
-// than a wildcard: responses to credentialed requests (cookies, client
-// certificates, authorization headers) must name a concrete origin, the
-// browser rejects * in that mode.
+// than a `wildcard:` response. Credentialed requests (`cookies`, client
+// certificates, `authorization` headers) must name a concrete origin, the
+// browser rejects `*` in that mode.
 const allowedOrigins = new Set([
   "http://localhost:5173",
   "https://app.example.com"
@@ -38,9 +38,9 @@ function corsHeaders(req: Request): Headers {
 Ende.serve((req) => {
   const headers = corsHeaders(req);
 
-  // Before non-simple requests (methods like PUT, or custom headers) the
-  // browser sends an OPTIONS preflight. Answer with the methods and headers
-  // we accept. max-age lets the browser cache the verdict for a day.
+  // Before non-simple requests (methods like `PUT`, or custom headers) the
+  // browser sends an `OPTIONS` preflight. Answer with the `methods` and `headers`
+  // we accept. `max-age` lets the browser cache the verdict for a day.
   if (req.method === "OPTIONS") {
     headers.set("access-control-allow-methods", "GET, POST, PUT, DELETE");
     headers.set("access-control-allow-headers", "content-type, authorization");
@@ -49,13 +49,13 @@ Ende.serve((req) => {
     return new Response(null, { headers, status: 204 });
   }
 
-  // Actual responses only need the allow-origin header (plus
-  // access-control-expose-headers if the page should read custom headers).
+  // Actual responses only need the `allow-origin` header (plus
+  // `access-control-expose-headers` if the page should read custom headers).
   headers.set("content-type", "application/json");
   return new Response(JSON.stringify({ message: "Hello, CORS" }), { headers });
 });
 
-// Simulate a preflight from an allowed origin with curl:
+// Simulate a preflight from an allowed origin with `curl`:
 //
 //   curl -i -X OPTIONS http://localhost:8000/ \
 //     -H "origin: http://localhost:5173" \

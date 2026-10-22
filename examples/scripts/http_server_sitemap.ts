@@ -8,11 +8,11 @@
  * @group Network
  *
  * Search engines discover pages through a sitemap and learn crawling rules
- * from robots.txt. Both files derive from the same route list, so serving
+ * from `robots.txt`. Both files derive from the same route list, so serving
  * them from one handler keeps them in sync as the site grows.
  */
 
-// The sitemap protocol requires absolute URLs in every loc element, so the
+// The sitemap protocol requires absolute URLs in every `loc` element, so the
 // canonical origin has to be part of the data.
 const SITE = "https://example.com";
 
@@ -23,8 +23,8 @@ const routes = [
   { path: "/blog/hello-world", lastmod: "2026-05-20" }
 ];
 
-// A urlset with one url element per route. lastmod uses the W3C date
-// format, YYYY-MM-DD is enough.
+// A urlset with one url element per route. `lastmod` uses the W3C date
+// format, `YYYY-MM-DD` is enough.
 function sitemap(): string {
   const urls = routes.map((route) =>
     `  <url>
@@ -40,7 +40,7 @@ ${urls}
 `;
 }
 
-// robots.txt points crawlers at the sitemap. The Sitemap line also needs
+// `robots.txt` points crawlers at the sitemap. The `Sitemap` line also needs
 // an absolute URL.
 const robots = `User-agent: *
 Allow: /

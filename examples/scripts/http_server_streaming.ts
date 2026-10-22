@@ -11,7 +11,7 @@
  */
 
 function handler(_req: Request): Response {
-  // Set up a variable to store a timer ID, and the ReadableStream.
+  // Set up a variable to store a timer `id`, and the `ReadableStream`.
   let timer: ReturnType<typeof setInterval> | undefined = undefined;
 
   const body = new ReadableStream({
@@ -30,7 +30,7 @@ function handler(_req: Request): Response {
     }
   });
 
-  // Return a response with the stream as the body.
+  // Return a response with the stream as the `body`.
   return new Response(body, {
     headers: {
       "content-type": "text/plain",
@@ -39,8 +39,8 @@ function handler(_req: Request): Response {
   });
 }
 
-// An async generator is often a more natural producer. ReadableStream.from
-// turns any async iterable into a stream usable as a Response body.
+// An `async` generator is often a more natural producer. `ReadableStream.from`
+// turns any `async` iterable into a stream usable as a `Response` body.
 async function* ticks(): AsyncGenerator<Uint8Array> {
   const encoder = new TextEncoder();
 
@@ -56,7 +56,7 @@ function iteratorHandler(_req: Request): Response {
   });
 }
 
-// Serve the interval stream on / and the generator stream on /ticks.
+// Serve the interval stream on `/` and the generator stream on `/ticks`.
 Ende.serve((req) =>
   new URL(req.url).pathname === "/ticks" ?
     iteratorHandler(req) :

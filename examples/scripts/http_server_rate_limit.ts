@@ -11,11 +11,11 @@
  * The token bucket algorithm allows short bursts while enforcing a steady
  * average rate. Each client gets a bucket of tokens that refills over time,
  * and every request spends one token. When the bucket is empty the server
- * answers 429 with a retry-after header.
+ * answers `429` with a `retry-after` header.
  */
 
-// Each client may average REFILL_RATE requests per second, with bursts of
-// up to BURST requests when the bucket is full.
+// Each client may average `REFILL_RATE` requests per second, with bursts of
+// up to `BURST` requests when the bucket is full.
 const BURST = 5;
 const REFILL_RATE = 1;
 
@@ -46,7 +46,7 @@ function take(ip: string): boolean {
 }
 
 // Buckets for idle clients are useless after they refill completely, so a
-// periodic sweep keeps the Map from growing forever. Ende.unrefTimer marks
+// periodic sweep keeps the Map from growing forever. `Ende.unrefTimer` marks
 // the interval as non-blocking, so the process can still exit normally.
 const IDLE_MS = (BURST / REFILL_RATE) * 1000;
 
@@ -67,8 +67,8 @@ Ende.serve((_req, info) => {
   const ip = info.remoteAddr.hostname;
 
   if (!take(ip)) {
-    // retry-after tells well-behaved clients how long to back off. One
-    // token takes 1 / REFILL_RATE seconds to appear.
+    // `retry-after` tells well-behaved clients how long to back off. One
+    // token takes 1 / `REFILL_RATE` seconds to appear.
     return new Response("too many requests\n", {
       headers: { "retry-after": String(Math.ceil(1 / REFILL_RATE)) },
       status: 429
@@ -80,7 +80,7 @@ Ende.serve((_req, info) => {
 
 // Behind a load balancer the socket address belongs to the proxy, not the
 // client. In that case derive the key from a trusted header such as
-// x-forwarded-for instead of info.remoteAddr.
+// `x-forwarded-for` instead of `info.remoteAddr`.
 
 // Sending requests faster than the refill rate drains the bucket. The first
 // five requests spend the burst capacity, then the server starts refusing:

@@ -9,7 +9,7 @@
  *
  * Scrapers, link checkers, and preview cards all start the same way: fetch
  * a page and pull data out of its HTML. This example parses a page with
- * deno-dom and extracts its links, title, and social metadata.
+ * [`deno-dom`](https://jsr.io/@b-fuze/deno-dom) and extracts its links, title, and social metadata.
  */
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
 
@@ -17,7 +17,7 @@ import { DOMParser } from "jsr:@b-fuze/deno-dom";
 const html = await (await fetch("https://example.com/")).text();
 const doc = new DOMParser().parseFromString(html, "text/html");
 
-// Extract every link with the same querySelectorAll you would use in a
+// Extract every link with the same `querySelectorAll` you would use in a
 // browser. Resolving against the page URL turns relative hrefs absolute.
 for (const anchor of doc.querySelectorAll("a[href]")) {
   const href = new URL(anchor.getAttribute("href")!, "https://example.com/");
@@ -27,8 +27,8 @@ for (const anchor of doc.querySelectorAll("a[href]")) {
 // The document title works like in the browser too.
 console.log(doc.title); // Example Domain
 
-// Social preview cards read Open Graph meta tags. Collect every og:
-// property into a record.
+// Social preview cards read Open Graph meta tags. Collect every
+// `og:property` into a record.
 const og: Record<string, string> = {};
 
 for (const meta of doc.querySelectorAll(`meta[property^="og:"]`)) {

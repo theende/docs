@@ -275,7 +275,7 @@ form[role="search"] {
         border-right: 2px solid var(--uchu-gray-1);
         grid-area: sidebar;
         min-width: 250px;
-        padding: 3.3rem 1rem 3rem 0;
+        padding: 4.73rem 1rem 3rem 0;
       }
 
       @media (max-width: 900px) {
@@ -332,6 +332,10 @@ form[role="search"] {
     a {
       position: relative;
       z-index: 1;
+    }
+
+    h2, h3, h4, h5, h6 {
+      margin-bottom: calc(var(--uniform-margin) / 2);
     }
 
     p:has([data-tag-btn]) {
@@ -400,6 +404,7 @@ form[role="search"] {
 
   h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.025ch;
+    line-height: 1;
     text-transform: lowercase;
   }
 
@@ -418,6 +423,8 @@ form[role="search"] {
 
   h1 {
     font-weight: 300;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
 
     @media (min-width: 1001px) {
       font-size: 3rem;

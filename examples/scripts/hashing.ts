@@ -18,16 +18,16 @@
 const message = "The easiest, most secure JavaScript runtime.";
 
 // Before we can pass our message to the hashing function,
-// we first need to encode it into a uint8 array.
+// we first need to encode it into a `uint8` array.
 const messageBuffer = new TextEncoder().encode(message);
 
 // Here, we use the built-in crypto.subtle.digest method to hash our original message.
-// The hash is returned as an ArrayBuffer. To obtain a string
+// The hash is returned as an `ArrayBuffer`. To obtain a string
 // we’ll need to do a little more work.
 const hashBuffer = await crypto.subtle.digest("SHA-256", messageBuffer);
 
 // We can encode this into a string using the standard
-// library’s encodeHex method.
+// library’s `encodeHex` method.
 import { encodeHex } from "jsr:@ende/encoding/hex";
 const hash = encodeHex(hashBuffer);
 console.log(hash);
@@ -40,7 +40,7 @@ console.log(hash);
 // The standard library has extensions to the Web
 // Crypto API that are useful when doing things
 // like hashing a file. These can be accessed through the
-// "crypto" module, a drop-in replacement for the Web Crypto
+// `crypto` module, a drop-in replacement for the Web Crypto
 // API that delegates to the native implementation when
 // possible.
 import { crypto } from "jsr:@ende/crypto";
@@ -49,11 +49,11 @@ const file = await Ende.open("example.txt", { read: true });
 // We obtain an async iterable using the readable property.
 const readableStream = file.readable;
 
-// This time, when we call crypto.subtle.digest, we’re using the
+// This time, when we call `crypto.subtle.digest`, we’re using the
 // imported version that allows us to operate on the
 // async iterable.
 const fileHashBuffer = await crypto.subtle.digest("SHA-256", readableStream);
 
-// Finally, we obtain the hex result using encodeHex like earlier.
+// Finally, we obtain the hex result using `encodeHex` like earlier.
 const fileHash = encodeHex(fileHashBuffer);
 console.log(fileHash);

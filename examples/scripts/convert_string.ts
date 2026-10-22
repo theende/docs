@@ -15,30 +15,30 @@
 // We start with a plain string.
 const text = "Hello";
 
-// To convert to a Uint8Array of UTF-8 bytes, use TextEncoder.
+// To convert to a `Uint8Array` of UTF-8 bytes, use `TextEncoder`.
 const bytes = new TextEncoder().encode(text);
 console.log(bytes); // Uint8Array(5) [ 72, 101, 108, 108, 111 ]
 
-// To convert back, use TextDecoder.
+// To convert back, use `TextDecoder`.
 console.log(new TextDecoder().decode(bytes)); // Hello
 
-// To get an ArrayBuffer, encode first and take the underlying buffer.
+// To get an `ArrayBuffer`, encode first and take the underlying buffer.
 const buffer = new TextEncoder().encode(text).buffer;
 console.log(buffer.byteLength); // 5
 
-// To convert to a Blob, pass the string directly. The Blob constructor
+// To convert to a `Blob`, pass the string directly. The `Blob` constructor
 // encodes it as UTF-8 for you.
 const blob = new Blob([text]);
 console.log(blob.size); // 5
 
-// To convert to a ReadableStream, the most direct route is through a Blob.
+// To convert to a `ReadableStream`, the most direct route is through a `Blob`.
 const stream = new Blob([text]).stream();
 console.log(await new Response(stream).text()); // Hello
 
-// To convert to a base64 string, encode to bytes and use the built-in
-// toBase64 method.
+// To convert to a `base64` string, `encode` to bytes and use the built-in
+// `toBase64` method.
 const base64 = new TextEncoder().encode(text).toBase64();
 console.log(base64); // SGVsbG8=
 
-// To decode base64 back to a string, combine fromBase64 and TextDecoder.
+// To decode `base64` back to a string, combine `fromBase64` and `TextDecoder`.
 console.log(new TextDecoder().decode(Uint8Array.fromBase64(base64))); // Hello

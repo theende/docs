@@ -8,7 +8,7 @@
  * @group Network
  *
  * Restarting a server by hand after every edit gets old fast. The
- * --watch-hmr flag hot-replaces changed modules inside the running
+ * `--watch-hmr` flag hot-replaces changed modules inside the running
  * process, so the server keeps serving while you edit.
  */
 
@@ -19,7 +19,7 @@ function handler(_req: Request): Response {
 
 Ende.serve(handler);
 
-// Run it with the --watch-hmr flag:
+// Run it with the `--watch-hmr` flag:
 //
 //   ende run --watch-hmr -N server.ts
 //   HMR Process started.
@@ -33,7 +33,7 @@ Ende.serve(handler);
 // When a change cannot be hot-replaced, the process restarts
 // automatically, so you never serve stale code.
 
-// The plain --watch flag is the simpler variant: it always restarts the
+// The plain `--watch` flag is the simpler variant: it always restarts the
 // whole process on every change. Use it when you want a clean slate, for
 // example to rerun module-level setup.
 
@@ -42,5 +42,5 @@ Ende.serve(handler);
 //
 //   ende run --watch-hmr=static/ -N server.ts
 
-// The --watch flag also works with ende serve, ende test, and most other
+// The `--watch` flag also works with ende serve, ende test, and most other
 // subcommands.

@@ -9,12 +9,12 @@
  *
  * APIs that return lists need pagination so a single response stays small.
  * This server shows the two common schemes over one dataset: offset and
- * limit at /items, and a cursor at /items/cursor. Both return the link to
+ * limit at `/items`, and a cursor at `/items/cursor`. Both return the link to
  * the next page so clients never construct page URLs themselves.
  */
 
 // A stand-in for a database table. Real handlers would run a query with
-// the same offset, limit, or cursor values instead.
+// the same `offset`, `limit`, or cursor values instead.
 const items = Array.from({ length: 25 }, (_, i) => ({
   id: i + 1,
   name: `Item ${i + 1}`
@@ -33,7 +33,7 @@ Ende.serve((req) => {
   const url = new URL(req.url);
   const limit = clamp(Number(url.searchParams.get("limit") ?? "5"), 1, 10);
 
-  // Offset pagination: skip the first N items. Simple, and supports
+  // Offset pagination: skip the first `N` items. Simple, and supports
   // jumping straight to an arbitrary page.
   if (url.pathname === "/items") {
     const offset = clamp(
@@ -51,7 +51,7 @@ Ende.serve((req) => {
     return Response.json({ items: page, next, total: items.length });
   }
 
-  // Cursor pagination: return items after the last id the client saw.
+  // Cursor pagination: return items after the last `id` the client saw.
   // Offsets degrade on large or changing datasets: the database must scan
   // and discard all skipped rows, and an insert or delete between two
   // requests shifts every later row, so pages show duplicates or skip
@@ -61,7 +61,7 @@ Ende.serve((req) => {
     const after = Number(url.searchParams.get("after") ?? "0");
     const page = items.filter((item) => item.id > after).slice(0, limit);
 
-    // The cursor is the id of the last item on this page. A null cursor
+    // The cursor is the `id` of the last item on this page. A `null` cursor
     // tells the client it has reached the end.
     const last = page.at(-1);
 

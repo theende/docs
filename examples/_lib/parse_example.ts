@@ -98,7 +98,7 @@ export function parseExample(id: string, file: string): Example {
           currentFile.snippets.push({ text, code });
         }
 
-        text = trimmedLine.slice(2).trim();
+        text = commentLine(trimmedLine);
         code = "";
         parseMode = "comment";
       } else {
@@ -113,7 +113,7 @@ export function parseExample(id: string, file: string): Example {
       ) {
         // skip ende directives
       } else if (trimmedLine.startsWith("//")) {
-        text += " " + trimmedLine.slice(2).trim();
+        text += "\n" + commentLine(trimmedLine);
       } else {
         code += line + "\n";
         parseMode = "code";
@@ -129,6 +129,11 @@ export function parseExample(id: string, file: string): Example {
   if (text || code.trimEnd()) {
     code = code.trimEnd();
     currentFile.snippets.push({ text, code });
+  }
+
+  for (const file of files) {
+    for (const snippet of file.snippets)
+      snippet.text = commentToMarkdown(snippet.text);
   }
 
   if (!kvs.title)
@@ -170,4 +175,42 @@ export function parseExample(id: string, file: string): Example {
     tags,
     title: kvs.title
   };
+}
+
+/** Strips the `//` marker and one following space, keeping any further indentation. */
+function commentLine(trimmedLine: string): string {
+  return trimmedLine.slice(2).replace(/^ /, "");
+}
+
+const INDENTED = /^\s{2,}\S/;
+
+/** Turns comment text into Markdown, fencing runs of indented lines as code blocks. */
+export function commentToMarkdown(text: string): string {
+  const lines = text.split("\n");
+  const out: string[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    if (!INDENTED.test(lines[i])) {
+      out.push(lines[i]);
+      continue;
+    }
+
+    // A blank line between two indented lines stays inside the block.
+    const block: string[] = [];
+
+    while (
+      i < lines.length &&
+      (INDENTED.test(lines[i]) || (lines[i] === "" && INDENTED.test(lines[i + 1] ?? "")))
+    ) {
+      block.push(lines[i]);
+      i++;
+    }
+
+    i--;
+
+    const indent = Math.min(...block.filter((l) => l).map((l) => l.search(/\S/)));
+    out.push("```", ...block.map((l) => l.slice(indent)), "```");
+  }
+
+  return out.join("\n");
 }

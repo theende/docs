@@ -6,7 +6,7 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel} MDN: BroadcastChannel
  * @group Web Standard APIs
  *
- * BroadcastChannel is a named bus. Every channel opened with the same name
+ * `BroadcastChannel` is a named bus. Every channel opened with the same name
  * receives what the others post, with no direct references between them.
  * That makes it a simple way for the main thread and workers to talk. This
  * example runs a worker from an inline module and
@@ -15,7 +15,7 @@
 
 // The worker is defined inline as source code, so this example stays in
 // one file. In a real program this would live in its own module, created
-// with new Worker(new URL("./worker.ts", import.meta.url), { type: "module" }).
+// with `new Worker(new URL("./worker.ts", import.meta.url), { type: "module" })`.
 const workerCode = `
 const channel = new BroadcastChannel("jobs");
 
@@ -35,7 +35,7 @@ channel.postMessage({ type: "ready" });
 
 // Turn the source into a Blob URL and start a module worker from it.
 const blobUrl = URL.createObjectURL(
-  new Blob([workerCode], { type: "application/javascript" }),
+  new Blob([workerCode], { type: "application/javascript" })
 );
 new Worker(blobUrl, { type: "module" });
 
@@ -50,7 +50,7 @@ channel.onmessage = (event) => {
   } else if (event.data.type === "result") {
     console.log(event.data.note); // finished resize avatar.png
     // Close the channel so the process can exit. The worker already
-    // closed its own side and shut itself down with self.close.
+    // closed its own side and shut itself down with `self.close`.
     channel.close();
     URL.revokeObjectURL(blobUrl);
   }
