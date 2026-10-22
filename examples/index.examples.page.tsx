@@ -20,7 +20,7 @@ function ExamplePage({ example }: { example: ExampleFromFileSystem }) {
           {file.name && <h2>{file.name}</h2>}
           {file.snippets.map((snippet) => (
             <>
-              {snippet.text && <p>{snippet.text}</p>}
+              {snippet.text && markdown(snippet.text)}
               {snippet.code && <pre><code class="language-ts">{raw(highlight(snippet.code, "ts")!)}</code></pre>}
             </>
           ))}
