@@ -193,7 +193,7 @@ Use `Symbol.for("Ende.customInspect")` instead.
 ```diff
 class Foo {
 - [Ende.customInspect]() {
-+ [Symbol.for("Ende.customInspect")] {
++ [Symbol.for("Ende.customInspect()")] {
   }
 }
 ```
