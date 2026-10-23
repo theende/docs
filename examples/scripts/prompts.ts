@@ -12,7 +12,7 @@
  */
 
 // The most basic way to interact with the user is by alerting them, and waiting
-// for them to acknowledge by pressing [Enter].
+// for them to acknowledge by pressing `[Enter]`.
 alert("Please acknowledge the message.");
 console.log("The message has been acknowledged.");
 

@@ -11,18 +11,19 @@
  */
 import { parse, stringify } from "jsr:@ende/csv";
 
-// To parse a CSV file, read its contents and pass them to the parse function.
+// To parse a CSV file, read its contents and pass them to the `parse` function.
 const fileContent = await Ende.readTextFile("data.csv");
 const fileData = parse(fileContent, { skipFirstRow: true, strip: true });
+
 console.log(fileData);
 
 // You can also parse CSV strings directly. The value is returned as an
-// array of objects when skipFirstRow is true.
+// array of objects when `skipFirstRow` is true.
 let text = `
 url,views,likes
-https://deno.land,10,7
-https://deno.land/x,20,15
-https://deno.dev,30,23
+https://ende.sh,10,7
+https://ende.sh/x,20,15
+https://docs.ende.sh,30,23
 `;
 
 let data = parse(text, {
@@ -30,28 +31,28 @@ let data = parse(text, {
   strip: true
 });
 
-console.log(data[0].url); // https://deno.land
+console.log(data[0].url);   // https://ende.sh
 console.log(data[0].views); // 10
 console.log(data[0].likes); // 7
 
 // In the case where our CSV is formatted differently, we are also able to
 // provide the columns through code.
 text = `
-https://deno.land,10,7
-https://deno.land/x,20,15
-https://deno.dev,30,23
+https://ende.sh,10,7
+https://ende.sh/x,20,15
+https://docs.ende.sh,30,23
 `;
 
 data = parse(text, {
   columns: ["url", "views", "likes"]
 });
 
-console.log(data[0].url); // https://deno.land
+console.log(data[0].url); // https://ende.sh
 console.log(data[0].views); // 10
 console.log(data[0].likes); // 7
 
 // To turn a list of JavaScript object into a CSV string, you can use the
-// standard library’s CSV stringify function.
+// Standard Library’s CSV stringify function.
 const obj = [
   { mascot: "dino", fans: { old: 100, new: 200 } },
   { mascot: "bread", fans: { old: 5, new: 2 } }

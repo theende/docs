@@ -181,7 +181,7 @@ using any APIs exclusive to one or the other. In such cases, a typical
 This should allow most code to be type checked properly by Ende.
 
 If your code uses APIs that are gated behind one of the `--unstable-*` flags,
-add the `deno.unstable` library to the mix as well:
+add the `ende.unstable` library to the mix as well:
 
 ```json title="ende.json"
 {
@@ -191,14 +191,14 @@ add the `deno.unstable` library to the mix as well:
       "dom.iterable",
       "dom.asynciterable",
       "ende.ns",
-      "deno.unstable"
+      "ende.unstable"
     ]
   }
 }
 ```
 
 Typically, when you use the `"lib"` option in TypeScript, you need to include an
-"es" library as well. In the case of `"ende.ns"` and `"deno.unstable"`, they
+"es" library as well. In the case of `"ende.ns"` and `"ende.unstable"`, they
 automatically include `"esnext"` when you bring them in.
 
 > [!NOTE]

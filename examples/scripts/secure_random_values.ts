@@ -8,7 +8,7 @@
  * @group Cryptography
  *
  * Session tokens, password reset links, and API keys must be impossible to
- * guess. Math.random is not suitable for secrets because its output is
+ * guess. `Math.random` is not suitable for secrets because its output is
  * predictable from earlier outputs. The built-in Web Crypto API provides a
  * cryptographically secure random source instead.
  */
@@ -28,7 +28,7 @@ console.log(token.toBase64(options)); // e.g. QIUpF1ewQ-bc...
 console.log(token.toHex()); // e.g. 4085291757b0...
 
 // A uniform random integer in a range takes more care. The naive approach,
-// value % range, is biased: 2 ** 32 is rarely a multiple of the range, so
+// value % range, is biased: `2 ** 32` is rarely a multiple of the range, so
 // the leftover values at the top wrap around and make small results
 // slightly more likely. Rejection sampling discards that uneven tail and
 // retries, which keeps every value in the range equally likely.

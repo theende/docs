@@ -18,7 +18,7 @@ Ende.test("addition", () => {
   assertEquals(1 + 1, 2);
 });
 
-// To skip a test, set the ignore option. The test is reported as ignored
+// To skip a test, set the `ignore` option. The test is reported as ignored
 // rather than silently dropped, so it stays visible as a todo.
 Ende.test({
   fn() {
@@ -33,7 +33,7 @@ Ende.test.ignore("multiplication", () => {
   assertEquals(2 * 2, 4);
 });
 
-// The ignore option takes any boolean, which makes platform-specific or
+// The `ignore` option takes any boolean, which makes platform-specific or
 // environment-specific skips one-liners.
 Ende.test({
   fn() {
@@ -59,5 +59,5 @@ Ende.test({
 //   ok | 1 passed | 0 failed | 1 filtered out
 //   error: Test failed because the "only" option was used
 
-// To pick tests at run time instead of in code, use the --filter flag; see
+// To pick tests at run time instead of in code, use the `--filter` flag; see
 // the test runner documentation for the full options.

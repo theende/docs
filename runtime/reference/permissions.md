@@ -3,7 +3,7 @@ last_modified: 2026-10-20
 title: "Permissions"
 description: "Reference for Ende's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import access with the --allow and --deny flags."
 oldUrl:
-  - /runtime/manual/basics/permissionsDeno/
+  - /runtime/manual/basics/permissionsEnde/
   - /manual/basics/permissions
   - /runtime/manual/basics/permissions
   - /runtime/manual/getting_started/permissions
@@ -271,7 +271,6 @@ During module loading, Ende can load modules from the network. By default Ende
 allows loading modules from the following locations using both static and
 dynamic imports, without requiring explicit network access:
 
-- `https://deno.land/`
 - `https://jsr.io/`
 - `https://esm.sh/`
 - `https://raw.esm.sh/`
@@ -530,7 +529,6 @@ $ ende run --allow-import=example.com main.ts
 
 By default Ende allows importing sources from following hosts:
 
-- `deno.land`
 - `jsr.io`
 - `esm.sh`
 - `raw.esm.sh`
@@ -544,7 +542,7 @@ This allow list is applied by default for static imports, and by default to
 dynamic imports if the `--allow-import` flag is specified.
 
 ```sh
-# allow dynamically importing code from `https://deno.land`
+# allow dynamically importing code
 $ ende run --allow-import main.ts
 ```
 

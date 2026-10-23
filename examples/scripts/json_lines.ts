@@ -7,10 +7,10 @@
  * @resource {https://jsonlines.org} Spec: JSON Lines
  * @group Encoding
  *
- * JSON Lines, also called NDJSON, stores one JSON value per line. Log
+ * JSON Lines, also called `NDJSON`, stores one JSON value per line. Log
  * files, data exports and streaming APIs use it because each line can be
  * processed on its own, without parsing the whole document. The Standard
- * Library provides stream transforms for both directions in jsr:@ende/json.
+ * Library provides stream transforms for both directions in [`jsr:@ende/json`](https://jsr.io/@ende/json).
  */
 import { JsonParseStream, JsonStringifyStream } from "jsr:@ende/json";
 import { TextLineStream } from "jsr:@ende/streams";
@@ -21,8 +21,8 @@ const ndjson = `{"level":"info","message":"server started"}
 {"level":"error","message":"request failed"}
 `;
 
-// To consume it, build a pipeline. TextLineStream splits the text into
-// lines and JsonParseStream parses each line into a value. Any readable
+// To consume it, build a pipeline. `TextLineStream` splits the text into
+// lines and `JsonParseStream` parses each line into a value. Any readable
 // stream of bytes works as a source, such as a file or a response body.
 const entries = new Blob([ndjson]).stream()
   .pipeThrough(new TextDecoderStream())
@@ -38,7 +38,7 @@ for await (const entry of entries) {
 //- { level: "warn", message: "high memory usage" }
 //- { level: "error", message: "request failed" }
 
-// To produce JSON Lines, pipe values through a JsonStringifyStream. Every
+// To produce JSON Lines, pipe values through a `JsonStringifyStream`. Every
 // chunk it emits is one JSON text followed by a newline character, ready
 // to append to a file or send over a socket.
 const events = [
@@ -49,7 +49,7 @@ const events = [
 const lines = ReadableStream.from(events)
   .pipeThrough(new JsonStringifyStream());
 
-// We trim each chunk before logging because console.log adds its own
+// We trim each chunk before logging because `console.log` adds its own
 // newline.
 for await (const line of lines) {
   console.log(line.trimEnd());

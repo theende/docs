@@ -1,6 +1,6 @@
 ---
 title: jsx-void-dom-elements-no-children
-tags: [recommended, react, jsx, fresh]
+tags: [recommended, react, jsx]
 ---
 
 Ensure that void elements in HTML don't have any children as that is not valid
@@ -18,6 +18,6 @@ for more information.
 **Valid:**
 
 ```tsx
-<br />
+<br/>
 <img src="a.jpg" />
 ```

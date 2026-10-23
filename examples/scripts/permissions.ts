@@ -17,7 +17,7 @@
  */
 
 // In the most simple case, we can just request a permission by it’s name.
-// In this case, we ask for -E and prompt the user. The user will
+// In this case, we ask for `-E` and prompt the user. The user will
 // not be prompted if it was already allowed in the past and not revoked.
 let status = await Ende.permissions.request({ name: "env" });
 
@@ -26,7 +26,7 @@ if (status.state === "granted")
 else
   console.log(`"env" permission is denied.`);
 
-// There are also synchronous versions of all the permission APIs
+// There are also synchronous versions of all the permission APIs.
 status = Ende.permissions.requestSync({ name: "env" });
 
 if (status.state === "granted")
@@ -37,7 +37,7 @@ else
 // We can also query permissions without asking for them. In this case,
 // we are querying whether or not we have the read permission. Not only
 // can we query whether we have a permission or not, we can even specify
-// what directories we have permissions in using the path option.
+// what directories we have permissions in using the `path` option.
 const readStatus = await Ende.permissions.query({
   name: "read",
   path: "/etc"

@@ -15,7 +15,7 @@
  */
 
 // Request an adapter (a physical GPU) and a device (a logical connection
-// to it). On machines without a GPU, requestAdapter resolves to null.
+// to it). On machines without a GPU, `requestAdapter` resolves to `null`.
 const adapter = await navigator.gpu.requestAdapter();
 if (!adapter) throw new Error("No GPU adapter found");
 const device = await adapter.requestDevice();
@@ -61,9 +61,9 @@ const readBuffer = device.createBuffer({
   usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ
 });
 
-// Bind the storage buffer to the shader’s binding 0, then record the
+// Bind the storage buffer to the shader’s `binding 0`, then record the
 // commands: run the pipeline with enough workgroups to cover the array,
-// and copy the results into the readable buffer.
+// and copy the results into the readable `buffer`.
 const bindGroup = device.createBindGroup({
   entries: [{ binding: 0, resource: { buffer: storageBuffer } }],
   layout: pipeline.getBindGroupLayout(0)

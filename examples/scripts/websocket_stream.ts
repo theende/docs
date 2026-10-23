@@ -7,14 +7,14 @@
  * @resource {https://docs.ende.sh/examples/websocket/} Example: Outbound WebSockets
  * @group Network
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>WebSocketStream is a promise-based alternative to the event-based
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br/>WebSocketStream is a promise-based alternative to the event-based
  * WebSocket API. It exposes the connection as a pair of web streams, which
  * brings backpressure and async iteration to WebSocket code and composes
- * with everything else that speaks ReadableStream and WritableStream.
+ * with everything else that speaks `ReadableStream` and `WritableStream`.
  */
 
 // Start a WebSocket echo server to talk to. The server side uses the
-// standard Ende.upgradeWebSocket, so only the client below needs the
+// standard `Ende.upgradeWebSocket`, so only the client below needs the
 // unstable WebSocketStream API.
 const server = Ende.serve({ port: 8000 }, (req) => {
   const { socket, response } = Ende.upgradeWebSocket(req);

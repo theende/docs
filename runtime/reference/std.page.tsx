@@ -11,7 +11,7 @@ function specifier(pkg: StdPackage, module: StdModule): string {
 function sidebar(std: Std): Sidebar {
   return [
     {
-      title: "Standard library",
+      title: "Standard Library",
       href: "/runtime/reference/std/",
       items: std.packages.map((pkg) => ({
         title: pkg.name,
@@ -99,7 +99,7 @@ function PackageView({ std, pkg }: { std: Std; pkg: StdPackage }) {
   );
 }
 
-/** The standard library reference: an index, a page per package and module, and a page per symbol. */
+/** The Standard Library reference: an index, a page per package and module, and a page per symbol. */
 export default async function* () {
   const std = await loadStd();
   const rewrite: Rewrite = (href) => std.fromJsrUrl(href);
@@ -107,13 +107,13 @@ export default async function* () {
 
   yield {
     url: "/runtime/reference/std/",
-    title: "Standard library",
-    description: "Ende's standard library: the @ende/* packages on JSR, with their modules and APIs.",
+    title: "Standard Library",
+    description: "Ende's Standard Library: the @ende/* packages on JSR, with their modules and APIs.",
     sidebar: side,
     content: (
       <>
         <p>
-          The standard library is a set of packages published on <a href="https://jsr.io/@ende">JSR</a> under{" "}
+          The Standard Library is a set of packages published on <a href="https://jsr.io/@ende">JSR</a> under{" "}
           <code>@ende</code>. Add one to a project with <code>ende add jsr:@ende/&lt;package&gt;</code>.
         </p>
         <ul>

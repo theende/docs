@@ -12,7 +12,7 @@
  * They sort by creation time, which makes them good database keys.
  */
 
-// The standard library contains a function for generating ULIDs.
+// The Standard Library contains a function for generating ULIDs.
 import { ulid } from "jsr:@ende/ulid@^2026.10.15";
 
 // To generate a ULID, simply call the function.
@@ -20,14 +20,14 @@ console.log(ulid());
 console.log(ulid());
 console.log(ulid());
 
-// ULIDs can also be generated from a timestamp. This is useful for migrating from
+// ULIDs can also be generated from a `timestamp`. This is useful for migrating from
 // another system.
 const timestamp = Date.now();
 console.log(ulid(timestamp));
 console.log(ulid(timestamp));
 console.log(ulid(timestamp));
 
-// Given a ULID, you can get the timestamp back out
+// Given a ULID, you can get the `timestamp` back out.
 import { decodeTime } from "jsr:@ende/ulid@^2026.10.15";
 const myULID = ulid();
 console.log(decodeTime(myULID));

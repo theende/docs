@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-10-20
 title: "Stability and releases"
-description: "Ende's stability guarantees and release process: ChronVer releases, upgrading, unstable features, and the standard library."
+description: "Ende's stability guarantees and release process: ChronVer releases, upgrading, unstable features, and the Standard Library."
 oldUrl:
   - /runtime/manual/runtime/stability/
   - /runtime/fundamentals/stability/
@@ -37,13 +37,13 @@ and are locked behind unstable flags. For example, the
 `--unstable-sloppy-imports` flag is used to enable `import`ing code without
 specifying file extensions.
 
-## Standard library
+## Standard Library
 
 The Ende Standard Library ([jsr.io/@ende](https://jsr.io/@ende)) is published as
 `@ende/*` packages, versioned with ChronVer like the runtime. Modules whose
 names start with `unstable_` are experimental and may change in any release.
 
-Using unstable standard library modules is not recommended for production code,
+Using unstable Standard Library modules is not recommended for production code,
 but it is a great way to experiment with new features and provide feedback to
 the Ende team. It is not necessary to use any unstable flags to use unstable
-standard library modules.
+Standard Library modules.

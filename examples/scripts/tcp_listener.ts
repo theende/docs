@@ -6,13 +6,13 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.listen} Doc: Ende.listen
  * @group Network
  *
- * An example of a TCP listener on localhost that will log the message if written to and close the connection if connected to.
+ * An example of a TCP listener on `localhost` that will log the message if written to and close the connection if connected to.
  */
 
 // Instantiate an instance of text decoder to read the TCP stream bytes back into plaintext.
 const decoder = new TextDecoder();
 
-// Instantiate an instance of a TCP listener on localhost port 8080.
+// Instantiate an instance of a TCP listener on localhost port `8080`.
 const listener = Ende.listen({
   hostname: "127.0.0.1",
   port: 8080,

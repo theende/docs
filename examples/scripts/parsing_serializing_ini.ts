@@ -10,11 +10,11 @@
  * INI is a plain text configuration format built from key value pairs that
  * can be grouped into sections. Many tools still read and write it, from
  * git config to legacy application settings. The Standard Library provides
- * parse and stringify functions for it in jsr:@ende/ini.
+ * parse and stringify functions for it in [`jsr:@ende/ini`](https://jsr.io/@ende/ini).
  */
 import { parse, stringify } from "jsr:@ende/ini";
 
-// An INI document is a list of key=value lines. A name in square brackets
+// An INI document is a list of `key=value` lines. A name in square brackets
 // starts a section and the lines below it belong to that section.
 const text = `
 theme=dark
@@ -25,7 +25,7 @@ host=localhost
 debug=true
 `;
 
-// To parse, pass the text to the parse function. Top level keys become
+// To parse, pass the text to the `parse` function. Top level keys become
 // properties and each section becomes a nested object. The type argument
 // describes the shape you expect.
 const config = parse<{
@@ -35,13 +35,13 @@ const config = parse<{
 }>(text);
 
 console.log(config.theme); // dark
-console.log(config.server); // { host: "localhost", debug: "true" }
+console.log(config.server); // { debug: "true", host: "localhost" }
 
 // INI has no type system, so every value comes back as a string. The port
 // looks like a number in the file but it is not one here.
 console.log(typeof config.port); // string
 
-// To get typed values, pass a reviver function. It runs for every entry
+// To get typed values, pass a `reviver` function. It runs for every entry
 // and receives the key, the raw value and the section name, and whatever
 // it returns ends up in the result.
 const typed = parse<{
@@ -63,7 +63,7 @@ const typed = parse<{
 console.log(typed.port); // 8080
 console.log(typed.server); // { debug: true, host: "localhost" }
 
-// To serialize, pass an object to the stringify function. Nested objects
+// To serialize, pass an object to the `stringify` function. Nested objects
 // turn back into sections, and numbers and booleans are written as their
 // plain text form.
 const ini = stringify({

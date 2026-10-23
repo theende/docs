@@ -37,7 +37,7 @@ console.log(hash);
 // without loading the whole file into memory is a typical
 // requirement.
 
-// The standard library has extensions to the Web
+// The Standard Library has extensions to the Web
 // Crypto API that are useful when doing things
 // like hashing a file. These can be accessed through the
 // `crypto` module, a drop-in replacement for the Web Crypto

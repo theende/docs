@@ -7,17 +7,17 @@
  * @group Basics
  *
  * Ende natively understands TypeScript code with no compiler to configure.
- * Start writing code in .ts files, and the runtime will work with them just
+ * Start writing code in `.ts` files, and the runtime will work with them just
  * fine.
  */
 
-// Define an interface in TypeScript
+// Define an interface in TypeScript.
 interface Person {
   age: number;
   name: string;
 }
 
-// Provide a typed input to a function
+// Provide a typed input to a function.
 function greet(person: Person) {
   return "Hello, " + person.name + "!";
 }

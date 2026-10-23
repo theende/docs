@@ -27,10 +27,10 @@ Ende.serve((req) => {
 
   const { response, socket } = Ende.upgradeWebSocket(req);
 
-  // Read the username from the connection URL, e.g. /?username=ada.
+  // Read the username from the connection URL, e.g. `/?username=ada`.
   const username = new URL(req.url).searchParams.get("username") ?? "guest";
 
-  // Each handler closes over this connection’s socket, and the Map lets
+  // Each handler closes over this connection’s socket, and the `Map` lets
   // any other part of the server look the session up later.
   socket.onopen = () => {
     sessions.set(socket, { username, joined: new Date() });

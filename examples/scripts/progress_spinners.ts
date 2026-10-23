@@ -8,9 +8,9 @@
  * @group CLI
  *
  * Long-running command line tools feel broken when they print nothing. The
- * standard library ships a Spinner for tasks of unknown length and a
- * ProgressBar for tasks with a known total. Both are currently exported
- * from unstable submodules of the cli package, so their APIs may still
+ * Standard Library ships a `Spinner` for tasks of unknown length and a
+ * `ProgressBar` for tasks with a known total. Both are currently exported
+ * from unstable submodules of the `cli` package, so their APIs may still
  * change.
  */
 
@@ -80,7 +80,7 @@ console.log("Done.");
 //   ⠏ Downloading manifest...
 //   [00:02] [##################################################] 5/5 files
 
-// When output is piped, isTerminal() is false and only the fallback lines
+// When output is piped, `isTerminal()` is `false` and only the fallback lines
 // are printed:
 //
 //   ende run progress_spinners.ts | cat

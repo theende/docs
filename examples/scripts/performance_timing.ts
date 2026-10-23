@@ -8,13 +8,13 @@
  * @group Web Standard APIs
  *
  * The performance API measures elapsed time with sub-millisecond
- * precision. performance.now gives quick deltas, while named marks and
+ * precision. `performance.now` gives quick deltas, while named marks and
  * measures build a timeline you can query later and inspect in the
  * DevTools performance panel when debugging with the inspector. Timings
  * differ on every machine and run, so the outputs below are examples.
  */
 
-// performance.now returns milliseconds since the program started. The
+// `performance.now` returns milliseconds since the program started. The
 // difference between two calls times a block of code.
 const start = performance.now();
 let total = 0;

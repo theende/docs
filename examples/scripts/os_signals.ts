@@ -22,7 +22,7 @@ function sigIntHandler() {
 }
 
 // Then, we can listen for the `SIGINT` signal,
-// which is sent when the user presses Ctrl+C.
+// which is sent when the user presses `Ctrl+C`.
 Ende.addSignalListener("SIGINT", sigIntHandler);
 
 // While we’re waiting for the signal, we can do other things,

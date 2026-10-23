@@ -5,7 +5,7 @@ description: "Move a Jest test suite to ende test: describe/it via @ende/testing
 ---
 
 Most Jest suites translate to `ende test` without rewriting test logic: the
-standard library's `@ende/testing/bdd` module provides the same `describe`/`it`
+Standard Library's `@ende/testing/bdd` module provides the same `describe`/`it`
 structure, and `@ende/expect` ships the matchers you already use. What changes
 is a handful of imports and how the runner is configured.
 

@@ -11,7 +11,7 @@
  */
 
 // First we need to use the WebSocket constructor to initiate
-// our connection to an external server
+// our connection to an external server.
 const socket = new WebSocket("ws://localhost:8000");
 
 // Before we do anything with the websocket, we should
@@ -20,12 +20,12 @@ const socket = new WebSocket("ws://localhost:8000");
 socket.addEventListener("open", () => {
   // We can read the "ready state" of our instance.
   // This determines if we are able to send messages.
-  // The ready state for open should be 1.
+  // The ready state for open should be `1`.
   console.log(socket.readyState);
 
   // We can now send messages to the server. The messages
-  // can be of the type string, ArrayBuffer, Blob, or
-  // TypedArray. In this case we will be sending a string
+  // can be of the type `string`, `ArrayBuffer`, `Blob`, or
+  // `TypedArray`. In this case we will be sending a `string`.
   socket.send("ping");
 });
 

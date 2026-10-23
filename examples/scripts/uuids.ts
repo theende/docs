@@ -7,7 +7,7 @@
  * @resource {https://jsr.io/@ende/uuid/doc} Doc: @ende/uuid
  * @group Cryptography
  *
- * UUIDs (universally unique identifier) can be used to uniquely identify some
+ * UUIDs (Universally Unique IDentifier) can be used to uniquely identify some
  * object or data.
  */
 
@@ -16,7 +16,7 @@
 const myUUID = crypto.randomUUID();
 console.log("Random UUID:", myUUID);
 
-// The standard library contains some more functions for working with UUIDs.
+// The Standard Library contains some more functions for working with UUIDs.
 import * as uuid from "jsr:@ende/uuid";
 
 // You can validate that a given string is a valid UUID.

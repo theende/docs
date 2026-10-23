@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-10-20
 title: "Ende Style Guide"
-description: "Comprehensive style guide for contributing to Ende's internal runtime code and standard library. Covers coding conventions, documentation standards, testing requirements, and best practices for TypeScript and Rust development."
+description: "Comprehensive style guide for contributing to Ende's internal runtime code and Standard Library. Covers coding conventions, documentation standards, testing requirements, and best practices for TypeScript and Rust development."
 oldUrl:
   - /runtime/manual/contributing/style_guide/
   - /runtime/manual/references/contributing/style_guide/
@@ -17,7 +17,7 @@ oldUrl:
 Most modules in the repository should have the following copyright header:
 
 ```ts
-// Copyright 2018-2026 the Deno authors. All rights reserved. MIT license.
+// Copyright 2026 the Ende authors. All rights reserved. MIT license.
 ```
 
 If the code originates elsewhere, ensure that the file has the proper copyright
@@ -61,7 +61,7 @@ Follow Rust conventions and be consistent with existing code.
 
 ### TypeScript
 
-The TypeScript portion of the code base is the standard library `std`.
+The TypeScript portion of the code base is the Standard Library `std`.
 
 #### Use TypeScript instead of JavaScript
 
@@ -336,9 +336,6 @@ Ende.test("foo() returns bar object", function () {
   assertEquals(foo(), { bar: "bar" });
 });
 ```
-
-Note: See [tracking issue](https://github.com/denoland/deno_std/issues/3754) for
-more information.
 
 #### Top-level functions should not use arrow syntax
 

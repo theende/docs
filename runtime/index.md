@@ -122,7 +122,7 @@ Pull in packages from [JSR](https://jsr.io) with
 [`ende install`](/runtime/reference/cli/install/):
 
 ```sh
-ende install jsr:@ende/assert    # the Ende standard library, on JSR
+ende install jsr:@ende/assert    # the Ende Standard Library, on JSR
 ```
 
 Then import and use them:

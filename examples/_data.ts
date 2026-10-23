@@ -483,18 +483,18 @@ export const items = [
     category: "Web standard APIs"
   },
 
-  // Standard library
+  // Standard Library
   {
     title: "User Data Processing with Ende Collections",
     href: "/examples/data_processing/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Exponential backoff",
     href: "/examples/exponential_backoff/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
 
   // Encoding
@@ -1065,55 +1065,49 @@ export const items = [
     title: "Debounce a function",
     href: "/examples/debounce_function/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Run async tasks with a concurrency limit",
     href: "/examples/concurrency_limit/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Add a timeout to any promise",
     href: "/examples/promise_timeout/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Memoize an expensive function",
     href: "/examples/memoize_function/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Parse and compare semver versions",
     href: "/examples/semver_versions/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Convert string case",
     href: "/examples/string_case/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Escape text for regular expressions",
     href: "/examples/regexp_escape/",
     type: "example",
-    category: "Standard library"
-  },
-  {
-    title: "Structured logging",
-    href: "/examples/structured_logging/",
-    type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Format bytes and durations for humans",
     href: "/examples/format_bytes_duration/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Parse and format dates",
@@ -1324,7 +1318,7 @@ export const items = [
     title: "Generate seeded random numbers",
     href: "/examples/seeded_random/",
     type: "example",
-    category: "Standard library"
+    category: "Standard Library"
   },
   {
     title: "Parse and generate XML",
@@ -1348,7 +1342,7 @@ export const categoryOrder = [
   "File system",
   "System",
   "Web standard APIs",
-  "Standard library",
+  "Standard Library",
   "Encoding",
   "CLI",
   "Cryptography",

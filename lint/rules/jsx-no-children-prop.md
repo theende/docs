@@ -1,6 +1,6 @@
 ---
 title: jsx-no-children-prop
-tags: [recommended, react, jsx, fresh]
+tags: [recommended, react, jsx]
 ---
 
 Pass children as JSX children instead of as an attribute.

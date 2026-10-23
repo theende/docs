@@ -4,7 +4,7 @@ This repository contains the website running
 [docs.ende.sh](https://docs.ende.sh). The intent of this project is to
 centralize all official Ende documentation content in a single website. The site
 is built with [satz](https://jsr.io/@ende/satz), a static site generator for
-[Ende](https://ende.sh) built on the `@ende/*` standard library.
+[Ende](https://ende.sh) built on the `@ende/*` Standard Library.
 
 ## Local development
 
@@ -35,7 +35,7 @@ ende task test:examples                    # type-checks every example script
 ende task check                            # type-checks the site's own code
 ```
 
-The link checker reads the built site. Links into the API and standard library
+The link checker reads the built site. Links into the API and Standard Library
 reference are reported as pending until that reference is generated again.
 
 ## Editing content
@@ -99,7 +99,7 @@ behavior that predates Ende's first release (2026.10.14).
 
 ## Reference docs
 
-The API reference (`/api/`) and the standard library reference
+The API reference (`/api/`) and the Standard Library reference
 (`/runtime/reference/std/`) aren't built at the moment. They will be generated
 with `ende doc`.
 
@@ -134,7 +134,7 @@ describe your proposed updates. It will be better to get feedback on your
 concept first before going to the trouble of writing a large number of docs!
 
 Over time, we will add more in the way of linting and formatting to the pull
-request process. But for now, you should merely ensure that `npm run build`
+request process. But for now, you should merely ensure that `ende task build`
 succeeds without error before submitting a pull request. This will ensure that
 there are no broken links or invalid MDX syntax in the content you have
 authored.
@@ -150,7 +150,7 @@ implemented in Ende.
 - Examples are written in TypeScript
 - Each example should be a single file, no more than 50 lines
 - Each example should be a self-contained unit, and should depend on no
-  dependencies other than Ende builtins and the standard library, unless a
+  dependencies other than Ende builtins and the Standard Library, unless a
   third-party library is strictly required.
 - Each example should be runnable without additional dependencies on all systems
   (exceptions can be made for platform specific functionality)

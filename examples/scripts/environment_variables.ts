@@ -28,7 +28,7 @@ Ende.env.set("MY_PASSWORD", "123456");
 // You can also unset an environment variable.
 Ende.env.delete("MY_PASSWORD");
 
-// Note that environment variables are case-sensitive on unix, but not on
+// Note that environment variables are case-sensitive on Unix, but not on
 // Windows. This means that these two invocations will have different results
 // between platforms.
 Ende.env.set("MY_PASSWORD", "123");

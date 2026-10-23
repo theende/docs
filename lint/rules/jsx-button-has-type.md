@@ -1,6 +1,6 @@
 ---
 title: jsx-button-has-type
-tags: [recommended, react, jsx, fresh]
+tags: [recommended, react, jsx]
 ---
 
 Enforce `<button>` elements to have a `type` attribute. If a `<button>` is

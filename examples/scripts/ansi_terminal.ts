@@ -30,7 +30,7 @@ function write(text: string) {
 // reset, otherwise the style leaks into the next line of output.
 console.log("\x1b[31mred\x1b[0m \x1b[1mbold\x1b[0m \x1b[4munderline\x1b[0m");
 
-// For colors alone you rarely need raw codes. The standard library wraps
+// For colors alone you rarely need raw codes. The Standard Library wraps
 // them in plain functions that emit the same bytes:
 console.log(green("green via @ende/fmt/colors"));
 

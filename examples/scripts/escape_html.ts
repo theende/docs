@@ -8,7 +8,7 @@
  * @group Web Standard APIs
  *
  * Interpolating user input into HTML without escaping it opens the door to
- * cross-site scripting. The standard library escapes the five significant
+ * cross-site scripting. The Standard Library escapes the five significant
  * characters for you. This example shows escaping and unescaping.
  */
 import { escape, unescape } from "jsr:@ende/html/entities";

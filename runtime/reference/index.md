@@ -1,11 +1,11 @@
 ---
 last_modified: 2026-10-20
 title: "Reference"
-description: "Look it up: the full ende CLI, configuration, the standard library, and runtime APIs."
+description: "Look it up: the full ende CLI, configuration, the Standard Library, and runtime APIs."
 ---
 
 The reference section is for looking things up: every `ende` subcommand, every
-configuration field, the standard library, and the runtime APIs.
+configuration field, the Standard Library, and the runtime APIs.
 
 ## Command line
 
@@ -23,7 +23,7 @@ configuration field, the standard library, and the runtime APIs.
 
 ## APIs and libraries
 
-- **[Standard library](/runtime/reference/std/).** Ende's audited standard
+- **[Standard Library](/runtime/reference/std/).** Ende's audited standard
   modules.
 - **[Ende API reference](/api/ende/).** The built-in `Ende.*` namespace.
 - **[Web platform APIs](/runtime/reference/web_platform_apis/).** The web

@@ -14,11 +14,12 @@
 // path.
 await Ende.writeTextFile("./hello.txt", "Hello World!");
 await Ende.rename("./hello.txt", "./hello-renamed.txt");
+
 console.log(await Ende.readTextFile("./hello-renamed.txt"));
 
 // If the source file or the destination directory does not exist, the function
 // will reject the returned promise with a `Ende.errors.NotFound` error. You can
-// catch this error with a `try/catch` block.
+// catch this error with a `try`/`catch` block.
 try {
   await Ende.rename("./hello.txt", "./does/not/exist");
 } catch (err) {
@@ -31,6 +32,7 @@ Ende.renameSync("./hello-renamed.txt", "./hello-again.txt");
 // If the destination file already exists, it will be overwritten.
 await Ende.writeTextFile("./hello.txt", "Invisible content.");
 await Ende.rename("./hello-again.txt", "./hello.txt");
+
 console.log(await Ende.readTextFile("./hello.txt"));
 
 // Read and write permissions are necessary to perform this operation. The

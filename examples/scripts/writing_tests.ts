@@ -11,12 +11,12 @@
  * existing code. Ende has a built-in test runner which makes this very easy.
  */
 
-// First, we import assert statements from the standard library. There are
+// First, we import assert statements from the Standard Library. There are
 // quite a few options but we will just import the most common ones here.
 import { assert, assertEquals } from "jsr:@ende/assert";
 
 // The most simple way to use the test runner is to just pass it a description
-// and a callback function
+// and a callback function.
 Ende.test("assert works correctly", () => {
   assert(true);
   assertEquals(1, 1);
@@ -52,7 +52,7 @@ Ende.test("testing steps", async (t) => {
 // The test runner by default makes it very hard to shoot yourself in the foot. For
 // each test, the test runner checks to make sure all resources created during the
 // test are freed. There are situations where this is not useful behavior. We can use
-// the more complex test definition to disable this behavior
+// the more complex test definition to disable this behavior.
 Ende.test({
   async fn() {
     await Ende.open("example.txt");

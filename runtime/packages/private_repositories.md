@@ -25,22 +25,22 @@ number of tokens delimited by a semi-colon (`;`) where each token is either:
 - a bearer token in the format of `{token}@{hostname[:port]}` or
 - basic auth data in the format of `{username}:{password}@{hostname[:port]}`
 
-For example, a single token for `deno.land` would look something like this:
+For example, a single token for `ende.sh` would look something like this:
 
 ```sh
-ENDE_AUTH_TOKENS=a1b2c3d4e5f6@deno.land
+ENDE_AUTH_TOKENS=a1b2c3d4e5f6@ende.sh
 ```
 
 or:
 
 ```sh
-ENDE_AUTH_TOKENS=username:password@deno.land
+ENDE_AUTH_TOKENS=username:password@ende.sh
 ```
 
 And multiple tokens would look like this:
 
 ```sh
-ENDE_AUTH_TOKENS=a1b2c3d4e5f6@deno.land;f1e2d3c4b5a6@example.com:8080;username:password@deno.land
+ENDE_AUTH_TOKENS=a1b2c3d4e5f6@ende.sh;f1e2d3c4b5a6@example.com:8080;username:password@ende.sh
 ```
 
 When Ende goes to fetch a remote module, where the hostname matches the hostname

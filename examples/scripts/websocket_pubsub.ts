@@ -12,12 +12,12 @@
  * track of connected sockets and broadcasts every message it receives.
  */
 
-// All currently connected clients. A Set handles disconnects cleanly.
+// All currently connected clients. A `Set` handles disconnects cleanly.
 const clients = new Set<WebSocket>();
 
 function broadcast(message: string) {
   for (const client of clients) {
-    // A socket may be mid-handshake or closing; only send when open.
+    // A socket may be mid-handshake or closing; only `send` when open.
     if (client.readyState === WebSocket.OPEN)
       client.send(message);
   }
@@ -57,7 +57,7 @@ Ende.serve((req) => {
 //   ws.onopen = () => ws.send("hello, everyone");
 
 // This state lives in one worker. To broadcast across the workers of
-// ende serve --parallel, relay each message through a BroadcastChannel,
+// `ende serve --parallel`, relay each message through a `BroadcastChannel`,
 // which reaches the other workers.
 //
 //   const relay = new BroadcastChannel("chat");
@@ -67,5 +67,5 @@ Ende.serve((req) => {
 //     relay.postMessage(event.data);
 //   };
 //
-// Separate processes and machines do not share a BroadcastChannel; for
+// Separate processes and machines do not share a `BroadcastChannel`; for
 // those, relay through something external like a Redis channel.

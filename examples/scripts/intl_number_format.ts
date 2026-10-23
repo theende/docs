@@ -7,7 +7,7 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatRange} MDN: formatRange
  * @group Web Standard APIs
  *
- * Intl.NumberFormat formats numbers for any locale and style. It handles
+ * `Intl.NumberFormat` formats numbers for any locale and style. It handles
  * grouping separators, currency symbols, compact notation, measurement
  * units, and percentages, so you never need to build those strings by
  * hand. This example shows the most common options.
@@ -75,7 +75,7 @@ const percentExact = new Intl.NumberFormat("en-US", {
 
 console.log(percentExact.format(0.485)); // 48.5%
 
-// formatRange renders a span of two values with locale aware punctuation.
-// Ende supports it on every Intl.NumberFormat instance.
+// `formatRange` renders a span of two values with locale aware punctuation.
+// Ende supports it on every `Intl.NumberFormat` instance.
 console.log(usd.formatRange(40, 60)); // $40.00 – $60.00
 console.log(new Intl.NumberFormat("en-US").formatRange(2.9, 3.1)); // 2.9–3.1

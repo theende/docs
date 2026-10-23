@@ -202,7 +202,7 @@ and throw an error if it’s not, causing the test to fail. Good assertions are
 clear, specific, and help identify exactly what went wrong when a test fails.
 
 Ende doesn’t include assertions in its core library, but you can import them
-from the [Ende standard library](https://jsr.io/@ende/assert):
+from the [Ende Standard Library](https://jsr.io/@ende/assert):
 
 ```ts
 import {
@@ -366,7 +366,7 @@ await:
 import { assertEquals } from "jsr:@ende/assert";
 
 Ende.test("async test example", async () => {
-  const response = await fetch("https://deno.land");
+  const response = await fetch("https://ende.sh");
   const status = response.status;
   assertEquals(status, 200);
 });

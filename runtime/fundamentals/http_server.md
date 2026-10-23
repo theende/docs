@@ -172,7 +172,7 @@ Ende.serve((req) => {
 });
 ```
 
-The standard library also ships a small router that maps pattern and method
+The Standard Library also ships a small router that maps pattern and method
 pairs to handlers:
 [`route` from `@ende/http`](https://jsr.io/@ende/http/doc/unstable-route). For
 middleware, larger route trees, or framework conveniences, reach for

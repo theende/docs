@@ -8,13 +8,13 @@
  * @group Web Standard APIs
  *
  * Ende implements the Web Cache API from service workers. The caches
- * global stores Response objects keyed by request URL, persisted on disk
+ * global stores `Response` objects keyed by request URL, persisted on disk
  * between runs. This example
- * starts a local server that counts requests, then proves a cached fetch
+ * starts a local server that counts requests, then proves a cached `fetch`
  * helper only hits the server once.
  */
 
-// This server counts how many requests actually reach it. Port 0 asks
+// This server counts how many requests actually reach it. Port `0` asks
 // the operating system for any free port.
 let requestCount = 0;
 
@@ -26,7 +26,7 @@ const server = Ende.serve({ port: 0, onListen: () => {} }, () => {
   });
 });
 
-// caches.open returns a named cache, creating it on first use. No extra
+// `caches.open` returns a named cache, creating it on first use. No extra
 // permission flags are needed for the cache itself.
 const cache = await caches.open("example-cache-v1");
 
@@ -58,7 +58,7 @@ console.log(await second.json()); // { message: "hello" }
 // second call.
 console.log(requestCount); // 1
 
-// cache.delete removes a single entry, caches.delete removes the whole
+// `cache.delete` removes a single entry, `caches.delete` removes the whole
 // named cache. Both return whether something was deleted.
 console.log(await cache.delete(url)); // true
 console.log(await caches.delete("example-cache-v1")); // true

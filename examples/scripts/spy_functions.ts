@@ -39,11 +39,11 @@ Ende.test("logger uses the log function", () => {
 });
 
 Ende.test("Creating a spy with the using keyword", () => {
-  // method spys are disposable, so we can create them with the keyword `using`
+  // Method spys are disposable, so we can create them with the keyword `using`.
   using logSpy = spy(logger, "log");
 
   logger.log("Disposable spy");
 
-  // Spys created with the `using` keyword are automatically restored at the end of the test
+  // Spys created with the `using` keyword are automatically restored at the end of the test.
   assertSpyCalls(logSpy, 1);
 });

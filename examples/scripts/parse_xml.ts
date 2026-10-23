@@ -6,7 +6,7 @@
  * @resource {https://jsr.io/@libs/xml} @libs/xml on JSR
  * @group Encoding
  *
- * The @libs/xml package on JSR converts XML in both directions: XML text
+ * The [`@libs/xml`](https://jsr.io/@libs/xml) package on JSR converts XML in both directions: XML text
  * to plain JavaScript objects and back. This is enough for RSS feeds,
  * sitemaps, SVG manipulation, and API responses from older services.
  */
@@ -24,7 +24,7 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
   </entry>
 </feed>`;
 
-// parse returns nested objects. Attributes are prefixed with @, text
+// `parse` returns nested objects. Attributes are prefixed with `@`, text
 // content of a leaf element becomes its value, and repeated elements
 // become an array.
 const doc = parse(xml) as unknown as {
@@ -39,12 +39,12 @@ console.log(doc.feed.entry.length); // 2
 console.log(doc.feed.entry[1]["@id"]); // 2
 
 // Values keep their string form unless you opt into revival; attributes
-// like draft="true" can be compared as strings or revived to booleans via
+// like `draft="true"` can be compared as strings or revived to booleans via
 // the reviver options of parse.
 const drafts = doc.feed.entry.filter((e) => e["@draft"] === "true");
 console.log(drafts.map((e) => e.title)); // [ "Deno 2.1" ]
 
-// stringify performs the reverse mapping: objects with @-prefixed keys
+// `stringify` performs the reverse mapping: objects with @-prefixed keys
 // become attributes, everything else becomes elements.
 const generated = stringify({
   sitemap: {

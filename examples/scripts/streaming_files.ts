@@ -26,18 +26,18 @@ const outputWriter = output.writable.getWriter();
 // Before we do anything with the writer, we should make sure it’s ready.
 await outputWriter.ready;
 
-// Let’s write some text to the file
+// Let’s write some text to the file.
 const outputText = "I love Ende!";
 const encoded = new TextEncoder().encode(outputText);
 await outputWriter.write(encoded);
 
-// Now we close the write stream (and the file)
+// Now we close the write stream (and the file).
 await outputWriter.close();
 
 // For our next example, let’s read the text from the file!
 const input = await Ende.open("example.txt");
 
-// Let’s get a reader from the input
+// Let’s get a reader from the input.
 const inputReader = input.readable.getReader();
 const decoder = new TextDecoder();
 

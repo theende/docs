@@ -9,7 +9,7 @@
  * reconstruction only when a sufficient number of shares are combined.
  */
 
-// Random Number Generation within a range
+// Random Number Generation within a range.
 async function getSecureRandom(min: number, max: number): Promise<number> {
   const range = max - min;
   const buffer = new Uint8Array(4);
@@ -19,7 +19,7 @@ async function getSecureRandom(min: number, max: number): Promise<number> {
   return min + (randomValue % range);
 }
 
-// Finding the value of the polynomial at x
+// Finding the value of the polynomial at `x`.
 function evaluatePolynomial(coefficients: number[], x: number): number {
   return coefficients.reduce(
     (result, coeff, power) => result + coeff * Math.pow(x, power),
@@ -27,13 +27,13 @@ function evaluatePolynomial(coefficients: number[], x: number): number {
   );
 }
 
-// Generates shares based on the secret and threshold
+// Generates shares based on the `secret` and `threshold`.
 async function generateShares(
   secret: number,
   totalShares: number,
   threshold: number
 ) {
-  // Generate random coefficients for the polynomial
+  // Generate random `coefficients` for the polynomial.
   const coefficients = [secret];
 
   for (let i = 1; i < threshold; i++) {
@@ -43,7 +43,7 @@ async function generateShares(
   const usedXValues = new Set<number>();
   const shares = [];
 
-  // Generate unique random x values for shares
+  // Generate unique random `x` values for shares.
   while (shares.length < totalShares) {
     const x = await getSecureRandom(1, 1000);
 
@@ -60,7 +60,7 @@ async function generateShares(
   return { coefficients, shares };
 }
 
-// Secret Reconstruction from a subset of shares using Lagrange interpolation
+// Secret Reconstruction from a subset of shares using Lagrange interpolation.
 function reconstructSecret(shares: Array<{ x: number; y: number }>): number {
   const secret = shares.reduce((sum, share, i) => {
     let product = share.y;
@@ -80,7 +80,7 @@ const secret = 12345;
 const threshold = 3;
 const totalShares = 5;
 
-// Generate shares
+// Generate `shares`.
 const { coefficients, shares } = await generateShares(
   secret,
   totalShares,
@@ -89,7 +89,7 @@ const { coefficients, shares } = await generateShares(
 
 console.log("Generated Shares:", shares);
 
-// Select random subset of shares to reconstruct the secret
+// Select random subset of shares to reconstruct the `secret`.
 const selectedIndices = new Set<number>();
 
 while (selectedIndices.size < threshold) {
@@ -102,7 +102,7 @@ const selectedShares = Array.from(selectedIndices).map((index) =>
 
 console.log("Selected Shares for Reconstruction:", selectedShares);
 
-// Reconstruct the secret
+// Reconstruct the `secret`.
 const reconstructedSecret = reconstructSecret(selectedShares);
 console.log("Original Secret:", secret);
 console.log("Reconstructed Secret:", reconstructedSecret);

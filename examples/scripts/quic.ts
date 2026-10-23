@@ -7,22 +7,21 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.connectQuic} Doc: Ende.connectQuic
  * @group Network
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>QUIC is the transport protocol underneath HTTP/3. It runs over UDP,
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br/>QUIC is the transport protocol underneath HTTP/3. It runs over UDP,
  * always encrypts with TLS, connects faster than TCP plus TLS, and one
  * connection carries many independent streams with no head-of-line
  * blocking. This example starts a QUIC server and client in one process
  * and echoes a message over a bidirectional stream.
  *
  * QUIC always requires TLS, so the server needs a certificate. For local
- * development, generate a self-signed one (note CA:FALSE, clients reject
- * certificates marked as CA when used by a server):
- * <code>openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 365 -nodes -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost" -addext "basicConstraints=critical,CA:FALSE"</code>
+ * development, generate a self-signed one (note `CA:FALSE`, clients reject
+ * certificates marked as `CA` when used by a server):
  */
-
+//   openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 365 -nodes -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost" -addext "basicConstraints=critical,CA:FALSE"
 const cert = Ende.readTextFileSync("./server.crt");
 const key = Ende.readTextFileSync("./server.key");
 
-// A QuicEndpoint binds a UDP socket. Listening on it takes the TLS
+// A `QuicEndpoint` binds a UDP socket. Listening on it takes the TLS
 // configuration; ALPN protocol names are required and both sides must
 // agree on one.
 const endpoint = new Ende.QuicEndpoint({ hostname: "localhost", port: 4433 });
@@ -47,7 +46,7 @@ const listener = endpoint.listen({ cert, key, alpnProtocols: ["echo"] });
   }
 })();
 
-// Connect as a client. caCerts trusts our self-signed certificate; with a
+// Connect as a client. `caCerts` trusts our self-signed certificate; with a
 // real certificate it is not needed.
 const client = await Ende.connectQuic({
   alpnProtocols: ["echo"],

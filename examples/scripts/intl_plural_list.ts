@@ -8,8 +8,8 @@
  * @group Web Standard APIs
  *
  * Hand-rolled pluralization like adding an s breaks as soon as you
- * leave English. Intl.PluralRules tells you which grammatical category a
- * number falls into for a locale, and Intl.ListFormat joins items with
+ * leave English. `Intl.PluralRules` tells you which grammatical category a
+ * number falls into for a locale, and `Intl.ListFormat` joins items with
  * the right separators and conjunction. This example shows both.
  */
 
@@ -49,8 +49,8 @@ console.log(pluralize(1)); // 1 file
 console.log(pluralize(3)); // 3 files
 console.log(pluralize(0)); // 0 files
 
-// Intl.ListFormat joins arrays the way prose does. The conjunction type
-// produces an and list, including the Oxford comma for en-US.
+// `Intl.ListFormat` joins arrays the way prose does. The conjunction type
+// produces an and list, including the Oxford comma for `en-US`.
 const and = new Intl.ListFormat("en-US", { type: "conjunction" });
 console.log(and.format(["red", "green", "blue"])); // red, green, and blue
 console.log(and.format(["red", "green"])); // red and green

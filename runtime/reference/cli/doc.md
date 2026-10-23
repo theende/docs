@@ -215,5 +215,5 @@ user's browser has JavaScript disabled.
 
 Use the `--json` flag to output the documentation in JSON format. This JSON
 format is consumed by the
-[ende doc website](https://github.com/denoland/docland) and is used to generate
+[Ende docs website](https://github.com/theende/docs) and is used to generate
 module documentation.

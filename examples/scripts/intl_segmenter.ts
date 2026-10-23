@@ -8,7 +8,7 @@
  * @group Web Standard APIs
  *
  * Splitting text with split or slice breaks on punctuation, emoji, and
- * languages that do not use spaces. Intl.Segmenter understands locale
+ * languages that do not use spaces. `Intl.Segmenter` understands locale
  * rules and can split by word, sentence, or grapheme, which is what a
  * human perceives as one character. This example shows all three
  * granularities and a truncation helper that never cuts an emoji in
@@ -16,21 +16,25 @@
  */
 
 // Word segmentation yields words and the separators between them. The
-// isWordLike flag filters out spaces and punctuation.
+// `isWordLike` flag filters out spaces and punctuation.
 const wordSegmenter = new Intl.Segmenter("en", { granularity: "word" });
 const text = "Ende ships with web standard APIs. Try Intl.Segmenter!";
+
 const words = [...wordSegmenter.segment(text)]
   .filter((segment) => segment.isWordLike)
   .map((segment) => segment.segment);
+
 console.log(words.join("|")); // Ende|ships|with|web|standard|APIs|Try|Intl|Segmenter
 console.log(words.length); // 9
 
 // Word segmentation also works for languages without spaces, where
-// split(" ") would return the whole sentence as one chunk.
+// `split(" ")` would return the whole sentence as one chunk.
 const japaneseSegmenter = new Intl.Segmenter("ja", { granularity: "word" });
+
 const japaneseWords = [...japaneseSegmenter.segment("デノは安全です")]
   .filter((segment) => segment.isWordLike)
   .map((segment) => segment.segment);
+
 console.log(japaneseWords.join("|")); // デ|ノ|は|安全|です
 
 // Sentence segmentation splits prose into sentences, keeping trailing
@@ -40,6 +44,7 @@ const sentenceSegmenter = new Intl.Segmenter("en", {
 });
 
 const prose = "Ende is secure by default. It needs permission flags. Try it!";
+
 const sentences = [...sentenceSegmenter.segment(prose)]
   .map((segment) => segment.segment.trim());
 

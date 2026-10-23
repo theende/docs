@@ -13,16 +13,16 @@
  * another program or a file.
  */
 
-// isTerminal reports whether a standard stream is attached to a terminal.
+// `isTerminal` reports whether a standard stream is attached to a terminal.
 // Run directly in a terminal, both lines print true. Run piped, as in
-// ende run terminal_detection.ts | cat, stdin stays attached to the
-// terminal but stdout is now a pipe, so the second line prints false.
+// `ende run terminal_detection.ts | cat`, `stdin` stays attached to the
+// terminal but `stdout` is now a pipe, so the second line prints `false`.
 console.log(`stdin is a terminal: ${Ende.stdin.isTerminal()}`); // stdin is a terminal: true
 console.log(`stdout is a terminal: ${Ende.stdout.isTerminal()}`); // stdout is a terminal: false (when piped; true in a terminal)
 
-// Ende.consoleSize returns the current size of the terminal window. It
+// `Ende.consoleSize` returns the current size of the terminal window. It
 // throws when no standard stream is attached to a terminal, for example in
-// CI, so wrap it in a try/catch.
+// CI, so wrap it in a `try`/`catch`.
 try {
   const { columns, rows } = Ende.consoleSize();
   console.log(`terminal size: ${columns}x${rows}`); // e.g. terminal size: 120x40
@@ -30,7 +30,7 @@ try {
   console.log("no terminal attached");
 }
 
-// The practical use: pick human friendly output only when stdout really is
+// The practical use: pick human friendly output only when `stdout` really is
 // a terminal. Here ANSI color codes are skipped when the output is piped,
 // so downstream programs receive clean text.
 const useColor = Ende.stdout.isTerminal();

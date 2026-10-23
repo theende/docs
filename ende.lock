@@ -26,7 +26,7 @@
     "jsr:@ende/net@^2026.10.15": "2026.10.15",
     "jsr:@ende/path@2026.10.14": "2026.10.14",
     "jsr:@ende/path@^2026.10.15": "2026.10.15",
-    "jsr:@ende/satz@^2026.10.20": "2026.10.20",
+    "jsr:@ende/satz@^2026.10.22": "2026.10.22",
     "jsr:@ende/streams@^2026.10.15": "2026.10.15",
     "jsr:@ende/toml@^2026.10.15": "2026.10.15",
     "jsr:@ende/yaml@^2026.10.15": "2026.10.15",
@@ -239,8 +239,8 @@
         "jsr:@ende/internal@^2026.10.15"
       ]
     },
-    "@ende/satz@2026.10.20": {
-      "integrity": "3f5bc5fec0db049960a78aa8fb38320487919a93e132290007f60aad20cc627e",
+    "@ende/satz@2026.10.22": {
+      "integrity": "fc783fd581c35acc63f5b5dc29d89a4209c0b57cda0d271e73cc203977dd8753",
       "dependencies": [
         "jsr:@ende/cli",
         "jsr:@ende/front-matter",
@@ -507,7 +507,7 @@
       "jsr:@ende/html@^2026.10.15",
       "jsr:@ende/markdown@^2026.10.18",
       "jsr:@ende/path@^2026.10.15",
-      "jsr:@ende/satz@^2026.10.20",
+      "jsr:@ende/satz@^2026.10.22",
       "jsr:@ende/yaml@^2026.10.15"
     ]
   }

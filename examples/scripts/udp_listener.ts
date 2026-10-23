@@ -7,14 +7,14 @@
  * @resource {/examples/udp_connector} Example: UDP Connector
  * @group Unstable APIs
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>An example of a UDP listener on localhost that will log the message
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br/>An example of a UDP listener on `localhost` that will log the message
  * if written to and close the connection if connected to.
  */
 
 // Instantiate an instance of text decoder to read the UDP stream bytes back into plaintext.
 const decoder = new TextDecoder();
 
-// Instantiate an instance of a UDP listener on localhost port 10000.
+// Instantiate an instance of a UDP listener on `localhost` port `10000`.
 const listener = Ende.listenDatagram({
   port: 10000,
   transport: "udp"
@@ -22,7 +22,7 @@ const listener = Ende.listenDatagram({
 
 // Await asynchronous messages that are sent to our UDP listener.
 for await (const [data, address] of listener) {
-  // Here we log the address of the sender of the data
+  // Here we log the address of the sender of the data.
   console.log("Server - received information from", address);
 
   // Here we log the results of the bytes that were read into our buffer array.

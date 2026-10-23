@@ -1,6 +1,6 @@
 ---
 title: jsx-no-comment-text-nodes
-tags: [recommended, react, jsx, fresh]
+tags: [recommended, react, jsx]
 ---
 
 JavaScript comments inside text nodes are rendered as plain text in JSX. This is

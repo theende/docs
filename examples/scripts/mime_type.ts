@@ -21,8 +21,8 @@ console.log(contentType(extname("data.json"))); // application/json
 // Text types include their charset, ready to use in a header.
 console.log(contentType(extname("index.html"))); // text/html; charset=UTF-8
 
-// Unknown extensions return undefined, so provide a fallback. The standard
-// fallback for arbitrary binary data is application/octet-stream.
+// Unknown extensions return `undefined`, so provide a fallback. The standard
+// fallback for arbitrary binary data is `application/octet-stream`.
 const type = contentType(extname("archive.xyz")) ??
   "application/octet-stream";
 console.log(type); // application/octet-stream

@@ -13,14 +13,14 @@
  */
 
 // If the directory has no depth (no folders), we can use
-// the built-in Ende.readDir
+// the built-in `Ende.readDir`.
 for await (const dirEntry of Ende.readDir(".")) {
   console.log("Basic listing:", dirEntry.name);
 }
 
 // If on the other hand you need to recursively walk
-// a repository, the standard library has a method for this.
-// In the most simple case it is a drop-in replacement
+// a repository, the Standard Library has a method for this.
+// In the most simple case it is a drop-in replacement.
 import { walk } from "jsr:@ende/fs/walk";
 
 for await (const dirEntry of walk(".")) {
@@ -29,7 +29,7 @@ for await (const dirEntry of walk(".")) {
 
 // We are also able to specify some settings to customize
 // our results. In the case of building filesystem routing
-// limiting results to only certain extensions may be useful
+// limiting results to only certain extensions may be useful.
 for await (const dirEntry of walk(".", { exts: ["ts"] })) {
   console.log("Recursive walking with extension:", dirEntry.name);
 }

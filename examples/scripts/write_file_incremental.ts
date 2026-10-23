@@ -21,10 +21,11 @@ const file = await Ende.open(`${dir}/log.txt`, {
   write: true
 });
 
-// Every open file exposes a web standard WritableStream. Its writer
+// Every open file exposes a web standard `WritableStream`. Its writer
 // guarantees each chunk is fully written before the promise resolves.
 const encoder = new TextEncoder();
 const writer = file.writable.getWriter();
+
 await writer.write(encoder.encode("line 1\n"));
 await writer.write(encoder.encode("line 2\n"));
 
@@ -36,6 +37,7 @@ console.log(await Ende.readTextFile(`${dir}/log.txt`)); // line 1\nline 2\n
 // it with the append option.
 const log = await Ende.open(`${dir}/log.txt`, { append: true });
 const appender = log.writable.getWriter();
+
 await appender.write(encoder.encode("line 3\n"));
 await appender.close();
 
@@ -43,12 +45,14 @@ await appender.close();
 // pipe closes the file for you.
 const source = ReadableStream.from(["streamed ", "content\n"])
   .pipeThrough(new TextEncoderStream());
+
 const target = await Ende.open(`${dir}/stream.txt`, {
   create: true,
   write: true
 });
+
 await source.pipeTo(target.writable);
 console.log(await Ende.readTextFile(`${dir}/stream.txt`)); // streamed content
 
-// Reading and writing files requires the -R and -W permissions.
+// Reading and writing files requires the `-R` and `-W` permissions.
 await Ende.remove(dir, { recursive: true });

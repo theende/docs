@@ -10,7 +10,7 @@
  * MessagePack is a binary serialization format with the same data model as
  * JSON. The binary encoding is smaller and faster to parse, which makes it
  * a good fit for caches, message queues and service to service traffic.
- * The Standard Library implements it in jsr:@ende/msgpack.
+ * The Standard Library implements it in [`jsr:@ende/msgpack`](https://jsr.io/@ende/msgpack).
  */
 import { decode, encode } from "jsr:@ende/msgpack";
 
@@ -23,13 +23,13 @@ const value = {
   version: 2
 };
 
-// To encode, pass the value to the encode function. The result is a
-// Uint8Array, noticeably smaller than the JSON text of the same value.
+// To encode, pass the value to the `encode` function. The result is a
+// `Uint8Array`, noticeably smaller than the JSON text of the same value.
 const bytes = encode(value);
 console.log(bytes.length); // 61
 console.log(JSON.stringify(value).length); // 79
 
-// To decode, pass the bytes to the decode function. The round trip
+// To decode, pass the bytes to the `decode` function. The round trip
 // returns an equivalent value.
 const decoded = decode(bytes);
 console.log(decoded);
@@ -42,10 +42,10 @@ console.log(decoded);
 //- }
 
 // MessagePack supports two types that JSON lacks: raw binary data and
-// bigint. Both survive the round trip without any base64 tricks.
-const binary = decode(encode({ data: new Uint8Array([1, 2, 3]), big: 123n }));
-console.log(binary); // { data: Uint8Array(3) [ 1, 2, 3 ], big: 123n }
+// `bigint`. Both survive the round trip without any `base64` tricks.
+const binary = decode(encode({ big: 123n, data: new Uint8Array([1, 2, 3]) }));
+console.log(binary); // { big: 123n, data: Uint8Array(3) [ 1, 2, 3 ] }
 
-// The full set of supported value types is null, boolean, number, bigint,
-// string, Uint8Array, and arrays and plain objects of those. Anything
-// else, for example a Date or a Map, makes encode throw an error.
+// The full set of supported value types is `null`, `boolean`, `number`, `bigint`,
+// `string`, `Uint8Array`, and arrays and plain objects of those. Anything
+// else, for example a `Date` or a `Map`, makes `encode` throw an error.

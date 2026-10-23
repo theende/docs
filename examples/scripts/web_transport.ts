@@ -7,23 +7,22 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.upgradeWebTransport} Doc: Ende.upgradeWebTransport
  * @group Network
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>WebTransport is the web platform’s API for low-latency, multiplexed
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br/>WebTransport is the web platform’s API for low-latency, multiplexed
  * communication over HTTP/3. Browsers can use it where raw QUIC and TCP
  * sockets are unavailable, and unlike WebSockets it offers many independent
  * streams plus unreliable datagrams. Ende provides both the client API and,
- * via Ende.upgradeWebTransport, the server side. This example runs both in
+ * via `Ende.upgradeWebTransport`, the server side. This example runs both in
  * one process.
  *
  * WebTransport runs over QUIC, which always requires TLS. Generate a local
- * self-signed certificate with:
- * <code>openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 14 -nodes -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost" -addext "basicConstraints=critical,CA:FALSE"</code>
+ * self-signed certificate with:<br/><pre><code>openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 14 -nodes -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost" -addext "basicConstraints=critical,CA:FALSE"</code></pre>
  */
 
 const cert = Ende.readTextFileSync("./server.crt");
 const key = Ende.readTextFileSync("./server.key");
 
 // The server side is a QUIC endpoint speaking the HTTP/3 ALPN protocol.
-// Ende.upgradeWebTransport performs the WebTransport handshake on an
+// `Ende.upgradeWebTransport` performs the WebTransport handshake on an
 // accepted QUIC connection.
 const endpoint = new Ende.QuicEndpoint({ hostname: "localhost", port: 4433 });
 const listener = endpoint.listen({ alpnProtocols: ["h3"], cert, key });
@@ -48,8 +47,8 @@ const listener = endpoint.listen({ alpnProtocols: ["h3"], cert, key });
 })();
 
 // Browsers normally require a certificate signed by a real CA, but
-// serverCertificateHashes lets a client trust a specific self-signed
-// certificate by the SHA-256 hash of its DER encoding. This is the
+// `serverCertificateHashes` lets a client trust a specific self-signed
+// certificate by the `SHA-256` hash of its DER encoding. This is the
 // standard way to develop locally with WebTransport.
 const der = Ende.readFileSync("./server.der"); // openssl x509 -in server.crt -outform der -out server.der
 const certHash = await crypto.subtle.digest("SHA-256", der);

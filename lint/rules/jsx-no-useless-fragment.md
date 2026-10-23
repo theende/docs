@@ -1,6 +1,6 @@
 ---
 title: jsx-no-useless-fragment
-tags: [recommended, react, jsx, fresh]
+tags: [recommended, react, jsx]
 ---
 
 Fragments are only necessary at the top of a JSX "block" and only when there are

@@ -12,7 +12,7 @@
  * make a sleep cancelable.
  */
 
-// The simplest sleep is a promise around setTimeout.
+// The simplest sleep is a promise around `setTimeout`.
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -21,11 +21,11 @@ console.log("waiting...");
 await sleep(100);
 console.log("done"); // prints 100ms later
 
-// The standard library provides a delay helper, with extras.
+// The Standard Library provides a `delay` helper, with extras.
 import { delay } from "jsr:@ende/async/delay";
 await delay(100);
 
-// A delay accepts an AbortSignal, which makes it cancelable. Aborting
+// A `delay` accepts an `AbortSignal`, which makes it cancelable. Aborting
 // rejects the promise.
 const controller = new AbortController();
 setTimeout(() => controller.abort(), 50);

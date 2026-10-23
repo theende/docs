@@ -12,7 +12,7 @@ documentation.
 
 Ende is a secure JavaScript and TypeScript runtime built on V8 and Rust that
 ships as a single binary with batteries included: TypeScript transpilation,
-formatting, linting, testing, and a rich standard library all work out of the
+formatting, linting, testing, and a rich Standard Library all work out of the
 box. Its explicit permission model (`--allow-net`, `--allow-read`, etc.) keeps
 programs sandboxed by default, which is especially useful for AI agents that
 need predictable side effects when running untrusted code snippets.

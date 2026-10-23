@@ -18,7 +18,7 @@ Firstly, let's create a file `url_bench.ts` and register a bench using the
 ```ts
 // url_bench.ts
 Ende.bench("URL parsing", () => {
-  new URL("https://deno.land");
+  new URL("https://ende.sh");
 });
 ```
 
@@ -48,38 +48,38 @@ the `only: true` option):
 ```ts
 // Compact form: name and function
 Ende.bench("hello world #1", () => {
-  new URL("https://deno.land");
+  new URL("https://ende.sh");
 });
 
 // Compact form: named function.
 Ende.bench(function helloWorld3() {
-  new URL("https://deno.land");
+  new URL("https://ende.sh");
 });
 
 // Longer form: bench definition.
 Ende.bench({
   name: "hello world #2",
   fn: () => {
-    new URL("https://deno.land");
+    new URL("https://ende.sh");
   }
 });
 
 // Similar to compact form, with additional configuration as a second argument.
 Ende.bench("hello world #4", { permissions: { read: true } }, () => {
-  new URL("https://deno.land");
+  new URL("https://ende.sh");
 });
 
 // Similar to longer form, with bench function as a second argument.
 Ende.bench(
   { name: "hello world #5", permissions: { read: true } },
   () => {
-    new URL("https://deno.land");
+    new URL("https://ende.sh");
   }
 );
 
 // Similar to longer form, with a named bench function as a second argument.
 Ende.bench({ permissions: { read: true } }, function helloWorld6() {
-  new URL("https://deno.land");
+  new URL("https://ende.sh");
 });
 ```
 
@@ -137,7 +137,7 @@ When registering a bench case, it can be assigned to a group, using
 ```ts
 // url_bench.ts
 Ende.bench("url parse", { group: "url" }, () => {
-  new URL("https://deno.land");
+  new URL("https://ende.sh");
 });
 ```
 

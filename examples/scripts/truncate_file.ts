@@ -19,7 +19,7 @@ const dir = await Ende.makeTempDir();
 const path = `${dir}/numbers.txt`;
 await Ende.writeTextFile(path, "0123456789");
 
-// Ende.truncate cuts the file to the given length. Everything after that
+// `Ende.truncate` cuts the file to the given length. Everything after that
 // point is gone.
 await Ende.truncate(path, 4);
 console.log(await Ende.readTextFile(path)); // 0123
@@ -48,6 +48,6 @@ await Ende.writeTextFile(path, "abc");
 await Ende.truncate(path, 6);
 console.log(await Ende.readFile(path)); // Uint8Array(6) [ 97, 98, 99, 0, 0, 0 ]
 
-// Truncating requires the -W permission; reading the results back
-// requires -R.
+// Truncating requires the `-W` permission; reading the results back
+// requires `-R`.
 await Ende.remove(dir, { recursive: true });

@@ -9,7 +9,7 @@
  */
 
 // Define the text to be encrypted.
-const text = "Hello, Deno 2!";
+const text = "Hello, Ende!";
 
 // Convert the text to a `Uint8Array` using `TextEncoder` (required for encryption).
 const encoder = new TextEncoder();

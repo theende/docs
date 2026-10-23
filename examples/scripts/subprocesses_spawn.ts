@@ -11,8 +11,8 @@
  * it using convenience methods for reading output streams.
  */
 
-// The Ende namespace has a unified api for interacting with the outside system
-// called Ende.Command. With it, we can initialize some information about the
+// The Ende namespace has a unified API for interacting with the outside system
+// called `Ende.Command`. With it, we can initialize some information about the
 // command but it will not be executed immediately.
 const command = new Ende.Command("ende", {
   args: [
@@ -24,21 +24,21 @@ const command = new Ende.Command("ende", {
 });
 
 // In a slightly more complex case, we want to interact with a spawned
-// process. To do this, we first need to spawn it.
+// process. To do this, we first need to `spawn` it.
 const process = command.spawn();
 
-// We can now pipe the input into stdin. To do this we must first get
-// a writer from the stream and write to it
+// We can now pipe the input into `stdin`. To do this we must first get
+// a writer from the stream and write to it.
 const writer = process.stdin.getWriter();
 await writer.write(new TextEncoder().encode(`console.log("hello")`));
 writer.releaseLock();
 
-// We must then close stdin
+// We must then close `stdin`.
 await process.stdin.close();
 
-// We can now wait for the process to output the results using convenience methods
+// We can now wait for the process to output the results using convenience methods.
 const stdout = await process.stdout.text();
 console.log(stdout);
 
-// Wait for the process to complete
+// Wait for the process to complete.
 await process.status;

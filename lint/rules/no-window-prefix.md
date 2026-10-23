@@ -21,7 +21,7 @@ the use of `window` only if it's completely replaceable with `self`,
 **Invalid:**
 
 ```typescript
-const a = await window.fetch("https://deno.land");
+const a = await window.fetch("https://ende.sh");
 
 const b = window.Ende.metrics();
 ```
@@ -29,9 +29,9 @@ const b = window.Ende.metrics();
 **Valid:**
 
 ```typescript
-const a1 = await fetch("https://deno.land");
-const a2 = await globalThis.fetch("https://deno.land");
-const a3 = await self.fetch("https://deno.land");
+const a1 = await fetch("https://ende.sh");
+const a2 = await globalThis.fetch("https://ende.sh");
+const a3 = await self.fetch("https://ende.sh");
 
 const b1 = Ende.metrics();
 const b2 = globalThis.Ende.metrics();

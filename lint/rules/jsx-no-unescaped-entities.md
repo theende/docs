@@ -1,6 +1,6 @@
 ---
 title: jsx-no-unescaped-entities
-tags: [recommended, react, jsx, fresh]
+tags: [recommended, react, jsx]
 ---
 
 Leaving the `>` or `}` character in JSX is often undesired and difficult to

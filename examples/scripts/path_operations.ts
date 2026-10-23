@@ -11,7 +11,7 @@
  * The Ende Standard Library provides simple utilities for this.
  */
 
-// First we will import the module from the Ende Standard Library
+// First we will import the module from the Ende Standard Library.
 import * as path from "jsr:@ende/path";
 import * as posix from "jsr:@ende/path/posix";
 import * as windows from "jsr:@ende/path/windows";
@@ -22,23 +22,23 @@ const p1 = posix.fromFileUrl("file:///home/foo");
 const p2 = windows.fromFileUrl("file:///home/foo");
 console.log(`Path 1: ${p1} Path 2: ${p2}`);
 
-// We can also choose to not specify the platform and automatically use whatever Ende is running on
+// We can also choose to not specify the platform and automatically use whatever Ende is running on.
 const p3 = path.fromFileUrl("file:///home/foo");
 console.log(`Path on current OS: ${p3}`);
 
-// We can get the last part of a file path using the basename method
+// We can get the last part of a file path using the `basename` method.
 const p = path.basename("./ende/is/awesome/mod.ts");
 console.log(p); // mod.ts
 
-// We can get the directory of a file path using the dirname method
+// We can get the directory of a file path using the `dirname` method.
 const base = path.dirname("./ende/is/awesome/mod.ts");
 console.log(base); // ./ende/is/awesome
 
-// We can get the extension of a file path using the extname method
+// We can get the extension of a file path using the `extname` method.
 const ext = path.extname("./ende/is/awesome/mod.ts");
 console.log(ext); // .ts
 
-// We can format a path using a FormatInputPathObject
+// We can format a path using a `FormatInputPathObject`.
 const formatPath = path.format({
   dir: "/home/user/dir",
   ext: ".html",
@@ -48,27 +48,27 @@ const formatPath = path.format({
 
 console.log(formatPath); // "/home/user/dir/index.html"
 
-// When we want to make our code cross-platform, we can use the join method.
+// When we want to make our code cross-platform, we can use the `join` method.
 // This joins any number of string by the OS-specific file separator. On
-// Mac OS this would be foo/bar. On windows, this would be foo\bar.
+// macOS this would be `foo/bar`. On Windows, this would be `foo\bar`.
 const joinPath = path.join("foo", "bar");
 console.log(joinPath);
 
-// We can get the current working directory using the built-in cwd method
+// We can get the current working directory using the built-in `cwd` method.
 const current = Ende.cwd();
 console.log(current);
 
 // We can get the directory name of the current module using the built-in
-// dirname method
+// `dirname` method.
 const dirname = import.meta.dirname;
 console.log(dirname);
 
 // We can get the URL of the current module using the built-in
-// url method
+// `url` method.
 const url = import.meta.url;
 console.log(url);
 
 // We can get the file name of the current module using the built-in
-// filename method
+// `filename` method.
 const filename = import.meta.filename;
 console.log(filename);

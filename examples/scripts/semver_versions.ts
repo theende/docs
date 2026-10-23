@@ -5,10 +5,10 @@
  * @run <url>
  * @resource {https://jsr.io/@ende/semver/doc/~/parse} Doc: @ende/semver parse
  * @resource {https://jsr.io/@ende/semver/doc/~/satisfies} Doc: @ende/semver satisfies
- * @group Standard library
+ * @group Standard Library
  *
  * Version strings cannot be compared as plain text, because "1.10.0"
- * sorts before "1.2.0" alphabetically. The @ende/semver package parses
+ * sorts before "1.2.0" alphabetically. The [`@ende/semver`](https://jsr.io/@ende/semver) package parses
  * semantic versions into objects and compares them by their numeric
  * parts, with full support for ranges like ^1.2.0.
  */
@@ -22,7 +22,7 @@ import {
   satisfies
 } from "jsr:@ende/semver";
 
-// Parse turns a version string into an object with numeric fields.
+// `parse` turns a version string into an object with numeric fields.
 const version = parse("1.2.3-rc.1");
 console.log(version.major, version.minor, version.patch); // 1 2 3
 console.log(version.prerelease); // [ "rc", 1 ]
@@ -31,7 +31,7 @@ console.log(version.prerelease); // [ "rc", 1 ]
 console.log("1.10.0" < "1.2.0"); // true
 console.log(compare(parse("1.10.0"), parse("1.2.0"))); // 1
 
-// Compare returns -1, 0, or 1, which makes it a ready-made sort
+// `compare` returns `-1`, `0`, or `1`, which makes it a ready-made sort
 // comparator for a list of versions.
 const versions = ["1.0.0", "2.1.3", "1.10.2", "0.9.0"].map(parse);
 versions.sort(compare);
@@ -43,7 +43,7 @@ const range = parseRange("^1.2.0");
 console.log(satisfies(parse("1.9.9"), range)); // true
 console.log(satisfies(parse("2.0.0"), range)); // false
 
-// maxSatisfying picks the highest version that fits the range, which
+// `maxSatisfying` picks the highest version that fits the range, which
 // is how a package manager resolves a dependency.
 const best = maxSatisfying(versions, parseRange(">=1.0.0 <2.0.0"));
 console.log(format(best!)); // 1.10.2

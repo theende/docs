@@ -9,7 +9,7 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.FsFile#property_readable} Ende File System API docs
  * @group File System
  *
- * In Unix, the `cat` command is a utility that reads files and writes them to standard output. You can use Ende to mimic the behavior of the `cat` command. <br><br> In this program each command-line argument is assumed to be a filename, the file is opened, and printed to stdout (e.g. the console).
+ * In Unix, the `cat` command is a utility that reads files and writes them to standard output. You can use Ende to mimic the behavior of the `cat` command.<br/><br/>In this program each command-line argument is assumed to be a filename, the file is opened, and printed to `stdout` (e.g. the console).
  */
 
 // Create a script that reads the contents of one or more files and writes them to standard output.

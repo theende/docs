@@ -7,13 +7,13 @@
  * @resource {https://docs.ende.sh/api/ende/~/Ende.bench} Doc: Ende.bench
  * @group CLI
  *
- * Ende has a built-in benchmark runner. Register benchmarks with Ende.bench
- * and run them with the ende bench subcommand, which reports timings and
+ * Ende has a built-in benchmark runner. Register benchmarks with `Ende.bench`
+ * and run them with the `ende bench` subcommand, which reports timings and
  * compares grouped benchmarks against a baseline.
  */
 
-// A classic question: for membership checks, how much faster is a Set than
-// an Array? Prepare both with the same ten thousand items, then look for an
+// A classic question: for membership checks, how much faster is a `Set` than
+// an `Array`? Prepare both with the same ten thousand items, then look for an
 // element near the end, the worst case for the array.
 const items = Array.from({ length: 10_000 }, (_, i) => `item-${i}`);
 const itemsArray = [...items];
@@ -50,7 +50,7 @@ Ende.bench("join parts", (b) => {
   b.end();
 });
 
-// Run the file with ende bench. The trailing columns with min, max and
+// Run the file with `ende bench`. The trailing columns with `min`, `max` and
 // percentiles are trimmed here to keep the table narrow:
 //
 //   ende bench ende_bench.ts
@@ -70,7 +70,7 @@ Ende.bench("join parts", (b) => {
 //        2303x slower than Set.prototype.has
 //
 // The linear scan takes microseconds while the hash lookup takes
-// nanoseconds, so the Set wins by more than three orders of magnitude.
+// nanoseconds, so the `Set` wins by more than three orders of magnitude.
 
-// Useful flags: ende bench --filter lookup runs only matching benchmarks,
-// and ende bench --json emits machine-readable results.
+// Useful flags: `ende bench --filter` lookup runs only matching benchmarks,
+// and `ende bench --json` emits machine-readable results.

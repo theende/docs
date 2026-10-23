@@ -21,7 +21,7 @@ used in your project. You can use it to map bare specifiers to URLs or file
 paths making it easier to manage dependencies and module resolution in your
 applications.
 
-For example, if you want to use the `assert` module from the standard library in
+For example, if you want to use the `assert` module from the Standard Library in
 your project, you could use this import map:
 
 ```json title="ende.json"

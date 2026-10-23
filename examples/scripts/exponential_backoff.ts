@@ -9,7 +9,7 @@
  *
  * Exponential backoff is a technique used in computer systems to handle retries and
  * avoid overwhelming services. We can easily implement this by using the `retry`
- * utility provided by the standard library.
+ * utility provided by the Standard Library.
  */
 
 // Import the `retry` utility from [`@ende/async`](https://jsr.io/@ende/async).

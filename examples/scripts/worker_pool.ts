@@ -45,7 +45,7 @@ self.onmessage = (e: MessageEvent<number>) => {
 const tasks = [1e6, 2e6, 3e6, 4e6, 5e6, 6e6, 7e6, 8e6];
 const results: { count: number; limit: number; }[] = [];
 
-// navigator.hardwareConcurrency reports the number of logical cores.
+// `navigator.hardwareConcurrency` reports the number of logical cores.
 // Spawning more workers than that only adds scheduling overhead.
 const poolSize = Math.min(navigator.hardwareConcurrency, tasks.length);
 console.log(`pool size: ${poolSize}`); // pool size: 8
@@ -87,5 +87,6 @@ await Promise.all(
 // if order matters. On an 8-core machine this runs roughly 4x faster
 // than the same loop on the main thread.
 results.sort((a, b) => a.limit - b.limit);
-console.log(results[0]); // { limit: 1000000, count: 78498 }
-console.log(results.at(-1)); // { limit: 8000000, count: 539777 }
+
+console.log(results[0]); // { count: 78498, limit: 1000000 }
+console.log(results.at(-1)); // { count: 539777, limit: 8000000 }

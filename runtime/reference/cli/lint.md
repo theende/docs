@@ -140,7 +140,7 @@ function foo(): any {
 The ignore directive must be placed before the first statement or declaration:
 
 ```ts
-// Copyright 2018-2024 the Deno authors. All rights reserved. MIT license.
+// Copyright 2026 the Ende authors. All rights reserved. MIT license.
 
 /**
  * Some JS doc

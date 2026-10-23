@@ -26,7 +26,7 @@ async function which(command: string): Promise<string | null> {
 
     try {
       const info = await Ende.stat(candidate);
-      // On unix, check that some execute bit is set. Windows has no mode,
+      // On Unix, check that some execute bit is set. Windows has no mode,
       // so existence is the best cheap signal.
       const executable = Ende.build.os === "windows" ||
         ((info.mode ?? 0) & 0o111) !== 0;

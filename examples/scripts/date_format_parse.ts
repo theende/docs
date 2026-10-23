@@ -48,7 +48,7 @@ console.log(date.dayOfWeek); // 5 (Friday)
 console.log(date.daysInMonth); // 30
 
 // `Temporal` parses ISO 8601 only. For data in custom patterns, parse from
-// the standard library converts to a `Date`. It interprets the value in the
+// the Standard Library converts to a `Date`. It interprets the value in the
 // local time zone, so hand it to `Temporal` through that same zone to keep
 // the calendar date intact.
 import { parse } from "jsr:@ende/datetime/parse";

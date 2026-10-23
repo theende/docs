@@ -15,7 +15,7 @@ const foo: any = 42;
 ```
 
 This rule checks for the validity of the specified rule names (i.e. whether
-`deno_lint` provides the rule or not).
+`ende_lint` provides the rule or not).
 
 **Invalid:**
 

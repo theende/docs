@@ -28,7 +28,7 @@ Languages: **Rust**, **JavaScript**, **TypeScript**
 
 ### [std](https://github.com/theende/std)
 
-The standard library for Ende, published as `@ende/*` on JSR.
+The Standard Library for Ende, published as `@ende/*` on JSR.
 
 Languages: **TypeScript**, WebAssembly
 

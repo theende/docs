@@ -223,8 +223,8 @@ some web APIs adopted by Ende.
 ```ts
 // ende run --location https://api.github.com/ --allow-net main.ts
 
-const response = await fetch("./orgs/denoland");
-// Fetches "https://api.github.com/orgs/denoland".
+const response = await fetch("./orgs/theende");
+// Fetches "https://api.github.com/orgs/theende".
 ```
 
 The `fetch()` call above would throw if the `--location` flag was not passed,
@@ -466,7 +466,7 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
   ende: {
     permissions: {
       net: [
-        "deno.land"
+        "ende.sh"
       ],
       read: [
         new URL("./file_1.txt", import.meta.url),

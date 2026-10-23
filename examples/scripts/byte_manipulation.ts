@@ -9,7 +9,7 @@
  * When working with lower-level data we often deal
  * with byte arrays in the form of `Uint8Arrays`. There
  * are some common manipulations and queries that can
- * be done and are included with the standard library.
+ * be done and are included with the Standard Library.
  */
 
 // Let’s initialize some byte arrays.

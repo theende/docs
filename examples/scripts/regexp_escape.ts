@@ -5,17 +5,17 @@
  * @run <url>
  * @resource {https://jsr.io/@ende/regexp/doc/~/escape} Doc: @ende/regexp escape
  * @resource {https://jsr.io/@ende/regexp} Doc: @ende/regexp
- * @group Standard library
+ * @group Standard Library
  *
- * Building a RegExp from user input is dangerous, because characters
+ * Building a `RegExp` from user input is dangerous, because characters
  * like parentheses and dots have special meaning in patterns. A stray
- * "(" throws a syntax error, and an unescaped "." matches more than
- * intended. The escape function neutralizes every special character so
+ * `(` throws a syntax error, and an unescaped `.` matches more than
+ * intended. The `escape` function neutralizes every special character so
  * the input matches literally.
  */
 
-// A user types this into a search box. The "(" starts a regex group
-// that is never closed, so constructing a RegExp from it throws.
+// A user types this into a search box. The `(` starts a regex group
+// that is never closed, so constructing a `RegExp` from it throws.
 const userInput = "find(";
 
 try {

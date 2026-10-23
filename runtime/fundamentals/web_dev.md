@@ -16,7 +16,7 @@ applications, making your web dev a delightful experience.
 2. Ende has [built-in TypeScript support](/runtime/fundamentals/typescript/),
    allowing you to write TypeScript code without additional configuration or
    tooling.
-3. Ende comes with a [standard library](/runtime/reference/std/) that includes
+3. Ende comes with a [Standard Library](/runtime/reference/std/) that includes
    modules for common tasks like HTTP servers, file system operations, and more.
 
 For your vanilla TypeScript, or JavaScript, web applications, you can use the
@@ -55,6 +55,6 @@ Hono also renders [JSX](/runtime/reference/jsx/) to HTML on the server.
 ## Static sites
 
 [satz](https://jsr.io/@ende/satz) is a static site generator built on the Ende
-standard library: Markdown and TSX pages, layouts, syntax highlighting, a dev
+Standard Library: Markdown and TSX pages, layouts, syntax highlighting, a dev
 server with live reload, and a search index. This documentation site is built
 with it.

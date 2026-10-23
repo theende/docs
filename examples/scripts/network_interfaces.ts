@@ -7,14 +7,14 @@
  * @resource {https://docs.ende.sh/examples/dns_queries/} Example: DNS queries
  * @group System
  *
- * Ende.networkInterfaces lists every network address of the machine. The
+ * `Ende.networkInterfaces` lists every network address of the machine. The
  * most common use is finding the LAN address of the computer, for example
  * to print a URL that teammates on the same network can open. The call
- * needs the system permission, granted with -S (short for --allow-sys).
+ * needs the system permission, granted with `-S` (short for `--allow-sys`).
  */
 
 // Each entry describes one address bound to one interface. An interface
-// like en0 typically appears several times, once per IPv4 and IPv6 address.
+// like `en0` typically appears several times, once per IPv4 and IPv6 address.
 const interfaces = Ende.networkInterfaces();
 console.log(interfaces.length); // e.g. 15
 
@@ -24,7 +24,7 @@ const first = interfaces[0];
 console.log(first.name, first.family, first.address); // e.g. lo0 IPv4 127.0.0.1
 
 // A small helper to find the LAN address: the first IPv4 address that is
-// not on the loopback interface. Addresses starting with 127. only reach
+// not on the loopback interface. Addresses starting with `127`. only reach
 // the machine itself, so they are skipped.
 function lanAddress(): string | undefined {
   return Ende.networkInterfaces().find((ni) =>

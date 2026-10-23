@@ -11,16 +11,12 @@ directive because it is most likely a mistake.
 
 Additionally, note that only the `types` directive is allowed in JavaScript
 files. This directive is useful for telling the TypeScript compiler the location
-of a type definition file that corresponds to a certain JavaScript file.
-However, even in the Ende manual of the versions prior to v1.10 (e.g. [v1.9.2]),
-there was a wrong statement describing that one should use the `path` directive
-in such cases. Actually, the `types` directive should be used. See
-[the latest manual] for more detail. So this rule also detects the usage of the
+of a type definition file that corresponds to a certain JavaScript file. See
+[the latest docs] for more detail. So this rule also detects the usage of the
 directive other than `types` in JavaScript files and suggests replacing it with
 the `types` directive.
 
-[v1.9.2]: https://deno.land/manual@v1.9.2/typescript/types#using-the-triple-slash-reference-directive
-[the latest manual]: https://deno.land/manual/typescript/types#using-the-triple-slash-reference-directive
+[the latest docs]: https://docs.ende.sh/runtime/reference/ts_config_migration/#triple-slash-directives
 
 **Invalid:**
 

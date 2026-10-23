@@ -6,7 +6,7 @@
  * @resource {https://docs.ende.sh/api/web/~/Worker/} API: Worker
  * @group Advanced
  *
- * Workers are the only way of running javascript off of the main thread.
+ * Workers are the only way of running JavaScript off of the main thread.
  * This can be useful for a wide variety of programs, especially those where
  * there is a lot of computation that needs to be done without blocking a
  * thread. This example is not runnable on its own; the worker expects
@@ -21,6 +21,7 @@
 self.onmessage = async (e) => {
   const { filename } = e.data;
   const text = await Ende.readTextFile(filename);
+
   console.log(text);
   self.close();
 };
@@ -36,12 +37,12 @@ const worker = new Worker(
   }
 );
 
-// We can send a message to the worker by using the `postMessage` method
+// We can send a message to the worker by using the `postMessage` method.
 worker.postMessage({ filename: "./log.txt" });
 
 // By default the worker inherits the permissions of the thread it was
 // instantiated from. We can give workers certain permissions by using
-// the ende.permissions option.
+// the `ende.permissions` option.
 const worker2 = new Worker(
   new URL("./worker.ts", import.meta.url).href,
   {
@@ -49,7 +50,7 @@ const worker2 = new Worker(
       permissions: {
         read: [
           new URL("./file_1.txt", import.meta.url),
-          new URL("./file_2.txt", import.meta.url),
+          new URL("./file_2.txt", import.meta.url)
         ]
       }
     },

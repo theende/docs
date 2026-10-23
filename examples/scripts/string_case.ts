@@ -5,10 +5,10 @@
  * @run <url>
  * @resource {https://jsr.io/@ende/text/doc/~/toCamelCase} Doc: @ende/text toCamelCase
  * @resource {https://jsr.io/@ende/text/doc/~/toKebabCase} Doc: @ende/text toKebabCase
- * @group Standard library
+ * @group Standard Library
  *
  * Identifiers, file names, CSS classes, and database columns all expect
- * different casing conventions. The @ende/text package converts between
+ * different casing conventions. The [`@ende/text`](https://jsr.io/@ende/text) package converts between
  * them from a single input, splitting words on spaces, dashes,
  * underscores, and existing case boundaries.
  */
@@ -34,7 +34,7 @@ console.log(toSnakeCase("getUserById")); // get_user_by_id
 console.log(toKebabCase("HTTPServerError")); // http-server-error
 
 // Sentence case and title case ship as unstable submodules, so their
-// import paths carry an unstable- prefix until they stabilize.
+// import paths carry an `unstable-` prefix until they stabilize.
 import { toSentenceCase } from "jsr:@ende/text/unstable-to-sentence-case";
 import { toTitleCase } from "jsr:@ende/text/unstable-to-title-case";
 

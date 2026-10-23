@@ -5,11 +5,11 @@
  * @run <url>
  * @resource {https://jsr.io/@ende/cache/doc/~/memoize} Doc: @ende/cache memoize
  * @resource {https://jsr.io/@ende/cache/doc/~/LruCache} Doc: @ende/cache LruCache
- * @group Standard library
+ * @group Standard Library
  *
  * Memoization caches the result of a function call so repeated calls
- * with the same arguments return instantly. The standard library ships
- * memoize for the wrapping and LruCache for keeping the cache bounded.
+ * with the same arguments return instantly. The Standard Library ships
+ * memoize for the wrapping and `LruCache` for keeping the cache bounded.
  * This example proves cache hits with a call counter and shows eviction
  * when the cache fills up.
  */
@@ -36,11 +36,11 @@ console.log(calls); // 1
 console.log(fastSquare(12)); // 144
 console.log(calls); // 2
 
-// By default the cache is an unbounded Map. The cache property exposes
+// By default the cache is an unbounded `Map`. The `cache` property exposes
 // it for inspection or manual invalidation.
 console.log(fastSquare.cache.size); // 2
 
-// An LruCache keeps at most maxSize entries and evicts the least
+// An `LruCache` keeps at most `maxSize` entries and evicts the least
 // recently used one when a new entry would exceed the limit.
 const lru = new LruCache<string, MemoizationCacheResult<number>>(2);
 let lookups = 0;

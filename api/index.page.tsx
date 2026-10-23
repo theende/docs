@@ -39,7 +39,7 @@ function sidebar(builtin: Builtin): Sidebar {
         })),
         title
       })),
-      { href: "/runtime/reference/std/", title: "Standard library" }
+      { href: "/runtime/reference/std/", title: "Standard Library" }
     ],
     title: "API reference"
   }];
@@ -58,7 +58,7 @@ export default async function* () {
       <>
         <p>
           The reference is generated from Ende’s own type declarations
-          {builtin.ende ? ` (Ende ${builtin.ende})` : ""} and the standard library’s published packages on JSR.
+          {builtin.ende ? ` (Ende ${builtin.ende})` : ""} and the Standard Library’s published packages on JSR.
         </p>
         <ul>
           {SECTIONS.map(({ section, title, intro }) => (
@@ -67,12 +67,12 @@ export default async function* () {
             </li>
           ))}
           <li>
-            <a href="/runtime/reference/std/">Standard library</a> — the <code>@ende/*</code> packages on JSR.
+            <a href="/runtime/reference/std/">Standard Library</a> — the <code>@ende/*</code> packages on JSR.
           </li>
         </ul>
       </>
     ),
-    description: "The APIs built into Ende and its standard library.",
+    description: "The APIs built into Ende and its Standard Library.",
     sidebar: side,
     title: "API reference",
     url: "/api/"

@@ -212,7 +212,7 @@ headers, request and response bodies, and timing information.
 Let's try it with a small program that uses `fetch()`:
 
 ```ts title="net.ts"
-const res = await fetch("https://api.github.com/repos/denoland/deno");
+const res = await fetch("https://api.github.com/repos/theende/ende");
 console.log(res.status, (await res.json()).stargazers_count);
 ```
 

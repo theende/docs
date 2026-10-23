@@ -1,6 +1,6 @@
 ---
 title: react-no-danger-with-children
-tags: [react, fresh]
+tags: [react]
 ---
 
 Using JSX children together with `dangerouslySetInnerHTML` is invalid as they

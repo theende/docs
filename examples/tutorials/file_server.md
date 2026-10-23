@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-10-20
 title: "Write a file server"
-description: "Tutorial on building a file server with Ende. Learn how to handle HTTP requests, serve static files, implement streaming responses, and use the standard library’s file server module for production deployments."
+description: "Tutorial on building a file server with Ende. Learn how to handle HTTP requests, serve static files, implement streaming responses, and use the Standard Library’s file server module for production deployments."
 url: /examples/file_server_tutorial/
 oldUrl:
   - /runtime/manual/examples/file_server/

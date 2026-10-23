@@ -13,7 +13,7 @@
  * It is a new and more efficient binary format.
  */
 
-// We create a new Uint8Array with the bytes of the WebAssembly module.
+// We create a new `Uint8Array` with the bytes of the WebAssembly module.
 // This is usually the output of some compiler and not written by hand.
 // ende-fmt-ignore
 const bytes = new Uint8Array([

@@ -37,7 +37,7 @@ function withTimeout<T>(work: Promise<T>, ms: number): Promise<T> {
   return Promise.race([work, deadline]).finally(() => clearTimeout(timer));
 }
 
-// Run a single test by part of its name with --filter. Wrapping the value
+// Run a single test by part of its name with `--filter`. Wrapping the value
 // in slashes treats it as a regular expression:
 //
 //   ende test --filter "addition" control.test.ts
@@ -45,8 +45,8 @@ function withTimeout<T>(work: Promise<T>, ms: number): Promise<T> {
 //
 //   ende test --filter "/add|sub/" control.test.ts
 
-// Stop at the first failure with --fail-fast, or after N failures with
-// --fail-fast=N. Without it, the runner reports every failure:
+// Stop at the first failure with `--fail-fast`, or after `N` failures with
+// `--fail-fast=N`. Without it, the runner reports every failure:
 //
 //   ende test --fail-fast control.test.ts
 
@@ -54,8 +54,8 @@ function withTimeout<T>(work: Promise<T>, ms: number): Promise<T> {
 //
 //   ende test --watch control.test.ts
 
-// Run test FILES in parallel across CPU cores. Tests inside one file still
-// run sequentially; the ENDE_JOBS environment variable controls the worker
+// Run test files in parallel across CPU cores. Tests inside one file still
+// run sequentially; the `ENDE_JOBS` environment variable controls the worker
 // count:
 //
 //   ende test --parallel

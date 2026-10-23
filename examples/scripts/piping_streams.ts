@@ -12,10 +12,10 @@
  */
 
 // A common usecase for streams is downloading files without buffering the whole file in memory.
-// First, we open a file we want to write to
+// First, we open a file we want to write to.
 const download = await Ende.open("example.html", { create: true, write: true });
 
-// Now let’s make a request to a web page
+// Now let’s make a request to a web page.
 const req = await fetch("https://examples.ende.sh");
 
 // We can pipe this response straight into the file. In a more realistic example, we would
@@ -24,13 +24,13 @@ const req = await fetch("https://examples.ende.sh");
 req.body?.pipeTo(download.writable);
 
 // Pipes can connect a lot of things. For example, we could pipe the file we just downloaded into
-// stdout. We could also pipe our streams through transformers to get a more interesting result. In this
-// case, we will pipe our file through a stream which will highlight all "<" characters in the terminal.
+// `stdout`. We could also pipe our streams through transformers to get a more interesting result. In this
+// case, we will pipe our file through a stream which will highlight all `<` characters in the terminal.
 
-// First we will import a utility from the standard library to help us with this.
+// First we will import a utility from the Standard Library to help us with this.
 import { bgBrightYellow } from "jsr:@ende/fmt/colors";
 
-// Then we will create a transform stream utility class
+// Then we will create a transform stream utility class.
 class HighlightTransformStream extends TransformStream<string, string> {
   constructor() {
     super({
@@ -41,11 +41,11 @@ class HighlightTransformStream extends TransformStream<string, string> {
   }
 }
 
-// Let’s open our file for reading
+// Let’s open our file for reading.
 const example = await Ende.open("example.html", { read: true });
 
-// Now we can pipe the result from the file, into a TextDecoderStream, into our custom transform class,
-// back through a TextEncoderStream, and finally into stdout
+// Now we can pipe the result from the file, into a `TextDecoderStream`, into our custom transform class,
+// back through a `TextEncoderStream`, and finally into `stdout`.
 await example.readable
   .pipeThrough(new TextDecoderStream())
   .pipeThrough(new HighlightTransformStream())

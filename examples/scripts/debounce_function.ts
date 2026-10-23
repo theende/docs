@@ -5,7 +5,7 @@
  * @run <url>
  * @resource {https://jsr.io/@ende/async/doc/~/debounce} Doc: @ende/async debounce
  * @resource {https://jsr.io/@ende/async/doc/~/DebouncedFunction} Doc: @ende/async DebouncedFunction
- * @group Standard library
+ * @group Standard Library
  *
  * A debounced function waits until calls stop arriving before it runs.
  * That makes it a good fit for noisy event sources, such as file watcher

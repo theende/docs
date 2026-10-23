@@ -12,7 +12,7 @@
 
 // File: ./util.ts
 
-// To export a function, you use the export keyword.
+// To export a function, you use the `export` keyword.
 export function sayHello(thing: string) {
   console.log(`Hello, ${thing}!`);
 }
@@ -25,7 +25,7 @@ export const baz = "baz";
 
 // File: ./main.ts
 
-// To import things from other files, you can use the import keyword.
+// To import things from other files, you can use the `import` keyword.
 import { sayHello } from "./util.ts";
 sayHello("World");
 

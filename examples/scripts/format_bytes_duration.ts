@@ -5,7 +5,7 @@
  * @run <url>
  * @resource {https://jsr.io/@ende/fmt/doc/bytes/~/format} Doc: @ende/fmt bytes format
  * @resource {https://jsr.io/@ende/fmt/doc/duration/~/format} Doc: @ende/fmt duration format
- * @group Standard library
+ * @group Standard Library
  *
  * Raw numbers like 1536 bytes or 97000 milliseconds are hard to read in
  * logs and user interfaces. The [`@ende/fmt`](https://jsr.io/@ende/fmt) package turns byte counts into

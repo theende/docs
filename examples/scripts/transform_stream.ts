@@ -7,9 +7,9 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/pipeThrough} MDN: pipeThrough
  * @group Web Standard APIs
  *
- * A TransformStream sits in the middle of a stream pipeline and rewrites
- * chunks as they pass through. You plug one in with pipeThrough. Built-in
- * helpers like TextEncoderStream and CompressionStream are transform
+ * A `TransformStream` sits in the middle of a stream pipeline and rewrites
+ * chunks as they pass through. You plug one in with `pipeThrough`. Built-in
+ * helpers like `TextEncoderStream` and `CompressionStream` are transform
  * streams too. This example uppercases chunks, splits text into lines,
  * numbers them, and uses flush to deal with leftovers.
  */
@@ -23,7 +23,7 @@ const upper = new TransformStream<string, string>({
   }
 });
 
-// ReadableStream.from turns an iterable into a stream, and Array.fromAsync
+// `ReadableStream.from` turns an iterable into a stream, and `Array.fromAsync`
 // collects a stream back into an array, which keeps the example compact.
 const shouted = await Array.fromAsync(
   ReadableStream.from(["hello", "streams"]).pipeThrough(upper)
@@ -43,7 +43,10 @@ function lineSplitter(): TransformStream<string, string> {
       buffer += chunk;
       const lines = buffer.split("\n");
       buffer = lines.pop()!;
-      for (const line of lines) controller.enqueue(line);
+
+      for (const line of lines) {
+        controller.enqueue(line);
+      }
     },
     flush(controller) {
       if (buffer.length > 0)
@@ -64,8 +67,8 @@ function lineNumberer(): TransformStream<string, string> {
   });
 }
 
-// Transforms compose by chaining pipeThrough calls. Note how the chunk
-// boundaries fall in the middle of words, and how charlie has no trailing
+// Transforms compose by chaining `pipeThrough` calls. Note how the chunk
+// boundaries fall in the middle of words, and how `charlie` has no trailing
 // newline, so only the flush callback can emit it.
 const numbered = await Array.fromAsync(
   ReadableStream.from(["alpha\nbra", "vo\nchar", "lie"])

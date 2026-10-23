@@ -285,8 +285,8 @@ built-in objects.
 
 ## Using wasmbuild for Rust WebAssembly in Ende
 
-[wasmbuild](https://github.com/denoland/wasmbuild) is an official Ende tool that
-simplifies working with Rust and WebAssembly in Ende projects. It automates the
+[wasmbuild](https://github.com/denoland/wasmbuild) is an official Deno tool that
+simplifies working with Rust and WebAssembly in Deno projects, not yet ported for Ende. It automates the
 process of compiling Rust code to WebAssembly and generating TypeScript
 bindings, making it easy to call Rust functions from JavaScript.
 

@@ -1,6 +1,6 @@
 ---
 title: react-no-danger
-tags: [react, fresh]
+tags: [react]
 ---
 
 Prevent the use of `dangerouslySetInnerHTML` which can lead to XSS

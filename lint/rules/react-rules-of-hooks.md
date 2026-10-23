@@ -1,6 +1,6 @@
 ---
 title: react-rules-of-hooks
-tags: [react, fresh]
+tags: [react]
 ---
 
 Ensure that hooks are called correctly in React/Preact components. They must be

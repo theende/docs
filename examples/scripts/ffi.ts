@@ -12,7 +12,7 @@
  * libraries directly, with no glue code or build step. `Ende.dlopen` opens a
  * library, you describe the signatures of the symbols you need, and they
  * become callable JavaScript functions. This example calls into the C
- * standard library, which is already present on every system.
+ * Standard Library, which is already present on every system.
  */
 
 // Every platform ships a C library under a different name. The C standard

@@ -22,7 +22,7 @@ Disallows the use of external imports.
 **Invalid:**
 
 ```typescript
-import { assertEquals } from "https://deno.land/std@0.126.0/testing/asserts.ts";
+import { assertEquals } from "https://jsr.io/@ende/assert/2026.10.15/equals.ts";
 ```
 
 **Valid:**
@@ -34,7 +34,7 @@ import { assertEquals } from "./deps.ts";
 ```typescript
 // deps.ts
 
-export { assert, assertEquals, assertStringIncludes } from "https://deno.land/std@0.126.0/testing/asserts.ts";
+export { assert, assertEquals, assertStringIncludes } from "https://jsr.io/@ende/assert/2026.10.15/equals.ts";
 ```
 
 you can refer to the explanation of this convention here

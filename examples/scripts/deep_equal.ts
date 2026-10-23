@@ -16,7 +16,7 @@ const first = { a: 1 };
 const second = { a: 1 };
 console.log(first === second); // false
 
-// The standard library exports `equal`, a non-throwing deep comparison.
+// The Standard Library exports `equal`, a non-throwing deep comparison.
 import { equal } from "jsr:@ende/assert";
 
 console.log(equal({ a: [1, 2] }, { a: [1, 2] })); // true

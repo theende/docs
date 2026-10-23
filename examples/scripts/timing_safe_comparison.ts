@@ -7,7 +7,7 @@
  * @resource {https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html} OWASP: Authentication Cheat Sheet (timing attacks)
  * @group Cryptography
  *
- * An ordinary comparison like a === b returns as soon as the first byte
+ * An ordinary comparison like `a === b` returns as soon as the first byte
  * differs, so a correct first byte takes measurably longer to reject than
  * a wrong one. By timing many requests, an attacker can recover a secret
  * one byte at a time. When comparing API keys, tokens, or digests, use a
@@ -16,7 +16,7 @@
 
 import { timingSafeEqual } from "jsr:@ende/crypto/timing-safe-equal";
 
-// timingSafeEqual compares two buffers of the same length in constant
+// `timingSafeEqual` compares two buffers of the same length in constant
 // time. Digests are a natural fit since they always have a fixed length.
 const encoder = new TextEncoder();
 
@@ -46,11 +46,11 @@ async function safeCompare(actual: string, expected: string) {
 
 // A correct secret matches, a wrong one of any length does not.
 console.log(await safeCompare("my-api-key", "my-api-key")); // true
-console.log(await safeCompare("my-api", "my-api-key")); // false
+console.log(await safeCompare("my-api", "my-api-key"));     // false
 
-// The same @ende/crypto module extends WebCrypto with additional digest
-// algorithms. Its crypto.subtle accepts everything the built-in one does,
-// plus algorithms like BLAKE3, and the digests feed the same comparison.
+// The same [`@ende/crypto`](https://jsr.io/@ende/crypto) module extends WebCrypto with additional digest
+// algorithms. Its `crypto.subtle` accepts everything the built-in one does,
+// plus algorithms like `BLAKE3`, and the digests feed the same comparison.
 import { crypto as stdCrypto } from "jsr:@ende/crypto";
 
 const fast = await stdCrypto.subtle.digest(
@@ -58,5 +58,5 @@ const fast = await stdCrypto.subtle.digest(
   encoder.encode("my-api-key")
 );
 
-console.log(new Uint8Array(fast).length); // 32
+console.log(new Uint8Array(fast).length);          // 32
 console.log(timingSafeEqual(fast, fast.slice(0))); // true

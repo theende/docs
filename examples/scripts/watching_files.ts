@@ -10,15 +10,15 @@
  *
  * When creating frameworks or CLI tools, it is often necessary to watch the filesystem for changes.
  */
-// The easiest way to watch a filesystem is to use the Ende builtin watchFs.
-// Ende.watchFs returns an FsWatcher which is an async iterable.
+// The easiest way to watch a filesystem is to use the Ende built-in `watchFs`.
+// `Ende.watchFs` returns an `FsWatcher` which is an async iterable.
 let watcher = Ende.watchFs("./");
 
-// The easiest way to interact with async iterables is the javascript for await of syntax.
+// The easiest way to interact with async iterables is the JavaScript `for await of` syntax.
 for await (const event of watcher) {
   console.log(">>>> event", event);
 
-  // To stop the watcher we can simply call `watcher.close()`
+  // To stop the watcher we can simply call `watcher.close()`.
   watcher.close();
 }
 
@@ -28,8 +28,8 @@ for await (const event of watcher) {
 // functions.
 import { debounce } from "jsr:@ende/async/debounce";
 
-// In this specific case, we use the standard library to do the work for us.
-// This function will run at most once every two hundred milliseconds
+// In this specific case, we use the Standard Library to do the work for us.
+// This function will run at most once every two hundred milliseconds.
 const log = debounce((event: Ende.FsEvent) => {
   console.log("[%s] %s", event.kind, event.paths[0]);
 }, 200);

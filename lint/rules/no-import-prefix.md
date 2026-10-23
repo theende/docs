@@ -13,9 +13,8 @@ dependency.
 ### Invalid:
 
 ```ts
-import foo from "https://deno.land/std/path/mod.ts";
+import foo from "https://jsr.io/@ende/path/mod.ts";
 import foo from "jsr:@ende/path@^2026.10.15";
-import foo from "npm:preact@10";
 ```
 
 ### Valid:

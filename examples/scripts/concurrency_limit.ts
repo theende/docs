@@ -5,7 +5,7 @@
  * @run <url>
  * @resource {https://jsr.io/@ende/async/doc/~/pooledMap} Doc: @ende/async pooledMap
  * @resource {https://jsr.io/@ende/async/doc/~/delay} Doc: @ende/async delay
- * @group Standard library
+ * @group Standard Library
  *
  * Firing hundreds of requests at once can overwhelm a server or hit rate
  * limits. The `pooledMap` function maps an `async` function over a list while

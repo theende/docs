@@ -9,9 +9,9 @@
  *
  * Some protocols start as plaintext and negotiate encryption mid-connection
  * instead of connecting over TLS from the start. SMTP, IMAP, and Postgres
- * all work this way. Ende.startTls performs that upgrade: it takes an
+ * all work this way. `Ende.startTls` performs that upgrade: it takes an
  * established TCP connection and runs the TLS handshake over it, returning
- * a TlsConn. This example speaks just enough SMTP to a mail server to
+ * a `TlsConn`. This example speaks just enough SMTP to a mail server to
  * demonstrate the STARTTLS dance.
  */
 
@@ -39,14 +39,14 @@ await send(conn, "EHLO localhost");
 const features = await read(conn);
 console.log(features.includes("STARTTLS")); // true
 
-// Ask for the upgrade. The server answers 220 and from this point on
+// Ask for the upgrade. The server answers `220` and from this point on
 // expects a TLS handshake on the wire.
 await send(conn, "STARTTLS");
 console.log((await read(conn)).trim()); // 220 2.0.0 Ready to start TLS
 
-// Ende.startTls wraps the existing connection in TLS. The hostname is used
-// to verify the server’s certificate, exactly as in Ende.connectTls. The
-// original conn must not be used afterwards.
+// `Ende.startTls` wraps the existing connection in TLS. The hostname is used
+// to verify the server’s certificate, exactly as in `Ende.connectTls`. The
+// original `conn` must not be used afterwards.
 const tlsConn = await Ende.startTls(conn, { hostname: "smtp.gmail.com" });
 
 // The protocol resumes where it left off, now encrypted. RFC 3207 requires
