@@ -15,6 +15,10 @@ export const sidebar = [
       {
         title: "Setup your environment",
         href: "/runtime/getting_started/setup_your_environment/"
+      },
+      {
+        title: "Coming from Deno",
+        href: "/runtime/getting_started/coming_from_deno/"
       }
     ]
   },

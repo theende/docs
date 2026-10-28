@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-20
+last_modified: 2026-10-28
 title: "Get started with Ende"
 description: "Install Ende and build your first project: why Ende, install, create, run, test, add a dependency, and use the built-in toolchain. No build step, no config."
 pagination_next: /runtime/getting_started/installation/
@@ -18,8 +18,9 @@ oldUrl:
 [open source](https://github.com/theende/ende/blob/primary/LICENSE.md)
 JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great
 developer experience. It is a fork of [Deno](https://github.com/denoland/deno),
-and the `Deno` global remains available as an alias of `Ende`. This page takes
-you from nothing to a running, tested project in a few minutes.
+and the `Deno` global remains available as an alias of `Ende`. Moving a Deno
+project? See [Coming from Deno](/runtime/getting_started/coming_from_deno/).
+This page takes you from nothing to a running, tested project in a few minutes.
 
 ## Why Ende?
 
