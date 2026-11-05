@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-20
+last_modified: 2026-11-05
 title: "ende compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -29,6 +29,54 @@ ende compile --allow-read --allow-net jsr:@ende/http/file-server -p 8080
 
 ./file_server --help
 ```
+
+### Narrowing permissions on the host
+
+A compiled binary takes no permission flags: every argument goes to the program.
+To give one host less than the binary was compiled with, set an `ENDE_ALLOW_*`
+environment variable when running it. Each one replaces the compiled allow list
+for its kind:
+
+| Variable            | Narrows          |
+| ------------------- | ---------------- |
+| `ENDE_ALLOW_NET`    | `--allow-net`    |
+| `ENDE_ALLOW_READ`   | `--allow-read`   |
+| `ENDE_ALLOW_WRITE`  | `--allow-write`  |
+| `ENDE_ALLOW_ENV`    | `--allow-env`    |
+| `ENDE_ALLOW_RUN`    | `--allow-run`    |
+| `ENDE_ALLOW_SYS`    | `--allow-sys`    |
+| `ENDE_ALLOW_FFI`    | `--allow-ffi`    |
+| `ENDE_ALLOW_IMPORT` | `--allow-import` |
+
+- The value is a comma-separated list in the same syntax as the flag.
+- An unset variable keeps the compiled grant. An empty value means no access of
+  that kind.
+- Every entry must already be granted by the compiled permissions. If one isn't,
+  the binary exits before running the program:
+  `error: ENDE_ALLOW_READ entry "/etc" is not granted by the permissions this binary was compiled with`.
+  So these variables can only narrow access, never widen it.
+- Deny flags given at compile time still apply.
+
+This lets one build serve every host. For example, build a runner once with
+broad permissions:
+
+```sh
+ende compile --allow-net --allow-read --allow-write --allow-run=git runner.ts
+```
+
+Then narrow it in each host's systemd unit:
+
+```ini
+[Service]
+ExecStart=/usr/local/bin/runner
+Environment=ENDE_ALLOW_NET=ci.example.com:443
+Environment=ENDE_ALLOW_READ=/var/lib/runner,/etc/runner/token
+Environment=ENDE_ALLOW_WRITE=/var/lib/runner
+```
+
+`--allow-run` stays as compiled because `ENDE_ALLOW_RUN` isn't set. A program
+listed in `--allow-run` but missing from the host's `PATH` grants nothing, and
+the binary doesn't warn about it at startup.
 
 ## Watch mode
 

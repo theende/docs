@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-10-20
+last_modified: 2026-11-05
 title: "Permissions"
 description: "Reference for Ende's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import access with the --allow and --deny flags."
 oldUrl:
@@ -265,7 +265,35 @@ ende run --allow-net --deny-net=github.com,jsr.io script.ts
 
 # Deny all network access, disabling permission prompts.
 ende run --deny-net script.ts
+
+# Deny connections to private IPv4 ranges
+ende run --allow-net --deny-net=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16 script.ts
 ```
+
+`--deny-net` is checked against the address a connection actually goes to, after
+DNS resolution, so a hostname that resolves to a denied address is refused. That
+check runs for every connection, including redirects, so a DNS server that
+changes its answer between your own lookup and the request can't get around it.
+Denied IP addresses and CIDR subnets apply to `fetch`, `WebSocket` and
+`Ende.connect`.
+
+`--deny-net` applies to the whole program. To block addresses for one HTTP
+client only, such as one that sends webhooks to user-supplied URLs, pass
+`denyAddresses` to `Ende.createHttpClient`:
+
+```ts
+const client = Ende.createHttpClient({
+  denyAddresses: ["10.0.0.0/8", "127.0.0.0/8", "::1", "fc00::/7"]
+});
+
+// Rejects with a TypeError if hook.example.com resolves to a denied address
+await fetch("https://hook.example.com/", { client });
+```
+
+Entries are IP addresses or CIDR subnets; IPv4-mapped IPv6 addresses such as
+`::ffff:10.0.0.1` match IPv4 rules. The client's own `proxy` is exempt from the
+list. Through a proxy, only the addresses the destination resolves to locally
+are checked, because the proxy does its own lookup.
 
 During module loading, Ende can load modules from the network. By default Ende
 allows loading modules from the following locations using both static and
