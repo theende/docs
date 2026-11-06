@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-11-05
+last_modified: 2026-11-06
 title: "ende compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -113,13 +113,13 @@ Ende supports cross compiling to all targets regardless of the host platform.
 | OS      | Architecture | Target                      |
 | ------- | ------------ | --------------------------- |
 | Windows | x86_64       | `x86_64-pc-windows-msvc`    |
-| Windows | ARM64        | `aarch64-pc-windows-msvc`   |
-| macOS   | x86_64       | `x86_64-apple-darwin`       |
 | macOS   | ARM64        | `aarch64-apple-darwin`      |
 | Linux   | x86_64       | `x86_64-unknown-linux-gnu`  |
 | Linux   | ARM64        | `aarch64-unknown-linux-gnu` |
 
-`aarch64-pc-windows-msvc` (Windows on ARM) is supported .
+These are the platforms Ende releases are built for. Intel Macs
+(`x86_64-apple-darwin`) and Windows on ARM (`aarch64-pc-windows-msvc`) aren't
+supported.
 
 ## The endert binary
 

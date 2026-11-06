@@ -1,11 +1,11 @@
 ---
-last_modified: 2026-10-20
+last_modified: 2026-11-06
 title: "Distribution"
 description: "Cross-compile a ende desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats: .app, .dmg, .exe directory, AppImage."
 ---
 
 `ende desktop` cross-compiles from any host. The same machine builds for macOS
-Intel, macOS arm64, Windows x86_64, Linux arm64, and Linux x86_64. Backend
+arm64, Windows x86_64, Linux arm64, and Linux x86_64. Backend
 binaries (CEF, WebView, etc.) are downloaded as needed.
 
 ## Per-platform output
@@ -26,7 +26,6 @@ Supported triples:
 | Triple                      | OS      | Architecture |
 | --------------------------- | ------- | ------------ |
 | `aarch64-apple-darwin`      | macOS   | arm64        |
-| `x86_64-apple-darwin`       | macOS   | Intel        |
 | `x86_64-pc-windows-msvc`    | Windows | x86_64       |
 | `aarch64-unknown-linux-gnu` | Linux   | arm64        |
 | `x86_64-unknown-linux-gnu`  | Linux   | x86_64       |
@@ -206,7 +205,6 @@ jobs:
       matrix:
         include:
           - { os: macos-14, target: aarch64-apple-darwin }
-          - { os: macos-15-intel, target: x86_64-apple-darwin }
           - { os: windows-latest, target: x86_64-pc-windows-msvc }
           - { os: ubuntu-latest, target: x86_64-unknown-linux-gnu }
     runs-on: ${{ matrix.os }}
